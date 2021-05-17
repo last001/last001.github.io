@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>流光按钮</title>
+    <style>
+        * {
+            /*去除全局内外边距*/
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            /* 设置背景网页为黑色 */
+            background-color: #45966d;
+
+        }
+
+        #sub {
+            /* 设置按钮大小 */
+            width: 200px;
+            height: 60px;
+
+            /* 使按钮居中 */
+            left: 44%;
+            top: 50%;
+            position: absolute;
+            line-height: 60px;
+            text-align: center;
+            /*由于absolute是以按钮的左上角来作为位置基准的，应该再向左上平移按钮自己的一半 */
+            transform: translate(-50%, -50%);
+            /* 去除文字装饰，使按钮字母大写 ，字体大小及颜色（可自行调节）*/
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 24px;
+            color: #ffff;
+            /* 按钮变成圆角 */
+            border-radius: 50px;
+            /* 按钮背景颜色及尺寸 */
+            background-image: linear-gradient(to right, #38bcfa, #b91572, #41ff3b, #31bbfb);
+            background-size: 400%;
+            /* 将该层层级设为1 */
+            z-index: 1;
+        }
+
+
+        @keyframes sun {
+            100% {
+                background-position: -400% 0;
+            }
+        }
+
+        /* 添加背景移动动画（添加完成这一步即可看到流光） */
+        #sub:hover {
+            animation: sun 4s infinite;
+        }
+
+
+        /* 最后添加外面的模糊光 ，这时流光动画会被这层模糊挡住*/
+        #sub::before {
+            content: "";
+            position: absolute;
+            left: -5px;
+            right: -5px;
+            top: -5px;
+            bottom: -5px;
+            background-image: linear-gradient(to right, #51b5e4, #c35694c9, #5ec55a, #47afdf);
+            background-size: 400%;
+            /* 添加高斯模糊为20px */
+            opacity: 0;
+            /* 将层级下调为-1 */
+            z-index: -1;
+            transition: 0.5s;
+        }
+
+
+        /* 给外面的模糊光也加上动画，就可以看到流光啦 */
+        #sub:hover::before {
+            animation: sun 4s infinite;
+            filter: blur(20px);
+            opacity: 1;
+        }
+
+        /* 0000000000 */
+        #abc{
+			position: absolute;
+			top: 50%;	
+			left: 56%;
+			transform: translate(-50%,-50%);
+			width: 200px;
+			height: 60px;
+			text-align: center;
+			line-height: 60px;
+			color: #fff;
+			font-size: 24px;
+			text-transform: uppercase;
+			text-decoration: none;
+			font-family: sans-serif;
+			box-sizing: border-box;
+			background: linear-gradient(to right,#03a9f4,#f51a96,#ffeb3b,#0a8cc8);
+			background-size: 400%;
+			border-radius: 30px;
+		}
+		#abc:hover{
+			animation:animate 4s linear infinite;
+		}
+		@keyframes animate{
+			0%{
+				background-position: 0%;
+			}
+			100%{
+				background-position: 400%;
+			}
+		}
+		#abc:before{
+			content: '';
+			position: absolute;
+			top: -5px;
+			left: -5px;
+			right: -5px;
+			bottom: -5px;
+			z-index: -1;
+			background: linear-gradient(to right,#27b1f1,#d83290,#dfce3a,#2d9acc);
+			background-size: 400%;
+			border-radius: 40px;
+			opacity: 0;
+			transition: 0.5s;
+		}
+		#abc:hover:before{
+			opacity: 1;
+			filter: blur(20px);
+		}
+    </style>
+</head>
+
+<body>
+    <a href="javascript:;" id="sub">submit</a>
+    <a href="#" id="abc">Button</a>
+</body>
+
+</html>
