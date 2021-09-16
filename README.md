@@ -1,11 +1,18 @@
-＃last001.github.io
+﻿＃ last001.github.io
 
-＃ 准备上线
+＃ clone vue 项目
 
-＃ vue+element
+＃ 第一步 npm install
 
-＃ npm install
+＃ 第二部 npm run dev
 
-＃npm run dev (浏览地址:"http://localhost:8080/#/home")(本地浏览)
+＃ 已上线项目
 
-＃ npm run build
+＃ ① http://www.ec-sigaoyi.com/sigaoyi/erp/index.html#/login
+
+＃ ② 康康记账(wx小程序)
+
+＃ 待上线项目
+
+＃ 商家后台(APP)
+
