@@ -1,0 +1,2435 @@
+<template>
+  <div class="ProductControl">
+    <div class="main" v-title data-title="产品库"></div>
+    <iframe :src="iframeSrc" style="display: none"></iframe>
+    <div class="box" :style="{ minHeight: minBoxH + 'px' }">
+      <div class="maskTop" :style="{ width: headerW }">
+        <el-breadcrumb separator-class="el-icon-arrow-right">
+          <el-breadcrumb-item :to="{ path: '/Home' }">首页</el-breadcrumb-item>
+          <el-breadcrumb-item>产品管理</el-breadcrumb-item>
+          <el-breadcrumb-item>产品库</el-breadcrumb-item>
+        </el-breadcrumb>
+      </div>
+      <div class="hearder" :style="{ width: headerW }">
+        <div class="classify">
+          <div>类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;目：</div>
+          <div>
+            <select
+              class="category"
+              v-model="classNum1Index"
+              @change="changeSet(classNum1, classNum1Index, 'classNum1')"
+              :class="classNum1Index == 0 ? '' : 'active'"
+            >
+              <option
+                v-for="(item, index) in classNum1"
+                :value="index"
+                :key="index"
+                :selected="item.selected"
+              >
+                {{ item.catalogName }}
+              </option>
+            </select>
+          </div>
+          <div>
+            <select
+              class="category"
+              v-model="classNum2Index"
+              @change="changeSet(classNum2, classNum2Index, 'classNum2')"
+              :class="classNum2Index == 0 ? '' : 'active'"
+            >
+              <option
+                v-for="(item, index) in classNum2"
+                :value="index"
+                :key="index"
+                :selected="item.selected"
+              >
+                {{ item.catalogName }}
+              </option>
+            </select>
+          </div>
+          <div>
+            <select
+              class="category"
+              v-model="classNum3Index"
+              @change="changeSet(classNum3, classNum3Index, 'classNum3')"
+              :class="classNum3Index == 0 ? '' : 'active'"
+            >
+              <option
+                v-for="(item, index) in classNum3"
+                :value="index"
+                :key="index"
+                :selected="item.selected"
+              >
+                {{ item.catalogName }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="fyNumdis">
+          <div class="classifyNum">
+            <div class="classText">
+              类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型：
+            </div>
+            <div class="classifyName">
+              <select
+                v-model="classIndex"
+                @change="changeSet(classList, classIndex)"
+                :class="classIndex == 0 ? '' : 'active'"
+              >
+                <option
+                  v-for="(item, index) in classList"
+                  :key="index"
+                  :value="index"
+                  :selected="item.selected"
+                >
+                  {{ item.name }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="classifyNum active">
+            <div class="classText">语言：</div>
+            <div class="classifyName">
+              <select
+                v-model="langugeIndex"
+                @change="changeSet(langugeList, langugeIndex, 'languge')"
+                :class="langugeIndex == 0 ? '' : 'active'"
+              >
+                <option
+                  v-for="(item, index) in langugeList"
+                  :key="index"
+                  :value="index"
+                  :selected="item.selected"
+                >
+                  {{ item.name }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="classifyNum">
+            <div class="classText">来原平台：</div>
+            <div class="classifyName">
+              <select
+                v-model="selectorIndex"
+                @change="changeSet(selectorData, selectorIndex)"
+                :class="selectorIndex == 0 ? '' : 'active'"
+              >
+                <option
+                  v-for="(item, index) in selectorData"
+                  :key="index"
+                  :value="index"
+                  :selected="item.selected"
+                >
+                  {{ item.name }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="search">
+          <div>
+            <span class="status"
+              >状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态：</span
+            >
+            <span class="set">
+              <select
+                v-model="statusIndex"
+                @change="changeSet(statusList, statusIndex)"
+                :class="statusIndex == 0 ? '' : 'active'"
+              >
+                <option
+                  v-for="(item, index) in statusList"
+                  :key="index"
+                  :value="index"
+                  :selected="item.selected"
+                >
+                  {{ item.name }}
+                </option>
+              </select>
+            </span>
+          </div>
+          <div>
+            <span class="title">标题：</span>
+            <span>
+              <input
+                type="text"
+                value=""
+                placeholder="请输入"
+                v-model="inputList.title"
+                :class="inputList.title == '' ? '' : 'active'"
+                @keydown.enter="searInput(30, 1)"
+              />
+            </span>
+          </div>
+          <div>
+            <span class="title">价格：</span>
+            <span>
+              <input
+                type="text"
+                value=""
+                placeholder="¥最低价"
+                v-model="inputList.LowPrice"
+                :class="inputList.LowPrice == '' ? '' : 'active'"
+              />
+              -
+              <input
+                type="text"
+                value=""
+                placeholder="¥最高价"
+                v-model="inputList.HeightPrice"
+                :class="inputList.HeightPrice == '' ? '' : 'active'"
+              />
+            </span>
+          </div>
+          <div>
+            <el-button
+              type="success"
+              icon="el-icon-refresh-right"
+              size="small"
+              @click="resetList()"
+              >重置</el-button
+            >
+            <el-button
+              type="primary"
+              icon="el-icon-search"
+              size="small"
+              @click="searInput(30, 1)"
+              >搜索</el-button
+            >
+          </div>
+        </div>
+      </div>
+      <div class="xls">
+        <div class="addDelete">
+          <el-button
+            type="primary"
+            icon="el-icon-circle-check"
+            size="small"
+            @click="clickAll()"
+            >全选</el-button
+          >
+          <el-button type="success" icon="el-icon-brush" @click="translate()"
+            >翻译</el-button
+          >
+          <!-- <el-button
+            type="primary"
+            icon="el-icon-add-location"
+            size="small"
+            @click="addPruduct()"
+            >添加</el-button
+          > -->
+          <el-button
+            type="danger"
+            icon="el-icon-delete-location"
+            size="small"
+            @click="delCommodity()"
+            >删除产品</el-button
+          >
+          <el-button
+            type="success"
+            icon="el-icon-delete-location"
+            size="small"
+            @click="delTranslation()"
+            >删除翻译</el-button
+          >
+          <el-button
+            type="primary"
+            icon="el-icon-s-promotion"
+            size="small"
+            @click="derive()"
+            >导出产品数据</el-button
+          >
+        </div>
+        <div class="Procontent" v-if="tableData.length > 0">
+          <div
+            class="item"
+            v-for="(item, index) in tableData"
+            :key="index"
+            :style="{ maxWidth: maxwidth + 'px' }"
+            :class="item.isActive ? 'active' : ''"
+            @mouseover="overItem(item, index)"
+            @mouseleave="leaveItem(item, index)"
+          >
+            <div class="checkDiv">
+              <el-checkbox
+                class=""
+                v-model="item.checked"
+                @click="clickSingle(item, index)"
+              ></el-checkbox>
+              <div
+                class="translation"
+                :class="item.translationStatus == 1 ? 'active' : ''"
+              >
+                {{ item.translationText }}
+              </div>
+              <div class="item-title">
+                <i
+                  class="el-icon-picture-outline"
+                  @mouseover="overImg(item, index)"
+                ></i>
+                <div class="carouselNum" v-show="item.imgList1.length">
+                  {{ item.imgList1.length }}
+                </div>
+                <div
+                  class="carouselImg"
+                  ref="carouselImg"
+                  v-show="item.ImgStatus"
+                  :style="{ left: carouselImgLeft + 'px' }"
+                  :class="item.imgList1.length < 5 ? 'active' : ''"
+                  @mouseleave="leaveItem(item, index)"
+                >
+                  <i
+                    class="el-icon-arrow-left"
+                    v-show="item.imgList1.length >= 5"
+                    @click="clickLeft(item, index)"
+                  ></i>
+                  <div class="img-list">
+                    <div
+                      class="v-img-list clearfix"
+                      :style="{
+                        width: vImgListW + 'px',
+                        marginLeft: vImgListMleft + 'px',
+                      }"
+                    >
+                      <div
+                        class="fl"
+                        v-for="(ele, i) in item.imgList1"
+                        :key="i"
+                        @click="showActualImg(item, ele, i)"
+                      >
+                        <img :src="ele" alt="" :onerror="errorImage" />
+                      </div>
+                    </div>
+                  </div>
+                  <i
+                    class="el-icon-arrow-right"
+                    v-show="item.imgList1.length >= 5"
+                    @click="clickRight(item, index)"
+                  ></i>
+                </div>
+              </div>
+            </div>
+            <div class="case">
+              <div
+                class="imgDiv"
+                v-loading="item.loadingImg"
+                @click="GotoProductPage(item, index)"
+              >
+                <img
+                  :src="item.pic_url"
+                  alt="加载失败"
+                  :onerror="errorImage"
+                  @progress="progress($event)"
+                  @load="loadImg(item, index, $event)"
+                />
+              </div>
+              <div
+                class="name"
+                :title="item.title"
+                @click="GotoProductPage(item, index)"
+              >
+                {{ item.title }}
+              </div>
+              <div class="price" :class="item.num < 5 ? 'active' : ''">
+                <span :class="item.currencytype != 2 ? 'active' : ''">{{
+                  item.moneySymbol
+                }}</span
+                ><span>{{ item.integer }}.</span
+                ><span>{{ item.decimals }}</span>
+                <font @click="GotoStbao(item)">采集链接</font>
+                <i @click="GotoStbao(item)" class="el-icon-connection"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="procontent1" v-else>
+          <span class="iconfont icon-zanwushuju"></span>
+          <div>暂无数据</div>
+        </div>
+        <!-- 分页 -->
+        <div class="paging">
+          <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page="currentPage"
+            layout="total,slot"
+            :total="total"
+          > 
+            <span class="blockText">显示</span>
+          </el-pagination>
+          <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page="currentPage"
+            :page-sizes="[30, 50, 100]"
+            :page-size="pageSize"
+            layout="sizes, prev, pager, next,slot,jumper"
+            :total="total"
+            :pager-count="11"
+          >
+            <span class="ensure-btn fr" @click="clickTrue()">确定</span>
+          </el-pagination>
+        </div>
+      </div>
+      <!-- <footerDiv></footerDiv> -->
+    </div>
+    <div class="translate">
+      <el-dialog
+        title="翻译选项"
+        :visible.sync="translateStatus"
+        width="30%"
+        center
+      >
+        <div class="v-translate">
+          <div
+            v-for="(item, index) in translateList"
+            :key="index"
+            @click="clickTranslate(item)"
+          >
+            <span>{{ item.name }}</span>
+            <input type="radio" :checked="item.isChecked" :value="item.value" />
+          </div>
+        </div>
+        <span slot="footer" class="dialog-footer">
+          <el-button type="primary" @click="translateTrue()">确 定</el-button>
+          <el-button @click="translateStatus = false">取 消</el-button>
+        </span>
+      </el-dialog>
+    </div>
+    <div class="derive">
+      <el-dialog
+        title="导出产品信息"
+        :visible.sync="deriveStatus"
+        width="33%"
+        center
+      >
+        <div class="deriveInfo">
+          <div>
+            <span>选择平台：</span>
+            <div>
+              <select @change="platform($event)" class="d-platform">
+                <option value="1">趣天</option>
+                <option value="2">亚马逊</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <span>选择数据：</span>
+            <div>
+              <select class="selectManner">
+                <option value="1">选中产品</option>
+                <option value="2">所有产品</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <span>选择语言：</span>
+            <div>
+              <select class="selectLanguage">
+                <option value="0">原语言</option>
+                <option value="1">英语</option>
+                <option value="2">日语</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <span>价格公示：</span>
+            <div>
+              <input type="text" v-model="deriveText.price" />
+            </div>
+          </div>
+          <div>
+            <span>{{ deriveText.name1 }}</span>
+            <div>
+              <input
+                type="text"
+                ref="deriveText1"
+                :placeholder="deriveText.placeholder1"
+              />
+            </div>
+          </div>
+          <div>
+            <span>{{ deriveText.name2 }}</span>
+            <div>
+              <input
+                type="text"
+                ref="deriveText2"
+                :placeholder="deriveText.placeholder2"
+              />
+            </div>
+          </div>
+        </div>
+        <span slot="footer" class="dialog-footer">
+          <el-button type="primary" @click="clickDerive()">确 定</el-button>
+          <el-button @click="deriveStatus = false">取 消</el-button>
+        </span>
+      </el-dialog>
+    </div>
+    <div class="actualImgSize">
+      <el-dialog
+        title="所有商品图片(左键放大,右键缩小)"
+        :visible.sync="actualStatus"
+        width="40%"
+        center
+      >
+        <div class="v-actualImgSize">
+          <div
+            class="actualImg"
+            @contextmenu.prevent="rightClickStatus && rightClick($event)"
+            @click="clickLargeStatus && clickLarge($event)"
+            @mousedown="downLargeImg($event)"
+            @mouseup="upLargeImg($event)"
+            @mousemove.prevent="moveStatus && moveLargeImg($event)"
+            @mouseleave="leaveLargeImg()"
+          >
+            <img
+              :src="firstImg"
+              alt=""
+              :style="{
+                transform: `scale(${scaleImg})`,
+                transformOrigin: originImg,
+                left: largeImgLeft + 'px',
+                top: largeImgTop + 'px',
+                transition: transitionImg,
+              }"
+            />
+            <div
+              class="smallImg"
+              v-show="smallImgStatus"
+              :style="{ left: maskImgLeft + 'px', top: maskImgTop + 'px' }"
+              @click.stop="clickMaskImg()"
+              @contextmenu.prevent.stop="reightClickMaskImg()"
+              @mousedown.stop="downMaskImg($event)"
+              @mousemove.prevent.stop="moveMaskImgStatus && moveMaskImg($event)"
+              @mouseup.stop="upMaskImg($event)"
+              @mouseover="overMaskImg()"
+              @mouseleave="leveaMaskImg()"
+            >
+              <img :src="maskImg" alt="" />
+              <div
+                class="mask"
+                :style="{
+                  transform: `scale(${scaleMask})`,
+                  transformOrigin: originMask,
+                  left: maskLeft + 'px',
+                  top: maskTop + 'px',
+                  transition: transitionMask,
+                }"
+                @contextmenu.prevent.stop="rightClickMask()"
+                @click.stop="clickMask()"
+                @mousedown.stop="downMask($event)"
+                @mouseup.stop="upMask($event)"
+                @mousemove.stop="moveMaskStatus && moveMask($event)"
+                @mouseleave="leaveMask()"
+              ></div>
+            </div>
+            <div class="text" title="点击左键放大,右键缩小">{{ showText }}</div>
+          </div>
+          <div class="listImg">
+            <i
+              class="el-icon-arrow-up"
+              v-show="listImgData.length > 7"
+              :class="upBtn ? '' : 'active'"
+              @click="upBtn && listImgUp()"
+            ></i>
+            <div class="hiddenListImg">
+              <div
+                class="scrollListImg"
+                :style="{ marginTop: scrollDivTop + 'px' }"
+              >
+                <div
+                  class="v-listImg"
+                  ref="VlistImg"
+                  v-for="(item, index) in listImgData"
+                  :key="index"
+                  :class="item.isActive ? 'active' : ''"
+                  @mouseover="overListImg(item, index)"
+                >
+                  <img :src="item.ImgSrc" alt="" />
+                </div>
+              </div>
+            </div>
+            <i
+              class="el-icon-arrow-down"
+              v-show="listImgData.length > 7"
+              :class="downBtn ? '' : 'active'"
+              @click="downBtn && listImgDown()"
+            ></i>
+          </div>
+        </div>
+        <span slot="footer" class="dialog-footer">
+          <el-button type="primary" @click="actualStatus = false"
+            >关 闭</el-button
+          >
+        </span>
+      </el-dialog>
+    </div>
+  </div>
+</template>
+<script>
+import "../../assets/less/ProductControl/ProductControl.less";
+// import footerDiv from "@/components/footer.vue";
+import { createNamespacedHelpers, mapState, mapActions } from "vuex";
+const {
+  mapState: homeState,
+  mapActions: homeActions,
+} = createNamespacedHelpers("homeStore");
+export default {
+  // 父元素传过来的值
+  props: ["wastate"],
+  data() {
+    return {
+      //   box minheight
+      minBoxH: "",
+      // header 的宽度
+      headerW: "calc(100% - 280px)",
+      //   点击翻译按钮弹出层状态值
+      translateStatus: false,
+      translateList: [
+        { name: "日语", isChecked: true, value: 2 },
+        { name: "英语", isChecked: false, value: 1 },
+      ],
+      //  导出产品状态值
+      deriveStatus: false,
+      deriveText: {
+        price: "(price*2+55)*1.2/0.058",
+        name1: "分类编号：",
+        placeholder1: "请输入分类编号",
+        name2: "运费编号：",
+        placeholder2: "请输入运费编号",
+      },
+      // 来源平台Data
+      selectorIndex: 0,
+      selectorData: [
+        { name: "全部", selected: true, status: 99 },
+        { name: "1688", selected: false, status: 1 },
+        { name: "淘宝", selected: false, status: 2 },
+        { name: "速卖通", selected: false, status: 3 },
+        { name: "趣天", selected: false, status: 4 },
+      ],
+      //   状态
+      statusIndex: 0,
+      statusList: [
+        { name: "全部", selected: true, status: 99 },
+        { name: "已编辑", selected: false, status: 1 },
+        { name: "未编辑", selected: false, status: 2 },
+      ],
+      //   类型
+      classIndex: 0,
+      classList: [
+        { name: "全部", selected: true, status: 99 },
+        { name: "普货", selected: false, status: 1 },
+        { name: "精品", selected: false, status: 2 },
+        { name: "原创", selected: false, status: 3 },
+      ],
+      //   语言
+      langugeIndex: 0,
+      langugeList: [
+        { name: "原语言", selected: true, value: 0 },
+        { name: "英语", selected: false, value: 1 },
+        { name: "日语", selected: false, value: 2 },
+      ],
+      //  搜索的input
+      inputList: {
+        LowPrice: "",
+        HeightPrice: "",
+        number: "",
+        title: "",
+      },
+      //   产品列表
+      tableData: [],
+      errorImage: 'this.src="' + require("../../assets/img/errorImg.png") + '"',
+      //   carouselImg 的left
+      carouselImgLeft: "-255",
+      // v-img-list 的宽度
+      vImgListW: "",
+      // v-img-list 的marginleft
+      vImgListMleft: 0,
+      // 点击右边icon num的值
+      num: 5,
+      //  点击图片弹出层状态值
+      actualStatus: false,
+      //  弹出层右边小图片数组
+      listImgData: [],
+      //  弹出层实际大小第一张图片
+      firstImg: "",
+      //  弹出层右下角的Img
+      maskImg: "",
+      //   弹出层的状态值
+      smallImgStatus: false,
+      //  弹出层scrollListImg的margin-top
+      scrollDivTop: 0,
+      //  弹出层右边向下按钮 状态值
+      downBtn: true,
+      //  弹出层按钮的num
+      listImgNum: 1,
+      //  弹出层右边向上按钮 状态值
+      upBtn: false,
+      //  弹出层大图片 点击的状态值
+      clickLargeStatus: true,
+      //  弹出层大图片 右键点击的状态值
+      rightClickStatus: false,
+      // 鼠标移动的状态
+      moveStatus: false,
+      // 图片 style
+      scaleImg: 1,
+      originImg: "",
+      largeImgLeft: 0,
+      largeImgTop: 0,
+      transitionImg: "",
+      // 弹出层大图片按下 开始时间 和 结束时间
+      startTime: "",
+      lastTime: "",
+      //鼠标按下的鼠标位置
+      startX: "",
+      startY: "",
+      //鼠标松开的largeImg 的left和top
+      endX: 0,
+      endY: 0,
+      //图片移动的最大(小)left和最大(小)top
+      maxLeft: "",
+      minLeft: "",
+      minTop: "",
+      maxTop: "",
+      // 弹出层右下角的文字提示
+      showText: "满窗口显示",
+      //  mask层img的鼠标按下位置
+      startMaskImgX: "",
+      startMaskImgY: "",
+      // mask层img的移动状态值
+      moveMaskImgStatus: false,
+      // mask层img的鼠标松开位置
+      endMaskImgX: "",
+      endMaskImgY: "",
+      // mask层img的left和Top
+      maskImgLeft: 415,
+      maskImgTop: 360,
+      // mask的缩小值和缩小位置和动画
+      originMask: "",
+      scaleMask: 1,
+      transitionMask: "",
+      // mask层的left 和 top
+      maskLeft: 0,
+      maskTop: 0,
+      //   mask层移动的最大位置
+      minMaskLeft: "",
+      maxMaskLeft: "",
+      minMaskTop: "",
+      maxMaskTop: "",
+      //   mask的move事件状态值
+      moveMaskStatus: false,
+      //  mask 层鼠标按下的开始坐标
+      startMaskX: "",
+      startMaskY: "",
+      //   mask 层鼠标松开的开始坐标
+      endMaskX: "",
+      endMaskY: "",
+      // 类目1
+      classNum1Index: 0,
+      classNum1: [
+        {
+          catalogId: 99,
+          catalogLevel: 0,
+          catalogName: "全部",
+          superiorId: 0,
+          selected: true,
+        },
+      ],
+      // 类目2
+      classNum2Index: 0,
+      classNum2: [
+        {
+          catalogId: 99,
+          catalogLevel: 0,
+          catalogName: "全部",
+          superiorId: 0,
+          selected: true,
+        },
+      ],
+      //   类目3
+      classNum3Index: 0,
+      classNum3: [
+        {
+          catalogId: 99,
+          catalogLevel: 0,
+          catalogName: "全部",
+          superiorId: 0,
+          selected: true,
+        },
+      ],
+      // 全选状态值
+      AllcheckedStatus: true,
+      //  分页 currentPage
+      currentPage: 1,
+      pageSize: 30,
+      total: 0,
+      //
+      maxwidth: "",
+      //   iframeSrc
+      iframeSrc: "",
+      top: "",
+    };
+  },
+  beforeRouteEnter(to, from, next) {
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
+    // console.log("进入路由之前 from.path ==>", from.path);
+    // if(from.path == "/"){
+    //     console.log("页面刷新!!!")
+    // }
+    if (from.path == "/productDetails") {
+      to.meta.isBack = true;
+    } else {
+      to.meta.isBack = false;
+    }
+    next();
+    // console.log(" to.meta.isBack ==>", to.meta.isBack)
+  },
+  activated() {
+    console.log("产平列表的状态值 this.wastate ==>", this.wastate);
+    console.log("this.WstateStatus ==>", this.WstateStatus);
+    // console.log("进入activated !!!");
+    // console.log("this.$route.meta.isBack ==>",this.$route.meta.isBack);
+    // console.log("this.InfoData ==>",this.InfoData);
+    // this.listenWastate();
+    document.title = "产品库";
+    this.$nextTick(() => {
+      this.minBoxH = document.documentElement.clientHeight - 68 - 51;
+    });
+    if (!this.$route.meta.isBack) {
+      this.tableData = []; // 清空原有数据
+      // 重置
+      this.resetList();
+      this.getproductList(0);
+    } else {
+      console.log("不重新获取数据!!!");
+      this.$route.meta.isBack = false;
+    }
+  },
+  created() {
+    console.log("进入了created!!!!");
+    if (this.WstateStatus) {
+      this.headerW = "calc(100% - 280px)";
+    } else {
+      this.headerW = "calc(100% - 110px)";
+    }
+  },
+  mounted() {
+    window.addEventListener("scroll", this.scrollTop, true);
+  },
+  destroyed() {
+    window.removeEventListener("scroll", this.scrollTop, true);
+  },
+  components: {
+    // footerDiv,
+  },
+  computed: {
+    ...homeState(["WstateStatus", "InfoData"]),
+  },
+  methods: {
+    //   监听侧边栏的状态值
+    listenWastate() {
+      console.log("进入了检测!!!");
+      if (this.wastate) {
+        this.headerW = "calc(100% - 280px)";
+      } else {
+        this.headerW = "calc(100% - 110px)";
+      }
+      console.log("this.headerW ==>", this.headerW);
+    },
+    // window.scroll 事件
+    scrollTop(e) {
+      this.top = document.documentElement.scrollTop || document.body.scrollTop;
+      // console.log('this.top ==>',this.top)  //
+      //   let ifram = document.getElementsByTagName("iframe")[2]
+      // console.log("ifram ==>",ifram)
+    },
+    //   重置radio input select  List
+    resetList() {
+      // 类目123
+      this.classNum1Index = 0;
+      this.classNum2Index = 0;
+      this.classNum3Index = 0;
+      this.classNum2 = this.classNum3 = [
+        {
+          catalogId: 99,
+          catalogLevel: 0,
+          catalogName: "全部",
+          superiorId: 0,
+          selected: true,
+        },
+      ];
+      // set
+      this.selectorIndex = 0;
+      this.statusIndex = 0;
+      this.classIndex = 0;
+      //   this.langugeIndex = 0;
+
+      //   input
+      for (const key in this.inputList) {
+        this.inputList[key] = "";
+      }
+      //   console.log("this.inputList ==>",this.inputList);
+    },
+    // 点击单个复选框
+    clickSingle(item, index) {
+      if (item.checked) {
+        return;
+      }
+      this.tableData.forEach((e) => {
+        e.checked = false;
+      });
+      item.checked = true;
+    },
+    // 全选
+    clickAll() {
+      console.log("this.tableData ==>", this.tableData);
+      if (this.AllcheckedStatus) {
+        this.tableData.forEach((e) => {
+          e.checked = true;
+        });
+        this.AllcheckedStatus = false;
+      } else {
+        this.tableData.forEach((e) => {
+          e.checked = false;
+        });
+        this.AllcheckedStatus = true;
+      }
+    },
+    // 鼠标移上item
+    overItem(item, index) {
+      if (item.isActive) {
+        return;
+      }
+      this.tableData.forEach((e) => {
+        e.isActive = false;
+      });
+      item.isActive = true;
+    },
+    // 鼠标离开item
+    leaveItem(item, index) {
+      this.tableData.forEach((e) => {
+        e.isActive = false;
+        e.ImgStatus = false;
+      });
+    },
+    // 鼠标移上item下面的icon
+    overImg(item, index) {
+      if (item.ImgStatus) {
+        return;
+      }
+      this.tableData.forEach((e) => {
+        e.ImgStatus = false;
+      });
+      item.ImgStatus = true;
+      // 给图片
+      item.imgList1 = item.imgList;
+      // 设置偏移量
+      this.vImgListMleft = "0";
+      this.vImgListW = item.imgList1.length * 88 - 10;
+      this.$nextTick(() => {
+        if ((index + 1) % 5 == 0) {
+          this.carouselImgLeft = -(
+            this.$refs.carouselImg[index].offsetWidth - 44
+          );
+          console.log(
+            "this.$refs.carouselImg[index] ==>",
+            this.$refs.carouselImg[index]
+          );
+        } else {
+          this.carouselImgLeft = "-255";
+        }
+      });
+
+      this.num = 5;
+
+      //   console.log(item);
+    },
+    // 鼠标点击右边 icon
+    clickRight(item, index) {
+      this.num++;
+      console.log("this.num ==>", this.num);
+      if (this.num == item.imgList.length + 1) {
+        this.num = 5;
+        this.vImgListMleft = 0;
+        console.log("后面!!!");
+        return;
+      }
+      this.vImgListMleft -= 88;
+    },
+    // 鼠标点击左边 icon
+    clickLeft(item, index) {
+      this.num--;
+      console.log("this.num ==>", this.num);
+      if (this.num == 4) {
+        this.vImgListMleft = (item.imgList.length - (this.num + 1)) * -88;
+        this.num = item.imgList.length;
+        console.log("前面!!!");
+        return;
+      }
+      this.vImgListMleft += 88;
+    },
+    // 点击 icon的图片列表
+    showActualImg(item, ele, i) {
+      this.actualStatus = true;
+      this.listImgData = [];
+      for (let i = 0; i < item.imgList.length; i++) {
+        let objList = {
+          ImgSrc: item.imgList[i],
+          isActive: false,
+        };
+        this.listImgData.push(objList);
+      }
+      this.firstImg = ele;
+      this.maskImg = ele;
+      //   if (i >= 7) {
+      //     this.scrollDivTop = -546;
+      //   } else {
+      //     this.scrollDivTop = 0;
+      //   }
+      // 重置
+      this.upBtn = false;
+      this.num = 5;
+      this.listImgNum = 1;
+      this.scrollDivTop = 0;
+      this.clickLargeStatus = true;
+      this.rightClickStatus = false;
+      this.largeImgLeft = this.maskLeft = 0;
+      this.largeImgTop = this.maskTop = 0;
+      this.smallImgStatus = false;
+      this.scaleImg = this.scaleMask = 1;
+      this.showText = "满窗口显示";
+      this.maskImgLeft = 415;
+      this.maskImgTop = 360;
+
+      let count = Math.ceil((i + 1) / 7) - this.listImgNum;
+      //   console.log("i+1 ==>", i + 1);
+      console.log("count ==>", count);
+      if (count > 0) {
+        for (let k = 0; k < count; k++) {
+          this.listImgDown();
+        }
+      }
+
+      for (let j = 0; j < this.listImgData.length; j++) {
+        if (i == j) {
+          this.listImgData[j].isActive = true;
+        }
+      }
+      this.$nextTick(() => {
+        if (this.listImgData.length > 7) {
+          this.$refs.VlistImg[0].style.marginTop = 10 + "px";
+        } else {
+          this.$refs.VlistImg[0].style.marginTop = 24 + "px";
+        }
+      });
+      console.log("this.listImgData ==>", this.listImgData);
+    },
+    // 鼠标移上 弹出层右边小图片
+    overListImg(item, index) {
+      if (item.isActive) {
+        return;
+      }
+      this.listImgData.forEach((e) => {
+        e.isActive = false;
+      });
+      item.isActive = true;
+      this.firstImg = item.ImgSrc;
+      this.maskImg = item.ImgSrc;
+      //   重置
+      // 给动画
+      this.transitionImg = "all .3s";
+      this.clickLargeStatus = true;
+      this.rightClickStatus = false;
+      this.largeImgLeft = this.maskLeft = 0;
+      this.largeImgTop = this.maskTop = 0;
+      this.smallImgStatus = false;
+      this.showText = "满窗口显示";
+      this.scaleImg = this.scaleMask = 1;
+      this.maskImgLeft = 415;
+      this.maskImgTop = 360;
+    },
+    // 点击 弹出层右边的向上 icon
+    listImgUp() {
+      this.listImgNum--;
+      this.scrollDivTop += 546;
+      if (this.listImgNum == 1) {
+        this.upBtn = false;
+        this.downBtn = true;
+      }
+    },
+    // 点击 弹出层右边的向下 icon
+    listImgDown() {
+      this.listImgNum++;
+      this.scrollDivTop -= 546;
+      console.log("listImgNum ==>", this.listImgNum);
+      if (Math.ceil(this.listImgData.length / 7) <= this.listImgNum) {
+        this.downBtn = false;
+        this.upBtn = true;
+      } else {
+        this.upBtn = true;
+      }
+    },
+    // 弹出层大图片 点击图片
+    clickLarge(e) {
+      if (this.lastTime - this.startTime > 250 || this.lastTime == undefined) {
+        return;
+      }
+      console.log("点击事件!!!");
+      // 给动画
+      this.transitionImg = this.transitionMask = "all .3s";
+      this.scaleImg += 0.5;
+      this.scaleMask -= 0.2;
+      //   获取对象
+      let dialogBox = document.querySelector(".actualImgSize .el-dialog");
+      let actualBox = document.querySelector(".actualImgSize .v-actualImgSize");
+      let actualImgBox = document.querySelector(".actualImgSize .actualImg");
+
+      let clickX = e.clientX - dialogBox.offsetLeft - actualBox.offsetLeft;
+      let clickY = e.clientY - dialogBox.offsetTop - actualBox.offsetTop;
+
+      this.originImg =
+        (clickX / actualImgBox.offsetWidth) * 100 +
+        "%" +
+        " " +
+        (clickY / actualImgBox.offsetHeight) * 100 +
+        "%";
+      this.originMask = this.originImg;
+
+      if (this.scaleImg >= 3) {
+        console.log("移除事件!!!");
+        this.clickLargeStatus = false;
+        this.rightClickStatus = true;
+        this.scaleImg = 3;
+      } else {
+        // this.clickLargeStatus = true;
+        this.rightClickStatus = true;
+      }
+
+      //  图片最大left
+      this.maxLeft =
+        actualImgBox.offsetWidth *
+        (this.scaleImg - 1) *
+        (clickX / actualImgBox.offsetWidth);
+      //   图片最小left
+      this.minLeft =
+        actualImgBox.offsetWidth *
+        (this.scaleImg - 1) *
+        (1 - clickX / actualImgBox.offsetWidth);
+      //  图片最大top
+      this.maxTop =
+        actualImgBox.offsetHeight *
+        (this.scaleImg - 1) *
+        (clickY / actualImgBox.offsetHeight);
+      //  图片最小top
+      this.minTop =
+        actualImgBox.offsetHeight *
+        (this.scaleImg - 1) *
+        (1 - clickY / actualImgBox.offsetHeight);
+
+      //  left 取值范围
+      if (this.largeImgLeft >= this.maxLeft) {
+        this.largeImgLeft = this.maxLeft;
+      }
+      if (this.largeImgLeft <= -this.minLeft) {
+        this.largeImgLeft = -this.minLeft;
+      }
+
+      //   top 取值范围
+      if (this.largeImgTop >= this.maxTop) {
+        this.largeImgTop = this.maxTop;
+      }
+      if (this.largeImgTop <= -this.minTop) {
+        this.largeImgTop = -this.minTop;
+      }
+
+      // 显示文字信息
+      if (this.scaleImg > 1) {
+        this.smallImgStatus = true;
+        this.showText = "放大" + this.scaleImg + "倍";
+      } else {
+        this.smallImgStatus = false;
+        this.showText = "满窗口显示";
+      }
+
+      // mask 的left的最大最小取值和top的最大最小取值
+      this.$nextTick(() => {
+        let smallImgBox = document.querySelector(".smallImg");
+        let maskBox = document.querySelector(".smallImg .mask");
+        this.minMaskLeft =
+          smallImgBox.offsetWidth *
+          (1 - this.scaleMask) *
+          (1 - clickX / actualImgBox.offsetWidth);
+        this.maxMaskLeft =
+          smallImgBox.offsetWidth *
+          (1 - this.scaleMask) *
+          (clickX / actualImgBox.offsetWidth);
+        this.minMaskTop =
+          smallImgBox.offsetHeight *
+          (1 - this.scaleMask) *
+          (1 - clickY / actualImgBox.offsetHeight);
+        this.maxMaskTop =
+          smallImgBox.offsetHeight *
+          (1 - this.scaleMask) *
+          (clickY / actualImgBox.offsetHeight);
+
+        // mask 的取值范围
+        if (this.maskLeft >= this.minMaskLeft) {
+          this.maskLeft = this.minMaskLeft;
+        }
+        if (this.maskLeft <= -this.maxMaskLeft) {
+          this.maskLeft = -this.maxMaskLeft;
+        }
+        if (this.maskTop >= this.minMaskTop) {
+          this.maskTop = this.minMaskTop;
+        }
+        if (this.maskTop <= -this.maxMaskTop) {
+          this.maskTop = -this.maxMaskTop;
+        }
+      });
+    },
+    // 弹出层大图片 右键点击图片
+    rightClick(e) {
+      if (this.lastTime - this.startTime > 250 || this.lastTime == undefined) {
+        return;
+      }
+      //  给动画
+      this.transitionImg = this.transitionMask = "all .3s";
+      this.scaleImg -= 0.5;
+      this.scaleMask += 0.2;
+
+      //   获取对象
+      let dialogBox = document.querySelector(".actualImgSize .el-dialog");
+      let actualBox = document.querySelector(".actualImgSize .v-actualImgSize");
+      let actualImgBox = document.querySelector(".actualImgSize .actualImg");
+
+      let clickX = e.clientX - dialogBox.offsetLeft - actualBox.offsetLeft;
+      let clickY = e.clientY - dialogBox.offsetTop - actualBox.offsetTop;
+
+      this.originImg =
+        (clickX / actualImgBox.offsetWidth) * 100 +
+        "%" +
+        " " +
+        (clickY / actualImgBox.offsetHeight) * 100 +
+        "%";
+      this.originMask = this.originImg;
+
+      if (this.scaleImg <= 1) {
+        this.clickLargeStatus = true;
+        this.rightClickStatus = false;
+        this.largeImgLeft = 0;
+        this.largeImgTop = 0;
+        this.scaleImg = 1;
+        // 文字提示
+        this.smallImgStatus = false;
+        this.showText = "满窗口显示";
+        console.log("移除事件!!!");
+      } else {
+        this.clickLargeStatus = true;
+        // this.rightClickStatus = true;
+        // 文字提示
+        this.smallImgStatus = true;
+        this.showText = "放大" + this.scaleImg + "倍";
+      }
+
+      if (this.scaleMask >= 1) {
+        this.maskLeft = 0;
+        this.maskTop = 0;
+      }
+
+      //  图片最大left
+      this.maxLeft =
+        actualImgBox.offsetWidth *
+        (this.scaleImg - 1) *
+        (clickX / actualImgBox.offsetWidth);
+      //   图片最小left
+      this.minLeft =
+        actualImgBox.offsetWidth *
+        (this.scaleImg - 1) *
+        (1 - clickX / actualImgBox.offsetWidth);
+      //  图片最大top
+      this.maxTop =
+        actualImgBox.offsetHeight *
+        (this.scaleImg - 1) *
+        (clickY / actualImgBox.offsetHeight);
+      //  图片最小top
+      this.minTop =
+        actualImgBox.offsetHeight *
+        (this.scaleImg - 1) *
+        (1 - clickY / actualImgBox.offsetHeight);
+
+      //  left 取值范围
+      if (this.largeImgLeft >= this.maxLeft) {
+        this.largeImgLeft = this.maxLeft;
+      }
+      if (this.largeImgLeft <= -this.minLeft) {
+        this.largeImgLeft = -this.minLeft;
+      }
+      //   top 取值范围
+      if (this.largeImgTop >= this.maxTop) {
+        this.largeImgTop = this.maxTop;
+      }
+      if (this.largeImgTop <= -this.minTop) {
+        this.largeImgTop = -this.minTop;
+      }
+
+      // mask 的left的最大最小取值和top的最大最小取值
+      this.$nextTick(() => {
+        let smallImgBox = document.querySelector(".smallImg");
+        let maskBox = document.querySelector(".smallImg .mask");
+        this.minMaskLeft =
+          smallImgBox.offsetWidth *
+          (1 - this.scaleMask) *
+          (1 - clickX / actualImgBox.offsetWidth);
+        this.maxMaskLeft =
+          smallImgBox.offsetWidth *
+          (1 - this.scaleMask) *
+          (clickX / actualImgBox.offsetWidth);
+        this.minMaskTop =
+          smallImgBox.offsetHeight *
+          (1 - this.scaleMask) *
+          (1 - clickY / actualImgBox.offsetHeight);
+        this.maxMaskTop =
+          smallImgBox.offsetHeight *
+          (1 - this.scaleMask) *
+          (clickY / actualImgBox.offsetHeight);
+
+        //   mask的取值范围
+        if (this.maskLeft >= this.minMaskLeft) {
+          this.maskLeft = this.minMaskLeft;
+        }
+        if (this.maskLeft <= -this.maxMaskLeft) {
+          this.maskLeft = -this.maxMaskLeft;
+        }
+        if (this.maskTop >= this.minMaskTop) {
+          this.maskTop = this.minMaskTop;
+        }
+        if (this.maskTop <= -this.maxMaskTop) {
+          this.maskTop = -this.maxMaskTop;
+        }
+      });
+    },
+    // 鼠标按下事件 区分 点击和移动事件
+    downLargeImg(e) {
+      this.startTime = new Date().getTime();
+      if (this.scaleImg > 1) {
+        this.moveStatus = true;
+      } else {
+        this.moveStatus = false;
+      }
+      this.startX = e.clientX;
+      this.startY = e.clientY;
+
+      if (this.largeImgLeft != 0 || this.largeImgTop != 0) {
+        this.endX = this.largeImgLeft;
+        this.endY = this.largeImgTop;
+      }
+    },
+    // 鼠标松开事件 记录上一个largeImg 的left值和top值
+    upLargeImg(e) {
+      this.lastTime = new Date().getTime();
+      this.moveStatus = false;
+      this.moveMaskImgStatus = false;
+      this.endX = this.largeImgLeft;
+      this.endY = this.largeImgTop;
+    },
+    // largeImg移动事件
+    moveLargeImg(e) {
+      console.log("move!!!!");
+      this.transitionImg = this.transitionMask = "none";
+      //   获取对象
+      let dialogBox = document.querySelector(".actualImgSize .el-dialog");
+      let actualBox = document.querySelector(".actualImgSize .v-actualImgSize");
+      let actualImgBox = document.querySelector(".actualImgSize .actualImg");
+      let largeImg = document.querySelector(".actualImgSize .actualImg img");
+
+      this.largeImgLeft = e.clientX - this.startX + this.endX;
+      this.largeImgTop = e.clientY - this.startY + this.endY;
+
+      //  left 取值范围
+      if (this.largeImgLeft >= this.maxLeft) {
+        this.largeImgLeft = this.maxLeft;
+      }
+      if (this.largeImgLeft < -this.minLeft) {
+        this.largeImgLeft = -this.minLeft;
+      }
+      //   top 取值范围
+      if (this.largeImgTop >= this.maxTop) {
+        this.largeImgTop = this.maxTop;
+      }
+      if (this.largeImgTop < -this.minTop) {
+        this.largeImgTop = -this.minTop;
+      }
+
+      // mask 最小left
+      if (this.largeImgLeft < 0) {
+        this.maskLeft = -(
+          this.largeImgLeft /
+          (this.minLeft / this.minMaskLeft)
+        );
+      } else {
+        this.maskLeft = -(
+          this.largeImgLeft /
+          (this.maxLeft / this.maxMaskLeft)
+        );
+      }
+      if (this.largeImgTop < 0) {
+        this.maskTop = -(this.largeImgTop / (this.minTop / this.minMaskTop));
+      } else {
+        this.maskTop = -(this.largeImgTop / (this.maxTop / this.maxMaskTop));
+      }
+    },
+    // 鼠标离开事件 去除移动事件 防止 再次进去 不按下鼠标 图片跟随移动
+    leaveLargeImg() {
+      this.upLargeImg();
+    },
+    // mask层img的鼠标点击事件
+    clickMaskImg() {},
+    reightClickMaskImg() {},
+    // mask层img的鼠标按下事件
+    downMaskImg(e) {
+      this.moveMaskImgStatus = true;
+
+      this.startMaskImgX = e.clientX;
+      this.startMaskImgY = e.clientY;
+
+      // console.log("按下 ==>",this.startMaskImgX,this.startMaskImgY);
+
+      if (this.maskImgLeft != 0 || this.maskImgTop != 0) {
+        this.endMaskImgX = this.maskImgLeft;
+        this.endMaskImgY = this.maskImgTop;
+      }
+    },
+    // mask层img的鼠标移动事件
+    moveMaskImg(e) {
+      this.maskImgLeft = e.clientX - this.startMaskImgX + this.endMaskImgX;
+      this.maskImgTop = e.clientY - this.startMaskImgY + this.endMaskImgY;
+      // console.log("this.maskImgLeft ==>",this.maskImgLeft)
+
+      let actualImgBox = document.querySelector(".actualImg");
+      let smallImgBox = document.querySelector(".smallImg");
+
+      // 取值范围
+      if (this.maskImgLeft <= 0) {
+        this.maskImgLeft = 0;
+      }
+      if (
+        this.maskImgLeft >=
+        actualImgBox.offsetWidth - smallImgBox.offsetWidth
+      ) {
+        this.maskImgLeft = actualImgBox.offsetWidth - smallImgBox.offsetWidth;
+      }
+      if (this.maskImgTop <= 0) {
+        this.maskImgTop = 0;
+      }
+      if (
+        this.maskImgTop >=
+        actualImgBox.offsetHeight - smallImgBox.offsetHeight
+      ) {
+        this.maskImgTop = actualImgBox.offsetHeight - smallImgBox.offsetHeight;
+      }
+    },
+    // mask层img的鼠标松开事件
+    upMaskImg(e) {
+      this.moveMaskImgStatus = false;
+
+      this.endMaskImgX = this.maskImgLeft;
+      this.endMaskImgY = this.maskImgTop;
+
+      console.log("松开 ==>", this.endMaskImgX, this.endMaskImgX);
+    },
+    overMaskImg() {
+      this.clickLargeStatus = false;
+      this.moveStatus = false;
+    },
+    leveaMaskImg() {
+      this.clickLargeStatus = true;
+      this.moveMaskImgStatus = false;
+    },
+    // mask层鼠标点击
+    clickMask() {
+      console.log("右键行为,阻止默认事件 ==>");
+    },
+    rightClickMask() {
+      console.log("右键点击,阻止默认事件的行为");
+    },
+    // mask层鼠标按下
+    downMask(e) {
+      this.moveMaskStatus = true;
+
+      this.startMaskX = e.clientX;
+      this.startMaskY = e.clientY;
+
+      if (this.maskLeft != 0 || this.endMaskY != 0) {
+        this.endMaskX = this.maskLeft;
+        this.endMaskY = this.maskTop;
+      }
+    },
+    // mask层鼠标移动
+    moveMask(e) {
+      this.transitionMask = this.transitionImg = "none";
+      this.maskLeft = e.clientX - this.startMaskX + this.endMaskX;
+      this.maskTop = e.clientY - this.startMaskY + this.endMaskY;
+      // mask 的 left和top取值范围
+      if (this.maskLeft >= this.minMaskLeft) {
+        this.maskLeft = this.minMaskLeft;
+      }
+      if (this.maskLeft <= -this.maxMaskLeft) {
+        this.maskLeft = -this.maxMaskLeft;
+      }
+      if (this.maskTop >= this.minMaskTop) {
+        this.maskTop = this.minMaskTop;
+      }
+      if (this.maskTop <= -this.maxMaskTop) {
+        this.maskTop = -this.maxMaskTop;
+      }
+
+      // 大图片的left 和 top
+      if (this.maskLeft < 0) {
+        this.largeImgLeft = -(
+          this.maskLeft *
+          (this.maxLeft / this.maxMaskLeft)
+        );
+      } else {
+        this.largeImgLeft = -(
+          this.maskLeft *
+          (this.minLeft / this.minMaskLeft)
+        );
+      }
+      if (this.maskTop < 0) {
+        this.largeImgTop = -(this.maskTop * (this.minTop / this.minMaskTop));
+      } else {
+        this.largeImgTop = -(this.maskTop * (this.maxTop / this.maxMaskTop));
+      }
+    },
+    // mask层鼠标松开
+    upMask(e) {
+      // this.clickLargeStatus = true;
+      this.moveMaskStatus = false;
+
+      this.endMaskX = this.maskLeft;
+      this.endMaskY = this.maskTop;
+    },
+    // mask层鼠标离开
+    leaveMask() {
+      // this.clickLargeStatus = true;
+      this.moveMaskStatus = false;
+    },
+    // 点击翻译按钮
+    translate() {
+      this.translateStatus = true;
+    },
+    //  翻译radio 点击事件
+    clickTranslate(item) {
+      if (item.isChecked) {
+        return;
+      }
+      for (let i = 0; i < this.translateList.length; i++) {
+        this.translateList[i].isChecked = false;
+      }
+      item.isChecked = true;
+    },
+    // 翻译弹出层 点击确定按钮
+    translateTrue() {
+      if (sessionStorage.getItem("token") == undefined) {
+        alert("请先登录");
+        this.$router.push({ name: "Login" });
+        return;
+      }
+      if (this.InfoData.id == undefined) {
+        alert("登陆时间过期,请重新登陆!");
+        sessionStorage.removeItem("token");
+        this.$router.push({ name: "Login" });
+        return;
+      }
+      var ids = "";
+      var indexList = [];
+      if (this.tableData.findIndex((target) => target.checked === true) > -1) {
+        for (let i = 0; i < this.tableData.length; i++) {
+          if (this.tableData[i].checked) {
+            if (this.tableData[i].translationStatus == 0) {
+              ids += "'" + this.tableData[i].id + "',";
+              indexList.push(i);
+            }
+          }
+        }
+      } else {
+        this.$message({
+          message: "请勾选要翻译的产品",
+          duration: 600,
+          center: true,
+          type: "error",
+        });
+        return;
+      }
+
+      ids = ids.substring(0, ids.length - 1);
+      let data = {
+        userId: this.InfoData.id,
+        language: Number,
+        ids: ids,
+      };
+
+      //   语言
+      for (let i = 0; i < this.translateList.length; i++) {
+        if (this.translateList[i].isChecked) {
+          data.language = this.translateList[i].value;
+        }
+      }
+      //
+      console.log("data ==>", data);
+
+      this.translateStatus = false;
+
+      //   发起请求
+      let loading = this.$loading({
+        lock: false,
+        text: "翻译中...",
+        spinner: "el-icon-loading",
+        background: "rgba(0, 0, 0, 0.7)",
+      });
+      this.$axios({
+        method: "POST",
+        url: "/sigaoyi/NEWtranslation",
+        params: data,
+      })
+        .then((result) => {
+          loading.close();
+          console.log("result ==>", result);
+          if (result.data.Code == 200) {
+            for (let i = 0; i < indexList.length; i++) {
+              this.tableData[indexList[i]].translationStatus = 1;
+              this.tableData[indexList[i]].translationText = "已翻译";
+            }
+            this.$notify({
+              title: "请求成功",
+              message: result.data.msg,
+              type: "success",
+              offset: 50,
+            });
+          } else {
+            this.translateStatus = true;
+            this.$notify({
+              title: "请求失败",
+              message: result.data.msg,
+              type: "warning",
+              offset: 50,
+            });
+          }
+        })
+        .catch((err) => {
+          loading.close();
+          this.translateStatus = true;
+          this.$notify({
+            title: "请求错误",
+            message: "系统业务繁忙,请稍后再试!",
+            type: "error",
+            offset: 50,
+          });
+          console.log("err ==>", err);
+        });
+    },
+    // 跳转商品详情页面
+    GotoProductPage(item, index) {
+      //   this.$router.push({
+      //     name: "ProductDetails",
+      //     query: {
+      //       id: item.id,
+      //       language: this.langugeList[this.langugeIndex].value,
+      //     },
+      //   });
+
+      let routeData = this.$router.resolve({
+        path: "/ProductDetails",
+        query: {
+          userID: this.InfoData.id,
+          id: item.id,
+          language: this.langugeList[this.langugeIndex].value,
+        },
+      });
+      window.open(routeData.href, "_blank");
+    },
+    // 去原链接
+    GotoStbao(item) {
+      console.log("item.detail_url ==>", item.detail_url);
+      window.open(item.detail_url, "_blank");
+    },
+    // 图片加载事件
+    loadImg(item, index, e) {
+      item.loadingImg = false;
+    },
+    progress(e) {
+      console.log("e ==>", e);
+    },
+    // 删除产品
+    delCommodity() {
+      if (sessionStorage.getItem("token") == undefined) {
+        alert("请先登录");
+        this.$router.push({ name: "Login" });
+        return;
+      }
+      if (this.InfoData.id == undefined) {
+        alert("登陆时间过期,请重新登陆!");
+        sessionStorage.removeItem("token");
+        this.$router.push({ name: "Login" });
+        return;
+      }
+      var ids = "";
+      var indexList = [];
+      if (this.tableData.findIndex((target) => target.checked === true) > -1) {
+        for (let i = 0; i < this.tableData.length; i++) {
+          if (this.tableData[i].checked) {
+            ids += "'" + this.tableData[i].id + "',";
+            indexList.push(i);
+          }
+        }
+      } else {
+        this.$message({
+          message: "请选择勾选要翻译的产品",
+          duration: 600,
+          center: true,
+          type: "error",
+        });
+        return;
+      }
+
+      ids = ids.substring(0, ids.length - 1);
+      let data = {
+        userId: this.InfoData.id,
+        ids: ids,
+      };
+
+      this.$confirm("", "请慎重选择要删除的产品", {
+        dangerouslyUseHTMLString: true,
+        center: true,
+        type: "warning",
+        confirmButtonText: "确认",
+        cancelButtonText: "取消",
+        customClass: "delMessage",
+      })
+        .then(() => {
+          //   发起请求
+          let loading = this.$loading({
+            lock: false,
+            text: "删除中...",
+            spinner: "el-icon-loading",
+            background: "rgba(0, 0, 0, 0.7)",
+          });
+
+          this.$axios({
+            url: "/sigaoyi/deteletproduct",
+            method: "POST",
+            params: data,
+          })
+            .then((result) => {
+              console.log("result ==>", result);
+              loading.close();
+              if (result.data.code == "200") {
+                for (let i = indexList.length - 1; i >= 0; i--) {
+                  this.tableData.splice(indexList[i], 1);
+                }
+                this.total = this.total - indexList.length;
+                this.$notify({
+                  title: "请求成功",
+                  message: result.data.msg,
+                  type: "success",
+                  offset: 50,
+                });
+              } else {
+                this.$notify({
+                  title: "请求失败",
+                  message: result.data.msg,
+                  type: "warning",
+                  offset: 50,
+                });
+              }
+            })
+            .catch((err) => {
+              console.log("err ==>", err);
+              loading.close();
+              this.$notify({
+                title: "请求错误",
+                message: "系统业务繁忙,请稍后再试",
+                type: "error",
+                offset: 50,
+              });
+            });
+        })
+        .catch(() => {});
+    },
+    // 删除翻译
+    delTranslation() {
+      if (sessionStorage.getItem("token") == undefined) {
+        alert("请先登录");
+        this.$router.push({ name: "Login" });
+        return;
+      }
+      if (this.InfoData.id == undefined) {
+        alert("登陆时间过期,请重新登陆!");
+        sessionStorage.removeItem("token");
+        this.$router.push({ name: "Login" });
+        return;
+      }
+      var ids = "";
+      var indexList = [];
+      if (this.tableData.findIndex((target) => target.checked === true) > -1) {
+        for (let i = 0; i < this.tableData.length; i++) {
+          if (this.tableData[i].checked) {
+            if (
+              this.tableData[i].translationStatus == 1 ||
+              this.tableData[i].translationText == ""
+            ) {
+              ids += "'" + this.tableData[i].id + "',";
+              indexList.push(i);
+            }
+          }
+        }
+      } else {
+        this.$message({
+          message: "请选择勾选要翻译的产品",
+          duration: 600,
+          center: true,
+          type: "error",
+        });
+        return;
+      }
+      ids = ids.substring(0, ids.length - 1);
+      let data = {
+        userId: this.InfoData.id,
+        ids: ids,
+      };
+
+      //   发起请求
+      let loading = this.$loading({
+        lock: false,
+        text: "删除翻译中...",
+        spinner: "el-icon-loading",
+        background: "rgba(0, 0, 0, 0.7)",
+      });
+
+      this.$axios({
+        url: "/sigaoyi/deteletranslation",
+        method: "POST",
+        params: data,
+      })
+        .then((result) => {
+          console.log("result ==>", result);
+          loading.close();
+          if (result.data.code == "200") {
+            if (this.langugeList[this.langugeIndex].value != 0) {
+              for (let i = indexList.length - 1; i >= 0; i--) {
+                this.tableData.splice(indexList[i], 1);
+              }
+              this.total = this.total - indexList.length;
+            } else {
+              for (let i = 0; i < indexList.length; i++) {
+                this.tableData[indexList[i]].translationStatus = 0;
+                this.tableData[indexList[i]].translationText = "未翻译";
+              }
+            }
+            this.$notify({
+              title: "请求成功",
+              message: result.data.msg,
+              type: "success",
+              offset: 50,
+            });
+          } else {
+            this.$notify({
+              title: "请求失败",
+              message: result.data.msg,
+              type: "warning",
+              offset: 50,
+            });
+          }
+        })
+        .catch((err) => {
+          console.log("err ==>", err);
+          loading.close();
+          this.$notify({
+            title: "请求错误",
+            message: "系统业务繁忙,请稍后再试",
+            type: "error",
+            offset: 50,
+          });
+        });
+    },
+    // 导出产品
+    derive() {
+      this.deriveStatus = true;
+    },
+    // 导出产品 的平台 change
+    platform(e) {
+      let platformList = document.querySelector(".d-platform").children;
+      for (let i = 0; i < platformList.length; i++) {
+        if (platformList[i].selected) {
+          if (platformList[i].value == "1") {
+            this.deriveText = {
+              name1: "分类编号：",
+              placeholder1: "请输入分类编号",
+              name2: "运费编号：",
+              placeholder2: "请输入运费编号",
+            };
+          } else {
+            this.deriveText = {
+              name1: "分类：",
+              placeholder1: "请输入分类",
+              name2: "挂号模板：",
+              placeholder2: "请输入挂号模板",
+            };
+          }
+        }
+      }
+    },
+    // 点击导出产品的确定按钮
+    clickDerive() {
+      if (sessionStorage.getItem("token") == undefined) {
+        alert("请先登录");
+        this.$router.push({ name: "Login" });
+        return;
+      }
+      if (this.InfoData.id == undefined) {
+        alert("登陆时间过期,请重新登陆!");
+        sessionStorage.removeItem("token");
+        this.$router.push({ name: "Login" });
+        return;
+      }
+      let data = {
+        userId: this.InfoData.id,
+        platform: 1,
+        manner: 1,
+        language: 0,
+        pricefromula: this.deriveText.price,
+        Qoo10type: this.$refs.deriveText1.value,
+        freightid: this.$refs.deriveText2.value,
+        ids: "",
+      };
+      // 平台
+      let platformList = document.querySelector(".d-platform").children;
+      for (let i = 0; i < platformList.length; i++) {
+        if (platformList[i].selected) {
+          data.platform = Number(platformList[i].value);
+        }
+      }
+      //  导出方式
+      let selectMannerList = document.querySelector(".selectManner").children;
+      for (let i = 0; i < selectMannerList.length; i++) {
+        if (selectMannerList[i].selected) {
+          data.manner = Number(selectMannerList[i].value);
+        }
+      }
+      //  语言
+      let selectLanguageList = document.querySelector(".selectLanguage")
+        .children;
+      for (let i = 0; i < selectLanguageList.length; i++) {
+        if (selectLanguageList[i].selected) {
+          data.language = Number(selectLanguageList[i].value);
+        }
+      }
+
+      // 选择平台 所传的key
+      for (const key in data) {
+        if (data.platform == 2) {
+          if (key == "Qoo10type") {
+            data["amazontype"] = data.Qoo10type;
+            delete data.Qoo10type;
+          } else if (key == "freightid") {
+            data["registeredid"] = data.freightid;
+            delete data.freightid;
+          }
+        } else {
+          if (key == "amazontype") {
+            data["Qoo10type"] = data.amazontype;
+            delete data.amazontype;
+          } else if (key == "registeredid") {
+            data["freightid"] = data.registeredid;
+            delete data.registeredid;
+          }
+        }
+      }
+      //   data.ids += "'" + this.tableData[i].id + "'" + ",";
+      // 选择导出方式 是否传ids
+      if (data.manner == 1) {
+        if (
+          this.tableData.findIndex((target) => target.checked === true) > -1
+        ) {
+          for (let i = 0; i < this.tableData.length; i++) {
+            if (this.tableData[i].checked) {
+              data.ids += "'" + this.tableData[i].id + "'" + ",";
+            }
+          }
+        } else {
+          this.$message({
+            message: "请勾选要导出的产品",
+            center: true,
+            duration: 800,
+            type: "error",
+          });
+          return;
+        }
+        data.ids = data.ids.substring(0, data.ids.length - 1);
+      } else {
+        data["userName"] = this.InfoData.userName;
+        delete data.ids;
+      }
+      console.log("data ==>", data);
+      this.deriveStatus = false;
+      //   发起请求
+      let loading = this.$loading({
+        lock: false,
+        text: "导出中...",
+        spinner: "el-icon-loading",
+        background: "rgba(0, 0, 0, 0.7)",
+      });
+      this.$axios({
+        method: "POST",
+        url: "/sigaoyi/exportproductlibrary",
+        params: data,
+      })
+        .then((result) => {
+          loading.close();
+          console.log("result ==>", result);
+          if (result.data.code == 200) {
+            this.$notify({
+              title: "请求成功",
+              message: result.data.msg,
+              type: "success",
+              offset: 50,
+            });
+            this.iframeSrc = "http://www.ec-sigaoyi.com/" + result.data.path;
+            // http://192.168.1.179:8080/
+            // http://www.ec-sigaoyi.com/
+            setTimeout(() => {
+              this.iframeSrc = "";
+            }, 500);
+            // http://www.ec-sigaoyi.com/wenjian/xls/1688toQoo10/1616480682454.xlsx
+          } else {
+            this.$notify({
+              title: "请求失败",
+              message: result.data.msg,
+              type: "warning",
+              offset: 50,
+            });
+            this.deriveStatus = true;
+          }
+        })
+        .catch((err) => {
+          loading.close();
+          this.deriveStatus = true;
+          consoel.log("err ==>", err);
+          this.$notify({
+            title: "请求错误",
+            message: "系统业务繁忙,请稍后再试!",
+            type: "error",
+            offset: 50,
+          });
+        });
+    },
+    // select 事件
+    changeSet(array, index, string) {
+      array.forEach((e) => {
+        e.selected = false;
+      });
+      array[index].selected = true;
+      console.log("string ==>", string);
+
+      if (string == "classNum1") {
+        if (index == 0) {
+          this.classNum2Index = 0;
+          this.classNum3Index = 0;
+          this.classNum2 = this.classNum3 = [
+            {
+              catalogId: 99,
+              catalogLevel: 0,
+              catalogName: "全部",
+              superiorId: 0,
+              selected: true,
+            },
+          ];
+          return;
+        }
+        this.$axios({
+          url: "/sigaoyi/superior",
+          method: "POST",
+          params: {
+            sortid: array[index].catalogId,
+          },
+        })
+          .then((result) => {
+            console.log("result ==>", result);
+            let classObj = {
+              catalogId: 99,
+              catalogLevel: 0,
+              catalogName: "全部",
+              superiorId: 0,
+              selected: true,
+            };
+            result.data.catalogs.forEach((e) => {
+              e["selected"] = false;
+            });
+            result.data.catalogs.unshift(classObj);
+            this.classNum2 = result.data.catalogs;
+          })
+          .catch((err) => {
+            console.log("err ==>", err);
+          });
+      } else if (string == "classNum2") {
+        if (index == 0) {
+          this.classNum3Index = 0;
+          this.classNum3 = [
+            {
+              catalogId: 99,
+              catalogLevel: 0,
+              catalogName: "全部",
+              superiorId: 0,
+              selected: true,
+            },
+          ];
+          return;
+        }
+        this.$axios({
+          url: "/sigaoyi/superior",
+          method: "POST",
+          params: {
+            sortid: array[index].catalogId,
+          },
+        })
+          .then((result) => {
+            console.log("result ==>", result);
+            let classObj = {
+              catalogId: 99,
+              catalogLevel: 0,
+              catalogName: "全部",
+              superiorId: 0,
+              selected: true,
+            };
+            result.data.catalogs.forEach((e) => {
+              e["selected"] = false;
+            });
+            result.data.catalogs.unshift(classObj);
+            this.classNum3 = result.data.catalogs;
+          })
+          .catch((err) => {
+            console.log("err ==>", err);
+          });
+      } else if (string == "languge") {
+        this.searInput(30, 1);
+      }
+    },
+    // 搜索按钮  sreach
+    searInput(amount, pages) {
+      if (sessionStorage.getItem("token") == undefined) {
+        alert("请先登录");
+        this.$router.push({ name: "Login" });
+        return;
+      }
+      if (this.InfoData.id == undefined) {
+        alert("登陆时间过期,请重新登陆!");
+        sessionStorage.removeItem("token");
+        this.$router.push({ name: "Login" });
+        return;
+      }
+      console.log("this.InfoData ==>", this.InfoData);
+      let data = {
+        userId: this.InfoData.id,
+        amount: amount,
+        pages: pages,
+        platform: this.selectorData[this.selectorIndex].status,
+        status: this.classList[this.classIndex].status,
+        language: this.langugeList[this.langugeIndex].value,
+        sortid: this.classNum1[this.classNum1Index].catalogId,
+        sortid11: this.classNum2[this.classNum2Index].catalogId,
+        sortid22: this.classNum3[this.classNum3Index].catalogId,
+        translationStatus: 99,
+        title: this.inputList.title,
+      };
+      //   请求
+      let loading = this.$loading({
+        lock: false,
+        text: "加载中...",
+        spinner: "el-icon-loading",
+        background: "rgba(0, 0, 0, 0.7)",
+      });
+      console.log("data  ==>", data);
+      this.$axios({
+        method: "POST",
+        url: "/sigaoyi/NEWproductLibrary",
+        params: data,
+      })
+        .then((result) => {
+          loading.close();
+          document.body.scrollTop = document.documentElement.scrollTop = 0;
+          console.log("result ==>", result);
+          if (result.data.Code == 200) {
+            if (result.data.products.length == 0) {
+              this.tableData = result.data.products;
+              this.$notify({
+                title: "请求成功",
+                message: "找不到该产品",
+                type: "success",
+                offset: 50,
+              });
+              return;
+            }
+            result.data.products.forEach((e, i) => {
+              // item.active
+              e["isActive"] = false;
+              // 展示图片状态
+              e["ImgStatus"] = false;
+              e["loadingImg"] = true;
+              //   选中状态
+              e["checked"] = false;
+              //   价格处理
+              e["integer"] = e.price.toString().split(".")[0];
+              e["decimals"] = e.price.toString().split(".")[1];
+              if (e.decimals == undefined) {
+                e.decimals = "00";
+              } else {
+                if (e.decimals.length == 1) {
+                  e.decimals = e.decimals + "0";
+                }
+              }
+              e["imgList"] = e.item_imgs.split(",");
+              // 钱符号
+              if (e.currencytype == 0) {
+                e["moneySymbol"] = "¥";
+              } else if (e.currencytype == 1) {
+                e["moneySymbol"] = "$";
+              } else {
+                e["moneySymbol"] = "円";
+              }
+              // 翻译状态
+              if (result.data.language == 0) {
+                if (e.translationStatus == 1) {
+                  e["translationText"] = "已翻译";
+                } else {
+                  e["translationText"] = "未翻译";
+                }
+              } else {
+                e["translationText"] = "";
+              }
+              if (e.imgList.length > 0) {
+                // 图片处理
+                e["imgList1"] = [...e.imgList];
+                for (let i = 0; i < e.imgList1.length; i++) {
+                  e.imgList1[i] = "";
+                }
+              } else {
+                e["imgList1"] = [];
+              }
+              // 图片是否已经加载过
+              this.tableData.forEach((el) => {
+                if (el.pic_url == e.pic_url) {
+                  if (!el.loadingImg) {
+                    // 已加载
+                    e.loadingImg = false;
+                  }
+                }
+              });
+            });
+            this.tableData = result.data.products;
+            this.pageSize = result.data.page.amount;
+            this.currentPage = result.data.page.pages;
+            this.total = result.data.page.total;
+            this.$notify({
+              title: "请求成功",
+              message: result.data.msg,
+              type: "success",
+              offset: 50,
+            });
+            // 类目1
+            let classObj = {
+              catalogId: 99,
+              catalogLevel: 0,
+              catalogName: "全部",
+              superiorId: 0,
+              selected: true,
+            };
+            result.data.catalogs.forEach((e) => {
+              e["selected"] = false;
+            });
+            result.data.catalogs.unshift(classObj);
+            this.classNum1 = result.data.catalogs;
+          } else {
+            this.$notify({
+              title: "请求失败",
+              message: result.data.msg,
+              type: "warning",
+              offset: 50,
+            });
+          }
+        })
+        .catch((err) => {
+          loading.close();
+          document.body.scrollTop = document.documentElement.scrollTop = 0;
+          console.log("err ==>", err);
+          this.$notify({
+            title: "请求错误",
+            message: "系统业务繁忙,请稍后再试",
+            type: "error",
+            offset: 50,
+          });
+        });
+    },
+    // 分页事件
+    handleSizeChange(val) {
+      //   console.log(`每页 ${val} 条`);
+      this.pageSize = val;
+      this.searInput(this.pageSize, this.currentPage);
+    },
+    // 去第几页
+    handleCurrentChange(val) {
+      //   console.log(`当前页: ${val}`);
+      this.currentPage = val;
+      this.searInput(this.pageSize, this.currentPage);
+    },
+    // 点击确定去哪一页
+    clickTrue() {
+      this.handleCurrentChange(this.currentPage);
+      // console.log('cccccccccc ==>', this.currentPage)
+    },
+    // 获取产品详情
+    getproductList(language) {
+      if (sessionStorage.getItem("token") == undefined) {
+        alert("请先登录");
+        this.$router.push({ name: "Login" });
+        return;
+      }
+      if (this.InfoData.id == undefined) {
+        alert("登陆时间过期,请重新登陆!");
+        sessionStorage.removeItem("token");
+        this.$router.push({ name: "Login" });
+        return;
+      }
+      //   发起请求
+      let loading = this.$loading({
+        lock: false,
+        text: "加载中...",
+        spinner: "el-icon-loading",
+        background: "rgba(0, 0, 0, 0.7)",
+      });
+      this.$axios({
+        method: "POST",
+        url: "/sigaoyi/NEWproductLibrary",
+        params: {
+          userId: this.InfoData.id,
+          amount: 30,
+          pages: 1,
+          language: language,
+          title: this.inputList.title,
+        },
+      })
+        .then((result) => {
+          console.log("result ==>", result);
+          loading.close();
+          if (result.data.Code == 200) {
+            if (result.data.products.length == 0) {
+              this.$notify({
+                title: "请求成功",
+                message: "该用户没有产品",
+                type: "success",
+                offset: 50,
+              });
+              return;
+            }
+            result.data.products.forEach((e) => {
+              // item.active
+              e["isActive"] = false;
+              // 展示图片状态
+              e["ImgStatus"] = false;
+              e["loadingImg"] = true;
+              //   选中状态
+              e["checked"] = false;
+              //   价格处理
+              e["integer"] = e.price.toString().split(".")[0];
+              e["decimals"] = e.price.toString().split(".")[1];
+              if (e.decimals == undefined) {
+                e.decimals = "00";
+              } else {
+                if (e.decimals.length == 1) {
+                  e.decimals = e.decimals + "0";
+                }
+              }
+              e["imgList"] = e.item_imgs.split(",");
+              // 钱符号
+              if (e.currencytype == 0) {
+                e["moneySymbol"] = "¥";
+              } else if (e.currencytype == 1) {
+                e["moneySymbol"] = "$";
+              } else {
+                e["moneySymbol"] = "円";
+              }
+              // 翻译状态
+              if (result.data.language == 0) {
+                if (e.translationStatus == 1) {
+                  e["translationText"] = "已翻译";
+                } else {
+                  e["translationText"] = "未翻译";
+                }
+              } else {
+                e["translationText"] = "";
+              }
+              // 图片处理
+              if (e.imgList.length > 0) {
+                e["imgList1"] = [...e.imgList];
+                for (let i = 0; i < e.imgList1.length; i++) {
+                  e.imgList1[i] = "";
+                }
+              } else {
+                e["imgList1"] = [];
+              }
+              // 图片是否已经加载过
+              this.tableData.forEach((el) => {
+                if (el.pic_url == e.pic_url) {
+                  if (!el.loadingImg) {
+                    // 已加载
+                    e.loadingImg = false;
+                  }
+                }
+              });
+            });
+            this.tableData = result.data.products;
+            this.pageSize = result.data.page.amount;
+            this.currentPage = result.data.page.pages;
+            this.total = result.data.page.total;
+            // 赋值个人信息
+            this.setInfoData(result.data.userinfo);
+            // 类目1
+            let classObj = {
+              catalogId: 99,
+              catalogLevel: 0,
+              catalogName: "全部",
+              superiorId: 0,
+              selected: true,
+            };
+            result.data.catalogs.forEach((e) => {
+              e["selected"] = false;
+            });
+            result.data.catalogs.unshift(classObj);
+            this.classNum1 = result.data.catalogs;
+            // console.table(result.data.catalogs);
+          } else {
+            this.$notify({
+              title: "请求失败",
+              message: result.data.msg,
+              type: "warning",
+              offset: 50,
+            });
+          }
+        })
+        .catch((err) => {
+          loading.close();
+          console.log("err ==>", err);
+          this.$notify({
+            title: "请求错误",
+            message: "系统业务繁忙,请稍后再试",
+            type: "error",
+            offset: 50,
+          });
+        });
+    },
+    ...homeActions(["setWstateStatus", "setInfoData"]),
+  },
+  watch: {
+    wastate: "listenWastate",
+  },
+};
+</script>

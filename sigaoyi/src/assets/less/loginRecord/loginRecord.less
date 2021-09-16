@@ -1,0 +1,146 @@
+.loginRecord {
+  margin-top: 48px;
+  width: 100%;
+  position: relative;
+  
+  .box {
+    overflow-x: hidden;
+    padding: 20px;
+    padding-bottom: 51px;
+    padding-top: 0;
+
+    .loginRecordInfo {
+      width: 100%;
+      .sreach {
+        background-color: #fff;
+        border-radius: 4px;
+        // width: 100%;
+        text-align: right;
+        padding: 15px;
+
+        .inputList {
+          display: flex;
+
+          div {
+            margin-right: 30px;
+
+            span {
+              color: #444;
+            }
+
+            input {
+              text-indent: 8px;
+              width: 285px;
+              padding: 8px 0;
+              border-radius: 4px;
+              font-size: 14px;
+              border: 1px solid #c2c2c2;
+              transition: border .3s;
+              outline: none;
+
+              &:focus{
+                outline-offset: 0px;
+                border: 1px solid #409eff;
+              }
+
+              &:hover {
+                border: 1px solid #409eff;
+              }
+            }
+          }
+        }
+
+        .searchBtn {
+          .el-button {
+            padding: 10px 15px;
+
+            &:last-child {
+              margin-left: 30px;
+            }
+          }
+        }
+
+      }
+
+      .table {
+        // width: 100%;
+        background-color: #fff;
+        border-radius: 4px;
+        padding: 15px;
+        margin-top: 15px;
+
+        .v-table {
+          padding: 10px;
+          padding-bottom: 0;
+
+          .el-table th{
+            background-color: #e9edef;
+          }
+
+          .block {
+            margin-top: 15px;
+            display: flex;
+
+            .blockText {
+              font-weight: normal;
+            }
+
+            .el-pagination {
+              //   width: 30%x;
+
+              &:nth-child(2) {
+                width: 100%;
+                margin-left: -13px;
+              }
+            }
+
+            .el-pagination__jump {
+              float: right;
+              margin-right: 16px;
+            }
+
+            .ensure-btn {
+              //   margin-right: -170px;
+              font-weight: normal;
+              border: 1px solid #dcdfe6;
+              text-align: center;
+              cursor: pointer;
+              padding: 0 10px;
+              border-radius: 4px;
+
+              &:hover {
+                border-color: #40a0ffcc;
+                color: #409EFF;
+                background: #ecf5ff;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.delMessage {
+  .el-message-box--center .el-message-box__header {
+    padding-top: 40px;
+  }
+
+  .el-message-box__title {
+    span {
+      font-size: 18px;
+    }
+  }
+
+  .el-message-box__btns {
+    button {
+      width: 100px;
+      padding: 10px;
+      font-size: 14px;
+
+      &:nth-child(2) {
+        margin-left: 40px;
+      }
+    }
+  }
+}

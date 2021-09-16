@@ -1,0 +1,152 @@
+.userInfo {
+  margin-top: 48px;
+  width: 100%;
+
+  .v-userInfo {
+    overflow-y: hidden;
+    padding: 20px;
+    padding-top: 0;
+    padding-bottom: 51px;
+
+    .radio-search {
+      background-color: #fff;
+      border-radius: 4px;
+      padding: 15px;
+
+      .radio {
+        display: flex;
+        padding: 5px 0;
+
+        div {
+          display: flex;
+          margin-right: 20px;
+          cursor: pointer;
+          font-size: 15px;
+        }
+      }
+
+      .int {
+        margin-top: 15px;
+        padding-bottom: 5px;
+
+        span {
+          letter-spacing: 5px;
+        }
+
+        input {
+          text-indent: 8px;
+          padding: 8px 0;
+          width: 230px;
+          outline: none;
+          border: 1px solid #d4d4d4;
+          border-radius: 4px;
+          margin-right: 26px;
+
+          &:hover {
+            border: 1px solid #409eff;
+          }
+
+          &:focus {
+            outline-offset: 0px;
+            border: 1px solid #409eff;
+          }
+        }
+
+        .el-button {
+          // padding: 9px 12px;
+          padding: 9px 12px;
+          height: 33px;
+          margin-right: 16px;
+        }
+      }
+    }
+
+    .table {
+      margin-top: 15px;
+      background-color: #fff;
+      border-radius: 4px;
+      padding: 15px;
+
+      .btn {
+        width: 100%;
+        text-align: right;
+      }
+
+      .tableList {
+        margin-top: 15px;
+        .el-table td,
+        .el-table th {
+          text-align: center;
+        }
+
+        .el-table th {
+          background-color: #e9edef;
+        }
+      }
+
+      // 分页
+      .block {
+        margin-top: 10px;
+        display: flex;
+
+        .blockText {
+          font-weight: normal;
+        }
+
+        .el-pagination {
+          //   width: 30%x;
+
+          &:nth-child(2) {
+            width: 100%;
+            margin-left: -13px;
+          }
+        }
+
+        .el-pagination__jump {
+          float: right;
+          margin-right: 16px;
+        }
+
+        .ensure-btn {
+          //   margin-right: -170px;
+          font-weight: normal;
+          border: 1px solid #dcdfe6;
+          text-align: center;
+          cursor: pointer;
+          padding: 0 10px;
+          border-radius: 4px;
+
+          &:hover {
+            border-color: #40a0ffcc;
+            color: #409EFF;
+            background: #ecf5ff;
+          }
+        }
+      }
+    }
+  }
+}
+// 删除提示
+.delMessage {
+  .el-message-box--center .el-message-box__header {
+    padding-top: 40px;
+  }
+
+  .el-message-box__title {
+    span {
+      font-size: 18px;
+    }
+  }
+
+  .el-message-box__btns {
+    button {
+      width: 100px;
+      padding: 10px;
+      font-size: 14px;
+
+      &:nth-child(2) {
+        margin-left: 40px;
+      }
+    }
+  }
+}

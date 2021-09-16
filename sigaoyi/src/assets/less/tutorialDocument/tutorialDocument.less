@@ -1,0 +1,199 @@
+.tutorialDocument {
+  position: relative;
+  width: 100%;
+  margin-top: 48px;
+  overflow-x: hidden;
+
+  .box {
+    padding: 20px;
+    padding-bottom: 51px;
+    padding-top: 0;
+    position: relative;
+
+    .Documen {
+      .sreach {
+        background-color: #fff;
+        border-radius: 4px;
+        width: 100%;
+
+        .v-sreach {
+          padding: 15px;
+
+          span {
+            display: block;
+            float: left;
+            padding-top: 4px;
+          }
+
+          input {
+            padding: 8px 0;
+            text-indent: 8px;
+            width: 230px;
+            border: 1px solid #c2c2c2;
+            border-radius: 4px;
+            outline: none;
+
+            &:focus{
+              outline-offset: 0px;
+              border: 1px solid #409eff;
+            }
+
+            &:hover {
+              border: 1px solid #409EFF;
+            }
+          }
+        }
+
+        .btn {
+          padding: 15px;
+
+          .el-button {
+            padding: 9px 14px;
+
+            &:nth-child(2){
+              margin-left: 30px;
+            }
+          }
+        }
+      }
+
+      .table {
+        background-color: #Fff;
+        border-radius: 4px;
+        width: 100%;
+        margin-top: 15px;
+        // padding: 15px;
+
+        .v-table {
+          padding: 15px;
+
+          .el-table th {
+            background-color: #e9edef;
+          }
+
+          .updataFile {
+            display: flex;
+            width: 100%;
+            justify-content: flex-end;
+
+            input {
+              width: 105px;
+              margin-left: -112px;
+              opacity: 0;
+              // cursor: pointer;
+            }
+
+            button {
+              padding: 9px 14px;
+              margin-right: 10px;
+            }
+
+            select {
+              padding: 8px 0;
+              padding-left: 8px;
+              width: 200px;
+              margin-left: 15px;
+              border-radius: 4px;
+              border: 1px solid #c2c2c2;
+              &:hover{
+                border: 1px solid #409EFF;
+              }
+              &:focus{
+                outline-offset: 0px;
+                outline: none;
+              }
+            }
+
+          }
+
+          .tableList {
+            margin-top: 10px;
+
+            .cell {
+              overflow: initial;
+            }
+
+            // .el-button--text {
+            //   padding: 10px 20px;
+            //   border: 1px solid #409EFF;
+            //   border-radius: 4px;
+            //   box-shadow: 1px 1px 8px rgba(64, 114, 255, 0.1);
+
+            //   &:hover {
+            //     border-color: #538cca;
+            //     color: #538cca;
+            //   }
+            // }
+          }
+
+          .block {
+            margin-top: 10px;
+            display: flex;
+
+            .blockText {
+              font-weight: normal;
+            }
+
+            .el-pagination {
+              //   width: 30%x;
+
+              &:nth-child(2) {
+                width: 100%;
+                margin-left: -13px;
+              }
+            }
+
+            .el-pagination__jump {
+              float: right;
+              margin-right: 16px;
+            }
+
+            .ensure-btn {
+              //   margin-right: -170px;
+              font-weight: normal;
+              border: 1px solid #dcdfe6;
+              text-align: center;
+              cursor: pointer;
+              padding: 0 10px;
+              border-radius: 4px;
+
+              &:hover {
+                border-color: #40a0ffcc;
+                color: #409EFF;
+                background: #ecf5ff;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// 删除
+.delMessage {
+  .el-message-box--center .el-message-box__header {
+    padding-top: 40px;
+  }
+
+  .el-message-box__title {
+    span {
+      font-size: 17px;
+      font-weight: 500;
+    }
+  }
+
+  .el-message-box__btns {
+    margin-top: 10px;
+
+    button {
+      width: 100px;
+      padding: 10px;
+      font-size: 12px;
+
+      &:nth-child(2) {
+        margin-left: 40px;
+      }
+    }
+  }
+}

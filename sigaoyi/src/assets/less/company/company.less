@@ -1,0 +1,281 @@
+.company {
+  position: relative;
+  // transition: all .3s;
+  margin-top: 48px;
+  width: 100%;
+  
+  .box {
+    overflow-x: hidden;
+    padding: 20px;
+    padding-bottom: 51px;
+    padding-top: 0;
+
+    .companyInfo {
+      position: relative;
+
+      .company-header {
+        background-color: #fff;
+        border-radius: 4px;
+        padding: 15px;
+
+        .title {
+          display: flex;
+
+          .title-text {
+            letter-spacing: 32px;
+            // text-align: justify;
+          }
+
+          div {
+            display: flex;
+            margin-right: 20px;
+            cursor: pointer;
+
+            input {
+              margin-top: 5px;
+            }
+
+            span {
+              font-weight: normal;
+            }
+          }
+        }
+
+        .inputList {
+          display: flex;
+          margin-top: 15px;
+
+          div {
+            padding-right: 30px;
+
+            select,
+            input {
+              width: 230px;
+              text-indent: 8px;
+              padding: 8px 0;
+              border: 1px solid #c2c2c2;
+              border-radius: 4px;
+
+              &:hover {
+                border: 1px solid #409EFF;
+              }
+            }
+
+            select {
+              // height: 34px;
+              width: 230px;
+              padding: 8px 0;
+              outline: none;
+              border: 1px solid #c2c2c2;
+              color: #666;
+            }
+          }
+
+          .iconList {
+
+            button {
+              padding: 10px 15px;
+
+              &:nth-child(2) {
+                margin-left: 20px;
+              }
+            }
+          }
+        }
+      }
+
+      .company-table {
+        background-color: #fff;
+        border-radius: 4px;
+        padding: 15px;
+        margin-top: 15px;
+
+        .btn {
+
+          div {
+
+            button {
+              padding: 10px 15px;
+            }
+
+            select {
+              width: 230px;
+              padding: 8px 0;
+              border-radius: 4px;
+              text-indent: 4px;
+              margin-right: 20px;
+              outline: none;
+              border: 1px solid #c2c2c2;
+
+              &:hover {
+                border: 1px solid #409EFF;
+              }
+            }
+
+            &:nth-child(2) {
+
+              span {
+                line-height: 10px;
+              }
+            }
+          }
+        }
+
+        .xls {
+          margin-top: 10px;
+
+          .el-table td,
+          .el-table th {
+            text-align: center;
+          }
+          .el-table th{
+            background-color: #e9edef;
+          }
+        }
+
+        .block {
+          margin-top: 10px;
+          display: flex;
+
+          .blockText {
+            font-weight: normal;
+          }
+
+          .el-pagination {
+            //   width: 30%x;
+
+            &:nth-child(2) {
+              width: 100%;
+              margin-left: -13px;
+            }
+          }
+
+          .el-pagination__jump {
+            float: right;
+            margin-right: 16px;
+          }
+
+          .ensure-btn {
+            //   margin-right: -170px;
+            font-weight: normal;
+            border: 1px solid #dcdfe6;
+            text-align: center;
+            cursor: pointer;
+            padding: 0 10px;
+            border-radius: 4px;
+
+            &:hover {
+              border-color: #40a0ffcc;
+              color: #409EFF;
+              background: #ecf5ff;
+            }
+          }
+        }
+
+      }
+
+      .comopanyMangeDialog {
+        .el-dialog__header {
+          text-align: left;
+          border-bottom: 1px solid #ddd;
+        }
+
+        .content {
+          font-size: 14px;
+
+          div {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+            width: 90%;
+
+            span {
+              width: 120px;
+              text-align: right;
+              font-size: 16px;
+            }
+
+            input {
+              width: 230px;
+              // padding: 7px 0;
+              text-indent: 8px;
+              border: none;
+              outline: none;
+              border-bottom: 1px solid #c2c2c2;
+
+              &:focus {
+                outline: none !important;
+                outline-offset: 0px !important;
+                border-bottom: 1px solid #409EFF;
+              }
+
+              &:hover{
+                border-bottom: 1px solid #409EFF;
+              }
+            }
+
+            &.imgNumber {
+              display: initial;
+
+              span {
+                display: block;
+                margin-left: 32px;
+                margin-top: 15px;
+              }
+
+              img {
+                margin-top: 10px;
+                margin-left: 70px;
+                width: 315px;
+                height: 280px;
+              }
+            }
+
+            &:last-child{
+              margin-left: 20px;
+              div{
+                width: initial;
+                margin-top: 0;
+                span{
+                  margin-left: 0;
+                }
+              }
+              .radio{
+                margin-top: 2px;
+                div{
+                  margin-top:3px;
+                  cursor: pointer;
+                  input{
+                    margin-top: 2px;
+                  }
+                }
+              }
+              span{
+                width: initial;
+                margin-left: -102px;
+              }
+              input{
+                width: initial;
+              }
+            }
+          }
+        }
+
+        .dialog-footer {
+          button {
+            outline: none;
+            padding: 8px 17px;
+            font-size: 12px;
+            cursor: pointer;
+            margin-top: 10px;
+            border-radius: 4px;
+
+            &:nth-child(2) {
+              margin-left: 50px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

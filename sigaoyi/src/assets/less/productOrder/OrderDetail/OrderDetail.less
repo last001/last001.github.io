@@ -1,0 +1,976 @@
+.OrderDetail {
+  padding: 20px;
+  padding-bottom: 51px;
+  margin-top: 48px;
+  padding-top: 0;
+
+  .compile {
+    border-radius: 4px;
+    background-color: #fff;
+    padding: 20px;
+    padding-bottom: 60px;
+
+    input {
+      padding:2px 0;
+      text-indent: 8px;
+      border-radius: 4px;
+      border: 1px solid #777;
+      outline: none;
+
+      &:-webkit-autofill {
+        box-shadow: 0 0 0 1000px white inset !important;
+      }
+    }
+
+    .hint {
+      padding: 10px;
+      padding-left: 0px;
+      padding-top: 0px;
+    }
+
+    // 订单
+    .order {
+      position: relative;
+      margin-left: 7px;
+
+      div {
+        letter-spacing: 30px;
+      }
+
+      hr {
+        position: absolute;
+        top: 3px;
+        left: 70px;
+        width: 94%;
+      }
+    }
+
+    .orderDetial {
+      display: flex;
+      justify-content: space-evenly;
+
+      .orderLeft {
+
+        .orderStatus {
+          margin-top: 20px;
+
+          select {
+            margin-left: 20px;
+            width: 352px;
+            height: 38px;
+            padding-left: 8px;
+            border-radius: 4px;
+            outline: none;
+            border: 1px solid #c2c2c2;
+
+            &:hover {
+              border: 1px solid #409eff;
+            }
+
+            &:focus{
+              outline-offset: 0px;
+              border: 1px solid #409eff;
+            }
+
+          }
+        }
+
+        .international,
+        .domestic {
+          width: 500px;
+          display: flex;
+          margin-top: 25px;
+
+          div {
+            &:first-child {
+              height: 38px;
+              line-height: 38px;
+            }
+
+            &:nth-child(2) {
+              margin-left: 24px;
+              height: 32px;
+              width: 70%;
+
+              input {
+                width: 100%;
+                height: 100%;
+                border-radius: 4px;
+                outline: none;
+                border: 1px solid #c2c2c2;
+
+                &:hover {
+                  border: 1px solid #409eff;
+                }
+
+                &:focus{
+                  outline-offset: 0px;
+                  border: 1px solid #409eff;
+                }
+
+                &::placeholder {
+                  color: #999;
+                }
+
+                &::-webkit-inner-spin-button {
+                  width: 20px;
+                  height: 35px;
+                }
+              }
+            }
+          }
+        }
+
+        .international{
+          div{
+            &:nth-child(2){
+              margin-left: 30px;
+            }
+          }
+        }
+      }
+
+      .orderRigth {
+        margin-top: 20px;
+
+        .deliveryTime {
+          width: 480px;
+          display: flex;
+
+          div {
+            &:first-child {
+              height: 38px;
+              line-height: 38px;
+            }
+
+            &:nth-child(2) {
+              margin-left: 24px;
+              height: 32px;
+              width: 73%;
+
+              input {
+                width: 100%;
+                height: 100%;
+
+                &:disabled {
+                  background-color: #f8f8f8;
+                }
+
+              }
+            }
+          }
+        }
+
+        .transferNumber {
+          width: 492px;
+          display: flex;
+          margin-top: 25px;
+
+          div {
+            &:first-child {
+              height: 38x;
+              line-height: 38px;
+            }
+
+            &:nth-child(2) {
+              margin-left: 24px;
+              height: 32px;
+              width: 71%;
+
+              input {
+                width: 100%;
+                height: 100%;
+
+                border-radius: 4px;
+                border: 1px solid #c2c2c2;
+
+                &:hover {
+                  border: 1px solid #409eff;
+                }
+
+                &:focus{
+                  outline-offset: 0px;
+                  border: 1px solid #409eff;
+                }
+
+                &::placeholder {
+                  color: #999;
+                }
+
+                &::-webkit-inner-spin-button {
+                  width: 20px;
+                  height: 35px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // 基本信息
+    .baseInfo {
+      margin-top: 20px;
+      margin-left: 7px;
+      position: relative;
+
+      hr {
+        position: absolute;
+        top: 3px;
+        left: 70px;
+        width: 94%;
+      }
+    }
+
+    .baseInfoDetial {
+      display: flex;
+      justify-content: space-evenly;
+
+      .baseInfoLeft {
+        .Info {
+          display: flex;
+          width: 480px;
+
+          div {
+            margin-top: 20px;
+
+            &:first-child {
+              height: 38px;
+              line-height: 38px;
+              width: 64px;
+              text-align: right;
+            }
+
+            &:nth-child(2) {
+              margin-left: 24px;
+              height: 32px;
+              width: 73%;
+
+              input {
+                width: 100%;
+                height: 100%;
+                border-radius: 4px;
+                border: 1px solid #c2c2c2;
+                outline: none;
+
+                &:focus{
+                  outline-offset: 0px;
+                  border: 1px solid #409eff;
+                }
+
+                &:hover {
+                  border: 1px solid #409eff;
+                }
+
+                &::placeholder {
+                  color: #999;
+                }
+
+                &::-webkit-inner-spin-button {
+                  width: 20px;
+                  height: 35px;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .baseInfoRight {
+        .Info {
+          display: flex;
+          width: 480px;
+
+          div {
+            margin-top: 20px;
+
+            &:first-child {
+              height: 38x;
+              line-height: 38px;
+              width: 64px;
+              text-align: right;
+            }
+
+            &:nth-child(2) {
+              margin-left: 24px;
+              height: 32px;
+              width: 73%;
+
+              input {
+                width: 100%;
+                height: 100%;
+                border-radius: 4px;
+                border: 1px solid #c2c2c2;
+                outline: none;
+                padding-right: 4px;
+
+                &:focus{
+                  outline-offset: 0px;
+                  border: 1px solid #409eff;
+                }
+
+                &:hover {
+                  border: 1px solid #409eff;
+                }
+
+                &::placeholder {
+                  color: #999;
+                }
+
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // 产品信息
+    .productInfo {
+      margin-top: 20px;
+      margin-left: 7px;
+      position: relative;
+
+      hr {
+        position: absolute;
+        top: 3px;
+        left: 70px;
+        width: 94%;
+      }
+    }
+
+    .productInfoDetial {
+      display: flex;
+      justify-content: space-evenly;
+
+      .productInfoLeft {
+        .Info {
+          display: flex;
+          width: 480px;
+
+          div {
+            margin-top: 20px;
+
+            &:first-child {
+              height: 38px;
+              line-height: 38px;
+              width: 64px;
+              text-align: right;
+
+              span {
+                width: 100px;
+                display: inline-block;
+                margin-left: -36px;
+              }
+            }
+
+            &:nth-child(2) {
+              margin-left: 34px;
+              height: 32px;
+              width: 73%;
+
+              input {
+                width: 100%;
+                height: 100%;
+                border-radius: 4px;
+                border: 1px solid #c2c2c2;
+                outline: none;
+
+                &:focus{
+                  outline-offset: 0px;
+                  border: 1px solid #409eff;
+                }
+
+                &:hover {
+                  border: 1px solid #409eff;
+                }
+
+                &::placeholder {
+                  color: #999;
+                }
+              }
+
+              
+            }
+          }
+
+          &:last-child {
+            width: 297%;
+
+            .files {
+              display: flex;
+
+              .link {
+                width: 100%;
+              }
+
+              div {
+                position: relative;
+                height: 100%;
+                width: 10%;
+                margin-top: 0;
+                background: #409eff;
+                color: #fff;
+                text-align: center;
+                border-radius: 4px;
+                font-size: 13px;
+                line-height: 32px;
+                padding: 3px 8px;
+
+                .inputFlie {
+                  position: absolute;
+                  left: 0;
+                  top: 0;
+                  opacity: 0;
+                }
+              }
+
+            }
+          }
+        }
+
+        .InfoSelect {
+          select {
+            width: 100%;
+            height: 38px;
+            padding-left: 8px;
+            border-radius: 4px;
+            border: 1px solid #c2c2c2;
+            outline: none;
+
+            &:hover {
+              border: 1px solid #409eff;
+            }
+
+            &:focus{
+              outline-offset: 0px;
+              border: 1px solid #409eff;
+            }
+          }
+        }
+      }
+
+      .productInfoRight {
+        .Info {
+          display: flex;
+          width: 490px;
+
+          div {
+            margin-top: 20px;
+
+            &:first-child {
+              height: 38x;
+              line-height: 38px;
+              width: 80px;
+              text-align: right;
+            }
+
+            &:nth-child(2) {
+              margin-left: 24px;
+              height: 32px;
+              width: 70%;
+
+              input {
+                width: 100%;
+                height: 100%;
+                border-radius: 4px;
+                border: 1px solid #c2c2c2;
+                outline: none;
+
+                &:disabled {
+                  background-color: #f8f8f8;
+                }
+
+                &:focus{
+                  outline-offset: 0px;
+                  border: 1px solid #409eff;
+                }
+
+                &:hover {
+                  border: 1px solid #409EFF;
+                }
+
+                &::-webkit-inner-spin-button {
+                  width: 20px;
+                  height: 35px;
+                }
+              }
+            }
+          }
+
+          &.active {
+            div {
+              &:nth-child(2) {
+                display: flex;
+
+                input {
+                  &:first-child {
+                    flex: 7;
+                  }
+
+                  &:nth-child(2) {
+                    flex: 3;
+                    margin-left: 15px;
+                  }
+
+                  &.active{
+                    margin-left: 0;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // 物流信息
+    .logisticsInfo {
+      margin-top: 20px;
+      margin-left: 7px;
+      position: relative;
+
+      hr {
+        position: absolute;
+        top: 3px;
+        left: 70px;
+        width: 94%;
+      }
+    }
+
+    .logisticsInfoDetial {
+      display: flex;
+      justify-content: space-evenly;
+
+      .logisticsInfoLeft {
+        .Info {
+          display: flex;
+          width: 480px;
+
+          div {
+            margin-top: 20px;
+
+            &:first-child {
+              height: 38x;
+              line-height: 38px;
+              width: 64px;
+              text-align: right;
+
+              span {
+                width: 100px;
+                display: inline-block;
+                margin-left: -36px;
+              }
+            }
+
+            &:nth-child(2) {
+              margin-left: 24px;
+              height: 32px;
+              width: 73%;
+
+              input {
+                width: 100%;
+                height: 100%;
+                border-radius: 4px;
+                border: 1px solid #c2c2c2;
+                outline: none;
+
+                &:hover {
+                  border: 1px solid #409eff;
+                }
+
+                &:focus{
+                  outline-offset: 0px;
+                  border: 1px solid #409eff;
+                }
+
+                &::placeholder {
+                  color: #999;
+                }
+
+                &::-webkit-inner-spin-button {
+                  width: 20px;
+                  height: 35px;
+                }
+              }
+            }
+          }
+        }
+
+        .selectInfo {
+          select {
+            width: 100%;
+            height: 38px;
+            padding-left: 8px;
+            border-radius: 4px;
+            outline: none;
+            border: 1px solid #c2c2c2;
+
+            &:hover {
+              border: 1px solid #409eff;
+            }
+
+            &:focus{
+              outline-offset: 0px;
+              border: 1px solid #409eff;
+            }
+
+          }
+        }
+      }
+
+      .logisticsInfoRight {
+
+        .Info {
+          display: flex;
+          width: 480px;
+
+          div {
+            margin-top: 20px;
+
+            &:first-child {
+              height: 38px;
+              line-height: 38px;
+              width: 71px;
+              text-align: right;
+              // span{
+              //   width: 100px;
+              //   display: inline-block;
+              //   margin-left: -36px;
+              // }
+            }
+
+            &:nth-child(2) {
+              margin-left: 24px;
+              height: 32px;
+              width: 73%;
+
+              input {
+                width: 100%;
+                height: 100%;
+                border-radius: 4px;
+                border: 1px solid #c2c2c2;
+                outline: none;
+
+                &::placeholder {
+                  color: #999;
+                }
+
+                &:focus{
+                  outline-offset: 0px;
+                  border: 1px solid #409eff;
+                }
+
+                &:hover {
+                  border: 1px solid #409eff;
+                }
+
+
+
+              }
+            }
+
+            select {
+              width: 100%;
+              height: 38px;
+              padding-left: 8px;
+              border-radius: 4px;
+              outline: none;
+              border: 1px solid #c2c2c2;
+
+              &:hover {
+                border: 1px solid #409eff;
+              }
+
+              &:focus{
+                outline-offset: 0px;
+                border: 1px solid #409eff;
+              }
+
+              &::placeholder {
+                color: #999;
+              }
+            }
+          }
+
+          &.active {
+            div {
+              &:first-child {
+                width: 120px;
+                margin-left: -49px;
+              }
+
+              &:nth-child(2) {
+                input {
+                  height: 28px;
+                  width: 58px;
+                  text-align: center;
+                  text-indent: 0;
+
+                  &.active{
+                    width: 98px;
+                  }
+                }
+
+                span {
+                  display: inline-block;
+                  width: 15px;
+                  text-align: center;
+                }
+
+                button {
+                  margin-left: 36px;
+                  padding: 10.5px 26px;
+
+                  span {
+                    width: inherit;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // 订单备注
+    .orderComment {
+      margin-top: 20px;
+      margin-left: 7px;
+      position: relative;
+
+      hr {
+        position: absolute;
+        top: 3px;
+        left: 70px;
+        width: 94%;
+      }
+    }
+
+    .teatrea {
+      margin-top: 5px;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0 100px;
+
+      textarea {
+        margin-top: 20px;
+        padding: 8px;
+        border-radius: 4px;
+        outline: none;
+        border: 1px solid #c2c2c2;
+        width: 100%;
+        &:first-child{
+          margin-right: 100px;
+        }
+        &:nth-child(2) {
+          &:hover {
+            border: 1px solid #409eff; 
+          }
+          &:focus{
+            outline-offset: 0px;
+            border: 1px solid #409eff;
+          }
+        }
+      }
+    }
+
+    // 系统默认数据
+    .defauitData {
+      margin-top: 20px;
+      margin-left: 7px;
+      position: relative;
+
+      hr {
+        position: absolute;
+        top: 3px;
+        left: 106px;
+        width: 91.5%;
+      }
+    }
+
+    .defauitDataDetial {
+      display: flex;
+      justify-content: space-evenly;
+
+      .Info {
+        display: flex;
+        width: 480px;
+
+        div {
+          margin-top: 20px;
+
+          &:first-child {
+            height: 38px;
+            line-height: 38px;
+            width: 71px;
+            text-align: right;
+          }
+
+          &:nth-child(2) {
+            margin-left: 24px;
+            height: 32px;
+            width: 73%;
+
+            input {
+              width: 100%;
+              height: 100%;
+              border-radius: 4px;
+              border: 1px solid #c2c2c2;
+
+              &::placeholder {
+                color: #999;
+              }
+
+            }
+          }
+        }
+      }
+
+      .InfoTime {
+        display: flex;
+        width: 480px;
+
+        div {
+          margin-top: 20px;
+
+          &:first-child {
+            height: 40px;
+            line-height: 40px;
+            width: 71px;
+            text-align: right;
+          }
+
+          &:nth-child(2) {
+            margin-left: 24px;
+            height: 32px;
+            width: 73%;
+
+            .el-date-editor {
+              width: 100%;
+              margin-top: 0;
+              border: 1px solid #c2c2c2;
+              border-radius: 4px;
+
+              input {
+                padding-left: 20px;
+                border: none;
+              }
+            }
+          }
+        }
+
+      }
+    }
+
+    // 产品图片
+    .productData {
+      margin-top: 20px;
+      margin-left: 7px;
+      position: relative;
+
+      hr {
+        position: absolute;
+        top: 3px;
+        left: 70px;
+        width: 94%;
+      }
+    }
+
+    .productPicture {
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      // width: 1280px;
+      width: 100%;
+      margin-left: 100px;
+
+      .addimg {
+        width: 200px;
+        height: 200px;
+        padding: 10px;
+        margin-right: 15px;
+
+        .v-img {
+          border: 1px solid #c2c2c2;
+          width: 100%;
+          height: 100%;
+          position: relative;
+
+          i {
+            position: absolute;
+            right: 6px;
+            top: 6px;
+            font-size: 22px;
+            cursor: pointer;
+          }
+
+          img {
+            width: 100%;
+            height: 100%;
+            vertical-align: bottom;
+          }
+        }
+
+      }
+
+      .pictureDiv {
+        // border-radius: 5px;
+        padding: 10px;
+
+        .updata {
+          width: 100%;
+          height: 100%;
+          position: relative;
+          border: 1px solid #c2c2c2;
+
+          input {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+          }
+
+          i {
+            font-size: 200px;
+            color: #ddd;
+          }
+        }
+      }
+    }
+
+    // 按钮
+    .btn {
+      width: 100%;
+      margin-top: 80px;
+      text-align: center;
+
+      button {
+        padding: 12px 20px;
+        background: #333437;
+        border: 1px solid #333437;
+        margin-right: 80px;
+
+        &:hover {
+          background: #333437c7;
+        }
+
+        &:first-child {
+          margin-left: 80px;
+        }
+      }
+    }
+
+    .mustIcon {
+      color: #e9360a;
+    }
+  }
+
+}
+
+.el-tooltip__popper.is-dark {
+  letter-spacing: 2px;
+}

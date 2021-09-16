@@ -1,0 +1,117 @@
+.staffManagement {
+  position: relative;
+  width: 100%;
+  // margin-top: 48px;
+  
+  .box {
+    overflow-x: hidden;
+    padding: 20px;
+    padding-bottom: 51px;
+    padding-top: 0;
+
+    .staffManagementInfo {
+      position: relative;
+      width: 100%;
+
+      .searchInt {
+        background-color: #fff;
+        border-radius: 4px;
+        padding: 15px;
+        display: flex;
+
+        .search {
+          display: flex;
+
+          span {
+            line-height: 33px;
+          }
+
+          input {
+            text-indent: 8px;
+            width: 230px;
+            padding: 7px 0;
+            border: 1px solid #c2c2c2;
+            border-radius: 4px;
+
+            &:hover {
+              border: 1px solid #409eff;
+            }
+          }
+
+        }
+
+        .btn {
+          margin-left: 30px;
+          .el-button {
+            padding: 10px 15px;
+            &:first-child{
+              margin-right: 20px;
+            }
+          }
+        }
+      }
+
+      .table {
+        background-color: #Fff;
+        border-radius: 4px;
+        margin-top: 15px;
+        padding: 15px;
+
+        .xls {
+          margin-top: 42px;
+
+          .el-table td,
+          .el-table th {
+            text-align: center;
+          }
+
+          .el-table th{
+            background-color: #e9edef;
+          }
+
+        }
+
+        .paging {
+          margin-top: 10px;
+          display: flex;
+
+          .blockText {
+            font-weight: normal;
+          }
+
+          .el-pagination {
+            //   width: 30%x;
+
+            &:nth-child(2) {
+              width: 100%;
+              margin-left: -13px;
+            }
+          }
+
+          .el-pagination__jump {
+            float: right;
+            margin-right: 16px;
+          }
+
+          .ensure-btn {
+            //   margin-right: -170px;
+            font-weight: normal;
+            border: 1px solid #dcdfe6;
+            text-align: center;
+            cursor: pointer;
+            padding: 0 10px;
+            border-radius: 4px;
+
+            &:hover {
+              border-color: #40a0ffcc;
+              color: #409EFF;
+              background: #ecf5ff;
+            }
+          }
+        }
+      }
+
+
+    }
+  }
+}

@@ -1,0 +1,464 @@
+.rechargeWidthdraw {
+  position: relative;
+  width: 100%;
+  margin-top: 48px;
+
+  .box {
+    overflow-x: hidden;
+    padding: 20px;
+    padding-bottom: 51px;
+    padding-top: 0;
+
+    .rechargeInfo {
+      position: relative;
+      border-radius: 4px;
+      background-color: #FFF;
+      padding: 15px;
+
+      .balance {
+        padding: 10px 30px;
+        padding-top: 20px;
+        text-align: center;
+
+        span {
+          font-size: 30px;
+          color: #409effe8;
+
+          &:hover {
+            border-bottom: 2px solid #409eff;
+            cursor: pointer;
+          }
+
+          &:first-child {
+            color: #444;
+
+            &:hover {
+              border-bottom: none;
+              cursor: initial;
+            }
+          }
+
+          .el-loading-mask {
+            .circular {
+              width: 38px;
+              height: 38px;
+            }
+          }
+        }
+
+      }
+
+      .content {
+        padding: 0px 30px 25px 30px;
+        // display: flex;
+        // justify-content: center; 
+        text-align: center;
+
+        .titleText {
+          color: #444;
+          display: flex;
+          font-size: 24px;
+
+          span {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 5px;
+            width: 50%;
+            letter-spacing: 5px;
+
+            &.active {
+              color: #409eff;
+              border-bottom: 1px solid #409eff;
+            }
+
+            &:first-child {
+              margin-right: 10px;
+            }
+          }
+        }
+
+        .recharge {
+          .tips{
+            margin-top: 20px;
+            span{
+              color: #eb3929;
+              font-size: 18px;
+            }
+          }
+
+          .rechrgeMoney {
+            padding: 15px 0;
+            margin-top: 10px;
+
+            span {
+              font-weight: 600;
+            }
+
+            input {
+              text-indent: 8px;
+              padding: 7px 0;
+              width: 230px;
+              border-radius: 4px;
+              outline: none;
+              border: 1px solid #c2c2c2;
+
+              &:hover {
+                border: 1px solid #409eff;
+              }
+
+              &:focus {
+                outline-offset: 0px;
+                border: 1px solid #409eff;
+              }
+            }
+
+            input[type='number'] {
+              &::-webkit-inner-spin-button {
+                width: 20px;
+                height: 29px;
+              }
+            }
+          }
+
+          .rechargeType {
+            padding: 10px 0;
+            margin-left: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .Typetext {
+              margin-right: 9px;
+              font-weight: 600;
+            }
+
+            .inputDiv {
+              display: flex;
+              margin-right: 20px;
+              cursor: pointer;
+
+              input {
+                margin-top: 5px;
+              }
+
+              input[type='number'] {
+                &::-webkit-inner-spin-button {
+                  width: 20px;
+                  height: 29px;
+                }
+              }
+            }
+          }
+
+          .QRcode {
+            display: flex;
+            margin-top: 20px;
+
+            span {
+              font-weight: 600;
+              letter-spacing: 5.35px;
+            }
+          }
+
+          .additionImg {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            margin-left: -30px;
+
+            span {
+              font-weight: 600;
+              margin-left: 38px;
+            }
+
+            .int-img {
+              position: relative;
+              width: 325px;
+              height: 325px;
+              margin-top: 50px;
+              margin-left: -80px;
+              border: 1px solid #ddd;
+              box-sizing: border-box;
+
+              img {
+                width: 100%;
+                height: 100%;
+              }
+            }
+
+          }
+
+          .btnRecharge {
+            margin-top: 30px;
+          }
+        }
+
+        .widthdraw {
+          .widthdrawMoney {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            padding: 15px 0;
+
+            span {
+              font-weight: 600;
+              line-height: 29px;
+              line-height: 33px;
+            }
+
+            input {
+              text-indent: 8px;
+              padding: 7px 0;
+              width: 230px;
+              border: 1px solid #c2c2c2;
+              border-radius: 4px;
+              outline: none;
+
+              &:focus {
+                outline-offset: 0px;
+                border: 1px solid #409eff;
+              }
+
+              &:hover {
+                border: 1px solid #409eff;
+              }
+            }
+
+            input[type='number'] {
+              &::-webkit-inner-spin-button {
+                width: 20px;
+                height: 29px;
+              }
+            }
+          }
+
+          .widthdrawType {
+            padding: 10px 0;
+            display: flex;
+            justify-content: center;
+            margin-left: 25px;
+
+            .Typetext {
+              margin-right: 4px;
+              font-weight: 600;
+            }
+
+            .inputDiv {
+              display: flex;
+              margin-right: 20px;
+              cursor: pointer;
+
+              input {
+                margin-top: 5px;
+
+              }
+            }
+          }
+
+          .typeName {
+            padding: 15px 0;
+            margin-left: -20px;
+
+            span {
+              font-weight: 600;
+              display: inline-block;
+              width: 100px;
+              text-align: right;
+            }
+
+            input {
+              width: 230px;
+              text-indent: 8px;
+              padding: 7px 0;
+              margin-left: -4px;
+              border-radius: 4px;
+              border: 1px solid #c2c2c2;
+              outline: none;
+
+              &:hover {
+                border: 1px solid #409eff;
+              }
+
+              &:focus {
+                outline-offset: 0px;
+                border: 1px solid #409eff;
+              }
+            }
+          }
+
+          .addQRcode {
+            margin-top: 20px;
+            position: relative;
+
+            span {
+              font-weight: 600;
+            }
+
+            .addFile {
+              position: absolute;
+              left: 0;
+              top: 0;
+              border: 1px solid red;
+              width: 310px;
+              opacity: 0;
+
+            }
+
+            .addtext {
+              padding: 5px 0;
+              text-indent: 4px;
+              width: 215px;
+            }
+          }
+
+          .QRcodeImg {
+            display: flex;
+            justify-content: center;
+            // margin-top: 10px;
+            margin-left: -10px;
+
+            span {
+              font-weight: 600;
+              margin-left: 30px;
+            }
+
+            .int-img {
+              position: relative;
+              width: 330px;
+              height: 330px;
+              margin-top: 50px;
+              margin-left: -95px;
+
+              input {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                left: 0;
+                top: 0;
+                opacity: 0;
+              }
+
+              img {
+                width: 100%;
+                height: 100%;
+              }
+            }
+          }
+
+          .btnWidthdraw {
+            margin-top: 30px;
+          }
+        }
+      }
+
+    }
+
+  }
+
+  .rechargeMask {
+    border-radius: 4px;
+    margin-top: 18vh !important;
+
+    .el-dialog__header {
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .el-dialog__body {
+      padding-top: 10px;
+      padding-bottom: 15px;
+
+      .content {
+        div {
+          margin-top: 10px;
+          font-size: 14px;
+
+          span {
+            margin-left: 10px;
+
+            &:first-child {
+              margin-left: 0px;
+              width: 85px;
+              display: inline-block;
+              text-align: right;
+            }
+          }
+
+          &:first-of-type {
+            font-size: 15px;
+            font-weight: 600;
+          }
+
+          &:nth-of-type(2) {
+            margin-top: 15px;
+          }
+
+          &:nth-last-of-type(2) {
+            span {
+              &:nth-child(2) {
+                color: #409eff;
+              }
+            }
+          }
+
+          &:last-of-type {
+
+            span {
+              &:last-child {
+                position: relative;
+                display: inline-block;
+                width: 140px;
+                height: 140px;
+                vertical-align: top;
+                border: 1px solid #ececec;
+                margin-top: 4px;
+
+                img {
+                  width: 100%;
+                  height: 100%;
+                }
+
+                input {
+                  width: 100%;
+                  height: 100%;
+                  position: absolute;
+                  left: 0;
+                  top: 0;
+                  opacity: 0;
+                }
+
+                .delete{
+                  position: absolute;
+                  right: 0;
+                  top: 0;
+                  color: #e64536;
+                  cursor: pointer;
+                  width: 16px;
+                  text-align: center;
+                  font-size: 24px;
+                  width: 28px;
+                }
+              }
+            }
+          }
+
+        }
+      }
+    }
+
+    .dialog-footer {
+      button {
+        outline: none;
+        padding: 8px 17px;
+        font-size: 12px;
+        cursor: pointer;
+        margin-top: 10px;
+        border-radius: 4px;
+
+        &:nth-child(2) {
+          margin-left: 50px;
+        }
+      }
+    }
+  }
+}

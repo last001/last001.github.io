@@ -1,0 +1,576 @@
+.sheduleNumber {
+  padding: 20px;
+  padding-bottom: 51px;
+  overflow-x: hidden;
+
+  
+  .sheduleBigbox {
+    margin-top: 20px;
+    border-radius: 4px;
+    background-color: #fff;
+    padding-bottom: 20px;
+    .sheduleTitle {
+      padding: 20px;
+      border-bottom: 1px solid #ddd;
+      font-size: 18px;
+      font-weight: bold;
+      margin-left: 20px;
+      padding-left: 0;
+      width: 88%;
+    }
+
+    .hint {
+      padding: 10px;
+      padding-left: 16px;
+    }
+
+    // 基本情况
+    .besicInfo {
+      padding: 20px;
+      width: 100%;
+      padding-top: 0;
+
+      .besicHeader {
+        padding: 10px 0;
+
+        hr {
+          width: 92%;
+          // background-color: red;
+          margin-left: 15px;
+          margin-top: 9.5px;
+        }
+      }
+
+      .besicContent {
+        padding: 10px 0;
+        padding-left: 60px;
+
+        div {
+          padding: 15px 0;
+
+          span {
+            display: inline-block;
+            width: 240px;
+
+          }
+
+          .threeText {
+            letter-spacing: 8px;
+          }
+
+          select,
+          input {
+            padding: 8px 0;
+            width: 374px;
+            text-indent: 8px;
+            border-radius: 4px;
+            border: 1px solid #c2c2c2;
+            &:hover{
+              border: 1px solid #409eff;
+            }
+          }
+
+          select{
+            width: 376px;
+          }
+
+          input{
+            &::placeholder{
+              color: #666;
+            }
+          }
+        }
+      }
+    }
+
+    // 账号情况
+    .IDsituation {
+      padding: 20px;
+      // margin-top: 10px;
+      width: 100%;
+
+      .IDheader {
+        padding: 10px 0;
+
+        hr {
+          width: 92%;
+          margin-left: 15px;
+          margin-top: 9.5px;
+        }
+      }
+
+      .IDContent {
+        padding: 10px 0;
+        padding-left: 60px;
+        display: flex;
+        margin-top: 20px;
+
+        .lists {
+          margin-right: 100px;
+
+
+          div {
+            padding: 10px 0;
+
+            span {
+              display: inline-block;
+              width: 100px;
+            }
+
+            .twoText {
+              letter-spacing: 15px;
+            }
+
+            .v-twoText {
+              letter-spacing: 30px;
+              position: relative;
+            }
+
+            input {
+              padding: 8px 0;
+              width: 240px;
+              text-indent: 8px;
+              border: 1px solid #c2c2c2;
+              border-radius: 4px;
+              &::placeholder{
+                color: #666;
+              }
+              &:hover{
+                border: 1px solid #409eff;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // 进度情况
+    .progressSituation {
+      padding: 20px;
+      // margin-top: 10px;
+      width: 100%;
+
+      .progressHeader {
+        padding: 10px 0;
+
+        hr {
+          width: 92%;
+          margin-left: 15px;
+          margin-top: 9.5px;
+        }
+      }
+
+      .progressContent {
+        padding: 10px 0;
+        padding-left: 60px;
+        display: flex;
+        margin-top: 20px;
+
+        .lists {
+          margin-right: 100px;
+
+          div {
+            padding: 10px 0;
+
+            span {
+              display: inline-block;
+              width: 100px;
+            }
+
+            input {
+              padding: 8px 0;
+              width: 240px;
+              text-indent: 8px;
+              border-radius: 4px;
+              border: 1px solid #c2c2c2;
+              &::placeholder{
+                color: #666;
+              }
+              &:hover{
+                border: 1px solid #409eff;
+              }
+            }
+
+            input[type='number'] {
+              &::-webkit-inner-spin-button {
+                width: 20px;
+                height: 36px;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // 业绩绩效
+    .performance {
+      padding: 20px;
+      // margin-top: 10px;
+      width: 100%;
+
+      .performanceHeader {
+        padding: 10px 0;
+
+        hr {
+          width: 92%;
+          margin-left: 15px;
+          margin-top: 9.5px;
+        }
+      }
+
+      .perrotmanceContent {
+        padding: 10px 0;
+        padding-left: 60px;
+
+        // display: flex;
+        .monthPerformance {
+          margin-top: 20px;
+
+          span {
+            display: inline-block;
+            width: 98px;
+          }
+
+          input {
+            width: 240px;
+            padding: 8px 0;
+            margin-right: 100px;
+            text-indent: 8px;
+            border-radius: 4px;
+            border: 1px solid #c2c2c2;
+            &::placeholder{
+              color: #666;
+            }
+            &:hover{
+              border: 1px solid #409eff;
+            }
+          }
+
+          input[type='number'] {
+            &::-webkit-inner-spin-button {
+              width: 20px;
+              height: 36px;
+            }
+          }
+        }
+
+        .cause {
+          div {
+            padding: 10px 0;
+
+            span {
+              display: inline-block;
+              width: 96px;
+            }
+
+            input {
+              padding: 8px 0;
+              width: 692px;
+              text-indent: 8px;
+              border-radius: 4px;
+              border: 1px solid #c2c2c2;
+              &::placeholder{
+                color: #666;
+              }
+              &:hover{
+                border: 1px solid #409eff;
+              }
+            }
+
+            &:first-child {
+              font-size: 22px;
+              padding: 20px 0;
+
+              i {
+                font-style: normal;
+              }
+
+              .downRed {
+                color: red;
+              }
+
+              .upGreen {
+                color: #25da2a;
+              }
+            }
+
+          }
+        }
+
+      }
+    }
+
+    // 系统默认数据
+    .systemDefault {
+      padding: 20px;
+      // margin-top: 10px;
+      width: 100%;
+
+      .systemDefaultHeader {
+        padding: 10px 0;
+
+        hr {
+          width: 90%;
+          margin-left: 15px;
+          margin-top: 9.5px;
+        }
+      }
+
+      .systemDefaultContent {
+        padding: 10px 0;
+        padding-left: 60px;
+
+        div {
+          padding: 15px 0;
+
+          span {
+            display: inline-block;
+            width: 240px;
+
+          }
+
+          .threeText {
+            letter-spacing: 8px;
+          }
+
+          select,
+          input {
+            padding: 8px 0;
+            width: 374px;
+            text-indent: 8px;
+          }
+
+          input {
+            width: 370px;
+          }
+        }
+      }
+    }
+
+    // 跟进记录/备注
+    .recordComment {
+      padding: 20px;
+      // margin-top: 10px;
+      width: 100%;
+
+      .recordCommentHeader {
+        padding: 10px 0;
+
+        hr {
+          width: 89%;
+          margin-left: 15px;
+          margin-top: 9.5px;
+        }
+      }
+
+      .recordCommentContent {
+        padding: 10px 0;
+        padding-left: 60px;
+
+        textarea {
+          padding: 10px 0;
+          text-indent: 2em;
+          font-size: 14px;
+          border-radius: 4px;
+          border: 1px solid #c2c2c2;
+          &::placeholder{
+            color: #666;
+          }
+          &:hover{
+            border: 1px solid #409eff;
+          }
+        }
+      }
+    }
+
+    // 图片
+    .picture {
+      padding: 20px;
+      // margin-top: 10px;
+      width: 100%;
+
+      .pictureHeader {
+        padding: 10px 0;
+
+        hr {
+          width: 93%;
+          margin-left: 15px;
+          margin-top: 9.5px;
+        }
+      }
+
+      .pictrueContent {
+        padding: 10px 0;
+        padding-left: 50px;
+        width: 96%;
+        display: flex;
+        flex-wrap: wrap;
+
+        .addimg {
+          width: 200px;
+          padding: 10px;
+
+          .v-img {
+            border: 1px solid #c2c2c2;
+            width: 100%;
+            height: 100%;
+            position: relative;
+
+            img {
+              width: 100%;
+              height: 100%;
+            }
+
+            i {
+              position: absolute;
+              right: 6px;
+              top: 6px;
+              cursor: pointer;
+              font-size: 22px;
+              color: #999;
+            }
+          }
+
+        }
+
+        .addPictrue {
+          padding: 10px;
+
+          // width: 13%;
+          .updata {
+            height: 100%;
+            position: relative;
+            border: 1px solid #c2c2c2;
+
+            input {
+              position: absolute;
+              left: 0;
+              top: 0;
+              width: 100%;
+              height: 100%;
+              opacity: 0;
+            }
+
+            i {
+              font-size: 200px;
+              color: #ddd;
+            }
+          }
+        }
+      }
+    }
+
+    // 文档
+    .document {
+      padding: 20px;
+      width: 100%;
+      padding-top: 0;
+
+      .documentHeader {
+        padding: 10px 0;
+
+        hr {
+          width: 93%;
+          margin-left: 15px;
+          margin-top: 9.5px;
+        }
+      }
+
+      .documentContent {
+        padding: 10px 0;
+        padding-left: 50px;
+        width: 96%;
+        display: flex;
+        flex-wrap: wrap;
+
+        .addimg {
+          width: 200px;
+          padding: 10px;
+
+          .v-img {
+            border: 1px solid #c2c2c2;
+            width: 100%;
+            height: 100%;
+
+            img {
+              width: 100%;
+              height: 100%;
+            }
+          }
+        }
+
+        .addDocument {
+          padding: 10px;
+
+          // width: 13%;
+          .updata {
+            height: 100%;
+            position: relative;
+            border: 1px solid #c2c2c2;
+
+            input {
+              position: absolute;
+              left: 0;
+              top: 0;
+              width: 100%;
+              height: 100%;
+              opacity: 0;
+            }
+
+            i {
+              font-size: 200px;
+              color: #ddd;
+            }
+          }
+        }
+      }
+    }
+
+    // btn
+    .btnList {
+      // width: 90%;
+      text-align: center;
+
+      button {
+        padding: 12px 20px;
+        margin-bottom: 30px;
+        // background: #333437;
+        // border: 1px solid #333437;
+
+        // &:hover {
+        //   background: #333437c7;
+        // }
+
+        &:first-child {
+          margin-right: 100px;
+        }
+      }
+    }
+
+    .mustIcon {
+      color: #e9360a;
+    }
+
+    .threeIcon {
+      margin-left: -10px;
+    }
+
+    .twoIcon {
+      margin-left: -16px;
+    }
+
+    .v-twoIcon {
+      position: absolute;
+      top: 3px;
+      right: 0;
+    }
+
+    input,
+    textarea {
+      &:focus {
+        outline: none;
+        border: 2px solid #409eff;
+      }
+    }
+  }
+}

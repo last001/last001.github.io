@@ -1,0 +1,308 @@
+.authorization {
+  position: relative;
+  width: 100%;
+  
+  .v-authorization {
+    margin-top: 48px;
+    overflow-x: hidden;
+    padding: 20px;
+    padding-bottom: 51px;
+    padding-top: 0;
+
+    .box {
+      width: 100%;
+
+      .titleText {
+        display: flex;
+        padding: 15px;
+        background-color: #fff;
+        border-radius: 4px;
+
+        .departmentList {
+
+          select {
+            padding: 8px 0;
+            width: 230px;
+            padding-left: 8px;
+            border: 1px solid #c2c2c2;
+            border-radius: 4px;
+            color: #666;
+            outline: none;
+
+            &:hover {
+              border: 1px solid #409eff;
+            }
+
+            &:focus {
+              outline-offset: 0px;
+              border: 1px solid #409eff;
+            }
+          }
+        }
+
+        .nameTextList {
+          display: flex;
+          margin-left: 20px;
+
+          span {
+            line-height: 33px;
+          }
+
+          input {
+            width: 230px;
+            padding: 8px 0;
+            margin-left: 6px;
+            text-indent: 8px;
+            border-radius: 4px;
+            border: 1px solid #c2c2c2;
+            outline: none;
+
+            &:focus {
+              outline-offset: 0px;
+              border: 1px solid #409eff;
+            }
+
+            &:hover {
+              border: 1px solid #409eff;
+            }
+          }
+        }
+
+        .btn {
+          .el-button {
+            margin-left: 25px;
+            padding: 9px 14px;
+
+            &:nth-child(2) {
+              margin-left: 20px;
+            }
+          }
+        }
+      }
+
+      .authorTalble {
+        transition: all .3s;
+        background-color: #fff;
+        border-radius: 4px;
+        padding: 15px;
+        margin-top: 15px;
+
+        .btn {
+          width: 100%;
+          display: flex;
+         justify-content: flex-end;
+          button {
+            margin-bottom: 10px;
+          }
+        }
+
+        .el-table__header-wrapper {
+          th {
+            text-align: center;
+          }
+        }
+
+        .el-table th {
+          background-color: #e9edef;
+        }
+
+        tbody {
+          tr {
+            td {
+              text-align: center;
+            }
+          }
+        }
+
+        .paging {
+          margin-top: 10px;
+          display: flex;
+
+          .blockText {
+            font-weight: normal;
+          }
+
+          .el-pagination {
+            //   width: 30%x;
+
+            &:nth-child(2) {
+              width: 100%;
+              margin-left: -13px;
+            }
+          }
+
+          .el-pagination__jump {
+            float: right;
+            margin-right: 16px;
+          }
+
+          .ensure-btn {
+            //   margin-right: -170px;
+            font-weight: normal;
+            border: 1px solid #dcdfe6;
+            text-align: center;
+            cursor: pointer;
+            padding: 0 10px;
+            border-radius: 4px;
+
+            &:hover {
+              border-color: #40a0ffcc;
+              color: #409EFF;
+              background: #ecf5ff;
+            }
+          }
+        }
+      }
+
+    }
+  }
+}
+
+// 修改面板
+.handleEditFace {
+  border-radius: 4px;
+
+  .el-dialog__header {
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .content {
+
+    div {
+      padding: 10px;
+      display: flex;
+      margin-left: 20px;
+      align-items: center;
+
+      span {
+        font-size: 16px;
+        width: 100px;
+        text-align: right;
+      }
+
+      input {
+        width: 300px;
+        margin-left: 10px;
+        // border: none;
+        border: 1px solid #e4e4e4;
+        outline: none;
+        // border-bottom: 1px solid #e4e4e4;
+        padding: 8px;
+        border-radius: 4px;
+
+        &:hover {
+          border: 1px solid #409eff;
+        }
+
+        &::-webkit-input-placeholder {
+          color: #999;
+          font-size: 13px;
+        }
+
+        &:focus {
+          outline: none !important;
+          border: 1px solid #409eff !important;
+        }
+      }
+
+      textarea {
+        text-indent: 8px;
+        outline: none;
+        border: 1px solid #e4e4e4;
+        border-radius: 4px;
+        margin-left: 11px;
+        width: 311px;
+
+        &:hover {
+          border: 1px solid #409eff;
+        }
+
+        &:focus {
+          outline: none !important;
+          border: 1px solid #409eff !important;
+        }
+      }
+
+      select {
+        width: 318px;
+        margin-left: 10px;
+        padding: 8px;
+        outline: none;
+        border: 1px solid #e4e4e4;
+        border-radius: 4px;
+
+        &:focus {
+          outline-offset: 0px;
+          border: 1px solid #409eff;
+        }
+
+        &:hover {
+          border: 1px solid #409eff;
+        }
+      }
+
+      &:last-child {
+        align-items: stretch;
+      }
+    }
+  }
+
+  .el-dialog__footer {
+    border-top: 1px solid #ddd;
+    text-align: right;
+    padding-bottom: 15px;
+    padding-top: 15px;
+
+    button {
+      padding: 8px 16px;
+    }
+  }
+
+}
+
+.el-message-box__wrapper {
+  z-index: 99999;
+
+  .el-message-box__content {
+    p {
+      div {
+        &:last-child {
+          select {
+            width: 100px;
+            margin-left: 10px;
+          }
+        }
+      }
+    }
+  }
+}
+
+// 多项删除提示
+.delMessage {
+  .el-message-box--center .el-message-box__header {
+    padding-top: 40px;
+  }
+
+  .el-message-box__title {
+    span {
+      font-size: 18px;
+    }
+  }
+
+  .el-message-box__btns {
+    button {
+      width: 100px;
+      padding: 10px;
+      font-size: 14px;
+
+      &:nth-child(2) {
+        margin-left: 40px;
+      }
+    }
+  }
+}
+
+.tip {
+  display: none !important;
+}

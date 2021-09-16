@@ -1,0 +1,70 @@
+.notice {
+  margin-top: 48px;
+  .v-notive {
+      padding: 20px;
+      padding-bottom: 51px;
+      padding-top: 0;
+      overflow-x: hidden;
+    .content {
+      padding: 15px;
+      padding-bottom: 25px;
+      background-color: #fff;
+      border-radius: 4px;
+
+      div {
+        width: 100%;
+        text-align: center;
+        margin-top: 40px;
+        margin-left: -40px;
+
+        span {
+          width: 80px;
+          text-align: right;
+        }
+
+        input,
+        textarea,
+        select {
+          width: 784px;
+          border: 1px solid #d4d4d4;
+          border-radius: 4px;
+          padding: 10px 12px;
+          outline: none;
+          font-size: 15px;
+
+          &:hover {
+            border: 1px solid #409eff;
+          }
+
+          &:focus {
+            outline: none;
+            outline-offset: 0px;
+            border: 1px solid #409eff;
+          }
+        }
+
+        &.type {
+          select {
+            width: 810px;
+          }
+        }
+
+        &.v-content {
+          height: 530px;
+          display: flex;
+          align-items: stretch;
+          justify-content: center;
+
+          textarea {
+            height: 450px;
+          }
+        }
+
+        &.btn {
+          margin-top: -20px;
+          margin-left: 0;
+        }
+      }
+    }
+  }
+}
