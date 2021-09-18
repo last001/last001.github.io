@@ -1,0 +1,30 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "997340",
+      "name": "home",
+      "font_class": "home",
+      "unicode": "e605",
+      "unicode_decimal": 58885
+    },
+    {
+      "icon_id": "7905654",
+      "name": "学院配置",
+      "font_class": "xueyuanpeizhi",
+      "unicode": "e672",
+      "unicode_decimal": 58994
+    },
+    {
+      "icon_id": "21823874",
+      "name": "s-promotion",
+      "font_class": "s-promotion",
+      "unicode": "e677",
+      "unicode_decimal": 58999
+    }
+  ]
+}

@@ -1,21 +1,614 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- <!DOCTYPE html> -->
+<html lang="zh">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <title>MyGitHub</title>
+    <link rel="icon" type="image/x-icon" href="./img/infoIcon.jpg" />
+    <link rel="stylesheet" href="./iconfont/iconfont.css">
+    <link rel="stylesheet" href="index.css">
     <style>
-        
+
     </style>
 </head>
+
 <body>
-    <h3> <a href="https://github.com/last001/last001.github.io" target="_Blank">my Github</a></h3>
+    <!-- <h3> <a href="https://github.com/last001/last001.github.io" target="_Blank">my Github</a></h3>
     <a href="http://www.ec-sigaoyi.com/sigaoyi/erp/index.html#/login" target="_Blank" >sigaoyi</a>
     <br>
     <a href="bootstrap/index.html" target="_Blank">bootstrap4案例</a>
     <br>
-    <a href="timeBtn.html" target="_Blank" >流光按钮简易示例</a>
+    <a href="timeBtn.html" target="_Blank" >流光按钮简易示例</a> -->
+    <div class="box">
+        <div class="content">
+            <!-- 标题 -->
+            <div class="title clearfix">
+                <span class="weChat fl">
+                    <span>weChat</span>
+                    <span class="QRcode">
+                        <img src="./img/QRcode.jpg" alt="">
+                        <i></i>
+                    </span>
+                </span>
+                <span class="jump fr">规划</span>
+                <span class="jump fr">技能</span>
+                <span class="jump fr">项目</span>
+                <span class="jump fr">工作</span>
+                <span class="jump fr">个人信息</span>
+                <span class="jump fr active">主页</span>
+            </div>
+            <!-- 主页 -->
+            <div class="home" id="home">
+
+                <div class="welcome web-font">
+                    <span>欢迎</span>
+                    <span>来到我的个人主页!</span>
+                </div>
+                <div class="hobby web-font">一个篮球爱好者</div>
+                <div class="download">
+                    <span>查看进度</span>
+                    <span>下载进度</span>
+                </div>
+            </div>
+            <!-- 个人信息 -->
+            <div class="info" id="info">
+                <div class="basicInfo">
+                    <div>
+                        <span>基本</span>
+                        <span>信息</span>
+                    </div>
+                </div>
+                <div class="targetLanguage">我们观看世界的视角与感受世界的方法可能有千百种，只要下意识的将这些角度和感受方法运用到日常生活中，这就是设计。</div>
+                <div class="detailInfo">
+                    <div class="infoText">
+                        <div class="name">
+                            <span class="text">
+                                <h6>姓名：许珊珊</h6>
+                                <i>出生日期：19993-01-15 | 籍贯：广东汕尾</i>
+                                <i>邮箱：1176250661@qq.com | 电话：18826499724</i>
+                            </span>
+                            <span class="icon">
+                                <span>
+                                    <i class="iconfont icon-home"></i>
+                                </span>
+                            </span>
+                        </div>
+                        <div class="school">
+                            <span class="text">
+                                <h6>广东女子职业技术学院</h6>
+                                <i>多媒体设计与制作(2011.9-2014.6)</i>
+                                <i>网页艺术设计、摄影、素描、中国画、高级网页设计、数码构成</i>
+                            </span>
+                            <span class="icon">
+                                <span>
+                                    <i class="iconfont icon-xueyuanpeizhi"></i>
+                                </span>
+                            </span>
+                        </div>
+                        <div class="post">
+                            <span class="text">
+                                <h6>目标职位</h6>
+                                <i>网页设计/APP设计师</i>
+                                <i>技能测评：擅长色彩搭配、整体把握强、熟悉各类设计软件</i>
+                            </span>
+                            <span class="icon">
+                                <span>
+                                    <i class="iconfont icon-s-promotion"></i>
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="infoImg">
+                        <div class="v-infoImg">
+                            <img src="./img/info.jpg" alt="加载失败...">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 个人优势 -->
+            <div class="infoGoodness">
+                <div class="v-infoGoodness">
+                    <div>
+                        <span>个人</span>
+                        <span>优势</span>
+                    </div>
+                </div>
+                <div class="targetLanguage">我们观看世界的视角与感受世界的方法可能有千百种，只要下意识的将这些角度和感受方法运用到日常生活中，这就是设计。</div>
+                <div class="detailGoodness">
+                    <div class="front">
+                        <div>
+                            <span class="icon">
+                                <span>
+                                    <i class="iconfont icon-s-promotion"></i>
+                                </span>
+                            </span>
+                            <span class="text">
+                                <h6>简单就好</h6>
+                                <i>考虑太多复杂的也没用，简单是美德</i>
+                            </span>
+                        </div>
+                        <div>
+                            <span class="icon">
+                                <span>
+                                    <i class="iconfont icon-s-promotion"></i>
+                                </span>
+                            </span>
+                            <span class="text">
+                                <h6>赋予生命</h6>
+                                <i>世界本就美好，设计更加动感</i>
+                            </span>
+                        </div>
+                        <div>
+                            <span class="icon">
+                                <span>
+                                    <i class="iconfont icon-s-promotion"></i>
+                                </span>
+                            </span>
+                            <span class="text">
+                                <h6>来点颜色</h6>
+                                <i>喜欢大红，火烈烈的颜色，火烈烈的人生考虑太多复杂的也没用，简单是美德</i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="behind">
+                        <div>
+                            <span class="text">
+                                <h6>自省和反思</h6>
+                                <i>立足过去与未来的夹缝，设计再配置</i>
+                            </span>
+                            <span class="icon">
+                                <span>
+                                    <i class="iconfont icon-s-promotion"></i>
+                                </span>
+                            </span>
+                        </div>
+                        <div>
+                            <span class="text">
+                                <h6>爱设计爱生活</h6>
+                                <i>生活就是设计的起源地，设计就是对生活的发言</i>
+                            </span>
+                            <span class="icon">
+                                <span>
+                                    <i class="iconfont icon-s-promotion"></i>
+                                </span>
+                            </span>
+                        </div>
+                        <div>
+                            <span class="text">
+                                <h6>丰富设计理念</h6>
+                                <i>对设计行为的语言表达，也是设计师重要任务</i>
+                            </span>
+                            <span class="icon">
+                                <span>
+                                    <i class="iconfont icon-s-promotion"></i>
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 工作经验 -->
+            <div class="work" id="work">
+                <div class="v-work">
+                    <div>
+                        <span>工作</span>
+                        <span>经验</span>
+                    </div>
+                </div>
+                <div class="targetLanguage">我们观看世界的视角与感受世界的方法可能有千百种，只要下意识的将这些角度和感受方法运用到日常生活中，这就是设计。</div>
+                <div class="detailWork">
+                    <div class="workImg">
+                        <div class="v-workImg">
+                            <img src="./img/show025.webp" alt="加载失败">
+                        </div>
+                    </div>
+                    <div class="workIntroduce">
+                        <div class="workContent">
+                            <span>爱好内容：</span>
+                            <span>网页设计与前端制作;</span>
+                            <span>UI用户页面设计,配合ipone及安卓标准进行切片;</span>
+                            <span>配合市场活动进行其他宣传材料的设计制作;</span>
+                            <span>公司VI修改维护以及测试;</span>
+                        </div>
+                        <div class="workTime">
+                            <div>工作时间：</div>
+                            <div>
+                                <span class="workIcon"><font>2014-07</font>|唐文海一名事务所网站建设：网页设计与前端制作。</span>
+                                <span class="workCompany"></span>
+                            </div>
+                            <div>
+                                <span class="workIcon"><font>2015-06</font>|达意源景观设计网页设计：网页主板面设计,多次束带更新。</span>
+                                <span class="workCompany"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 产品项目 -->
+            <div class="project" id="project">
+                <div class="v-project">
+                    <div>
+                        <span>产品</span>
+                        <span>项目</span>
+                    </div>
+                </div>
+                <div class="targetLanguage">我们观看世界的视角与感受世界的方法可能有千百种，只要下意识的将这些角度和感受方法运用到日常生活中，这就是设计。</div>
+            </div>
+            <!-- 专业技能 -->
+            <div class="skill" id="skill">
+                <div class="v-skill">
+                    <div>
+                        <span>专业</span>
+                        <span>技能</span>
+                    </div>
+                </div>
+                <div class="targetLanguage">我们观看世界的视角与感受世界的方法可能有千百种，只要下意识的将这些角度和感受方法运用到日常生活中，这就是设计。</div>
+                <div class="detailSkill">
+                    <div id="main" style="width:100%;height: 400px;"></div>
+                </div>
+            </div>
+            <!-- 职业规划 -->
+            <div class="plan" id="plan">
+                <div class="v-plan">
+                    <div>
+                        <span>职业</span>
+                        <span>规划</span>
+                    </div>
+                </div>
+                <div class="targetLanguage">我们观看世界的视角与感受世界的方法可能有千百种，只要下意识的将这些角度和感受方法运用到日常生活中，这就是设计。</div>
+                <div class="detailPlan">
+                    <div>
+                        <span class="icon">
+                            <span>
+                                <i class="iconfont icon-s-promotion"></i>
+                            </span>
+                        </span>
+                        <span class="text">2014年-2015年<br>初出茅庐的一年。目标：找一份有前途的网页设计师工作，好好工作期间不断提升自己好好赚钱，还学费</span>
+                    </div>
+                    <div>
+                        <span class="icon">
+                            <span>
+                                <i class="iconfont icon-s-promotion"></i>
+                            </span>
+                        </span>
+                        <span class="text">2014年-2015年<br>初出茅庐的一年。目标：找一份有前途的网页设计师工作，好好工作期间不断提升自己好好赚钱，还学费</span>
+                    </div>
+                    <div>
+                        <span class="icon">
+                            <span>
+                                <i class="iconfont icon-s-promotion"></i>
+                            </span>
+                        </span>
+                        <span class="text">2014年-2015年<br>初出茅庐的一年。目标：找一份有前途的网页设计师工作，好好工作期间不断提升自己好好赚钱，还学费</span>
+                    </div>
+                    <div>
+                        <span class="icon">
+                            <span>
+                                <i class="iconfont icon-s-promotion"></i>
+                            </span>
+                        </span>
+                        <span class="text">2014年-2015年<br>初出茅庐的一年。目标：找一份有前途的网页设计师工作，好好工作期间不断提升自己好好赚钱，还学费</span>
+                    </div>
+                </div>
+            </div>
+            <!-- 页脚 -->
+            <div class="footer" id="footer">
+                <div>
+                    <span><i class="footerTitle">主页</i></span>
+                    <span><i class="footerTitle">个人</i></span>
+                    <span><i class="footerTitle">工作</i></span>
+                    <span><i class="footerTitle">项目</i></span>
+                    <span><i class="footerTitle">技能</i></span>
+                    <span><i class="footerTitle">规划</i></span>
+                </div>
+                <div>
+                    <span class="footer-title">学习网址</span>
+                    <span class="website">
+                        <div class="">
+                            <span><a href="https://www.runoob.com/" target="_blank">菜鸟教程</a></span>
+                            <span><a href="https://www.w3school.com.cn/" target="_blank">w3school在线教程</a></span>
+                            <span><a href="https://www.csdn.net/" target="_blank">csdn</a></span>
+                            <span><a href="https://www.imooc.com/" target="_blank">慕课网</a></span>
+                            <span><a href="http://www.divcss5.com/" target="_blank">DIVCSS5</a></span>
+                        </div>
+                        <div class="">
+                            <span><a href="https://www.udacity.com/" target="_blank">优达学城</a></span>
+                            <span><a href="https://ke.qq.com/" target="_blank">腾讯课堂</a></span>
+                            <span><a href="https://www.jikexueyuan.com/" target="_blank">极客学院</a></span>
+                            <span><a href="https://www.bianchengquan.com/" target="_blank">编程圈</a></span>
+                            <span><a href="https://www.iconfont.cn/" target="_blank">阿里巴巴矢量图</a></span>
+                        </div>
+                    </span>
+                </div>
+                <div>
+                    <div>
+                        <span>
+                            <i class="iconfont icon-s-promotion"></i>
+                        </span>
+                    </div>
+                    <div>
+                        <span>
+                            <i class="iconfont icon-s-promotion"></i>
+                        </span>
+                    </div>
+                    <div>
+                        <span>
+                            <i class="iconfont icon-s-promotion"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!-- completion time -->
+            <div class="footerText">
+                2020/09/20 制作完成 有意联系
+            </div>
+            <!-- 至顶 -->
+            <div class="toTop">
+                <span></span>
+            </div>
+        </div>
+    </div>
+    <script src="./echarts/echarts.js"></script>
+    <script>
+        // 获取dome 元素
+        function qsc(selector) {
+            return document.querySelector(selector);
+        }
+        var titles = document.querySelectorAll(".title .fr");
+        var footers = document.querySelectorAll(".footer .footerTitle");
+        // 设置背景高度
+        qsc(".box").style.height = document.documentElement.clientHeight + 'px';
+        //  echarts
+        var chartDom = document.getElementById('main');
+        var myChart = echarts.init(chartDom);
+        var option;
+        option = {
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                },
+                borderWidth: '1',
+                borderColor: '#e74b3e',
+                fontSize: 14,
+                formatter: function (value) {
+                    return value[0].name + "<br>" + value[0].axisValue + '：' + value[0].data.value + '%';
+                },
+            },
+            xAxis: {
+                type: 'category',
+                data: ['Vue', 'jquery', 'javascript', 'HTML5', 'Web前端', 'css/less', 'git上传' , '小程序', 'node.js', 'mysql',
+                    'Photoshop',
+                    'uniApp'
+                ],
+                axisLable: {
+                    interval: 0,
+                    rotate: 0,
+                    textStyle: {
+                        fontSize: 4,
+                    },
+                },
+            },
+            yAxis: {
+                type: "value",
+                max: 100,
+                axisLabel: {
+                    show: true,
+                    interval: 'auto',
+                    formatter: function (value) {
+                        var yAxisText = "";
+                        if (value == 20) {
+                            yAxisText = value + '%' + `(了解)`;
+                        } else if (value == 40) {
+                            yAxisText = value + '%' + `(一般)`;
+                        } else if (value == 60) {
+                            yAxisText = value + '%' + `(良好)`;
+                        } else if (value == 80) {
+                            yAxisText = value + '%' + `(熟练)`;
+                        } else if (value == 100) {
+                            yAxisText = value + '%' + `(精通)`;
+                        }
+                        return yAxisText;
+                    }
+                },
+            },
+            series: [{
+                type: 'bar',
+                label: {
+                    show: true,
+                    position: 'top',
+                    lineHeight: 20,
+                    color: '#000000',
+                    fontSize: 14,
+                    fontWeight: 'normal',
+                    formatter: function (value) {
+                        return value.name;
+                    }
+                },
+                data: [{
+                    value: 80,
+                    name: "熟练",
+                }, {
+                    value: 80,
+                    name: "熟练",
+                }, {
+                    value: 80,
+                    name: "熟练",
+                }, {
+                    value: 80,
+                    name: "熟练",
+                },{
+                    value: 80,
+                    name: "熟练",
+                }, {
+                    value: 80,
+                    name: "熟练",
+                }, {
+                    value: 80,
+                    name: "熟练",
+                }, {
+                    value: 60,
+                    name: "良好",
+                }, {
+                    value: 40,
+                    name: "一般",
+                }, {
+                    value: 40,
+                    name: "一般",
+                }, {
+                    value: 40,
+                    name: "一般",
+                }, {
+                    value: 20,
+                    name: "了解",
+                }, ],
+                showBackground: true,
+                barWidth: 50,
+                barCategoryGap: "80%",
+                backgroundStyle: {
+                    color: 'rgba(180, 180, 180, 0.2)'
+                },
+                itemStyle: {
+                    color: new echarts.graphic.LinearGradient(
+                        0, 0, 0, 1,
+                        [{
+                                offset: 0,
+                                color: '#fd8b82'
+                            },
+                            {
+                                offset: 0.5,
+                                color: '#f96559'
+                            },
+                            {
+                                offset: 1,
+                                color: '#e74b3e'
+                            }
+                        ]
+                    ),
+                },
+            }]
+        };
+        option && myChart.setOption(option);
+        // 给titles 点击事件
+        for (let i = 0; i < titles.length; i++) {
+            titles[i].onclick = function () {
+                for (let j = 0; j < titles.length; j++) {
+                    titles[j].classList.remove("active");
+                }
+                this.classList.add("active");
+                let spanText = this.innerText;
+                if (spanText == "项目") {
+                    window.location.hash = "#project";
+                } else if (spanText == "技能") {
+                    window.location.hash = "#skill";
+                } else if (spanText == "工作") {
+                    window.location.hash = "#work";
+                } else if (spanText == "个人信息") {
+                    window.location.hash = "#info";
+                } else if (spanText == "主页") {
+                    window.location.hash = "#home";
+                } else if (spanText == "规划") {
+                    window.location.hash = "#plan";
+                }
+            }
+        }
+        // 给footers点击事件
+        for (let i = 0; i < footers.length; i++) {
+            footers[i].onclick = function () {
+                for (let j = 0; j < footers.length; j++) {
+                    footers[j].classList.remove("active");
+                }
+                this.classList.add("active");
+                let spanText = this.innerText;
+                if (spanText == "项目") {
+                    window.location.hash = "#project";
+                } else if (spanText == "技能") {
+                    window.location.hash = "#skill";
+                } else if (spanText == "工作") {
+                    window.location.hash = "#work";
+                } else if (spanText == "个人") {
+                    window.location.hash = "#info";
+                } else if (spanText == "主页") {
+                    window.location.hash = "#home";
+                } else if (spanText == "规划") {
+                    window.location.hash = "#plan";
+                }
+            }
+        }
+        // 兼容
+        var top = document.body.scrollTop || document.documentElement.scrollTop;
+        // 屏幕滚动
+        window.onscroll = function () {
+            // 屏幕滚动 渲染title 颜色
+            if (top.scrollY > 0) {
+                // toTop 显示
+                qsc(".toTop").classList.add("active");
+                for (let i = 0; i < titles.length; i++) {
+                    titles[i].classList.remove("active");
+                    if (titles[i].innerText == "主页") {
+                        titles[i].classList.add("active");
+                    }
+                }
+            } else {
+                // toTop 隐藏
+                qsc(".toTop").classList.remove("active");
+            }
+            if (top.scrollY >= qsc(".info").offsetTop) {
+                for (let i = 0; i < titles.length; i++) {
+                    titles[i].classList.remove("active");
+                    if (titles[i].innerText == "个人信息") {
+                        titles[i].classList.add("active");
+                    }
+                }
+            }
+            if (top.scrollY >= qsc(".work").offsetTop) {
+                for (let i = 0; i < titles.length; i++) {
+                    titles[i].classList.remove("active");
+                    if (titles[i].innerText == "工作") {
+                        titles[i].classList.add("active");
+                    }
+                }
+            }
+            if (top.scrollY >= qsc(".project").offsetTop) {
+                for (let i = 0; i < titles.length; i++) {
+                    titles[i].classList.remove("active");
+                    if (titles[i].innerText == "项目") {
+                        titles[i].classList.add("active");
+                    }
+                }
+            }
+            if (top.scrollY >= qsc(".skill").offsetTop) {
+                for (let i = 0; i < titles.length; i++) {
+                    titles[i].classList.remove("active");
+                    if (titles[i].innerText == "技能") {
+                        titles[i].classList.add("active");
+                    }
+                }
+            }
+            if (top.scrollY >= qsc(".plan").offsetTop) {
+                for (let i = 0; i < titles.length; i++) {
+                    titles[i].classList.remove("active");
+                    if (titles[i].innerText == "规划") {
+                        titles[i].classList.add("active");
+                    }
+                }
+            }
+        }
+        // weChat 鼠标移上
+        qsc(".weChat").onmouseover = function () {
+            qsc(".QRcode").style.display = "block";
+        }
+        // weChat 鼠标移走
+        qsc(".weChat").onmouseleave = function () {
+            qsc(".QRcode").style.display = "none";
+        }
+        // toTop 至顶
+        qsc(".toTop").onclick = function () {
+            window.scrollTo(0, 0);
+        }
+    </script>
 </body>
+
 </html>
