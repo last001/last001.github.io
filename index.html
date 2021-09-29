@@ -610,6 +610,12 @@
         // toTop 至顶
         qsc(".toTop").onclick = function () {
             window.scrollTo(0, 0);
+            for (let i = 0; i < titles.length; i++) {
+                titles[i].classList.remove("active");
+                if(i == titles.length - 1){
+                    titles[i].classList.add("active");
+                }
+            }
         }
     </script>
 </body>
