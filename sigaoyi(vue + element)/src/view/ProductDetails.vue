@@ -142,6 +142,11 @@
                   </option>
                 </select>
               </div>
+              <div class="classs_number">
+                编码：{{ largeList[largeIndex].catalogId }}，{{
+                  mediumList[mediumIndex].catalogId
+                }}，{{ smallList[smallIndex].catalogId }}
+              </div>
             </div>
             <div class="type">
               <span>类型</span>
@@ -571,7 +576,7 @@
             >翻 译</el-button
           >
           <el-button size="small" @click="translateStatus = false"
-            >取 消</el-button
+            >关 闭</el-button
           >
         </span>
       </el-dialog>
@@ -584,12 +589,15 @@
         custom-class="v-translateDome"
         width="80%"
         center
+        :show-close="false"
+        :close-on-click-modal="false"
+        :close-on-press-escape="false"
       >
         <div class="cotnent">
           <PictureEditor ref="pic" :data="data" :onCompleted="onCompleted" />
         </div>
         <span slot="footer" class="dialog-footer">
-          <el-button size="small" type="primary" @click="translateDome = false"
+          <el-button size="small" type="primary" @click="translateDomeClose()"
             >关 闭</el-button
           >
         </span>
@@ -648,7 +656,7 @@
       >
         <div class="deriveInfo">
           <div>
-            <span>选择数据：</span>
+            <span>选择店铺：</span>
             <div>
               <select
                 v-model="qoo10shopsIndex"
@@ -760,7 +768,7 @@ export default {
       tableImgStatus: false,
       //  点击图片 index
       tableList: "",
-      tableRow:{},
+      tableRow: {},
       // 添加变体
       AddTableList: {},
       //   弹出层List
@@ -882,7 +890,7 @@ export default {
   created() {
     let d = new Date();
     this.years = d.getFullYear();
-    // console.log("this.InfoData ==>",this.InfoData);
+
     this.getTable();
   },
   activated() {},
@@ -915,7 +923,7 @@ export default {
       this.bgImgSrc = this.item.pic_url;
       let imgList = this.item.item_imgs.split(",");
       //图片翻译 详情图图片 数组   00000
-      //   console.log("imgList ==>",imgList)
+
       for (let i = 0; i < imgList.length; i++) {
         let objImg = {
           imgSrc: "",
@@ -934,12 +942,9 @@ export default {
           e.isActive = false;
         }
       });
-      console.log("this.samllImg ==>", this.samllImg);
     },
     // 点击图片 在大Box展示
     showLarge(item, index) {
-      //   console.log("item ==>", item);
-      //   console.log("index ==>",index)
       if (item.isActive) {
         return;
       }
@@ -948,7 +953,6 @@ export default {
       });
       this.bgImgSrc = item.imgSrc;
       item.isActive = true;
-      //   console.log("this.samllImg ==>", this.samllImg);
     },
     // magnifyImg()
     overImg(e) {
@@ -972,8 +976,7 @@ export default {
       // 让鼠标在遮挡层的中心
       maskX = maskX - maskDiv.offsetWidth / 2;
       maskY = maskY - maskDiv.offsetHeight / 2;
-      //   console.log("maskX ==>", maskX);
-      // console.log("maskY ==>", maskY);
+
       //限制遮挡层不能跑出小盒子外面
       if (maskX < 0) {
         maskX = 0;
@@ -1020,7 +1023,6 @@ export default {
         type: "warning",
       })
         .then(() => {
-          console.log("row ==>", row);
           this.tableLoading = true;
           this.$axios({
             url: "/sigaoyi/delectVariants",
@@ -1030,7 +1032,6 @@ export default {
             },
           })
             .then((result) => {
-              console.log("result ==>", result);
               setTimeout(() => {
                 this.tableLoading = false;
               }, 500);
@@ -1052,7 +1053,6 @@ export default {
               }
             })
             .catch((err) => {
-              console.log("err ==>", err);
               setTimeout(() => {
                 this.tableLoading = false;
               }, 500);
@@ -1068,7 +1068,6 @@ export default {
     },
     //   table 保存 按钮
     handleSave(index, row) {
-      console.log("row ==>", row);
       this.tableLoading = true;
       let data = {
         product_id: this.item.id,
@@ -1088,7 +1087,7 @@ export default {
       ) {
         data.imgurl = "";
       }
-      console.log("data ==>", data);
+
       this.$axios({
         url: "/sigaoyi/NEWaddarants",
         method: "POST",
@@ -1096,7 +1095,7 @@ export default {
       })
         .then((result) => {
           this.tableLoading = false;
-          console.log("result ==>", result);
+
           if (result.data.Code == "200") {
             this.$notify({
               title: "请求成功",
@@ -1115,7 +1114,7 @@ export default {
         })
         .catch((err) => {
           this.tableLoading = false;
-          console.log("err ==>", err);
+
           this.$notify({
             title: "请求错误",
             message: "系统业务繁忙,请稍后再试",
@@ -1169,7 +1168,7 @@ export default {
       });
       // 详情图
       let imgList = document.querySelectorAll(".quillEditor img");
-      console.log("imgList ==>", imgList);
+
       for (let i = 0; i < imgList.length; i++) {
         let obj = {
           imgSrc: "",
@@ -1184,7 +1183,6 @@ export default {
     },
     // table 删除图片
     deleteTableIMG(index, row) {
-      console.log("row ==>", row);
       row.imgurl =
         "http://www.ec-sigaoyi.com/sigaoyi/assets/img/%E5%9B%BE%E7%89%87.jpg";
     },
@@ -1194,12 +1192,11 @@ export default {
         e.checked = false;
       });
       item.checked = true;
-      console.log("item ==>", item);
     },
     // table 点击图片 弹出层 上传图片按钮
     updataImg(e) {
       let files = e.target.files[0];
-      console.log("files ==>", files);
+
       let formData = new FormData();
       // 向 formData 对象中添加文件
       formData.append("file", files);
@@ -1214,18 +1211,17 @@ export default {
       let url = "/sigaoyi/variantsImgupload";
       this.$axios(uploadPdfs.uploadPdf(url, formData))
         .then((result) => {
-          console.log("result ==>", result);
           loading.close();
           this.$refs.fileText.value = null;
           if (result.data.Code == 200) {
-              // 后来添加的
+            // 后来添加的
             let objAdd = {
-                imgSrc: "",
+              imgSrc: "",
               checked: false,
             };
             objAdd.imgSrc = result.data.path;
             this.AllImgList.push(objAdd);
-            console.log("this.AllImgList ==>", this.AllImgList);
+
             this.$notify({
               title: "请求成功",
               message: result.data.msg,
@@ -1250,7 +1246,6 @@ export default {
             type: "error",
             offset: 50,
           });
-          console.log("err =>", err);
         });
     },
     // table 点击图片 弹出层 确定 按钮
@@ -1263,12 +1258,11 @@ export default {
       });
       this.tableData[this.tableList].imgurl = imgSrc;
       this.tableImgStatus = false;
-      //   console.log("tableData ==>", this.tableData);
     },
     // table 点击图片上传图片
     uploadImg(e) {
       let files = e.target.files[0];
-      console.log("files ==>", files);
+
       let formData = new FormData();
       // 向 formData 对象中添加文件
       formData.append("file", files);
@@ -1283,7 +1277,6 @@ export default {
       let url = "/sigaoyi/variantsImgupload";
       this.$axios(uploadPdfs.uploadPdf(url, formData))
         .then((result) => {
-          console.log("result ==>", result);
           loading.close();
           this.$refs.uploadSrc.value = null;
           if (result.data.Code == "200") {
@@ -1312,7 +1305,6 @@ export default {
             type: "error",
             offset: 50,
           });
-          console.log("err =>", err);
         });
     },
     // 点击确定添加
@@ -1337,7 +1329,6 @@ export default {
         params: data,
       })
         .then((result) => {
-          console.log("result ==>", result);
           this.tableLoading = false;
           if (result.data.Code == "200") {
             this.tableData.push(result.data.variants);
@@ -1357,7 +1348,6 @@ export default {
           }
         })
         .catch((err) => {
-          console.log("err ==>", err);
           this.tableLoading = false;
           this.$notify({
             title: "请求错误",
@@ -1426,7 +1416,7 @@ export default {
       }
       // 初始值问题
       let data1 = qs.stringify(data);
-      console.log("data ==>", data);
+
       //   laoding
       let loading = this.$loading({
         lock: false,
@@ -1447,7 +1437,7 @@ export default {
           setTimeout(() => {
             loading.close();
           }, 500);
-          console.log("result ==>", result);
+
           if (result.data.code == 200) {
             // this.$notify({
             //   title: "请求成功",
@@ -1467,7 +1457,7 @@ export default {
         })
         .catch((err) => {
           loading.close();
-          console.log("err ==>", err);
+
           this.$notify({
             title: "请求错误",
             message: "系统业务繁忙,请稍后再试",
@@ -1482,25 +1472,20 @@ export default {
     },
     // 点击rightMove
     rightMove() {
-      console.log("this.samllImg.length ==>", this.samllImg.length);
-      // console.log("this.count ==>",this.count)
       this.maskDiv = this.$refs.mask;
       if (this.count + 6 >= this.samllImg.length) {
         this.addBtnFlag = false;
-        console.log("count + 6大于 >length ???");
+
         return;
       }
       if (this.count >= 0) {
-        // console.log("this.count + 6 ==>",this.count + 6)
         this.addBtnNum = true;
       }
       this.count++;
       this.cbd = this.maskDiv.style.marginLeft = -(this.count * 50) + "px";
-      console.log("this.count ==>", this.count);
     },
     // 点击leftMove
     leftMove() {
-      // console.log("this.count ==>",this.count + 6)
       this.maskDiv = this.$refs.mask;
       if (this.count <= 0) {
         this.addBtnNum = false;
@@ -1511,19 +1496,17 @@ export default {
       }
       this.count--;
       this.cbd = this.maskDiv.style.marginLeft = -(this.count * 50) + "px";
-      console.log("this.count ==>", this.count);
     },
     // 删除图片
     deleteImg(index) {
       let imgDivList = document.querySelectorAll(".imgDiv");
       this.samllImg.splice(index, 1);
       this.samllImg.forEach((e, i) => {
-        console.log("this.samllImg.length", this.samllImg.length);
         if (i >= index) {
           e.imgLeft = 50 * i;
         }
       });
-      // console.log('点击了删除图片')
+
       //   点击this.count >0 的图片
       this.maskDiv = this.$refs.mask;
       // index ==> 5 < length
@@ -1531,21 +1514,16 @@ export default {
         this.cbd = this.maskDiv.style.marginLeft =
           parseInt(this.cbd) + 50 + "px";
         this.count--;
-        console.log("index大于5");
       }
       if (this.samllImg.length <= 5) {
-        console.log("length小于5了");
         this.cbd = this.maskDiv.style.marginLeft = 0 + "px";
         this.count = 0;
       }
-      console.log("index ==>", index);
-      console.log("this.count ==>", this.count);
-      console.log("this.samllImg.length ==>", this.samllImg.length);
     },
     //头部 上传图片
     upImg(e) {
       let files = e.target.files[0];
-      console.log("files ==>", files);
+
       let formData = new FormData();
       // 向 formData 对象中添加文件
       formData.append("file", files);
@@ -1560,7 +1538,7 @@ export default {
       this.$axios(uploadPdfs.uploadPdf(url, formData))
         .then((result) => {
           loading.close();
-          console.log("result ==>", result);
+
           this.$refs.uploadVal.value = null;
           if (result.data.Code == "200") {
             let objImg = {
@@ -1596,7 +1574,7 @@ export default {
         .catch((err) => {
           this.$refs.uploadVal.value = null;
           loading.close();
-          console.log("err ==>", err);
+
           this.$message({
             message: "系统繁忙,请稍后再试!",
             center: true,
@@ -1632,7 +1610,7 @@ export default {
           });
           return;
         }
-        console.log("this.arrImages ==>", this.arrImages);
+
         this.filesToRar(this.arrImages, "产品图片");
       } else if (val == "xls") {
         let copyTableData = JSON.parse(JSON.stringify(this.tableData));
@@ -1661,24 +1639,23 @@ export default {
           objImg.fileUrl = e.imgurl;
           let count = index + 1 >= 10 ? index + 1 : "0" + (index + 1);
           let name = e.imgurl.split(".")[e.imgurl.split(".").length - 1];
-          console.log("name ==>", name);
+
           objImg.renameFileName = `${e.id}_${count}.${name}`;
           this.arrImages.push(objImg);
         });
-        console.log("this.arrImages ==>", this.arrImages);
+
         this.filesToRar(this.arrImages, "变体图片");
       } else if (val == "quill") {
         let editor = document
           .querySelector(".ql-editor")
           .getElementsByTagName("img");
-        console.log("editor ==>", editor);
-        //   console.log("editor ==>",editor)
+
         for (let i = 0; i < editor.length; i++) {
           let objImg = {
             fileUrl: "",
             renameFileName: "",
           };
-          // console.log("editor[i].src ==>",editor[i].src)
+
           objImg.fileUrl = editor[i].src;
           let count = i + 1 >= 10 ? i + 1 : "0" + (i + 1);
           let name = editor[i].src.split(".")[
@@ -1689,7 +1666,7 @@ export default {
 
           this.arrImages.push(objImg);
         }
-        console.log("this.arrImages ==>", this.arrImages);
+
         if (this.arrImages.length == 0) {
           this.$message({
             message: "暂无图片下载!",
@@ -1716,7 +1693,7 @@ export default {
       for (let item of arrImages) {
         const promise = _this.getImgArrayBuffer(item.fileUrl).then((data) => {
           // 下载文件, 并存成ArrayBuffer对象(blob)
-          console.log("data ==>", data);
+
           zip.file(item.renameFileName, data, { binary: true }); // 逐个添加文件
           cache[item.renameFileName] = data;
         });
@@ -1732,7 +1709,6 @@ export default {
           });
         })
         .catch((res) => {
-          console.log("res ==>", res);
           _this.$message.error("文件压缩失败");
         });
     },
@@ -1760,9 +1736,7 @@ export default {
       let formData = new FormData();
       // 向 formData 对象中添加文件
       if (e.target.files.length > 1) {
-        //   console.log("大于1")
         for (let i = 0; i < e.target.files.length; i++) {
-          //   console.log("e.target.files[i] ==>",e.target.files[i]);
           // 向 formData 对象中添加文件
           formData.append("file", e.target.files[i]);
         }
@@ -1783,7 +1757,7 @@ export default {
       })
         .then((result) => {
           this.quillLoading = false;
-          console.log("result ==>", result);
+
           this.$refs.quillUpdata.value = null;
           if (result.data.Code == "200") {
             result.data.imglist.forEach((e) => {
@@ -1807,7 +1781,7 @@ export default {
         .catch((err) => {
           this.quillLoading = false;
           this.$refs.quillUpdata.value = null;
-          console.log("err ==>", err);
+
           this.$notify({
             title: "请求失败",
             message: "系统业务繁忙,请稍后再试",
@@ -1829,7 +1803,7 @@ export default {
     // window.scroll 事件
     scrollTop(e) {
       let top = document.documentElement.scrollTop || document.body.scrollTop;
-      //   console.log("top ==>", top);
+
       top > 50 ? (this.opacity = 1) : (this.opacity = 0);
     },
     // 点击图标window.scroll = docuemnt.body.clientHeight
@@ -1873,14 +1847,14 @@ export default {
       })
         .then((result) => {
           loading.close();
-          console.log("result ==>", result);
+
           if (result.data.Code == 200) {
             document.title = result.data.product.title;
             //   个人信息
             this.setInfoData(result.data.userinfo);
             // 向子组件传值
             this.flag = true;
-            console.log("个人信息 ==>", this.InfoData);
+
             //   表格
             if (result.data.variants.length > 0) {
               for (let i = 0; i < result.data.variants.length; i++) {
@@ -1958,8 +1932,6 @@ export default {
               e["selected"] = false;
             });
             this.qoo10shopsList.unshift(qoo10shopsObj);
-
-            // console.log("this.mediumList ==>", this.mediumList);
           } else {
             this.$notify({
               title: "请求失败",
@@ -1977,7 +1949,6 @@ export default {
             type: "error",
             offset: 50,
           });
-          console.log("err ==>", err);
         });
     },
     // 分类 changeSet
@@ -2009,7 +1980,6 @@ export default {
               selected: true,
             },
           ];
-
           return;
         }
         this.$axios({
@@ -2020,7 +1990,6 @@ export default {
           },
         })
           .then((result) => {
-            console.log("result ==>", result);
             let classObj = {
               catalogId: 99,
               catalogLevel: 0,
@@ -2044,9 +2013,7 @@ export default {
             // catalog2
             this.changeSet(this.mediumList, this.mediumIndex, "medium");
           })
-          .catch((err) => {
-            console.log("err ==>", err);
-          });
+          .catch((err) => {});
       } else if (string == "medium") {
         if (index == 0) {
           this.smallIndex = 0;
@@ -2069,7 +2036,6 @@ export default {
           },
         })
           .then((result) => {
-            console.log("result ==>", result);
             let classObj = {
               catalogId: 99,
               catalogLevel: 0,
@@ -2080,7 +2046,7 @@ export default {
 
             this.smallList = result.data.catalogs;
             this.smallList.unshift(classObj);
-            // console.log("this.catalog2.catalogId ==>",this.catalog2.catalogId);
+
             this.smallList.forEach((e, i) => {
               e.selected = false;
               if (e.catalogId == this.catalog2.catalogId) {
@@ -2088,14 +2054,9 @@ export default {
                 this.smallIndex = i;
               }
             });
-            // console.log("this.smallIndex ==>",this.smallIndex);
-            // console.log("this.smallList ==>",this.smallList);
           })
-          .catch((err) => {
-            console.log("err ==>", err);
-          });
+          .catch((err) => {});
       } else if (string == "qoo10shops") {
-        console.log(this.qoo10shopsList[this.qoo10shopsIndex].id);
         if (this.qoo10shopsList[this.qoo10shopsIndex].id == 0) {
           this.freightList = [{ ShippingName: "全部", ShippingNo: 0 }];
           return;
@@ -2108,7 +2069,6 @@ export default {
           },
         })
           .then((result) => {
-            console.log("result ==>", result);
             let freightObj = {
               ShippingName: "全部",
               ShippingNo: 0,
@@ -2120,20 +2080,15 @@ export default {
             this.freightList.unshift(freightObj);
             this.publishList.CertificationKey = result.data.CertificationKey;
           })
-          .catch((err) => {
-            console.log("err ==>", err);
-          });
+          .catch((err) => {});
       } else if (string == "freight") {
         this.publishList.ShippingNo = this.freightList[
           this.freightIndex
         ].ShippingNo;
-        console.log("this.publishList ==>", this.publishList);
       }
     },
     // 点击模板一
     template1() {
-      console.log(this.tableData[0]);
-
       let data = {
         color: this.tableData[0].name,
         elm1: this.item.details,
@@ -2148,7 +2103,7 @@ export default {
         return;
       }
       data = qs.stringify(data);
-      //   console.log("data ==>", data);
+
       // 发请求
       let loading = this.$loading({
         lock: false,
@@ -2166,7 +2121,7 @@ export default {
       })
         .then((result) => {
           loading.close();
-          console.log("result ==>", result);
+
           if (result.data.code == 200) {
             this.$message({
               message: "切换成功",
@@ -2179,7 +2134,6 @@ export default {
             // let quill = this.$refs.quillEditor
             // this.onEditorChange({quill,html})
             this.item.details = result.data.elm;
-            // console.log("this.text0 ==>", this.text0);
           } else {
             this.$meesge({
               message: "系统业务繁忙,请稍后再试！",
@@ -2191,7 +2145,7 @@ export default {
         })
         .catch((err) => {
           loading.close();
-          console.log("err ==>", err);
+
           this.$message({
             message: "系统业务繁忙,请稍后再试！",
             center: true,
@@ -2227,14 +2181,23 @@ export default {
       }
       // 弹出层状态
       this.translateStatus = true;
-      console.log("this.mianList 主图==>", this.mianList);
-      console.log("this.tableData 表格图==>", this.tableData);
-      console.log("this.detailsList 详情图==>", this.detailsList);
     },
     // 图片翻译弹出层选中图片
     selectImg(item, index) {
       item.checked = !item.checked;
-      //   console.log("item.checked ==>", item.checked);
+    },
+    // 关闭所有图片 转为false
+    closeTranslate() {
+      // mianList tableData detailsList
+      this.mianList.forEach((e) => {
+        e.checked = false;
+      });
+      this.tableData.forEach((e) => {
+        e.checked = false;
+      });
+      this.detailsList.forEach((e) => {
+        e.checked = false;
+      });
     },
     // 图片翻译弹出层 翻译按钮
     translateBtn() {
@@ -2262,21 +2225,18 @@ export default {
       // 主图
       this.mianList.forEach((e, i) => {
         if (e.checked) {
-          //   console.log("主图 ==>", e.imgSrc);
           this.imgUrl += e.imgSrc + ",";
         }
       });
       // 表格图
       this.tableData.forEach((e) => {
         if (e.checked) {
-          //   console.log("表格图 ==>", e.imgurl);
           this.biantiimgs += e.imgurl + ",";
         }
       });
       // 详情图
       this.detailsList.forEach((e, i) => {
         if (e.checked) {
-          //   console.log("详情图 ==>", e.src);
           this.xiangqingtuimgs += e.src + ",";
         }
       });
@@ -2289,24 +2249,8 @@ export default {
         0,
         this.xiangqingtuimgs.length - 1
       );
-      //   console.log(typeof this.imgUrl);
-      console.log("this.imgUrl ==>", this.imgUrl);
-      console.log("this.biantiimgs ==>", this.biantiimgs);
-      console.log("this.xiangqingtuimgs ==>", this.xiangqingtuimgs);
+
       this.gettranslate();
-    },
-    // 关闭所有图片 转为false
-    closeTranslate() {
-      // mianList tableData detailsList
-      this.mianList.forEach((e) => {
-        e.checked = false;
-      });
-      this.tableData.forEach((e) => {
-        e.checked = false;
-      });
-      this.detailsList.forEach((e) => {
-        e.checked = false;
-      });
     },
     // 翻译调接口
     gettranslate() {
@@ -2325,8 +2269,7 @@ export default {
         money -= 0.1;
       }
       money = money.toFixed(2);
-      console.log("this.InfoData ==>", this.InfoData);
-      console.log("money ==>", money);
+
       if (this.InfoData.balance < money) {
         let alertText = confirm("余额不足,是否前往充值");
         if (alertText) {
@@ -2350,15 +2293,15 @@ export default {
         spinner: "el-icon-loading",
         background: "rgba(0, 0, 0, 0.7)",
       });
-      console.log("data ==>", data);
+
       this.$axios({
         url: "/sigaoyi/NEWPictureTranslation",
         method: "POST",
         params: data,
       })
         .then((result) => {
-          console.log("result ==>", result);
           loading.close();
+          console.log("result ==>", result);
           if (result.data.code == "200") {
             this.$notify({
               title: "请求成功",
@@ -2403,8 +2346,8 @@ export default {
           }
         })
         .catch((err) => {
-          loading.close();
           console.log("err ==>", err);
+          loading.close();
           this.translateDome = false;
           this.translateStatus = false;
           this.$notify({
@@ -2415,6 +2358,27 @@ export default {
             customClass: "translate",
           });
         });
+    },
+    // translateDomeClose
+    translateDomeClose() {
+      //   (this.data = {
+      //     targetLang: "en",
+      //     sourceLang: "zh",
+      //     templateJson: [],
+      //   }),
+      //   this.imgUrl = "";
+      //   this.biantiimgs = "";
+      //   this.xiangqingtuimgs = "";
+      //   this.detailsList.forEach(e => {
+      //        e.checked = false;
+      //   });
+      //   this.mianList.forEach(e => {
+      //       e.checked = false;
+      //   });
+      //   this.$refs.pic.receiveMessage(this.data);
+      //   this.$refs.pic.postMessage();
+      //   this.translateDome = false;
+      location.reload();
     },
     // 完成编辑 || 一键机翻
     onCompleted(data) {
@@ -2427,8 +2391,6 @@ export default {
       for (let i = 0; i < data.length; i++) {
         data[i]["besaImg"] = this.data.templateJson[i].children[0].src;
       }
-
-      console.log("data ==>", data);
 
       //   发起请求
       let loading = this.$loading({
@@ -2449,12 +2411,9 @@ export default {
         formData.append("text", data[0].besaImg);
       }
 
-      console.log("formData ==>", formData);
-
       let url = "/sigaoyi/NEWbase64ImageSave";
       this.$axios(uploadPdfs.uploadPdf(url, formData))
         .then((result) => {
-          console.log("result ==>", result);
           loading.close();
           if (result.data.Code == 200) {
             result.data.list.forEach((e) => {
@@ -2485,7 +2444,6 @@ export default {
                   e.imgs0URL,
                   e.imgs1URL
                 );
-                // console.log("this.item.details ==>", this.item.details);
               }
             });
             this.translateDome = false;
@@ -2510,7 +2468,7 @@ export default {
         })
         .catch((err) => {
           loading.close();
-          console.log("err ==>", err);
+
           this.$notify({
             title: "请求错误",
             message: "系统业务繁忙,请稍后再试",
@@ -2519,6 +2477,7 @@ export default {
           });
         });
     },
+    // this.data.templateJson
     // base64 转图片
     dataURLtoFile(dataurl, filename = "file") {
       let arr = dataurl.split(",");
@@ -2547,6 +2506,34 @@ export default {
         this.$router.push({ name: "Login" });
         return;
       }
+      // 提示
+      if(this.qoo10shopsList[this.qoo10shopsIndex].id == 0){
+          this.$message({
+              message:"请先选择店铺",
+              center:true,
+              type:"warning",
+              duration:600
+          })
+          return;
+      }   
+      if(this.publishList.ShippingNo == 0){
+          this.$message({
+              message:"请先选择运费编号",
+              center:true,
+              type:"warning",
+              duration:600
+          })
+          return;
+      }
+      if(this.publishList.priceCount == ""){
+           this.$message({
+              message:"请先填写价格公示",
+              center:true,
+              type:"warning",
+              duration:600
+          })
+          return;
+      }
       let data = {
         pricefromula: this.publishList.priceCount,
         id: this.item.id,
@@ -2556,7 +2543,7 @@ export default {
         SecondSubCat: this.publishList.SecondSubCat,
         ShippingNo: this.publishList.ShippingNo,
       };
-      console.log("data ==>", data);
+
       this.publishStatus = false;
       // 发请求
       let loading = this.$loading({
@@ -2580,7 +2567,6 @@ export default {
         params: data,
       })
         .then((result) => {
-          console.log("result ==>", result);
           loading.close();
           if (result.data.code == "200") {
             this.publishStatus = false;
@@ -2606,7 +2592,7 @@ export default {
           setTimeout(() => {
             this.publishStatus = true;
           }, 500);
-          console.log("err ==>", err);
+
           loading.close();
           this.$notify({
             title: "请求错误",

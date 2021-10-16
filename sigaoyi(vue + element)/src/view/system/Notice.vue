@@ -74,7 +74,7 @@ export default {
     },
     // 点击确认发布 通知
     coifrm() {
-        if (sessionStorage.getItem("token") == undefined) {
+      if (sessionStorage.getItem("token") == undefined) {
         alert("请先登录");
         this.$router.push({ name: "Login" });
         return;
@@ -115,7 +115,6 @@ export default {
         params: data,
       })
         .then((result) => {
-          console.log("result ==>", result);
           if (result.data.code == "200") {
             this.$notify({
               title: "请求成功",
@@ -133,7 +132,6 @@ export default {
           }
         })
         .catch((err) => {
-          console.log("err ==>", err);
           this.$notify({
             title: "请求错误",
             message: "系统业务繁忙,请稍后再试",

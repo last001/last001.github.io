@@ -3,10 +3,16 @@
     <div class="bigBox">
       <el-card>
         <!-- 2、为ECharts准备一个具备大小（宽高）的Dom -->
-        <div ref="main" style="width: 750px; height: 400px; margin-top:20px"></div>
+        <div
+          ref="main"
+          style="width: 750px; height: 400px; margin-top: 20px"
+        ></div>
       </el-card>
       <el-card>
-          <div id="v-main" style="width: 750px; height: 400px; margin-top:20px"></div>
+        <div
+          id="v-main"
+          style="width: 750px; height: 400px; margin-top: 20px"
+        ></div>
       </el-card>
     </div>
   </div>
@@ -30,18 +36,19 @@ export default {
       title: {
         text: "销量图表",
       },
-     tooltip: {
-        trigger: 'axis',
-        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-        }
-    },
+      tooltip: {
+        trigger: "axis",
+        axisPointer: {
+          // 坐标轴指示器，坐标轴触发有效
+          type: "shadow", // 默认为直线，可选为：'line' | 'shadow'
+        },
+      },
       xAxis: {
-          type: 'category',
+        type: "category",
         data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"],
-         axisTick: {
-                alignWithLabel: true
-            }
+        axisTick: {
+          alignWithLabel: true,
+        },
       },
       yAxis: [
         {
@@ -57,30 +64,27 @@ export default {
           type: "bar",
           barWidth: 50,
           data: [50, 97, 136, 190, 83, 28],
-           itemStyle: {
-                color: new echarts.graphic.LinearGradient(
-                    0, 0, 0, 1,
-                    [
-                        {offset: 1, color: '#1787f5'},
-                        {offset: 0.5, color: '#5fabf8'},
-                        {offset: 0, color: '#81bdf8'},
-                    ]
-                )
-            },
+          itemStyle: {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              { offset: 1, color: "#1787f5" },
+              { offset: 0.5, color: "#5fabf8" },
+              { offset: 0, color: "#81bdf8" },
+            ]),
+          },
           showBackground: true,
           backgroundStyle: {
             color: "rgba(180, 180, 180, 0.2)",
           },
-          label:{
-              show:true,
-              position:"top",
-          }
+          label: {
+            show: true,
+            position: "top",
+          },
         },
       ],
     };
     // 5、展示数据
     // 使用刚指定的配置项和数据显示图表。
-    // console.log(myChart)
+
     myChart.setOption(option);
 
     var VmyChart = echarts.init(document.getElementById("v-main"));
@@ -123,8 +127,6 @@ export default {
       ],
     });
   },
-  methods: {
-   
-  },
+  methods: {},
 };
 </script>

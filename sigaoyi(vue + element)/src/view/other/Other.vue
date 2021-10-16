@@ -1,11 +1,11 @@
 <template>
-  <div class="other" :style="{minHeight:minheight + 'px'}">
+  <div class="other" :style="{ minHeight: minheight + 'px' }">
     <titleNavbar ref="titlePage"></titleNavbar>
     <div class="content-bottom">
-        <sideNavbar ref="abcd" @Wstate="getWstate"></sideNavbar>
-        <router-view :style="{width:W, marginLeft: leftName + 'px' }" />
+      <sideNavbar ref="abcd" @Wstate="getWstate"></sideNavbar>
+      <router-view :style="{ width: W, marginLeft: leftName + 'px' }" />
     </div>
-    <footerDiv :style="{width:W, marginLeft: leftName + 'px' }"></footerDiv>
+    <footerDiv :style="{ width: W, marginLeft: leftName + 'px' }"></footerDiv>
   </div>
 </template>
 
@@ -22,26 +22,26 @@ const {
 export default {
   data() {
     return {
-      W:"calc(100% - 220px)",
+      W: "calc(100% - 220px)",
       // sideNavbar 的状态
       chilrenVal: "",
       //   left 值
       leftName: 220,
       // minheight
-      minheight:document.documentElement.clientHeight,   
+      minheight: document.documentElement.clientHeight,
     };
   },
   created() {
-      document.body.scrollTop = document.documentElement.scrollTop = 0;
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
   },
-  mounted () {
+  mounted() {
     const that = this;
     window.onresize = () => {
       return (() => {
         window.minheight = document.documentElement.clientHeight;
         that.minheight = window.minheight;
       })();
-    };    
+    };
   },
   computed: {
     ...homeState(["WstateStatus", "InfoData"]),
@@ -49,10 +49,10 @@ export default {
   components: {
     titleNavbar,
     sideNavbar,
-    footerDiv
+    footerDiv,
   },
   methods: {
-      // 子组件像父组件 传过来的状态值
+    // 子组件像父组件 传过来的状态值
     getWstate(v) {
       this.chilrenVal = v;
     },
@@ -70,7 +70,7 @@ export default {
     },
     ...homeActions(["setWstateStatus", "setInfoData"]),
   },
-   watch: {
+  watch: {
     chilrenVal: "Wchange",
     minheight(val) {
       if (!this.timer) {
@@ -78,7 +78,6 @@ export default {
         this.timer = true;
         let that = this;
         setTimeout(function () {
-          console.log("that.minheight ==>", that.minheight);
           that.timer = false;
         }, 400);
       }
@@ -87,10 +86,10 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-    .other{
-        position: relative;
-        width: 100%;
-        overflow-x: hidden;
-         background-color: #f0f2f5;
-    }
+.other {
+  position: relative;
+  width: 100%;
+  overflow-x: hidden;
+  background-color: #f0f2f5;
+}
 </style>

@@ -1,0 +1,240 @@
+.addOrder {
+  .title {
+    height: 46px;
+    .van-nav-bar__title {
+      font-size: 15px;
+    }
+
+    .van-nav-bar__right {
+      .updata {
+        width: 46px;
+        position: relative;
+
+        button {
+          height: 28px;
+          width: 50px;
+          // padding: 6px 12px;
+          border-radius: 15px;
+        }
+
+        input {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          opacity: 0;
+        }
+      }
+    }
+  }
+
+  .box {
+    padding-bottom: 50px;
+    font-size: 13px;
+
+    .set {
+      display: flex;
+      margin-top: 1px;
+
+      .header {
+        width: 80px;
+        line-height: 46px;
+        background: #fff;
+        text-align: right;
+
+        i {
+          color: red;
+        }
+      }
+
+      .van-cell::after {
+        border-bottom: none;
+      }
+
+      .van-cell--clickable {
+        color: #b1b1b1;
+        padding-right: 10px;
+        text-align: right;
+
+        &.active {
+          color: #444;
+        }
+
+        .van-cell__title {
+          padding-right: 10px;
+        }
+      }
+
+      &.isUser {
+        .header {
+          color: #bcbcbc;
+        }
+
+        .van-cell {
+          .van-cell__title {
+            span {
+              color: #bcbcbc;
+            }
+          }
+
+          .van-icon {
+            color: #bcbcbc;
+          }
+        }
+
+      }
+
+      &.must {
+        .header {
+          width: 85px;
+        }
+      }
+    }
+
+    .int {
+      display: flex;
+      background: #fff;
+      margin-top: 1px;
+      padding-right: 40px;
+
+      span {
+        &:first-child {
+          width: 80px;
+          line-height: 46px;
+          background: #fff;
+          text-align: right;
+
+          i {
+            color: red;
+          }
+        }
+
+        &:nth-child(2) {
+          width: 100%;
+
+          input {
+            padding: 0;
+            text-align: right;
+            text-indent: 10px;
+            height: 100%;
+            width: 100%;
+            outline: none;
+            border: none;
+            font-size: 14px;
+
+            &::placeholder {
+              color: #b1b1b1;
+            }
+          }
+        }
+      }
+
+      &.dis {
+        span {
+          &:first-child {
+            color: #bcbcbc;
+          }
+
+          input {
+            color: #bcbcbc;
+
+            &:disabled {
+              background-color: #fff;
+            }
+          }
+        }
+
+      }
+
+      &.must {
+        span {
+          &:first-child {
+            width: 85px;
+          }
+        }
+      }
+    }
+
+    .note {
+      .van-cell::after {
+        width: 0;
+      }
+
+      .van-field__label {
+        width: 50px;
+        text-align: right;
+      }
+
+      .addImg {
+        background-color: #fff;
+        padding-left: 30px;
+        padding-bottom: 5px;
+        display: flex;
+
+        div {
+          &:first-child {
+            span {
+              display: block;
+              color: #666;
+              margin-bottom: 10px;
+              position: relative;
+
+              i {
+                border: 1px #ddd dashed;
+              }
+
+              input{
+                  position: absolute;
+                  left: 0;
+                  top: 0;
+                  width: 100%;
+                  height: 100%;
+                  opacity: 0;
+              }
+            }
+          }
+
+          &:nth-child(2) {
+            width: 100%;
+            height: 52px;
+            display: flex;
+            flex-wrap: wrap;
+
+            span {
+              width: 19%;
+              height: 100%;
+              margin-left: 1%;
+              position: relative;
+
+              i {
+                position: absolute;
+                right: 2px;
+                top: 2px;
+              }
+
+              img {
+                width: 100%;
+                height: 100%;
+              }
+            }
+
+
+          }
+
+        }
+      }
+    }
+
+    .btn {
+      padding: 0 10px;
+      margin-top: 50px;
+
+      button {
+        width: 100%;
+        background-color: 1px solid #409eff;
+        border-color: 1px solid #409eff;
+      }
+    }
+  }
+}

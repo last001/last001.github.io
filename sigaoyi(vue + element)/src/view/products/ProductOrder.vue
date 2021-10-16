@@ -75,7 +75,6 @@ export default {
   methods: {
     // 子组件向父组件 传过来的状态值
     getWstate(v) {
-      console.log("v ==>", v);
       this.chilrenVal = v;
     },
     // 监听 侧边栏的状态
@@ -102,7 +101,6 @@ export default {
         this.timer = true;
         let that = this;
         setTimeout(function () {
-        //   console.log("that.screenHeight ==>", that.screenHeight);
           that.timer = false;
         }, 400);
       }

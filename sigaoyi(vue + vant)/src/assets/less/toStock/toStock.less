@@ -1,0 +1,155 @@
+.toStock {
+    background-color: #f9f9f9;
+  .title {
+    height: 46px;
+  }
+
+  .set {
+
+    .orderNum,
+    .number {
+      display: flex;
+      background: #fff;
+      margin-top: 1px;
+      padding-right: 40px;
+
+      span {
+        &:first-child {
+          width: 60px;
+          line-height: 46px;
+          background: #fff;
+          text-align: right;
+          font-size: 14px;
+        }
+
+        &:nth-child(2) {
+          width: 100%;
+
+          input {
+            padding: 0;
+            text-align: right;
+            text-indent: 10px;
+            height: 100%;
+            width: 100%;
+            outline: none;
+            border: none;
+            font-size: 14px;
+
+            &::placeholder {
+              color: #b1b1b1;
+            }
+          }
+        }
+      }
+    }
+
+    .userName {
+      display: flex;
+      margin-top: 1px;
+
+      .header {
+        width: 60px;
+        line-height: 46px;
+        background: #fff;
+        text-align: right;
+        font-size: 14px;
+      }
+
+      .van-cell::after {
+        border-bottom: none;
+      }
+
+      .van-cell--clickable {
+        color: #b1b1b1;
+        padding-right: 10px;
+        text-align: right;
+
+        &.active {
+          color: #444;
+        }
+
+        .van-cell__title {
+          padding-right: 10px;
+        }
+      }
+    }
+  }
+
+  .note {
+      margin-top: 1px;
+    .van-cell::after {
+      width: 0;
+    }
+
+    .van-field__label {
+      width: 35px;
+      text-align: right;
+    }
+
+    .addImg {
+      background-color: #fff;
+      padding-left: 60px;
+      padding-bottom: 5px;
+      display: flex;
+
+      div {
+        &:first-child {
+          span {
+            display: block;
+            color: #666;
+            margin-bottom: 10px;
+            position: relative;
+
+            i {
+              border: 1px #ddd dashed;
+            }
+
+            input {
+              position: absolute;
+              left: 0;
+              top: 0;
+              width: 100%;
+              height: 100%;
+              opacity: 0;
+            }
+          }
+        }
+
+        &:nth-child(2) {
+          width: 100%;
+          height: 52px;
+          display: flex;
+          flex-wrap: wrap;
+
+          span {
+            width: 19%;
+            height: 100%;
+            margin-left: 1%;
+            position: relative;
+
+            i {
+              position: absolute;
+              right: 2px;
+              top: 2px;
+            }
+
+            img {
+              width: 100%;
+              height: 100%;
+            }
+          }
+
+
+        }
+
+      }
+    }
+  }
+
+  .btn{
+      padding: 40px 10px;
+      button{
+          width: 100%;
+      }
+  }
+}

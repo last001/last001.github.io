@@ -189,7 +189,6 @@ export default {
     if (this.$route.query.rowStatus) {
       this.browserTitle = "修改进度情况";
       this.row = JSON.parse(this.$route.query.row);
-      console.log("this.row ==>", this.row);
 
       this.value1 = this.row.startTime;
       this.value2 = this.row.endTime;
@@ -197,7 +196,6 @@ export default {
         this.row.performance = "";
       }
       this.value3 = this.row.performance;
-      console.log("value3 ==>", this.value3);
 
       this.$nextTick(() => {
         this.getSelected();
@@ -231,10 +229,9 @@ export default {
     // 开始 select 的默认值
     getSelected() {
       let selectDiv = document.querySelector("#selectDiv").childNodes;
-      console.log("selectDiv ==>", selectDiv);
+
       this.optionList.forEach((e) => {
         if (e.name == this.row.finishTime) {
-          console.log("e.name ==>", e.name);
           e.selected = true;
         }
       });

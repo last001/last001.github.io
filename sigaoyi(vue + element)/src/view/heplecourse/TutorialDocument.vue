@@ -254,7 +254,7 @@ export default {
           setTimeout(() => {
             loading.close();
           }, 500);
-          console.log("result ==>", result);
+
           if (result.data.Code == 200) {
             result.data.files.forEach((e) => {
               e.createDate = timestampToTimes.timestampToTime(e.createDate);
@@ -296,7 +296,6 @@ export default {
             type: "error",
             offset: 50,
           });
-          console.log("err ==>", err);
         });
     },
     // 搜索
@@ -328,7 +327,7 @@ export default {
       })
         .then((result) => {
           this.tableLoading = false;
-          console.log("result ==>", result);
+
           if (result.data.Code == 200) {
             result.data.files.forEach((e) => {
               e.createDate = timestampToTimes.timestampToTime(e.createDate);
@@ -364,7 +363,7 @@ export default {
         })
         .catch((err) => {
           this.tableLoading = false;
-          console.log("err ==>", err);
+
           this.$notify({
             title: "请求错误",
             message: "系统业务繁忙,请稍后再试",
@@ -379,20 +378,17 @@ export default {
     },
     // 分页事件 每页多少条
     handleSizeChange(val) {
-      //   console.log(`每页 ${val} 条`);
       this.pageSize = val;
       this.searchInput(this.currentPage, this.pageSize, true);
     },
     // 去第几页
     handleCurrentChange(val) {
-      //   console.log(`当前页: ${val}`);
       this.currentPage = val;
       this.searchInput(this.currentPage, this.pageSize, true);
     },
     // 点击确定去哪一页
     clickTrue() {
       this.handleCurrentChange(this.currentPage);
-      // console.log('cccccccccc ==>', this.currentPage)
     },
     // option change 事件
     changeSet(array, index) {
@@ -400,7 +396,6 @@ export default {
         e.selected = false;
       });
       array[index].selected = true;
-      console.log("index +==>", index);
     },
     // 上传
     updataFile(e) {
@@ -411,8 +406,6 @@ export default {
       formData.append("userId", this.InfoData.id);
       formData.append("mulv", this.optionList[this.optionIndex].id);
 
-      console.log("formData ==>", formData.get("userId"));
-
       this.$axios({
         url: "/sigaoyi/NEWupload",
         method: "POST",
@@ -422,7 +415,6 @@ export default {
         data: formData,
       })
         .then((result) => {
-          console.log("result ==>", result);
           if (result.data.Code == "200") {
             this.searchInput(1, 30, false);
             this.$notify({
@@ -441,7 +433,6 @@ export default {
           }
         })
         .catch((err) => {
-          console.log("err ==>", err);
           this.$notify({
             title: "请求错误",
             message: "系统业务繁忙,请稍后再试",
@@ -453,8 +444,8 @@ export default {
     // 浏览
     browse(index, row) {
       let url = encodeURIComponent("http://www.ec-sigaoyi.com/" + row.url);
-    //   window.open("http://ow365.cn/?i=23884&furl=" + url);
-      window.open("https://61office.com/?src=" + url);
+      window.open("http://ow365.cn/?i=23884&furl=" + url);
+      //   window.open("https://61office.com/?src=" + url);
     },
     // 删除
     deleteRow(index, row, rows) {
@@ -477,7 +468,6 @@ export default {
             },
           })
             .then((result) => {
-              console.log("result ==>", result);
               this.tableLoading = false;
               if (result.data.Code == 200) {
                 this.tableData.splice(index, 1);
@@ -498,7 +488,6 @@ export default {
               }
             })
             .catch((err) => {
-              console.log("err ==>", err);
               this.tableLoading = false;
               this.$notify({
                 title: "请求错误",

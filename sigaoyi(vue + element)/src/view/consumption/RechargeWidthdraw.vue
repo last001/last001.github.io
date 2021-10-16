@@ -12,7 +12,9 @@
       <div class="rechargeInfo">
         <div class="balance">
           <span>当前账户余额:</span>
-          <span @click="GotoConsumption()" v-loading = loading>{{ balanceText }}元</span>
+          <span @click="GotoConsumption()" v-loading="loading"
+            >{{ balanceText }}元</span
+          >
         </div>
         <div class="content">
           <div class="titleText">
@@ -25,9 +27,11 @@
             >
           </div>
           <div class="recharge" v-if="typeStatus">
-              <div class="tips">
-                  <span>（充值审核每天早上10点后处理。请不要多次提交，谢谢配合。）</span>
-              </div>
+            <div class="tips">
+              <span
+                >（充值审核每天早上10点后处理。请不要多次提交，谢谢配合。）</span
+              >
+            </div>
             <div class="rechrgeMoney">
               <span>充值金额：</span>
               <input
@@ -131,7 +135,9 @@
     >
       <div class="content">
         <div>请仔细核对您的充值信息后再确认提交！</div>
-        <div style="color:#409eff;margin-top:10px">提交成功后,请等待管理员审核,请勿重复提交！(可在消费明细查看处理进度)</div>
+        <div style="color: #409eff; margin-top: 10px">
+          提交成功后,请等待管理员审核,请勿重复提交！(可在消费明细查看处理进度)
+        </div>
         <div>
           <span>充值用户名：</span>
           <span>{{ infoData.userName }}</span>
@@ -185,7 +191,7 @@ const {
 export default {
   data() {
     return {
-      loading:true,
+      loading: true,
       //   conten层的高度
       H: "",
       //   账户余额
@@ -246,8 +252,6 @@ export default {
     });
 
     this.H = document.documentElement.clientHeight - 60 - 82 - 20;
-
-    // console.log("this.$route.query.status ==>",this.$route.query.status)
   },
   components: {
     // footerDiv,
@@ -273,7 +277,6 @@ export default {
     },
     // 点击input
     clickInput(arr, item, index) {
-      console.log("index ==>", index);
       if (index == 0) {
         this.typeText = "支付宝账号";
       } else if (index == 1) {
@@ -304,12 +307,12 @@ export default {
         return;
       }
       //   请求
-    //   let loading = this.$loading({
-    //     lock: false,
-    //     text: "加载中...",
-    //     spinner: "el-icon-loading",
-    //     background: "rgba(0, 0, 0, 0.7)",
-    //   });
+      //   let loading = this.$loading({
+      //     lock: false,
+      //     text: "加载中...",
+      //     spinner: "el-icon-loading",
+      //     background: "rgba(0, 0, 0, 0.7)",
+      //   });
       this.$axios({
         method: "POST",
         url: "/sigaoyi/UnderIdQueryUserTableInfo",
@@ -318,9 +321,8 @@ export default {
         },
       })
         .then((result) => {
-          console.log("result ==>", result);
           setTimeout(() => {
-              this.loading = false;
+            this.loading = false;
           }, 500);
           if (result.data.Code == 200) {
             this.setInfoData(result.data.userInfo);
@@ -337,9 +339,9 @@ export default {
         })
         .catch((err) => {
           setTimeout(() => {
-              this.loading = false;
+            this.loading = false;
           }, 500);
-          console.log("err ==>", err);
+
           this.$notify({
             title: "请求错误",
             message: "系统业务繁忙,请稍后再试!",
@@ -354,7 +356,7 @@ export default {
       if (files == undefined || files == null) {
         return;
       }
-      console.log("files ==>", files);
+
       let formData = new FormData();
       // 向 formData 对象中添加文件
       formData.append("file", files);
@@ -368,7 +370,7 @@ export default {
       this.$axios(uploadFiles.uploadFile(formData))
         .then((result) => {
           loading.close();
-          console.log("result ==>", result);
+
           if (result.data.Code == 200) {
             this.imgSrc = result.data.imgsURL;
             this.$notify({
@@ -388,7 +390,7 @@ export default {
         })
         .catch((err) => {
           loading.close();
-          console.log("err ==>", err);
+
           this.$notify({
             title: "请求错误",
             message: "图片上传错误!",
@@ -403,7 +405,7 @@ export default {
       if (files == undefined || files == null) {
         return;
       }
-      console.log("files ==>", files);
+
       let formData = new FormData();
       // 向 formData 对象中添加文件
       formData.append("file", files);
@@ -417,7 +419,7 @@ export default {
       this.$axios(uploadFiles.uploadFile(formData))
         .then((result) => {
           loading.close();
-          console.log("result ==>", result);
+
           if (result.data.Code == 200) {
             this.rechargeImg = result.data.imgsURL;
             this.$notify({
@@ -437,7 +439,7 @@ export default {
         })
         .catch((err) => {
           loading.close();
-          console.log("err ==>", err);
+
           this.$notify({
             title: "请求错误",
             message: "图片上传错误!",
@@ -466,7 +468,9 @@ export default {
           this.rechargeList.type = e.text;
         }
       });
-      this.rechargeList.money = Number(this.$refs.rechrgeMoney.value).toFixed(2);
+      this.rechargeList.money = Number(this.$refs.rechrgeMoney.value).toFixed(
+        2
+      );
       this.rechargeStatus = true;
     },
     // 弹出层确认提交
@@ -485,7 +489,6 @@ export default {
       let data = {
         amount: "",
         costStatus: 0,
-        img: this.imgSrc,
         userId: this.InfoData.id,
         img: this.imgSrc,
       };
@@ -510,7 +513,7 @@ export default {
       })
         .then((result) => {
           loading.close();
-          console.log("result ==>", result);
+
           if (result.data.code == 200) {
             this.rechargeStatus = false;
             this.$notify({
@@ -530,9 +533,9 @@ export default {
           }
         })
         .catch((err) => {
-            this.rechargeStatus = true;
+          this.rechargeStatus = true;
           loading.close();
-          console.log("err ==>", err);
+
           this.$notify({
             title: "请求失败",
             message: "系统业务繁忙,请稍后再试!",
@@ -543,7 +546,7 @@ export default {
     },
     // 立即提现 还有图片路径
     clickWidthdrawMoney() {
-        if (sessionStorage.getItem("token") == undefined) {
+      if (sessionStorage.getItem("token") == undefined) {
         alert("请先登录");
         this.$router.push({ name: "Login" });
         return;
@@ -588,7 +591,7 @@ export default {
         remarks: Number(this.account),
         img: this.rechargeImg,
       };
-      console.log("data ==>", data);
+
       //   laoding
       let loading = this.$loading({
         lock: false,
@@ -603,7 +606,6 @@ export default {
         params: data,
       })
         .then((result) => {
-          console.log("result ==>", result);
           loading.close();
           if (result.data.code == "200") {
             this.$notify({
@@ -623,7 +625,7 @@ export default {
         })
         .catch((err) => {
           loading.close();
-          console.log("err ==>", err);
+
           this.$notify({
             title: "请求错误",
             message: "系统业务繁忙,请稍后再试",

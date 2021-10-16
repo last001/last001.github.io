@@ -241,8 +241,6 @@ export default {
       this.row = JSON.parse(this.$route.query.row);
       this.infoData = this.InfoData;
       this.dataTitle = "编辑员工提成";
-      console.log("this.$route.query.row ==>", this.$route.query.row);
-      console.log("this.row ==>", this.row);
     }
 
     // marginleft
@@ -298,7 +296,7 @@ export default {
           data[key] = Number(data[key]);
         }
       }
-      console.log("data ==>", data);
+
       // 发起请求
     },
   },

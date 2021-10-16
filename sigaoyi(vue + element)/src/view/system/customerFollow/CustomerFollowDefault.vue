@@ -70,7 +70,11 @@
               @click="resetIniput()"
               >重置</el-button
             >
-            <el-button type="primary" icon="el-icon-search" size="small" @click="search()"
+            <el-button
+              type="primary"
+              icon="el-icon-search"
+              size="small"
+              @click="search()"
               >搜索</el-button
             >
           </div>
@@ -79,7 +83,11 @@
       <div class="customer-table">
         <div class="v-customer-table">
           <div class="btn clearfix">
-            <el-button class="fr" type="success" size="small" icon="el-icon-s-promotion"
+            <el-button
+              class="fr"
+              type="success"
+              size="small"
+              icon="el-icon-s-promotion"
               >导出</el-button
             >
             <el-button
@@ -412,11 +420,6 @@ export default {
     },
     // 搜索
     search() {
-      console.log(
-        "this.$refs.accountName ==>",
-        this.$refs.accountName[0].value
-      );
-      console.log("this.$refs.guidance ==>", this.$refs.guidance);
       let data = {
         radioType: "",
         accountType: "",
@@ -446,7 +449,7 @@ export default {
         }
       }
 
-      console.log("data ==>", data);
+      
       // 发请求
     },
     // 表格
@@ -454,11 +457,11 @@ export default {
     // 是否是选中的状态
     onTableSelect(rows, row) {
       row.selected = rows.length && rows.indexOf(row) !== -1;
-      console.log("selected ==>", row.selected); // true就是选中，0或者false是取消选中
+      
     },
     // 编辑
     handleEdit(index, row) {
-      console.log("row ==>", row);
+      
       const loading = this.$loading({
         lock: false,
         text: "加载中...",
@@ -477,7 +480,7 @@ export default {
     },
     // 分页事件 每页多少条
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
+      
       this.pageSize = val;
       this.currentPage = 1;
       this.tableData = JSON.parse(JSON.stringify(this.copyTableData));
@@ -485,25 +488,25 @@ export default {
     },
     // 去第几页
     handleCurrentChange(val) {
-      //   console.log(`当前页: ${val}`);
+      
       this.currentPage = val;
       let abc = this.pageSize * (val - 1);
       this.tableData = JSON.parse(JSON.stringify(this.copyTableData));
       this.tableData.splice(0, abc);
       this.tableData.splice(this.pageSize);
-      //   console.log('this.pageSize ==>',this.pageSize)
+      
       //   this.tableData = a.splice(this.pageSize)
-      console.log("this.tableData ==>", this.tableData);
-      // console.log("a ==>",a)
+      
+      
     },
     // 点击确定去哪一页
     clickTrue() {
       this.handleCurrentChange(this.currentPage);
-      // console.log('cccccccccc ==>', this.currentPage)
+      
     },
     // 去GotoScheduleNum
     GotoScheduleNum() {
-      //   console.log(11111111111111);
+      
       let loading = this.$loading({
         lock: false,
         text: "加载中...",
@@ -522,7 +525,7 @@ export default {
     Alldelete() {
       for (let i = this.tableData.length - 1; i >= 0; i--) {
         if (this.tableData[i].selected) {
-          console.log(1111111111);
+          
           this.tableData.splice(i, 1);
         }
       }

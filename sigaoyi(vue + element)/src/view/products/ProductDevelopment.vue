@@ -1,5 +1,5 @@
 <template>
-  <div class="productDevelopment">
+  <div class="productDevelopment" :style="{ minHeight: H + 'px' }">
     <div class="v-productDevelopment" :style="{ minHeight: minHeight + 'px' }">
       <div class="main" v-title data-title="产品采集"></div>
       <div class="dandruff">
@@ -90,7 +90,11 @@
                   >
                 </div>
                 <div>
-                  <input type="file" ref="fileText" @change="uploadFile($event)" />
+                  <input
+                    type="file"
+                    ref="fileText"
+                    @change="uploadFile($event)"
+                  />
                   <el-button type="success" icon="el-icon-upload"
                     >导入text</el-button
                   >
@@ -188,8 +192,8 @@
           </div>
         </div>
       </div>
-      <!-- <footerDiv></footerDiv> -->
     </div>
+    <footerDiv></footerDiv>
   </div>
 </template>
 <script>
@@ -204,6 +208,11 @@ const {
 export default {
   data() {
     return {
+      // sideNavbar 的状态
+      chilrenVal: "",
+      // 传给子元素的状态值
+      flag: "",
+      H:"",
       minHeight: "",
       // inputList
       inputList: [
@@ -213,7 +222,7 @@ export default {
         { name: "速卖通", value: "4", checked: false },
         { name: "拼多多", value: "5", checked: false },
         { name: "亚马逊日本站", value: "6", checked: false },
-        { name: "乐天1", value: "7", checked: false },
+        { name: "乐天", value: "7", checked: false },
         { name: "雅虎商场", value: "8", checked: false },
       ],
       //   xls
@@ -270,6 +279,7 @@ export default {
     next();
   },
   created() {
+    this.H = document.documentElement.clientHeight;
     this.getclassfly();
   },
   mounted() {
@@ -285,6 +295,20 @@ export default {
     ...homeState(["WstateStatus", "InfoData"]),
   },
   methods: {
+    // 子组件向父组件 传过来的状态值
+    getWstate(v) {
+      this.chilrenVal = v;
+    },
+    // 监听 侧边栏的状态
+    Wchange() {
+      //   传给子元素的值
+      this.flag = this.chilrenVal;
+      if (this.chilrenVal) {
+        this.setWstateStatus(true);
+      } else {
+        this.setWstateStatus(false);
+      }
+    },
     //   获取分类
     getclassfly() {
       // 发起请求
@@ -303,7 +327,7 @@ export default {
           setTimeout(() => {
             loading.close();
           }, 500);
-          console.log("result ==>", result);
+
           let classObj = {
             catalogId: 99,
             catalogLevel: 0,
@@ -325,7 +349,6 @@ export default {
             type: "error",
             offset: 50,
           });
-          console.log("err ==>", err);
         });
     },
     // changeSet
@@ -366,7 +389,6 @@ export default {
           },
         })
           .then((result) => {
-            console.log("result ==>", result);
             let classObj = {
               catalogId: 99,
               catalogLevel: 0,
@@ -380,9 +402,7 @@ export default {
             result.data.catalogs.unshift(classObj);
             this.middleList = result.data.catalogs;
           })
-          .catch((err) => {
-            console.log("err ==>", err);
-          });
+          .catch((err) => {});
       } else if (string == "middleList") {
         if (this.middleIndex == 0) {
           this.smallIndex = 0;
@@ -405,7 +425,6 @@ export default {
           },
         })
           .then((result) => {
-            console.log("result ==>", result);
             let classObj = {
               catalogId: 99,
               catalogLevel: 0,
@@ -419,17 +438,14 @@ export default {
             result.data.catalogs.unshift(classObj);
             this.smallList = result.data.catalogs;
           })
-          .catch((err) => {
-            console.log("err ==>", err);
-          });
+          .catch((err) => {});
       }
     },
     // 导入
     uploadFile(e) {
-      console.log("e ==>", e.target.files);
       alert("正在维护中..........");
       setTimeout(() => {
-          this.$refs.fileText.value = "";
+        this.$refs.fileText.value = "";
       }, 500);
     },
     // 点击input 事件
@@ -467,7 +483,7 @@ export default {
           linkArr.splice(i, 1);
         }
       }
-      console.log("linkAArr ==>", linkArr);
+
       let obj = {
         link: "",
         gatherStatus: "未采集",
@@ -502,7 +518,7 @@ export default {
       if (sessionStorage.getItem("token") == undefined) {
         alert("请先登录");
         this.$router.push({ name: "Login" });
-        console.log(">>>>>>>>>>>>>>>>>订单页面");
+
         return;
       }
       if (this.InfoData.id == undefined) {
@@ -522,7 +538,6 @@ export default {
       // 平台
       for (let i = 0; i < this.inputList.length; i++) {
         if (this.inputList[i].checked) {
-          console.log("this.inputList[i].value ==>", this.inputList[i].value);
           data.platform = this.inputList[i].value;
         }
       }
@@ -557,7 +572,7 @@ export default {
           }
         }
         data.link = e.link;
-        console.log("data ==>", data);
+
         // 发请求
         let loading = this.$loading({
           lock: false,
@@ -572,7 +587,7 @@ export default {
         })
           .then((result) => {
             loading.close();
-            console.log("result ==>", result);
+
             if (result.data.code == 200) {
               e.gatherStatus = result.data.msg;
               e.slotTbale = false;
@@ -584,7 +599,6 @@ export default {
             }
           })
           .catch((err) => {
-            console.log("err ==>", err);
             loading.close();
             e.gatherStatus = "系统业务繁忙,请稍后再试";
             e.slotTbale = true;
@@ -597,7 +611,7 @@ export default {
       if (sessionStorage.getItem("token") == undefined) {
         alert("请先登录");
         this.$router.push({ name: "Login" });
-        console.log(">>>>>>>>>>>>>>>>>订单页面");
+
         return;
       }
       if (this.InfoData.id == undefined) {
@@ -606,7 +620,7 @@ export default {
         this.$router.push({ name: "Login" });
         return;
       }
-      console.log("row ==>", row);
+
       var data = {
         platform: "",
         link: row.link,
@@ -618,7 +632,6 @@ export default {
       // 平台
       for (let i = 0; i < this.inputList.length; i++) {
         if (this.inputList[i].checked) {
-          console.log("this.inputList[i].value ==>", this.inputList[i].value);
           data.platform = this.inputList[i].value;
         }
       }
@@ -652,7 +665,7 @@ export default {
       })
         .then((result) => {
           loading.close();
-          console.log("result ==>", result);
+
           if (result.data.code == 200) {
             row.gatherStatus = result.data.msg;
             row.slotTbale = false;
@@ -665,7 +678,7 @@ export default {
         })
         .catch((err) => {
           loading.close();
-          console.log("err ==>", err);
+
           row.gatherStatus = "系统业务繁忙,请稍后再试";
           row.slotTbale = true;
           row.color = "sbai";
@@ -674,13 +687,13 @@ export default {
     ...homeActions(["setWstateStatus"]),
   },
   watch: {
+    chilrenVal: "Wchange",
     minHeight(val) {
       if (!this.timer) {
         this.screenWidth = val;
         this.timer = true;
         let that = this;
         setTimeout(function () {
-          console.log("that.screenHeight ==>", that.screenHeight);
           that.timer = false;
         }, 400);
       }

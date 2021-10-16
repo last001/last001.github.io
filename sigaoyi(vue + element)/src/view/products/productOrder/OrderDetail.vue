@@ -451,7 +451,7 @@
               v-show="infoData.statu == '0' || infoData.orderStatu == 0"
             >
               <div>
-                <span>发货渠道<i class="mustIcon">*</i></span>
+                <span>发货渠道</span>
               </div>
               <div>
                 <select
@@ -548,7 +548,11 @@
               >
                 <i class="el-icon-close" @click="deleteImg(item, index)"></i>
               </el-tooltip>
-              <img :src="item.imgSrc" alt="" />
+              <div class="demo-image__preview">
+                <el-image :src="item.imgSrc" :preview-src-list="largeImg">
+                </el-image>
+              </div>
+              <!-- <img :src="item.imgSrc" alt="" /> -->
             </div>
           </div>
           <div class="pictureDiv">
@@ -678,6 +682,7 @@ export default {
         { name: "E特快", selected: false, value: "ETK" },
         { name: "EMS", selected: false, value: "EMS" },
         { name: "CNE", selected: false, value: "CNE" },
+        { name: "CNE广州", selected: false, value: "CNEGZ" },
         { name: "国内退货", selected: false, value: "国内退货" },
       ],
       // 运输方式
@@ -720,13 +725,15 @@ export default {
       // 运输方式disabled + 发货渠道
       tradeDisabled: false,
       channelDisabled: false,
+      // 图片放大
+      largeImg: [],
     };
   },
   //   判断页面是否刷新
   beforeRouteEnter(to, from, next) {
     document.body.scrollTop = document.documentElement.scrollTop = 0;
     first = false;
-    console.log("from.path ==>", from.path);
+
     if (from.path == "/") {
       first = true;
     }
@@ -776,7 +783,6 @@ export default {
       ];
     }
 
-    console.log("this.$route.query.rowStatus ==>", this.$route.query.rowStatus);
     if (this.$route.query.rowStatus) {
       this.browserTitle = "修改订单";
       this.getList(this.$route.query.id);
@@ -916,7 +922,7 @@ export default {
         e.selected = false;
       });
       array[setIndex].selected = true;
-      //   console.log("array  ==>", array);
+
       this.plan();
     },
     // 地址失去焦点事件
@@ -924,7 +930,7 @@ export default {
       if (this.row.address == "") {
         return;
       }
-      console.log("进来了!!!!");
+
       let address;
       let arr1 = ["県", "都", "府"];
       let arr2 = ["市", "区", "郡"];
@@ -936,13 +942,12 @@ export default {
         }
       }
 
-      console.log("address ==>", address);
       if (address == undefined) {
         // this.row.consignee_state = "";
         // this.row.consignee_city = "";
         return;
       }
-      //   console.log("this.row.consignee_state ==>", this.row.consignee_state);
+
       if (address[1] == "" || address[1] == undefined) {
         this.row.consignee_city = "";
       } else {
@@ -976,7 +981,6 @@ export default {
       let url = "/sigaoyi/UploadPDF";
       this.$axios(uploadPdfs.uploadPdf(url, formData))
         .then((result) => {
-          console.log("result ==>", result);
           setTimeout(() => {
             loading.close();
           }, 300);
@@ -1001,7 +1005,7 @@ export default {
           setTimeout(() => {
             loading.close();
           }, 300);
-          console.log("err ==>", err);
+
           this.$notify({
             title: "请求错误",
             message: "系统业务繁忙,请稍后再试",
@@ -1012,12 +1016,9 @@ export default {
     },
     // 上传图片
     uploading(e) {
-      console.log("e ==>", e.target.files);
       var formData = new FormData();
       if (e.target.files.length > 1) {
-        //   console.log("大于1")
         for (let i = 0; i < e.target.files.length; i++) {
-          //   console.log("e.target.files[i] ==>",e.target.files[i]);
           // 向 formData 对象中添加文件
           formData.append("file", e.target.files[i]);
         }
@@ -1026,8 +1027,6 @@ export default {
         // 向 formData 对象中添加文件
         formData.append("file", this.file);
       }
-
-      console.log("formData ==>", formData);
 
       let loading = this.$loading({
         lock: false,
@@ -1038,7 +1037,6 @@ export default {
       let url = "/sigaoyi/logisticsupload";
       this.$axios(uploadPdfs.uploadPdf(url, formData))
         .then((result) => {
-          console.log("result ==>", result);
           setTimeout(() => {
             loading.close();
           }, 300);
@@ -1057,7 +1055,6 @@ export default {
                 this.imgSrcData.push(imgObj);
               }
               this.$refs.uploadInt.value = "";
-              console.log("this.imgSrcData ==>", this.imgSrcData);
             } else {
               var imgObj = { imgSrc: "" };
               imgObj.imgSrc = result.data.path;
@@ -1085,7 +1082,7 @@ export default {
           setTimeout(() => {
             loading.close();
           }, 300);
-          console.log("err ==>", err);
+
           this.$notify({
             title: "请求错误",
             message: "系统服务繁忙,请稍后再试！",
@@ -1099,7 +1096,7 @@ export default {
       if (sessionStorage.getItem("token") == undefined) {
         alert("请先登录");
         this.$router.push({ name: "Login" });
-        console.log(">>>>>>>>>>>>>>>>>订单页面");
+
         return;
       }
       if (this.InfoData.id == undefined) {
@@ -1123,7 +1120,6 @@ export default {
         },
       })
         .then((result) => {
-          console.log("result ==>", result);
           setTimeout(() => {
             loading.close();
           }, 500);
@@ -1146,7 +1142,6 @@ export default {
           }
         })
         .catch((err) => {
-          console.log("err ==>", err);
           setTimeout(() => {
             loading.close();
           }, 500);
@@ -1163,10 +1158,7 @@ export default {
       this.infoData = this.InfoData;
 
       // 赋值
-      console.log("this.row  ==>", this.row);
-      //   console.log("this.infoData  ==>", this.infoData);
 
-      // console.log("this.row.trade_type1 000000000000 ==>",this.row.trade_type1);
       // 备注
       this.noteAdd = "";
       this.row.note = this.row.note.replace(/--/g, "\n");
@@ -1188,8 +1180,6 @@ export default {
           this.purchaseIndex = i;
         }
       }
-
-      console.log("this.purchaseType ==>", this.purchaseType);
 
       // 运输方式
       for (let i = 0; i < this.tradeTypeList.length; i++) {
@@ -1217,6 +1207,8 @@ export default {
           var objImg = { imgSrc: "" };
           objImg.imgSrc = imgList[i];
           this.imgSrcData.push(objImg);
+          // 放大图片层
+          this.largeImg.push(imgList[i]);
         }
       }
 
@@ -1259,7 +1251,6 @@ export default {
           this.plan();
         }
       }
-      console.log("this.infoData ==>", this.infoData);
 
       // 下单
       let placeArr = [
@@ -1275,6 +1266,7 @@ export default {
         "佐川",
         "CNE",
         "LTW",
+        "CNEGZ",
       ];
       //   取消下单
       let cansrArr = [
@@ -1289,6 +1281,7 @@ export default {
         "EYB1",
         "ETK",
         "ZX",
+        "CNEGZ",
       ];
       //  打印
       let printArr = [
@@ -1301,6 +1294,9 @@ export default {
         "佐川",
         "CNE",
         "RB-DS3",
+        "CNEGZ",
+        "PK0009",
+        "PK00091",
       ];
 
       //   payOrderStatus   true 显示     false  隐藏
@@ -1325,6 +1321,7 @@ export default {
           // 已下单 判断
 
           this.payOrderStatus = false;
+
           //  判断 渠道 取消订单
           if (cansrArr.indexOf(this.row.trade_type1) > -1) {
             this.cancelPrint = true;
@@ -1380,8 +1377,6 @@ export default {
         data.PlanToThrow = 0;
       }
 
-      console.log("data.userName ==>", data.userName);
-
       if (data.address == "") {
         this.$message({
           message: "请输入收件人地址",
@@ -1391,8 +1386,6 @@ export default {
         });
         return;
       }
-
-      console.log("000000000000000  ==>", data.trade_type1);
 
       if (data.trade_type1 == "99") {
         this.$message({
@@ -1411,11 +1404,10 @@ export default {
         params: data,
       })
         .then((result) => {
-          console.log("result ==>", result);
           if (result.data.Code == 200) {
             this.row.freight = result.data.freight;
             this.row.freightprofit = result.data.freightprofit.toFixed(3);
-            this.row.weight = result.data.weight1;
+            this.row.weight = result.data.weight1.toFixed(3);
             this.product_id = result.data.product_id;
           } else {
             this.$notify({
@@ -1427,7 +1419,6 @@ export default {
           }
         })
         .catch((err) => {
-          console.log("err ==>", err);
           this.$notify({
             title: "请求错误",
             message: "系统业务繁忙,请稍后再试",
@@ -1442,7 +1433,7 @@ export default {
       if (sessionStorage.getItem("token") == undefined) {
         alert("请先登录");
         this.$router.push({ name: "Login" });
-        console.log(">>>>>>>>>>>>>>>>>订单页面");
+
         return;
       }
       if (this.InfoData.id == undefined) {
@@ -1453,7 +1444,6 @@ export default {
       }
       var time = timestampToTimes.timestampToTime(new Date());
       if (this.$route.query.rowStatus) {
-        console.log("进入修改");
         // 修改
         var data = {
           id: this.row.id,
@@ -1515,7 +1505,7 @@ export default {
             data.status = this.optionsList[i].value;
           }
         }
-        console.log("this.optionsList ==>", this.optionsList);
+
         // 采购方式
         for (let i = 0; i < this.purchaseType.length; i++) {
           if (this.purchaseType[i].selected) {
@@ -1541,8 +1531,6 @@ export default {
           data.image += `${e.imgSrc},`;
         });
         data.image = data.image.slice(0, data.image.length - 1);
-
-        console.log("data ==>", data);
 
         // 提示
         if (data.shipDate == "NaN-NaN-NaN" || data.shipDate == "1970-01-01") {
@@ -1662,7 +1650,6 @@ export default {
           });
           return;
         }
-        console.log("发起请求!!!!!!!!!!!!");
 
         // 发起请求
         let loading = this.$loading({
@@ -1677,7 +1664,6 @@ export default {
           params: data,
         })
           .then((result) => {
-            console.log("result ==>", result);
             setTimeout(() => {
               loading.close();
             }, 500);
@@ -1728,7 +1714,6 @@ export default {
               type: "error",
               offset: 50,
             });
-            console.log("err ==>", err);
           });
       } else {
         //  添加
@@ -1817,8 +1802,6 @@ export default {
           data.image += `${e.imgSrc},`;
         });
         data.image = data.image.slice(0, data.image.length - 1);
-
-        console.log("data ==>", data);
 
         // 提示
         if (data.name == "") {
@@ -1929,7 +1912,6 @@ export default {
           });
           return;
         }
-        console.log("发起请求!!!!!!!!!!!!");
 
         // 发起请求
         let loading = this.$loading({
@@ -1946,7 +1928,7 @@ export default {
         })
           .then((result) => {
             loading.close();
-            console.log("result ==>", result);
+
             if (result.data.Code == 200) {
               this.$notify({
                 title: "请求成功",
@@ -1970,7 +1952,6 @@ export default {
             }
           })
           .catch((err) => {
-            console.log("err ==>", err);
             loading.close();
             this.$notify({
               title: "请求错误",
@@ -1986,7 +1967,7 @@ export default {
       if (sessionStorage.getItem("token") == undefined) {
         alert("请先登录");
         this.$router.push({ name: "Login" });
-        console.log(">>>>>>>>>>>>>>>>>订单页面");
+
         return;
       }
       if (this.InfoData.id == undefined) {
@@ -2029,6 +2010,8 @@ export default {
           url = "/sigaoyi/RecordDPC";
         } else if (tradeTypeVal == "CNE") {
           url = "/sigaoyi/RecordCNE";
+        } else if (tradeTypeVal == "CNEGZ") {
+          url = "/sigaoyi/RecordCNEGZ";
         } else if (tradeTypeVal == "LTW") {
           url = "/sigaoyi/RecordLTW";
           if (this.row.order_id == "") {
@@ -2069,7 +2052,7 @@ export default {
             setTimeout(() => {
               loading.close();
             }, 500);
-            console.log("result ==>", result);
+
             if (result.data.Code == 200) {
               this.getList(this.$route.query.id);
               //   this.getPurchaseType();
@@ -2098,7 +2081,6 @@ export default {
             setTimeout(() => {
               loading.close();
             }, 500);
-            console.log("err ==>", err);
           });
       }
     },
@@ -2107,7 +2089,7 @@ export default {
       if (sessionStorage.getItem("token") == undefined) {
         alert("请先登录");
         this.$router.push({ name: "Login" });
-        console.log(">>>>>>>>>>>>>>>>>订单页面");
+
         return;
       }
       if (this.InfoData.id == undefined) {
@@ -2116,7 +2098,7 @@ export default {
         this.$router.push({ name: "Login" });
         return;
       }
-      console.log("this.row.trade_type1  ==>", this.row.trade_type1);
+
       var url = "";
       if (this.row.trade_type1 == "RB-DS3") {
         url = "/sigaoyi/cancelOrderYDH";
@@ -2133,6 +2115,8 @@ export default {
         url = "/sigaoyi/cancelOrderYCGJ";
       } else if (this.row.trade_type1 == "CNE") {
         url = "/sigaoyi/cancelOrderCNE";
+      } else if (this.row.trade_type1 == "CNEGZ") {
+        url = "/sigaoyi/cancelOrderCNEGZ";
       } else if (
         this.row.trade_type1 == "EYB" ||
         this.row.trade_type1 == "EYB1" ||
@@ -2167,7 +2151,7 @@ export default {
           setTimeout(() => {
             loading.close();
           }, 500);
-          console.log("result ==>", result);
+
           if (result.data.Code == 200) {
             this.$notify({
               title: "请求成功",
@@ -2196,12 +2180,10 @@ export default {
           setTimeout(() => {
             loading.close();
           }, 500);
-          console.log("err ==>", err);
         });
     },
     // 打印
     clickPrint() {
-      console.log("this.row.trade_type1 ==>", this.row.trade_type1);
       if (
         this.row.trade_type1 == "EYB" ||
         this.row.trade_type1 == "EYB1" ||
@@ -2239,7 +2221,7 @@ export default {
         })
           .then((result) => {
             loading.close();
-            console.log("result ==>", result);
+
             if (result.data.Code == 200) {
               this.$notify({
                 title: "请求成功",
@@ -2265,7 +2247,6 @@ export default {
               offset: 50,
             });
             loading.close();
-            console.log("err ==>", err);
           });
         return;
       } else if (this.row.trade_type1 == "RB-DS3") {
@@ -2284,7 +2265,7 @@ export default {
         })
           .then((result) => {
             loading.close();
-            console.log("result ==>", result);
+
             if (result.data.Code == 200) {
               this.$notify({
                 title: "请求成功",
@@ -2310,9 +2291,98 @@ export default {
               offset: 50,
             });
             loading.close();
-            console.log("err ==>", err);
           });
         return;
+      } else if (this.row.trade_type1 == "CNEGZ") {
+        let loading = this.$loading({
+          lock: false,
+          text: "加载中...",
+          spinner: "el-icon-loading",
+          background: "rgba(0, 0, 0, 0.7)",
+        });
+        this.$axios({
+          url: "/sigaoyi/printorderCNEGZ",
+          method: "POST",
+          params: {
+            orderId: this.row.orderId1,
+          },
+        })
+          .then((result) => {
+            loading.close();
+
+            if (result.data.Code == 200) {
+              this.$notify({
+                title: "请求成功",
+                message: result.data.msg,
+                type: "success",
+                offset: 50,
+              });
+              window.open(result.data.lable_file);
+            } else {
+              this.$notify({
+                title: "请求失败",
+                message: result.data.msg,
+                type: "warning",
+                offset: 50,
+              });
+            }
+          })
+          .catch((err) => {
+            this.$notify({
+              title: "请求错误",
+              message: "系统业务繁忙,请稍后再试!",
+              type: "error",
+              offset: 50,
+            });
+            loading.close();
+          });
+        return;
+      } else if (
+        this.row.trade_type1 == "PK0009" ||
+        this.row.trade_type1 == "PK00091"
+      ) {
+        let loading = this.$loading({
+          lock: false,
+          text: "加载中...",
+          spinner: "el-icon-loading",
+          background: "rgba(0, 0, 0, 0.7)",
+        });
+        this.$axios({
+          url: "/sigaoyi/printorderYCGJ",
+          method: "POST",
+          params: {
+            orderId: this.row.orderId1,
+          },
+        })
+          .then((result) => {
+            loading.close();
+
+            if (result.data.Code == 200) {
+              this.$notify({
+                title: "请求成功",
+                message: result.data.msg,
+                type: "success",
+                offset: 50,
+              });
+              window.open(result.data.lable_file);
+            } else {
+              this.$notify({
+                title: "请求失败",
+                message: result.data.msg,
+                type: "warning",
+                offset: 50,
+              });
+            }
+          })
+          .catch((err) => {
+            this.$notify({
+              title: "请求错误",
+              message: "系统业务繁忙,请稍后再试!",
+              type: "error",
+              offset: 50,
+            });
+            loading.close();
+          });
       } else {
         this.$message({
           message: "不能打印",
@@ -2322,49 +2392,6 @@ export default {
         });
         return;
       }
-      let loading = this.$loading({
-        lock: false,
-        text: "加载中...",
-        spinner: "el-icon-loading",
-        background: "rgba(0, 0, 0, 0.7)",
-      });
-      this.$axios({
-        url: "/sigaoyi/printorderYCGJ",
-        method: "POST",
-        params: {
-          orderId: this.row.orderId1,
-        },
-      })
-        .then((result) => {
-          loading.close();
-          console.log("result ==>", result);
-          if (result.data.Code == 200) {
-            this.$notify({
-              title: "请求成功",
-              message: result.data.msg,
-              type: "success",
-              offset: 50,
-            });
-            window.open(result.data.lable_file);
-          } else {
-            this.$notify({
-              title: "请求失败",
-              message: result.data.msg,
-              type: "warning",
-              offset: 50,
-            });
-          }
-        })
-        .catch((err) => {
-          this.$notify({
-            title: "请求错误",
-            message: "系统业务繁忙,请稍后再试!",
-            type: "error",
-            offset: 50,
-          });
-          loading.close();
-          console.log("err ==>", err);
-        });
     },
   },
 };

@@ -12,13 +12,19 @@
         <div class="searchInt">
           <div class="search">
             <span>公司名字：</span>
-            <input type="sreach" placeholder="请输入" />
+            <input v-model="companName" type="sreach" placeholder="请输入" />
           </div>
           <div class="btn">
             <el-button type="info" icon="el-icon-refresh-right" size="small"
               >重置</el-button
             >
-            <el-button type="primary" size="small" icon="el-icon-search">搜索</el-button>
+            <el-button
+              type="primary"
+              size="small"
+              icon="el-icon-search"
+              @click="getStaffManageList('search')"
+              >搜索</el-button
+            >
           </div>
         </div>
         <div class="table">
@@ -38,7 +44,7 @@
               tooltip-effect="dark"
               style="width: 100%"
               stripe
-              @selection-change="handleSelectionChange"
+              v-loading="loading"
             >
               <template slot="empty">
                 <span class="iconfont icon-zanwushuju"></span>
@@ -50,7 +56,10 @@
                 label="账号名字"
               ></el-table-column>
               <el-table-column prop="company" label="公司"></el-table-column>
-              <el-table-column prop="phone" label="手机号码"></el-table-column>
+              <el-table-column
+                prop="phoneNumber"
+                label="手机号码"
+              ></el-table-column>
               <el-table-column
                 prop="AllorderNum"
                 label="总订单数"
@@ -69,7 +78,7 @@
                 label="代付费用"
               ></el-table-column>
               <el-table-column
-                prop="userNameBalance"
+                prop="balance"
                 label="账号余额"
               ></el-table-column>
               <el-table-column
@@ -110,7 +119,7 @@
               @current-change="handleCurrentChange"
               :current-page="currentPage"
               layout="total,slot"
-              :total="copyTableData.length"
+              :total="total"
             >
               <span class="blockText">显示</span>
             </el-pagination>
@@ -118,10 +127,10 @@
               @size-change="handleSizeChange"
               @current-change="handleCurrentChange"
               :current-page="currentPage"
-              :page-sizes="[2, 3, 4, 5]"
-              :page-size="5"
+              :page-sizes="[30, 50, 100]"
+              :page-size="pageSize"
               layout="sizes, prev, pager, next, slot,jumper"
-              :total="copyTableData.length"
+              :total="total"
             >
               <span class="ensure-btn fr" @click="clickTrue()">确定</span>
             </el-pagination>
@@ -142,79 +151,27 @@ const {
 export default {
   data() {
     return {
+      loading: false,
       //   xls
       tableData: [],
-      copyTableData: [
-        {
-          userName: "王者01",
-          company: "思高易有限公司",
-          phone: "13888888888",
-          AllorderNum: "5000",
-          AtPersentUnfilledOrder: "150",
-          UnpaidFreightOrder: "200",
-          PayForAnotherFreight: "10000",
-          userNameBalance: "9999",
-          Allrecharge: "999999",
-          userNameOWEcollection: "0",
-          AllConsumption: "99999",
-        },
-        {
-          userName: "王者02",
-          company: "001",
-          phone: "13777777777",
-          AllorderNum: "5000",
-          AtPersentUnfilledOrder: "150",
-          UnpaidFreightOrder: "200",
-          PayForAnotherFreight: "10000",
-          userNameBalance: "9999",
-          Allrecharge: "999999",
-          userNameOWEcollection: "0",
-          AllConsumption: "99999",
-        },
-        {
-          userName: "王者03",
-          company: "002",
-          phone: "13666666666",
-          AllorderNum: "5000",
-          AtPersentUnfilledOrder: "150",
-          UnpaidFreightOrder: "200",
-          PayForAnotherFreight: "10000",
-          userNameBalance: "9999",
-          Allrecharge: "999999",
-          userNameOWEcollection: "0",
-          AllConsumption: "99999",
-        },
-        {
-          userName: "王者03",
-          company: "002",
-          phone: "13666666666",
-          AllorderNum: "5000",
-          AtPersentUnfilledOrder: "150",
-          UnpaidFreightOrder: "200",
-          PayForAnotherFreight: "10000",
-          userNameBalance: "9999",
-          Allrecharge: "999999",
-          userNameOWEcollection: "0",
-          AllConsumption: "99999",
-        },
-      ],
       //  分页 currentPage
       currentPage: 1,
+      pageSize: 30,
+      total: 0,
+      // 搜索 val
+      companName: "",
     };
   },
   created() {
     // 分页复制对象
-    this.tableData = JSON.parse(JSON.stringify(this.copyTableData));
+    this.getStaffManageList("start");
   },
   computed: {
-    ...homeState(["WstateStatus"]),
+    ...homeState(["WstateStatus", "InfoData"]),
   },
   methods: {
-    // 表格
-    handleSelectionChange() {},
     // 编辑
     handleEdit(index, row) {
-      console.log("index,row ==>", index, row);
       this.$router.push({
         name: "StaffManagementEditor",
         query: { flag: false, row: JSON.stringify(row) },
@@ -224,29 +181,20 @@ export default {
     collection(index, row) {},
     // 分页事件 每页多少条
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
       this.pageSize = val;
       this.currentPage = 1;
-      this.tableData = JSON.parse(JSON.stringify(this.copyTableData));
       this.tableData.splice(val);
     },
     // 去第几页
     handleCurrentChange(val) {
-      //   console.log(`当前页: ${val}`);
       this.currentPage = val;
       let abc = this.pageSize * (val - 1);
-      this.tableData = JSON.parse(JSON.stringify(this.copyTableData));
       this.tableData.splice(0, abc);
       this.tableData.splice(this.pageSize);
-      //   console.log('this.pageSize ==>',this.pageSize)
-      //   this.tableData = a.splice(this.pageSize)
-      console.log("this.tableData ==>", this.tableData);
-      // console.log("a ==>",a)
     },
     // 点击确定去哪一页
     clickTrue() {
       this.handleCurrentChange(this.currentPage);
-      // console.log('cccccccccc ==>', this.currentPage)
     },
     // 添加
     GotoAdd() {
@@ -254,6 +202,84 @@ export default {
         name: "StaffManagementEditor",
         query: { flag: true },
       });
+    },
+    getStaffManageList(string) {
+      if (sessionStorage.getItem("token") == undefined) {
+        alert("请先登录");
+        this.$router.push({ name: "Login" });
+        return;
+      }
+      if (this.InfoData.id == undefined) {
+        alert("登陆时间过期,请重新登陆!");
+        sessionStorage.removeItem("token");
+        this.$router.push({ name: "Login" });
+        return;
+      }
+      if (string == "start") {
+        //   发起请求
+        var loading = this.$loading({
+          lock: false,
+          text: "加载中...",
+          spinner: "el-icon-loading",
+          background: "rgba(0, 0, 0, 0.7)",
+        });
+      }
+
+      let data = {
+        userId: this.InfoData.id,
+        amount: 30,
+        pages: 1,
+        status: 99,
+        companyName: this.InfoData.company,
+        //   this.InfoData.company
+        companyPrincipal: "",
+      };
+      // 公司名字 处理
+      if (data.companyName == "") {
+        data.companyName = "moll";
+      }
+
+      this.$axios({
+        method: "POST",
+        url: "/sigaoyi/userinfos",
+        params: data,
+      })
+        .then((result) => {
+          if (string == "start") {
+            loading.close();
+          }
+          if (result.data.Code == 200) {
+            this.tableData = result.data.users;
+            this.pageSize = result.data.page.amount;
+            this.currentPage = result.data.page.pages;
+            this.total = result.data.page.total;
+            this.$notify({
+              title: "请求成功",
+              message: result.data.msg,
+              type: "success",
+              offset: 50,
+            });
+          } else {
+            this.$notify({
+              title: "请求失败",
+              message: result.data.msg,
+              type: "warning",
+              offset: 50,
+            });
+          }
+        })
+        .catch((err) => {
+          if (string == "start") {
+            loading.close();
+          }
+
+          this.$notify({
+            title: "请求错误",
+            message: "系统业务繁忙,请稍后再试",
+            type: "error",
+            offset: 50,
+          });
+        });
     },
 
     ...homeActions(["setWstateStatus"]),

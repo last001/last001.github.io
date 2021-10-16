@@ -326,7 +326,6 @@ export default {
           }
         }
       }
-      console.log("data ==>", data);
     },
     // 表格
     handleSelectionChange() {},
@@ -334,7 +333,6 @@ export default {
     handleEdit(index, row) {
       this.departmentStatus = true;
       this.compileRow = row;
-      //   console.log('row ==>',row)
     },
     // 点击添加按钮
     addDivisional() {
@@ -344,11 +342,9 @@ export default {
     // 点击添加或者编辑按钮弹出层的 save 按钮
     clickSave() {
       // 里面拿3个值
-      console.log("this.compileRow ==>", this.compileRow);
     },
     // 分页事件 每页多少条
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
       this.pageSize = val;
       this.currentPage = 1;
       this.tableData = JSON.parse(JSON.stringify(this.copyTableData));
@@ -356,21 +352,17 @@ export default {
     },
     // 去第几页
     handleCurrentChange(val) {
-      //   console.log(`当前页: ${val}`);
       this.currentPage = val;
       let abc = this.pageSize * (val - 1);
       this.tableData = JSON.parse(JSON.stringify(this.copyTableData));
       this.tableData.splice(0, abc);
       this.tableData.splice(this.pageSize);
-      //   console.log('this.pageSize ==>',this.pageSize)
+
       //   this.tableData = a.splice(this.pageSize)
-      console.log("this.tableData ==>", this.tableData);
-      // console.log("a ==>",a)
     },
     // 点击确定去哪一页
     clickTrue() {
       this.handleCurrentChange(this.currentPage);
-      // console.log('cccccccccc ==>', this.currentPage)
     },
 
     ...homeActions(["setWstateStatus"]),

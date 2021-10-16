@@ -29,16 +29,34 @@
                           另：请大家及时添加国内运单号，便于我司快速处理发货。无国内运单号不予处理。
                         </div>
                         <div>
-                          关于异常订单：工作日上午11:00点。下午3::00点我们司物流部们同意处理跟进异常订单。处理后请及时跟进！
+                          关于异常订单：工作日上午11:00点。下午3：00点我们司物流部们同意处理跟进异常订单。处理后请及时跟进！
                         </div>
                       </el-collapse-item>
-                     <el-collapse-item
+                      <el-collapse-item
+                        title="2021-10-15：修改产品库获取产品方式"
+                        name="1"
+                      >
+                        <div>1.产品库获取产品方式(下滑)</div>
+                        <div>2.优化产品库获取产品</div>
+                      </el-collapse-item>
+                      <el-collapse-item
+                        title="2021-10-13：订单页面添加查询物流(点击国内单号)"
+                        name="6"
+                      >
+                        <div>1.订单页面添加查询物流(点击国内单号)</div>
+                        <div>2.添加编辑订单页面佐川普货免抛(下单,打印)</div>
+                      </el-collapse-item>
+                      <el-collapse-item
                         title="2021-09-14：修改产品库导出价格"
                         name="2"
                       >
                         <div>
-                          <div>1.修改订单详情客户(修改或添加)返回 重新获取数据</div>
-                          <div>2.修改订单页面 '待发货' 为 '库存件' 颜色为(浅绿色)</div>
+                          <div>
+                            1.修改订单详情客户(修改或添加)返回 重新获取数据
+                          </div>
+                          <div>
+                            2.修改订单页面 '待发货' 为 '库存件' 颜色为(浅绿色)
+                          </div>
                         </div>
                       </el-collapse-item>
                       <el-collapse-item
@@ -46,7 +64,8 @@
                         name="4"
                       >
                         <div>
-                          1.我司内部人员添加 '导出发货-青岛' 按钮(包括用户级别5)。
+                          1.我司内部人员添加 '导出发货-青岛'
+                          按钮(包括用户级别5)。
                         </div>
                         <div>2.修改黑猫3cm普货 首重:35 续重:11。</div>
                         <div>3.修改黑猫3cm带电 首重:39 续重:12。</div>
@@ -55,16 +74,6 @@
                         <div>1.添加佐川普货-LTW渠道</div>
                         <div>2.添加订单页面管理员</div>
                         <div>3.修复商品页面主图放大层的层级问题</div>
-                      </el-collapse-item>
-                      <el-collapse-item
-                        title="2021-09-01：修改订单页面"
-                        name="1"
-                      >
-                        <div>1.Home页面弹出层(渠道价格)。</div>
-                        <div>2.修改头部导航栏,将订单单独放置。</div>
-                        <div>
-                          3.添加标记异常订单操作人,申诉异常订单操作人等。
-                        </div>
                       </el-collapse-item>
                     </el-collapse>
                   </div>
@@ -452,7 +461,7 @@ export default {
       },
       // 日期的值
       value1: [],
-      //  长 * 宽 * 高 *重   
+      //  长 * 宽 * 高 *重
       reckonList: {
         long: 0,
         width: 0,
@@ -511,7 +520,7 @@ export default {
         },
         {
           channel: "黑猫3cm带电",
-          first: "39",
+          first: "37",
           Continuation: "12",
           norms: "限5kg以内,三边和不超过60cm",
           volume: "不计抛",
@@ -544,14 +553,11 @@ export default {
     this.years = d.getFullYear();
     this.getTime();
     // this.setWstateStatus(false);
-    // console.log("home页面 this.WstateStatus ==>",this.WstateStatus)
   },
   computed: {
     ...homeState(["WstateStatus", "InfoData", "homeTitleStatus"]),
   },
-  mounted() {
-    // console.log("home infoData ==>",this.InfoData);
-  },
+  mounted() {},
   methods: {
     // 货物的选择
     selectProduct(item, index) {
@@ -573,7 +579,7 @@ export default {
         e.seleted = false;
       });
       array[index].seleted = true;
-      //   console.log("array ==>", array);
+
       let data = {
         PlanToThrow: 0,
         userName: this.InfoData.userName,
@@ -594,14 +600,12 @@ export default {
         data.PlanToThrow = 1;
       }
 
-      console.log("data ==>", data);
       this.$axios({
         url: "/sigaoyi/NEWFreightCalculation",
         method: "POST",
         params: data,
       })
         .then((result) => {
-          console.log("result ==>", result);
           if (result.data.Code == 200) {
             this.resultText = result.data.freight;
           } else {
@@ -609,7 +613,6 @@ export default {
           }
         })
         .catch((err) => {
-          console.log("err ==>", err);
           this.resultText = "计算错误";
         });
     },
@@ -638,7 +641,6 @@ export default {
         data.RemoteRegions = 1;
       }
 
-      console.log("data ==>", data);
       this.iconSrc = "el-icon-loading";
       this.$axios({
         url: "/sigaoyi/SmartEstimation",
@@ -646,7 +648,6 @@ export default {
         params: data,
       })
         .then((result) => {
-          console.log("result ==>", result);
           if (result.data.Code == 200) {
             this.transitionList.forEach((e, i) => {
               e.selected = false;
@@ -667,17 +668,15 @@ export default {
         .catch((err) => {
           this.resultText = "计算错误";
           this.iconSrc = "el-icon-top";
-          console.log("err ==>", err);
         });
     },
     // 销售选项卡
     selectorDraw(index) {
       this.salesData.forEach((e) => {
-        // console.log("e ==>",e.active)
         e.active = "";
       });
       this.salesData[index].active = "active";
-      console.log("index ==>", index);
+
       if (index == 0) {
         this.oneFaceState = false;
       } else {
@@ -730,22 +729,20 @@ export default {
             endweek.length - 2
           );
           //  周一+7大于本月的最后一天
-          //   console.log("day,weekDay,endweekEnd ==>",day,weekDay,endweekEnd)
+
           if (day - weekDay + 7 > endweekEnd) {
-            console.log("周一+7大于本月的最后一天");
             var endweek = `${year}/${month + 1}/${
               day - weekDay + 7 - endweekEnd
             }`;
           }
           this.value1 = [startweek, endweek];
-          console.log("this.value1 ==>", this.value1);
         }
         // 本月
       } else if (index == 2) {
         let startMonth = `${year}/${month}`;
         let endMonth = `${this.getMonthFinalDay()}`;
         this.value1 = [startMonth, endMonth];
-        // console.log(startMonth, endMonth);
+
         // 本年
       } else if (index == 3) {
         let startYear = `${year}/01/01`;
@@ -776,10 +773,6 @@ export default {
     },
     // home开始弹出层 合并
     arraySpanMethod({ row, column, rowIndex, columnIndex }) {
-      //   console.log("row ==>",row)
-      //   console.log("column ==>",column)
-      //   console.log("rowIndex ==>",rowIndex)
-      //   console.log("columnIndex ==>",columnIndex)
       if (rowIndex == 5) {
         if (columnIndex == 1) {
           return [1, 3];
@@ -790,7 +783,6 @@ export default {
     },
     // 初始弹出层
     childByValue(childValue) {
-      console.log("childValue ==>", childValue);
       if (childValue) {
         if (this.InfoData.statu == "5") {
           this.noticeStatus = false;

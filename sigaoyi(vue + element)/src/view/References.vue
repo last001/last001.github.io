@@ -179,8 +179,6 @@ export default {
         params: data,
       })
         .then((result) => {
-          console.log("result ==>", result);
-
           setTimeout(() => {
             this.iconSrc = "";
             this.isLogin = false;
@@ -205,7 +203,6 @@ export default {
         .catch((err) => {
           this.iconSrc = "";
           this.isLogin = false;
-          console.log("err ==>", err);
           this.$notify({
             title: "请求错误",
             message: "系统业务繁忙,请稍后再试",

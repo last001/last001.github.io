@@ -2,7 +2,7 @@
   <div class="staffInfo">
     <div class="main" v-title :data-title="browserTitle"></div>
     <div class="bigbox">
-        <div class="dandruff">
+      <div class="dandruff">
         <el-breadcrumb separator-class="el-icon-arrow-right">
           <el-breadcrumb-item :to="{ path: '/Home' }">首页</el-breadcrumb-item>
           <el-breadcrumb-item>公司管理</el-breadcrumb-item>
@@ -206,22 +206,18 @@ export default {
     };
   },
   created() {
-    console.log("this.$route.query.rowStatus ==>", this.$route.query.rowStatus);
+    
     // 区分是点击添加按钮进来的是点击编辑
     if (this.$route.query.rowStatus) {
       this.browserTitle = "修改员工信息";
       this.row = JSON.parse(this.$route.query.row);
       this.staffName = this.$route.query.name;
-      console.log(
-        "this.$route.query.row ==>",
-        JSON.parse(this.$route.query.row)
-      );
-      console.log("name ==>", this.$route.query.name);
+      
       this.getSelected();
     } else {
       this.browserTitle = "添加员工";
       this.row = {};
-      console.log("false");
+      
     }
 
     // marginleft

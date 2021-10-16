@@ -250,9 +250,9 @@ export default {
       this.infoData.userName == "王杰" ||
       this.infoData.userName == "hzsugoi"
     ) {
-        this.infoData["admitor"] = true;
-    }else{
-        this.infoData["admitor"] = false;
+      this.infoData["admitor"] = true;
+    } else {
+      this.infoData["admitor"] = false;
     }
     this.browserTitle = "修改编号";
     this.getList(this.$route.query.id);
@@ -311,7 +311,7 @@ export default {
       })
         .then((result) => {
           loading.close();
-          console.log("result ==>", result);
+
           if (result.data.Code == "200") {
             this.statusList.forEach((e, i) => {
               e.selected = false;
@@ -338,7 +338,6 @@ export default {
             type: "error",
             offset: 50,
           });
-          console.log("err ==>", err);
         });
     },
     // 获取当前时间
@@ -353,7 +352,7 @@ export default {
         d.getMinutes() >= 10 ? d.getMinutes() : "0" + `${d.getMinutes()}`;
       let second =
         d.getSeconds() >= 10 ? d.getSeconds() : "0" + `${d.getSeconds()}`;
-      // console.log("time ==>",year+'-'+month+'-'+day+'  '+hours+':'+minutes+':'+second)
+
       this.time =
         year +
         "-" +
@@ -389,7 +388,6 @@ export default {
 
       this.$axios(uploadPdfs.uploadPdf(url, formData))
         .then((result) => {
-          console.log("result ==>", result);
           this.$refs.uploadInt.value = null;
           setTimeout(() => {
             loading.close();
@@ -416,7 +414,7 @@ export default {
           setTimeout(() => {
             loading.close();
           }, 300);
-          console.log("err ==>", err);
+
           this.$notify({
             title: "请求错误",
             message: "系统业务繁忙,请稍后再试",
@@ -456,7 +454,7 @@ export default {
         imgUrl: this.row.img,
         status: this.statusList[this.statusIndex].value,
       };
-      console.log("data ==>", data);
+
       //   请求
       let loading = this.$loading({
         lock: false,
@@ -470,7 +468,6 @@ export default {
         params: data,
       })
         .then((result) => {
-          console.log("result ==>", result);
           loading.close();
           if (result.data.Code == "200") {
             firstRouter = true;
@@ -494,7 +491,7 @@ export default {
         .catch((err) => {
           loading.close();
           firstRouter = false;
-          console.log("err ==>", err);
+
           this.$notify({
             title: "请求错误",
             message: "系统业务繁忙,请稍后再试",

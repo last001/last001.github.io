@@ -47,7 +47,16 @@ export default {
         data: ["销售额"],
       },
       xAxis: {
-        data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子", "衣服", "泳衣"],
+        data: [
+          "衬衫",
+          "羊毛衫",
+          "雪纺衫",
+          "裤子",
+          "高跟鞋",
+          "袜子",
+          "衣服",
+          "泳衣",
+        ],
         // data: [],
       },
       yAxis: [
@@ -62,11 +71,11 @@ export default {
         {
           name: "销售额",
           type: "bar",
-           label: {
-                show: true,
-                position: 'top',
-                color:"444",
-            },
+          label: {
+            show: true,
+            position: "top",
+            color: "444",
+          },
           data: [
             {
               value: 38,
@@ -124,7 +133,7 @@ export default {
     };
     // 5、展示数据
     // 使用刚指定的配置项和数据显示图表。
-    // console.log(myChart)
+
     myChart.setOption(option);
 
     var VmyChart = echarts.init(document.getElementById("v-main"));
@@ -160,7 +169,7 @@ export default {
             itemStyle: {
               shadowBlur: 10,
               shadowOffsetX: 0,
-              shadowColor: "rgba(0, 0, 0, 0.5)", 
+              shadowColor: "rgba(0, 0, 0, 0.5)",
             },
           },
         },
@@ -168,9 +177,7 @@ export default {
     });
   },
   methods: {
-    abc() {
-      console.log(111111111);
-    },
+    abc() {},
   },
 };
 </script>

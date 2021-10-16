@@ -51,8 +51,6 @@ Vue.prototype.msg = function (msg) {
     "<br>")
 }
 
-// console.log("mian文件 ==>mianmianmianmianmianmianmianmianmian");
-
 // POST json格式传值
 // axios.defaults.headers.post['Content-Type'] = 'application/json';
 
@@ -77,7 +75,7 @@ router.onError((error) => {
 
 // 设置浏览器标题
 Vue.directive('title', {
-  inserted: function (el, binding) {
+  inserted: function (el, binding) {  
     document.title = el.dataset.title
   }
 })

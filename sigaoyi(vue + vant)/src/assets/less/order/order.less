@@ -1,0 +1,591 @@
+.order {
+  .order-title {
+    height: 46px;
+    border-bottom: 1px solid #ddd;
+
+    [class*=van-hairline]::after {
+      border-color: #dbdbdb;
+    }
+
+    .van-nav-bar {
+      z-index: 100;
+    }
+
+    // .van-hairline--bottom::after {
+    //   border-bottom-width: 0;
+    // }
+
+    .sreach {
+      background: #f9f9f9;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 100;
+      width: 100%;
+
+      .appoint {
+        background: #fff;
+        margin-top: 10px;
+        padding-top: 10px;
+
+        .text {
+          width: 100%;
+          text-align: center;
+        }
+
+        .list {
+          margin-top: 10px;
+          display: flex;
+
+          div {
+            width: 20%;
+            text-align: center;
+
+            &.active {
+              color: #409eff;
+            }
+          }
+        }
+      }
+
+    }
+  }
+
+  .Alltransverse {
+    position: fixed;
+    top: 46px;
+    left: 0;
+    width: 100%;
+    z-index: 99;
+    // overflow-x: hidden;
+
+    .box {
+      display: -webkit-box;
+      padding: 5px;
+      overflow-x: auto;
+      position: relative;
+      z-index: 999;
+      background-color: #fff;
+
+      .v-Alltransverse {
+        background-color: #f3f3f3;
+        color: #000;
+        border-radius: 12px;
+        padding: 5px;
+        margin-left: 5px;
+
+        div {
+          display: flex;
+          padding: 3px 5px;
+          position: relative;
+
+          &.active {
+
+            // border-radius: 4px;
+            // border-top-left-radius: 10px;
+            // border-top-right-radius: 10px;
+            &::after {
+              content: "";
+              display: block;
+              position: absolute;
+              left: -7%;
+              bottom: -12px;
+              height: 14px;
+              width: 114%;
+              background-color: #f3f3f3;
+            }
+          }
+
+          .van-icon {
+            line-height: 16px;
+            margin-left: 2px;
+          }
+        }
+
+        &.active {
+          border: 1px solid #409eff;
+          background-color: #6bacec42;
+
+          div {
+            span {
+              color: #409eff;
+            }
+
+            .van-icon {
+              color: #409eff;
+            }
+          }
+        }
+      }
+
+      // 滚动条
+      &::-webkit-scrollbar {
+        /*滚动条整体样式*/
+        width: 0px;
+        /*高宽分别对应横竖滚动条的尺寸*/
+        height: 0px;
+      }
+    }
+
+    // 弹出层 
+    .transverseFace {
+      position: absolute;
+      left: 0;
+      padding-top: 42px;
+      width: 100%;
+      height: 30%;
+      background-color: #f3f3f3;
+      z-index: 100;
+      transition: all .3s;
+      border-bottom-left-radius: 15px;
+      border-bottom-right-radius: 15px;
+
+      .face_content {
+        // border-top-left-radius: 10px;
+        // border-top-right-radius: 10px;
+        overflow-y: auto;
+        height: 100%;
+
+        .v_face_content {
+          flex-wrap: wrap;
+          display: flex;
+          padding-bottom: 48px;
+          overflow-y: scroll;
+
+          .v_face_search{
+            width: 100%;
+            input{
+              width: 45%;
+              padding:5px 8px;
+              margin-left: 10px;
+              margin-top: 10px;
+              background-color: #Fff;
+              outline: none;
+              border: none;
+              border-radius: 15px;
+            }
+          }
+
+          span {
+            display: block;
+            width: 50%;
+            line-height: 33px;
+            text-indent: 10px;
+            font-size: 13px;
+            color: #444;
+            display: inline-block;
+            min-width: 48px;
+
+            &.active {
+              color: #409eff;
+            }
+          }
+        }
+      }
+
+      .face_btn {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        padding:7px 10px;
+        width: calc(100% - 20px);
+        background-color: #fff;
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+
+        button {
+          flex: 1;
+          height: 40px;
+
+          &:first-child {
+            border-top-left-radius: 20px;
+            border-bottom-left-radius: 20px;
+          }
+
+          &:nth-child(2) {
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+          }
+        }
+      }
+    }
+
+    // mask
+    .transverseFaceBox {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.55);
+      z-index: 99;
+    }
+  }
+
+  .orderTransverse {
+    position: fixed;
+    left: 0;
+    top: 90px;
+    width: 100%;
+    background-color: #fff;
+    z-index: 9;
+    overflow-y: auto;
+
+      .orderList {
+        height: 100%;
+        .van-list {
+          padding-bottom: 0;
+        }
+
+        .van-pull-refresh {
+          height: 100%;
+
+          .empty {
+            // .van-empty {
+            //   padding: 80px 0;
+            // }
+
+            .bottom-button {
+              margin-top: 30px;
+              width: 160px;
+              height: 40px;
+            }
+          }
+        }
+
+        .allOrder {
+          min-height: 340px;
+
+          .allOrderList {
+            margin-top: 10px;
+            border-top: 1px solid #ddd;
+
+            .all-order {
+              background: #fff;
+              padding: 6px 15px;
+              padding-bottom: 0;
+
+              div {
+                font-size: 13px;
+                width: 79%;
+
+                &:first-child {
+                  display: flex;
+
+                  .van-checkbox {
+                    display: block;
+                    width: 9%;
+                    margin-left: -10px;
+
+                    .van-checkbox__icon {
+                      margin-left: 2px;
+                      margin-top: 1px;
+                    }
+                  }
+
+                  span {
+                    width: 21%;
+
+                    &:nth-child(3) {
+                      display: inline-block;
+                      width: 79%;
+                      line-height: 21px;
+                      overflow: hidden;
+                      white-space: nowrap;
+                      text-overflow: ellipsis;
+                    }
+                  }
+                }
+
+                &:nth-child(2) {
+                  width: 21%;
+                  text-align: right;
+                  border-radius: 25px;
+                  font-size: 14px;
+                  height: 24px;
+                  font-weight: 600;
+                  color: #409eff;
+                  // &.one{
+                  //   background: #e06767ba;
+                  // }
+                  // &.two{
+                  //   background: #b78b43bd;
+                  // }
+                  // &.three{
+                  //   background:#93c30dd1;
+                  // }
+                  // &.four{
+                  //   background:#409eff ;
+                  // }
+                  // &.five{
+                  //   background: #4d16c3b8;
+                  // }
+                  // &.six{
+                  //   background: #7e16d3b8;
+                  // }
+                  // &.seven{
+                  //   background: #db12d1b8;
+                  // }
+                  // &.eight{
+                  //   background: #eb0e20b8;
+                  // }
+                  // &.nine{
+                  //   background-color: beige;
+                  // }
+                  // &.ten{
+                  //   background: #0e80ebb8;
+                  // }
+                }
+              }
+            }
+
+            .all-details {
+              display: flex;
+              padding: 0px 15px;
+              padding-left: 30px;
+              // padding-top: 6px;
+              background-color: #fafafa;
+
+              &.active {
+
+                .details-img,
+                .details-text {
+                  border-bottom: none;
+                }
+              }
+
+              .details-img {
+                width: 18%;
+                height: 100%;
+                max-height: 76px;
+                overflow: hidden;
+                // border-bottom: 1px solid #ddd;
+
+                img {
+                  // border: 1px solid red;
+                  width: 100%;
+                  height: 100%;
+                }
+              }
+
+              .details-text {
+                width: 80%;
+                font-weight: 600;
+                padding-left: 10px;
+                padding-bottom: 6px;
+                padding-top: 3px;
+                // border-bottom: 1px solid #ddd;
+
+                div {
+                  width: 100%;
+                  display: flex;
+
+                }
+
+                .name {
+                  .productName {
+                    width: 80%;
+                    overflow: hidden; //超出的文本隐藏
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+
+                  }
+
+                  .price {
+                    width: 20%;
+                    text-align: right;
+                    margin-right: 3px;
+                  }
+                }
+
+                .count {
+                  span {
+                    width: 90%;
+                  }
+
+                  .quantity {
+                    width: 10%;
+                    text-align: center;
+                    font-weight: normal;
+                  }
+                }
+
+                .integral {
+                  display: block;
+                  width: 100%;
+                  margin-top: 10px;
+                  font-weight: normal;
+                  color: #7c7c7c;
+                  overflow: hidden;
+                  white-space: nowrap;
+                  text-overflow: ellipsis;
+                }
+
+              }
+            }
+
+            .all-total {
+              background: #fff;
+              padding: 6px 15px;
+              border-bottom: 1px solid #eeebeb;
+
+              span {
+                font-weight: 600;
+                margin-right: 3px;
+
+                &:first-child {
+                  display: flex;
+                  font-weight: normal;
+                  margin-left: 15px;
+
+                  i {
+                    margin-top: 2px;
+                    margin-right: 2px;
+                  }
+                }
+              }
+            }
+
+            .all-btn {
+              width: 100%;
+              text-align: right;
+              padding: 6px 0;
+              margin-left: 3px;
+              background: #fff;
+              border-bottom: 1px solid #ddd;
+
+              .van-button--mini {
+                font-size: 12px;
+              }
+
+              button {
+                border-radius: 4px;
+                margin-right: 20px;
+                padding: 12px 8px;
+
+                &:last-child {
+                  margin-left: 0;
+                }
+              }
+            }
+
+            &:first-child{
+              margin-top: 0;
+              border-color: #ececec;
+            }
+          }
+
+        }
+
+        .empty {
+          padding-bottom: 46px;
+        }
+
+        .emptyOrder {
+          padding: 50px 0;
+        }
+
+        .skeleton {
+          width: 100%;
+          padding-top: 1px;
+          background-color: #fff;
+
+          .van-skeleton {
+            margin-top: 5px;
+          }
+        }
+      }
+
+      .pay-delete {
+        width: 100%;
+        position: fixed;
+        bottom: 60px;
+        left: 0;
+        text-align: right;
+        padding: 8px 0;
+        background-color: #fff;
+        // border-top: 1px solid #eeeeee;
+        box-shadow: 0 -5px 12px #c5c5c5;
+        box-sizing: border-box;
+
+        button {
+          border-radius: 5px;
+          height: 30px;
+          font-size: 12px;
+          margin-right: 5px;
+
+          &:last-child {
+            margin-right: 10px;
+          }
+        }
+      }
+  }
+
+  .sync {
+    .van-overlay {
+      background-color: #fff;
+    }
+
+    .van-popup {
+      width: 100%;
+
+      .sync-title {
+        .van-nav-bar__content {
+          .van-nav-bar__left {
+
+            span,
+            i {
+              color: #409eff;
+            }
+          }
+
+          .van-nav-bar__right {
+            button {
+              padding: 2px 10px;
+              border-radius: 15px;
+            }
+          }
+        }
+      }
+
+      .sync-content {
+        .van-overlay {
+          background-color: rgba(0, 0, 0, .7);
+        }
+
+        .orderState,
+        .time,
+        .shop {
+          display: flex;
+          margin-top: 1px;
+
+          .header {
+            width: 60px;
+            line-height: 46px;
+            background: #fff;
+            text-align: right;
+            font-size: 14px;
+          }
+
+          .van-cell::after {
+            border-bottom: none;
+          }
+
+          .van-cell--clickable {
+            color: #b1b1b1;
+            padding-right: 10px;
+            text-align: right;
+
+            &.active {
+              color: #444;
+            }
+
+            .van-cell__title {
+              padding-right: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+}

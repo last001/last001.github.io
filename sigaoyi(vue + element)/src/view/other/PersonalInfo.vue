@@ -2,10 +2,12 @@
   <div class="personalSet">
     <div class="main" v-title data-title="个人信息"></div>
     <div class="box">
-      <div class="personalInfo" >
+      <div class="personalInfo">
         <div class="dandruff">
           <el-breadcrumb separator-class="el-icon-arrow-right">
-            <el-breadcrumb-item :to="{ path: '/Home' }">首页</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/Home' }"
+              >首页</el-breadcrumb-item
+            >
             <el-breadcrumb-item>其他功能</el-breadcrumb-item>
             <el-breadcrumb-item>个人中心</el-breadcrumb-item>
           </el-breadcrumb>
@@ -245,7 +247,7 @@ export default {
   data() {
     return {
       infoData: {
-          avatar:require("../../assets/img/defaultAcatar.jpg"),
+        avatar: require("../../assets/img/defaultAcatar.jpg"),
       },
       //   名字
       name: "",
@@ -359,7 +361,6 @@ export default {
         loading.close();
         this.noExit();
         this.$router.push({ name: "Login" });
-        console.log("this.InfoData 退出登陆 ==>", this.InfoData);
       }, 500);
     },
     // 点击注销账号
@@ -465,12 +466,11 @@ export default {
         return;
       }
       //  拿值 发起请求
-      console.log("确定绑定新手机!!!");
     },
     // 上传头像
     uploadHead(e) {
       let files = e.target.files[0];
-      console.log("files ==>", files);
+
       let formData = new FormData();
       // 向 formData 对象中添加文件
       formData.append("file", files);
@@ -479,7 +479,7 @@ export default {
         .then((result) => {
           this.$refs.acatarSrc.value = null;
           this.loadHeadStatus = false;
-          console.log("result ==>", result);
+
           if (result.data.Code == "200") {
             this.InfoData.avatar = this.infoData.avatar = result.data.imgsURL;
             let list = {
@@ -487,7 +487,7 @@ export default {
               isActive: false,
             };
             this.setHeadList(list);
-            console.log("this.headList ==>", this.headList);
+
             this.$notify({
               title: "请求成功",
               message: "上传头像成功",
@@ -506,7 +506,7 @@ export default {
         .catch((err) => {
           this.$refs.acatarSrc.value = null;
           this.loadHeadStatus = false;
-          console.log("err ==>", err);
+
           this.$notify({
             title: "请求错误",
             message: "系统服务繁忙.请稍后再试!",
@@ -516,9 +516,7 @@ export default {
         });
     },
     //保存名字
-    saveName() {
-      console.log("this.name ==>", this.name);
-    },
+    saveName() {},
     // 修改邮箱
     changeEmail() {
       if (this.emailStatus) {
@@ -625,7 +623,6 @@ export default {
         return;
       }
       // 发起请求....
-      console.log("this.pasList ==>", this.pasList);
     },
     ...homeActions(["setWstateStatus", "setNum", "setHeadList"]),
   },

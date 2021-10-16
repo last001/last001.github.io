@@ -23,12 +23,14 @@
                   :key="index"
                   :value="index"
                   :selected="item.selected"
-                >{{item.name}}</option>
+                >
+                  {{ item.name }}
+                </option>
               </select>
             </div>
           </div>
           <div class="typeDiv">
-             <span class="text">类</span>
+            <span class="text">类</span>
             <span class="text1">型：</span>
             <div>
               <select
@@ -40,7 +42,9 @@
                   :key="index"
                   :value="index"
                   :selected="item.selected"
-                >{{item.name}}</option>
+                >
+                  {{ item.name }}
+                </option>
               </select>
             </div>
           </div>
@@ -291,7 +295,7 @@ export default {
         { name: "停用", selected: false, id: 2 },
       ],
       // redioType
-      radioTypeIndex:0,
+      radioTypeIndex: 0,
       radioTypeList: [
         { name: "全部", selected: true, id: 99 },
         { name: "系统管理", selected: false, id: 0 },
@@ -347,7 +351,7 @@ export default {
   beforeRouteEnter(to, from, next) {
     document.title = "产品订单";
     document.body.scrollTop = document.documentElement.scrollTop = 0;
-    console.log("from.path ==>", from.path);
+
     if (from.path == "/personalEditor") {
       to.meta.isBack = true;
     } else {
@@ -388,15 +392,14 @@ export default {
   },
   methods: {
     ...homeActions(["setWstateStatus"]),
-    changeSet(array,index){
-        array.forEach(e => {
-            e.selected = false;
-        });
-        array[index].selcted = true;
+    changeSet(array, index) {
+      array.forEach((e) => {
+        e.selected = false;
+      });
+      array[index].selcted = true;
     },
     // 重置 和 搜索
     resetAndSreach(booleans, pages, val) {
-      console.log("booleans ==>", booleans);
       //   input
       let inputList = document.querySelectorAll(".Sinput");
       if (booleans) {
@@ -427,39 +430,31 @@ export default {
         }
       } else {
         this.radioStatusList.forEach((element) => {
-          //   console.log('element ==>',element)
           if (element.checked) {
-            // console.log("element.name ==>", element.name);
             this.searchList.status = element.id;
           }
         });
         this.radioTypeList.forEach((element) => {
-          //   console.log('element ==>',element)
           if (element.checked) {
-            // console.log("element.name ==>", element.name);
             this.searchList.type = element.id;
           }
         });
         // 选择所有公司 select
         // companySelect
         let options = document.querySelector(".companySelect").children;
-        console.log("options ==>", options);
+
         for (let i = 0; i < options.length; i++) {
           if (options[i].selected) {
             this.searchList.companyID = options[i].value;
-            console.log("options[i].value ==>", options[i].value);
           }
         }
         for (let i = 0; i < inputList.length; i++) {
-          console.log("搜索 ==>", inputList[i].name + inputList[i].value);
           if (inputList[i].name == "用户名：") {
             this.searchList.userName = inputList[i].value;
           } else {
             this.searchList.phoneName = inputList[i].value;
           }
         }
-
-        console.log("this.searchList ==>", this.searchList);
 
         let loading = this.$loading({
           lock: false,
@@ -484,7 +479,7 @@ export default {
             setTimeout(() => {
               loading.close();
             }, 500);
-            console.log("result ==>", result);
+
             if (result.data.ResultMsg == "error") {
               this.$notify({
                 title: "请求失败",
@@ -501,7 +496,7 @@ export default {
               });
 
               this.total = result.data.page.total;
-              console.log("result.data.userTables ==>", result.data.userTables);
+
               this.copyTableData = result.data.userTables;
               this.tableData = JSON.parse(JSON.stringify(this.copyTableData));
             }
@@ -510,7 +505,7 @@ export default {
             setTimeout(() => {
               loading.close();
             }, 500);
-            console.log("err ==>", err);
+
             this.$notify({
               title: "请求错误",
               message: "系统业务,请稍后再试",
@@ -522,31 +517,26 @@ export default {
     },
     // 分页事件 每页多少条
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
       this.pageSize = val;
       this.resetAndSreach(false, this.currentPage, this.pageSize);
     },
     // 去第几页
     handleCurrentChange(val) {
-      //   console.log(`当前页: ${val}`);
       this.currentPage = val;
       this.resetAndSreach(false, this.currentPage, this.pageSize);
     },
     // 点击确定去哪一页
     clickTrue() {
       this.handleCurrentChange(this.currentPage);
-      // console.log('cccccccccc ==>', this.currentPage)
     },
     // 表格事件
     handleSelectionChange() {},
     // 是否是选中的状态
     onTableSelect(rows, row) {
       row.selected = rows.length && rows.indexOf(row) !== -1;
-      console.log("selected ==>", row.selected); // true就是选中，0或者false是取消选中
     },
     // 点击input type=checked 全选
     setAll(selection) {
-      console.log("selection ==>", selection);
       if (selection.length > 0) {
         this.Allstatus = true;
         selection.forEach((e) => {
@@ -558,7 +548,6 @@ export default {
           e.selected = false;
         });
       }
-      // console.log("this.Allstatus ==>", this.Allstatus);
     },
     // 点击 全选按钮
     Allset(e) {
@@ -595,7 +584,7 @@ export default {
       });
       let allCompanyList = JSON.stringify(this.allCompanyList);
       let items = JSON.stringify(item);
-      console.log("this.allCompanyList ==>", this.allCompanyList);
+
       setTimeout(() => {
         this.$router.push({
           name: "PersonalEditor",
@@ -605,17 +594,16 @@ export default {
     },
     // 点击个人详情
     personal(index, row) {
-      console.log(index, row);
       for (const key in row) {
         //   timestampToTimes
         row.userCreatTime = timestampToTimes.timestampToTime(row.userCreatTime);
         row.modifyTime = timestampToTimes.timestampToTime(row.modifyTime);
       }
-    //   this.allCompanyList.forEach((e) => {
-    //     e["selected"] = false;
-    //   });
-    //   let item = JSON.stringify(row);
-    //   let allCompanyList = JSON.stringify(this.allCompanyList);
+      //   this.allCompanyList.forEach((e) => {
+      //     e["selected"] = false;
+      //   });
+      //   let item = JSON.stringify(row);
+      //   let allCompanyList = JSON.stringify(this.allCompanyList);
       const loading = this.$loading({
         lock: false,
         text: "加载中...",
@@ -628,7 +616,7 @@ export default {
       setTimeout(() => {
         this.$router.push({
           name: "PersonalEditor",
-          query: { saveAdd: false},
+          query: { saveAdd: false },
         });
       }, 500);
     },
@@ -638,12 +626,10 @@ export default {
     },
     // 输入事件
     inputVal(e, nameVal) {
-      // console.log('value ==>',e.target.value)
       // this.compileData.nameVal = e.target.value
       for (const key in this.compileData) {
         this.compileData[nameVal] = e.target.value;
       }
-      // console.log('this.compileData ==>',this.compileData)
     },
     // 点击修改 0000
     changeStatus(flag) {
@@ -659,10 +645,9 @@ export default {
               type: "warning",
               duration: 800,
             });
-            console.log("this.compileData ==>", this.compileData);
+
             return;
           }
-          console.log("000 ==>", this.compileData[key]);
         }
         this.$notify({
           title: "请求成功",
@@ -672,13 +657,12 @@ export default {
         });
 
         this.tableData.push(this.compileData);
-        // console.log('this.compileData ==>',this.compileData)
+
         this.AllMask = false;
       }
     },
     // 单项删除
     deleteRow(index, rows) {
-      console.log("rows ==>", rows, index);
       rows.splice(index, 1);
     },
     // 多项删除
@@ -718,7 +702,7 @@ export default {
       if (sessionStorage.getItem("token") == undefined) {
         return;
       }
-      console.log("pages,val ==>", pages, val);
+
       let loading = this.$loading({
         lock: false,
         text: "加载中...",
@@ -742,7 +726,7 @@ export default {
           setTimeout(() => {
             loading.close();
           }, 500);
-          console.log("result ==>", result);
+
           if (result.data.ResultMsg == "success") {
             this.total = result.data.page.total;
             this.copyTableData = result.data.userTables;
@@ -757,7 +741,6 @@ export default {
           }
         })
         .catch((err) => {
-          console.log("err ==>", err);
           setTimeout(() => {
             loading.close();
           }, 500);
@@ -793,16 +776,16 @@ export default {
           setTimeout(() => {
             loading.close();
           }, 500);
-          console.log("result ==>", result);
+
           this.allCompanyList = result.data.companies;
-          console.log("this.allCompanyList ==>", this.allCompanyList);
+
           // this.tableData = JSON.parse(JSON.stringify(this.copyTableData));
         })
         .catch((err) => {
           setTimeout(() => {
             loading.close();
           }, 500);
-          console.log("err ==>", err);
+
           this.$notify({
             title: "请求失败",
             message: "系统业务繁忙,请稍后再试",

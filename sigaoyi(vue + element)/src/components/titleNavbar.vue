@@ -2,9 +2,9 @@
   <div class="navbar clearfix" ref="titleNavbar">
     <div class="logoBox fl" @click="goHome()">
       <div class="logo">
-        <img src="../assets/img/icon1.png" alt="" />
+        <img :src="logoImg" alt="" />
       </div>
-      <div class="logoName">思高易有限公司</div>
+      <div class="logoName">{{ company }}</div>
     </div>
     <!-- 类型 -->
     <div
@@ -135,7 +135,7 @@ const {
   mapActions: homeActions,
 } = createNamespacedHelpers("homeStore");
 export default {
-   props: ["getParent"],
+  props: ["getParent"],
   data() {
     return {
       titleList: [
@@ -456,11 +456,13 @@ export default {
       pLeft: 100,
       number: "",
       Vname: "",
+      logoImg: "",
+      company: "",
       isLogin: false,
       //  鼠标移上展示面板
       ExitShow: false,
       //   headerUrl
-      headerUrl: "http://www.ec-sigaoyi.com/imagelink/1626948164266.jpg",
+      headerUrl: "",
       //   000
       //通知状态值
       releaseStatus: false,
@@ -502,21 +504,25 @@ export default {
     this.getInfoData();
   },
   computed: {
-    ...homeState(["InfoData", "EscCode", "headList", "homeTitleStatus"]),
+    ...homeState([
+      "InfoData",
+      "EscCode",
+      "headList",
+      "homeTitleStatus",
+      "companyData",
+    ]),
   },
   methods: {
     // 0000
     over() {
-      //  console.log("移上去")
       this.maskStatus = true;
     },
     out() {
-      //   console.log("移下来")
       this.maskStatus = false;
     },
     GotoRouter(ele) {
-      if(ele.routeName == this.$route.name){
-          return;
+      if (ele.routeName == this.$route.name) {
+        return;
       }
       this.titleList.forEach((e) => {
         e.list.forEach((el) => {
@@ -536,7 +542,7 @@ export default {
         e.isActive = false;
       });
       item.isActive = true;
-      console.log("item.name ==>", item.name);
+
       this.maskStatus = false;
       this.detection();
       this.$router.push({ name: item.routerName });
@@ -554,7 +560,7 @@ export default {
         }
         if (this.$route.path.indexOf(e.pathName) > -1) {
           e.isActive = true;
-          console.log("e.name ==>", e.name);
+
           if (e.pathName == "system") {
             if (this.InfoData.statu != "0") {
               alert("您不是管理员");
@@ -565,7 +571,7 @@ export default {
         }
       });
       // titleList
-      console.log("this.$route.name ==>", this.$route.name);
+
       this.titleList.forEach((e) => {
         e.list.forEach((el) => {
           if (this.$route.name == el.routeName) {
@@ -584,13 +590,45 @@ export default {
       if (this.InfoData.id == undefined) {
         return;
       }
-      console.log("title 获取 == 初始值>>>>>>>>>>>>>>");
+
       this.isLogin = true;
       //   this.userName = this.InfoData.mail;
       this.number = 10850 + this.InfoData.id;
       this.Vname = this.InfoData.userName;
+      if (this.InfoData.img == "" || this.InfoData.img == undefined) {
+        this.headerUrl =
+          "http://www.ec-sigaoyi.com/imagelink/1626948164266.jpg";
+      } else {
+        this.headerUrl = this.InfoData.img;
+      }
+
+      //  gongsi
+      if (this.companyData.id) {
+        if (
+          this.companyData.companyName == "" ||
+          this.companyData.companyName == undefined
+        ) {
+          this.company = "思高易网络科技有限公司";
+        } else {
+          this.company = this.companyData.companyName;
+        }
+
+        if (
+          this.companyData.companyImg == "" ||
+          this.companyData.companyImg == undefined
+        ) {
+          this.logoImg = require("../assets/img/icon1.png");
+        } else {
+          this.logoImg = this.companyData.companyImg;
+        }
+      } else {
+        this.company = "思高易网络科技有限公司";
+        this.logoImg = require("../assets/img/icon1.png");
+      }
+
+      //   company
       this.pLeft = 0;
-      console.log("this.InfoData ==>", this.InfoData);
+
       for (let i = 0; i < this.typeList.length; i++) {
         if (this.typeList[i].name == "系统管理") {
           if (this.InfoData.statu == "0") {
@@ -620,7 +658,7 @@ export default {
                 this.InfoData.userName == "任治琴" ||
                 this.InfoData.userName == "李健明" ||
                 this.InfoData.userName == "王杰" ||
-                this.InfoData.userName == "hzgugoi"
+                this.InfoData.userName == "hzsugoi"
               ) {
                 el.showStatus = true;
               } else {
@@ -634,7 +672,7 @@ export default {
     //   goHome
     goHome() {
       if (this.$route.name == "Home") {
-        return console.log("路由相同不执行!!!");
+        return;
       }
       let loading = this.$loading({
         lock: false,
@@ -676,13 +714,12 @@ export default {
     // 去个人信息
     clickPersonInfo() {
       if (this.$route.name == "PersonalInfo") {
-        return console.log("路由相同不执行!!!");
+        return;
       }
       this.$router.push({ name: "PersonalInfo" });
     },
     // 拿到头像路径
     GetHeadSrc() {
-      console.log("this.headList.isActive ==>", this.headList.isActive);
       if (!this.headList.isActive) {
         this.headerUrl = this.headList.src;
         // let list = {
@@ -694,7 +731,6 @@ export default {
     },
     // 通知
     GetNotice() {
-      console.log("this.InfoData  ==>", this.InfoData);
       if (sessionStorage.getItem("token") == undefined) {
         return;
       }
@@ -709,7 +745,6 @@ export default {
         },
       })
         .then((result) => {
-          console.log("result ==>", result);
           if (result.data.code == "200") {
             if (result.data.announcementsize > 0) {
               // 通知层状态值
@@ -743,7 +778,6 @@ export default {
         })
         .catch((err) => {
           this.$emit("childByValue", true);
-          console.log("err ==>", err);
         });
     },
     closex() {
@@ -760,20 +794,16 @@ export default {
         },
       })
         .then((result) => {
-          console.log("result ==>", result);
           // if(result.data.Code)
           this.releaseStatus = false;
           this.$emit("childByValue", true);
         })
-        .catch((err) => {
-          console.log("err ==>", err);
-        });
+        .catch((err) => {});
     },
-    aginInfoData(){
-        console.log("000000000000",this.getParent);
-        if(this.getParent){
-            this.getInfoData();
-        }
+    aginInfoData() {
+      if (this.getParent) {
+        this.getInfoData();
+      }
     },
     ...homeActions([
       "setInfoData",
@@ -785,7 +815,7 @@ export default {
   },
   watch: {
     headList: "GetHeadSrc",
-    getParent:"aginInfoData"
+    getParent: "aginInfoData",
   },
 };
 </script>

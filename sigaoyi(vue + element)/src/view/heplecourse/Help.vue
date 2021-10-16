@@ -5,9 +5,7 @@
       <sideNavbar ref="abcd" @Wstate="getWstate"></sideNavbar>
       <router-view :style="{ width: W, marginLeft: leftName + 'px' }" />
     </div>
-    <footerDiv
-      :style="{ width: W, marginLeft: leftName + 'px' }"
-    ></footerDiv>
+    <footerDiv :style="{ width: W, marginLeft: leftName + 'px' }"></footerDiv>
   </div>
 </template>
 
@@ -36,14 +34,14 @@ export default {
   created() {
     document.body.scrollTop = document.documentElement.scrollTop = 0;
   },
-   mounted () {
+  mounted() {
     const that = this;
     window.onresize = () => {
       return (() => {
         window.minheight = document.documentElement.clientHeight;
         that.minheight = window.minheight;
       })();
-    };    
+    };
   },
   computed: {
     ...homeState(["WstateStatus", "InfoData"]),
@@ -80,7 +78,6 @@ export default {
         this.timer = true;
         let that = this;
         setTimeout(function () {
-          console.log("that.minheight ==>", that.minheight);
           that.timer = false;
         }, 400);
       }
@@ -93,6 +90,6 @@ export default {
   width: 100%;
   position: relative;
   overflow-x: hidden;
-   background-color: #f0f2f5;
+  background-color: #f0f2f5;
 }
 </style>

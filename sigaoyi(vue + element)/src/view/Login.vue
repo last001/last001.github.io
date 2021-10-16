@@ -231,14 +231,14 @@ export default {
     //   获取box的高度
     this.$nextTick(() => {
       this.boxH = this.$refs.box.offsetHeight / 2;
-      console.log("2123 ==>", this.boxH);
+
       document.title = "用户登陆";
       this.DocHeight = document.documentElement.clientHeight; //实时屏幕高度
       this.screenHeight = document.documentElement.clientHeight; //实时屏幕高度
     });
   },
   computed: {
-    ...homeState(["InfoData"]),
+    ...homeState(["InfoData", "companyData"]),
   },
   mounted() {},
   destroyed() {
@@ -283,7 +283,6 @@ export default {
     // radio的选择
     changRadio() {
       if (this.radio == 1) {
-        console.log(11111111111111);
         this.radioShow = false;
       } else {
         this.radioShow = true;
@@ -342,7 +341,7 @@ export default {
       };
       //   手机号码
       let phoneReg = new RegExp("^1[3456789][0-9]{9}$");
-      //   console.log("phoneReg ==>", phoneReg);
+
       this.rules.phone[0].validator = (rule, value, callback) => {
         if (value === "") {
           callback(new Error("请输入手机号码"));
@@ -383,12 +382,11 @@ export default {
     },
     // 点击发送验证码
     sendCode() {
-      //   console.log("abc ==>", 123213);
       // 手机号码是否有填写
       let phoneReg = /^1[3456789]d{9}$/;
       if (this.ruleForm.phone == "" || !phoneReg.test(this.ruleForm.phone)) {
         this.$message("请输入正确的手机号码!");
-        return console.log(111111111111);
+        return;
       }
     },
     // 点击注册按钮
@@ -397,7 +395,6 @@ export default {
         if (valid) {
           alert("submit!");
         } else {
-          console.log("error submit!!");
           return false;
         }
       });
@@ -425,14 +422,14 @@ export default {
         return;
       }
       this.clickLogin = false;
-      console.log("error submit!!");
+
       this.iconSrc = "el-icon-loading";
       this.isLogin = true;
       // 获取IP地址
       let ip = localStorage.getItem("Ip");
       let cityname = localStorage.getItem("cityname");
       //   http://www.ec-sigaoyi.com/sugoiERP/UserLogin
-      // console.log("123 ==>", ip, cityname);
+
       this.$axios({
         method: "POST",
         url: "/sigaoyi/NEWlogin1",
@@ -451,7 +448,6 @@ export default {
             this.iconSrc = "";
             this.isLogin = false;
           }, 300);
-          console.log("result =>", result);
 
           if (result.data.Code == "200") {
             setTimeout(() => {
@@ -466,8 +462,16 @@ export default {
             let user = result.data.userinfo;
             user.avatar = "./static/img/defaultAcatar.0c4749e.jpg";
             user.balance = user.balance.toFixed(2);
+            // 公司信息
+            if (result.data.company != undefined) {
+              this.setCompanData(result.data.company);
+            } else {
+              this.setCompanData({});
+            }
+
+            // 个人信息
             this.setInfoData(user);
-            console.log("infoData ==>", this.InfoData);
+
             setTimeout(() => {
               this.$router.push({ name: "Home" });
             }, 200);
@@ -478,9 +482,9 @@ export default {
               type: "warning",
               offset: 50,
             });
-            setTimeout(()=>{
-                this.$router.push({ name: "References" });
-            },300)
+            setTimeout(() => {
+              this.$router.push({ name: "References" });
+            }, 300);
           } else {
             setTimeout(() => {
               this.$notify({
@@ -496,7 +500,6 @@ export default {
           this.clickLogin = true;
           this.iconSrc = "";
           this.isLogin = false;
-          console.log("err =>", err);
 
           if (this.timer == null) {
             this.$notify({
@@ -545,12 +548,10 @@ export default {
       // 获取IP地址
       let ip = localStorage.getItem("Ip");
       let cityname = localStorage.getItem("cityname");
-      //   http://www.ec-sigaoyi.com/sugoiERP/UserLogin
-      // console.log("123 ==>", ip, cityname);
+
       this.$axios({
         method: "POST",
         url: "/sigaoyi/NEWlogin1",
-        // http://192.168.1.179:8080/sugoiERP/Userlogin
         params: {
           userName: this.loginRuleForm.userName,
           password: this.loginRuleForm.password,
@@ -561,7 +562,6 @@ export default {
         cancelToken: this.source.token,
       })
         .then((result) => {
-            console.log("result =>", result);
           setTimeout(() => {
             this.enterLogin = true;
             this.iconSrc = "";
@@ -580,6 +580,13 @@ export default {
             let user = result.data.userinfo;
             user.avatar = "./static/img/defaultAcatar.0c4749e.jpg";
             user.balance = user.balance.toFixed(2);
+            // 公司信息
+            if (result.data.company != undefined) {
+              this.setCompanData(result.data.company);
+            } else {
+              this.setCompanData({});
+            }
+            // 个人信息
             this.setInfoData(user);
             setTimeout(() => {
               this.$router.push({ name: "Home" });
@@ -591,9 +598,9 @@ export default {
               type: "warning",
               offset: 50,
             });
-            setTimeout(()=>{
-                this.$router.push({ name: "References" });
-            },300)
+            setTimeout(() => {
+              this.$router.push({ name: "References" });
+            }, 300);
           } else {
             this.$notify({
               title: "请求失败",
@@ -605,10 +612,8 @@ export default {
         })
         .catch((err) => {
           this.enterLogin = true;
-          console.log("err =>", err);
           this.iconSrc = "";
           this.isLogin = false;
-
           if (this.timer == null) {
             this.$notify({
               title: "请求错误",
@@ -618,7 +623,6 @@ export default {
             });
             return;
           }
-
           this.$notify({
             title: "请求错误",
             message: "系统服务繁忙,请稍后再试",
@@ -634,7 +638,7 @@ export default {
         this.screenHeight = document.documentElement.clientHeight;
       }, 400);
     },
-    ...homeActions(["setInfoData"]),
+    ...homeActions(["setInfoData", "setCompanData"]),
   },
   watch: {
     screenHeight: "getclientH",

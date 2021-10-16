@@ -1,11 +1,14 @@
 <template>
-  <div class="FinanceList" :style="{minHeight:boxH + 'px'}">
+  <div class="FinanceList" :style="{ minHeight: boxH + 'px' }">
     <titleNavbar ref="titlePage"></titleNavbar>
     <div class="content-bottom">
       <sideNavbar ref="sideNavbar" @Wstate="getWstate"></sideNavbar>
-      <router-view :wastate="flag" :style="{width:W,marginLeft: leftName + 'px' }" />
+      <router-view
+        :wastate="flag"
+        :style="{ width: W, marginLeft: leftName + 'px' }"
+      />
     </div>
-    <footerDiv :style="{width:W,marginLeft: leftName + 'px' }"></footerDiv>
+    <footerDiv :style="{ width: W, marginLeft: leftName + 'px' }"></footerDiv>
   </div>
 </template>
 <script>
@@ -22,27 +25,27 @@ const {
 export default {
   data() {
     return {
-    //   父路由的的高度
-      boxH:document.documentElement.clientHeight,
+      //   父路由的的高度
+      boxH: document.documentElement.clientHeight,
       // sideNavbar 的状态
       chilrenVal: "",
       //   left 值
       leftName: 220,
-      W:"calc(100% - 220px)",
-      flag:"",
+      W: "calc(100% - 220px)",
+      flag: "",
     };
   },
   created() {
     document.body.scrollTop = document.documentElement.scrollTop = 0;
   },
-   mounted () {
+  mounted() {
     const that = this;
     window.onresize = () => {
       return (() => {
         window.boxH = document.documentElement.clientHeight;
         that.boxH = window.boxH;
       })();
-    };    
+    };
   },
   components: {
     titleNavbar,
@@ -55,13 +58,12 @@ export default {
   methods: {
     // 子组件像父组件 传过来的状态值
     getWstate(v) {
-    //   console.log('v ==>',v)
       this.chilrenVal = v;
     },
     // 监听 侧边栏的状态
     Wchange() {
       this.flag = this.chilrenVal;
-    //   console.log("this.flag ==>",this.flag)
+
       if (this.chilrenVal) {
         this.leftName = 220;
         this.W = "calc(100% - 220px)";
@@ -76,13 +78,12 @@ export default {
   },
   watch: {
     chilrenVal: "Wchange",
-     boxH(val) {
+    boxH(val) {
       if (!this.timer) {
         this.boxH = val;
         this.timer = true;
         let that = this;
         setTimeout(function () {
-          console.log("that.boxH ==>", that.boxH);
           that.timer = false;
         }, 400);
       }
@@ -91,10 +92,10 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-.FinanceList{
-    position: relative;
-    width: 100%;
-    overflow-x: hidden;
-    background-color: #f0f2f5;
+.FinanceList {
+  position: relative;
+  width: 100%;
+  overflow-x: hidden;
+  background-color: #f0f2f5;
 }
 </style>

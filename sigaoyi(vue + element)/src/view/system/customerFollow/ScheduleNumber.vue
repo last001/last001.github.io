@@ -393,7 +393,7 @@ export default {
     inputBlur() {
       let input1 = this.$refs.inTheLastMonth.value.replace(/^0+/, "");
       let input2 = this.$refs.LastMonth.value.replace(/^0+/, "");
-      console.log("input1,input2 ==>", input1, input2);
+
       if (input1 == "0" || input2 == "0") {
         input1 = "";
         input2 = "";
@@ -405,8 +405,7 @@ export default {
         this.juhao = "";
         return;
       }
-      //   console.log(Number(input1))
-      //   console.log(Number(input2))
+
       if (Number(input1) > Number(input2)) {
         this.text = "上月业绩相对上上月业绩";
         this.upAndDown = "下降";
@@ -427,7 +426,7 @@ export default {
     updataImg(e) {
       // 解决上传同一张图片问题  this.$refs.uploadVal.value = null;
       let files = e.target.files[0];
-      console.log("files ==>", files);
+
       // let filesName = files.name.split(".")[1]
       // 检测正则
       let res = /\.(png|jpe?g|gif|svg)(\?.*)?$/;
@@ -452,7 +451,7 @@ export default {
       this.$axios(uploadFiles.uploadFile(formData))
         .then((result) => {
           loading.close();
-          console.log("result ==>", result);
+
           if (result.data.Code == "200") {
             this.$message({
               message: "上传图片成功!",
@@ -473,7 +472,7 @@ export default {
         })
         .catch((err) => {
           loading.close();
-          console.log("err ==>", err);
+
           this.$message({
             message: "系统繁忙,请稍后再试!",
             duration: 800,
@@ -484,9 +483,7 @@ export default {
         });
     },
     // 点击删除图片
-    deleteImg(item, index) {
-      console.log("index,item ==>", index, item);
-    },
+    deleteImg(item, index) {},
     // 返回上一级
     exit() {
       const loading = this.$loading({

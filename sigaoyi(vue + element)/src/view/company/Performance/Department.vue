@@ -6,23 +6,35 @@
         <el-breadcrumb-item :to="{ path: '/Home' }">首页</el-breadcrumb-item>
         <el-breadcrumb-item>公司管理</el-breadcrumb-item>
         <el-breadcrumb-item>绩效管理</el-breadcrumb-item>
-        <el-breadcrumb-item>{{staffName}}</el-breadcrumb-item>
+        <el-breadcrumb-item>{{ staffName }}</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
     <div class="v-department">
       <div class="search">
         <span>日期：</span>
         <input type="sreach" placeholder="示例:2021-01" />
-        <el-button type="info" size="small" icon="el-icon-refresh-right">重置</el-button>
-        <el-button type="primary" size="small" icon="el-icon-search">搜索</el-button>
+        <el-button type="info" size="small" icon="el-icon-refresh-right"
+          >重置</el-button
+        >
+        <el-button type="primary" size="small" icon="el-icon-search"
+          >搜索</el-button
+        >
       </div>
       <div class="table">
         <div class="v-table">
           <div class="btn clearfix">
-            <el-button class="fr" type="danger" icon="el-icon-delete-location" size="small"
+            <el-button
+              class="fr"
+              type="danger"
+              icon="el-icon-delete-location"
+              size="small"
               >删除</el-button
             >
-            <el-button class="fr" type="success" icon="el-icon-s-promotion" size="small"
+            <el-button
+              class="fr"
+              type="success"
+              icon="el-icon-s-promotion"
+              size="small"
               >导出数据</el-button
             >
             <el-button
@@ -33,10 +45,18 @@
               @click="gotoStaffInfo()"
               >添加</el-button
             >
-            <el-button class="fr" type="success" icon="el-icon-caret-right" size="small"
+            <el-button
+              class="fr"
+              type="success"
+              icon="el-icon-caret-right"
+              size="small"
               >下一个月</el-button
             >
-            <el-button class="fr" type="primary" icon="el-icon-caret-left" size="small"
+            <el-button
+              class="fr"
+              type="primary"
+              icon="el-icon-caret-left"
+              size="small"
               >上一个月</el-button
             >
           </div>
@@ -375,8 +395,6 @@ export default {
   methods: {
     // 表格颜色
     getRowClass(row, column, rowIndex, columnIndex) {
-      // console.log(row, column, rowIndex, columnIndex)
-      //   console.log("row, column, rowIndex, columnIndex ==>",row, column, rowIndex, columnIndex)
       if (row.rowIndex != 0) {
         return {
           background: "#63acf6",
@@ -388,8 +406,6 @@ export default {
     },
     // 编辑
     handleEdit(index, row) {
-      console.log("row ==>", row);
-
       let loading = this.$loading({
         lock: false,
         text: "加载中...",
@@ -413,8 +429,7 @@ export default {
     // table footer 第一个
     getSummaries(param) {
       const { columns, data } = param;
-      //   console.log("columns列 ==>", columns);
-      //   console.log("data行 ==>", data);
+
       //   const sums = [];
       columns.forEach((column, index) => {
         if (index === 0) {
@@ -460,11 +475,9 @@ export default {
           index == columns.length - 4
         ) {
           sums[index] = "--";
-          //   console.log("sums ==>", sums);
         }
-        // console.log("index ==>",index)
+
         this.firstData.map((v, i) => {
-          // console.log("v ==>",v)
           if (i != 0 && i != 12 && i != 13) {
             if (i == index) {
               v = v / this.firstData[11];
@@ -474,7 +487,7 @@ export default {
           }
         });
       });
-      // console.log('sums ==>',sums)
+
       return sums;
     },
     // 合计的值
@@ -499,8 +512,7 @@ export default {
           });
         }
       });
-      //   console.log("this.firstData ==>",this.firstData)
-      //   console.log("this.firstData[0] ==>", this.firstData[0]);
+
       this.AllProportion();
     },
     // 百分比

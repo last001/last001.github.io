@@ -219,7 +219,7 @@ const {
   mapActions: homeActions,
 } = createNamespacedHelpers("homeStore");
 export default {
-//   name: "PurchaseList",
+  //   name: "PurchaseList",
   data() {
     return {
       //   radio数组
@@ -276,7 +276,7 @@ export default {
   },
   beforeRouteEnter(to, from, next) {
     document.body.scrollTop = document.documentElement.scrollTop = 0;
-    console.log("from.path ==>",from.path);
+
     if (from.path == "/purchaSellStock/purchaseCompileDefault") {
       to.meta.isBack = true;
     } else {
@@ -296,7 +296,6 @@ export default {
       this.tableData = [];
       this.getData(1, 30);
     } else {
-      console.log("子页面刷新进入 ==>");
       if (this.$route.query.flag) {
         this.search(1, 30, false);
       }
@@ -371,7 +370,7 @@ export default {
       })
         .then((result) => {
           this.tableLoading = false;
-          console.log("result ==>", result);
+
           if (result.data.Code == 200) {
             let obj = {
               3: "待出库",
@@ -404,7 +403,7 @@ export default {
         })
         .catch((err) => {
           this.tableLoading = false;
-          console.log("err ==>", err);
+
           this.$notify({
             title: "请求错误",
             message: "系统业务繁忙,请稍后再试",
@@ -434,8 +433,7 @@ export default {
     // 表格select 选择
     onTableSelect(rows, row) {
       row.selected = rows.length && rows.indexOf(row) !== -1;
-      // console.log("selected ==>",selected)  // true就是选中，0或者false是取消选中
-      //   console.log("row ==>", row);
+
       this.tableData.forEach((e) => {
         e.selected = false;
       });
@@ -447,7 +445,6 @@ export default {
     },
     // 全选状态值
     setAll(selection) {
-      console.log("selection ==>", selection);
       if (selection.length > 0) {
         for (let i = 0; i < this.tableData.length; i++) {
           this.tableData[i].selected = true;
@@ -513,7 +510,6 @@ export default {
           },
         })
           .then((result) => {
-            console.log("result ==>", result);
             loading.close();
             if (result.data.code == "200") {
               // indexList
@@ -537,7 +533,6 @@ export default {
           })
           .catch((err) => {
             loading.close();
-            console.log("err ==>", err);
           });
       });
     },
@@ -553,13 +548,11 @@ export default {
     },
     // 分页事件 每页多少条
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
       this.pageSize = val;
       this.clickSearch(this.currentPage, this.pageSize, true);
     },
     // 去第几页
     handleCurrentChange(val) {
-      //   console.log(`当前页: ${val}`);
       this.currentPage = val;
       this.search(this.currentPage, this.pageSize, true);
     },
@@ -586,7 +579,7 @@ export default {
         this.InfoData.userName == "林天长" ||
         this.InfoData.userName == "李健明" ||
         this.InfoData.userName == "王杰" ||
-        this.InfoData.userName == "hzgugoi" ||
+        this.InfoData.userName == "hzsugoi" ||
         this.InfoData.userName == "任治琴"
       ) {
         this.btnStatus = true;
@@ -610,7 +603,7 @@ export default {
       })
         .then((result) => {
           loading.close();
-          console.log("result ==>", result);
+
           if (result.data.Code == 200) {
             let obj = {
               3: "待出库",
@@ -647,7 +640,6 @@ export default {
             type: "error",
             offset: 50,
           });
-          console.log("err ==>", err);
         });
     },
     // 表格上传图片
@@ -668,7 +660,6 @@ export default {
 
       this.$axios(uploadPdfs.uploadPdf(url, formData))
         .then((result) => {
-          console.log("result ==>", result);
           this.$refs.uploadInt.value = null;
           setTimeout(() => {
             loading.close();
@@ -696,7 +687,7 @@ export default {
           setTimeout(() => {
             loading.close();
           }, 300);
-          console.log("err ==>", err);
+
           this.$notify({
             title: "请求错误",
             message: "系统业务繁忙,请稍后再试",
@@ -715,12 +706,8 @@ export default {
           imgUrl: row.img,
         },
       })
-        .then((result) => {
-          console.log("result ==>", result);
-        })
-        .catch((err) => {
-          console.log("err ==>", err);
-        });
+        .then((result) => {})
+        .catch((err) => {});
     },
   },
 };
@@ -760,7 +747,7 @@ export default {
           margin-top: 7px;
 
           div {
-            margin-right: 15px;
+            margin-right: 20px;
 
             input {
               padding: 8px 0;
@@ -799,6 +786,7 @@ export default {
           .btn {
             display: flex;
             padding: 10px 0;
+            margin-left: 10px;
 
             div {
               border: 1px solid #777;
@@ -815,7 +803,7 @@ export default {
             button {
               padding: 9px 14px;
               &:first-child {
-                margin-right: 5px;
+                margin-right: 13px;
               }
             }
           }

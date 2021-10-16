@@ -1,11 +1,14 @@
 <template>
-  <div class="companyParent" :style="{minHeight:minheight + 'px'}">
+  <div class="companyParent" :style="{ minHeight: minheight + 'px' }">
     <titleNavbar ref="titlePage"></titleNavbar>
     <div class="content-bottom">
       <sideNavbar ref="abcd" @Wstate="getWstate"></sideNavbar>
-      <router-view :wastate="flag" :style="{width:W,marginLeft: leftName + 'px' }" />
+      <router-view
+        :wastate="flag"
+        :style="{ width: W, marginLeft: leftName + 'px' }"
+      />
     </div>
-    <footerDiv :style="{width:W,marginLeft: leftName + 'px' }"></footerDiv>
+    <footerDiv :style="{ width: W, marginLeft: leftName + 'px' }"></footerDiv>
   </div>
 </template>
 <script>
@@ -26,28 +29,28 @@ export default {
       chilrenVal: "",
       //   left 值
       leftName: 220,
-      W:"calc(100% - 220px)",
-      flag:"",
+      W: "calc(100% - 220px)",
+      flag: "",
       //minheight
-      minheight:document.documentElement.clientHeight,   
+      minheight: document.documentElement.clientHeight,
     };
   },
   created() {
     document.body.scrollTop = document.documentElement.scrollTop = 0;
   },
-  mounted () {
+  mounted() {
     const that = this;
     window.onresize = () => {
       return (() => {
         window.minheight = document.documentElement.clientHeight;
         that.minheight = window.minheight;
       })();
-    };    
+    };
   },
   components: {
     titleNavbar,
     sideNavbar,
-    footerDiv
+    footerDiv,
   },
   computed: {
     ...homeState(["WstateStatus", "InfoData"]),
@@ -55,13 +58,12 @@ export default {
   methods: {
     // 子组件像父组件 传过来的状态值
     getWstate(v) {
-    //   console.log('v ==>',v)
       this.chilrenVal = v;
     },
     // 监听 侧边栏的状态
     Wchange() {
       this.flag = this.chilrenVal;
-    //   console.log("this.flag ==>",this.flag)
+
       if (this.chilrenVal) {
         this.leftName = 220;
         this.W = "calc(100% - 220px)";
@@ -82,7 +84,6 @@ export default {
         this.timer = true;
         let that = this;
         setTimeout(function () {
-          console.log("that.minheight ==>", that.minheight);
           that.timer = false;
         }, 400);
       }
@@ -91,10 +92,10 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-    .companyParent{
-        position: relative;
-        width: 100%;
-        overflow: hidden;
-        background-color: #f0f2f5;
-    }
+.companyParent {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background-color: #f0f2f5;
+}
 </style>

@@ -9,7 +9,7 @@
           <el-breadcrumb-item>URL转换</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
-      <div class="v-imageOnlineURl" :style="{height:H + 'px'}">
+      <div class="v-imageOnlineURl" :style="{ height: H + 'px' }">
         <div class="imgList">
           <div class="upload">
             <div class="top">
@@ -62,19 +62,16 @@ export default {
     };
   },
   created() {
-      this.H = document.documentElement.clientHeight - 48 - 45 - 51 - 36;
+    this.H = document.documentElement.clientHeight - 48 - 45 - 51 - 36;
   },
   methods: {
     uploadFile(e) {
-      console.log("e ==>", e.target.files);
       this.fileName = "";
-    //   this.resultImg = "";
+      //   this.resultImg = "";
       this.imgList = e.target.files;
       for (let i = 0; i < e.target.files.length; i++) {
         this.fileName += e.target.files[i].name + "\n";
       }
-
-      console.log("this.fileName  ==>", this.fileName);
     },
     transionImg() {
       if (this.fileName == "") {
@@ -86,7 +83,7 @@ export default {
         });
         return;
       }
-      // var 一个新的FormData  
+      // var 一个新的FormData
       var formData = new FormData();
       for (let i = 0; i < this.imgList.length; i++) {
         // 向 formData 对象中添加文件
@@ -101,7 +98,6 @@ export default {
       let url = "/sigaoyi/ImageOnlineURLUpload";
       this.$axios(uploadPdfs.uploadPdf(url, formData))
         .then((result) => {
-          console.log("result ==>", result);
           this.$refs.upload.value = "";
           loading.close();
           if (result.data.Code == "200") {
@@ -124,7 +120,7 @@ export default {
         .catch((err) => {
           this.$refs.upload.value = "";
           loading.close();
-          console.log("err ==>", err);
+
           this.$notify({
             title: "请求错误",
             message: "系统业务繁忙，请稍后再试试",

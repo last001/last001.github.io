@@ -342,7 +342,7 @@ export default {
       rejectIndex: "",
       // 驳回弹出层 reasonText
       reasonText: "",
-      ifarmSrc:null,
+      ifarmSrc: null,
     };
   },
   beforeRouteEnter(to, from, next) {
@@ -461,7 +461,7 @@ export default {
           data.costStatus = Number(this.radioTypeList[i].value);
         }
       }
-      console.log("data ==>", data);
+
       if (flag) {
         this.tableLoading = true;
         this.$axios({
@@ -474,7 +474,7 @@ export default {
               this.tableLoading = false;
               this.sreachStatus = true;
             }, 500);
-            console.log("result ==>", result);
+
             if (result.data.Code == 200) {
               document.body.scrollTop = document.documentElement.scrollTop = 0;
               for (let i = 0; i < result.data.finances.length; i++) {
@@ -541,7 +541,7 @@ export default {
               this.tableLoading = false;
               this.sreachStatus = true;
             }, 500);
-            console.log("err ==>", err);
+
             this.$notify({
               title: "请求错误",
               message: "系统服务繁忙,请稍后再试!",
@@ -561,7 +561,7 @@ export default {
               this.sreachStatus = true;
               this.tableLoading = false;
             }, 500);
-            console.log("result ==>", result);
+
             if (result.data.Code == 200) {
               document.body.scrollTop = document.documentElement.scrollTop = 0;
               for (let i = 0; i < result.data.finances.length; i++) {
@@ -634,7 +634,6 @@ export default {
               this.sreachStatus = true;
               this.tableLoading = false;
             }, 500);
-            console.log("err ==>", err);
           });
       }
     },
@@ -642,20 +641,17 @@ export default {
     handleSelectionChange() {},
     // 分页事件 每页多少条
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
       this.pageSize = val;
       this.sreachIcon(this.currentPage, this.pageSize, false);
     },
     // 去第几页
     handleCurrentChange(val) {
-      //   console.log(`当前页: ${val}`);
       this.currentPage = val;
       this.sreachIcon(this.currentPage, this.pageSize, false);
     },
     // 点击确定去哪一页
     clickTrue() {
       this.handleCurrentChange(this.currentPage);
-      // console.log('cccccccccc ==>', this.currentPage)
     },
     // 导出消费明细 按钮
     exportDetail() {
@@ -683,12 +679,12 @@ export default {
       })
         .then((result) => {
           loading.close();
-          console.log("result ==>", result);
+
           if (result.data.code == 200) {
             this.ifarmSrc = "http://www.ec-sigaoyi.com/" + result.data.path;
             // this.ifarmSrc = "http://192.168.1.179:8080/" + result.data.path;
             setTimeout(() => {
-                this.ifarmSrc = null;
+              this.ifarmSrc = null;
             }, 500);
             this.$notify({
               title: "请求成功",
@@ -713,7 +709,6 @@ export default {
             type: "error",
             offset: 50,
           });
-          console.log("err ==>", err);
         });
     },
     // 获取初始数组
@@ -731,7 +726,7 @@ export default {
       }
       this.infoData = JSON.parse(JSON.stringify(this.InfoData));
       this.infoData.balance = Number(this.infoData.balance).toFixed(2);
-      console.log("this.infoData ==>", this.infoData);
+
       //   余额
       let loading = this.$loading({
         lock: false,
@@ -752,7 +747,7 @@ export default {
           setTimeout(() => {
             loading.close();
           }, 500);
-          console.log("result ==>", result);
+
           if (result.data.Code == 200) {
             this.setInfoData(result.data.userinfo);
             this.infoData = result.data.userinfo;
@@ -833,7 +828,7 @@ export default {
           setTimeout(() => {
             loading.close();
           }, 500);
-          console.log("err ==>", err);
+
           this.$notify({
             title: "请求错误",
             message: "系统业务繁忙,请稍后再试!",
@@ -885,7 +880,7 @@ export default {
           setTimeout(() => {
             this.tableLoading = false;
           }, 500);
-          console.log("result ==>", result);
+
           if (result.data.Code == "200") {
             this.$notify({
               title: "请求成功",
@@ -920,7 +915,6 @@ export default {
             type: "error",
             offset: 50,
           });
-          console.log("err ==>", err);
         });
     },
     // 通过
@@ -937,7 +931,7 @@ export default {
         return;
       }
       this.tableLoading = true;
-      console.log("index,rwo ==>", index, row);
+
       this.$axios({
         url: "/sigaoyi/NEWthrough",
         method: "POST",
@@ -947,7 +941,6 @@ export default {
         },
       })
         .then((result) => {
-          console.log("result ==>", result);
           setTimeout(() => {
             this.tableLoading = false;
           }, 500);
@@ -958,7 +951,9 @@ export default {
             // this.setInfoData(result.data.userInfo);
             this.copyTableData[index].auditName = this.InfoData.userName;
             this.copyTableData[index].auditStatus = "审核通过";
-            this.copyTableData[index].auditDate = timestampToTimes.timestampToTime(new Date());
+            this.copyTableData[
+              index
+            ].auditDate = timestampToTimes.timestampToTime(new Date());
             this.copyTableData[index].isActive = false;
             this.tableData = JSON.parse(JSON.stringify(this.copyTableData));
             this.$notify({
@@ -984,7 +979,6 @@ export default {
             type: "error",
             offset: 50,
           });
-          console.log("err ==>", err);
         });
     },
     ...homeActions(["setWstateStatus", "setNum", "setInfoData"]),

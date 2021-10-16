@@ -13,13 +13,11 @@ const {
 } = createNamespacedHelpers("homeStore");
 export default {
   beforeRouteEnter(to, from, next) {
-    console.log("|from.path ==>", from.path);
     next((vm) => {
       if (from.path == "/") {
         vm.setFirstStatus(true);
       } else {
         vm.setFirstStatus(false);
-        console.log("进来了!!!!")
       }
     });
     // next();

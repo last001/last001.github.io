@@ -152,39 +152,31 @@ export default {
     // 搜索
     search() {
       this.$nextTick(() => {
-        console.log("inputVal ==>", this.$refs.searchInputVal.value);
         // 发请求
       });
     },
     // 表格
     handleSelectionChange() {},
     // 编辑
-    handleEdit(index, row) {
-      console.log("index,row ==>", index, row);
-    },
+    handleEdit(index, row) {},
     // 分页事件 每页多少条
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
       this.pageSize = val;
       this.currentPage = 1;
       this.tableData.splice(val);
     },
     // 去第几页
     handleCurrentChange(val) {
-      //   console.log(`当前页: ${val}`);
       this.currentPage = val;
       let abc = this.pageSize * (val - 1);
       this.tableData.splice(0, abc);
       this.tableData.splice(this.pageSize);
-      //   console.log('this.pageSize ==>',this.pageSize)
+
       //   this.tableData = a.splice(this.pageSize)
-      console.log("this.tableData ==>", this.tableData);
-      // console.log("a ==>",a)
     },
     // 点击确定去哪一页
     clickTrue() {
       this.handleCurrentChange(this.currentPage);
-      // console.log('cccccccccc ==>', this.currentPage)
     },
     // 添加
     gotoAdd() {

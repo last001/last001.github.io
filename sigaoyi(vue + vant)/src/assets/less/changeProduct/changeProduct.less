@@ -1,0 +1,178 @@
+.changeProduct {
+  background: #f4f4f4;
+
+  .title {
+    .van-nav-bar__title {
+      font-size: 15px;
+    }
+
+    .van-nav-bar__right {
+      button {
+        width: 50px;
+        height: 28px;
+        padding: 2px 10px;
+        border-radius: 15px;
+      }
+    }
+  }
+
+  .product_content {
+    margin-top: 46px;
+    font-size: 14px;
+
+    .int {
+      display: flex;
+      background: #fff;
+      margin-top: 1px;
+      padding-right: 40px;
+
+      span {
+        &:first-child {
+          width: 80px;
+          line-height: 46px;
+          background: #fff;
+          text-align: right;
+
+          i {
+            color: red;
+          }
+        }
+
+        &:nth-child(2) {
+          width: 100%;
+
+          input {
+            padding: 0;
+            text-align: right;
+            text-indent: 10px;
+            height: 100%;
+            width: 100%;
+            outline: none;
+            border: none;
+            font-size: 14px;
+
+            &::placeholder {
+              color: #b1b1b1;
+            }
+          }
+        }
+      }
+
+      &.dis {
+        span {
+          &:first-child {
+            color: #bcbcbc;
+          }
+
+          input {
+            color: #bcbcbc;
+
+            &:disabled {
+              background-color: #fff;
+            }
+          }
+        }
+
+      }
+    }
+
+    .set {
+      display: flex;
+      margin-top: 1px;
+
+      .header {
+        width: 80px;
+        line-height: 46px;
+        background: #fff;
+        text-align: right;
+
+        i {
+          color: red;
+        }
+      }
+
+      .van-cell::after {
+        border-bottom: none;
+      }
+
+      .van-cell--clickable {
+        color: #b1b1b1;
+        padding-right: 10px;
+        text-align: right;
+
+        &.active {
+          color: #444;
+        }
+
+        .van-cell__title {
+          padding-right: 10px;
+        }
+      }
+
+      &.isUser {
+        .header {
+          color: #bcbcbc;
+        }
+
+        .van-cell {
+          .van-cell__title {
+            span {
+              color: #bcbcbc;
+            }
+          }
+
+          .van-icon {
+            color: #bcbcbc;
+          }
+        }
+
+      }
+
+      &.must {
+        .header {
+          width: 85px;
+        }
+      }
+    }
+
+    .remakrs {
+      display: flex;
+      margin-top: 1px;
+
+      .van-field__label {
+        width: 50px;
+        text-align: right;
+      }
+
+      .van-field__value {
+        .textarea {
+          min-height: 180px;
+          max-height: 300px;
+        }
+      }
+    }
+
+    .detail {
+      // padding: 10px;
+      margin-top: 1px;
+
+      .v-detail {
+        width: calc(100% - 20px);
+        padding: 10px;
+        background-color: #fff;
+        border-radius: 5px;
+
+        // .quill-editor {
+
+        //   .ql-toolbar.ql-snow {
+        //     border: none;
+        //   }
+
+        //   .ql-container.ql-snow{
+        //     border: none;
+        //   }
+        // }
+      }
+    }
+  }
+}

@@ -31,12 +31,12 @@
                 <option value="1">思高易分公司</option>
               </select>
             </div>
-            <div class="divisionalName">
+            <!-- <div class="divisionalName">
               <span>部门名字：</span>
               <input ref="divisionalName" type="text" placeholder="请输入" />
-            </div>
+            </div> -->
             <div class="Administrator">
-              <span>管理员：</span>
+              <span>负责人：</span>
               <input ref="Administrator" type="text" placeholder="请输入" />
             </div>
             <div class="iconList">
@@ -89,6 +89,7 @@
               tooltip-effect="dark"
               style="width: 100%"
               stripe
+              v-loading="loading"
               @selection-change="handleSelectionChange"
             >
               <template slot="empty">
@@ -96,7 +97,7 @@
                 <div>暂无数据</div>
               </template>
               <el-table-column type="selection"></el-table-column>
-              <el-table-column prop="companyId" label="编号"></el-table-column>
+              <el-table-column prop="id" label="编号"></el-table-column>
               <el-table-column
                 prop="companyName"
                 label="公司名"
@@ -106,21 +107,20 @@
                 prop="businessNumber"
                 label="营业编号"
               ></el-table-column>
-              <el-table-column label="营业执照">
+              <el-table-column label="营业logo">
                 <template slot-scope="scope">
-                  <img :src="scope.row.ImageUrl" style="height: 40px" />
+                  <img :src="scope.row.companyImg" style="height: 40px" />
                 </template>
               </el-table-column>
               <el-table-column
-                prop="principalName"
+                prop="companyPrincipal"
                 label="负责人"
               ></el-table-column>
               <el-table-column
                 prop="createTime"
                 label="创建时间"
-              ></el-table-column
-              >
-              <el-table-column prop="status" label="状态"></el-table-column>
+              ></el-table-column>
+              <el-table-column prop="statusText" label="状态"></el-table-column>
               <el-table-column prop="comment" label="备注"></el-table-column>
               <el-table-column label="操作">
                 <template slot-scope="scope">
@@ -141,7 +141,7 @@
               @current-change="handleCurrentChange"
               :current-page="currentPage"
               layout="total,slot"
-              :total="copyTableData.length"
+              :total="total"
             >
               <span class="blockText">显示</span>
             </el-pagination>
@@ -149,10 +149,10 @@
               @size-change="handleSizeChange"
               @current-change="handleCurrentChange"
               :current-page="currentPage"
-              :page-sizes="[2, 5, 10, 12]"
+              :page-sizes="[30, 50, 100]"
               :page-size="pageSize"
               layout="sizes, prev, pager, next, slot,jumper"
-              :total="copyTableData.length"
+              :total="total"
             >
               <span class="ensure-btn fr" @click="clickTrue()">确定</span>
             </el-pagination>
@@ -243,50 +243,14 @@ export default {
         { name: "正常", value: "1", checked: false },
         { name: "停用", value: "2", checked: false },
       ],
-
       //   表格
       tableData: [],
-      copyTableData: [
-        {
-          companyId: "001",
-          companyName: "思高易",
-          scale: "11",
-          businessNumber: "98595",
-          scope: "64641616",
-          principalName: "----",
-          ImageUrl:
-            "http://www.ec-sigaoyi.com/sigaoyi/assets/img/%E5%9B%BE%E7%89%87.jpg",
-          createTime:"----",
-          status:"正常",
-          comment:"主要",
-        },
-         {
-          companyId: "002",
-          companyName: "老年人电动车",
-          scale: "4546",
-          businessNumber: "1151563",
-          scope: "798461",
-          principalName: "----",
-          ImageUrl:
-            "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1317576163,911743821&fm=26&gp=0.jpg",
-        },
-         {
-          companyId: "002",
-          companyName: "雪糕批发",
-          scale: "3",
-          businessNumber: "468463",
-          scope: "4156543135",
-          principalName: "----",
-          ImageUrl:
-            "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1976503924,3877240699&fm=15&gp=0.jpg",
-        },
-      ],
+      loading: false,
       // 当前页
       currentPage: 1,
       //   每一页多少条
-      pageSize: 5,
-      //   默认照片路径
-      defaulImgSrc: require("../../assets/img/defaultImg.jpg"),
+      pageSize: 30,
+      total: 0,
       // 编辑或者添加弹出层的状态值
       companyDialog: false,
       // 弹出层radioList
@@ -306,16 +270,10 @@ export default {
     next();
   },
   created() {
-    this.$nextTick(() => {
-      this.handleSizeChange(this.pageSize);
-    });
-
-    // this.getCompany()
-
-    this.tableData = JSON.parse(JSON.stringify(this.copyTableData));
+    this.getCompanyList("start");
   },
   computed: {
-    ...homeState(["WstateStatus"]),
+    ...homeState(["WstateStatus", "InfoData"]),
   },
   methods: {
     // 点击 radio
@@ -330,7 +288,6 @@ export default {
     },
     // 重置
     resetIniput() {
-      // console.log("this.$refs.options ==>",this.$refs.options.children)
       let options = this.$refs.options.children;
       for (let i = 0; i < options.length; i++) {
         if (options[i].value == 0) {
@@ -343,10 +300,12 @@ export default {
     // 搜索
     searchInput() {
       let data = {
-        status: "",
-        optionVal: "",
-        departmentName: this.$refs.divisionalName.value,
-        AdministratorVal: this.$refs.Administrator.value,
+        userId: this.InfoData.id,
+        amount: 30,
+        pages: 1,
+        status: 99,
+        companyName: "",
+        companyPrincipal: "",
       };
       // status
       for (let i = 0; i < this.statusData.length; i++) {
@@ -361,7 +320,6 @@ export default {
           data.optionVal = Number(optionsList[i].value);
         }
       }
-      console.log("data ==>", data);
     },
     // 点击添加按钮
     addDivisional() {
@@ -382,35 +340,105 @@ export default {
     handleEdit(index, row) {
       this.companyDialog = true;
       this.DialogText = row;
-      console.log("row ==>", row);
     },
     // 分页事件 每页多少条
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
       this.pageSize = val;
       this.currentPage = 1;
-      this.tableData = JSON.parse(JSON.stringify(this.copyTableData));
       this.tableData.splice(val);
     },
     // 去第几页
     handleCurrentChange(val) {
-      //   console.log(`当前页: ${val}`);
       this.currentPage = val;
       let abc = this.pageSize * (val - 1);
-      this.tableData = JSON.parse(JSON.stringify(this.copyTableData));
       this.tableData.splice(0, abc);
       this.tableData.splice(this.pageSize);
-      //   console.log('this.pageSize ==>',this.pageSize)
+
       //   this.tableData = a.splice(this.pageSize)
-      console.log("this.tableData ==>", this.tableData);
-      // console.log("a ==>",a)
     },
     // 点击确定去哪一页
     clickTrue() {
       this.handleCurrentChange(this.currentPage);
-      // console.log('cccccccccc ==>', this.currentPage)
     },
+    // 获取 公司 list
+    getCompanyList(string) {
+      if (sessionStorage.getItem("token") == undefined) {
+        alert("请先登录");
+        this.$router.push({ name: "Login" });
+        return;
+      }
+      if (this.InfoData.id == undefined) {
+        alert("登陆时间过期,请重新登陆!");
+        sessionStorage.removeItem("token");
+        this.$router.push({ name: "Login" });
+        return;
+      }
+      if (string == "start") {
+        //   发起请求
+        var loading = this.$loading({
+          lock: false,
+          text: "加载中...",
+          spinner: "el-icon-loading",
+          background: "rgba(0, 0, 0, 0.7)",
+        });
+      }
 
+      this.$axios({
+        method: "POST",
+        url: "/sigaoyi/getAllConpanyInfo",
+        params: {
+          userId: this.InfoData.id,
+          amount: 30,
+          pages: 1,
+          status: 99,
+          companyName: "",
+          companyPrincipal: "",
+        },
+      })
+        .then((result) => {
+          if (string == "start") {
+            loading.close();
+          }
+          if (result.data.Code == 200) {
+            result.data.companies.forEach((e) => {
+              if (e.status == 0) {
+                e["statusText"] = "正常";
+              } else {
+                e["statusText"] = "停用";
+              }
+            });
+            this.tableData = result.data.companies;
+            this.pageSize = result.data.page.amount;
+            this.currentPage = result.data.page.pages;
+            this.total = result.data.page.total;
+            this.$notify({
+              title: "请求成功",
+              message: result.data.msg,
+              type: "success",
+              offset: 50,
+            });
+          } else {
+            this.$notify({
+              title: "请求失败",
+              message: result.data.msg,
+              type: "warning",
+              offset: 50,
+            });
+          }
+        })
+        .catch((err) => {
+          if (string == "start") {
+            loading.close();
+          }
+
+          this.$notify({
+            title: "请求错误",
+            message: "系统业务繁忙,请稍后再试",
+            type: "error",
+            offset: 50,
+          });
+        });
+    },
     ...homeActions(["setWstateStatus"]),
   },
 };

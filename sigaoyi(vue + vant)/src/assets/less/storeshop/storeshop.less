@@ -1,0 +1,111 @@
+.storeshop {
+  background-color: #f5f5f5;
+  padding-bottom: 10px;
+
+  .title {
+    height: 46px;
+  }
+
+  .shopList {
+    //   background-color: #fff;
+    .v-shopList {
+      padding: 10px;
+      // padding-bottom: 0;
+      overflow: hidden;
+
+      .v-list {
+        .list {
+          background-color: #fff;
+          margin-top: 15px;
+          border-radius: 5px;
+          font-size: 14px;
+          box-shadow: 0 0 12px #cacaca;
+
+          .title_state {
+            height: 40px;
+            line-height: 38px;
+            border-bottom: 1px solid #ddd;
+            box-sizing: border-box;
+
+            span {
+              padding: 0 10px;
+
+              strong {
+                font-size: 15px;
+              }
+            }
+          }
+
+          .number {
+            width: 100%;
+            text-align: left;
+            padding: 10px;
+          }
+
+          .apikey {
+            padding: 10px;
+            padding-top: 0;
+            display: flex;
+
+            span {
+              display: inline-block;
+              height: 20px;
+              line-height: 20px;
+              &:nth-child(2) {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+              }
+            }
+          }
+
+          .remarks {
+            width: 100%;
+            text-align: left;
+            padding: 10px;
+            padding-top: 0;
+          }
+
+          .btn {
+            width: calc(100% - 20px);
+            padding: 8px 10px;
+            text-align: right;
+            border-top: 1px solid #ddd;
+
+            button {
+              padding: 12px 10px;
+              border-radius: 4px;
+            }
+          }
+
+          &:first-child {
+            margin-top: 5px;
+          }
+        }
+
+        .empety{
+          .van-empty{
+            padding: 50px 0;
+          }
+        }
+      }
+
+      .v-skeleton {
+        background-color: #fff;
+        padding: 5px 0;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+        .skeleton{
+            .van-skeleton{
+                margin-top: 10px;
+                &:last-child{
+                    .van-skeleton__row{
+                        margin-left: 80%;
+                    }
+                }
+            }
+        }
+      }
+    }
+  }
+}

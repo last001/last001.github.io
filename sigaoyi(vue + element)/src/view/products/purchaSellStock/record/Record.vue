@@ -211,7 +211,6 @@ export default {
     },
     // 分页事件 每页多少条
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
       this.pageSize = val;
       this.currentPage = 1;
       this.tableData = JSON.parse(JSON.stringify(this.copyTableData));
@@ -219,21 +218,17 @@ export default {
     },
     // 去第几页
     handleCurrentChange(val) {
-      //   console.log(`当前页: ${val}`);
       this.currentPage = val;
       let abc = this.pageSize * (val - 1);
       this.tableData = JSON.parse(JSON.stringify(this.copyTableData));
       this.tableData.splice(0, abc);
       this.tableData.splice(this.pageSize);
-      //   console.log('this.pageSize ==>',this.pageSize)
+
       //   this.tableData = a.splice(this.pageSize)
-      console.log("this.tableData ==>", this.tableData);
-      // console.log("a ==>",a)
     },
     // 点击确定去哪一页
     clickTrue() {
       this.handleCurrentChange(this.currentPage);
-      // console.log('cccccccccc ==>', this.currentPage)
     },
   },
 };
@@ -241,7 +236,7 @@ export default {
 
 <style lang="less" scoped>
 .record {
-  .v-record{
+  .v-record {
     position: relative;
     overflow-x: hidden;
     padding: 20px;

@@ -310,25 +310,25 @@ export default {
     document.body.scrollTop = document.documentElement.scrollTop = 0;
     firstRouter = false;
     if (from.path == "/") {
-      console.log("路由刷新!!");
+      
       firstRouter = true;
-      //  console.log("firstRouter ==>",firstRouter)
+      
     }
     next();
   },
   created() {
     this.saveAdd = this.$route.query.saveAdd;
-    // console.log("this.saveAdd ===>",this.saveAdd)
-    // console.log("this.$route.query.item ==>",this.$route.query.item)
+    
+    
     this.itemList = JSON.parse(this.$route.query.item);
     if (!this.$route.query.saveAdd) {
       this.defaultUrl = this.itemList.avatar;
     }
-    console.log("this.itemList ==>", this.itemList);
-    // console.log("this.allCompanyList ==>", this.allCompanyList);
+    
+    
 
     // 页面的marginleft
-    console.log("this.WstateStatus ==>", this.WstateStatus);
+    
     if (this.WstateStatus) {
       this.marginleft = -202;
     } else {
@@ -377,13 +377,9 @@ export default {
     },
     // 用户级别 change 事件
     changeUserLever(e) {
-      console.log(e.target.children);
+      
       for (let i = 0; i < e.target.children.length; i++) {
         if (e.target.children[i].selected) {
-          console.log(
-            "e.target.children[i].value ==>",
-            e.target.children[i].value
-          );
           if (e.target.children[i].value == "5") {
             this.companyDisabled = true;
             this.deparmentDisabled = true;
@@ -399,7 +395,7 @@ export default {
     // 上传图片
     // 导入
     uploadFile(e) {
-      console.log("e ==>", e.target.files);
+      
       this.file = e.target.files[0];
       let formData = new FormData();
       // 向 formData 对象中添加文件
@@ -408,8 +404,8 @@ export default {
 
       this.$axios(uploadFiles.uploadFile(formData))
         .then((result) => {
-          console.log("result ==>", result);
-          console.log("result.data.imgsURL ==>", result.data.imgsURL);
+          
+          
           if (result.data.Code == 200) {
             this.defaultUrl = result.data.imgsURL;
             this.$message({
@@ -421,7 +417,7 @@ export default {
           }
         })
         .catch((err) => {
-          console.log("err ==>", err);
+          
         });
     },
     // 返回
@@ -520,17 +516,12 @@ export default {
           avatar: this.defaultUrl,
         };
 
-        console.log(
-          "this.$refs.integral ==>",
-          typeof this.$refs.integral.value
-        );
-
         //   用户级别
         let userLeverList = document.querySelector(".userLever").children;
         for (let i = 0; i < userLeverList.length; i++) {
           if (userLeverList[i].selected) {
-            console.log("userLeverList[i] ==>", userLeverList[i].value);
-            console.log("用户级别类型 ==>", typeof userLeverList[i].value);
+            
+            
             refsList.userLever = Number(userLeverList[i].value);
           }
         }
@@ -539,8 +530,8 @@ export default {
         let companyIdList = document.querySelector(".company_id").children;
         for (let i = 0; i < companyIdList.length; i++) {
           if (companyIdList[i].selected) {
-            //   console.log("companyIdList[i] ==>",companyIdList[i].value)
-            //   console.log("companyIdList[i] ==>",companyIdList[i].innerHTML)
+            
+            
             refsList.Company_id = Number(companyIdList[i].value);
             refsList.Company_name = companyIdList[i].innerHTML;
           }
@@ -550,12 +541,12 @@ export default {
         let userStatusIdList = document.querySelector(".userStatus").children;
         for (let i = 0; i < userStatusIdList.length; i++) {
           if (userStatusIdList[i].selected) {
-            //   console.log("userStatusIdList[i] ==>",userStatusIdList[i].value)
+            
             refsList.userStatus = Number(userStatusIdList[i].value);
           }
         }
 
-        // console.log("refsList ==>",refsList)
+        
 
         let loading = this.$loading({
           lock: false,
@@ -596,7 +587,7 @@ export default {
                 offset: 50,
               });
             }
-            console.log("result ==>", result);
+            
           })
           .catch((err) => {
             setTimeout(() => {
@@ -608,7 +599,7 @@ export default {
               type: "error",
               offset: 50,
             });
-            console.log("err ==>", err);
+            
           });
       } else {
         // 提示
@@ -686,18 +677,12 @@ export default {
           creditScore: Number(this.$refs.creditScore.value),
           avatar: this.defaultUrl,
         };
-
-        console.log(
-          "this.$refs.integral ==>",
-          typeof this.$refs.integral.value
-        );
-
         //   用户级别
         let userLeverList = document.querySelector(".userLever").children;
         for (let i = 0; i < userLeverList.length; i++) {
           if (userLeverList[i].selected) {
-            console.log("userLeverList[i] ==>", userLeverList[i].value);
-            console.log("用户级别类型 ==>", typeof userLeverList[i].value);
+            
+            
             refsList.userLever = Number(userLeverList[i].value);
           }
         }
@@ -706,8 +691,8 @@ export default {
         let companyIdList = document.querySelector(".company_id").children;
         for (let i = 0; i < companyIdList.length; i++) {
           if (companyIdList[i].selected) {
-            //   console.log("companyIdList[i] ==>",companyIdList[i].value)
-            //   console.log("companyIdList[i] ==>",companyIdList[i].innerHTML)
+            
+            
             refsList.Company_id = Number(companyIdList[i].value);
             refsList.Company_name = companyIdList[i].innerHTML;
           }
@@ -717,12 +702,12 @@ export default {
         let userStatusIdList = document.querySelector(".userStatus").children;
         for (let i = 0; i < userStatusIdList.length; i++) {
           if (userStatusIdList[i].selected) {
-            //   console.log("userStatusIdList[i] ==>",userStatusIdList[i].value)
+            
             refsList.userStatus = Number(userStatusIdList[i].value);
           }
         }
 
-        // console.log("refsList ==>",refsList)
+        
 
         let loading = this.$loading({
           lock: false,
@@ -737,7 +722,7 @@ export default {
         })
           .then((result) => {
             loading.close();
-            console.log("result ==>", result);
+            
             if (result.data.ResultMsg == "success") {
               setTimeout(() => {
                 let flag = confirm("是否返回上一个页面?");
@@ -773,7 +758,7 @@ export default {
               type: "error",
               offset: 50,
             });
-            console.log("err ==>", err);
+            
           });
       }
     },

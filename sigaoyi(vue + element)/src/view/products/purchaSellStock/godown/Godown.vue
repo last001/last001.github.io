@@ -182,7 +182,6 @@ export default {
   methods: {
     // 分页事件 每页多少条
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
       this.pageSize = val;
       this.currentPage = 1;
       this.tableData = JSON.parse(JSON.stringify(this.copyTableData));
@@ -190,21 +189,17 @@ export default {
     },
     // 去第几页
     handleCurrentChange(val) {
-      //   console.log(`当前页: ${val}`);
       this.currentPage = val;
       let abc = this.pageSize * (val - 1);
       this.tableData = JSON.parse(JSON.stringify(this.copyTableData));
       this.tableData.splice(0, abc);
       this.tableData.splice(this.pageSize);
-      //   console.log('this.pageSize ==>',this.pageSize)
+
       //   this.tableData = a.splice(this.pageSize)
-      console.log("this.tableData ==>", this.tableData);
-      // console.log("a ==>",a)
     },
     // 点击确定去哪一页
     clickTrue() {
       this.handleCurrentChange(this.currentPage);
-      // console.log('cccccccccc ==>', this.currentPage)
     },
     // textarea 的输入事件 拿到length
     inputPress() {
@@ -228,7 +223,7 @@ export default {
     Addxls() {
       let textareaVal = this.textarea.replace(/(\r\n*$)/, "");
       textareaVal = textareaVal.replace(/(\s*)$/g, "");
-      console.log("textareaVal ==>", textareaVal);
+
       if (textareaVal == "") {
         this.$message({
           message: "单号不能为空",
@@ -242,7 +237,7 @@ export default {
       }
 
       let linkArr = textareaVal.split(/\n/);
-      console.log("linkAArr ==>", linkArr);
+
       let obj = {
         number: "",
         gatherStatus: "待入库",
@@ -264,7 +259,7 @@ export default {
           count: 1,
         };
         e = e.replace(/\s*/g, "");
-        // console.log("linkAArr ==>", linkArr)
+
         obj.number = e;
         this.tableData.push(obj);
       });
@@ -285,7 +280,6 @@ export default {
           type: "warning",
         });
       }
-      console.log("this.tableData ==>", this.tableData);
     },
     // 获取所有用户信息
     getInfoData() {
@@ -306,14 +300,11 @@ export default {
         params: {},
       })
         .then((result) => {
-          console.log("result ==>", result);
           if (result.data.Code == 200) {
             this.options = result.data.users;
           }
         })
-        .catch((err) => {
-          console.log("err ==>", err);
-        });
+        .catch((err) => {});
     },
     // 上传图片
     uploading(index, row, e) {
@@ -333,7 +324,6 @@ export default {
 
       this.$axios(uploadPdfs.uploadPdf(url, formData))
         .then((result) => {
-          console.log("result ==>", result);
           this.$refs.uploadInt.value = null;
           setTimeout(() => {
             loading.close();
@@ -360,7 +350,7 @@ export default {
           setTimeout(() => {
             loading.close();
           }, 300);
-          console.log("err ==>", err);
+
           this.$notify({
             title: "请求错误",
             message: "系统业务繁忙,请稍后再试",
@@ -425,7 +415,7 @@ export default {
         })
           .then((result) => {
             loading.close();
-            console.log("result ==>", result);
+
             if (result.data.Code == 200) {
               e.slotTbale = false;
               e.gatherStatus = "成功";
@@ -438,7 +428,6 @@ export default {
           })
           .catch((err) => {
             loading.close();
-            console.log("err ==>", err);
           });
       });
     },
@@ -487,7 +476,7 @@ export default {
       })
         .then((result) => {
           loading.close();
-          console.log("result ==>", result);
+
           if (result.data.Code == 200) {
             row.slotTbale = false;
             row.gatherStatus = "成功";
@@ -500,7 +489,7 @@ export default {
         })
         .catch((err) => {
           loading.close();
-          console.log("err ==>", err);
+
           this.$notify({
             title: "请求错误",
             message: "系统服务繁忙,请稍后再试!",

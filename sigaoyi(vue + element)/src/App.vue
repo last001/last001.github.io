@@ -17,31 +17,30 @@ const {
 export default {
   beforeCreate() {},
   data() {
-    return {
-    };
+    return {};
   },
   created() {
     window.addEventListener("unload", this.saveState);
     // 刷新重新拿到个人信息
-    // console.log(JSON.parse(sessionStorage.getItem("state")))
+
     if (JSON.parse(sessionStorage.getItem("state")) == null) {
       return;
     }
     this.setInfoData(
       JSON.parse(sessionStorage.getItem("state")).homeStore.InfoData
     );
+    this.setCompanData(
+      JSON.parse(sessionStorage.getItem("state")).homeStore.companyData
+    );
     sessionStorage.removeItem("state");
-    // console.log("this.release  737373 ==>", this.release);
   },
   computed: {
-    ...homeState(["InfoData", "EscCode", "release"]),
+    ...homeState(["InfoData", "companyData", "EscCode", "release"]),
   },
   methods: {
-    ...homeActions(["setInfoData", "setRelease"]),
+    ...homeActions(["setInfoData", , "setCompanData", "setRelease"]),
     saveState() {
-      console.log("刷新页面!!!");
       sessionStorage.setItem("state", JSON.stringify(this.$store.state));
-      this.GetNotice();
     },
     toLink() {
       let routeData = this.$router.resolve({
@@ -60,8 +59,8 @@ export default {
   color: #444;
   background: #f0f2f5;
   font-size: 16px;
-//   background: linear-gradient(to bottom, #e4e6eb 0%,#f5f5f5 100%);
-//   cursor: wait !important;
+  //   background: linear-gradient(to bottom, #e4e6eb 0%,#f5f5f5 100%);
+  //   cursor: wait !important;
 }
 /* 解决top提示偏移的问题 */
 /* body{padding-right:0px!important} */

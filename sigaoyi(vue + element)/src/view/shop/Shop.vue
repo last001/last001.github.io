@@ -2,8 +2,14 @@
   <div class="shop">
     <titleNavbar></titleNavbar>
     <div class="content-bottom">
-        <sideNavbar ref="abcd" @Wstate="getWstate"></sideNavbar>
-        <router-view :style="{minHeight:screenHeight + 'px',width:W, marginLeft: leftName + 'px' }" />
+      <sideNavbar ref="abcd" @Wstate="getWstate"></sideNavbar>
+      <router-view
+        :style="{
+          minHeight: screenHeight + 'px',
+          width: W,
+          marginLeft: leftName + 'px',
+        }"
+      />
     </div>
   </div>
 </template>
@@ -20,25 +26,24 @@ const {
 export default {
   data() {
     return {
-      W:"calc(100% - 220px)",
+      W: "calc(100% - 220px)",
       // sideNavbar 的状态
       chilrenVal: "",
       //   left 值
       leftName: 220,
       //screenHeight
-      screenHeight:document.documentElement.clientHeight,   
+      screenHeight: document.documentElement.clientHeight,
     };
   },
-  created() {
-  },
-  mounted () {
+  created() {},
+  mounted() {
     const that = this;
     window.onresize = () => {
       return (() => {
         window.screenHeight = document.documentElement.clientHeight;
         that.screenHeight = window.screenHeight;
       })();
-    };  
+    };
   },
   computed: {
     ...homeState(["WstateStatus", "InfoData"]),
@@ -48,7 +53,7 @@ export default {
     sideNavbar,
   },
   methods: {
-      // 子组件像父组件 传过来的状态值
+    // 子组件像父组件 传过来的状态值
     getWstate(v) {
       this.chilrenVal = v;
     },
@@ -66,7 +71,7 @@ export default {
     },
     ...homeActions(["setWstateStatus", "setInfoData"]),
   },
-   watch: {
+  watch: {
     chilrenVal: "Wchange",
     screenHeight(val) {
       if (!this.timer) {
@@ -74,7 +79,6 @@ export default {
         this.timer = true;
         let that = this;
         setTimeout(function () {
-          console.log("that.screenHeight ==>", that.screenHeight);
           that.timer = false;
         }, 400);
       }

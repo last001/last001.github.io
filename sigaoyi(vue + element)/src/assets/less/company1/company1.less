@@ -1,0 +1,147 @@
+.company1 {
+    width: 100%;
+    background: url("http://www.ec-sigaoyi.com/imagelink/1632895531180.jpg") no-repeat;
+    background-position: top center;
+    background-size: 100% 100%;
+    // background-position: center center;
+    // height: 800px;
+    position: relative;
+    overflow: hidden;
+  
+    .box {
+      // border: 1px solid #8291A2;
+      width: 360px;
+      position: absolute;
+      right: 50%;
+      margin-right: -180px;
+      top: 37%;
+  
+      .el-form-item {
+        margin-bottom: 20px;
+        margin-left: -60px;
+      }
+  
+      .selector {
+        display: flex;
+        border-bottom: 3px solid #8291A2;
+        margin-top: -1px;
+        // cursor: pointer;
+        background-color: rgba(255, 255, 255, 0.88);
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+  
+        div {
+          text-align: center;
+          width: 100%;
+          // font-weight: bold;
+          font-size: 17px;
+          font-weight: 500;
+          line-height: 40px;
+  
+          &.active {
+            color: #409eff;
+          }
+        }
+  
+      }
+  
+      .showFace {
+        padding: 30px 20px;
+        padding-bottom: 1px;
+        // background: linear-gradient(to right,#adc8db,#adc8db);
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        background: rgba(255, 255, 255, 0.88);
+  
+        .el-form-item__content {
+          display: flex;
+  
+          .el-input {
+            input:-webkit-autofill {
+              box-shadow: 0 0 0 1000px white inset !important;
+            }
+          }
+        }
+      }
+  
+      .type {
+        display: flex;
+        margin-bottom: 14px;
+  
+        .typeText {
+          width: 30%;
+          text-align: right;
+          padding-right: 40px;
+        }
+  
+        .typeRadio {
+          width: 70%;
+          margin-left: 10px;
+        }
+      }
+  
+      .valcode {
+        display: flex;
+        margin-bottom: 20px;
+  
+        .el-input {
+          width: 90%;
+        }
+  
+        button {
+          background-color: #909399;
+          border: none;
+  
+          &:hover {
+            background-color: #a6a9ad;
+          }
+  
+          span {
+            color: #fff;
+          }
+        }
+  
+      }
+  
+      .registeBox {
+        margin-left: 33px;
+  
+        .el-form-item__content {
+          margin-left: 30px !important;
+  
+          .el-button--primary {
+            width: 100%;
+  
+            &.active {
+              opacity: .75;
+              box-shadow: 0 0 5px #409eff;
+            }
+  
+            .el-icon-loading {
+              font-size: 14px !important;
+            }
+  
+            span {
+              letter-spacing: 8px;
+            }
+          }
+  
+  
+        }
+  
+      }
+    }
+  
+  }
+  
+  .gohome {
+    position: absolute;
+    left: 50%;
+    top: 3%;
+    width: 200px;
+    height: 192px;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    // cursor: pointer;
+  }
+  

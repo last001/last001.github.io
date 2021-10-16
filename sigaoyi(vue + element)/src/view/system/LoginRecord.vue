@@ -142,21 +142,21 @@ import { createNamespacedHelpers, mapState, mapActions } from "vuex";
 const {
   mapState: homeState,
   mapActions: homeActions,
-} = createNamespacedHelpers("homeStore"); 
+} = createNamespacedHelpers("homeStore");
 export default {
   data() {
     return {
       // 搜索Text
-      userName:"",
-      Ipadd:"",   
+      userName: "",
+      Ipadd: "",
       //   表格
       tableData: [],
       //  表格loading
-      tableLoading:false,   
+      tableLoading: false,
       //   分页
       currentPage: 1,
       //   pageSize
-      pageSize: 30,  
+      pageSize: 30,
       //   总数
       total: 0,
     };
@@ -170,9 +170,7 @@ export default {
       this.getLoginRecord(this.pageSize, this.currentPage);
     });
   },
-  components: {
-
-  },
+  components: {},
   computed: {
     ...homeState(["WstateStatus", "InfoData"]),
   },
@@ -188,7 +186,7 @@ export default {
     //     cancelButtonText: "取消",
     //     customClass: "delMessage",
     //   }).then(() => {
-    //     console.log("rows ==>", rows);
+
     //     rows.splice(index, 1);
     //     this.tableData.length--;
     //     this.pageSize--;
@@ -202,20 +200,17 @@ export default {
     // },
     // 分页事件 每页多少条
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
       this.pageSize = val;
       this.resetAndSreach(false, this.pageSize, this.currentPage);
     },
     // 去第几页
     handleCurrentChange(val) {
-      //   console.log(`当前页: ${val}`);
       this.currentPage = val;
       this.resetAndSreach(false, this.pageSize, this.currentPage);
     },
     // 点击确定去哪一页
     clickTrue() {
       this.handleCurrentChange(this.currentPage);
-      // console.log('cccccccccc ==>', this.currentPage)
     },
     //  true 重置 false 搜索
     resetAndSreach(flag, amount, pages) {
@@ -225,17 +220,17 @@ export default {
         // this.currentPage = 1;
         // this.pageSize = 30;
       } else {
-         if (sessionStorage.getItem("token") == undefined) {
-        alert("请先登录");
-        this.$router.push({ name: "Login" });
-        return;
-      }
-      if (this.InfoData.id == undefined) {
-        alert("登陆时间过期,请重新登陆!");
-        sessionStorage.removeItem("token");
-        this.$router.push({ name: "Login" });
-        return;
-      }
+        if (sessionStorage.getItem("token") == undefined) {
+          alert("请先登录");
+          this.$router.push({ name: "Login" });
+          return;
+        }
+        if (this.InfoData.id == undefined) {
+          alert("登陆时间过期,请重新登陆!");
+          sessionStorage.removeItem("token");
+          this.$router.push({ name: "Login" });
+          return;
+        }
         this.tableLoading = true;
         this.$axios({
           method: "POST",
@@ -249,7 +244,7 @@ export default {
         })
           .then((result) => {
             this.tableLoading = false;
-            console.log("result ==>", result);
+
             if (result.data.Code == 200) {
               this.$notify({
                 title: "请求成功",
@@ -257,7 +252,7 @@ export default {
                 type: "success",
                 offset: 65,
               });
-               result.data.Editrecording.forEach((e) => {
+              result.data.Editrecording.forEach((e) => {
                 e.editDate = timestampToTimes.timestampToTime(e.editDate);
               });
               this.total = result.data.page.total;
@@ -275,7 +270,7 @@ export default {
           })
           .catch((err) => {
             this.tableLoading = false;
-            console.log("err ==>", err);
+
             this.$notify({
               title: "请求失败",
               message: "系统业务繁忙,请稍后再试",
@@ -316,17 +311,14 @@ export default {
           setTimeout(() => {
             loading.close();
           }, 500);
-          console.log("result ==>", result);
+
           if (result.data.Code == 200) {
-            //   console.log("result.data.page.total ==>", result.data.page.total);
             this.total = result.data.page.total;
 
             result.data.Editrecording.forEach((e) => {
-              //   console.log("e.editDate ==>",e.editDate)
               e.editDate = timestampToTimes.timestampToTime(e.editDate);
             });
             this.tableData = result.data.Editrecording;
-            //   console.log("this.tableData ==>", this.tableData);
           } else {
             this.$notify({
               title: "请求错误",
@@ -346,7 +338,6 @@ export default {
             type: "error",
             offset: 50,
           });
-          console.log("err ==>", err);
         });
     },
   },

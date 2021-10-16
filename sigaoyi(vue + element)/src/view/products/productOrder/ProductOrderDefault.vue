@@ -228,7 +228,11 @@
                 <span class="iconfont icon-zanwushuju"></span>
                 <div>暂无数据</div>
               </template>
-              <el-table-column type="selection" width="50" :fixed="screenWidth < 1700 ? 'left' : false "></el-table-column>
+              <el-table-column
+                type="selection"
+                width="50"
+                :fixed="screenWidth < 1700 ? 'left' : false"
+              ></el-table-column>
               <el-table-column label="异常" width="60">
                 <template slot-scope="scope">
                   <el-switch
@@ -246,7 +250,11 @@
               <el-table-column label="国内单号">
                 <template slot-scope="scope">
                   <!-- scope.row.collecChecked -->
-                  <div v-if="scope.row.collecChecked" class="orderId">
+                  <div
+                    v-if="scope.row.collecChecked"
+                    class="orderId active"
+                    @click="openCause1(scope.$index, scope.row)"
+                  >
                     {{ scope.row.orderId }}
                   </div>
                   <div
@@ -346,7 +354,11 @@
               prop="purchaseMode"
               label="采购方式"
             ></el-table-column> -->
-              <el-table-column label="操作" :fixed="screenWidth < 1700 ? 'right' : false " width="150">
+              <el-table-column
+                label="操作"
+                :fixed="screenWidth < 1700 ? 'right' : false"
+                width="150"
+              >
                 <template slot-scope="scope">
                   <!-- 管理员 -->
                   <div
@@ -473,14 +485,13 @@
               :page-size="pageSize"
               layout="sizes, prev, pager, next"
               :total="total"
-              :pager-count="11"
             >
             </el-pagination>
-            <el-pagination layout="slot">
-              <span>总数量：{{profit.ordernum}}</span>
-              <span>总运费：{{profit.totalFreight}}</span>
-              <span>总销售金额：{{profit.totalPurchasePrice}}</span>
-              <span>总采购金额：{{profit.totalprofit}}</span>
+            <el-pagination layout="slot" class="totalDom">
+              <span>总采购金额：{{ profit.totalPurchasePrice }}</span>
+              <span>总运费：{{ profit.totalFreight }}</span>
+              <span>总销售金额：{{ profit.totalPrice }}</span>
+              <span>总利润：{{ profit.totalprofit }}</span>
             </el-pagination>
             <el-pagination
               @size-change="handleSizeChange"
@@ -596,6 +607,73 @@
           </div>
           <span slot="footer" class="dialog-footer">
             <el-button type="primary" @click="causeMaskStatus = false"
+              >关 闭</el-button
+            >
+          </span>
+        </el-dialog>
+      </div>
+      <!-- 物流追踪 -->
+      <div class="causeMask1">
+        <el-dialog
+          title="物流追踪"
+          :visible.sync="causeMaskStatus1"
+          width="33%"
+          center
+        >
+          <div class="content">
+            <div class="query">
+              <div class="set">
+                <span>物流公司：</span>
+                <select
+                  v-model="logisticsIndex"
+                  @change="changeLogisticsSet(logisticsIndex)"
+                >
+                  <option
+                    v-for="(item, index) in logisticsList"
+                    :key="index"
+                    :value="index"
+                  >
+                    {{ item.name }}
+                  </option>
+                </select>
+              </div>
+              <div class="orderNum">
+                <span>单号：</span>
+                <input
+                  type="text"
+                  placeholder="请输入单号"
+                  v-model="orderNum"
+                />
+              </div>
+              <div class="btn">
+                <el-button
+                  type="primary"
+                  icon="el-icon-search"
+                  size="mini"
+                  @click="queryLogistics()"
+                  >查询</el-button
+                >
+              </div>
+            </div>
+            <div class="note">
+              <div class="loading" v-if="logisticsLoading">
+                <span>
+                  <i class="el-icon-loading"></i>
+                  <i>加载中</i>
+                </span>
+              </div>
+              <textarea
+                cols="30"
+                rows="28"
+                placeholder="物流追踪"
+                v-model="logisticsVal"
+                v-else
+                disabled
+              ></textarea>
+            </div>
+          </div>
+          <span slot="footer" class="dialog-footer">
+            <el-button type="primary" @click="causeMaskStatus1 = false"
               >关 闭</el-button
             >
           </span>
@@ -780,8 +858,8 @@ export default {
   data() {
     return {
       // 屏幕实时 宽度
-      screenWidth: "",   
-      //  复制的个人信息   
+      screenWidth: "",
+      //  复制的个人信息
       InfoDataObj: {},
       // 发货状态
       shipIndex: 0,
@@ -908,12 +986,62 @@ export default {
       //   total
       total: 0,
       // 分页List
-      profit:{},
+      profit: {
+        totalFreight: 0,
+        totalPrice: 0,
+        totalPurchasePrice: 0,
+        totalprofit: 0,
+      },
       //   footer宽度
       footerW: "",
       // 查看异常原因的status
       causeMaskStatus: false,
       causeText: "",
+      //  查看物流信息
+      causeMaskStatus1: false,
+      //  物流公司
+      logisticsIndex: 0,
+      logisticsList: [
+        { name: "自动匹配", selected: true, value: "" },
+        { name: "圆通速递", selected: false, value: "yuantong" },
+        { name: "韵达快递", selected: false, value: "yunda" },
+        { name: "中通快递", selected: false, value: "zhongtong" },
+        { name: "申通快递", selected: false, value: "shentong" },
+        { name: "百世快递", selected: false, value: "huitongkuaidi" },
+        { name: "邮政快递包裹", selected: false, value: "youzhengguonei" },
+        { name: "顺丰速运", selected: false, value: "shunfeng" },
+        { name: "极兔速递", selected: false, value: "jtexpress" },
+        { name: "EMS", selected: false, value: "ems" },
+        { name: "京东物流", selected: false, value: "jd" },
+        { name: "邮政标准快递", selected: false, value: "youzhengbk" },
+        { name: "德邦", selected: false, value: "debangwuliu" },
+        { name: "德邦快递", selected: false, value: "debangkuaidi" },
+        { name: "圆通快运", selected: false, value: "yuantongkuaiyun" },
+        { name: "百世快运", selected: false, value: "baishiwuliu" },
+        { name: "丰网速运", selected: false, value: "fengwang" },
+        { name: "宅急送", selected: false, value: "zhaijisong" },
+        { name: "中通国际", selected: false, value: "zhongtongguoji" },
+        { name: "中通快运", selected: false, value: "安能快运" },
+        { name: "韵达快运", selected: false, value: "yundakuaiyun" },
+        { name: "国际包裹", selected: false, value: "youzhengguoji" },
+        { name: "顺丰快运", selected: false, value: "shunfengkuaiyun" },
+        { name: "UPS", selected: false, value: "ups" },
+        { name: "安得物流", selected: false, value: "annto" },
+        { name: "优速快递", selected: false, value: "youshuwuliu" },
+        { name: "特急送", selected: false, value: "lntjs" },
+        { name: "DPD", selected: false, value: "dpd" },
+        { name: "D速快递", selected: false, value: "dsukuaidi" },
+        { name: "顺心捷达", selected: false, value: "sxjdfreight" },
+        { name: "跨越速运", selected: false, value: "kuayue" },
+        { name: "壹米滴答", selected: false, value: "yimidida" },
+        { name: "DHL-全球件", selected: false, value: "dhlen" },
+        { name: "DHL-中国件", selected: false, value: "dhl" },
+        { name: "京广速递", selected: false, value: "jinguangsudikuaijian" },
+      ],
+      // loading
+      logisticsLoading:false,   
+      orderNum: "",
+      logisticsVal: "",
       //   同步订单状态值
       syncOrderStatus: false,
       // 转运单号状态值
@@ -1020,8 +1148,8 @@ export default {
   },
   beforeRouteEnter(to, from, next) {
     document.body.scrollTop = document.documentElement.scrollTop = 0;
-    //   console.log("to.params ==>",to.params);
-    console.log("from.path ==>", from.path);
+    
+    
     if (from.path == "/productOrder/orderDetail") {
       to.meta.isBack = true;
     } else {
@@ -1039,11 +1167,11 @@ export default {
       this.tableData = [];
       this.getInitial();
       //   判断按钮show and hidden 00000000
-      this.getOrder(this.pageSize, this.currentPage);
+      this.getOrder(30, 1);
     } else {
-      console.log("不重新获取数据!!!");
+      
       this.$route.meta.isBack = false;
-      console.log("this.$route.query.first ==>", this.$route.query.first);
+      
       if (this.$route.query.first) {
         this.clickSearch(30, 1, true);
         this.getInitial();
@@ -1051,7 +1179,7 @@ export default {
     }
   },
   created() {
-    console.log("进入了created !!!!");
+    
     this.screenWidth = document.documentElement.clientWidth;
   },
   mounted() {
@@ -1060,12 +1188,11 @@ export default {
       return (() => {
         window.screenWidth = document.documentElement.clientWidth;
         that.screenWidth = window.screenWidth;
-        console.log("执行 onresize  事件 ====>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
       })();
     };
   },
   computed: {
-    ...homeState(["WstateStatus", "InfoData"]),
+    ...homeState(["WstateStatus", "InfoData", "companyData"]),
   },
   methods: {
     //  获取 初始值
@@ -1181,7 +1308,7 @@ export default {
         e.selected = false;
       });
       array[setIndex].selected = true;
-      console.log("array ==>", array);
+      
       if (string == "sreach") {
         this.clickSearch(30, 1, true);
       }
@@ -1198,8 +1325,6 @@ export default {
     clickOrder1(index, row) {
       this.order1Status = true;
       this.orderLoading = true;
-      console.log("前一次 ==>", this.order1);
-      console.log("第二次 ==>", row.orderId1);
       //  点击前两次是否是相同的订单id
       if (this.order1 == row.orderId1) {
         this.orderLoading = false;
@@ -1214,7 +1339,7 @@ export default {
         },
       })
         .then((result) => {
-          console.log("result ==>", result);
+          
           this.orderLoading = false;
           if (result.data.ResultMsg == "success") {
             this.order1HTML = result.data.message;
@@ -1226,12 +1351,11 @@ export default {
         .catch((err) => {
           this.orderLoading = false;
           this.order1HTML = "系统业务繁忙,请稍后再试！";
-          console.log("err");
+          
         });
     },
     // 点击表格图片
     openImgLink(index, row) {
-      //   console.log("row ==>", row);
       window.open(row.link);
     },
     // 入库
@@ -1262,7 +1386,7 @@ export default {
         image: "",
         remarks: "",
       };
-      console.log("data ==>", data);
+      
       //   请求
       let loading = this.$loading({
         lock: false,
@@ -1276,7 +1400,7 @@ export default {
         params: data,
       })
         .then((result) => {
-          console.log("result ==>", result);
+          
           loading.close();
           if (result.data.Code == 200) {
             this.$notify({
@@ -1296,7 +1420,7 @@ export default {
         })
         .catch((err) => {
           loading.close();
-          console.log("err ==>", err);
+          
           this.$notify({
             title: "请求错误",
             message: "系统服务繁忙,请稍后再试!",
@@ -1330,7 +1454,7 @@ export default {
       if (sessionStorage.getItem("token") == undefined) {
         alert("请先登录");
         this.$router.push({ name: "Login" });
-        console.log(">>>>>>>>>>>>>>>>>订单页面");
+        
         return;
       }
       if (this.InfoData.id == undefined) {
@@ -1339,9 +1463,9 @@ export default {
         this.$router.push({ name: "Login" });
         return;
       }
-      // console.log("this.value1 ==>", this.value1);
-      console.log("this.inputList ==>", this.inputList);
-      //   console.log("flag ==>", flag);
+      
+      
+      
       // 转时间格式
       if (this.value1 != null) {
         var time = dateFormats.dateFormat(this.value1[0]);
@@ -1377,8 +1501,6 @@ export default {
       if (this.deliverTime == "请选择") {
         this.deliverTime = "";
       }
-      console.log("time,time1 ==>", time, time1);
-
       var data = {
         amount: amount,
         pages: pages,
@@ -1393,7 +1515,9 @@ export default {
         shipDate1: deliverTime1,
         startTime: time1,
         lastTime: time,
+        companyPrincipal: this.companyData.companyName,
       };
+      //
       // 运输方式 或者 渠道
       if (
         this.InfoData.statu == "0" ||
@@ -1420,7 +1544,7 @@ export default {
         }
       }
 
-      console.log("data ==>", data);
+      
 
       if (flag) {
         this.tableLoading = true;
@@ -1439,7 +1563,7 @@ export default {
         params: data,
       })
         .then((result) => {
-          console.log("result ==>", result);
+          
           if (flag) {
             this.tableLoading = false;
           } else {
@@ -1452,7 +1576,7 @@ export default {
             this.freightVal = result.data.freight.toFixed(2);
             // 分页 内容
             this.profit = result.data.profit;
-            // console.log("Number(this.freightVal) ==>",Number(this.freightVal) > 0)
+            
             // 已欠运费
             if (Number(this.freightVal) > 0) {
               this.AllFreightStatus = true;
@@ -1661,7 +1785,7 @@ export default {
           } else {
             loading.close();
           }
-          console.log("err ==>", err);
+          
           this.$notify({
             title: "请求错误",
             message: "系统服务繁忙,请稍后再试!",
@@ -1673,21 +1797,21 @@ export default {
     //   是否选中的状态值
     onTableSelect(rows, row) {
       row.selected = rows.length && rows.indexOf(row) !== -1;
-      // console.log("selected ==>",selected)  // true就是选中，0或者false是取消选中
-      //   console.log("row ==>", row);
+      
+      
       this.tableData.forEach((e) => {
         e["selected"] = false;
       });
       rows.forEach((e) => {
         e["selected"] = true;
       });
-      //   console.log("rows ==>", rows);
+      
       // 点击合并按钮 的 勾选的订单数量
       this.mergeIndex = rows.length;
     },
     // 全选状态值
     setAll(selection) {
-      console.log("selection ==>", selection);
+      
       if (selection.length > 0) {
         for (let i = 0; i < this.tableData.length; i++) {
           this.tableData[i].selected = true;
@@ -1711,34 +1835,33 @@ export default {
       }
     },
     changeCellStyle({ row, column, rowIndex, columnIndex }) {
-      //   console.log("row ==>", row);
+      
       if (columnIndex == 7) {
         return "hideDot";
       }
     },
     // 分页事件
     handleSizeChange(val) {
-      //   console.log(`每页 ${val} 条`);
+      
       this.pageSize = val;
       this.clickSearch(this.pageSize, this.currentPage, true);
     },
     // 去第几页
     handleCurrentChange(val) {
-      //   console.log(`当前页: ${val}`);
+      
       this.currentPage = val;
       this.clickSearch(this.pageSize, this.currentPage, true);
     },
     // 点击确定去哪一页
     clickTrue() {
       this.handleCurrentChange(this.currentPage);
-      // console.log('cccccccccc ==>', this.currentPage)
+      
     },
     // 点击按钮  0 1 显示删除按钮
     btnClickList(item) {
       if (sessionStorage.getItem("token") == undefined) {
         alert("请先登录");
         this.$router.push({ name: "Login" });
-        console.log(">>>>>>>>>>>>>>>>>订单页面");
         return;
       }
       if (this.InfoData.id == undefined) {
@@ -1777,7 +1900,7 @@ export default {
           },
         })
           .then((result) => {
-            console.log("result ==>", result);
+            
             setTimeout(() => {
               item.className = "";
             }, 500);
@@ -1818,7 +1941,7 @@ export default {
               type: "error",
               offset: 50,
             });
-            console.log("err ==>", err);
+            
           });
       } else if (item.name == "删除订单") {
         var ids = "";
@@ -1841,7 +1964,7 @@ export default {
           });
           return;
         }
-        console.log("indexList ==>", indexList);
+        
         ids = ids.substring(0, ids.length - 1);
         this.$confirm("", "请慎重选择要删除的订单列表", {
           dangerouslyUseHTMLString: true,
@@ -1867,7 +1990,7 @@ export default {
           })
             .then((result) => {
               loading.close();
-              console.log("result ==>", result);
+              
               if (result.data.code == "200") {
                 // indexList
                 for (let i = indexList.length - 1; i >= 0; i--) {
@@ -1891,7 +2014,7 @@ export default {
             })
             .catch((err) => {
               loading.close();
-              console.log("err ==>", err);
+              
               this.$notify({
                 title: "请求错误",
                 message: "系统业务繁忙,请稍后再试",
@@ -1915,12 +2038,12 @@ export default {
         })
           .then((result) => {
             loading.close();
-            console.log("result ==>", result);
+            
             if (result.data.code == "200") {
               // http://192.168.1.179:8080/
               // http://www.ec-sigaoyi.com/
               this.ifarmSrc = "http://www.ec-sigaoyi.com/" + result.data.path;
-              console.log("this.ifarmSrc ==>", this.ifarmSrc);
+              
               setTimeout(() => {
                 this.ifarmSrc = null;
                 this.clickSearch(30, 1, true);
@@ -1944,7 +2067,7 @@ export default {
           .catch((err) => {
             loading.close();
             this.ifarmSrc = null;
-            console.log("err =>", err);
+            
             this.$notify({
               title: "请求错误",
               message: "系统业务繁忙,请稍后再试!",
@@ -1995,8 +2118,7 @@ export default {
         if (this.deliverTime == "请选择") {
           this.deliverTime = "";
         }
-        console.log("time,time1 ==>", time, time1);
-
+        
         //   发起请求
         let loading = this.$loading({
           lock: false,
@@ -2016,6 +2138,8 @@ export default {
           lastTime: time,
           shipDate: deliverTime,
           shipDate1: deliverTime1,
+        //   shipDate: 2021-10-15,
+        //   shipDate1: 2021-10-15,
           orderId: this.inputList[2].value,
         };
 
@@ -2060,7 +2184,7 @@ export default {
           params: data,
         })
           .then((result) => {
-            console.log("result ==>", result);
+            // console.log("result ==>",result);
             loading.close();
             if (result.data.code == "200") {
               this.ifarmSrc = null;
@@ -2086,7 +2210,7 @@ export default {
           })
           .catch((err) => {
             loading.close();
-            console.log("err ==>", err);
+            
             this.$notify({
               title: "请求错误",
               message: "系统业务繁忙,请稍后再试",
@@ -2132,8 +2256,8 @@ export default {
           return;
         }
         ids = ids.substring(0, ids.lastIndexOf(","));
-        console.log("ids ==>", ids);
-        console.log("发送请求!!!!!!");
+        
+        
         // 发送请求!!!!!!
         let loading = this.$loading({
           lock: false,
@@ -2150,7 +2274,7 @@ export default {
         })
           .then((result) => {
             loading.close();
-            console.log("result ==>", result);
+            
             if (result.data.Code == 200) {
               this.clickSearch(30, 1, true);
               this.$notify({
@@ -2176,7 +2300,7 @@ export default {
               type: "error",
               offset: 50,
             });
-            console.log("err ==>", err);
+            
           });
       } else if (item.name == "导出表格-青岛") {
         //   exportQDMP
@@ -2196,12 +2320,12 @@ export default {
         })
           .then((result) => {
             loading.close();
-            console.log("result ==>", result);
+            
             if (result.data.code == "200") {
               // http://192.168.1.179:8080/
               // http://www.ec-sigaoyi.com/
               this.ifarmSrc = " http://www.ec-sigaoyi.com/" + result.data.path;
-              console.log("this.ifarmSrc ==>", this.ifarmSrc);
+              
               setTimeout(() => {
                 this.ifarmSrc = null;
                 this.clickSearch(30, 1, true);
@@ -2225,7 +2349,7 @@ export default {
           .catch((err) => {
             loading.close();
             this.ifarmSrc = null;
-            console.log("err =>", err);
+            
             this.$notify({
               title: "请求错误",
               message: "系统业务繁忙,请稍后再试!",
@@ -2261,7 +2385,7 @@ export default {
         return;
       }
 
-      console.log("data ==>", data);
+      
       // 发起请求
       let loading = this.$loading({
         lock: false,
@@ -2276,7 +2400,7 @@ export default {
         params: data,
       })
         .then((result) => {
-          console.log("result ==>", result);
+          
           loading.close();
           if (result.data.Code == 200) {
             this.syncOrderStatus = false;
@@ -2306,7 +2430,7 @@ export default {
             type: "error",
             offset: 50,
           });
-          console.log("err ==>", err);
+          
         });
     },
     // 一键付款
@@ -2314,7 +2438,7 @@ export default {
       if (sessionStorage.getItem("token") == undefined) {
         alert("请先登录");
         this.$router.push({ name: "Login" });
-        console.log(">>>>>>>>>>>>>>>>>订单页面");
+        
         return;
       }
       if (this.InfoData.id == undefined) {
@@ -2351,7 +2475,7 @@ export default {
         },
       })
         .then((result) => {
-          console.log("result ==>", result);
+          
           setTimeout(() => {
             loading.close();
           }, 500);
@@ -2363,6 +2487,8 @@ export default {
               offset: 50,
             });
             this.freightVal = "0.00";
+            this.setInfoData(result.data.user);
+            this.resetIniput();
             this.getOrder(30, 1);
           } else {
             this.$notify({
@@ -2383,7 +2509,7 @@ export default {
             type: "error",
             offset: 50,
           });
-          console.log("err ==>", err);
+          
         });
     },
     // 表格 点击付费
@@ -2391,7 +2517,7 @@ export default {
       if (sessionStorage.getItem("token") == undefined) {
         alert("请先登录");
         this.$router.push({ name: "Login" });
-        console.log(">>>>>>>>>>>>>>>>>订单页面");
+        
         return;
       }
       if (this.InfoData.id == undefined) {
@@ -2400,7 +2526,7 @@ export default {
         this.$router.push({ name: "Login" });
         return;
       }
-      console.log(" row.freight ==>", typeof row.freight);
+      
       if (this.InfoData.balance < Number(row.freight)) {
         let alertText = confirm("余额不足,是否前往充值");
         if (alertText) {
@@ -2433,14 +2559,14 @@ export default {
         }
       }
       this.tableLoading = true;
-      console.log("data ==>", data);
+      
       this.$axios({
         url: "/sigaoyi/NEWpayment",
         method: "POST",
         params: data,
       })
         .then((result) => {
-          console.log("result ==>", result);
+          
           setTimeout(() => {
             this.tableLoading = false;
           }, 500);
@@ -2450,6 +2576,7 @@ export default {
               2
             );
             this.freightVal = (this.freightVal - row.freight).toFixed(2);
+            this.setInfoData(result.data.userinfo);
             if (this.freightVal > 0) {
               this.AllFreightStatus = true;
               if (this.InfoData.statu > 2) {
@@ -2476,7 +2603,6 @@ export default {
                 }
               });
             }
-            // this.setInfoData(this.InfoData);
             this.$notify({
               title: "请求成功",
               message: result.data.msg,
@@ -2502,7 +2628,7 @@ export default {
             type: "error",
             offset: 50,
           });
-          console.log("err ==>", err);
+          
         });
     },
     // 导入运费 (废弃)
@@ -2528,7 +2654,7 @@ export default {
         .then((result) => {
           this.loadingUpdateFile.close();
           this.$refs.uploadFreight.value = null;
-          console.log("result ==>", result);
+          
           if (result.data.ResultMsg == "success") {
             this.clickSearch(this.pageSize, this.currentPage, false);
             this.$notify({
@@ -2550,7 +2676,7 @@ export default {
         })
         .catch((err) => {
           this.loadingUpdateFile.close();
-          console.log("err ==>", err);
+          
           this.$refs.uploadFreight.value = null;
           this.$notify({
             title: "请求失败",
@@ -2565,7 +2691,7 @@ export default {
       if (sessionStorage.getItem("token") == undefined) {
         alert("请先登录");
         this.$router.push({ name: "Login" });
-        console.log(">>>>>>>>>>>>>>>>>订单页面");
+        
         return;
       }
       if (this.InfoData.id == undefined) {
@@ -2578,7 +2704,7 @@ export default {
         alert("没有权限");
         return;
       }
-      console.log("e.target.files[0] ==>", e.target.files[0]);
+      
       let files = e.target.files[0];
       let formData = new FormData();
       // 向 formData 对象中添加文件
@@ -2601,7 +2727,7 @@ export default {
         .then((result) => {
           this.loadingUpdateFile.close();
           this.$refs.uploadOrder.value = null;
-          console.log("result ==>", result);
+          
           if (result.data.Code == 200) {
             this.$notify({
               title: "请求成功",
@@ -2609,7 +2735,6 @@ export default {
               type: "success",
               offset: 50,
             });
-            // this.setInfoData(this.InfoData);
             this.clickSearch(30, 1, true);
           } else {
             this.$notify({
@@ -2621,7 +2746,7 @@ export default {
           }
         })
         .catch((err) => {
-          console.log("err ==>", err);
+          
           this.$refs.uploadOrder.value = null;
           this.loadingUpdateFile.close();
           this.$notify({
@@ -2639,6 +2764,78 @@ export default {
       row.note = row.note.replace(/--/g, "\n");
       this.causeText = row.note;
     },
+    // 查看物流
+    openCause1(index, row) {
+      this.causeMaskStatus1 = true;
+      // 重置
+      this.logisticsIndex = 0; 
+      this.orderNum = "";
+      this.logisticsVal = "";
+      // 去除文字 + 空格   
+      let orderIdVal;
+      orderIdVal = row.orderId.replace(/\s/g, "");
+      orderIdVal = orderIdVal.replace(/[\u4e00-\u9fa5]/g, "");
+      this.orderNum = orderIdVal;
+      
+    },
+    // 物流弹出层 set
+    changeLogisticsSet(setIndex) {
+      this.logisticsList.forEach((e) => {
+        e.selected = false;
+      });
+      this.logisticsList[setIndex].selected = true;
+    },
+    // 物流弹出层 查询
+    queryLogistics() {
+      if (this.orderNum == "") {
+        this.$message({
+          message: "请输入物流单号",
+          type: "error",
+          center:true,
+          duration:800,
+        });
+        return;
+      }
+      this.logisticsLoading = true;
+      this.$axios({
+        url: "/sigaoyi/GetLogisticsInformation",
+        method: "POST",
+        params: {
+          num: this.orderNum,
+          com: this.logisticsList[this.logisticsIndex].value,
+        },
+      })
+        .then((result) => {
+          
+          this.logisticsLoading = false;
+          if (result.data.code == "200") {
+            this.logisticsVal = result.data.text;
+            this.$notify({
+              title: "请求成功",
+              message: result.data.msg,
+              type: "success",
+              offset: 50,
+            });
+          } else {
+            this.$notify({
+              title: "请求失败",
+              message: result.data.msg,
+              type: "warning",
+              offset: 50,
+            });
+          }
+        })
+        .catch((err) => {
+          this.logisticsLoading = false;
+          this.$notify({
+            title: "请求错误",
+            message: "系统业务繁忙,请稍后再试",
+            type: "error",
+            offset: 50,
+          });
+          
+        });
+    },
     // 点击 标记异常 switch change 事件
     changeAbnormal(index, row) {
       this.abnormalStatus = true;
@@ -2647,7 +2844,6 @@ export default {
       row.collecChecked = false;
       row.note = row.note.replace(/--/g, "\n");
       this.textareaText = row.note;
-      console.log("row ==>", row);
     },
     // 异常弹出层 set
     changeAbnormalSet(setIndex) {
@@ -2668,7 +2864,6 @@ export default {
     },
     // 异常弹出层 确定事件  //2021-08-10 09:36:22:测试标记订单异常
     SubmitAbnormal() {
-      console.log("标记异常!!!!!!");
       this.textareaText +=
         "\n" +
         timestampToTimes.timestampToTime(new Date()) +
@@ -2685,7 +2880,7 @@ export default {
         },
       })
         .then((result) => {
-          console.log("result ==>", result);
+          
           if (result.data.code == "200") {
             //   事件冲突
             this.abnormalStatus = false;
@@ -2693,10 +2888,6 @@ export default {
             this.tableData[this.abnormaldioIndex].followUp = true;
             // 赋值
             this.tableData[this.abnormaldioIndex].note = this.textareaText;
-            console.log(
-              "this.tableData[this.abnormaldioIndex] ==>",
-              this.tableData[this.abnormaldioIndex]
-            );
             this.$notify({
               title: "请求成功",
               message: result.data.msg,
@@ -2713,7 +2904,7 @@ export default {
           }
         })
         .catch((err) => {
-          console.log("err ==>", err);
+          
           this.$notify({
             title: "请求错误",
             message: "系统业务繁忙,请稍后再试",
@@ -2739,12 +2930,13 @@ export default {
         this.FollowUpStatus = true;
         //
         this.orderStatusIndex = 0;
+        
         this.FollowUpListIndex = 0;
         this.followList.orderId = row.id;
         this.followList.freight = row.freight;
         row.note = row.note.replace(/--/g, "\n");
         this.FollowUpNote = row.note;
-        console.log("this.FollowUpNote ==>", this.FollowUpNote);
+        
       } else {
         // 点击 跟进 弹出层
         this.FollowUpTan = 0;
@@ -2755,7 +2947,7 @@ export default {
         this.FollowUp1Row = row;
         this.FollowUp1Index1 = index;
         this.FollowUp1Index = 0;
-        console.log("this.FollowUp1Row ==>", this.FollowUp1Row);
+        
       }
     },
     // 点击表格处理按钮 第一个set change事件
@@ -2764,7 +2956,7 @@ export default {
         e.checked = false;
       });
       array[setIndex].checked = true;
-      console.log("array ==>", array);
+      
     },
     // 点击表格处理按钮 第二个set change事件
     changeFollowUp(setIndex) {
@@ -2781,15 +2973,11 @@ export default {
     clickFollowUpStatus() {
       let data = {
         chuliID: this.followList.orderId,
-        chulicollectionStatus: Number,
+        chulicollectionStatus: this.orderStatusData[this.orderStatusIndex]
+          .value,
         chulinote: this.FollowUpNote,
         chulifreight: this.followList.freight,
       };
-      this.orderStatusData.forEach((e) => {
-        if (e.checked) {
-          data.chulicollectionStatus = e.value;
-        }
-      });
       //  处理异常订单 && 已完成
       if (data.chulicollectionStatus == 1) {
         data.chulinote +=
@@ -2806,21 +2994,15 @@ export default {
         params: data,
       })
         .then((result) => {
-          console.log("result ==>", result);
+          
           if (result.data.code == "200") {
-            console.log(
-              "data.chulicollectionStatus ==>",
-              data.chulicollectionStatus
-            );
+            
             if (data.chulicollectionStatus == 1) {
               this.FollowUpStatus = false;
               this.tableData[this.FollowUpIndex].collecChecked = false;
               this.tableData[this.FollowUpIndex].followUp = true;
               this.tableData[this.FollowUpIndex].note = data.chulinote;
-              console.log(
-                "this.tableData[this.FollowUpIndex] ==>",
-                this.tableData[this.FollowUpIndex]
-              );
+              
             } else {
               // 已完成
               this.FollowUpStatus = false;
@@ -2844,7 +3026,7 @@ export default {
           }
         })
         .catch((err) => {
-          console.log("err ==>", err);
+          
           this.$notify({
             title: "请求失败",
             message: "系统业务繁忙,请稍后再试",
@@ -2897,7 +3079,7 @@ export default {
         params: data,
       })
         .then((result) => {
-          console.log("result ==>", result);
+          
           if (result.data.code == "200") {
             this.FollowUp1Status = false;
             if (this.FollowUpTan == 1) {
@@ -2905,10 +3087,7 @@ export default {
               this.tableData[this.appealIndex].followUp = true;
               this.tableData[this.appealIndex].note = data.note;
             } else {
-              console.log(
-                "this.tableData[this.FollowUp1Index1] ==>",
-                this.tableData[this.FollowUp1Index1]
-              );
+              
               this.tableData[this.FollowUp1Index1].note = data.note;
             }
             this.$notify({
@@ -2927,7 +3106,7 @@ export default {
           }
         })
         .catch((err) => {
-          console.log("err ==>", err);
+          
           this.$notify({
             title: "请求错误",
             message: "系统业务繁忙,请稍后再试",
@@ -2952,7 +3131,7 @@ export default {
       if (sessionStorage.getItem("token") == undefined) {
         alert("请先登录");
         this.$router.push({ name: "Login" });
-        console.log(">>>>>>>>>>>>>>>>>订单页面");
+        
         return;
       }
       if (this.InfoData.id == undefined) {
@@ -2961,7 +3140,7 @@ export default {
         this.$router.push({ name: "Login" });
         return;
       }
-      console.log("进入获取订单了!!!!");
+      
       let loading = this.$loading({
         lock: false,
         text: "加载中...",
@@ -2975,10 +3154,11 @@ export default {
           userId: this.InfoData.id,
           amount: amount,
           pages: pages,
+          companyPrincipal: this.companyData.companyName,
         },
       })
         .then((result) => {
-          console.log("result ==>", result);
+          
           loading.close();
           if (result.data.Code == 200) {
             document.body.scrollTop = document.documentElement.scrollTop = 0;
@@ -2986,7 +3166,7 @@ export default {
             this.userNameList = result.data.logisticsNames;
             // 表格
             this.freightVal = result.data.freight.toFixed(2);
-            // console.log("Number(this.freightVal) ==>",Number(this.freightVal) > 0)
+            
             // 分页 内容
             this.profit = result.data.profit;
             // 已欠运费
@@ -3153,10 +3333,13 @@ export default {
             // this.getInitial();
             // 设置表格 页数 总数 等
             this.total = result.data.page.total;
+            this.currentPage = result.data.page.pages;
+            this.pageSize = result.data.page.amount;
             this.tableData = result.data.logisticss;
             this.tableData.forEach((e) => {
               e["image1"] = e.image.split(",")[0];
             });
+            
           } else {
             this.$notify({
               title: "请求失败",
@@ -3175,7 +3358,7 @@ export default {
             type: "error",
             offset: 50,
           });
-          console.log("err ==>", err);
+          
         });
     },
     ...homeActions(["setWstateStatus", "setInfoData"]),
@@ -3187,7 +3370,6 @@ export default {
         this.timer = true;
         let that = this;
         setTimeout(function () {
-          console.log("val ==>", val);
           that.timer = false;
         }, 400);
       }

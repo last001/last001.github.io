@@ -1,0 +1,336 @@
+.rechargeWithdraw {
+  background: #f6f6f6;
+  overflow: hidden;
+
+  .van-nav-bar {
+    background: #409eff;
+
+    .van-nav-bar__left {
+      .van-icon {
+        color: #fff;
+      }
+    }
+
+  }
+
+  .van-hairline--bottom::after {
+    border-bottom-width: 0;
+  }
+
+  .setText {
+    display: flex;
+    background: #409eff;
+    height: 140px;
+
+    div {
+      font-weight: 500;
+      width: 32%;
+      text-align: right;
+      color: #fff;
+      font-size: 17px;
+      margin-left: 20px;
+
+      &:nth-child(2) {
+        margin-left: 0;
+        margin-right: 20px;
+      }
+    }
+  }
+
+  .arightRecharge,
+  .wothdraw {
+    padding: 0 10px 20px;
+
+    .v-recharge {
+      margin-top: -100px;
+      width: 100%;
+      height: 120px;
+      //   border: 1px solid #ddd;
+      background: #fff;
+      position: relative;
+      border-radius: 4px;
+      box-shadow: 0 0 6px rgba(87, 87, 87, 0.5);
+
+      .triangle {
+        position: absolute;
+        top: 0px;
+        left: 26%;
+        width: 0;
+        height: 0;
+        border-bottom: 12px solid#fff;
+        border-top: 12px solid transparent;
+        border-left: 12px solid transparent;
+        border-right: 12px solid transparent;
+        margin-top: -24px;
+        margin-left: 10px;
+        transition: opacity .5s;
+
+        &.active {
+          left: 60%;
+        }
+      }
+
+      .num {
+        height: 100%;
+
+        div {
+          height: 70%;
+          text-align: center;
+          line-height: 95px;
+          font-size: 34px;
+
+          span {
+            &:nth-child(2) {
+              font-size: 15px;
+            }
+          }
+
+          &:nth-child(2) {
+            height: 30%;
+            line-height: 36px;
+            border-top: 1px solid #e6e5e5;
+            color: #409eff;
+            font-size: 14px;
+          }
+        }
+
+        &.active {
+          height: 100%;
+
+          div {
+            height: 70%;
+            text-align: center;
+            line-height: 95px;
+            font-size: 15px;
+
+            span {
+              &:nth-child(2) {
+                font-size: 34px;
+              }
+            }
+
+            &:nth-child(2) {
+              height: 30%;
+              line-height: 36px;
+              border-top: 1px solid #e6e5e5;
+              color: #409eff;
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+
+    .rechargeStatus {
+      display: flex;
+      margin-top: 15px;
+      
+      div {
+        // width: 20%;
+        flex: 1;
+        text-align: center;
+
+        span {
+          width: 70%;
+          display: inline-block;
+          padding: 5px;
+          border-radius: 15px;
+          line-height: 15px;
+          font-size: 13px;
+        }
+
+        &.active {
+          span {
+            background: #409eff;
+            color: #fff;
+          }
+        }
+      }
+    }
+
+    .time {
+      margin-top: 10px;
+      background-color: #fff;
+      padding: 8px 10px;
+      border-radius: 4px;
+
+      .text {
+        font{
+          display: inline-block;
+          min-width:105px;
+          i{
+            font-style: normal;
+          }
+        }
+        span {
+          display: inline-block;
+          margin-left: 10px;
+          padding: 2px 6px;
+          text-align: center;
+
+          &.active {
+            background-color: #409eff;
+            border-radius: 12px;
+            color: #fff;
+          }
+
+          &:nth-child(2) {
+            margin-left: 10px;
+          }
+        }
+
+        button {
+          margin-top: -2px;
+          margin-right: -2px;
+
+          .van-button__text {
+            margin-left: 0;
+          }
+        }
+      }
+
+      .statistics{
+        background-color: #fff;
+        margin-top: 10px;
+        margin-bottom: 2px;
+        color: #888;
+        span{
+          &:last-child{
+            font-size: 13px;
+          }
+        }
+      }
+
+    }
+
+    .scroll-list {
+      // height: 325px;
+      overflow: scroll;
+      margin-top: 10px;
+
+      .itemList {
+        height: 300.5px;
+
+        .list {
+          height: 100%;
+          background: #fff;
+          border-bottom: 1px solid #e6e5e5;
+          padding: 5px 10px;
+
+          &:first-child {
+            // border-top: none;
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;
+          }
+
+          &:last-child {
+            border-bottom-left-radius: 6px;
+            border-bottom-right-radius: 6px;
+          }
+
+          div {
+            height: 100%;
+            width: 60%;
+
+            &:first-child {
+              width: 10%;
+              height: 33.5px;
+              margin-top: 2px;
+
+              img {
+                width: 100%;
+                height: 100%;
+                // border: 1px solid red;
+                vertical-align: bottom;
+              }
+            }
+
+            &:nth-child(2) {
+              margin-left: 2%;
+            }
+
+            &:nth-child(3) {
+              width: 28%;
+              font-size: 15px;
+              line-height: 35px;
+              text-align: right;
+              color: #409eff;
+              &.active{
+                color: #f5aa20;
+              }
+              &.review{
+                font-size: 14px;
+              }
+              &.cutMoney{
+                color: #ee0a24;
+              }
+            }
+
+            
+
+            span {
+              display: block;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+
+              &:nth-child(2) {
+                margin-top: 5px;
+              }
+            }
+          }
+        }
+
+        .van-list__loading, .van-list__error-text, .van-list__finished-text{
+          background-color: #fff;
+          line-height: 43.5px;
+        }
+      }
+    }
+
+    .emptyDraw {
+      .van-empty {
+        .van-empty__bottom {
+          div {
+            letter-spacing: 2px;
+
+            span {
+              color: #409eff;
+              margin-left: 2px;
+            }
+          }
+        }
+      }
+    }
+
+    .skeletonDraw {
+      margin-top: 10px;
+      overflow: hidden;
+      border-radius: 4px;
+      .v-skeletonDraw {
+        padding: 5px 0;
+        background-color: #fff;
+        display: flex;
+
+        .van-skeleton {
+          display: flex;
+          width: 80%;
+
+          .van-skeleton__avatar {
+            margin-top: 6px;
+          }
+
+          &:nth-child(2) {
+            width: 20%;
+            margin-top: 2%;
+            padding-left: 0;
+
+            .van-skeleton__avatar {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+}

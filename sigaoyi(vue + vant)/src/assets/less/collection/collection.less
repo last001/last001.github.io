@@ -1,0 +1,91 @@
+.collection {
+  .title {
+   height: 46px;
+  }
+
+  .platform,
+  .classify1,
+  .classify2,
+  .classify3,
+  .link {
+    display: flex;
+    margin-top: 1px;
+
+    .header {
+      width: 60px;
+      line-height: 46px;
+      background: #fff;
+      text-align: right;
+    }
+
+    .van-cell::after{
+        border-bottom: none;
+    }
+
+    .van-cell--clickable {
+      color: #b1b1b1;
+      padding-right: 10px;
+      text-align: right;
+      &.active{
+          color: #444;
+      }
+      .van-cell__title {
+        padding-right: 10px;
+      }
+    }
+  }
+
+  .keyWord {
+    display: flex;
+    background: #fff;
+    margin-top: 1px;
+    padding-right: 40px;
+
+    span {
+      &:first-child {
+        width: 60px;
+        line-height: 46px;
+        background: #fff;
+        text-align: right;
+      }
+
+      &:nth-child(2) {
+        width: 100%;
+
+        input {
+          padding: 0;
+          text-align: right;
+          text-indent: 10px;
+          height: 100%;
+          width: 100%;
+          outline: none;
+          border: none;
+          font-size: 14px;
+
+          &::placeholder {
+            color: #b1b1b1;
+          }
+        }
+      }
+    }
+  }
+
+  .link {
+    .van-field__label {
+      width: 35px;
+      text-align: right;
+    }
+  }
+
+  .btn {
+    padding: 0 10px;
+    margin-top: 50px;
+
+    button {
+      width: 100%;
+      &:nth-child(2){
+        margin-top: 25px;
+      }
+    }
+  }
+}

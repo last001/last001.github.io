@@ -1,0 +1,107 @@
+.notice {
+  font-size: 14px;
+
+  .title {
+    .van-nav-bar {
+
+      .van-icon,
+      .van-nav-bar__text {
+        color: #409eff;
+      }
+
+      .van-nav-bar__right {
+        button {
+          height: 28px;
+          padding: 2px 12px;
+          border-radius: 15px;
+          background-color: #409eff;
+        }
+      }
+    }
+  }
+
+  .header {
+    margin-top: 46px;
+
+    .van-tabs__wrap {
+      .van-tab {
+        font-size: 15px;
+      }
+
+      .van-tabs__line {
+        background-color: #409eff;
+        width: 56px;
+      }
+    }
+
+    .van-tabs__content {
+      .van-tab__pane {
+        padding: 20px;
+        text-align: center;
+
+        .systemList,
+        .noticeList {
+          .time {
+            width: 46%;
+            margin-left: 27%;
+            background-color: #ccc;
+            border-radius: 6px;
+            color: #fff;
+          }
+
+          .content {
+            background-color: #fff;
+            border: 1px solid #eeeeee;
+            border-radius: 6px;
+            margin-top: 15px;
+            padding: 10px;
+            text-align: left;
+
+            .v-content-title {
+              font-weight: bold;
+              padding-bottom: 5px;
+
+              .big-dot {
+                min-width: 0;
+                width: 10px;
+                height: 10px;
+                border-radius: 100%;
+                background: red;
+                box-shadow: 0px 0px 6px red;
+                margin-top: 4.5px;
+                margin-right: 5px;
+              }
+            }
+
+            .v-content {
+              overflow: hidden;
+              display: -webkit-box;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 2;
+            }
+
+            .notice-content {
+              // overflow-x: hidden;
+              // white-space: nowrap;
+              // text-overflow: ellipsis;
+
+              overflow: hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 2;
+            }
+
+            .detail {
+              text-align: right;
+              padding-top: 5px;
+              margin-top: 10px;
+              border-top: 1px solid #ddd;
+              color: #999;
+            }
+          }
+        }
+      }
+    }
+  }
+}

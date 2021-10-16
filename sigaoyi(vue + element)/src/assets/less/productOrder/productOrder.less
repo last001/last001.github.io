@@ -2,710 +2,622 @@
   position: relative;
   margin-top: 48px;
 
-  .v-productOrderDefault{
+  .v-productOrderDefault {
     padding: 20px;
     padding-top: 0;
     padding-bottom: 50px;
 
-  .proTop {
+    .proTop {
 
-    .order-search {
-      background-color: #fff;
-      border-radius: 4px;
-      padding: 20px;
+      .order-search {
+        background-color: #fff;
+        border-radius: 4px;
+        padding: 20px;
 
-      .selectStatu {
-        display: flex;
-        position: relative;
-
-        div {
+        .selectStatu {
           display: flex;
-          flex: 1;
-          justify-content: flex-start;
-          align-items: center;
-          padding-right: 15px;
-
-          span {
-            flex: 6;
-            text-align: right;
-            height: 100%;
-            line-height: 33px;
-          }
-
-          select {
-            flex: 15;
-            padding: 7px 0;
-            text-indent: 8px;
-            border-radius: 4px;
-            outline: none;
-            border: 1px solid #c2c2c2;
-            color: #666;
-
-            &:hover {
-              border: 1px solid #409eff;
-            }
-
-            &:focus {
-              outline: none;
-              border: 1px solid #409eff;
-            }
-
-            &.active {
-              border: 1px solid #409eff;
-            }
-          }
-
-          &:last-child {
-            span {
-              margin-right: 10px;
-            }
-
-            button {
-              display: inline-block;
-              line-height: 1;
-              white-space: nowrap;
-              cursor: pointer;
-              background: #fff;
-              border: 1px solid #dcdfe6;
-              color: #606266;
-              -webkit-appearance: none;
-              text-align: center;
-              box-sizing: border-box;
-              outline: none;
-              margin: 0;
-              transition: .1s;
-              font-weight: 500;
-              padding: 8px 20px;
-              font-size: 14px;
-              border-radius: 4px;
-
-              &:hover {
-                background-color: #ecf5ff;
-                color: #57aafd;
-                border: 1px solid #95caff;
-              }
-            }
-          }
-        }
-      }
-
-      .detailDiv {
-        display: flex;
-        margin-top: 20px;
-        margin-right: -3px;
-
-        div {
-          height: 32px;
-          margin-right: 1%;
-          width: 180px;
-
-          input {
-            width: 100%;
-            height: 100%;
-            font-size: 15px;
-            border: 1px solid #c2c2c2;
-            border-radius: 4px;
-            outline: none;
-            line-height: 31px;
-            text-indent: 8px;
-
-            &:focus {
-              outline: none;
-              border: 1px solid #409eff;
-            }
-
-            &:hover {
-              border: 1px solid #409eff;
-            }
-          }
-        }
-
-        .set {
-          width: 200px;
-          height: 36px;
-          margin-right: 10px;
-          // 
-          .el-select {
-            width: 100%;
-            height: 100%;
-
-            .el-input {
-              width: 100%;
-              height: 100%;
-
-              input {
-                &::placeholder {
-                  color: #666;
-                }
-              }
-
-              .el-input__suffix {
-                .el-input__icon {
-                  line-height: 34px;
-                }
-              }
-            }
-
-            &.active {
-              input {
-                border: 1px solid #409eff;
-              }
-            }
-          }
-        }
-
-        .inp {
-          input {
-            &.active {
-              border: 1px solid #409eff;
-            }
-          }
-        }
-
-        .inp-btn {
-          width: inherit;
-          margin-right: 10px;
-
-          &.active {
-            margin-right: 0px;
-          }
-
-          button {
-            padding: 10px 26px;
-          }
-        }
-
-        .block,
-        .deliverData {
-          height: 36px;
-
-          .el-date-editor {
-            border-color: #c2c2c2;
-
-            &.active {
-              border-color: #409eff;
-            }
-          }
-
-          .el-date-editor--daterange.el-input__inner {
-            width: 300px;
-            height: 100%;
-
-            .el-range__close-icon {
-              line-height: 31px;
-              padding-left: 4px;
-            }
-          }
-
-          .el-date-editor .el-range-input {
-            text-indent: 0px;
-            margin-left: 6px;
-          }
-
-          .el-date-editor .el-range-separator {
-            margin-left: 4px;
-          }
-
-          input {
-            &::placeholder {
-              color: #666;
-            }
-          }
-        }
-
-        .deliverData {
-          margin-left: 115px;
-        }
-
-        .iconList {
-          display: flex;
-          margin-left: 106px;
+          position: relative;
 
           div {
-            padding: 1px 11px;
-            line-height: 33px;
-            border: 1px solid #c2c2c2;
-            cursor: pointer;
-            width: 18px;
-            border-radius: 4px;
-
-            &:hover {
-              border: 1px solid #409eff;
-
-              i {
-                color: #409eff;
-              }
-            }
-
-            i {
-              font-size: 18px;
-              color: #7a7a7a;
-            }
-
-            &:first-child {
-              margin-right: 14%;
-              margin-left: 10px;
-            }
-
-            &:nth-child(2) {
-              margin-left: -14px;
-            }
-          }
-        }
-      }
-    }
-
-    .order-content {
-      background-color: #fff;
-      border-radius: 4px;
-      padding: 15px;
-      margin-top: 15px;
-      // margin-top: 130px;
-
-      .btn {
-        width: 100%;
-        transition: none;
-
-        div {
-          height: 40px;
-
-          button {
-            padding: 10.5px 15px;
-
-            &.active {
-              i {
-                animation: rotate .9s linear infinite;
-              }
-
-              @keyframes rotate {
-                from {
-                  transform: rotate(360deg);
-                }
-
-                to {
-                  transform: rotate(0deg);
-                }
-              }
-            }
-
-          }
-
-          &:first-child {
-            width: 96px;
-            margin-left: 8px;
-
-            input {
-              border: 1px solid red;
-              height: 100%;
-              width: 135px;
-              opacity: 0;
-              position: relative;
-              left: 0px;
-              cursor: pointer;
-              top: -40px;
-            }
-          }
-
-          &:nth-child(3) {
-            width: 100px;
-
-            input {
-              border: 1px solid red;
-              height: 100%;
-              width: 95px;
-              opacity: 0;
-              position: relative;
-              left: 0px;
-              cursor: pointer;
-              top: -40px;
-            }
-          }
-
-          &:nth-child(2) {
-            button {
-              margin-left: 10px;
-              cursor: pointer;
-
-              &:nth-child(2) {
-                padding: 10px 16px;
-              }
-            }
-          }
-        }
-
-      }
-
-      .xls {
-        margin-top: 10px;
-
-        .el-table {
-          font-size: 15px;
-        }
-
-        .el-table td,
-        .el-table th {
-          text-align: center;
-        }
-
-        .el-table .hideDot {
-          div {
-            // overflow: hidden;
-            // white-space: nowrap;
-            // text-overflow: ellipsis;
-
-            word-break: break-all;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 2;
-            /* 这里是超出几行省略 */
-            overflow: hidden;
-          }
-        }
-
-        .el-table th {
-          background-color: #e9edef;
-        }
-
-        .el-table .red {
-          background-color: #f17070;
-        }
-
-        .el-table .stock{
-          background-color: #7cc17cd1;
-        }
-
-        .el-table .yellow {
-          background-color: #f7ef98;
-        }
-
-        .el-table tbody tr:hover>td {
-          background-color: initial;
-        }
-
-        .el-table__body tr.hover-row>td {
-          background-color: initial;
-        }
-
-
-        .el-table td {
-          &:last-child {
-            .Edit {
-              color: #5458b3;
-              cursor: pointer;
-              // margin-right: 5px;
-
-              &:hover {
-                text-decoration: underline;
-              }
-            }
-
-            .active {
-              color: #444;
-            }
-          }
-        }
-
-        .cell {
-          .v-followUp {
             display: flex;
-            justify-content: center;
-
-            .followUp {
-              color: #5458b3;
-              cursor: pointer;
-              margin-right: 5px;
-
-              &:hover {
-                text-decoration: underline;
-              }
-            }
-
-            .Edit {
-              margin-right: 5px;
-              // color: #5458b3;
-            }
-          }
-
-          input {
-            width: 100%;
-            padding: 6px 0;
-            text-align: center;
-            border: none;
-            background-color: #fff;
-          }
-
-          .order1Div {
-            cursor: pointer;
-            color: #5458b3;
-
-            &:hover {
-              text-decoration: underline;
-            }
-          }
-
-          .el-popover__reference-wrapper {
-            cursor: pointer;
-            //   position: absolute;
-            //   left: 0;
-            //   top: 0;
-            //   opacity: 0;
-            //   width: 100%;
-            //   height: 100%;
-
-            //   .el-popover__reference {
-            //     width: 100%;
-            //     height: 100%;
-            //   }
-          }
-
-          .orderId {
-            &.active {
-              color: #5458b3;
-              cursor: pointer;
-            }
-          }
-        }
-
-        .el-table__row--striped {
-          .cell {
-            input {
-              background-color: #fafafa;
-            }
-          }
-        }
-
-        .freight {
-          div {
-            span {
-              color: #409eff;
-              cursor: pointer;
-
-              &:hover {
-                text-decoration: underline;
-              }
-            }
-
-            .twoBtn {
-              width: 88px;
-              display: inline-block;
-
-              // span{
-              //   &:hover {
-              //     text-decoration: none;
-              //   }
-              // }
-              .v-freight {
-                &:hover {
-                  text-decoration: none;
-                }
-              }
-            }
-          }
-
-        }
-      }
-
-      .paging {
-        margin-top: 10px;
-        display: flex;
-
-        .el-pagination {
-
-          .blockText {
-            font-weight: normal;
-          }
-
-          .el-pagination__jump {
-            float: right;
-            margin-right: 16px;
-          }
-  
-          .ensure-btn {
-            //   margin-right: -170px;
-            font-weight: normal;
-            border: 1px solid #dcdfe6;
-            text-align: center;
-            cursor: pointer;
-            padding: 0 10px;
-            border-radius: 4px;
-  
-            &:hover {
-              border-color: #40a0ffcc;
-              color: #409EFF;
-              background: #ecf5ff;
-            }
-          }
-
-          &:nth-child(2) {
-            // width: 100%;
-            margin-left: -13px;
-          }
-
-          &:nth-child(3) {
-            span{
-              font-weight: 500;
-              font-size: 16px;
-              margin-right: 20px;
-            }
-          }
-
-          &:last-child{
-            width: 100%;
-          }
-        }
-      }
-    }
-
-  }
-
-  .sync-order {
-    .el-dialog__header {
-      border-bottom: 1px solid #ddd;
-      text-align: left;
-    }
-
-    .el-dialog--center {
-      margin-top: 30vh !important;
-      border-radius: 4px;
-
-      .el-dialog__header {
-
-        button,
-        .el-dialog__headerbtn {
-          top: 10px;
-          right: 10px;
-
-          i {
-            font-size: 18px;
-          }
-        }
-      }
-
-      .el-dialog__body {
-        padding-top: 40px;
-        padding-bottom: 0px;
-
-        .content {
-          div {
-            width: 100%;
-            text-align: center;
-            display: flex;
-            margin-bottom: 30px;
+            flex: 1;
+            justify-content: flex-start;
+            align-items: center;
+            padding-right: 15px;
 
             span {
-              width: 130px;
+              flex: 6;
               text-align: right;
+              height: 100%;
+              line-height: 33px;
             }
 
             select {
-              width: 100%;
-              padding: 10px 0;
-              padding-left: 7px;
+              flex: 15;
+              padding: 7px 0;
+              text-indent: 8px;
               border-radius: 4px;
-              margin-top: -10px;
               outline: none;
-              border: 1px solid #e2e2e2;
+              border: 1px solid #c2c2c2;
+              color: #666;
 
               &:hover {
                 border: 1px solid #409eff;
               }
 
               &:focus {
-                outline-offset: 0px;
+                outline: none;
+                border: 1px solid #409eff;
+              }
+
+              &.active {
                 border: 1px solid #409eff;
               }
             }
 
-          }
-        }
-      }
+            &:last-child {
+              span {
+                margin-right: 10px;
+              }
 
-      .el-dialog__footer {
-        border-top: 1px solid #ddd;
-        text-align: right;
-        padding-bottom: 10px;
-        margin-right: 5px;
+              button {
+                display: inline-block;
+                line-height: 1;
+                white-space: nowrap;
+                cursor: pointer;
+                background: #fff;
+                border: 1px solid #dcdfe6;
+                color: #606266;
+                -webkit-appearance: none;
+                text-align: center;
+                box-sizing: border-box;
+                outline: none;
+                margin: 0;
+                transition: .1s;
+                font-weight: 500;
+                padding: 8px 20px;
+                font-size: 14px;
+                border-radius: 4px;
 
-        button {
-          // margin-top: 10px;
-          outline: none;
-          padding: 8px 17px;
-          font-size: 13px;
-          cursor: pointer;
-          // margin-top: 10px;
-          border-radius: 4px;
-
-          &:first-child {
-            margin-right: 15px;
-          }
-        }
-      }
-    }
-
-  }
-
-  .order1Mask {
-
-    .el-dialog__wrapper {
-      .el-dialog {
-        border-radius: 4px;
-
-        .el-dialog__header {
-          border-bottom: 1px solid #ddd;
-          text-align: left;
-
-          .el-dialog__headerbtn {
-            right: 10px;
-            top: 10px;
-            font-size: 18px;
+                &:hover {
+                  background-color: #ecf5ff;
+                  color: #57aafd;
+                  border: 1px solid #95caff;
+                }
+              }
+            }
           }
         }
 
-        .content {
+        .detailDiv {
+          display: flex;
+          margin-top: 20px;
+          margin-right: -3px;
+
           div {
-            height: 400px;
-            width: 100%;
-            border: 1px solid #ddd;
+            height: 32px;
+            margin-right: 1%;
+            width: 180px;
 
-            span {
+            input {
               width: 100%;
-              text-align: center;
-              margin-top: 181px;
-              display: inline-block;
+              height: 100%;
+              font-size: 15px;
+              border: 1px solid #c2c2c2;
+              border-radius: 4px;
+              outline: none;
+              line-height: 31px;
+              text-indent: 8px;
 
-              i {
-                display: block;
+              &:focus {
+                outline: none;
+                border: 1px solid #409eff;
+              }
+
+              &:hover {
+                border: 1px solid #409eff;
               }
             }
           }
 
-          textarea {
-            width: 96%;
-            height: 400px;
-            outline: none;
-            border: 1px solid #ddd;
-            resize: none;
-            line-height: 22px;
-            padding: 10px;
-            padding-bottom: 0px;
-            border-radius: 2px;
+          .set {
+            width: 200px;
+            height: 36px;
+            margin-right: 10px;
 
-            &:disabled {
+            // 
+            .el-select {
+              width: 100%;
+              height: 100%;
+
+              .el-input {
+                width: 100%;
+                height: 100%;
+
+                input {
+                  &::placeholder {
+                    color: #666;
+                  }
+                }
+
+                .el-input__suffix {
+                  .el-input__icon {
+                    line-height: 34px;
+                  }
+                }
+              }
+
+              &.active {
+                input {
+                  border: 1px solid #409eff;
+                }
+              }
+            }
+          }
+
+          .inp {
+            input {
+              &.active {
+                border: 1px solid #409eff;
+              }
+            }
+          }
+
+          .inp-btn {
+            width: inherit;
+            margin-right: 10px;
+
+            &.active {
+              margin-right: 0px;
+            }
+
+            button {
+              padding: 10px 26px;
+            }
+          }
+
+          .block,
+          .deliverData {
+            height: 36px;
+
+            .el-date-editor {
+              border-color: #c2c2c2;
+
+              &.active {
+                border-color: #409eff;
+              }
+            }
+
+            .el-date-editor--daterange.el-input__inner {
+              width: 300px;
+              height: 100%;
+
+              .el-range__close-icon {
+                line-height: 31px;
+                padding-left: 4px;
+              }
+            }
+
+            .el-date-editor .el-range-input {
+              text-indent: 0px;
+              margin-left: 6px;
+            }
+
+            .el-date-editor .el-range-separator {
+              margin-left: 4px;
+            }
+
+            input {
+              &::placeholder {
+                color: #666;
+              }
+            }
+          }
+
+          .deliverData {
+            margin-left: 115px;
+          }
+
+          .iconList {
+            display: flex;
+            margin-left: 106px;
+
+            div {
+              padding: 1px 11px;
+              line-height: 33px;
+              border: 1px solid #c2c2c2;
+              cursor: pointer;
+              width: 18px;
+              border-radius: 4px;
+
+              &:hover {
+                border: 1px solid #409eff;
+
+                i {
+                  color: #409eff;
+                }
+              }
+
+              i {
+                font-size: 18px;
+                color: #7a7a7a;
+              }
+
+              &:first-child {
+                margin-right: 14%;
+                margin-left: 10px;
+              }
+
+              &:nth-child(2) {
+                margin-left: -14px;
+              }
+            }
+          }
+        }
+      }
+
+      .order-content {
+        background-color: #fff;
+        border-radius: 4px;
+        padding: 15px;
+        margin-top: 15px;
+        // margin-top: 130px;
+
+        .btn {
+          width: 100%;
+          transition: none;
+
+          div {
+            height: 40px;
+
+            button {
+              padding: 10.5px 15px;
+
+              &.active {
+                i {
+                  animation: rotate .9s linear infinite;
+                }
+
+                @keyframes rotate {
+                  from {
+                    transform: rotate(360deg);
+                  }
+
+                  to {
+                    transform: rotate(0deg);
+                  }
+                }
+              }
+
+            }
+
+            &:first-child {
+              width: 96px;
+              margin-left: 8px;
+
+              input {
+                border: 1px solid red;
+                height: 100%;
+                width: 135px;
+                opacity: 0;
+                position: relative;
+                left: 0px;
+                cursor: pointer;
+                top: -40px;
+              }
+            }
+
+            &:nth-child(3) {
+              width: 100px;
+
+              input {
+                border: 1px solid red;
+                height: 100%;
+                width: 95px;
+                opacity: 0;
+                position: relative;
+                left: 0px;
+                cursor: pointer;
+                top: -40px;
+              }
+            }
+
+            &:nth-child(2) {
+              button {
+                margin-left: 10px;
+                cursor: pointer;
+
+                &:nth-child(2) {
+                  padding: 10px 16px;
+                }
+              }
+            }
+          }
+
+        }
+
+        .xls {
+          margin-top: 10px;
+
+          .el-table {
+            font-size: 15px;
+          }
+
+          .el-table td,
+          .el-table th {
+            text-align: center;
+          }
+
+          .el-table .hideDot {
+            div {
+              // overflow: hidden;
+              // white-space: nowrap;
+              // text-overflow: ellipsis;
+
+              word-break: break-all;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 2;
+              /* 这里是超出几行省略 */
+              overflow: hidden;
+            }
+          }
+
+          .el-table th {
+            background-color: #e9edef;
+          }
+
+          .el-table .red {
+            background-color: #f17070;
+          }
+
+          .el-table .stock {
+            background-color: #7cc17cd1;
+          }
+
+          .el-table .yellow {
+            background-color: #f7ef98;
+          }
+
+          .el-table tbody tr:hover>td {
+            background-color: initial;
+          }
+
+          .el-table__body tr.hover-row>td {
+            background-color: initial;
+          }
+
+
+          .el-table td {
+            &:last-child {
+              .Edit {
+                color: #5458b3;
+                cursor: pointer;
+                // margin-right: 5px;
+
+                &:hover {
+                  text-decoration: underline;
+                }
+              }
+
+              .active {
+                color: #444;
+              }
+            }
+          }
+
+          .cell {
+            .v-followUp {
+              display: flex;
+              justify-content: center;
+
+              .followUp {
+                color: #5458b3;
+                cursor: pointer;
+                margin-right: 5px;
+
+                &:hover {
+                  text-decoration: underline;
+                }
+              }
+
+              .Edit {
+                margin-right: 5px;
+                // color: #5458b3;
+              }
+            }
+
+            input {
+              width: 100%;
+              padding: 6px 0;
+              text-align: center;
+              border: none;
               background-color: #fff;
             }
 
-            &::-webkit-scrollbar {
-              width: 3.5px;
+            .order1Div {
+              cursor: pointer;
+              color: #5458b3;
+
+              &:hover {
+                text-decoration: underline;
+              }
             }
 
-            &::-webkit-scrollbar-thumb {
-              background: #67c23a;
-              border-radius: 5px;
+            .el-popover__reference-wrapper {
+              cursor: pointer;
+              //   position: absolute;
+              //   left: 0;
+              //   top: 0;
+              //   opacity: 0;
+              //   width: 100%;
+              //   height: 100%;
+
+              //   .el-popover__reference {
+              //     width: 100%;
+              //     height: 100%;
+              //   }
             }
 
-            &::-webkit-scrollbar-track {
-              background: transparent;
+            .orderId {
+              &.active {
+                color: #5458b3;
+                cursor: pointer;
+              }
+            }
+          }
+
+          .el-table__row--striped {
+            .cell {
+              input {
+                background-color: #fafafa;
+              }
+            }
+          }
+
+          .freight {
+            div {
+              span {
+                color: #409eff;
+                cursor: pointer;
+
+                &:hover {
+                  text-decoration: underline;
+                }
+              }
+
+              .twoBtn {
+                width: 88px;
+                display: inline-block;
+
+                // span{
+                //   &:hover {
+                //     text-decoration: none;
+                //   }
+                // }
+                .v-freight {
+                  &:hover {
+                    text-decoration: none;
+                  }
+                }
+              }
+            }
+
+          }
+        }
+
+        .paging {
+          margin-top: 10px;
+          display: flex;
+
+          .el-pagination {
+
+            .blockText {
+              font-weight: normal;
+            }
+
+            .el-pagination__jump {
+              float: right;
+              margin-right: 16px;
+            }
+
+            .ensure-btn {
+              //   margin-right: -170px;
+              font-weight: normal;
+              border: 1px solid #dcdfe6;
+              text-align: center;
+              cursor: pointer;
+              padding: 0 10px;
+              border-radius: 4px;
+
+              &:hover {
+                border-color: #40a0ffcc;
+                color: #409EFF;
+                background: #ecf5ff;
+              }
+            }
+
+            &:nth-child(2) {
+              // width: 100%;
+              margin-left: -13px;
+            }
+
+            &:nth-child(3) {
+              span {
+                font-weight: 500;
+                font-size: 16px;
+                margin-right: 20px;
+              }
+            }
+
+            &:last-child {
+              width: 100%;
+            }
+          }
+        }
+      }
+
+    }
+
+    .sync-order {
+      .el-dialog__header {
+        border-bottom: 1px solid #ddd;
+        text-align: left;
+      }
+
+      .el-dialog--center {
+        margin-top: 30vh !important;
+        border-radius: 4px;
+
+        .el-dialog__header {
+
+          button,
+          .el-dialog__headerbtn {
+            top: 10px;
+            right: 10px;
+
+            i {
+              font-size: 18px;
+            }
+          }
+        }
+
+        .el-dialog__body {
+          padding-top: 40px;
+          padding-bottom: 0px;
+
+          .content {
+            div {
+              width: 100%;
+              text-align: center;
+              display: flex;
+              margin-bottom: 30px;
+
+              span {
+                width: 130px;
+                text-align: right;
+              }
+
+              select {
+                width: 100%;
+                padding: 10px 0;
+                padding-left: 7px;
+                border-radius: 4px;
+                margin-top: -10px;
+                outline: none;
+                border: 1px solid #e2e2e2;
+
+                &:hover {
+                  border: 1px solid #409eff;
+                }
+
+                &:focus {
+                  outline-offset: 0px;
+                  border: 1px solid #409eff;
+                }
+              }
+
             }
           }
         }
@@ -714,102 +626,15 @@
           border-top: 1px solid #ddd;
           text-align: right;
           padding-bottom: 10px;
-
-          button {
-            outline: none;
-            padding: 8px 17px;
-            font-size: 13px;
-            cursor: pointer;
-            border-radius: 4px;
-          }
-        }
-      }
-    }
-
-  }
-
-  .abnormal {
-    .el-dialog__wrapper {
-      .el-dialog {
-        border-radius: 4px;
-
-        .el-dialog__header {
-          border-bottom: 1px solid #ddd;
-          text-align: left;
-
-          .el-dialog__headerbtn {
-            right: 10px;
-            top: 10px;
-            font-size: 18px;
-          }
-        }
-
-        .content {
-
-          // padding-right: 40px;
-          div {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            span {
-              flex: 4;
-              width: 200px;
-              text-align: center;
-            }
-
-            select {
-              flex: 22;
-              border-radius: 4px;
-              outline: none;
-              border: 1px solid #e2e2e2;
-              padding: 10px 12px;
-
-              &:hover {
-                border: 1px solid #409eff;
-              }
-
-              &:focus {
-                outline-offset: 0px;
-                border: 1px solid #409eff;
-              }
-            }
-
-            textarea {
-              border: 1px solid #e2e2e2;
-              outline: none;
-              border-radius: 4px;
-              flex: 22;
-              padding: 10px;
-
-              &:hover {
-                border: 1px solid #409eff;
-              }
-
-              &:focus {
-                outline-offset: 0px;
-                border: 1px solid #409eff;
-              }
-            }
-
-            &:nth-child(2) {
-              align-items: stretch;
-              margin-top: 15px;
-            }
-          }
-        }
-
-        .el-dialog__footer {
-          border-top: 1px solid #ddd;
-          text-align: right;
           margin-right: 5px;
-          padding-bottom: 15px;
 
           button {
+            // margin-top: 10px;
             outline: none;
             padding: 8px 17px;
             font-size: 13px;
             cursor: pointer;
+            // margin-top: 10px;
             border-radius: 4px;
 
             &:first-child {
@@ -817,180 +642,472 @@
             }
           }
         }
-
       }
+
     }
-  }
 
-  .FollowUp,
-  .FollowUp1 {
-    .el-dialog__wrapper {
-      margin-top: -7vh !important;
+    .order1Mask {
 
-      .el-dialog {
-        border-radius: 4px;
+      .el-dialog__wrapper {
+        .el-dialog {
+          border-radius: 4px;
 
-        .el-dialog__header {
-          border-bottom: 1px solid #ddd;
-          text-align: left;
+          .el-dialog__header {
+            border-bottom: 1px solid #ddd;
+            text-align: left;
 
-          .el-dialog__headerbtn {
-            right: 10px;
-            top: 10px;
-            font-size: 18px;
-          }
-        }
-
-        .content {
-          div {
-            margin-top: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            span {
-              flex: 4;
-              width: 200px;
-              text-align: center;
-            }
-
-            select,
-            input {
-              flex: 22;
-              border-radius: 4px;
-              outline: none;
-              border: 1px solid #e2e2e2;
-              padding: 10px 12px;
-
-              &:hover {
-                border: 1px solid #409eff;
-              }
-
-              &:focus {
-                outline-offset: 0px;
-                border: 1px solid #409eff;
-              }
-            }
-
-            textarea {
-              border: 1px solid #e2e2e2;
-              outline: none;
-              border-radius: 4px;
-              flex: 22;
-              padding: 10px;
-
-              &:hover {
-                border: 1px solid #409eff;
-              }
-
-              &:focus {
-                outline-offset: 0px;
-                border: 1px solid #409eff;
-              }
-            }
-
-            &:nth-child(2) {
-              align-items: stretch;
-              margin-top: 15px;
-
-              span {
-                line-height: 37px;
-              }
-            }
-
-            &.active {
-              align-items: stretch;
-
-              span {
-                line-height: 20px;
-              }
+            .el-dialog__headerbtn {
+              right: 10px;
+              top: 10px;
+              font-size: 18px;
             }
           }
-        }
 
-        .el-dialog__footer {
-          border-top: 1px solid #ddd;
-          text-align: right;
-          margin-right: 5px;
-          padding-bottom: 15px;
-
-          button {
-            outline: none;
-            padding: 8px 17px;
-            font-size: 13px;
-            cursor: pointer;
-            border-radius: 4px;
-
-            &:first-child {
-              margin-right: 15px;
-            }
-          }
-        }
-
-      }
-    }
-  }
-
-  // 查看异常
-  .causeMask {
-    .el-dialog__wrapper {
-      .el-dialog {
-        border-radius: 4px;
-
-        .el-dialog__header {
-          border-bottom: 1px solid #ddd;
-          text-align: left;
-
-          .el-dialog__headerbtn {
-            right: 10px;
-            top: 10px;
-            font-size: 18px;
-          }
-        }
-
-        .el-dialog__body {
           .content {
-            width: 100%;
-
             div {
-              width: 100%;
               height: 400px;
+              width: 100%;
+              border: 1px solid #ddd;
+
+              span {
+                width: 100%;
+                text-align: center;
+                margin-top: 181px;
+                display: inline-block;
+
+                i {
+                  display: block;
+                }
+              }
+            }
+
+            textarea {
+              width: 96%;
+              height: 400px;
+              outline: none;
+              border: 1px solid #ddd;
+              resize: none;
+              line-height: 22px;
+              padding: 10px;
+              padding-bottom: 0px;
+              border-radius: 2px;
+
+              &:disabled {
+                background-color: #fff;
+              }
+
+              &::-webkit-scrollbar {
+                width: 3.5px;
+              }
+
+              &::-webkit-scrollbar-thumb {
+                background: #67c23a;
+                border-radius: 5px;
+              }
+
+              &::-webkit-scrollbar-track {
+                background: transparent;
+              }
+            }
+          }
+
+          .el-dialog__footer {
+            border-top: 1px solid #ddd;
+            text-align: right;
+            padding-bottom: 10px;
+
+            button {
+              outline: none;
+              padding: 8px 17px;
+              font-size: 13px;
+              cursor: pointer;
+              border-radius: 4px;
+            }
+          }
+        }
+      }
+
+    }
+
+    .abnormal {
+      .el-dialog__wrapper {
+        .el-dialog {
+          border-radius: 4px;
+
+          .el-dialog__header {
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+
+            .el-dialog__headerbtn {
+              right: 10px;
+              top: 10px;
+              font-size: 18px;
+            }
+          }
+
+          .content {
+
+            // padding-right: 40px;
+            div {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+
+              span {
+                flex: 4;
+                width: 200px;
+                text-align: center;
+              }
+
+              select {
+                flex: 22;
+                border-radius: 4px;
+                outline: none;
+                border: 1px solid #e2e2e2;
+                padding: 10px 12px;
+
+                &:hover {
+                  border: 1px solid #409eff;
+                }
+
+                &:focus {
+                  outline-offset: 0px;
+                  border: 1px solid #409eff;
+                }
+              }
 
               textarea {
-                height: 100%;
-                border: 1px solid #ddd;
+                border: 1px solid #e2e2e2;
                 outline: none;
                 border-radius: 4px;
-                width: 100%;
-                padding: 8px;
-                box-sizing: border-box;
+                flex: 22;
+                padding: 10px;
 
-                &:disabled {
-                  background-color: #fff;
+                &:hover {
+                  border: 1px solid #409eff;
+                }
+
+                &:focus {
+                  outline-offset: 0px;
+                  border: 1px solid #409eff;
+                }
+              }
+
+              &:nth-child(2) {
+                align-items: stretch;
+                margin-top: 15px;
+              }
+            }
+          }
+
+          .el-dialog__footer {
+            border-top: 1px solid #ddd;
+            text-align: right;
+            margin-right: 5px;
+            padding-bottom: 15px;
+
+            button {
+              outline: none;
+              padding: 8px 17px;
+              font-size: 13px;
+              cursor: pointer;
+              border-radius: 4px;
+
+              &:first-child {
+                margin-right: 15px;
+              }
+            }
+          }
+
+        }
+      }
+    }
+
+    .FollowUp,
+    .FollowUp1 {
+      .el-dialog__wrapper {
+        margin-top: -7vh !important;
+
+        .el-dialog {
+          border-radius: 4px;
+
+          .el-dialog__header {
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+
+            .el-dialog__headerbtn {
+              right: 10px;
+              top: 10px;
+              font-size: 18px;
+            }
+          }
+
+          .content {
+            div {
+              margin-top: 10px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+
+              span {
+                flex: 4;
+                width: 200px;
+                text-align: center;
+              }
+
+              select,
+              input {
+                flex: 22;
+                border-radius: 4px;
+                outline: none;
+                border: 1px solid #e2e2e2;
+                padding: 10px 12px;
+
+                &:hover {
+                  border: 1px solid #409eff;
+                }
+
+                &:focus {
+                  outline-offset: 0px;
+                  border: 1px solid #409eff;
+                }
+              }
+
+              textarea {
+                border: 1px solid #e2e2e2;
+                outline: none;
+                border-radius: 4px;
+                flex: 22;
+                padding: 10px;
+
+                &:hover {
+                  border: 1px solid #409eff;
+                }
+
+                &:focus {
+                  outline-offset: 0px;
+                  border: 1px solid #409eff;
+                }
+              }
+
+              &:nth-child(2) {
+                align-items: stretch;
+                margin-top: 15px;
+
+                span {
+                  line-height: 37px;
+                }
+              }
+
+              &.active {
+                align-items: stretch;
+
+                span {
+                  line-height: 20px;
                 }
               }
             }
           }
+
+          .el-dialog__footer {
+            border-top: 1px solid #ddd;
+            text-align: right;
+            margin-right: 5px;
+            padding-bottom: 15px;
+
+            button {
+              outline: none;
+              padding: 8px 17px;
+              font-size: 13px;
+              cursor: pointer;
+              border-radius: 4px;
+
+              &:first-child {
+                margin-right: 15px;
+              }
+            }
+          }
+
         }
+      }
+    }
 
-        .el-dialog__footer {
-          border-top: 1px solid #ddd;
-          text-align: right;
-          margin-right: 5px;
-          padding-bottom: 15px;
+    // 查看异常
+    .causeMask {
+      .el-dialog__wrapper {
+        .el-dialog {
+          border-radius: 4px;
 
-          button {
-            outline: none;
-            padding: 8px 17px;
-            font-size: 13px;
-            cursor: pointer;
+          .el-dialog__header {
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+
+            .el-dialog__headerbtn {
+              right: 10px;
+              top: 10px;
+              font-size: 18px;
+            }
+          }
+
+          .el-dialog__body {
+            .content {
+              width: 100%;
+
+              div {
+                width: 100%;
+                height: 400px;
+
+                textarea {
+                  height: 100%;
+                  border: 1px solid #ddd;
+                  outline: none;
+                  border-radius: 4px;
+                  width: 100%;
+                  padding: 8px;
+                  box-sizing: border-box;
+
+                  &:disabled {
+                    background-color: #fff;
+                  }
+                }
+              }
+            }
+          }
+
+          .el-dialog__footer {
+            border-top: 1px solid #ddd;
+            text-align: right;
+            margin-right: 5px;
+            padding-bottom: 15px;
+
+            button {
+              outline: none;
+              padding: 8px 17px;
+              font-size: 13px;
+              cursor: pointer;
+            }
           }
         }
       }
     }
-  }
 
-}
+    // 查看物流
+    .causeMask1{
+      .el-dialog__wrapper {
+        .el-dialog {
+          border-radius: 4px;
+
+          .el-dialog__header {
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+
+            .el-dialog__headerbtn {
+              right: 10px;
+              top: 10px;
+              font-size: 18px;
+            }
+          }
+
+          .el-dialog__body {
+            .content {
+              width: 100%;
+
+              .query{
+                width: 100%;
+                display: flex;
+                .set, .orderNum{
+                  flex: 3;
+                  display: flex;
+                  line-height: 38px;
+                  span{
+                    width: 70px;
+                    text-align: right;
+                  }
+                  select, input{
+                    text-indent: 4px;
+                    height: 36px;
+                    width: calc(100% - 70px);
+                    outline: none;
+                    border: none;
+                    border: 1px solid #c2c2c2;
+                    border-radius: 4px;
+                    padding: 0 ;
+                    box-sizing: border-box;
+                  }
+                }
+                .orderNum{
+                  margin-left:-16px;
+                  input{
+                    text-indent: 8px;
+                  }
+                }
+                .btn{
+                  flex: 1;
+                  height: 36px;
+                  text-align: right;
+                  button{
+                    padding: 11px 15px;
+                  }
+                }
+              }
+
+              .note {
+                width: 100%;
+                height: 400px;
+                margin-top: 15px;
+
+                textarea {
+                  height: 100%;
+                  border: 1px solid #ddd;
+                  outline: none;
+                  border-radius: 4px;
+                  width: 100%;
+                  padding: 8px;
+                  box-sizing: border-box;
+                  resize: none;
+
+                  &:disabled {
+                    background-color: #fff;
+                  }
+                }
+
+                .loading{
+                  height: 100%;
+                  border: 1px solid #ddd;
+                  text-align: center;
+                  box-sizing: border-box;
+                  line-height: 430px;
+                  span{
+                    display: inline-block;
+                    i{
+                      display: block;
+                      line-height: initial;
+                      font-style: normal;
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          .el-dialog__footer {
+            border-top: 1px solid #ddd;
+            text-align: right;
+            margin-right: 5px;
+            padding-bottom: 15px;
+
+            button {
+              outline: none;
+              padding: 8px 17px;
+              font-size: 13px;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+
+  }
 
 }
 
@@ -1051,17 +1168,26 @@
   }
 }
 
+@media screen and (max-width:1900px) {
+  .paging {
+    .totalDom {
+      display: none !important;
+    }
+  }
+}
 
 @media screen and (max-width:1794px) {
   .selectStatu {
     div {
       padding-right: 5px !important;
+
       span {
         flex: 7 !important;
         height: 33px !important;
       }
-      &:last-child{
-        span{
+
+      &:last-child {
+        span {
           width: 175px !important;
         }
       }

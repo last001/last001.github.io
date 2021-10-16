@@ -1,0 +1,322 @@
+.my {
+  // background: #f7f8fa;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  overflow-y: hidden;
+
+  .v-my {
+    overflow-y: auto;
+    padding-bottom: 10px;
+
+    .bg {
+      width: 100%;
+      height: 140px;
+      position: relative;
+
+      .header {
+        width: 40px;
+        margin-left: 50%;
+        transform: translateX(-50%) translateY(35px);
+        border-radius: 50%;
+        overflow: hidden;
+        width: 40px;
+        height: 40px;
+
+        img {
+          width: 100%;
+          height: 100%;
+          display: block;
+        }
+      }
+
+      .userName {
+        width: 100%;
+        text-align: center;
+        transform: translateY(40px);
+        font-size: 14px;
+        color: #fff;
+
+      }
+
+      .remask {
+        width: 100%;
+        text-align: center;
+        transform: translateY(50px);
+        font-size: 14px;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        span {
+          max-width: 300px;
+          color: #f0f0f0;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+
+        i {
+          margin-left: 5px;
+        }
+      }
+
+      .gotoLogin {
+        text-align: center;
+        transform: translateY(50px);
+
+        .van-button--info {
+          background-color: #409eff;
+          border: 1px solid #409eff;
+        }
+
+        .van-button {
+          width: 80px;
+          height: 30px;
+        }
+      }
+
+      .text {
+        position: absolute;
+        right: 10px;
+        top: 12px;
+        width: 60px;
+        height: 20px;
+        border-radius: 12px;
+        background: rgba(255, 255, 255.9);
+        text-align: center;
+        line-height: 21px;
+        padding: 1px 5px;
+        display: none;
+
+        input {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          border-radius: 12px;
+          opacity: 0;
+        }
+      }
+
+    }
+
+    .allOrder {
+      background: rgba(255, 255, 255, .8);
+      border-bottom: 1px solid #ddd;
+      padding: 10px;
+
+      div {
+        font-weight: bold;
+        font-size: 13px;
+        display: flex;
+
+        span {
+          margin-left: 17px;
+          margin-top: 2px;
+        }
+
+        &:nth-child(2) {
+          font-weight: normal;
+          color: #999;
+          margin-top: 2px;
+
+          i {
+            margin-top: 2px;
+          }
+        }
+      }
+
+    }
+
+    .await {
+      background: rgba(255, 255, 255, .8);
+      padding: 8px 0;
+      display: flex;
+
+      .await-list {
+        width: 33.33%;
+        text-align: center;
+
+        div {
+          font-weight: bold;
+        }
+      }
+    }
+
+    .accountLit {
+      margin-top: 15px;
+      background: rgba(255, 255, 255, .8);
+      // border-bottom: 1px solid #f2f2f2;
+
+      .v-accountList {
+        display: flex;
+        padding-right: 5px;
+
+        &:last-child {
+
+          div,
+          i {
+            border-bottom: none;
+          }
+        }
+
+        div,
+        i {
+          padding: 12px;
+        }
+
+        div {
+          width: 90%;
+          border-bottom: 1px solid #ddd;
+          padding-left: 5px;
+          padding-top: 16px;
+          font-weight: bold;
+
+          span {
+            position: relative;
+
+            .dot {
+              display: inline-block;
+              min-width: 0;
+              width: 5px;
+              height: 5px;
+              border-radius: 100%;
+              background-color: red;
+              position: absolute;
+              right: -6px;
+              top: 0;
+            }
+          }
+
+        }
+
+        .arrow {
+          padding-top: 16px;
+          border-bottom: 1px solid #ddd;
+        }
+      }
+    }
+
+    .more {
+      margin-top: 10px;
+      display: flex;
+      padding-right: 5px;
+      background: rgba(255, 255, 255, .8);
+
+      div,
+      i {
+        padding: 12px;
+      }
+
+      div {
+        width: 90%;
+        padding-left: 5px;
+        line-height: 22px;
+        font-weight: bold;
+      }
+
+      .arrow {
+        line-height: 22px;
+      }
+    }
+
+    .loading {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 99;
+
+      .v-loading {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        div {
+          width: 13px;
+          height: 13px;
+          border-radius: 50%;
+          margin-right: 20px;
+
+          &.active {
+            animation: marginTop .6s cubic-bezier(0.2, 0.98, 0.72, 0.9);
+          }
+
+          &:first-child {
+            background: #3568f3;
+            animation-delay: 0s;
+          }
+
+          &:nth-child(2) {
+            background: #f04040;
+            animation-delay: .1s;
+          }
+
+          &:nth-child(3) {
+            background: #10d6ec;
+            animation-delay: 0.2s;
+          }
+
+          &:last-child {
+            background: #ff457d;
+            margin-right: 0px;
+            animation-delay: 0.3s;
+          }
+
+          @keyframes marginTop {
+            33.33% {
+              margin-top: 0;
+            }
+
+            66.66% {
+              margin-top: -70px;
+            }
+
+            100% {
+              margin-top: 0;
+            }
+          }
+        }
+      }
+
+      .text {
+        width: 100%;
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        text-align: center;
+        margin-left: -50%;
+        margin-top: 12px;
+        font-size: 14px;
+        color: #ddd;
+        display: flex;
+
+        .v-text {
+          position: absolute;
+          left: 50%;
+          top: 0;
+          margin-left: -21px;
+        }
+
+        .dot {
+          position: absolute;
+          left: 50%;
+          top: 0;
+          margin-left: 21px;
+
+          i {
+            font-size: 16px;
+            color: #fff;
+            font-style: normal;
+          }
+        }
+      }
+    }
+  }
+}

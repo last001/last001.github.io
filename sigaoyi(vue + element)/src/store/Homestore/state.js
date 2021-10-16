@@ -1,6 +1,8 @@
 export const state = {
     // 个人信息
     InfoData:{},
+    // 公司信息
+    companyData:{},
     // 展开状态
     WstateStatus:true,
     // sildeNavberNum

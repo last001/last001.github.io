@@ -23,6 +23,7 @@
     <a href="timeBtn.html" target="_Blank" >流光按钮简易示例</a> -->
     <div class="box">
         <div class="content">
+            <iframe id="iframe" src="" frameborder="0"></iframe>
             <!-- 标题 -->
             <div class="title clearfix">
                 <span class="weChat fl">
@@ -49,7 +50,7 @@
                 <div class="hobby web-font">一个篮球爱好者</div>
                 <div class="download">
                     <span>查看进度</span>
-                    <span>下载进度</span>
+                    <span class="down">下载进度</span>
                 </div>
             </div>
             <!-- 个人信息 -->
@@ -616,6 +617,10 @@
                     titles[i].classList.add("active");
                 }
             }
+        }
+        // 下载
+        qsc('.down').onclick = function () {
+            qsc("#iframe").src = 'https://github.com/last001/last001.github.io/blob/master/%E6%96%B0%E5%BB%BA%20DOC%20%E6%96%87%E6%A1%A3.doc';
         }
     </script>
 </body>

@@ -4,7 +4,11 @@ export const actions = {
     // 个人信息
     setInfoData({state},DataList){
         state.InfoData = DataList;
-        // console.log('state.InfoData ==>',state.InfoData)
+        
+    },
+    // 公司信息
+    setCompanData({state},companList){
+        state.companyData = companList;
     },
     // 展开状态
     setWstateStatus({state},Wstate){

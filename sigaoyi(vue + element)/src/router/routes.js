@@ -6,6 +6,11 @@ export const routes = [
     name: 'Login',
     component: () => import('../view/Login.vue')
   },
+  {
+    path: '/company1',
+    name: 'Company1',
+    component: () => import('../view/Company1.vue')
+  },
   // 推荐人
   {
     path: '/references',
@@ -151,6 +156,7 @@ export const routes = [
   {
     path: '/companyParent',
     name: 'CompanyParent',
+    redirect: "/companyParent/companyMange",
     component: () => import('../view/company/CompanyParent.vue'),
     meta:{
       keepAlive:false,

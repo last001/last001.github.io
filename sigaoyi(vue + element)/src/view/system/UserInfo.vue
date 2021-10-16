@@ -23,7 +23,12 @@
         </div>
         <div class="int">
           <span>用户名：</span>
-          <input type="text" v-model="searchText" @keyup.enter="search()" placeholder="请输入" />
+          <input
+            type="text"
+            v-model="searchText"
+            @keyup.enter="search()"
+            placeholder="请输入"
+          />
           <el-button
             icon="el-icon-refresh-right"
             size="small"
@@ -185,7 +190,7 @@ export default {
         revirwStatus: 99,
         pages: this.currentPage,
         amount: this.pageSize,
-        userName:"",
+        userName: "",
       },
       //拿数据loadingList 全屏loading 表格loading
       loadingList: { flag: false, isActive: true },
@@ -253,7 +258,6 @@ export default {
           },
         })
           .then((result) => {
-            console.log("result ==>", result);
             if (result.data.Code == 200) {
               this.tableData.splice(index, 1);
               this.$notify({
@@ -272,7 +276,6 @@ export default {
             }
           })
           .catch((err) => {
-            console.log("err ==>", err);
             this.$notify({
               title: "请求错误",
               message: "系统业务繁忙,请稍后再试",
@@ -284,7 +287,6 @@ export default {
     },
     // 全选
     setAll(selection) {
-      console.log("selection ==>", selection);
       if (selection.length > 0) {
         this.Allstatus = true;
         selection.forEach((e) => {
@@ -306,7 +308,7 @@ export default {
     },
     // 点击 删除按钮   0000
     allDelete() {
-     if (sessionStorage.getItem("token") == undefined) {
+      if (sessionStorage.getItem("token") == undefined) {
         alert("请先登录");
         this.$router.push({ name: "Login" });
         return;
@@ -321,7 +323,6 @@ export default {
         for (let i = 0; i < this.tableData.length; i++) {
           if (this.tableData[i].checked) {
             // this.centerDialogVisibleStatus = true;
-            console.log("i ==>", i);
           }
         }
       } else {
@@ -335,7 +336,6 @@ export default {
     },
     // 分页事件 每页多少条
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
       this.pageSize = val;
       this.sreachList.amount = this.pageSize;
       this.loadingList.flag = true;
@@ -344,7 +344,6 @@ export default {
     },
     // 去第几页
     handleCurrentChange(val) {
-      //   console.log(`当前页: ${val}`);
       this.currentPage = val;
       this.sreachList.pages = this.currentPage;
       this.loadingList.flag = true;
@@ -354,7 +353,6 @@ export default {
     // 点击确定去哪一页
     clickTrue() {
       this.handleCurrentChange(this.currentPage);
-      // console.log('cccccccccc ==>', this.currentPage)
     },
     // 初始拿数据
     getInfoData(loadingList, data) {
@@ -388,7 +386,6 @@ export default {
         params: data,
       })
         .then((result) => {
-          console.log("result ==>", result);
           // 搜索loading
           if (!loadingList.flag) {
             setTimeout(() => {
@@ -442,7 +439,7 @@ export default {
           if (!loadingList.isActive) {
             this.tableLoading = false;
           }
-          console.log("err ==>", err);
+
           this.$notify({
             title: "请求错误",
             message: "系统服务繁忙,请稍后再试",
@@ -462,7 +459,6 @@ export default {
         },
       })
         .then((result) => {
-          console.log("result ==>", result);
           if (result.data.Code == 200) {
             row.reviewStatus = "审核通过";
             this.$notify({
@@ -481,7 +477,6 @@ export default {
           }
         })
         .catch((err) => {
-          console.log("err ==>", err);
           this.$notify({
             title: "请求错误",
             message: "系统业务繁忙,请稍后再试",
@@ -501,7 +496,6 @@ export default {
         },
       })
         .then((result) => {
-          console.log("result ==>", result);
           if (result.data.Code == 200) {
             row.reviewStatus = "审核驳回";
             this.$notify({
@@ -520,7 +514,6 @@ export default {
           }
         })
         .catch((err) => {
-          console.log("err ==>", err);
           this.$notify({
             title: "请求错误",
             message: "系统业务繁忙,请稍后再试",

@@ -1,0 +1,74 @@
+.changeState {
+  .title {
+    .van-nav-bar__right {
+      button {
+        width: 50px;
+        height: 28px;
+        padding: 2px 10px;
+        border-radius: 15px;
+      }
+    }
+  }
+
+  .textVal {
+    width: 100%;
+
+    textarea {
+      width: calc(100% - 16px);
+      padding: 8px;
+      outline: none;
+      border: none;
+      font-size: 13px;
+      resize: none;
+      color: #000;
+    }
+  }
+
+  .shortcut {
+    margin-top: 15px;
+    width: 100%;
+    background-color: #fff;
+
+    div {
+      // width: 100%;
+      padding: 15px 8px;
+      font-size: 13px;
+      color: #409eff;
+      border-bottom: 1px solid #f9f9f9;
+
+      span {
+        &:nth-child(2) {
+          border: 1px solid #c0c0c0;
+          border-radius: 50%;
+          display: inline-block;
+          width: 18px;
+          height: 18px;
+          text-align: center;
+          box-sizing: border-box;
+
+          i {
+            margin-top: 1px;
+          }
+        }
+      }
+    }
+  }
+
+  .handle {
+    .van-dialog {
+      .van-dialog__header {
+        padding-top: 15px;
+      }
+      .van-dialog__content {
+        .content {
+            padding: 20px 0;
+          .van-radio-group {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+          }
+        }
+      }
+    }
+  }
+}

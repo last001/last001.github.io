@@ -5,7 +5,9 @@
       <div class="box">
         <div class="dandruff" ref="dandruff">
           <el-breadcrumb separator-class="el-icon-arrow-right">
-            <el-breadcrumb-item :to="{ path: '/Home' }">首页</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/Home' }"
+              >首页</el-breadcrumb-item
+            >
             <el-breadcrumb-item>店铺管理</el-breadcrumb-item>
             <el-breadcrumb-item>授权</el-breadcrumb-item>
           </el-breadcrumb>
@@ -271,8 +273,6 @@ export default {
     this.$nextTick(() => {
       this.getStore(this.pageSize, this.currentPage);
     });
-
-    // console.log("this.$route.name ==>", this.$route.name);
   },
   computed: {
     ...homeState(["WstateStatus", "InfoData"]),
@@ -287,7 +287,6 @@ export default {
         e.selected = false;
       });
       array[index].selected = true;
-      console.log("array ==>", array);
     },
     //  重置
     resetBtn() {
@@ -321,7 +320,7 @@ export default {
       })
         .then((result) => {
           this.tableLoading = false;
-          console.log("result ==>", result);
+
           if (result.data.Code == 200) {
             this.$notify({
               title: "请求成功",
@@ -357,7 +356,6 @@ export default {
             type: "error",
             offset: 50,
           });
-          console.log("err ==>", err);
         });
     },
     //   点击表格编辑 按钮
@@ -374,7 +372,6 @@ export default {
         }
       });
       this.addChangeStatus = false;
-      console.log("row ==>", row);
     },
     // 添加page
     addList() {
@@ -425,8 +422,8 @@ export default {
           remarks: this.handleEditList.remarks,
         };
       }
-      console.log("data ==>", data);
-       this.centerDialogVisible = false;
+
+      this.centerDialogVisible = false;
       // 发起请求
       let loading = this.$loading({
         lock: false,
@@ -443,9 +440,8 @@ export default {
           setTimeout(() => {
             loading.close();
           }, 500);
-          console.log("result ==>", result);
+
           if (result.data.code == "200") {
-            console.log("this.addChangeStatus ==>", this.addChangeStatus);
             if (this.addChangeStatus) {
               // 添加成功
               //   this.tableData.unshift();
@@ -467,7 +463,6 @@ export default {
                   e.status = "停售";
                 }
               });
-              console.log("this.tableData ==>", this.tableData);
             }
             this.centerDialogVisible = false;
             this.$notify({
@@ -495,41 +490,33 @@ export default {
             type: "error",
             offset: 50,
           });
-          console.log("err ==>", err);
         });
     },
     // 全选状态值
     setAll(selection) {
-      console.log("selection ==>", selection);
       if (selection.length > 0) {
         this.Allstatus = true;
-        console.log("1");
+
         selection.forEach((e) => {
           e.selected = true;
-          console.log("e ==>", e.selected);
         });
       } else {
-        console.log("2");
         this.Allstatus = false;
         this.tableData.forEach((e) => {
           e.selected = false;
-          console.log("e.selected ==>", e.selected);
         });
       }
-      // console.log("this.Allstatus ==>", this.Allstatus);
     },
     //   是否选中的状态值
     onTableSelect(rows, row) {
       row.selected = rows.length && rows.indexOf(row) !== -1;
-      // console.log("selected ==>",selected)  // true就是选中，0或者false是取消选中
-      console.log("row ==>", row);
+
       this.tableData.forEach((e) => {
         e.selected = false;
       });
       rows.forEach((e) => {
         e.selected = true;
       });
-      console.log("rows ==>", rows);
     },
     // 点击 全选按钮
     Allset() {
@@ -574,7 +561,7 @@ export default {
           })
             .then((result) => {
               loading.close();
-              console.log("result ==>", result);
+
               if (result.data.code == "200") {
                 for (let i = indexList.length - 1; i >= 0; i--) {
                   this.tableData.splice(indexList[i], 1);
@@ -596,7 +583,7 @@ export default {
             })
             .catch((err) => {
               loading.close();
-              console.log("err ==>", err);
+
               this.$notify({
                 title: "请求错误",
                 message: "系统业务繁忙,请稍后再试",
@@ -616,20 +603,17 @@ export default {
     },
     // 分页事件 每页多少条
     handleSizeChange(val) {
-      //   console.log(`每页 ${val} 条`);
       this.pageSize = val;
       this.searchInput(this.pageSize, this.currentPage);
     },
     // 去第几页
     handleCurrentChange(val) {
-      //   console.log(`当前页: ${val}`);
       this.currentPage = val;
       this.searchInput(this.pageSize, this.currentPage);
     },
     // 点击确定去哪一页
     clickTrue() {
       this.handleCurrentChange(this.currentPage);
-      // console.log('cccccccccc ==>', this.currentPage)
     },
     // 获取所有店铺
     getStore(amount, pages) {
@@ -660,7 +644,6 @@ export default {
         },
       })
         .then((result) => {
-          console.log("result ==>", result);
           setTimeout(() => {
             loading.close();
           }, 500);
@@ -704,7 +687,6 @@ export default {
             type: "error",
             offset: 50,
           });
-          console.log("err ==>", err);
         });
     },
     ...homeActions(["setWstateStatus", "setInfoData"]),

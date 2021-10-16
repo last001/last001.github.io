@@ -5,7 +5,9 @@
       <div class="feightInfo">
         <div class="dandruff">
           <el-breadcrumb separator-class="el-icon-arrow-right">
-            <el-breadcrumb-item :to="{ path: '/Home' }">首页</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/Home' }"
+              >首页</el-breadcrumb-item
+            >
             <el-breadcrumb-item>其他</el-breadcrumb-item>
             <el-breadcrumb-item>运费估算</el-breadcrumb-item>
           </el-breadcrumb>
@@ -215,8 +217,7 @@ export default {
     document.body.scrollTop = document.documentElement.scrollTop = 0;
     next();
   },
-  created() {
-  },
+  created() {},
   components: {
     // footerDiv,
   },
@@ -226,7 +227,6 @@ export default {
   methods: {
     // 运输方式改变select 事件
     changeSelect(e) {
-      // console.log("e.target ==>",e.target.childNodes)
       //   let weightVal = (this.$refs.weight.value = "");
       let longVal = (this.$refs.long.value = "");
       let wideVal = (this.$refs.wide.value = "");
@@ -235,7 +235,6 @@ export default {
       for (let i = 0; i < this.options.length; i++) {
         if (this.options[i].selected) {
           if (this.options[i].value == 0) {
-            console.log("000000000000");
             for (const key in this.disabledList) {
               this.disabledList[key] = true;
             }
@@ -245,7 +244,6 @@ export default {
             this.options[i].value == 2 ||
             this.options[i].value == 3
           ) {
-            console.log("123123123123123123123");
             for (const key in this.disabledList) {
               if (key == "weight") {
                 this.disabledList[key] = false;
@@ -254,7 +252,6 @@ export default {
               }
             }
           } else {
-            console.log("444444444444444");
             let freightOptionList = this.$refs.freightOption.children;
             for (let i = 0; i < freightOptionList.length; i++) {
               freightOptionList[i].selected = false;
@@ -297,7 +294,7 @@ export default {
           this.disabledList.wide = false;
           this.disabledList.height = false;
           weightVal = (longVal * wideVal * heightVal) / 6000;
-          console.log("进入了 体积");
+
           if (this.flag) {
             // 提示
             if (longVal == "" || wideVal == "" || heightVal == "") {
@@ -429,7 +426,7 @@ export default {
           this.disabledList.long = true;
           this.disabledList.wide = true;
           this.disabledList.height = true;
-          console.log("进入了 重量");
+
           if (this.flag) {
             // 提示
             if (weightVal == "") {
@@ -551,8 +548,6 @@ export default {
     },
     // 点击radio
     clickInput(item, v, i) {
-      // console.log("v ==>",v)
-      // console.log("item ==>",item)
       if (v.radioStatus) {
         return;
       }
@@ -561,7 +556,7 @@ export default {
       });
 
       v.radioStatus = true;
-      //   console.log("item ==>",item)
+
       //   改变selet 给booleanVal 赋值
       for (const key in item) {
         item.radio.forEach((e) => {
@@ -611,9 +606,9 @@ export default {
       });
       //   计费方式 的 options
       let freightOptionList = this.$refs.freightOption.children;
-      //   console.log('freightOptionList ==>',freightOptionList)
+
       //   提示
-      //  console.log('this.options.length ==>',this.options.length)
+
       if (this.options.length == 0) {
         this.$message({
           type: "warning",
@@ -624,14 +619,12 @@ export default {
         this.resultText = "";
         return;
       }
-      console.log("this.options ==>", this.options);
 
       //   循环 运输方式的 options
       for (let i = 0; i < this.options.length; i++) {
         //   E邮宝 E邮宝加快
         if (this.options[i].selected) {
           if (this.options[i].value == 1 || this.options[i].value == 2) {
-            console.log("进入了E邮宝 E邮宝加快!!!");
             // 提示
             if (weightVal == "") {
               this.$message({
@@ -667,7 +660,6 @@ export default {
             }, 800);
             //  E特快
           } else if (this.options[i].value == 3) {
-            console.log("进入了E特快!!!");
             // 提示
             if (weightVal == "") {
               this.$message({
@@ -706,7 +698,6 @@ export default {
             }, 800);
             // 佐川
           } else if (this.options[i].value == 4) {
-            console.log("进入了佐川!!!");
             this.changeBilling();
             setTimeout(() => {
               this.$notify({

@@ -1,0 +1,146 @@
+.product{
+    background-color: #f0f0f0;
+    padding-bottom: 53px;
+    border-radius: 4px;
+    .sreach{
+        width: 100%;
+        .van-search{
+            z-index: 99;
+            width: 100%;
+            position: fixed;
+            left: 0;
+            top: 46px;
+            padding: 5px;
+            .van-search__content{
+                border: 1px solid #e4e4e4;
+                background-color: #fff ;
+                .van-field__left-icon{
+                    margin-right: 10px;
+                    padding-right: 10px;
+                    border-right: 1px solid #e4e4e4;
+                    .van-icon{
+                        font-size: 20px;
+                    }
+                }
+            }
+        }
+    }
+    .screenNavbar{
+        z-index: 99;
+        position: fixed;
+        left: 0;
+        top: 92px;
+        background-color: #fff;
+        width: 100%;
+        display: flex;
+        div{
+            width: 25%;
+            text-align: center;
+            font-size: 14px;
+            &.active{
+                color: #409eff;
+            }
+            span{
+                display: block;
+            }
+        }
+    }
+    .productList{
+        margin-top: 137px;
+        .box-list{
+            overflow: auto;
+            height: 487px;
+            .list{
+                padding:5px 0;
+                padding-bottom: 0;
+                background-color: #fff;
+                margin-top: 10px;
+                .box{
+                    display: flex;
+                    margin-left: 5px;
+                    .set{
+                        height: 100px;
+                    }
+                    .content{
+                        width: 100%;
+                        margin-left: 10px;
+                        .title{
+                            font-size: 16px;
+                            font-weight: 500;
+                        }
+                        .v-content{
+                            margin-top: 10px;
+                            display: flex;
+                            .img{
+                                width: 24%;
+                                height: 18%;
+                                border: 1px solid #409eff;
+                                img{
+                                    width: 100%;
+                                    height: 100%;
+                                }
+                            }
+                            .right{
+                                margin-left: 10px;
+                                margin-top: 6%;
+                                font-size: 14px;
+                                .time{
+                                    color: #999;
+                                }
+                                .status{
+                                    margin-top: 6%;
+                                    color: #409eff;
+                                }
+                            }
+                        }
+                        
+                    }
+                }
+                .btn{
+                    margin-top: 7px;
+                    display: flex;
+                    border-top: 1px solid #e4e4e4;
+                    width: 100%;
+                    justify-content: flex-end;
+                    padding: 5px 0;
+                    button{
+                        margin-right: 20px;
+                        outline: none;
+                        background-color: #fff;
+                        color: #444;
+                        border: 1px solid #e4e4e4;
+                        padding:4px 13px;
+                        border-radius: 4px;
+                        // #e6e6e6
+                    }
+                }
+            }
+        }
+        
+    }
+
+    .bottom{
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        div{
+            text-align: center;
+            width: 22.5%;
+            line-height: 44px;
+            color: #fff;
+            font-size: 14px;
+        }
+        .checked{
+            padding-top: 10px;
+            padding-left: 2px;
+            width: 10%;
+            background-color: #fff;
+            .van-checkbox{
+                overflow: initial;
+                margin-left: 5px;
+            }
+        }
+    }
+}

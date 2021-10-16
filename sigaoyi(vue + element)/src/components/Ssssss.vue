@@ -1,5 +1,10 @@
 <template>
-  <div class="left" ref="left" :class="WstateStatus ? 'active' : ''" :style="{ width: W + 'px', height: 100 + '%' }">
+  <div
+    class="left"
+    ref="left"
+    :class="WstateStatus ? 'active' : ''"
+    :style="{ width: W + 'px', height: 100 + '%' }"
+  >
     <div class="widthBox">
       <div class="on-off">
         <i :class="iconSrc" @click="clickW"></i>
@@ -541,11 +546,11 @@ export default {
     };
   },
   beforeRouteEnter(to, from, next) {
-    // console.log("from.path ==>",from.path);
+    
     next();
   },
   activated() {
-    console.log("进入activeted!!!");
+    
     // this.Width = document.documentElement.clientWidth - 50;
     // 状态值
     // 入库 statu
@@ -555,7 +560,7 @@ export default {
       this.InfoData.userName == "任治琴" ||
       this.InfoData.userName == "李健明" ||
       this.InfoData.userName == "王杰" ||
-      this.InfoData.userName == "hzgugoi"
+      this.InfoData.userName == "hzsugoi"
     ) {
       this.pathName[0].arrName[
         this.pathName[0].arrName.length - 1
@@ -580,7 +585,7 @@ export default {
     }
     // 检测路由
     this.detection();
-    console.log("this.WstateStatus ==>", this.WstateStatus);
+    
     // 解决不缓存跳到缓存的leftNavbar 不展开问题
     if (this.WstateStatus && this.$route.meta.keepAlive) {
       this.setWstateStatus(false);
@@ -592,7 +597,7 @@ export default {
     }
   },
   created() {
-    console.log("进入created!!!");
+    
     // 入库 statu
     if (
       this.InfoData.statu == 0 ||
@@ -600,7 +605,7 @@ export default {
       this.InfoData.userName == "任治琴" ||
       this.InfoData.userName == "李健明" ||
       this.InfoData.userName == "王杰" ||
-      this.InfoData.userName == "hzgugoi"
+      this.InfoData.userName == "hzsugoi"
     ) {
       this.pathName[0].arrName[
         this.pathName[0].arrName.length - 1
@@ -624,8 +629,8 @@ export default {
     }
     // 检测路由
     this.detection();
-    console.log("this.WstateStatus ==>", this.WstateStatus);
-    console.log("this.$route.meta.keepAlive ==>", this.$route.meta.keepAlive);
+    
+    
     // 解决缓存跳到不缓存的leftNavbar 展开问题
     if (!this.WstateStatus && !this.$route.meta.keepAlive) {
       this.setWstateStatus(true);
@@ -651,7 +656,6 @@ export default {
   methods: {
     // 通知
     GetNotice() {
-      console.log("执行了 通知的 方法!!!!!!!!!!!!!");
       if (
         this.InfoData.userName == "undefined" ||
         this.InfoData.userName == null
@@ -666,7 +670,7 @@ export default {
         },
       })
         .then((result) => {
-          console.log("result ==>", result);
+          
           if (result.data.code == "200") {
             if (result.data.announcementsize > 0) {
               // 通知层状态值
@@ -697,7 +701,7 @@ export default {
           }
         })
         .catch((err) => {
-          console.log("err ==>", err);
+          
         });
     },
     // 已阅读
@@ -711,18 +715,15 @@ export default {
         },
       })
         .then((result) => {
-          console.log("result ==>", result);
-          // if(result.data.Code)
           this.releaseStatus = false;
           this.$emit("childByValue", true);
         })
         .catch((err) => {
-          console.log("err ==>", err);
+          
         });
     },
     // clickMe宽度
     clickW() {
-      console.log("运行了 clickW  事件!!!");
       if (this.WstateStatus) {
         this.popoverDis = false;
         this.linkTo = false;
@@ -750,7 +751,7 @@ export default {
         ) {
           this.catalogueList[this.catalogueList.length - 1].isChildren = true;
           this.catalogueList[this.catalogueList.length - 1].arrow = true;
-          console.log("this.catalogueList ==>", this.catalogueList);
+          
         }
         if (this.$route.path.indexOf("product") > -1) {
           this.catalogueList[this.catalogueList.length - 1].rightStatus = true;
@@ -785,20 +786,12 @@ export default {
         this.leftArow = true;
         this.iconSrc = "el-icon-s-fold";
         this.borderR = "3px solid #409eff";
-        console.log(
-          "运行了 clicKW 之后的 this.WstateStatus ==>",
-          this.WstateStatus
-        );
       }
       this.$emit("Wstate", this.WstateStatus);
-      console.log("this.WstateStatus ==>", this.WstateStatus);
+      
     },
     // 检测路由
     detection() {
-      console.log("this.$route.path ==>", this.$route.path);
-      console.log("this.$route.name ==>", this.$route.name);
-
-      //   console.log("this.$route.from.path ==>",this.$route.from.path);
       this.catalogueList.forEach((e) => {
         e.isActive = false;
         e.isChildrenColor = false;
@@ -832,7 +825,7 @@ export default {
           this.catalogueList[this.catalogueList.length - 1].isChildrenColor = true;
           //  上颜色
           if (e.isChildren) {
-            // console.log("e.children ===>", e.children);
+            
             if (e.name == "趣天教学视频" || e.name == "系统操作教学视频") {
               //   父颜色
               this.catalogueList[this.catalogueList.length - 2].isChildrenColor = true;
@@ -897,12 +890,10 @@ export default {
           e.isChildrenColor = true;
         }
       });
-      console.log("this.catalogueList ==>", this.catalogueList);
+      
     },
     // 侧边栏跳转路由
     gotoRouter(item, index) {
-      console.log("父级路由跳转!!!");
-      console.log("this.WstateStatus ==>",this.WstateStatus);
       if (
         (item.name == "库存管理" && index == 3) ||
         item.name == "趣天教学视频" ||
@@ -935,8 +926,8 @@ export default {
           e.arrow = this.sideStatus.arrow;
         }
       });
-      //   console.log("this.catalogueList ==>", this.catalogueList);
-      //   console.log("this.$route.meta.isBack ==>", this.$route.meta.isBck);
+      
+      
       item.isActive = true;
       item.isChildrenColor = true;
       //   检测是否有通知
@@ -945,9 +936,9 @@ export default {
     },
     // 点击展开 跳转子路由
     gotoChildren(item, ele, i) {
-      console.log("子路由跳转!!!");
+      
       if (item.name == "趣天教学视频" || item.name == "系统操作教学视频") {
-        console.log("item ==>", item);
+        
         // 去所有子颜色
         this.pathName.forEach((e) => {
           if (e.name == "help") {
@@ -968,7 +959,7 @@ export default {
               if (k == 0) {
                 el.isActive = false;
                 el.isChildrenColor = false;
-                console.log("el ==>", el);
+                
                 return;
               }
               el.isChildrenColor = false;
@@ -979,7 +970,7 @@ export default {
         item.isChildrenColor = true;
         this.$router.push({ name: "VideoCourse" });
         // 给链接
-        // console.log("ele.videoSrc ==>",ele.videoSrc);
+        
         this.setVideoSrc(ele.videoSrc);
         return;
       }
@@ -1005,8 +996,8 @@ export default {
     // 鼠标移上已经关闭的Navbar
     overNavbar(item, index) {
       this.titleIndex = index;
-      //   console.log("item ==>", item);
-      //   console.log("index ==>", index);
+      
+      
     },
     // 显示的时候触发
     getPopoverList() {
@@ -1015,7 +1006,6 @@ export default {
       } else {
         this.tipsList = this.catalogueList[this.titleIndex];
       }
-      console.log("this.tipsList.children ==>", this.tipsList.children);
     },
     ...homeActions([
       "setWstateStatus",
@@ -1032,7 +1022,7 @@ export default {
         this.timer = true;
         let that = this;
         setTimeout(function () {
-          // console.log("that.screenHeight ==>", that.screenHeight);
+          
           that.timer = false;
         }, 400);
       }

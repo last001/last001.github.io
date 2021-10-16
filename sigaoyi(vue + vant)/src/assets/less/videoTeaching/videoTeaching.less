@@ -1,0 +1,68 @@
+.videoTeaching{
+    .sreach{
+        .van-search{
+            padding: 6px 0;
+            padding-left: 12px;
+        }
+    }
+    .targe{
+        .van-sidebar-item--select::before{
+            background-color: #62afff;
+        }
+        .van-tree-select__content{
+            padding-top: 8px;
+            .list{
+                height: 55px;
+                display: flex;
+                margin-bottom: 8px;
+                border-bottom: 1px solid #f1f1f1;
+                .video{
+                    width: 40%;
+                    height: 100%;
+                    // background-color: rgba(0, 0, 0, 0.281);
+                    video{
+                        height: 100%;
+                        width: 100%;
+                    }
+                }
+                .text{
+                    width: 60%;
+                    .title{
+                        overflow: hidden;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                        font-size: 12px;
+                        margin-left: 8px;
+                    }
+                    .details{
+                        height: 39px;
+                        line-height: 65px;
+                        width: 100%;
+                        font-size: 12px;
+                        overflow:hidden ;
+                        .duration{
+                            color: #62afff;
+                            margin-left: 8px;
+                        }
+                        .timer{
+                            margin-right: 20px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .autoPlayVideo{
+        width: 100%;
+        .van-overlay{
+            background: rgba(0,0,0,.9);
+        }
+        .van-popup{
+            width: 100%;
+            video{
+                width: 100%;
+                height: auto;
+            }
+        }
+    }
+}

@@ -1,8 +1,13 @@
 <template>
-  <div class="ProductControl">
+  <div
+    class="ProductControl"
+    style="overflow: auto"
+    :style="{ height: H + 'px' }"
+  >
     <div class="main" v-title data-title="产品库"></div>
     <iframe :src="iframeSrc" style="display: none"></iframe>
-    <div class="box" :style="{ minHeight: minBoxH + 'px' }">
+    <!-- 搜索栏 -->
+    <div class="box">
       <div class="maskTop" :style="{ width: headerW }">
         <el-breadcrumb separator-class="el-icon-arrow-right">
           <el-breadcrumb-item :to="{ path: '/Home' }">首页</el-breadcrumb-item>
@@ -10,7 +15,11 @@
           <el-breadcrumb-item>产品库</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
-      <div class="hearder" :style="{ width: headerW }">
+      <div
+        class="hearder"
+        :class="openCloseState ? 'active' : ''"
+        :style="{ width: headerW }"
+      >
         <div class="classify">
           <div>类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;目：</div>
           <div>
@@ -157,7 +166,7 @@
                 placeholder="请输入"
                 v-model="inputList.title"
                 :class="inputList.title == '' ? '' : 'active'"
-                @keydown.enter="searInput(30, 1)"
+                @keydown.enter="searInput(30, 1, 'start')"
               />
             </span>
           </div>
@@ -167,7 +176,7 @@
               <input
                 type="text"
                 value=""
-                placeholder="¥最低价"
+                placeholder="￥最低价"
                 v-model="inputList.LowPrice"
                 :class="inputList.LowPrice == '' ? '' : 'active'"
               />
@@ -175,7 +184,7 @@
               <input
                 type="text"
                 value=""
-                placeholder="¥最高价"
+                placeholder="￥最高价"
                 v-model="inputList.HeightPrice"
                 :class="inputList.HeightPrice == '' ? '' : 'active'"
               />
@@ -193,185 +202,192 @@
               type="primary"
               icon="el-icon-search"
               size="small"
-              @click="searInput(30, 1)"
+              @click="searInput(30, 1, 'start')"
               >搜索</el-button
             >
           </div>
+          <!-- 收起 展开 -->
+          <div class="open-close" @click="openClose()">
+            <span>{{ openCloseText }}</span>
+            <span><i :class="openCloseCionSrc"></i></span>
+          </div>
         </div>
       </div>
-      <div class="xls">
-        <div class="addDelete">
-          <el-button
-            type="primary"
-            icon="el-icon-circle-check"
-            size="small"
-            @click="clickAll()"
-            >全选</el-button
-          >
-          <el-button type="success" icon="el-icon-brush" @click="translate()"
-            >翻译</el-button
-          >
-          <!-- <el-button
+    </div>
+    <!-- 产品 -->
+    <div
+      class="Procontent"
+      v-infinite-scroll="searInput1"
+      infinite-scroll-disabled="disabled"
+      :infinite-scroll-immediate="false"
+      v-if="tableData.length > 0"
+      :style="{ marginTop: procontentTop + 'px' }"
+    >
+      <!-- 操作数据按钮 -->
+      <div class="addDelete">
+        <el-button
+          type="primary"
+          icon="el-icon-circle-check"
+          size="small"
+          @click="clickAll()"
+          >全选</el-button
+        >
+        <el-button type="success" icon="el-icon-brush" @click="translate()"
+          >翻译</el-button
+        >
+        <!-- <el-button
             type="primary"
             icon="el-icon-add-location"
             size="small"
             @click="addPruduct()"
             >添加</el-button
           > -->
-          <el-button
-            type="danger"
-            icon="el-icon-delete-location"
-            size="small"
-            @click="delCommodity()"
-            >删除产品</el-button
-          >
-          <el-button
-            type="success"
-            icon="el-icon-delete-location"
-            size="small"
-            @click="delTranslation()"
-            >删除翻译</el-button
-          >
-          <el-button
-            type="primary"
-            icon="el-icon-s-promotion"
-            size="small"
-            @click="derive()"
-            >导出产品数据</el-button
-          >
-        </div>
-        <div class="Procontent" v-if="tableData.length > 0">
+        <el-button
+          type="danger"
+          icon="el-icon-delete-location"
+          size="small"
+          @click="delCommodity()"
+          >删除产品</el-button
+        >
+        <el-button
+          type="success"
+          icon="el-icon-delete-location"
+          size="small"
+          @click="delTranslation()"
+          >删除翻译</el-button
+        >
+        <el-button
+          type="primary"
+          icon="el-icon-s-promotion"
+          size="small"
+          @click="derive()"
+          >导出产品数据</el-button
+        >
+      </div>
+      <!-- 循环 -->
+      <div
+        class="item"
+        v-for="(item, index) in tableData"
+        :key="index"
+        :style="{ maxWidth: maxwidth + 'px' }"
+        :class="item.isActive ? 'active' : ''"
+        @mouseover="overItem(item, index)"
+        @mouseleave="leaveItem(item, index)"
+      >
+        <div class="checkDiv">
+          <el-checkbox
+            class=""
+            v-model="item.checked"
+            @click="clickSingle(item, index)"
+          ></el-checkbox>
           <div
-            class="item"
-            v-for="(item, index) in tableData"
-            :key="index"
-            :style="{ maxWidth: maxwidth + 'px' }"
-            :class="item.isActive ? 'active' : ''"
-            @mouseover="overItem(item, index)"
-            @mouseleave="leaveItem(item, index)"
+            class="translation"
+            :class="item.translationStatus == 1 ? 'active' : ''"
           >
-            <div class="checkDiv">
-              <el-checkbox
-                class=""
-                v-model="item.checked"
-                @click="clickSingle(item, index)"
-              ></el-checkbox>
-              <div
-                class="translation"
-                :class="item.translationStatus == 1 ? 'active' : ''"
-              >
-                {{ item.translationText }}
-              </div>
-              <div class="item-title">
-                <i
-                  class="el-icon-picture-outline"
-                  @mouseover="overImg(item, index)"
-                ></i>
-                <div class="carouselNum" v-show="item.imgList1.length">
-                  {{ item.imgList1.length }}
-                </div>
-                <div
-                  class="carouselImg"
-                  ref="carouselImg"
-                  v-show="item.ImgStatus"
-                  :style="{ left: carouselImgLeft + 'px' }"
-                  :class="item.imgList1.length < 5 ? 'active' : ''"
-                  @mouseleave="leaveItem(item, index)"
-                >
-                  <i
-                    class="el-icon-arrow-left"
-                    v-show="item.imgList1.length >= 5"
-                    @click="clickLeft(item, index)"
-                  ></i>
-                  <div class="img-list">
-                    <div
-                      class="v-img-list clearfix"
-                      :style="{
-                        width: vImgListW + 'px',
-                        marginLeft: vImgListMleft + 'px',
-                      }"
-                    >
-                      <div
-                        class="fl"
-                        v-for="(ele, i) in item.imgList1"
-                        :key="i"
-                        @click="showActualImg(item, ele, i)"
-                      >
-                        <img :src="ele" alt="" :onerror="errorImage" />
-                      </div>
-                    </div>
-                  </div>
-                  <i
-                    class="el-icon-arrow-right"
-                    v-show="item.imgList1.length >= 5"
-                    @click="clickRight(item, index)"
-                  ></i>
-                </div>
-              </div>
+            {{ item.translationText }}
+          </div>
+          <div class="item-title">
+            <i
+              class="el-icon-picture-outline"
+              @mouseover="overImg(item, index)"
+            ></i>
+            <div class="carouselNum" v-show="item.imgList1.length">
+              {{ item.imgList1.length }}
             </div>
-            <div class="case">
-              <div
-                class="imgDiv"
-                v-loading="item.loadingImg"
-                @click="GotoProductPage(item, index)"
-              >
-                <img
-                  :src="item.pic_url"
-                  alt="加载失败"
-                  :onerror="errorImage"
-                  @progress="progress($event)"
-                  @load="loadImg(item, index, $event)"
-                />
+            <div
+              class="carouselImg"
+              ref="carouselImg"
+              v-show="item.ImgStatus"
+              :style="{ left: carouselImgLeft + 'px' }"
+              :class="item.imgList1.length < 5 ? 'active' : ''"
+              @mouseleave="leaveItem(item, index)"
+            >
+              <i
+                class="el-icon-arrow-left"
+                v-show="item.imgList1.length >= 5"
+                @click="clickLeft(item, index)"
+              ></i>
+              <div class="img-list">
+                <div
+                  class="v-img-list clearfix"
+                  :style="{
+                    width: vImgListW + 'px',
+                    marginLeft: vImgListMleft + 'px',
+                  }"
+                >
+                  <div
+                    class="fl"
+                    v-for="(ele, i) in item.imgList1"
+                    :key="i"
+                    @click="showActualImg(item, ele, i)"
+                  >
+                    <img :src="ele" alt="" :onerror="errorImage" />
+                  </div>
+                </div>
               </div>
-              <div
-                class="name"
-                :title="item.title"
-                @click="GotoProductPage(item, index)"
-              >
-                {{ item.title }}
-              </div>
-              <div class="price" :class="item.num < 5 ? 'active' : ''">
-                <span :class="item.currencytype != 2 ? 'active' : ''">{{
-                  item.moneySymbol
-                }}</span
-                ><span>{{ item.integer }}.</span
-                ><span>{{ item.decimals }}</span>
-                <font @click="GotoStbao(item)">采集链接</font>
-                <i @click="GotoStbao(item)" class="el-icon-connection"></i>
-              </div>
+              <i
+                class="el-icon-arrow-right"
+                v-show="item.imgList1.length >= 5"
+                @click="clickRight(item, index)"
+              ></i>
             </div>
           </div>
         </div>
-        <div class="procontent1" v-else>
-          <span class="iconfont icon-zanwushuju"></span>
-          <div>暂无数据</div>
-        </div>
-        <!-- 分页 -->
-        <div class="paging">
-          <el-pagination
-            @size-change="handleSizeChange"
-            @current-change="handleCurrentChange"
-            :current-page="currentPage"
-            layout="total,slot"
-            :total="total"
-          > 
-            <span class="blockText">显示</span>
-          </el-pagination>
-          <el-pagination
-            @size-change="handleSizeChange"
-            @current-change="handleCurrentChange"
-            :current-page="currentPage"
-            :page-sizes="[30, 50, 100]"
-            :page-size="pageSize"
-            layout="sizes, prev, pager, next,slot,jumper"
-            :total="total"
-            :pager-count="11"
+        <div class="case">
+          <div
+            class="imgDiv"
+            v-loading="item.loadingImg"
+            @click="GotoProductPage(item, index)"
           >
-            <span class="ensure-btn fr" @click="clickTrue()">确定</span>
-          </el-pagination>
+            <img
+              :src="item.pic_url"
+              alt="加载失败"
+              :onerror="errorImage"
+              @progress="progress($event)"
+              @load="loadImg(item, index, $event)"
+            />
+          </div>
+          <div
+            class="name"
+            :title="item.title"
+            @click="GotoProductPage(item, index)"
+          >
+            {{ item.title }}
+          </div>
+          <div class="price" :class="item.num < 5 ? 'active' : ''">
+            <span :class="item.currencytype != 2 ? 'active' : ''">{{
+              item.moneySymbol
+            }}</span
+            ><span>{{ item.integer }}.</span><span>{{ item.decimals }}</span>
+            <font @click="GotoStbao(item)">采集链接</font>
+            <i @click="GotoStbao(item)" class="el-icon-connection"></i>
+          </div>
         </div>
       </div>
-      <!-- <footerDiv></footerDiv> -->
+      <div class="isLoading" v-if="loading">
+        <span class="text">加载中</span><span class="dot"></span>
+      </div>
+      <div class="isFinished" v-if="noMore && !errorLoading">
+        没有更多产品了
+      </div>
+      <div class="errorLoading" v-if="errorLoading">
+        加载失败，<i @click="searInput1()">重新加载</i>
+      </div>
+    </div>
+    <!-- 没有产品 -->
+    <div
+      class="procontent1"
+      :style="{ marginTop: procontentTop + 'px' }"
+      v-else
+    >
+      <span class="iconfont icon-zanwushuju"></span>
+      <div>暂无数据</div>
+    </div>
+    <!-- 页脚 -->
+    <div class="product_footer" :class="tableData.length <= 5 ? 'active' : ''">
+      ©{{
+        years
+      }}&nbsp;&nbsp;&nbsp;广州思高易网络科技有限公司&nbsp;&nbsp;&nbsp;粤ICP备19040870号
     </div>
     <div class="translate">
       <el-dialog
@@ -580,7 +596,15 @@ export default {
   data() {
     return {
       //   box minheight
+      H: "",
       minBoxH: "",
+      years: "",
+      // 搜索栏
+      openCloseState: false,
+      // openCloseText
+      openCloseText: "收起",
+      procontentTop: 200,
+      openCloseCionSrc: "el-icon-arrow-up",
       // header 的宽度
       headerW: "calc(100% - 280px)",
       //   点击翻译按钮弹出层状态值
@@ -759,22 +783,25 @@ export default {
       ],
       // 全选状态值
       AllcheckedStatus: true,
-      //  分页 currentPage
-      currentPage: 1,
-      pageSize: 30,
-      total: 0,
       //
       maxwidth: "",
       //   iframeSrc
       iframeSrc: "",
       top: "",
+      // 初始保存 页数 和 00
+      amount: "",
+      pages: "",
+      loading: false,
+      // disabled
+      apiLoading: false,
+      errorLoading: false,
     };
   },
   beforeRouteEnter(to, from, next) {
     document.body.scrollTop = document.documentElement.scrollTop = 0;
-    // console.log("进入路由之前 from.path ==>", from.path);
+
     // if(from.path == "/"){
-    //     console.log("页面刷新!!!")
+
     // }
     if (from.path == "/productDetails") {
       to.meta.isBack = true;
@@ -782,18 +809,15 @@ export default {
       to.meta.isBack = false;
     }
     next();
-    // console.log(" to.meta.isBack ==>", to.meta.isBack)
   },
   activated() {
-    console.log("产平列表的状态值 this.wastate ==>", this.wastate);
-    console.log("this.WstateStatus ==>", this.WstateStatus);
-    // console.log("进入activated !!!");
-    // console.log("this.$route.meta.isBack ==>",this.$route.meta.isBack);
-    // console.log("this.InfoData ==>",this.InfoData);
     // this.listenWastate();
     document.title = "产品库";
     this.$nextTick(() => {
       this.minBoxH = document.documentElement.clientHeight - 68 - 51;
+      this.H = document.documentElement.clientHeight;
+      let d = new Date();
+      this.years = d.getFullYear();
     });
     if (!this.$route.meta.isBack) {
       this.tableData = []; // 清空原有数据
@@ -801,47 +825,36 @@ export default {
       this.resetList();
       this.getproductList(0);
     } else {
-      console.log("不重新获取数据!!!");
       this.$route.meta.isBack = false;
     }
   },
   created() {
-    console.log("进入了created!!!!");
     if (this.WstateStatus) {
       this.headerW = "calc(100% - 280px)";
     } else {
       this.headerW = "calc(100% - 110px)";
     }
   },
-  mounted() {
-    window.addEventListener("scroll", this.scrollTop, true);
-  },
-  destroyed() {
-    window.removeEventListener("scroll", this.scrollTop, true);
-  },
   components: {
     // footerDiv,
   },
   computed: {
     ...homeState(["WstateStatus", "InfoData"]),
+    noMore() {
+      return this.apiLoading;
+    },
+    disabled() {
+      return this.loading || this.noMore;
+    },
   },
   methods: {
     //   监听侧边栏的状态值
     listenWastate() {
-      console.log("进入了检测!!!");
       if (this.wastate) {
         this.headerW = "calc(100% - 280px)";
       } else {
         this.headerW = "calc(100% - 110px)";
       }
-      console.log("this.headerW ==>", this.headerW);
-    },
-    // window.scroll 事件
-    scrollTop(e) {
-      this.top = document.documentElement.scrollTop || document.body.scrollTop;
-      // console.log('this.top ==>',this.top)  //
-      //   let ifram = document.getElementsByTagName("iframe")[2]
-      // console.log("ifram ==>",ifram)
     },
     //   重置radio input select  List
     resetList() {
@@ -868,7 +881,19 @@ export default {
       for (const key in this.inputList) {
         this.inputList[key] = "";
       }
-      //   console.log("this.inputList ==>",this.inputList);
+    },
+    // 收起 展开
+    openClose() {
+      this.openCloseState = !this.openCloseState;
+      if (this.openCloseState) {
+        this.openCloseText = "展开";
+        this.procontentTop = 105;
+        this.openCloseCionSrc = "el-icon-arrow-down";
+      } else {
+        this.openCloseText = "收起";
+        this.procontentTop = 200;
+        this.openCloseCionSrc = "el-icon-arrow-up";
+      }
     },
     // 点击单个复选框
     clickSingle(item, index) {
@@ -882,7 +907,6 @@ export default {
     },
     // 全选
     clickAll() {
-      console.log("this.tableData ==>", this.tableData);
       if (this.AllcheckedStatus) {
         this.tableData.forEach((e) => {
           e.checked = true;
@@ -931,27 +955,21 @@ export default {
           this.carouselImgLeft = -(
             this.$refs.carouselImg[index].offsetWidth - 44
           );
-          console.log(
-            "this.$refs.carouselImg[index] ==>",
-            this.$refs.carouselImg[index]
-          );
         } else {
           this.carouselImgLeft = "-255";
         }
       });
 
       this.num = 5;
-
-      //   console.log(item);
     },
     // 鼠标点击右边 icon
     clickRight(item, index) {
       this.num++;
-      console.log("this.num ==>", this.num);
+
       if (this.num == item.imgList.length + 1) {
         this.num = 5;
         this.vImgListMleft = 0;
-        console.log("后面!!!");
+
         return;
       }
       this.vImgListMleft -= 88;
@@ -959,11 +977,11 @@ export default {
     // 鼠标点击左边 icon
     clickLeft(item, index) {
       this.num--;
-      console.log("this.num ==>", this.num);
+
       if (this.num == 4) {
         this.vImgListMleft = (item.imgList.length - (this.num + 1)) * -88;
         this.num = item.imgList.length;
-        console.log("前面!!!");
+
         return;
       }
       this.vImgListMleft += 88;
@@ -1002,8 +1020,7 @@ export default {
       this.maskImgTop = 360;
 
       let count = Math.ceil((i + 1) / 7) - this.listImgNum;
-      //   console.log("i+1 ==>", i + 1);
-      console.log("count ==>", count);
+
       if (count > 0) {
         for (let k = 0; k < count; k++) {
           this.listImgDown();
@@ -1022,7 +1039,6 @@ export default {
           this.$refs.VlistImg[0].style.marginTop = 24 + "px";
         }
       });
-      console.log("this.listImgData ==>", this.listImgData);
     },
     // 鼠标移上 弹出层右边小图片
     overListImg(item, index) {
@@ -1061,7 +1077,7 @@ export default {
     listImgDown() {
       this.listImgNum++;
       this.scrollDivTop -= 546;
-      console.log("listImgNum ==>", this.listImgNum);
+
       if (Math.ceil(this.listImgData.length / 7) <= this.listImgNum) {
         this.downBtn = false;
         this.upBtn = true;
@@ -1074,7 +1090,7 @@ export default {
       if (this.lastTime - this.startTime > 250 || this.lastTime == undefined) {
         return;
       }
-      console.log("点击事件!!!");
+
       // 给动画
       this.transitionImg = this.transitionMask = "all .3s";
       this.scaleImg += 0.5;
@@ -1096,7 +1112,6 @@ export default {
       this.originMask = this.originImg;
 
       if (this.scaleImg >= 3) {
-        console.log("移除事件!!!");
         this.clickLargeStatus = false;
         this.rightClickStatus = true;
         this.scaleImg = 3;
@@ -1222,7 +1237,6 @@ export default {
         // 文字提示
         this.smallImgStatus = false;
         this.showText = "满窗口显示";
-        console.log("移除事件!!!");
       } else {
         this.clickLargeStatus = true;
         // this.rightClickStatus = true;
@@ -1334,7 +1348,6 @@ export default {
     },
     // largeImg移动事件
     moveLargeImg(e) {
-      console.log("move!!!!");
       this.transitionImg = this.transitionMask = "none";
       //   获取对象
       let dialogBox = document.querySelector(".actualImgSize .el-dialog");
@@ -1392,8 +1405,6 @@ export default {
       this.startMaskImgX = e.clientX;
       this.startMaskImgY = e.clientY;
 
-      // console.log("按下 ==>",this.startMaskImgX,this.startMaskImgY);
-
       if (this.maskImgLeft != 0 || this.maskImgTop != 0) {
         this.endMaskImgX = this.maskImgLeft;
         this.endMaskImgY = this.maskImgTop;
@@ -1403,7 +1414,6 @@ export default {
     moveMaskImg(e) {
       this.maskImgLeft = e.clientX - this.startMaskImgX + this.endMaskImgX;
       this.maskImgTop = e.clientY - this.startMaskImgY + this.endMaskImgY;
-      // console.log("this.maskImgLeft ==>",this.maskImgLeft)
 
       let actualImgBox = document.querySelector(".actualImg");
       let smallImgBox = document.querySelector(".smallImg");
@@ -1434,8 +1444,6 @@ export default {
 
       this.endMaskImgX = this.maskImgLeft;
       this.endMaskImgY = this.maskImgTop;
-
-      console.log("松开 ==>", this.endMaskImgX, this.endMaskImgX);
     },
     overMaskImg() {
       this.clickLargeStatus = false;
@@ -1446,12 +1454,8 @@ export default {
       this.moveMaskImgStatus = false;
     },
     // mask层鼠标点击
-    clickMask() {
-      console.log("右键行为,阻止默认事件 ==>");
-    },
-    rightClickMask() {
-      console.log("右键点击,阻止默认事件的行为");
-    },
+    clickMask() {},
+    rightClickMask() {},
     // mask层鼠标按下
     downMask(e) {
       this.moveMaskStatus = true;
@@ -1576,7 +1580,6 @@ export default {
         }
       }
       //
-      console.log("data ==>", data);
 
       this.translateStatus = false;
 
@@ -1594,7 +1597,7 @@ export default {
       })
         .then((result) => {
           loading.close();
-          console.log("result ==>", result);
+
           if (result.data.Code == 200) {
             for (let i = 0; i < indexList.length; i++) {
               this.tableData[indexList[i]].translationStatus = 1;
@@ -1625,7 +1628,6 @@ export default {
             type: "error",
             offset: 50,
           });
-          console.log("err ==>", err);
         });
     },
     // 跳转商品详情页面
@@ -1650,16 +1652,13 @@ export default {
     },
     // 去原链接
     GotoStbao(item) {
-      console.log("item.detail_url ==>", item.detail_url);
       window.open(item.detail_url, "_blank");
     },
     // 图片加载事件
     loadImg(item, index, e) {
       item.loadingImg = false;
     },
-    progress(e) {
-      console.log("e ==>", e);
-    },
+    progress(e) {},
     // 删除产品
     delCommodity() {
       if (sessionStorage.getItem("token") == undefined) {
@@ -1721,13 +1720,11 @@ export default {
             params: data,
           })
             .then((result) => {
-              console.log("result ==>", result);
               loading.close();
               if (result.data.code == "200") {
                 for (let i = indexList.length - 1; i >= 0; i--) {
                   this.tableData.splice(indexList[i], 1);
                 }
-                this.total = this.total - indexList.length;
                 this.$notify({
                   title: "请求成功",
                   message: result.data.msg,
@@ -1744,7 +1741,6 @@ export default {
               }
             })
             .catch((err) => {
-              console.log("err ==>", err);
               loading.close();
               this.$notify({
                 title: "请求错误",
@@ -1812,14 +1808,12 @@ export default {
         params: data,
       })
         .then((result) => {
-          console.log("result ==>", result);
           loading.close();
           if (result.data.code == "200") {
             if (this.langugeList[this.langugeIndex].value != 0) {
               for (let i = indexList.length - 1; i >= 0; i--) {
                 this.tableData.splice(indexList[i], 1);
               }
-              this.total = this.total - indexList.length;
             } else {
               for (let i = 0; i < indexList.length; i++) {
                 this.tableData[indexList[i]].translationStatus = 0;
@@ -1842,7 +1836,6 @@ export default {
           }
         })
         .catch((err) => {
-          console.log("err ==>", err);
           loading.close();
           this.$notify({
             title: "请求错误",
@@ -1970,7 +1963,7 @@ export default {
         data["userName"] = this.InfoData.userName;
         delete data.ids;
       }
-      console.log("data ==>", data);
+
       this.deriveStatus = false;
       //   发起请求
       let loading = this.$loading({
@@ -1986,7 +1979,7 @@ export default {
       })
         .then((result) => {
           loading.close();
-          console.log("result ==>", result);
+
           if (result.data.code == 200) {
             this.$notify({
               title: "请求成功",
@@ -2029,7 +2022,6 @@ export default {
         e.selected = false;
       });
       array[index].selected = true;
-      console.log("string ==>", string);
 
       if (string == "classNum1") {
         if (index == 0) {
@@ -2054,7 +2046,6 @@ export default {
           },
         })
           .then((result) => {
-            console.log("result ==>", result);
             let classObj = {
               catalogId: 99,
               catalogLevel: 0,
@@ -2068,9 +2059,7 @@ export default {
             result.data.catalogs.unshift(classObj);
             this.classNum2 = result.data.catalogs;
           })
-          .catch((err) => {
-            console.log("err ==>", err);
-          });
+          .catch((err) => {});
       } else if (string == "classNum2") {
         if (index == 0) {
           this.classNum3Index = 0;
@@ -2093,7 +2082,6 @@ export default {
           },
         })
           .then((result) => {
-            console.log("result ==>", result);
             let classObj = {
               catalogId: 99,
               catalogLevel: 0,
@@ -2107,15 +2095,13 @@ export default {
             result.data.catalogs.unshift(classObj);
             this.classNum3 = result.data.catalogs;
           })
-          .catch((err) => {
-            console.log("err ==>", err);
-          });
+          .catch((err) => {});
       } else if (string == "languge") {
-        this.searInput(30, 1);
+        this.searInput(30, 1, "start");
       }
     },
     // 搜索按钮  sreach
-    searInput(amount, pages) {
+    searInput(amount, pages, string) {
       if (sessionStorage.getItem("token") == undefined) {
         alert("请先登录");
         this.$router.push({ name: "Login" });
@@ -2127,7 +2113,22 @@ export default {
         this.$router.push({ name: "Login" });
         return;
       }
-      console.log("this.InfoData ==>", this.InfoData);
+      if (string == "start") {
+        //   发起请求
+        var loading = this.$loading({
+          lock: false,
+          text: "搜索中...",
+          spinner: "el-icon-loading",
+          background: "rgba(0, 0, 0, 0.7)",
+        });
+        amount = 30;
+        pages = 1;
+        // 复制 当前list
+        var copyTableData = JSON.parse(JSON.stringify(this.tableData));
+      } else {
+        pages++;
+        // console.log("pages ==>",pages);
+      }
       let data = {
         userId: this.InfoData.id,
         amount: amount,
@@ -2141,26 +2142,37 @@ export default {
         translationStatus: 99,
         title: this.inputList.title,
       };
-      //   请求
-      let loading = this.$loading({
-        lock: false,
-        text: "加载中...",
-        spinner: "el-icon-loading",
-        background: "rgba(0, 0, 0, 0.7)",
-      });
-      console.log("data  ==>", data);
+      //   laoding
+      this.loading = true;
+      this.errorLoading = false;
+      this.apiLoading = false;
+
       this.$axios({
         method: "POST",
         url: "/sigaoyi/NEWproductLibrary",
         params: data,
       })
         .then((result) => {
-          loading.close();
-          document.body.scrollTop = document.documentElement.scrollTop = 0;
-          console.log("result ==>", result);
+          //   console.log("result ==>", result);
           if (result.data.Code == 200) {
+            // laoding
+            this.loading = false;
+            this.errorLoading = false;
+            //string == "start"
+            if (string == "start") {
+              this.tableData = [];
+              loading.close();
+              this.$notify({
+                title: "请求成功",
+                message: result.data.msg,
+                type: "success",
+                offset: 50,
+              });
+            }
+            // 找不到
             if (result.data.products.length == 0) {
               this.tableData = result.data.products;
+              this.apiLoading = true;
               this.$notify({
                 title: "请求成功",
                 message: "找不到该产品",
@@ -2169,6 +2181,12 @@ export default {
               });
               return;
             }
+            this.apiLoading = false;
+            // 已完成
+            if (result.data.products.length < 30) {
+              this.apiLoading = true;
+            }
+
             result.data.products.forEach((e, i) => {
               // item.active
               e["isActive"] = false;
@@ -2206,8 +2224,8 @@ export default {
               } else {
                 e["translationText"] = "";
               }
+              // 图片处理
               if (e.imgList.length > 0) {
-                // 图片处理
                 e["imgList1"] = [...e.imgList];
                 for (let i = 0; i < e.imgList1.length; i++) {
                   e.imgList1[i] = "";
@@ -2215,26 +2233,25 @@ export default {
               } else {
                 e["imgList1"] = [];
               }
+
               // 图片是否已经加载过
-              this.tableData.forEach((el) => {
-                if (el.pic_url == e.pic_url) {
-                  if (!el.loadingImg) {
-                    // 已加载
-                    e.loadingImg = false;
+              if (string == "start") {
+                copyTableData.forEach((el) => {
+                  if (el.id == e.id) {
+                    if (!el.loadingImg) {
+                      // 已加载
+                      e.loadingImg = false;
+                    }
                   }
-                }
-              });
+                });
+              }
+              this.tableData.push(e);
             });
-            this.tableData = result.data.products;
-            this.pageSize = result.data.page.amount;
-            this.currentPage = result.data.page.pages;
-            this.total = result.data.page.total;
-            this.$notify({
-              title: "请求成功",
-              message: result.data.msg,
-              type: "success",
-              offset: 50,
-            });
+
+            // console.log("this.tableData ==>", this.tableData);
+
+            this.amount = result.data.page.amount;
+            this.pages = result.data.page.pages;
             // 类目1
             let classObj = {
               catalogId: 99,
@@ -2249,42 +2266,41 @@ export default {
             result.data.catalogs.unshift(classObj);
             this.classNum1 = result.data.catalogs;
           } else {
-            this.$notify({
-              title: "请求失败",
-              message: result.data.msg,
-              type: "warning",
-              offset: 50,
-            });
+            // laoding
+            this.loading = false;
+            this.apiLoading = true;
+            this.errorLoading = true;
+            if (string == "start") {
+              this.$notify({
+                title: "请求失败",
+                message: result.data.msg,
+                type: "warning",
+                offset: 50,
+              });
+            }
           }
         })
         .catch((err) => {
-          loading.close();
-          document.body.scrollTop = document.documentElement.scrollTop = 0;
-          console.log("err ==>", err);
-          this.$notify({
-            title: "请求错误",
-            message: "系统业务繁忙,请稍后再试",
-            type: "error",
-            offset: 50,
-          });
+          // console.log("err ==>",err);
+          // laoding
+          if (string == "start") {
+            loading.close();
+            this.$notify({
+              title: "请求错误",
+              message: "系统业务繁忙,请稍后再试",
+              type: "error",
+              offset: 50,
+            });
+          }
+          this.loading = false;
+          this.apiLoading = true;
+          this.errorLoading = true;
         });
     },
-    // 分页事件
-    handleSizeChange(val) {
-      //   console.log(`每页 ${val} 条`);
-      this.pageSize = val;
-      this.searInput(this.pageSize, this.currentPage);
-    },
-    // 去第几页
-    handleCurrentChange(val) {
-      //   console.log(`当前页: ${val}`);
-      this.currentPage = val;
-      this.searInput(this.pageSize, this.currentPage);
-    },
-    // 点击确定去哪一页
-    clickTrue() {
-      this.handleCurrentChange(this.currentPage);
-      // console.log('cccccccccc ==>', this.currentPage)
+    searInput1() {
+      //   console.log("获取数据")
+      //   this.loading = true;
+      this.searInput(this.amount, this.pages, "search");
     },
     // 获取产品详情
     getproductList(language) {
@@ -2318,7 +2334,6 @@ export default {
         },
       })
         .then((result) => {
-          console.log("result ==>", result);
           loading.close();
           if (result.data.Code == 200) {
             if (result.data.products.length == 0) {
@@ -2387,9 +2402,8 @@ export default {
               });
             });
             this.tableData = result.data.products;
-            this.pageSize = result.data.page.amount;
-            this.currentPage = result.data.page.pages;
-            this.total = result.data.page.total;
+            this.amount = result.data.page.amount;
+            this.pages = result.data.page.pages;
             // 赋值个人信息
             this.setInfoData(result.data.userinfo);
             // 类目1
@@ -2417,7 +2431,6 @@ export default {
         })
         .catch((err) => {
           loading.close();
-          console.log("err ==>", err);
           this.$notify({
             title: "请求错误",
             message: "系统业务繁忙,请稍后再试",

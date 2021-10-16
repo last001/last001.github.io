@@ -357,8 +357,6 @@ export default {
   methods: {
     // 表格颜色
     getRowClass(row, column, rowIndex, columnIndex) {
-      // console.log(row, column, rowIndex, columnIndex)
-      //   console.log("row, column, rowIndex, columnIndex ==>",row, column, rowIndex, columnIndex)
       if (row.rowIndex != 0) {
         return {
           background: "#5d9fe2d6",
@@ -370,7 +368,6 @@ export default {
     },
     // 点击部门
     clickDeparment(index, row) {
-      console.log("index,row ==>", index, row);
       let loading = this.$loading({
         lock: false,
         text: "加载中...",
@@ -405,8 +402,7 @@ export default {
     // table footer 第一个
     getSummaries(param) {
       const { columns, data } = param;
-      //   console.log("columns列 ==>", columns);
-      //   console.log("data行 ==>", data);
+
       //   const sums = [];
       columns.forEach((column, index) => {
         if (index === 0) {
@@ -452,11 +448,9 @@ export default {
           index == columns.length - 4
         ) {
           sums[index] = "- -";
-          //   console.log("sums ==>", sums);
         }
-        // console.log("index ==>",index)
+
         this.firstData.map((v, i) => {
-          // console.log("v ==>",v)
           if (i != 0 && i != 12 && i != 13) {
             if (i == index) {
               v = v / this.firstData[11];
@@ -466,7 +460,7 @@ export default {
           }
         });
       });
-      // console.log('sums ==>',sums)
+
       return sums;
     },
     // 合计的值
@@ -481,7 +475,6 @@ export default {
           }
         }
       });
-      //   console.log(" this.firstData ==>", this.firstData);
     },
     // this.firstData 排序
     firstDataSort() {
@@ -492,14 +485,11 @@ export default {
           });
         }
       });
-      //   console.log("this.firstData ==>",this.firstData)
 
-      //   console.log("this.firstData[0] ==>", this.firstData[0]);
       this.AllProportion();
     },
     // 百分比
     AllProportion() {
-      //   console.log('this.firstData ==>[1]',this.firstData[1])
       this.copyTableData.forEach((e) => {
         this.proportion = 0;
         for (const key in e) {
@@ -510,12 +500,9 @@ export default {
             }
             this.proportion = e[key] / this.firstData[1];
             e.proportion = (Number(this.proportion) * 100).toFixed(2) + "%";
-            console.log("this.proportion ==>", this.proportion);
           }
-          // console.log('e["proportion"] ==>',e["proportion"])
         }
       });
-      console.log("copyTableData ==>", this.copyTableData);
     },
     //
     handleSizeChange() {},

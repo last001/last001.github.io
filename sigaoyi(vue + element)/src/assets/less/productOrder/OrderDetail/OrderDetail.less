@@ -11,7 +11,7 @@
     padding-bottom: 60px;
 
     input {
-      padding:2px 0;
+      padding: 2px 0;
       text-indent: 8px;
       border-radius: 4px;
       border: 1px solid #777;
@@ -67,7 +67,7 @@
               border: 1px solid #409eff;
             }
 
-            &:focus{
+            &:focus {
               outline-offset: 0px;
               border: 1px solid #409eff;
             }
@@ -103,7 +103,7 @@
                   border: 1px solid #409eff;
                 }
 
-                &:focus{
+                &:focus {
                   outline-offset: 0px;
                   border: 1px solid #409eff;
                 }
@@ -121,9 +121,9 @@
           }
         }
 
-        .international{
-          div{
-            &:nth-child(2){
+        .international {
+          div {
+            &:nth-child(2) {
               margin-left: 30px;
             }
           }
@@ -188,7 +188,7 @@
                   border: 1px solid #409eff;
                 }
 
-                &:focus{
+                &:focus {
                   outline-offset: 0px;
                   border: 1px solid #409eff;
                 }
@@ -253,7 +253,7 @@
                 border: 1px solid #c2c2c2;
                 outline: none;
 
-                &:focus{
+                &:focus {
                   outline-offset: 0px;
                   border: 1px solid #409eff;
                 }
@@ -304,7 +304,7 @@
                 outline: none;
                 padding-right: 4px;
 
-                &:focus{
+                &:focus {
                   outline-offset: 0px;
                   border: 1px solid #409eff;
                 }
@@ -375,7 +375,7 @@
                 border: 1px solid #c2c2c2;
                 outline: none;
 
-                &:focus{
+                &:focus {
                   outline-offset: 0px;
                   border: 1px solid #409eff;
                 }
@@ -389,7 +389,7 @@
                 }
               }
 
-              
+
             }
           }
 
@@ -441,7 +441,7 @@
               border: 1px solid #409eff;
             }
 
-            &:focus{
+            &:focus {
               outline-offset: 0px;
               border: 1px solid #409eff;
             }
@@ -480,7 +480,7 @@
                   background-color: #f8f8f8;
                 }
 
-                &:focus{
+                &:focus {
                   outline-offset: 0px;
                   border: 1px solid #409eff;
                 }
@@ -512,7 +512,7 @@
                     margin-left: 15px;
                   }
 
-                  &.active{
+                  &.active {
                     margin-left: 0;
                   }
                 }
@@ -578,7 +578,7 @@
                   border: 1px solid #409eff;
                 }
 
-                &:focus{
+                &:focus {
                   outline-offset: 0px;
                   border: 1px solid #409eff;
                 }
@@ -609,7 +609,7 @@
               border: 1px solid #409eff;
             }
 
-            &:focus{
+            &:focus {
               outline-offset: 0px;
               border: 1px solid #409eff;
             }
@@ -655,7 +655,7 @@
                   color: #999;
                 }
 
-                &:focus{
+                &:focus {
                   outline-offset: 0px;
                   border: 1px solid #409eff;
                 }
@@ -681,7 +681,7 @@
                 border: 1px solid #409eff;
               }
 
-              &:focus{
+              &:focus {
                 outline-offset: 0px;
                 border: 1px solid #409eff;
               }
@@ -706,7 +706,7 @@
                   text-align: center;
                   text-indent: 0;
 
-                  &.active{
+                  &.active {
                     width: 98px;
                   }
                 }
@@ -761,14 +761,17 @@
         outline: none;
         border: 1px solid #c2c2c2;
         width: 100%;
-        &:first-child{
+
+        &:first-child {
           margin-right: 100px;
         }
+
         &:nth-child(2) {
           &:hover {
-            border: 1px solid #409eff; 
+            border: 1px solid #409eff;
           }
-          &:focus{
+
+          &:focus {
             outline-offset: 0px;
             border: 1px solid #409eff;
           }
@@ -897,6 +900,7 @@
           width: 100%;
           height: 100%;
           position: relative;
+          cursor: pointer;
 
           i {
             position: absolute;
@@ -904,12 +908,23 @@
             top: 6px;
             font-size: 22px;
             cursor: pointer;
+            z-index: 99;
           }
 
-          img {
+          .demo-image__preview {
             width: 100%;
             height: 100%;
-            vertical-align: bottom;
+
+            .el-image {
+              width: 100%;
+              height: 100%;
+
+              img {
+                width: 100%;
+                height: 100%;
+                vertical-align: bottom;
+              }
+            }
           }
         }
 

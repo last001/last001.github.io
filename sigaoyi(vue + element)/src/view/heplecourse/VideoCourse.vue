@@ -24,30 +24,28 @@ import "../../assets/less/videoCourse/videoCourse.css";
 export default {
   data() {
     return {
-        src:"http://www.ec-sigaoyi.com/wenjian/videotutorial/趣天/变体修改.mp4",
+      src: "http://www.ec-sigaoyi.com/wenjian/videotutorial/趣天/变体修改.mp4",
     };
   },
   beforeRouteEnter(to, from, next) {
     document.body.scrollTop = document.documentElement.scrollTop = 0;
     next();
   },
-  created() {
-  },
+  created() {},
   components: {
     // footerDiv,
   },
   computed: {
-    ...homeState(["WstateStatus","videoSrc"]),
+    ...homeState(["WstateStatus", "videoSrc"]),
   },
   methods: {
-      getSrc(){
-          this.src = this.videoSrc;
-          console.log("this.src ==>",this.src);
-      },
-    ...homeActions(["setWstateStatus","setVideoSrc"]),
+    getSrc() {
+      this.src = this.videoSrc;
+    },
+    ...homeActions(["setWstateStatus", "setVideoSrc"]),
   },
   watch: {
-      videoSrc:"getSrc"
-  }
+    videoSrc: "getSrc",
+  },
 };
 </script>
