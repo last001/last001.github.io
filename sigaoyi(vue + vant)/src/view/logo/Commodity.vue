@@ -69,7 +69,8 @@
               </div>
               <div class="name" @click="clickList(item)">{{ item.title }}</div>
               <div class="price">
-                ¥{{ item.price }}
+                <span>¥{{ item.price }}</span>
+                <span v-show="item.status == 1">已刊登</span>
               </div>
               <div class="count">
                 <span
@@ -89,21 +90,6 @@
                 icon-size="24px"
                 shape="square"
               ></van-checkbox>
-            </div>
-            <!-- btn -->
-            <div class="btn">
-              <van-button type="danger" size="mini" @click="deleteList()"
-                >删除产品</van-button
-              >
-              <van-button
-                type="danger"
-                size="mini"
-                @click="deleteTranslate()"
-                >删除翻译</van-button
-              >
-              <van-button type="primary" size="mini" @click="translate()"
-                >翻译产品</van-button
-              >
             </div>
           </div>
           <!-- 无产品 -->
@@ -135,6 +121,18 @@
         <van-skeleton avatar-size="100px" avatar avatar-shape="square" />
         <van-skeleton :row="3" :row-width="rowWidth" />
       </div>
+    </div>
+    <!-- btn -->
+    <div class="btn" v-if="nextTickStatus">
+      <van-button type="danger" size="mini" @click="deleteList()"
+        >删除产品</van-button
+      >
+      <van-button type="danger" size="mini" @click="deleteTranslate()"
+        >删除翻译</van-button
+      >
+      <van-button type="primary" size="mini" @click="translate()"
+        >翻译产品</van-button
+      >
     </div>
     <!-- 分享栏 -->
     <van-share-sheet
@@ -173,7 +171,7 @@ export default {
       // 搜索内容
       SreachVal: "",
       screenList: [
-        { name: "源语言", isActive: true, value: 0 },
+        { name: "原语言", isActive: true, value: 0 },
         { name: "日语", isActive: false, value: 2 },
         { name: "英语", isActive: false, value: 1 },
       ],
@@ -220,8 +218,8 @@ export default {
       // 翻译弹出层 状态 + radio
       translateState: false,
       translateRadio: "1",
-      // 异步请求 的 laodding   
-      stopGetProduct:true,
+      // 异步请求 的 laodding
+      stopGetProduct: true,
     };
   },
   beforeRouteEnter(to, from, next) {
@@ -237,7 +235,7 @@ export default {
   activated() {
     console.log("产品 ==>", this.$route.meta.isBack);
     if (!this.$route.meta.isBack) {
-       this.infoData = JSON.parse(sessionStorage.getItem("infoData"));
+      this.infoData = JSON.parse(sessionStorage.getItem("infoData"));
       if (this.infoData == null || this.infoData == undefined) {
         this.nextTickStatus = true;
         this.productList = [];
@@ -248,11 +246,11 @@ export default {
         this.productList = [];
         this.empty = true;
         this.nextTickStatus = false;
-        this.screenList.forEach(e => {
-            e.isActive = false;
-            if(e.name == "源语言"){
-                e.isActive = true;
-            }
+        this.screenList.forEach((e) => {
+          e.isActive = false;
+          if (e.name == "原语言") {
+            e.isActive = true;
+          }
         });
         this.getCommodity("start");
       }
@@ -261,9 +259,7 @@ export default {
       this.$route.meta.isBack = false;
     }
   },
-  created() {
-     
-  },
+  created() {},
   mounted() {},
   methods: {
     //   返回上一级
@@ -389,18 +385,18 @@ export default {
     },
     // 获取产品详情
     getCommodity(string) {
-        let data = {
-          userId: this.infoData.id,
-          amount: 30,
-          pages: 1,
-          title: "",
-          language: 0,
+      let data = {
+        userId: this.infoData.id,
+        amount: 30,
+        pages: 1,
+        title: "",
+        language: 0,
+      };
+      this.screenList.forEach((e) => {
+        if (e.isActive) {
+          data.language = e.value;
         }
-        this.screenList.forEach(e => {
-            if(e.isActive){
-                data.language = e.value;
-            }
-        });
+      });
       let loading = this.$toast.loading({
         message: "加载中...",
         forbidClick: true,
@@ -410,7 +406,7 @@ export default {
       this.$axios({
         method: "POST",
         url: "/sigaoyi/NEWproductLibrary",
-        params: data
+        params: data,
       })
         .then((result) => {
           loading.clear();
@@ -444,11 +440,11 @@ export default {
               });
 
               //  判断 是否已经获取完成
-              if(data.amount > result.data.products.length){
-                  this.finishedText = "没有更多的产品信息了";
-                  this.stopGetProduct = true;
-              }else{
-                   this.stopGetProduct = false;
+              if (data.amount > result.data.products.length) {
+                this.finishedText = "没有更多的产品信息了";
+                this.stopGetProduct = true;
+              } else {
+                this.stopGetProduct = false;
               }
             } else {
               this.$toast("该用户还有没产品");
@@ -482,7 +478,7 @@ export default {
     searchCommodity(string) {
       let data = {
         userId: this.infoData.id,
-        amount: this.amount,  
+        amount: this.amount,
         pages: this.pages,
         platform: 99,
         status: 99,
@@ -540,13 +536,13 @@ export default {
                     "http://www.ec-sigaoyi.com/sigaoyi/assets/img/%E5%9B%BE%E7%89%87.jpg";
                 }
               });
-              
+
               //  判断 是否已经获取完成
-              if(data.amount > result.data.products.length){
-                  this.stopGetProduct = true;
-                  this.finishedText = "没有更多的产品信息了";
-              }else{
-                   this.stopGetProduct = false;
+              if (data.amount > result.data.products.length) {
+                this.stopGetProduct = true;
+                this.finishedText = "没有更多的产品信息了";
+              } else {
+                this.stopGetProduct = false;
               }
               this.$toast(result.data.msg);
             } else {
@@ -653,10 +649,7 @@ export default {
       ) {
         for (let i = 0; i < this.productList.length; i++) {
           if (this.productList[i].checked) {
-            if (
-              this.productList[i].translationStatus == 1 ||
-              this.productList[i].translationStatus == ""
-            ) {
+            if (this.productList[i].translationStatus != 0) {
               this.ids += "'" + this.productList[i].id + "',";
               this.indexList.push(i);
             }

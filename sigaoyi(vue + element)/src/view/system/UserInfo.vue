@@ -188,8 +188,8 @@ export default {
       total: 0,
       sreachList: {
         revirwStatus: 99,
-        pages: this.currentPage,
-        amount: this.pageSize,
+        pages: 1,
+        amount: 30,
         userName: "",
       },
       //拿数据loadingList 全屏loading 表格loading
@@ -386,6 +386,7 @@ export default {
         params: data,
       })
         .then((result) => {
+            console.log("result ==>",result);
           // 搜索loading
           if (!loadingList.flag) {
             setTimeout(() => {

@@ -150,7 +150,7 @@
           </div>
           <div class="lists">
             <div>
-              <span>代理产品<i class="mustIcon">*</i></span>
+              <span>待理产品<i class="mustIcon">*</i></span>
               <input type="text" placeholder="必须填" />
             </div>
             <div>

@@ -148,18 +148,54 @@
     .table {
       padding: 10px;
       padding-top: 0;
-
+      
       .v-table {
-        width: calc(100% - 20px);
         background-color: #fff;
+        width: calc(100% - 20px);
         padding: 10px;
         border-radius: 5px;
-        table{
+        .save{
           width: 100%;
+          text-align: right;
+          button{
+            padding: 12px 10px;
+            border-radius: 3px;
+          }
+        }
+        table{
+          margin-top: 10px;
+          width: 100%;
+          border: none;
           tr{
+            width: 100%;
+            display: flex;
             td, th{
+              width: 20%;
               height: 24px;
               text-align: center;
+              border: 1px solid #808080;
+              line-height: 24px;
+              input{
+                width: 100%;
+                outline: none;
+                border: none;
+                background-color: #fff;
+                color: #444;
+                padding: 0;
+                text-align: center;
+              }
+            }
+            td{
+              flex: 1;
+              padding: 4px 0;
+              &:last-child{
+                span{
+                  display: inline-block;
+                  width: 100%;
+                  text-decoration: underline;
+                  color: #409eff;
+                }
+              }
             }
           }
         }
@@ -231,7 +267,7 @@
       text-align: center;
       padding: 8px 0;
       background-color: #fff;
-      box-shadow: 0 -5px 10px #b5b5b5a3;
+      box-shadow: 0 -2px 6px #b5b5b5a3;
       button{
         padding:0 60px;
         height: 38px;

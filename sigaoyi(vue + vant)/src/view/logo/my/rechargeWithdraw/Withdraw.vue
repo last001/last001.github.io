@@ -80,18 +80,18 @@ export default {
           text: "支付宝提现",
           remarkText: "",
         },
-        {
-          checked: false,
-          imgSrc: require("../../../../assets/img/wecharIcon.png"),
-          text: "微信提现",
-          remarkText: "",
-        },
-        {
-          checked: false,
-          imgSrc: require("../../../../assets/img/xianxia.png"),
-          text: "银行卡提现",
-          remarkText: "",
-        },
+        // {
+        //   checked: false,
+        //   imgSrc: require("../../../../assets/img/wecharIcon.png"),
+        //   text: "微信提现",
+        //   remarkText: "",
+        // },
+        // {
+        //   checked: false,
+        //   imgSrc: require("../../../../assets/img/xianxia.png"),
+        //   text: "银行卡提现",
+        //   remarkText: "",
+        // },
       ],
     };
   },

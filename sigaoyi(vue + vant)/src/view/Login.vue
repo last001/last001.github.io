@@ -471,9 +471,12 @@ export default {
               result.data.userinfo.balance = result.data.userinfo.balance.toFixed(
                 2
               );
+              // 密码   
               let user = result.data.userinfo;
               user.userPassword = "xxxxxxxxxxxx";
               sessionStorage.setItem("infoData", JSON.stringify(user));
+              // 销售额 利润 等。   
+              sessionStorage.setItem("profitData",JSON.stringify(result.data.profit))
               // cookie 记住密码
               if (this.isChecked) {
                 // Encrypt 加密

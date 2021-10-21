@@ -351,14 +351,14 @@ export default {
           tooltip: "指标说明",
         },
         {
-          title: "代发货",
+          title: "待发货",
           num: 0,
           className: "up",
           showState: true,
           detail: "取消要求/取消中",
           numTwo: 0,
           time: "运送延期  0",
-          tooltip: "代发货订单",
+          tooltip: "待发货订单",
         },
         {
           title: "本年销售额",

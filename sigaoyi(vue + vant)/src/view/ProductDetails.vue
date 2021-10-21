@@ -68,22 +68,29 @@
       <!-- 表格 -->
       <div class="table">
         <div class="v-table">
+          <div class="save">
+            <van-button type="info" size="mini" @click="addTable()"
+              >添加</van-button
+            >
+          </div>
           <table border="1" rules="all">
             <tr>
               <th>类型</th>
               <th>名称</th>
               <th>英文</th>
               <th>日文</th>
-              <th>库存</th>
               <th>加价</th>
+              <th>操作</th>
             </tr>
             <tr v-for="(item, index) in variants" :key="index">
-              <td>{{ item.type }}</td>
-              <td>{{ item.name }}</td>
-              <td>{{ item.name_en }}</td>
-              <td>{{ item.name_jp }}</td>
-              <td>{{ item.stock }}</td>
-              <td>{{ item.markup }}</td>
+              <td><input disabled type="text" v-model="item.type" /></td>
+              <td><input disabled type="text" v-model="item.name" /></td>
+              <td><input disabled type="text" v-model="item.name_en" /></td>
+              <td><input disabled type="text" v-model="item.name_jp" /></td>
+              <td><input disabled type="text" v-model="item.markup" /></td>
+              <td>
+                <span @click="tableExit(item)">编辑</span>
+              </td>
             </tr>
           </table>
         </div>
@@ -250,15 +257,7 @@ export default {
     },
     // 返回
     goBack() {
-      this.$toast.loading({
-        message: "加载中...",
-        forbidClick: true,
-        loadingType: "spinner",
-        duration: "600",
-      });
-      setTimeout(() => {
-        this.$router.push({ name: "Commodity" });
-      }, 600);
+      this.$router.push({ name: "Commodity" });
     },
     // 去 修改页面
     goChange() {
@@ -307,11 +306,11 @@ export default {
               this.catalog2 = result.data.catalog2.catalogName;
               // 运费编号
               this.catalog2Num = result.data.catalog2.catalogId;
-            }else{
-                this.catalog0 = "";
-                this.catalog1 = "";
-                this.catalog2 = "";
-                this.catalog2Num = 0;
+            } else {
+              this.catalog0 = "";
+              this.catalog1 = "";
+              this.catalog2 = "";
+              this.catalog2Num = 0;
             }
           } else {
             this.$toast(result.data.msg);
@@ -345,6 +344,22 @@ export default {
           language: this.$route.query.language,
           catalog2Num: this.catalog2Num,
         },
+      });
+    },
+    // 变体编辑
+    tableExit(item) {
+      this.$router.push({
+        name: "Changetable",
+        query: { item: JSON.stringify(item), productId: this.$route.query.id },
+      });
+    },
+    addTable() {
+      let item = {
+        id: 0,
+      };
+      this.$router.push({
+        name: "Changetable",
+        query: { item: JSON.stringify(item), productId: this.$route.query.id },
       });
     },
   },

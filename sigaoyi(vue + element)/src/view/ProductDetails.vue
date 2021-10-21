@@ -142,11 +142,11 @@
                   </option>
                 </select>
               </div>
-              <div class="classs_number">
+              <!-- <div class="classs_number">
                 编码：{{ largeList[largeIndex].catalogId }}，{{
                   mediumList[mediumIndex].catalogId
                 }}，{{ smallList[smallIndex].catalogId }}
-              </div>
+              </div> -->
             </div>
             <div class="type">
               <span>类型</span>
@@ -1847,7 +1847,7 @@ export default {
       })
         .then((result) => {
           loading.close();
-
+          console.log('result ==>',result);
           if (result.data.Code == 200) {
             document.title = result.data.product.title;
             //   个人信息
@@ -2069,6 +2069,7 @@ export default {
           },
         })
           .then((result) => {
+            console.log("result ==>",result);
             let freightObj = {
               ShippingName: "全部",
               ShippingNo: 0,

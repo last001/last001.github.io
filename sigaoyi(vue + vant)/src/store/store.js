@@ -14,10 +14,11 @@ const store = new Vuex.Store({
             title:"",
             // 为处理的 1 || 2
             handleIndex:"",
-
         },
         // 用户列表
         userLists:[],
+        // logo footer 的小红点
+        isDot:false,
     },       
     //修改state
     mutations: {

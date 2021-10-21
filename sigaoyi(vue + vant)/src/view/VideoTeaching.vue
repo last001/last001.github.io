@@ -75,7 +75,7 @@ export default {
       //   分类循坏数组
       itemList: [
         {
-          text: "趣天视频教学",
+          text: "趣天教学视频",
           children: [
             {
               text: "变体修改",
@@ -136,7 +136,7 @@ export default {
           ],
         },
         {
-          text: "系统视频",
+          text: "系统操作视频",
           children: [
             {
               text: "系统视频1",
@@ -164,15 +164,7 @@ export default {
   methods: {
     //   返回
     onClickLeft() {
-      this.$toast.loading({
-        message: "加载中...",
-        forbidClick: true,
-        loadingType: "spinner",
-        duration: "600",
-      });
-      setTimeout(() => {
         this.$router.back();
-      }, 600);
     },
     // 显示搜索
     onClickRight() {

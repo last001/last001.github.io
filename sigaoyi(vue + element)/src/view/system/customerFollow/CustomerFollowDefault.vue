@@ -188,7 +188,7 @@
                   prop="selfBuild"
                   label="自建量"
                 ></el-table-column>
-                <el-table-column prop="agency" label="代理量"></el-table-column>
+                <el-table-column prop="agency" label="待理量"></el-table-column>
                 <el-table-column
                   prop="synchronization"
                   label="同步量"

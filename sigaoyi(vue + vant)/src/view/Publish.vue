@@ -4,9 +4,11 @@
       <van-nav-bar
         title="刊登产品"
         left-text="返回"
+        right-text="清空价格公示"
         left-arrow
         fixed
         @click-left="onClickLeft"
+        @click-right="priceCount = ''"
       />
     </div>
     <div class="content">
@@ -188,6 +190,10 @@ export default {
       }
       if(this.freightList.value == "0"){
           this.$toast('请先选择运费编号');
+          return;
+      }
+      if(this.priceCount == ""){
+          this.$toast("请先输入产品价格");
           return;
       }
       // loading

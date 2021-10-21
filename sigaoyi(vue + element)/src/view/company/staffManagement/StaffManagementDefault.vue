@@ -75,7 +75,7 @@
               ></el-table-column>
               <el-table-column
                 prop="PayForAnotherFreight"
-                label="代付费用"
+                label="待付费用"
               ></el-table-column>
               <el-table-column
                 prop="balance"

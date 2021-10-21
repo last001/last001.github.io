@@ -1,5 +1,5 @@
 <template>
-  <div class="collection" :style="{ minHeight: H + 'px' }">
+  <div class="collection" :style="{ minHeight: H - 50 + 'px' }">
     <div class="title">
       <van-nav-bar title="采集" left-text="返回" right-text="清空" left-arrow fixed @click-left="onClickLeft"  @click-right="clearVal" />
     </div>
@@ -96,6 +96,7 @@
     <div class="link">
       <van-field
         v-model="linkSrc"
+        clearable
         rows="4"
         autosize
         label="链接"

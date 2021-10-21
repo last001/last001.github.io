@@ -1,13 +1,22 @@
 <template>
-  <div class="recharge" :style="{ height: H + 'px' }">
+  <div class="recharge" :style="{ minHeight: H - 30 + 'px' }">
     <van-nav-bar
       title="充值"
       left-text="返回"
       left-arrow
+      fixed
       @click-left="onClickLeft"
-    />
+    >
+      <template #right>
+        <span>上传图片</span>
+        <input @change="updata($event)" type="file" ref="uploadImg" />
+      </template>
+    </van-nav-bar>
     <div class="bgBox">
       <div class="pay">
+        <div class="qrCode" @click="largeImg()">
+          <img :src="qrCodeSrc" alt="" />
+        </div>
         <div class="text">充值金额(元)</div>
         <div class="int">
           <input type="number" v-model="payVal" placeholder="请输入充值金额" />
@@ -43,28 +52,13 @@
       <div class="btn">
         <van-button type="info" @click="Submit()">充值</van-button>
       </div>
-      <!-- 弹出层 -->
-      <van-popup
-        v-model="showFace"
-        position="right"
-        :style="{ height: '100%' }"
-      >
-        <div class="face_title">
-          <van-nav-bar
-            title="二维码"
-            left-text="返回"
-            left-arrow
-            @click-left="showFace = false"
-          />
-        </div>
-        <div class="image">
-          <img src="../../../../assets/img/QRimg03.png" alt="" />
-        </div>
-        <div class="face_confirm">
-          <van-button type="info" @click="SubmitNow">立即提交</van-button>
-        </div>
-      </van-popup>
     </div>
+    <!-- 预览图片 -->
+    <van-image-preview v-model="largeImgState" :images="images">
+      <template v-slot:cover
+        ><span @click="saveImage()">保存图片</span></template
+      >
+    </van-image-preview>
   </div>
 </template>
 <script>
@@ -76,6 +70,7 @@ export default {
       // 屏幕高度
       H: "",
       infoData: {},
+      qrCodeSrc:require("../../../../assets/img/QRimg03.png"),
       //   充值金额
       payVal: 10,
       // 快捷的数字
@@ -97,20 +92,25 @@ export default {
           text: "支付宝支付",
           remarkText: "",
         },
-        {
-          checked: false,
-          imgSrc: require("../../../../assets/img/wecharIcon.png"),
-          text: "微信支付",
-          remarkText: "",
-        },
-        {
-          checked: false,
-          imgSrc: require("../../../../assets/img/xianxia.png"),
-          text: "线下支付",
-          remarkText: "",
-        },
+        // {
+        //   checked: false,
+        //   imgSrc: require("../../../../assets/img/wecharIcon.png"),
+        //   text: "微信支付",
+        //   remarkText: "",
+        // },
+        // {
+        //   checked: false,
+        //   imgSrc: require("../../../../assets/img/xianxia.png"),
+        //   text: "线下支付",
+        //   remarkText: "",
+        // },
       ],
       showFace: false,
+      // 图片
+      imgSrc: "",
+      // 预览图片
+      largeImgState: false,
+      images: [],
     };
   },
   created() {
@@ -150,21 +150,37 @@ export default {
       });
       item.checked = true;
     },
-    // 充值
+    // 预览图片
+    largeImg() {
+      this.images = [];
+      this.largeImgState = true;
+      this.images.push(this.qrCodeSrc);
+    },
+    // 保存图片
+    saveImage() {
+      let _this = this;
+      if (!window.plus) return console.log("不是app!!!");
+      plus.gallery.save(
+        _this.images[0],
+        function () {
+          _this.$toast("保存相册成功!"); //_this.user_qrcode 是服务器链接，必须是图片格式
+        },
+        function () {
+          _this.$toast("保存失败，请重试!");
+        }
+      );
+    },
+    // 立即提交
     Submit() {
       if (this.payVal == 0) {
         this.$dialog({ message: "充值金额不正确" });
         return;
       }
-      this.showFace = true;
-    },
-    // 立即提交
-    SubmitNow() {
       let data = {
         amount: this.payVal,
         costStatus: 0,
         userId: this.infoData.id,
-        img: "",
+        img: this.imgSrc,
       };
       const loading = this.$toast.loading({
         message: "提交中...",
@@ -182,9 +198,9 @@ export default {
           loading.clear();
           if (result.data.code == 200) {
             firstRouter = true;
-            this.$toast({
+            this.$dialog({
               message: result.data.msg,
-              duration: 600,
+              confirmButtonColor: "#409eff",
             });
           } else {
             this.$dialog({ message: result.data.msg });
@@ -194,6 +210,50 @@ export default {
           loading.clear();
           console.log("err ==>", err);
           this.$dialog({ message: "系统服务繁忙,请稍后再试!" });
+        });
+    },
+    // 上传图片
+    updata(e) {
+      let formData = new FormData();
+      // 向 formData 对象中添加文件
+      formData.append("file", e.target.files[0]);
+
+      //   loading
+      var loading = this.$toast.loading({
+        message: "上传中...",
+        forbidClick: true,
+        loadingType: "spinner",
+        duration: "0",
+      });
+
+      this.$axios({
+        url: "/sigaoyi/invoicingupload",
+        method: "POST",
+        data: formData,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+        .then((result) => {
+          loading.clear();
+          console.log("result ==>", result);
+          setTimeout(() => {
+            this.$refs.uploadImg.value = null;
+          }, 100);
+          if (result.data.Code == 200) {
+            this.imgSrc = result.data.path;
+            this.$toast({ message: result.data.msg });
+          } else {
+            this.$dialog({ message: result.data.msg });
+          }
+        })
+        .catch((err) => {
+          setTimeout(() => {
+            this.$refs.uploadImg.value = null;
+          }, 100);
+          loading.clear();
+          this.$dialog({ message: "系统服务繁忙,请稍后再试!" });
+          console.log("err ==>", err);
         });
     },
   },

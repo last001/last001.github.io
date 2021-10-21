@@ -81,6 +81,7 @@
             </div>
             <div class="classifyName">
               <select
+                disabled
                 v-model="classIndex"
                 @change="changeSet(classList, classIndex)"
                 :class="classIndex == 0 ? '' : 'active'"
@@ -142,6 +143,7 @@
             >
             <span class="set">
               <select
+               disabled
                 v-model="statusIndex"
                 @change="changeSet(statusList, statusIndex)"
                 :class="statusIndex == 0 ? '' : 'active'"
@@ -875,7 +877,7 @@ export default {
       this.selectorIndex = 0;
       this.statusIndex = 0;
       this.classIndex = 0;
-      //   this.langugeIndex = 0;
+      this.langugeIndex = 0;
 
       //   input
       for (const key in this.inputList) {

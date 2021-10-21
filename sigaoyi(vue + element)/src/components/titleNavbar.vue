@@ -654,7 +654,7 @@ export default {
             if (el.name == "入库") {
               if (
                 this.InfoData.statu == "0" ||
-                this.InfoData.userName == "林天长" ||
+                this.InfoData.userName == "王焕杰" ||
                 this.InfoData.userName == "任治琴" ||
                 this.InfoData.userName == "李健明" ||
                 this.InfoData.userName == "王杰" ||

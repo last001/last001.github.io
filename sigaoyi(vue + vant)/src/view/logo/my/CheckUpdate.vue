@@ -11,20 +11,19 @@
       <div class="logo">
         <img src="../../../assets/img/sigaoyi1.png" alt="" />
       </div>
-      <div class="edition">版本号:1.1</div>
+      <div class="edition">版本号:{{version}}</div>
       <div class="btn">
         <van-button round type="info" size="small" @click="autoUpdate()"
           >检查更新</van-button
         >
       </div>
       <div class="time">
-        <div>客服热线</div>
-        <div class="active">10086</div>
+        <!-- <div>客服热线</div>
+        <div class="active">10086</div> -->
         <div class="work">工作时间</div>
         <div class="active">周一至周六 09:00~18:00</div>
       </div>
     </div>
-    <iframe v-show="iframeState" :src="iframeSrc" frameborder="0"></iframe>
   </div>
 </template>
 
@@ -32,19 +31,29 @@
 export default {
   data() {
     return {
-      // iframe
-      iframeState: false,
-      iframeSrc: "",
+      version: "1.4",
     };
   },
-  created() {},
+  created() {
+    function plusReady1() {
+      // 获取本地应用资源版本号
+      plus.runtime.getProperty(plus.runtime.appid, (inf) => {
+        this.version = inf.version;
+      });
+    }
+    if (window.plus) {
+      plusReady1();
+    } else {
+      document.addEventListener("plusready",plusReady1,false);
+    }
+  },
   methods: {
     onClickLeft() {
       this.$router.back();
     },
     // 自动更新
     autoUpdate() {
-      console.log('window.plus ==>',window.plus);
+      console.log("window.plus ==>", window.plus);
       if (window.plus) {
         this.plusReady();
       } else {
@@ -81,17 +90,15 @@ export default {
               })
               .then(() => {
                 that.downloadWgt(result.data.url);
-                // this.iframeSrc = "";
-                // this.iframeSrc = result.data.url;
-                // setTimeout(() => {
-                //   this.iframeSrc = "";
-                // }, 500);
               })
               .catch(() => {
                 // on cancel
               });
           } else {
-            that.$dialog({ message: "检查失败!" });
+            that.$dialog({
+              message: "已经是最新版本了！",
+              confirmButtonColor: "#409eff",
+            });
           }
         })
         .catch((err) => {
@@ -118,7 +125,7 @@ export default {
       plus.nativeUI.showWaiting("安装更新文件...");
       plus.runtime.install(
         path,
-        {},
+        { force: true },
         function () {
           plus.nativeUI.closeWaiting();
           plus.nativeUI.alert("应用资源更新完成！", function () {

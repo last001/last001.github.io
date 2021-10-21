@@ -10,7 +10,9 @@
         @click-right="onClickRight"
       >
         <template #right>
-          <van-button type="info" size="mini">{{ rightText }}</van-button>
+          <van-button v-show="rightText != ''" type="info" size="mini">{{
+            rightText
+          }}</van-button>
         </template>
       </van-nav-bar>
     </div>
@@ -18,14 +20,16 @@
       <van-tabs v-model="active">
         <van-tab title="系统消息" :dot="systemDot">
           <div class="systemList" v-if="sysytemState">
-            <div class="time">2020-06-30 15:15:59</div>
-            <div class="content">
-              <div class="v-content-title clearfix">
-                <div class="fl big-dot"></div>
-                您有个订单没处理
-              </div>
-              <div class="v-content">
-                尊敬的用户，您有个订单异常，请尽快处理！过期不候。
+            <div class="v-noticeList">
+              <div class="time">2020-06-30 15:15:59</div>
+              <div class="content">
+                <div class="v-content-title clearfix">
+                  <div class="fl big-dot"></div>
+                  您有个订单没处理
+                </div>
+                <div class="v-content">
+                  尊敬的用户，您有个订单异常，请尽快处理！过期不候。
+                </div>
               </div>
             </div>
           </div>
@@ -33,17 +37,27 @@
         </van-tab>
         <van-tab title="公告消息" :dot="noticeDot">
           <div class="noticeList" v-if="noticeState">
-            <div class="time">{{noticeList.releaseTime}}</div>
-            <div class="content">
-              <div class="v-content-title clearfix">
-                <div class="fl big-dot"></div>
-                {{ noticeList.title }}
+            <div
+              class="v-noticeList"
+              v-for="(item, index) in noticeList"
+              :key="index"
+            >
+              <div class="time">{{ item.releaseTime }}</div>
+              <div class="content">
+                <div class="v-content-title clearfix">
+                  <div
+                    class="fl big-dot"
+                    :class="item.bigDot ? 'active' : ''"
+                  ></div>
+                  {{ item.title }}
+                  <span class="fr">{{ item.readyText }}</span>
+                </div>
+                <div class="greet">尊敬的用户，您好！</div>
+                <div class="notice-content">
+                  {{ item.content }}
+                </div>
+                <div class="detail" @click="noticeDetail(item)">查看详情>></div>
               </div>
-              <div class="greet">尊敬的用户，您好！</div>
-              <div class="notice-content">
-                {{ noticeList.content }}
-              </div>
-              <div class="detail" @click="noticeDetail">查看详情>></div>
             </div>
           </div>
           <div v-else>暂无公告消息</div>
@@ -62,7 +76,7 @@ export default {
       // 初始显示值
       active: 1,
       //  系统消息 是否显示
-      sysytemState: true,
+      sysytemState: false,
       //  系统 红点状态
       systemDot: false,
       //  公告消息 是否显示
@@ -74,7 +88,7 @@ export default {
       // 个人信息
       infoData: {},
       // 公告 list
-      noticeList: {},
+      noticeList: [],
     };
   },
   beforeRouteEnter(to, from, next) {
@@ -93,14 +107,14 @@ export default {
       if (this.infoData.statu == "0") {
         this.rightText = "发布公告";
       } else {
-        this.rightText = "一键全读";
+        this.rightText = "";
       }
       this.getNoticeState();
     } else {
-        console.log("不重新获取数据!!!");
-        this.$route.meta.isBack = false;
+      console.log("不重新获取数据!!!");
+      this.$route.meta.isBack = false;
 
-        // 返回 无红点(返回全部 公告对象   [待做])
+      // 返回 无红点(返回全部 公告对象   [待做])
     }
   },
   created() {
@@ -125,26 +139,31 @@ export default {
   methods: {
     // 返回
     onClickLeft() {
-      this.$toast.loading({
-        message: "加载中...",
-        forbidClick: true,
-        loadingType: "spinner",
-        duration: "600",
-      });
-      setTimeout(() => {
-        this.$router.back();
-      }, 600);
+      if (this.noticeList.findIndex((target) => target.bigDot == true) > -1) {
+        this.$dialog
+          .confirm({
+            title: "提示",
+            message: "退出该页面？（将会删除已阅读公告）",
+          })
+          .then(() => {
+            this.$router.back();
+          })
+          .catch(() => {
+            // 取消
+          });
+      } else {
+          this.$router.back();
+      }
     },
     // 一键全读(待做) + 发布公告
     onClickRight() {
-      if (this.rightText == "一键全读") {
-        console.log("一键全读 ==>", "一键全读");
-      } else {
-        this.$router.push({ name: "PublishNotice" });
+      if (this.rightText == "") {
+        return;
       }
+      this.$router.push({ name: "PublishNotice" });
     },
     // 查看详情
-    noticeDetail() {
+    noticeDetail(item) {
       this.$toast.loading({
         message: "加载中...",
         forbidClick: true,
@@ -152,8 +171,13 @@ export default {
         duration: "600",
       });
       setTimeout(() => {
-        this.$router.push({ name: "NoticeDetail",query:{item:JSON.stringify(this.noticeList)} });
-      }, 600);
+        item.bigDot = true;
+        item.readyText = "已读";
+        this.$router.push({
+          name: "NoticeDetail",
+          query: { item: JSON.stringify(item) },
+        });
+      }, 500);
     },
     // 获取公告状态
     getNoticeState() {
@@ -165,6 +189,7 @@ export default {
         method: "POST",
         params: {
           userName: this.infoData.userName,
+          port: "app",
         },
       })
         .then((result) => {
@@ -174,7 +199,11 @@ export default {
               this.noticeState = true;
               this.noticeDot = true;
               // 渲染
-              this.noticeList = result.data.announcement;
+              result.data.announcementList.forEach((e) => {
+                e["bigDot"] = false;
+                e["readyText"] = "未读";
+              });
+              this.noticeList = result.data.announcementList;
             } else {
               this.noticeState = false;
               this.noticeDot = false;
@@ -186,6 +215,7 @@ export default {
           //   this.$dialog({ message: "系统服务繁忙,请稍后再试!" });
         });
     },
+    //
   },
 };
 </script>

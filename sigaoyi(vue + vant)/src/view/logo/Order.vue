@@ -704,7 +704,7 @@ export default {
     // 获取管理员
     getAdminiStrators() {
       if (
-        this.infoData.userName == "林天长" ||
+        this.infoData.userName == "王焕杰" ||
         this.infoData.userName == "任治琴" ||
         this.infoData.userName == "李健明" ||
         this.infoData.userName == "王杰" ||
@@ -989,8 +989,8 @@ export default {
       this.amount = 30;
       this.pages = 1;
       this.refreshStatus = true;
-      this.reset();
       this.onLoadStatus = true;
+      this.reset();
       this.getOrderList(this.amount, this.pages);
     },
     // 异步拿数据
@@ -1328,7 +1328,7 @@ export default {
           console.log("result ==>", result);
           loading.clear();
           if (result.data.Code == "200") {
-            //  当前页的 代付运费 修改为 已完成
+            //  当前页的 待付运费 修改为 已完成
             this.orderList.forEach((e) => {
               if (e.status == 7) {
                 e.status = 3;

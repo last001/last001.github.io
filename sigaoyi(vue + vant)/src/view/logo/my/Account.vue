@@ -138,6 +138,7 @@ export default {
             duration: "600",
           });
           sessionStorage.removeItem("infoData");
+          sessionStorage.removeItem("profitData");
           setTimeout(() => {
             this.$router.push({ name: "Login" });
           }, 600);

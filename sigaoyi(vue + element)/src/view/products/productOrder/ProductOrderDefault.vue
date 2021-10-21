@@ -1201,7 +1201,7 @@ export default {
       // 运输方式 或者运输渠道
       if (
         this.InfoDataObj.statu == "0" ||
-        this.InfoDataObj.userName == "林天长" ||
+        this.InfoDataObj.userName == "王焕杰" ||
         this.InfoDataObj.userName == "任治琴" ||
         this.InfoDataObj.userName == "李健明" ||
         this.InfoDataObj.userName == "王杰" ||
@@ -1521,7 +1521,7 @@ export default {
       // 运输方式 或者 渠道
       if (
         this.InfoData.statu == "0" ||
-        this.InfoData.userName == "林天长" ||
+        this.InfoData.userName == "王焕杰" ||
         this.InfoData.userName == "任治琴" ||
         this.InfoData.userName == "李健明" ||
         this.InfoData.userName == "王杰" ||
@@ -1723,7 +1723,7 @@ export default {
               if (result.data.userinfo.statu != "0") {
                 e["collecStatuChecked"] = true;
                 if (
-                  result.data.userinfo.userName == "林天长" ||
+                  result.data.userinfo.userName == "王焕杰" ||
                   result.data.userinfo.userName == "任治琴" ||
                   result.data.userinfo.userName == "李健明" ||
                   result.data.userinfo.userName == "王杰" ||
@@ -2145,7 +2145,7 @@ export default {
 
         if (
           this.InfoData.statu == "0" ||
-          this.InfoData.userName == "林天长" ||
+          this.InfoData.userName == "王焕杰" ||
           this.InfoData.userName == "任治琴" ||
           this.InfoData.userName == "李健明" ||
           this.InfoData.userName == "王杰" ||
@@ -2162,7 +2162,7 @@ export default {
 
         if (
           this.InfoData.statu == "0" ||
-          this.InfoData.userName == "林天长" ||
+          this.InfoData.userName == "王焕杰" ||
           this.InfoData.userName == "任治琴" ||
           this.InfoData.userName == "李健明" ||
           this.InfoData.userName == "王杰" ||
@@ -2915,10 +2915,10 @@ export default {
     },
     // 点击表格处理 按钮
     clickFollowUp(index, row) {
-      // 林天长 任治琴 李健明 王杰 hzsugoi
+      // 王焕杰 任治琴 李健明 王杰 hzsugoi
       if (
         this.InfoDataObj.statu == "0" ||
-        this.InfoDataObj.userName == "林天长" ||
+        this.InfoDataObj.userName == "王焕杰" ||
         this.InfoDataObj.userName == "任治琴" ||
         this.InfoDataObj.userName == "李健明" ||
         this.InfoDataObj.userName == "王杰" ||
@@ -3318,7 +3318,7 @@ export default {
               if (result.data.userinfo.statu != "0") {
                 e["collecStatuChecked"] = true;
                 if (
-                  result.data.userinfo.userName == "林天长" ||
+                  result.data.userinfo.userName == "王焕杰" ||
                   result.data.userinfo.userName == "任治琴" ||
                   result.data.userinfo.userName == "李健明" ||
                   result.data.userinfo.userName == "王杰" ||

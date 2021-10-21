@@ -1,23 +1,18 @@
 <template>
-  <div
-    class="my"
-    :style="{
-      background: 'url(' + defaulBgSrc + ')',
-      paddingTop: statusH + 'px',
-    }"
-  >
+  <div class="my">
+      <!-- :style="{background: 'url(' + defaulBgSrc + ')',}" -->
     <div class="v-my" :style="{ height: H + 'px' }">
       <!-- 头像 + 个签 -->
       <div class="bg">
-        <div class="header" @click="gotoPersonalInfo()">
+        <div class="header">
           <img src="../../assets/img/head.jpg" alt="" />
         </div>
         <div class="detection" v-if="showInfo">
-          <div class="userName">{{ infoData.actualName }}</div>
-          <div class="remask">
-            <span>这家伙很懒，什么也没有写！</span
-            ><van-icon name="edit" @click="gotoPersonalInfo()" />
-          </div>
+          <div class="userName">{{ infoData.userName }}</div>
+          <!-- <div class="remask">
+            <span>这家伙很懒，什么也没有写！</span>
+            <van-icon name="edit" @click="gotoPersonalInfo()" />
+          </div> -->
           <div class="text">
             <input
               type="file"
@@ -64,11 +59,11 @@
         </div>
       </div>
       <!-- 更多 -->
-      <div class="more">
+      <!-- <div class="more">
         <van-icon name="setting" size="22" color="#439eff" />
         <div>更多</div>
         <van-icon name="arrow" color="#999" class="fr arrow" />
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -87,10 +82,10 @@ export default {
       showInfo: true,
       // 默认背景图片
       defaulBgSrc: require("../../assets/img/th.jpg"),
-      // 代付款 代发货 待收货
+      // 待付款 待发货 待收货
       awaitList: [
-        { name: "代付款", iconSrc: "pending-payment" },
-        { name: "代发货", iconSrc: "debit-pay" },
+        { name: "待付款", iconSrc: "pending-payment" },
+        { name: "待发货", iconSrc: "debit-pay" },
         { name: "待收货", iconSrc: "paid" },
       ],
       // 功能列表
@@ -123,27 +118,27 @@ export default {
           linkText: "Account",
           dotStatus: false,
         },
-        {
-          name: "收货地址",
-          iconSrc: "logistics",
-          color: "#e06a6b",
-          linkText: "Adress",
-          dotStatus: false,
-        },
+        // {
+        //   name: "收货地址",
+        //   iconSrc: "logistics",
+        //   color: "#e06a6b",
+        //   linkText: "Adress",
+        //   dotStatus: false,
+        // },
         {
           name: "检查更新",
-          iconSrc: "down",
+          iconSrc: "warn-o",
           color: "#cd70fb",
           linkText: "CheckUpdate",
           dotStatus: false,
         },
-        {
-          name: "用户反馈",
-          iconSrc: "chat-o",
-          color: "#e06a6b",
-          linkText: "Feedback",
-          dotStatus: false,
-        },
+        // {
+        //   name: "用户反馈",
+        //   iconSrc: "chat-o",
+        //   color: "#e06a6b",
+        //   linkText: "Feedback",
+        //   dotStatus: false,
+        // },
         {
           name: "公告",
           iconSrc: "volume-o",
@@ -151,37 +146,51 @@ export default {
           linkText: "Notice",
           dotStatus: false,
         },
+        //  {
+        //   name: "测试",
+        //   iconSrc: "volume-o",
+        //   color: "#cd70fb",
+        //   linkText: "Qecode",
+        //   dotStatus: false,
+        // },
       ],
-      //
-      statusH: "",
+      // 是否存在公告
+      isNotice: false,
+      isCheck: false,
     };
   },
   created() {
-    if (window.plus) {
-      this.plusReady();
-    } else {
-      document.addEventListener("plusready", this.plusReady, false);
-    }
+    // function plusReady() {
+    //   if (plus.navigator.isImmersedStatusbar()) {
+    //     this.statusH = plus.navigator.getStatusbarHeight();
+    //     console.log("this.statusH ==>", this.statusH);
+    //   }
+    // }
+    // if (window.plus) {
+    //   plusReady();
+    // } else {
+    //   document.addEventListener("plusready", plusReady, false);
+    // }
 
     this.$nextTick(() => {
-      this.H = document.documentElement.clientHeight - 70;
+      this.H = document.documentElement.clientHeight - 60;
       this.infoData = JSON.parse(sessionStorage.getItem("infoData"));
       if (this.infoData == null || this.infoData == undefined) {
         this.showInfo = false;
       } else {
         this.showInfo = true;
+        //  获取公告状态
+        this.getNoticeState();
+        this.autoUpdate();
       }
-      //  获取公告状态
-      this.getNoticeState();
     });
   },
-  methods: {
-    plusReady() {
-      //   设置沉浸式状态栏
-      if (plus.navigator.isImmersedStatusbar()) {
-        this.statusH = plus.navigator.getStatusbarHeight();
-      }
+  computed: {
+    isDotMap(value) {
+      return this.isNotice || this.isCheck;
     },
+  },
+  methods: {
     // 去登陆页面
     gotoLogin() {
       this.$toast.loading({
@@ -194,7 +203,7 @@ export default {
         this.$router.push({ name: "Login" });
       }, 600);
     },
-    //   点击跳转链接
+    // 点击跳转链接
     linkPage(item) {
       console.log("this.infoData ==>", this.infoData);
       if (this.infoData == null || this.infoData == undefined) {
@@ -283,11 +292,13 @@ export default {
       if (this.infoData == undefined || this.infoData == null) {
         return;
       }
+      console.log("获取公告!!!");
       this.$axios({
         url: "/sigaoyi/NEWGetAnnounceInfo",
         method: "POST",
         params: {
           userName: this.infoData.userName,
+          port: "app",
         },
       })
         .then((result) => {
@@ -299,12 +310,14 @@ export default {
                   e.dotStatus = true;
                 }
               });
+              this.isNotice = true;
             } else {
               this.accountList.forEach((e) => {
                 if (e.name == "公告") {
                   e.dotStatus = false;
                 }
               });
+              this.isNotice = false;
             }
           }
         })
@@ -312,6 +325,65 @@ export default {
           console.log("err ==>", err);
           //   this.$dialog({ message: "系统服务繁忙,请稍后再试!" });
         });
+    },
+    // 自动更新
+    autoUpdate() {
+    //   console.log("window.plus ==>", window.plus);
+      if (window.plus) {
+        this.plusReady();
+      } else {
+        document.addEventListener("plusready", this.plusReady, false);
+      }
+    },
+    // 获取版本号
+    plusReady() {
+      // 获取本地应用资源版本号
+      plus.runtime.getProperty(plus.runtime.appid, (inf) => {
+        this.checkVersion(inf.version);
+      });
+    },
+    // 检查更新
+    checkVersion(nativeVersion) {
+      let that = this;
+      that
+        .$axios({
+          url: "/sigaoyi/CheckFoUpdates",
+          method: "GET",
+          params: {
+            versionNumber: nativeVersion,
+          },
+        })
+        .then((result) => {
+          console.log("result ==>", result);
+          if (result.data.Code == 200) {
+            this.accountList.forEach((e) => {
+              if (e.name == "检查更新") {
+                e.dotStatus = true;
+              }
+            });
+            this.isCheck = true;
+          } else {
+            this.accountList.forEach((e) => {
+              if (e.name == "检查更新") {
+                e.dotStatus = false;
+              }
+            });
+            this.isCheck = false;
+          }
+        })
+        .catch((err) => {
+          that.$dialog({ message: "发生不可预期的错误" });
+          console.log("err ==>", err);
+        });
+    },
+  },
+  watch: {
+    isDotMap(value) {
+      if (value) {
+        this.$store.state.isDot = true;
+      } else {
+        this.$store.state.isDot = false;
+      }
     },
   },
 };

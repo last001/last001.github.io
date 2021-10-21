@@ -244,7 +244,7 @@ export default {
     // 设置 管理员
     if (
       this.infoData.statu == "0" ||
-      this.infoData.userName == "林天长" ||
+      this.infoData.userName == "王焕杰" ||
       this.infoData.userName == "任治琴" ||
       this.infoData.userName == "李健明" ||
       this.infoData.userName == "王杰" ||

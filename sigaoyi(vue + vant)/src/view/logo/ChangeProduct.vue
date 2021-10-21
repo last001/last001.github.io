@@ -102,6 +102,13 @@
           </div>
         </van-action-sheet>
       </div>
+      <!-- 分类三的编码 -->
+      <div class="int">
+        <span>编码</span>
+        <span>
+          <input type="number" placeholder="请输入" v-model="catalog2Val" />
+        </span>
+      </div>
       <!-- 简介 -->
       <div class="remakrs">
         <van-field
@@ -173,6 +180,8 @@ export default {
         index: 0,
         list: [],
       },
+      // 编码   
+      catalog2Val:0,
       // 富文本
       content: "",
       editorOption: {
@@ -240,6 +249,14 @@ export default {
         imglist: this.item.item_imgs,
         language: this.$route.query.language,
       };
+      if(this.catalog2Val != 0 || this.catalog2Val != ""){
+          if(this.catalog2.list.findIndex(target => target.catalogId == this.catalog2Val) > -1){
+              console.log("找到了");
+              data.sortid = Number(this.catalog2Val);
+          }else{
+              data.sortid = this.catalog2.value;
+          }
+      }
 
       console.log("data ==>", data);
 
@@ -413,6 +430,7 @@ export default {
                 this.catalog2.index = i;
               }
             });
+            this.catalog2Val = this.catalog2.value;
           })
           .catch((err) => {
             console.log("err ==>", err);
@@ -529,7 +547,11 @@ export default {
           this.catalog2.value = 99;
           this.catalog2.index = 0;
           this.catalog2.list = [];
-        }
+        } 
+      }else{
+          if(string == "三"){
+              this.catalog2Val = array.value;
+          }
       }
     },
     onEditorReady(editor) {

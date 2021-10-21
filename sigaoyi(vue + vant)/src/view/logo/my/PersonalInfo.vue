@@ -33,14 +33,10 @@
       <div class="gender">
         <div class="v-title">性别</div>
         <div class="content">
-          <div
-            v-for="(item, index) in radioList"
-            :key="index"
-            @click="genderSet(item, index)"
-          >
-            <span>{{ item.text }}</span>
-            <input type="radio" :checked="item.checked" />
-          </div>
+          <van-radio-group v-model="radioGender">
+            <van-radio name="1">男</van-radio>
+            <van-radio name="2">女</van-radio>
+          </van-radio-group>
         </div>
       </div>
       <div class="address">
@@ -72,7 +68,7 @@
       <div class="remark">
         <div class="v-title">简介：</div>
         <div class="content">
-          <textarea cols="30" rows="10" maxlength="120">这家伙很懒，什么也没有写！</textarea>
+          <textarea cols="30" rows="10" maxlength="120" v-model="textareaVal"></textarea>
         </div>
       </div>
     </div>
@@ -100,7 +96,7 @@ export default {
           val: "王者",
           text: "姓名",
           value: "name",
-          placeholder:"请输入",
+          placeholder: "请输入",
           disabled: false,
         },
         {
@@ -108,7 +104,7 @@ export default {
           val: "24kc",
           text: "昵称",
           value: "nickName",
-          placeholder:"请输入",
+          placeholder: "请输入",
           disabled: false,
         },
         {
@@ -123,7 +119,7 @@ export default {
           val: "15977905862",
           text: "号码",
           value: "phoneName",
-          placeholder:"请输入",
+          placeholder: "请输入",
           disabled: false,
         },
         {
@@ -131,12 +127,12 @@ export default {
           val: "1900586299@qq.com",
           text: "邮箱",
           value: "email",
-          placeholder:"请输入",
+          placeholder: "请输入",
           disabled: false,
         },
       ],
       //  详细地址
-      detailsAddress:"",   
+      detailsAddress: "",
       // 上传图片的status
       isActive: false,
       //   三级联动数组
@@ -145,18 +141,16 @@ export default {
       areaShow: false,
       // 三级联动初始标题
       cellTitle: "请选择地址",
-      //  inputRadio list
-      radioList: [
-        { text: "男", checked: false },
-        { text: "女", checked: false },
-      ],
+      // 性别
+      radioGender: "1",
+      textareaVal:"这家伙很懒，什么也没有写！",
     };
   },
   created() {
     this.$nextTick(() => {
       this.infoData = JSON.parse(sessionStorage.getItem("infoData"));
-      // 获取初始值   
-      this.getInfo()
+      // 获取初始值
+      this.getInfo();
     });
   },
   methods: {
@@ -164,20 +158,20 @@ export default {
     onClickLeft() {
       this.$router.go(-1);
     },
-    getInfo(){
-        this.list.forEach(e => {
-            if(e.text == "姓名"){
-                e.val = this.infoData.userName;
-            }else if(e.text == "昵称"){
-                e.val = this.infoData.userName;
-            }else if(e.text == "编号"){
-                e.val = this.infoData.id + 10850;
-            }else if(e.text == "号码"){
-                e.val = this.infoData.phoneNumber;
-            }else if(e.text == "邮箱"){
-                e.val = this.infoData.mail;
-            }
-        });
+    getInfo() {
+      this.list.forEach((e) => {
+        if (e.text == "姓名") {
+          e.val = this.infoData.userName;
+        } else if (e.text == "昵称") {
+          e.val = this.infoData.userName;
+        } else if (e.text == "编号") {
+          e.val = this.infoData.id + 10850;
+        } else if (e.text == "号码") {
+          e.val = this.infoData.phoneNumber;
+        } else if (e.text == "邮箱") {
+          e.val = this.infoData.mail;
+        }
+      });
     },
     // 确定
     onClickRight() {
@@ -203,16 +197,6 @@ export default {
     cancelBtn() {
       console.log("取消按钮!!!~");
       this.areaShow = false;
-    },
-    // 性别选择
-    genderSet(item, index) {
-      if (item.checked) {
-        return;
-      }
-      for (let i = 0; i < this.radioList.length; i++) {
-        this.radioList[i].checked = false;
-      }
-      item.checked = true;
     },
   },
 };

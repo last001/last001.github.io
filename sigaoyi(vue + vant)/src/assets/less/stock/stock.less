@@ -1,5 +1,126 @@
-.stock{
-    .title{
-        height: 46px;
+.stock {
+  .title {
+    height: 46px;
+
+    .van-search {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      z-index: 99;
     }
+  }
+
+  .tabs {
+    .van-tabs {
+      .van-tabs__wrap {
+        position: fixed;
+        top: 46px;
+        left: 0;
+        width: 100%;
+        z-index: 99;
+      }
+
+      .van-tabs__content {
+        margin-top: 45px;
+
+        .van-list {
+          min-height: 250px;
+          .van-cell {
+            border-top: 1px solid #ddd;
+            margin-top: 10px;
+            padding: 0;
+
+            &::after {
+              border: none;
+            }
+
+            .stockList {
+              .orderNum {
+                padding: 5px 10px;
+                display: flex;
+                justify-content: space-between;
+                border-bottom: 1px solid #ddd;
+              }
+
+              .img_belonger {
+                display: flex;
+                padding: 5px 10px;
+
+                .image {
+                  flex: 1;
+                  border: 1px solid #eee;
+                  box-sizing: border-box;
+
+                  img {
+                    width: 100%;
+                    height: 100%;
+                    // display: block;
+                    vertical-align: bottom;
+                  }
+                }
+
+                .belonger {
+                  //   width: 70%;
+                  flex: 4;
+                  margin-left: 5%;
+
+                  .orderNo {
+                    display: flex;
+                    justify-content: space-between;
+                  }
+                }
+              }
+
+              .btn {
+                width: calc(100% - 20px);
+                padding: 7px 10px;
+                text-align: right;
+                border-top: 1px solid #ddd;
+                border-bottom: 1px solid #ddd;
+                line-height: 16px;
+
+                button {
+                  padding: 12px 8px;
+                  border-radius: 4px;
+
+                  &:first-child {
+                    margin-right: 4px;
+                  }
+                }
+              }
+            }
+
+          }
+
+          .skeleton {
+            background-color: #fff;
+            padding: 10px 0;
+
+            .v-skeleton {
+              .orderNum {
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+
+                .van-skeleton {
+                  flex: 3;
+                  &:nth-child(2){
+                      flex: 1;
+                  }
+                }
+              }
+
+            }
+          }
+
+          .emptyList {
+            .van-empty {
+              padding: 100px 0;
+            }
+          }
+        }
+      }
+    }
+  }
 }

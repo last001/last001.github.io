@@ -58,7 +58,24 @@ router.beforeEach((to, from, next) => {
         plus.runtime.quit(); //那么就退出app
       }
     }
-  }
+  };
+
+  // document.addEventListener("pause", function () {
+  //   //从前台切换到后台
+  //   sessionStorage.setItem("RouterName", router.name);
+  // }, false);
+
+
+  // document.addEventListener("resume", function () {
+  //   //从后台切换到前台
+  //   if (JSON.parse(sessionStorage.getItem("infoData")) != undefined || SON.parse(sessionStorage.getItem("infoData")) != null) {
+  //     router.push({name:sessionStorage.getItem("RouterName")});
+  //   }else{
+  //     Toast({message:"登陆过期",duration:600});
+  //     router.push({name:'Login'});
+  //   }
+  // }, false);
+
   next();
 })
 
@@ -178,8 +195,8 @@ Vue.config.productionTip = false;
 Vue.prototype.$axios = axios;
 
 // 基本api
-// axios.defaults.baseURL = '/api';
-axios.defaults.baseURL = 'http://www.ec-sigaoyi.com';
+axios.defaults.baseURL = '/api';
+// axios.defaults.baseURL = 'http://www.ec-sigaoyi.com';
 
 // 防止点击同一个路由报错
 const originalPush = Router.prototype.push

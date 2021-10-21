@@ -242,7 +242,7 @@ export default {
       methodTypeList: [
         { name: "", value: 99 },
         { name: "自采购", value: 0 },
-        { name: "代采购", value: 1 },
+        { name: "待采购", value: 1 },
       ],
       //   运输方式
       tradeTypeList: [
@@ -303,15 +303,7 @@ export default {
   methods: {
     //   返回上一页
     onClickLeft() {
-      this.$toast.loading({
-        message: "加载中...",
-        forbidClick: true,
-        loadingType: "spinner",
-        duration: "600",
-      });
-      setTimeout(() => {
         this.$router.back();
-      }, 600);
     },
     // 修改
     onClickRight() {
@@ -359,7 +351,7 @@ export default {
     renderList() {
       // 获取管理员
       if (
-        this.infoData.userName == "林天长" ||
+        this.infoData.userName == "王焕杰" ||
         this.infoData.userName == "任治琴" ||
         this.infoData.userName == "李健明" ||
         this.infoData.userName == "王杰" ||

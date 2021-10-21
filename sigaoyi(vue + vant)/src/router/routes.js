@@ -61,6 +61,11 @@ export const routes = [{
     }
   },
   {
+    path: '/changetable',
+    name: 'Changetable',
+    component: () => import('../view/Changetable.vue'),
+  },
+  {
     path: '/publish',
     name: 'Publish',
     component: () => import('../view/Publish.vue'),
@@ -74,6 +79,11 @@ export const routes = [{
     path: '/videoTeaching',
     name: 'VideoTeaching',
     component: () => import('../view/VideoTeaching.vue')
+  },
+  {
+    path: '/qecode',
+    name: 'Qecode',
+    component: () => import('../view/Qecode.vue')
   },
   {
     path: '/documentFile',
@@ -207,7 +217,16 @@ export const routes = [{
   {
     path: '/stock',
     name: 'Stock',
-    component: () => import('../view/logo/home/stock.vue')
+    component: () => import('../view/logo/home/stock.vue'),
+    meta: {
+      keepAlive: true,
+      isBack: true,
+    }
+  },
+  {
+    path: '/changeStock',
+    name: 'ChangeStock',
+    component: () => import('../view/logo/home/ChangeStock.vue')
   },
   {
     path: '/toStock',

@@ -116,7 +116,7 @@
                 />
               </div>
               <div>
-                <span>代付费用<i class="mustIcon">*</i></span>
+                <span>待付费用<i class="mustIcon">*</i></span>
                 <input
                   type="number"
                   ref="PayForAnotherFreight"

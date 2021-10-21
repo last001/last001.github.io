@@ -665,6 +665,8 @@ export default {
         data.auditDate = inputList[3].value;
         data.applicationDate = inputList[2].value;
       }
+
+      console.log("data ==>",data);
       // 请求
       let loading = this.$loading({
         lock: false,

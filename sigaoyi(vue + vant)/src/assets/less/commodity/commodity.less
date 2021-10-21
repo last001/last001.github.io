@@ -127,7 +127,7 @@
         display: flex;
         flex-wrap: wrap;
         // overflow: auto;
-        padding-bottom: 10px;
+        // padding-bottom: 10px;
 
         .list {
           width: 45%;
@@ -136,7 +136,8 @@
           background: #fff;
           position: relative;
           padding-bottom: 5px;
-          box-shadow: 0 0 12px #cacaca;
+          box-shadow: 0 0 10px #cacaca;
+          border-radius: 3px;
 
           .list-img {
             width: 100%;
@@ -161,11 +162,21 @@
             -webkit-box-orient: vertical;
             -webkit-line-clamp: 2;
             overflow: hidden;
+            color: #409eff;
+            text-decoration: underline;
           }
 
           .price {
             color: #409eff;
             font-size: 16px;
+            display: flex;
+            justify-content: space-between;
+            padding: 2px 5px;
+            span{
+              &:last-child{
+                font-size: 12px;
+              }
+            }
           }
 
           .count {
@@ -195,32 +206,6 @@
 
             .van-icon {
               border-color: #b5b5b5;
-            }
-          }
-        }
-
-        .btn {
-          position: fixed;
-          right: 0;
-          bottom: 60px;
-          width: 100%;
-          padding: 8px 10px;
-          background-color: #fff;
-          box-shadow: 0 -2px 12px #cacaca;
-          text-align: right;
-          // border-top: 0.02667rem solid #eeeeee;
-          box-sizing: border-box;
-          z-index: 99;
-
-          button {
-            border-radius: 3px;
-            height: 30px;
-            font-size: 12px;
-            margin-right: 6px;
-            padding: 0 6px;
-
-            &:last-child {
-              margin-right: 0;
             }
           }
         }
@@ -268,6 +253,33 @@
             width: 100% !important;
           }
         }
+      }
+    }
+  }
+  
+  .btn {
+    position: fixed;
+    right: 0;
+    bottom: 60px;
+    width: 100%;
+    padding: 8px 10px;
+    background-color: #fff;
+    box-shadow: 0 -1px 4px #cacaca;
+    text-align: right;
+    // border-top: 0.02667rem solid #eeeeee;
+    box-sizing: border-box;
+    border-bottom: 1px solid #eeeeee;
+    z-index: 99;
+
+    button {
+      border-radius: 3px;
+      height: 30px;
+      font-size: 12px;
+      margin-right: 6px;
+      padding: 0 6px;
+
+      &:last-child {
+        margin-right: 0;
       }
     }
   }

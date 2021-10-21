@@ -3,7 +3,7 @@
     <!--  background: rgba(255,255,255,.8); -->
     <router-view v-if="!$route.meta.keepAlive"></router-view>
     <keep-alive>
-        <router-view v-if="$route.meta.keepAlive"></router-view>
+      <router-view v-if="$route.meta.keepAlive"></router-view>
     </keep-alive>
     <div class="footer" :style="{ background: bgColor }">
       <div
@@ -13,7 +13,11 @@
         :class="item.isActive ? 'active' : ''"
         @click="gotoPage(item)"
       >
-        <van-icon :name="item.iconHollow" size="30" />
+        <van-icon
+          :name="item.iconHollow"
+          size="30"
+          :class="item.isDot ? 'active' : ''"
+        />
         <div class="iconText">
           {{ item.iconName }}
         </div>
@@ -35,6 +39,7 @@ export default {
           iconHollow: "wap-home-o",
           iconSolid: "wap-home",
           iconName: "首页",
+          isDot: false,
         },
         {
           gotoName: "Commodity",
@@ -42,7 +47,8 @@ export default {
           isActive: false,
           iconHollow: "shopping-cart-o",
           iconSolid: "shopping-cart",
-          iconName: "商品",
+          iconName: "产品",
+          isDot: false,
         },
         {
           gotoName: "Order",
@@ -51,6 +57,7 @@ export default {
           iconHollow: "label-o",
           iconSolid: "label",
           iconName: "订单",
+          isDot: false,
         },
         {
           gotoName: "My",
@@ -59,6 +66,7 @@ export default {
           iconHollow: "user-o",
           iconSolid: "user",
           iconName: "我的",
+          isDot: this.$store.state.isDot,
         },
       ],
     };
@@ -76,6 +84,13 @@ export default {
         this.bgColor = "rgb(255,255,255)";
       }
     }
+    this.$store.state.isDot = false;
+  },
+  mounted() {},
+  computed: {
+    isDotMap() {
+      return this.$store.state.isDot;
+    },
   },
   methods: {
     //   跳转路由
@@ -108,6 +123,16 @@ export default {
         }
       }
     },
+    isDotMap(flag){
+        console.log('flag ==>',flag);
+        if(flag){
+            this.iconList.forEach(e => {
+                if(e.text == "my"){
+                    e.isDot = true;
+                }
+            });
+        }
+    }
   },
 };
 </script>
@@ -136,6 +161,22 @@ export default {
         width: 100%;
         text-align: center;
         font-weight: 600;
+      }
+      .van-icon {
+        &.active {
+          position: relative;
+          &::after {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 8px;
+            height: 8px;
+            border-radius: 100%;
+            background-color: red;
+          }
+        }
       }
     }
   }

@@ -644,7 +644,7 @@ export default {
     getInitial() {
       this.infoData = JSON.parse(sessionStorage.getItem("infoData"));
       if (
-        this.infoData.userName == "林天长" ||
+        this.infoData.userName == "王焕杰" ||
         this.infoData.userName == "任治琴" ||
         this.infoData.userName == "李健明" ||
         this.infoData.userName == "王杰" ||
