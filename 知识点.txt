@@ -1,0 +1,98 @@
+dist本地打开:
+https://blog.csdn.net/weixin_39897287/article/details/89643591
+
+win7安装node
+https://blog.csdn.net/weixin_44347152/article/details/109488113
+
+window7配置node
+https://jingyan.baidu.com/article/c33e3f48380dd6ea15cbb5fe.html
+
+element图标问题
+https://blog.csdn.net/qq_41619796/article/details/91806545
+
+vue创建
+https://blog.csdn.net/shenbug/article/details/79541218
+
+vue自定义组价%调用
+https://blog.csdn.net/qq_42714690/article/details/104584858
+
+element官网
+https://element.eleme.cn/#/zh-CN/component/installation
+
+view ui
+https://www.iviewui.com/components/tabs
+
+axios中文网
+https://element.eleme.cn/#/zh-CN/component/installation
+
+less版本太高了解决办法
+https://blog.csdn.net/gdutRex/article/details/113547371
+先卸载最后版本的less 
+npm uninstall less-loader
+安装4.0版本的less比较合适
+npm install less-loader@4.1.0 --save
+
+vue 配置rem 自适应
+npm install postcss-pxtorem@5.0.0 -D (px转rem、版本太高会报错)
+npm install amfe-flexible --save (自适应)
+在min.js文件引入 import "amfe-flexible";
+
+vue结合axios实现restful风格的四种请求详解_一只前端小菜鸟-CSDN博客
+https://blog.csdn.net/qq_43363884/article/details/88525057
+
+vant ui
+https://youzan.github.io/vant/#/zh-CN/uploader
+
+出现 [Intervention] Slow network is detected. See
+https://blog.csdn.net/hss0123456789/article/details/82144996
+
+quill打包的错误问题
+https://www.mk2048.com/answer/answer_jhibji2jaa.html
+
+vue监听页刷新状态
+https://www.cnblogs.com/wangbin96/p/12582370.html
+
+Vue - element-ui 中预览 word 、exce、ppt以及pdf文件_碌碌无为的程序猿-CSDN博客_vue预览word文件
+https://blog.csdn.net/weixin_44326007/article/details/99693479
+
+WPS开放平台
+https://open.wps.cn/docs/wwo/access/file-access-url
+
+JS在线预览文档最佳实践
+view.xdocin.com/view-xdocin-com_kl7v6l.htm
+
+vue-element-xlsx在线读取Excel数据预览_IT-精英联盟-CSDN博客
+https://blog.csdn.net/qq_34462220/article/details/108741345
+
+配置多个请求头
+https://www.cnblogs.com/ybhome/p/13993307.html
+14:12 2021/1/18
+vue上传formData文件
+https://www.cnblogs.com/yesyes/p/7299500.html
+
+apicoud官网
+https://www.apicloud.com/appoverview
+
+图片打包下载
+https://zhuanlan.zhihu.com/p/159644042
+
+通过HBuilderX 打包APP 过程
+https://blog.csdn.net/weixin_42948074/article/details/104030249
+
+git操作命令
+https://www.cnblogs.com/coderwhytop/p/14723223.html
+
+vue---微信分享
+https://blog.csdn.net/weixin_45102071/article/details/90407953
+https://www.jianshu.com/p/c8b55e64a45e
+
+vue config.js 文件的详细介绍
+https://blog.csdn.net/qq_31964019/article/details/106186776
+
+vue + app + hbuilderX 消息通知
+https://www.liangzl.com/get-article-detail-224919.html
+
+在线预览:
+http://view.xdocin.com/xdoc?_xdoc=
+http://view.officeapps.live.com/op/view.aspx?src=
+http://ow365.cn/?i=23884&furl=
