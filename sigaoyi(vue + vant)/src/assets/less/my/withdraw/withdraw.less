@@ -1,6 +1,25 @@
 .withdraw {
   background: #f6f6f6;
 
+  .title {
+    height: 46px;
+
+    .van-nav-bar {
+      .van-nav-bar__right {
+        span {
+          color: #1989fa;
+        }
+
+        input {
+          position: absolute;
+          left: 0;
+          right: 0;
+          opacity: 0;
+        }
+      }
+    }
+  }
+
   .bgBox {
     padding: 15px;
 
@@ -38,7 +57,7 @@
             height: 25px;
             line-height: 25px;
             padding: 0 5px;
-            border-radius: 6px;
+            border-radius: 3px;
           }
         }
       }
@@ -55,8 +74,6 @@
       display: flex;
       flex-wrap: wrap;
       padding-bottom: 15px;
-      border-bottom-left-radius: 6px;
-      border-bottom-right-radius: 6px;
 
       div {
         width: 25%;
@@ -77,6 +94,44 @@
           border-radius: 15px;
           border: 1px solid #e2e2e2;
           box-sizing: border-box;
+        }
+      }
+    }
+
+    .account {
+      border-bottom-left-radius: 6px;
+      border-bottom-right-radius: 6px;
+      background: #fff;
+      padding: 10px 10px;
+      display: flex;
+
+      span {
+        padding: 10px 0;
+        width: 44px;
+        font-size: 14px;
+        // color: #8f8f8f;
+        &:nth-child(2) {
+          position: relative;
+          width: calc(100% - 54px);
+          input {
+            text-indent: 4px;
+            width: 100%;
+            border: none;
+            font-size: 17px;
+            border-bottom: 1px solid #e4e4e4;
+            &::placeholder{
+              font-size: 14px;
+            }
+          }
+          i{
+            position: absolute;
+            right: 0;
+            top: 12px;
+            color: #f1f1f1;
+            background: #ddd;
+            border-radius: 50%;
+            padding: 2px;
+          }
         }
       }
     }
@@ -133,14 +188,15 @@
       }
     }
 
-    .btn{
-        padding: 0 15px;
-        margin-top: 18px;
-        button{
-            width: 100%;
-            border-radius: 25px;
-            margin-top: 10px;
-        }
+    .btn {
+      padding: 0 15px;
+      margin-top: 18px;
+
+      button {
+        width: 100%;
+        border-radius: 25px;
+        margin-top: 10px;
+      }
     }
   }
 }

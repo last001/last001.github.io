@@ -4,7 +4,7 @@
       <van-nav-bar
         title="刊登产品"
         left-text="返回"
-        right-text="清空价格公示"
+        right-text="清空价格公式"
         left-arrow
         fixed
         @click-left="onClickLeft"
@@ -81,7 +81,6 @@ import "@/assets/less/publish/publish.css";
 export default {
   data() {
     return {
-      AllshopLit: [],
       //   选择店铺
       shopList: {
         title: "请选择",
@@ -106,14 +105,18 @@ export default {
     };
   },
   created() {
-    this.AllshopLit = JSON.parse(this.$route.query.AllshopLit);
     this.getAllShopList();
-    console.log("this.AllshopLit ==>", this.AllshopLit);
   },
   methods: {
     //   返回
     onClickLeft() {
-      this.$router.push({name:"ProductDetails",query:{id:this.$route.query.id,language: this.$route.query.language,}});
+      this.$router.push({
+        name: "ProductDetails",
+        query: {
+          id: this.$route.query.id,
+          language: this.$route.query.language,
+        },
+      });
     },
     // 打开face
     showFace() {
@@ -168,33 +171,34 @@ export default {
     },
     // 初始值 渲染
     getAllShopList() {
-      let objShop = {
-        id: 0,
-        shopuser: "请选择",
-        text: "请选择",
-      };
-      this.shopList.list = this.AllshopLit;
+      this.shopList.list = this.$store.state.shopList;
       this.shopList.list.forEach((e) => {
         e["text"] = e.shopuser;
       });
-      this.shopList.list.unshift(objShop);
+    //   let objShop = {
+    //     id: 0,
+    //     shopuser: "请选择",
+    //     text: "请选择",
+    //   };
+    //   this.shopList.list.unshift(objShop);
+      console.log(" this.shopList.list ==>", this.shopList.list);
       // 分类编号
       this.number = this.$route.query.catalog2Num;
     },
     // 确定 刊登
     publishConfirm() {
       //  提示
-      if(this.shopList.value == 0){
-          this.$toast('请先选择店铺');
-          return;
+      if (this.shopList.value == 0) {
+        this.$toast("请先选择店铺");
+        return;
       }
-      if(this.freightList.value == "0"){
-          this.$toast('请先选择运费编号');
-          return;
+      if (this.freightList.value == "0") {
+        this.$toast("请先选择运费编号");
+        return;
       }
-      if(this.priceCount == ""){
-          this.$toast("请先输入产品价格");
-          return;
+      if (this.priceCount == "") {
+        this.$toast("请先输入产品价格");
+        return;
       }
       // loading
       let loading = this.$toast.loading({
@@ -202,7 +206,7 @@ export default {
         forbidClick: true,
         loadingType: "spinner",
         duration: 0,
-      });   
+      });
       let data = {
         id: this.$route.query.id,
         language: this.$route.query.language,
@@ -218,7 +222,7 @@ export default {
         params: data,
       })
         .then((result) => {
-            loading.clear();
+          loading.clear();
           console.log("result ==>", result);
           if (result.data.code == "200") {
             this.$dialog({
@@ -230,7 +234,7 @@ export default {
           }
         })
         .catch((err) => {
-            loading.clear();
+          loading.clear();
           console.log("err ==>", err);
           this.$dialog({ message: "系统服务繁忙,请稍后再试!" });
         });

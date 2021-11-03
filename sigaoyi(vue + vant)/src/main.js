@@ -37,11 +37,7 @@ router.beforeEach((to, from, next) => {
   mui.back = function () {
     // 首次按键， 提示 再按一次退出应用
     if (!first) {
-      if (to.name == "My" || to.name == "Order" || to.name == "Commodity") {
-        router.push({
-          name: "Home"
-        });
-      } else if (to.name == "Home") {
+      if (to.name == "My" || to.name == "Order" || to.name == "Commodity" || to.name == "Home") {
         //记录第一次按下回退键的时间
         first = new Date().getTime();
         mui.toast("再按一次退出应用");
@@ -60,21 +56,20 @@ router.beforeEach((to, from, next) => {
     }
   };
 
-  // document.addEventListener("pause", function () {
-  //   //从前台切换到后台
-  //   sessionStorage.setItem("RouterName", router.name);
-  // }, false);
+  document.addEventListener("pause", function () {
+    //从前台切换到后台
+    sessionStorage.setItem("RouterName", to.name);
+  }, false);
 
-
-  // document.addEventListener("resume", function () {
-  //   //从后台切换到前台
-  //   if (JSON.parse(sessionStorage.getItem("infoData")) != undefined || SON.parse(sessionStorage.getItem("infoData")) != null) {
-  //     router.push({name:sessionStorage.getItem("RouterName")});
-  //   }else{
-  //     Toast({message:"登陆过期",duration:600});
-  //     router.push({name:'Login'});
-  //   }
-  // }, false);
+  document.addEventListener("resume", function () {
+    //从后台切换到前台
+    if (JSON.parse(sessionStorage.getItem("infoData")) != undefined || JSON.parse(sessionStorage.getItem("infoData")) != null) {
+      router.push({name:sessionStorage.getItem("RouterName")});
+    }else{
+      Toast({message:"登陆过期",duration:600});
+      router.push({name:'Login'});
+    }
+  }, false);
 
   next();
 })
@@ -195,8 +190,9 @@ Vue.config.productionTip = false;
 Vue.prototype.$axios = axios;
 
 // 基本api
-axios.defaults.baseURL = '/api';
-// axios.defaults.baseURL = 'http://www.ec-sigaoyi.com';
+const root = process.env.API_HOST;
+
+axios.defaults.baseURL = root;
 
 // 防止点击同一个路由报错
 const originalPush = Router.prototype.push

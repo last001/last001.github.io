@@ -233,7 +233,7 @@
 
           div {
             height: 100%;
-            width: 60%;
+            width: 66%;
 
             &:first-child {
               width: 10%;
@@ -252,27 +252,36 @@
               margin-left: 2%;
             }
 
-            &:nth-child(3) {
-              width: 28%;
-              font-size: 15px;
-              line-height: 35px;
-              text-align: right;
+            &.cutPayment,
+            &.cutPayment1 {
+              width: 20%;
               color: #409eff;
 
-              &.active {
-                color: #f5aa20;
-              }
+              div {
+                width: 100%;
+                text-align: right;
+                font-size: 15px;
+                line-height: 35px;
 
-              &.review {
-                font-size: 14px;
-              }
+                &.active {
+                  color: #f5aa20;
+                }
 
-              &.cutMoney {
-                color: #ee0a24;
+                &.review {
+                  font-size: 14px;
+                }
+
+                &.cutMoney {
+                  color: #ee0a24;
+                }
               }
             }
 
-
+            &.cutPayment1 {
+              div {
+                color: red;
+              }
+            }
 
             span {
               display: block;
@@ -285,6 +294,8 @@
               }
             }
           }
+
+
         }
 
         .van-list__loading,

@@ -34,7 +34,7 @@
       <div class="int">
         <span>价格</span>
         <span>
-          <input type="text" placeholder="请输入" v-model="item.price" />
+          <input type="text" placeholder="请输入" v-model="item.priceSymbol" />
         </span>
       </div>
       <!-- 分类一 -->
@@ -242,7 +242,7 @@ export default {
         sortid: this.catalog2.value,
         status: this.item.status,
         title: this.item.title,
-        price: this.item.price.toString(),
+        price: this.item.priceSymbol,
         express_fee: this.item.express_fee,
         summary: this.item.summary,
         elm1: this.item.details,
@@ -257,6 +257,9 @@ export default {
               data.sortid = this.catalog2.value;
           }
       }
+
+      // 处理price 单位
+      data.price = data.price.replace(/[^\d.]/g, "");
 
       console.log("data ==>", data);
 
@@ -321,6 +324,14 @@ export default {
           loading.clear();
           console.log("result ==>", result);
           if (result.data.Code == 200) {
+             if (result.data.product.currencytype == 0) {
+              result.data.product["Moneysymbol"] = "¥";
+            } else if (result.data.product.currencytype == 1) {
+              result.data.product["Moneysymbol"] = "$";
+            } else {
+              result.data.product["Moneysymbol"] = "円";
+            }
+            result.data.product["priceSymbol"] = result.data.product.price + result.data.product.Moneysymbol
             this.item = result.data.product;
             // 分类 处理
             let classObj = {

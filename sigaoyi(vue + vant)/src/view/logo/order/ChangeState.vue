@@ -20,7 +20,7 @@
         v-model="remakrs"
         @input="focusTextVal(remakrs)"
         cols="30"
-        rows="10"
+        rows="15"
         placeholder="请输入标记异常原因"
       ></textarea>
     </div>

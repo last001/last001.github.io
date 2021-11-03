@@ -48,7 +48,7 @@
         :placeholder="passwordList.newPlaceholder"
         @click-right-icon="clickRightIcon('new')"
       />
-      <button class="vant-btn" @click="confirm()">确认修改</button>
+      <van-button round class="vant-btn" @click="confirm()">确认修改</van-button>
     </van-popup>
   </div>
 </template>
@@ -100,25 +100,23 @@ export default {
         this.unsubscribeStatus = true;
       } else {
         this.$dialog
-          .confirm({
-            title: "注销账号",
-            message: "是否确认注销账号,一旦确认无法恢复!",
-            confirmButtonColor: "#409eff",
+          ({
+            title: "提示",
+            message: "暂时不可以自己注销账号",
+            // confirmButtonColor: "#409eff",
             className: "accountDialog",
           })
-          .then(() => {
-            // on confirm
-            this.$toast.loading({
-              message: "正在注销...",
-              forbidClick: true,
-              loadingType: "spinner",
-              duration: "600",
-            });
-            console.log("注销账号!!!");
-          })
-          .catch(() => {
-            // on cancel
-          });
+        //   .then(() => {
+        //     this.$toast.loading({
+        //       message: "正在注销...",
+        //       forbidClick: true,
+        //       loadingType: "spinner",
+        //       duration: "600",
+        //     });
+        //     console.log("注销账号!!!");
+        //   })
+        //   .catch(() => {
+        //   });
       }
     },
     // 退出登录
@@ -132,13 +130,12 @@ export default {
         })
         .then(() => {
           this.$toast.loading({
-            message: "退出中...",
+            message: "退出登陆中...",
             forbidClick: true,
             loadingType: "spinner",
             duration: "600",
           });
           sessionStorage.removeItem("infoData");
-          sessionStorage.removeItem("profitData");
           setTimeout(() => {
             this.$router.push({ name: "Login" });
           }, 600);
@@ -172,8 +169,9 @@ export default {
     },
     // 确认修改密码
     confirm() {
-      console.log("this.passwordList.oldVal ==>", this.passwordList.oldVal);
-      console.log("this.passwordList.newVal ==>", this.passwordList.newVal);
+    //   console.log("this.passwordList.oldVal ==>", this.passwordList.oldVal);
+    //   console.log("this.passwordList.newVal ==>", this.passwordList.newVal);
+       this.$dialog({title:"提示",message:"该功能正在维护，维护具体时间请等待，给您带来不便请谅解",})
     },
   },
 };

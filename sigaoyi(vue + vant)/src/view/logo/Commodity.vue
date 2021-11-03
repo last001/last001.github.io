@@ -13,7 +13,7 @@
               @search="searchCommodity('search')"
             >
               <template #action>
-                <div @click="searchCommodity('search')">|&nbsp;&nbsp;搜索</div>
+                <div @click="searchCommodity('search')">丨&nbsp;搜索</div>
               </template>
             </van-search>
           </div>
@@ -69,7 +69,7 @@
               </div>
               <div class="name" @click="clickList(item)">{{ item.title }}</div>
               <div class="price">
-                <span>¥{{ item.price }}</span>
+                <span>{{ item.Moneysymbol }}{{ item.price }}</span>
                 <span v-show="item.status == 1">已刊登</span>
               </div>
               <div class="count">
@@ -433,9 +433,18 @@ export default {
                 } else {
                   e["translationText"] = "";
                 }
+                // 图片
                 if (e.pic_url == "") {
                   e.pic_url =
                     "http://www.ec-sigaoyi.com/sigaoyi/assets/img/%E5%9B%BE%E7%89%87.jpg";
+                }
+                // 钱符号
+                if (e.currencytype == 0) {
+                  e["Moneysymbol"] = "¥";
+                } else if (e.currencytype == 1) {
+                  e["Moneysymbol"] = "$";
+                } else {
+                  e["Moneysymbol"] = "円";
                 }
               });
 
@@ -531,9 +540,18 @@ export default {
                 } else {
                   e["translationText"] = "";
                 }
+                // 图片
                 if (e.pic_url == "") {
                   e.pic_url =
                     "http://www.ec-sigaoyi.com/sigaoyi/assets/img/%E5%9B%BE%E7%89%87.jpg";
+                }
+                // 钱符号
+                if (e.currencytype == 0) {
+                  e["Moneysymbol"] = "¥";
+                } else if (e.currencytype == 1) {
+                  e["Moneysymbol"] = "$";
+                } else {
+                  e["Moneysymbol"] = "円";
                 }
               });
 
@@ -656,7 +674,7 @@ export default {
           }
         }
       } else {
-        this.$toast("请选择要翻译的产品");
+        this.$toast("请选择要删除翻译的产品");
         return;
       }
       // 参数处理
@@ -720,7 +738,7 @@ export default {
           }
         }
       } else {
-        this.$toast("请选择要翻译的产品");
+        this.$toast("请选择要删除的产品");
         return;
       }
       //  请求

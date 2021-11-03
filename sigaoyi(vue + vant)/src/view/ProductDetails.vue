@@ -11,7 +11,7 @@
     <div class="wrap">
       <van-swipe :autoplay="3000" style="height: 200px" @change="onChange">
         <van-swipe-item v-for="(item, index) in imgList" :key="index">
-          <img v-lazy="item" @click="onClick(item)" />
+          <img v-lazy="item" @click="onClick(item,index)" />
         </van-swipe-item>
         <template #indicator>
           <div class="custom-indicator">
@@ -26,7 +26,7 @@
       <div class="proInfo">
         <div class="price clearfix">
           <div class="v-price fl">
-            ￥<em>{{ item.price }}</em>
+            {{ item.Moneysymbol }}<em>{{ item.price }}</em>
           </div>
         </div>
         <div class="title">
@@ -128,7 +128,15 @@
         <van-button round type="info" @click="publish()">刊登产品</van-button>
       </div>
       <!-- 图片预览 -->
-      <van-image-preview v-model="showImage" :images="previewList">
+      <van-image-preview
+        v-model="showImage"
+        :images="previewList"
+        @change="changePreview"
+        :startPosition="startIndex"
+      >
+        <template v-slot:cover
+          ><span @click="saveImage()">保存图片</span></template
+        >
       </van-image-preview>
     </div>
     <!-- 骨架屏 -->
@@ -207,14 +215,16 @@ export default {
       },
       // 图片预览
       showImage: false,
+      startIndex:1,
       previewList: [],
+      PreviewIndex: 0,
       // 骨架屏状态值
       skeletionState: true,
     };
   },
   beforeRouteEnter(to, from, next) {
     console.log("from.path ==>", from.path);
-    if (from.path == "/changeProduct" || from.path == "/publish") {
+    if (from.path == "/changeProduct" || from.path == "/publish" || from.path == "/changetable") {
       to.meta.isBack = true;
     } else {
       to.meta.isBack = false;
@@ -228,6 +238,10 @@ export default {
       this.skeletionState = false;
       this.item = [];
       this.imgList = [];
+      this.shopList = [];
+      this.variants = [];
+      this.current = 0;
+      this.showImage = false;
       this.getInitData();
     } else {
       console.log("不重新获取数据!!!");
@@ -250,9 +264,10 @@ export default {
       // console.log("index ==>",index);
     },
     //   轮播图点击事件
-    onClick(item) {
+    onClick(item,index) {
       this.previewList = [];
       this.showImage = true;
+      this.startIndex = index;
       this.previewList = this.imgList;
     },
     // 返回
@@ -292,6 +307,13 @@ export default {
           console.log("result ==>", result);
           this.skeletionState = true;
           if (result.data.Code == 200) {
+            if (result.data.product.currencytype == 0) {
+              result.data.product["Moneysymbol"] = "¥";
+            } else if (result.data.product.currencytype == 1) {
+              result.data.product["Moneysymbol"] = "$";
+            } else {
+              result.data.product["Moneysymbol"] = "円";
+            }
             this.item = result.data.product;
             // 表格
             this.variants = result.data.variants;
@@ -339,7 +361,7 @@ export default {
       this.$router.push({
         name: "Publish",
         query: {
-          AllshopLit: JSON.stringify(this.shopList),
+        //   AllshopLit: JSON.stringify(this.shopList),
           id: this.$route.query.id,
           language: this.$route.query.language,
           catalog2Num: this.catalog2Num,
@@ -353,6 +375,7 @@ export default {
         query: { item: JSON.stringify(item), productId: this.$route.query.id },
       });
     },
+    // 添加 变体
     addTable() {
       let item = {
         id: 0,
@@ -361,6 +384,24 @@ export default {
         name: "Changetable",
         query: { item: JSON.stringify(item), productId: this.$route.query.id },
       });
+    },
+    // 轮播图change 事件 拿到index
+    changePreview(index) {
+      this.PreviewIndex = index;
+    },
+    // 保存图片
+    saveImage() {
+      let _this = this;
+      if (!window.plus) return console.log("不是app!!!");
+      plus.gallery.save(
+        _this.previewList[_this.PreviewIndex],
+        function () {
+          _this.$toast("保存相册成功!"); //_this.user_qrcode 是服务器链接，必须是图片格式
+        },
+        function () {
+          _this.$toast("保存失败，请重试!");
+        }
+      );
     },
   },
 };

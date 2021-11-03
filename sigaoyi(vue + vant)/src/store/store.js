@@ -19,14 +19,21 @@ const store = new Vuex.Store({
         userLists:[],
         // logo footer 的小红点
         isDot:false,
+        // 店铺列表
+        shopList:[],
     },       
     //修改state
     mutations: {
         setImgList(state,ImgSrc){
             state.imgList.push(ImgSrc);
         },
+        // 用户列表
         setUserLists(state,array){
             state.userLists = array;
+        },
+        // 店铺列表
+        setShopList(state,array){
+            state.shopList = array;
         }
     },   
     //异步操作

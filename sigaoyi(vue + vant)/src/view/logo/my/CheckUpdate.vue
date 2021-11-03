@@ -31,7 +31,7 @@
 export default {
   data() {
     return {
-      version: "1.4",
+      version: "1.6",
     };
   },
   created() {

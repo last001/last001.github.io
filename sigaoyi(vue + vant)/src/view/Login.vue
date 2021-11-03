@@ -457,8 +457,8 @@ export default {
             city: cityname,
             ip: ip,
           },
-          // 请求超时 5s 超过请求失败
-          timeout: 5 * 1000,
+          // 请求超时 10s 超过请求失败
+          timeout: 10 * 1000,
         })
           .then((result) => {
             loading.clear();
@@ -471,12 +471,15 @@ export default {
               result.data.userinfo.balance = result.data.userinfo.balance.toFixed(
                 2
               );
-              // 密码   
+              // 密码
               let user = result.data.userinfo;
-              user.userPassword = "xxxxxxxxxxxx";
               sessionStorage.setItem("infoData", JSON.stringify(user));
-              // 销售额 利润 等。   
-              sessionStorage.setItem("profitData",JSON.stringify(result.data.profit))
+              // 店铺信息
+              if (result.data.qoo10shops != undefined) {
+                this.$store.commit("setShopList", result.data.qoo10shops);
+              } else {
+                this.$store.commit("setShopList", []);
+              }
               // cookie 记住密码
               if (this.isChecked) {
                 // Encrypt 加密
@@ -499,7 +502,6 @@ export default {
               this.$dialog.alert({
                 title: "登陆失败",
                 message: result.data.msg,
-                confirmButtonColor: "#646566",
               });
             }
           })
@@ -508,7 +510,6 @@ export default {
             this.$dialog.alert({
               title: "登陆失败",
               message: "服务器繁忙,请稍后再试！",
-              confirmButtonColor: "#646566",
             });
             console.log("err =>", err);
           });
@@ -533,7 +534,7 @@ export default {
     },
     // 点击思高易 待做
     clicksigoyi() {
-      console.log("思高易!!!!!!!!!!!!!");
+      this.$router.push({ name: "Agreement" });
     },
     // 点击没有账号 或者 忘记密码
     noUserName(status) {
@@ -732,23 +733,29 @@ export default {
         this.isChecked = true;
         this.checked = true;
         // 解密 账号
-        var bytesUserName = CryptoJS.AES.decrypt(localStorage.getItem("userName"), "userName");
+        var bytesUserName = CryptoJS.AES.decrypt(
+          localStorage.getItem("userName"),
+          "userName"
+        );
         var originalUserName = bytesUserName.toString(CryptoJS.enc.Utf8);
         this.username = originalUserName;
         // 解密 密码
-        var bytesPassWorld = CryptoJS.AES.decrypt(localStorage.getItem("passWorld"), "passWord");
+        var bytesPassWorld = CryptoJS.AES.decrypt(
+          localStorage.getItem("passWorld"),
+          "passWord"
+        );
         var originalpassWorld = bytesPassWorld.toString(CryptoJS.enc.Utf8);
         this.password = originalpassWorld;
 
         this.testRules();
-      }else{
-          this.checked = false;
+      } else {
+        this.checked = false;
       }
     },
     //清除localStorage
     clearCookie() {
-      localStorage.removeItem('userName');
-      localStorage.removeItem('passWorld');
+      localStorage.removeItem("userName");
+      localStorage.removeItem("passWorld");
     },
   },
 };
@@ -839,7 +846,7 @@ export default {
           display: flex;
           span {
             font-size: 13px;
-            color:#409eff;
+            color: #409eff;
             &:nth-child(2) {
               margin-left: 4px;
             }

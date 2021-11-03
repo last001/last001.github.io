@@ -9,7 +9,11 @@
       @close="Close()"
       v-model="largeImgStatus"
       :images="imgList"
+      className="previewImage"
     >
+      <template v-slot:cover
+        ><span @click="saveImage()">保存图片</span></template
+      >
     </van-image-preview>
   </div>
 </template>
@@ -24,8 +28,18 @@ export default {
     };
   },
   mounted() {},
-  created () {
-
+  created() {
+    window.addEventListener("unload", this.saveState);
+    if (JSON.parse(sessionStorage.getItem("state")) == null) {
+      return;
+    }
+    this.$store.commit('setShopList',JSON.parse(sessionStorage.getItem("state")).shopList);
+    sessionStorage.removeItem("state");
+    if (window.plus) {
+      this.plusReady();
+    } else {
+      document.addEventListener("plusready", this.plusReady, false);
+    }
   },
   computed: {
     lisentLager() {
@@ -33,11 +47,48 @@ export default {
     },
   },
   methods: {
+    saveState() {
+      sessionStorage.setItem("state", JSON.stringify(this.$store.state));
+    },
     Close() {
       this.largeImgStatus = false;
       this.imgList = [];
       this.$store.state.largeImgStatus = false;
       this.$store.state.imgList = [];
+    },
+    plusReady() {
+      //监听系统通知栏消息点击事件
+      plus.push.addEventListener(
+        "click",
+        function (msg) {
+          //处理点击消息的业务逻辑代码
+          console.log("msg.payload ==>", msg.payload);
+        },
+        false
+      );
+      //监听接收透传消息事件
+      plus.push.addEventListener(
+        "receive",
+        function (msg) {
+          //处理透传消息的业务逻辑代码
+          console.log("receive ==>", JSON.stringify(msg));
+        },
+        false
+      );
+    },
+    // 保存图片
+    saveImage() {
+      let _this = this;
+      if (!window.plus) return console.log("不是app!!!");
+      plus.gallery.save(
+        _this.imgList[0],
+        function () {
+          _this.$toast("保存相册成功!"); //_this.user_qrcode 是服务器链接，必须是图片格式
+        },
+        function () {
+          _this.$toast("保存失败，请重试!");
+        }
+      );
     },
   },
   watch: {
@@ -71,5 +122,17 @@ export default {
 }
 .fr {
   float: right;
+}
+.previewImage {
+  .van-image-preview__cover {
+    color: #fff;
+    top: 88%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    font-size: 14px;
+    padding: 8px 16px;
+    background-color: #656565;
+    border-radius: 20px;
+  }
 }
 </style>

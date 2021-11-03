@@ -86,7 +86,7 @@ export default {
       item: {},
       // 基本信息
       baseList: {
-        imgSrc: require("../../../../assets/img/11111.jpg"),
+        imgSrc: "",
         name: "王者",
         eName: "WangZhe",
         grade: "一级厂长",

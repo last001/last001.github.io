@@ -19,6 +19,7 @@
         <van-search
           v-model="sreachVal"
           show-action
+          clearable
           :placeholder="placeVal"
           @search="onSearch(sreachVal)"
           @cancel="onCancel"
@@ -479,6 +480,7 @@ export default {
           isActive: false,
           listName: [
             { name: "佐川", isActive: false, value: "佐川" },
+            { name: "佐川加急", isActive: false, value: "RB-DS3" },
             { name: "黑猫", isActive: false, value: "黑猫" },
             { name: "青岛-免抛", isActive: false, value: "QDMP" },
             { name: "带电渠道", isActive: false, value: "JPSADD" },
@@ -645,9 +647,9 @@ export default {
         this.reset();
         // 获取管理员
         this.getAdminiStrators();
+        // 判断 获取订单
+        this.isFromMyAwait();
       }
-      //  获取订单
-      this.getOrderList(this.amount, this.pages);
     } else {
       // 获取 vuex  备注
       this.orderList.forEach((e) => {
@@ -721,23 +723,16 @@ export default {
               { name: "全部", isActive: true, value: "99" },
               { name: "E特快", isActive: false, value: "ETK" },
               { name: "佐川特货", isActive: false, value: "佐川" },
-              { name: "佐川普货", isActive: false, value: "RB-DS3" },
+            //   { name: "佐川普货", isActive: false, value: "RB-DS3" },
+              { name: "佐川加急", isActive: false, value: "RB-DS3" },
               { name: "佐川普货-LTW", isActive: false, value: "LTW" },
               { name: "佐川普货-DPC", isActive: false, value: "DPC" },
               { name: "青岛-免抛", isActive: false, value: "QDMP" },
               { name: "佐川带电", isActive: false, value: "JPSADD" },
               { name: "黑猫3cm", isActive: false, value: "黑猫" },
-              {
-                name: "黑猫3cm带电",
-                isActive: false,
-                value: "黑猫带电",
-              },
-              {
-                name: "黑猫普货5cm",
-                isActive: false,
-                value: "黑猫普货5cm",
-              },
-              { name: "黑猫带电5cm", isActive: false, value: "黑猫带电5cm" },
+            //   { name: "黑猫3cm带电", isActive: false, value: "黑猫带电",},
+            //   { name: "黑猫普货5cm", isActive: false,value: "黑猫普货5cm",},
+            //   { name: "黑猫带电5cm", isActive: false, value: "黑猫带电5cm" },
               { name: "Qxpress", isActive: false, value: "Qxpress" },
               { name: "EMS", isActive: false, value: "EMS" },
               { name: "免抛", isActive: false, value: "PK0009" },
@@ -753,7 +748,8 @@ export default {
             e.listName = [
               { name: "全部", isActive: true, value: "99" },
               { name: "佐川", isActive: false, value: "佐川" },
-              { name: "黑猫", isActive: false, value: "黑猫" },
+              { name: "佐川加急", isActive: false, value: "RB-DS3" },
+            //   { name: "黑猫", isActive: false, value: "黑猫" },
               { name: "青岛-免抛", isActive: false, value: "QDMP" },
               { name: "带电渠道", isActive: false, value: "JPSADD" },
               { name: "Qxpress", isActive: false, value: "Qxpress" },
@@ -772,7 +768,7 @@ export default {
       } else {
         this.clientNameState = false;
       }
-    //   console.log("item.isActive ==>", item.isActive);
+      //   console.log("item.isActive ==>", item.isActive);
       // 关闭mask 层
       if (item.isActive) {
         this.maskState = false;
@@ -810,12 +806,12 @@ export default {
           console.log("已经存在值 open");
           this.maskState = false;
           this.FaceTop = -this.H * 0.3;
-        //   if(!item.isActive){
-        //       this.maskState = true;
-        //       this.FaceTop = 0;
-        //       item.isActive = true;
-        //       return;
-        //   }
+          //   if(!item.isActive){
+          //       this.maskState = true;
+          //       this.FaceTop = 0;
+          //       item.isActive = true;
+          //       return;
+          //   }
           item.isActive = false;
         }
         return;
@@ -880,7 +876,7 @@ export default {
       this.FaceTop = -this.H * 0.3;
 
       // 刷新
-        this.getOrderList(30, 1);
+      this.getOrderList(30, 1);
     },
     // 确定 选中 内容
     selectConfim() {
@@ -901,7 +897,7 @@ export default {
       this.FaceTop = -this.H * 0.3;
 
       // 搜索
-        this.sreachInput();
+      this.sreachInput();
     },
     //   返回
     onClickLeft() {
@@ -975,6 +971,9 @@ export default {
           el.isActive = false;
         });
       });
+      this.maskState = false;
+      this.FaceTop = -this.H * 0.3;
+      // 搜索
       this.sreachVal = "";
       this.searchStatus = true;
       this.orderStatus = true;
@@ -1248,6 +1247,16 @@ export default {
           console.log("result ==>", result);
           if (result.data.Code == 200) {
             this.$toast.success(result.data.msg);
+            // 录入用户
+            result.data.logisticsNames.forEach((e) => {
+              e["name"] = e.userName + "：" + (e.id + 10850);
+              e["isActive"] = false;
+            });
+            this.transverseList.forEach((e) => {
+              if (e.resetText == "录入用户") {
+                e.listName = result.data.logisticsNames;
+              }
+            });
             //   列表数据 > 0d
             if (result.data.logisticss.length > 0) {
               this.finishText = "没有更多的订单信息了";
@@ -1420,51 +1429,12 @@ export default {
     },
     // 点击 同步订单
     clickSyncBtn() {
-      //   loading
-      const loading = this.$toast.loading({
-        message: "同步请求中...",
-        forbidClick: true,
-        loadingType: "spinner",
-        duration: "0",
+      this.shopLit.list = this.$store.state.shopList;
+      this.shopLit.list.forEach((e) => {
+        e["text"] = e.shopuser;
+        e["value"] = e.id;
       });
-      this.$axios({
-        url: "/sigaoyi/NEWqoo10Shop",
-        method: "POST",
-        params: {
-          userId: this.infoData.id,
-          amount: 30,
-          pages: 1,
-        },
-      })
-        .then((result) => {
-          console.log("result ==>", result);
-          loading.clear();
-          if (result.data.Code == 200) {
-            if (result.data.qoo10shops.length > 0) {
-              result.data.qoo10shops.forEach((e) => {
-                e["text"] = e.shopuser;
-                e["value"] = e.id;
-              });
-              this.shopLit.list = result.data.qoo10shops;
-              //   id
-              setTimeout(() => {
-                this.syncShow = true;
-              }, 300);
-            } else {
-              this.syncShow = false;
-              this.$dialog({ message: "该用户没有店铺" });
-            }
-          } else {
-            this.syncShow = false;
-            this.$dialog({ message: result.data.msg });
-          }
-        })
-        .catch((err) => {
-          loading.clear();
-          this.syncShow = false;
-          console.log("err ==>", err);
-          this.$dialog({ message: "系统服务繁忙,请稍后再试!" });
-        });
+      this.syncShow = true;
     },
     // 渠道选择确定
     platformConFirm(e, array) {
@@ -1592,6 +1562,57 @@ export default {
         name: "ChangeState",
         query: { title: string, item: JSON.stringify(item) },
       });
+    },
+    // 是否从my 的 wait 点击过来的
+    isFromMyAwait() {
+      if (this.$route.query.isSearchText == "未入库") {
+        this.transverseList.forEach((e) => {
+          // 发货状态
+          if (e.resetText == "发货状态") {
+            e.listName.forEach((el) => {
+              if (el.value == 9) {
+                el.isActive = true;
+                e.text = el.name;
+              }
+            });
+            e.textNo = true;
+            e.isActive = false;
+          }
+        });
+        this.sreachInput();
+      } else if (this.$route.query.isSearchText == "待付运费") {
+        this.transverseList.forEach((e) => {
+          // 发货状态
+          if (e.resetText == "发货状态") {
+            e.listName.forEach((el) => {
+              if (el.value == 7) {
+                el.isActive = true;
+                e.text = el.name;
+              }
+            });
+            e.textNo = true;
+            e.isActive = false;
+          }
+        });
+        this.sreachInput();
+      } else if (this.$route.query.isSearchText == "异常订单") {
+        this.transverseList.forEach((e) => {
+          // 异常状态
+          if (e.resetText == "异常状态") {
+            e.listName.forEach((el) => {
+              if (el.value == "1") {
+                el.isActive = true;
+                e.text = el.name;
+              }
+            });
+            e.textNo = true;
+            e.isActive = false;
+          }
+        });
+        this.sreachInput();
+      } else {
+        this.getOrderList(this.amount, this.pages);
+      }
     },
   },
 };

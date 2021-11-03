@@ -1,11 +1,11 @@
 <template>
   <div class="my">
-      <!-- :style="{background: 'url(' + defaulBgSrc + ')',}" -->
+    <!-- :style="{background: 'url(' + defaulBgSrc + ')',}" -->
     <div class="v-my" :style="{ height: H + 'px' }">
       <!-- 头像 + 个签 -->
       <div class="bg">
-        <div class="header">
-          <img src="../../assets/img/head.jpg" alt="" />
+        <div class="header" @click="toPersonInfo()">
+          <img :src="infoData.img" alt="" />
         </div>
         <div class="detection" v-if="showInfo">
           <div class="userName">{{ infoData.userName }}</div>
@@ -31,14 +31,21 @@
       <div class="allOrder clearfix">
         <div class="fl">
           <van-icon name="label" size="20px" color="#409eff" />
-          <span>全部订单</span>
+          <span>全部订单（{{ orderNum }}）</span>
         </div>
-        <div class="fr">查看所有订单<van-icon name="arrow" /></div>
+        <div class="fr">
+          查看所有订单<van-icon name="arrow" @click="toOrder('all')" />
+        </div>
       </div>
       <div class="await">
-        <div class="await-list" v-for="(item, index) in awaitList" :key="index">
+        <div
+          class="await-list"
+          v-for="(item, index) in awaitList"
+          :key="index"
+          @click="toOrder('other', item)"
+        >
           <van-icon :name="item.iconSrc" size="26" color="#999" />
-          <div>{{ item.name }}</div>
+          <div>{{ item.name }}（{{ item.value }}）</div>
         </div>
       </div>
       <!-- 功能列表 -->
@@ -84,72 +91,72 @@ export default {
       defaulBgSrc: require("../../assets/img/th.jpg"),
       // 待付款 待发货 待收货
       awaitList: [
-        { name: "待付款", iconSrc: "pending-payment" },
-        { name: "待发货", iconSrc: "debit-pay" },
-        { name: "待收货", iconSrc: "paid" },
+        { name: "未入库", iconSrc: "peer-pay", value: 0 },
+        { name: "待付运费", iconSrc: "balance-pay", value: 0 },
+        { name: "异常订单", iconSrc: "ecard-pay", value: 0 },
       ],
       // 功能列表
       accountList: [
         {
           name: "账户余额",
           iconSrc: "balance-o",
-          color: "#e06a6b",
+          color: "#409eff",
           linkText: "Balance",
           dotStatus: false,
         },
         {
           name: "充值提现",
           iconSrc: "balance-list-o",
-          color: "#cd70fb",
+          color: "#07c160",
           linkText: "RechargeWithdraw",
           dotStatus: false,
         },
         {
           name: "个人资料",
           iconSrc: "user-circle-o",
-          color: "#e06a6b",
+          color: "#409eff",
           linkText: "PersonalInfo",
           dotStatus: false,
         },
         {
           name: "账户安全",
           iconSrc: "warning-o",
-          color: "#cd70fb",
+          color: "#07c160",
           linkText: "Account",
           dotStatus: false,
         },
         // {
         //   name: "收货地址",
         //   iconSrc: "logistics",
-        //   color: "#e06a6b",
+        //   color: "#409eff",
         //   linkText: "Adress",
         //   dotStatus: false,
         // },
         {
           name: "检查更新",
           iconSrc: "warn-o",
-          color: "#cd70fb",
+          color: "#409eff",
           linkText: "CheckUpdate",
           dotStatus: false,
         },
         // {
         //   name: "用户反馈",
         //   iconSrc: "chat-o",
-        //   color: "#e06a6b",
+        //   color: "#409eff",
         //   linkText: "Feedback",
         //   dotStatus: false,
         // },
         {
           name: "公告",
           iconSrc: "volume-o",
-          color: "#cd70fb",
+          color: "#07c160",
           linkText: "Notice",
           dotStatus: false,
         },
         //  {
         //   name: "测试",
         //   iconSrc: "volume-o",
-        //   color: "#cd70fb",
+        //   color: "#07c160",
         //   linkText: "Qecode",
         //   dotStatus: false,
         // },
@@ -157,21 +164,11 @@ export default {
       // 是否存在公告
       isNotice: false,
       isCheck: false,
+      // 订单总数
+      orderNum: 0,
     };
   },
   created() {
-    // function plusReady() {
-    //   if (plus.navigator.isImmersedStatusbar()) {
-    //     this.statusH = plus.navigator.getStatusbarHeight();
-    //     console.log("this.statusH ==>", this.statusH);
-    //   }
-    // }
-    // if (window.plus) {
-    //   plusReady();
-    // } else {
-    //   document.addEventListener("plusready", plusReady, false);
-    // }
-
     this.$nextTick(() => {
       this.H = document.documentElement.clientHeight - 60;
       this.infoData = JSON.parse(sessionStorage.getItem("infoData"));
@@ -179,8 +176,14 @@ export default {
         this.showInfo = false;
       } else {
         this.showInfo = true;
+        if (this.infoData.img == "" || this.infoData.img == undefined) {
+          this.infoData.img =
+            "http://www.ec-sigaoyi.com/imagelink/1626948164266.jpg";
+        }
         //  获取公告状态
         this.getNoticeState();
+        // 获取订单 值
+        this.getOrderNum();
         this.autoUpdate();
       }
     });
@@ -191,6 +194,10 @@ export default {
     },
   },
   methods: {
+    //   去个人信息
+    toPersonInfo() {
+      this.$router.push({ name: "PersonalInfo" });
+    },
     // 去登陆页面
     gotoLogin() {
       this.$toast.loading({
@@ -328,7 +335,7 @@ export default {
     },
     // 自动更新
     autoUpdate() {
-    //   console.log("window.plus ==>", window.plus);
+      //   console.log("window.plus ==>", window.plus);
       if (window.plus) {
         this.plusReady();
       } else {
@@ -375,6 +382,100 @@ export default {
           that.$dialog({ message: "发生不可预期的错误" });
           console.log("err ==>", err);
         });
+    },
+    // 获取订单 值
+    getOrderNum() {
+      // 初始 渲染
+      var orderList = JSON.parse(localStorage.getItem("orderNumList"));
+      // 存在值
+      if (orderList != null) {
+        this.orderNum = orderList.order;
+        this.awaitList.forEach((e) => {
+          if (e.name == "未入库") {
+            e.value = orderList.notInstorage;
+          } else if (e.name == "异常订单") {
+            e.value = orderList.abnormalOrder;
+          } else {
+            e.value = orderList.pendingFreight;
+          }
+        });
+      }
+      this.$axios({
+        url: "/sigaoyi/LogisticsStatusInfo",
+        method: "GET",
+        params: {
+          userId: this.infoData.id,
+        },
+      })
+        .then((result) => {
+          console.log("result ==>", result);
+          if (result.data.Code == 200) {
+            result.data.orderNumList = {};
+            result.data.orderNumList["order"] = result.data.order;
+            result.data.orderNumList["notInstorage"] = result.data.notInstorage;
+            result.data.orderNumList["abnormalOrder"] =
+              result.data.abnormalOrder;
+            result.data.orderNumList["pendingFreight"] =
+              result.data.pendingFreight;
+            //  不存在值
+            if (orderList == null) {
+              localStorage.setItem(
+                "orderNumList",
+                JSON.stringify(result.data.orderNumList)
+              );
+            }
+            // 与之前不相等
+            if (!this.isObjectValueEqual(orderList, result.data.orderNumList)) {
+              this.orderNum = result.data.orderNumList.order;
+              this.awaitList.forEach((e) => {
+                if (e.name == "未入库") {
+                  e.value = result.data.orderNumList.notInstorage;
+                } else if (e.name == "异常订单") {
+                  e.value = result.data.orderNumList.abnormalOrder;
+                } else {
+                  e.value = result.data.orderNumList.pendingFreight;
+                }
+              });
+              localStorage.setItem(
+                "orderNumList",
+                JSON.stringify(result.data.orderNumList)
+              );
+            }
+          }
+        })
+        .catch((err) => {
+          console.log("err ==>", err);
+        });
+    },
+    // 判断两个对象是否相等
+    isObjectValueEqual(a, b) {
+      var aProps = Object.getOwnPropertyNames(a);
+      var bProps = Object.getOwnPropertyNames(b);
+
+      if (aProps.length != bProps.length) {
+        return false;
+      }
+
+      for (var i = 0; i < aProps.length; i++) {
+        var propName = aProps[i];
+        var propA = a[propName];
+        var propB = b[propName];
+        if (propA !== propB) {
+          return false;
+        }
+      }
+      return true;
+    },
+    // 去订单页面
+    toOrder(string, item) {
+      if (string == "all") {
+        this.$router.push({ name: "Order" });
+      } else {
+        this.$router.push({
+          name: "Order",
+          query: { isSearchText: item.name },
+        });
+      }
     },
   },
   watch: {

@@ -1,7 +1,12 @@
 export const routes = [{
     path: '/login',
     name: 'Login',
-    component: () => import('../view/Login.vue')
+    component: () => import('../view/Login.vue'),
+  },
+  {
+    path: '/agreement',
+    name: 'Agreement',
+    component: () => import('../view/Agreement.vue'),
   },
   {
     path: '/logo',
@@ -32,15 +37,6 @@ export const routes = [{
         component: () => import('../view/logo/Order.vue'),
         meta: {
           keepAlive: true,
-          isBack: true,
-        }
-      },
-      {
-        path: 'setting',
-        name: 'Setting',
-        component: () => import('../view/logo/Setting.vue'),
-        meta: {
-          keepAlive: false,
           isBack: true,
         }
       },
@@ -79,11 +75,6 @@ export const routes = [{
     path: '/videoTeaching',
     name: 'VideoTeaching',
     component: () => import('../view/VideoTeaching.vue')
-  },
-  {
-    path: '/qecode',
-    name: 'Qecode',
-    component: () => import('../view/Qecode.vue')
   },
   {
     path: '/documentFile',
@@ -181,11 +172,6 @@ export const routes = [{
     component: () => import('../view/logo/my/rechargeWithdraw/Withdraw.vue')
   },
   {
-    path: '/withdrawDeailt',
-    name: 'WithdrawDeailt',
-    component: () => import('../view/logo/my/rechargeWithdraw/withdraw/WithdrawDeailt.vue')
-  },
-  {
     path: '/product',
     name: 'Product',
     component: () => import('../view/logo/home/Product.vue')
@@ -275,7 +261,6 @@ export const routes = [{
     name: 'ChangeState',
     component: () => import('../view/logo/order/ChangeState.vue')
   },
-
   // 重定向
   {
     path: '*',

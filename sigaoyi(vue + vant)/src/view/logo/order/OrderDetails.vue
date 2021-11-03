@@ -208,7 +208,8 @@
       </div>
     </div>
     <!-- 预览图片 -->
-    <van-image-preview v-model="largeImgState" :images="images">
+    <van-image-preview className="orderDetailsPreview" v-model="largeImgState" :images="images">
+      <template v-slot:cover><span @click="saveImage()">保存图片</span></template>
     </van-image-preview>
   </div>
 </template>
@@ -249,7 +250,8 @@ export default {
         { text: "", value: "99" },
         { text: "青岛-免抛", value: "QDMP" },
         { text: "佐川", value: "佐川" },
-        { text: "黑猫", value: "黑猫" },
+        { text: "佐川加急", value: "RB-DS3" },
+        // { text: "黑猫", value: "黑猫" },
         { text: "带电渠道", value: "JPSADD" },
         { text: "Qxpress", value: "Qxpress" },
         { text: "ETK", value: "ETK" },
@@ -261,21 +263,16 @@ export default {
         { text: "", value: "99" },
         { text: "佐川普货免抛", value: "PK0009" },
         { text: "佐川特货", value: "佐川" },
-        { text: "佐川普货", value: "RB-DS3" },
+        // { text: "佐川普货", value: "RB-DS3" },
+        { text: "佐川加急", value: "RB-DS3" },
         { text: "佐川普货-LTW", value: "LTW" },
         { text: "佐川普货-DPC", value: "DPC" },
         { text: "青岛-免抛", value: "QDMP" },
         { text: "佐川带电", value: "JPSADD" },
         { text: "黑猫3cm", value: "黑猫" },
-        {
-          text: "黑猫3cm带电",
-          value: "黑猫带电",
-        },
-        {
-          text: "黑猫普货5cm",
-          value: "黑猫普货5cm",
-        },
-        { text: "黑猫带电5cm", value: "黑猫带电5cm" },
+        // { text: "黑猫3cm带电", value: "黑猫带电"},
+        // { text: "黑猫普货5cm", value: "黑猫普货5cm"},
+        // { text: "黑猫带电5cm", value: "黑猫带电5cm" },
         { text: "Qxpress", value: "Qxpress" },
         { text: "E特快", value: "ETK" },
         { text: "EMS", value: "EMS" },
@@ -690,6 +687,20 @@ export default {
           console.log("err ==>", err);
           this.$dialog({ message: "系统服务繁忙,请稍后再试!" });
         });
+    },
+    // 保存图片
+    saveImage() {
+      let _this = this;
+      if (!window.plus) return console.log("不是app!!!");
+      plus.gallery.save(
+        _this.images[0],
+        function () {
+          _this.$toast("保存相册成功!"); //_this.user_qrcode 是服务器链接，必须是图片格式
+        },
+        function () {
+          _this.$toast("保存失败，请重试!");
+        }
+      );
     },
   },
 };

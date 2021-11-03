@@ -105,14 +105,20 @@
                 <span>编号：{{ item.numbering }}</span>
                 <span>{{ item.applicationDate }}</span>
               </div>
-              <!-- 通过 驳回 审核中 -->
-              <div class="fr" v-if="item.auditStatus == 1">
-                +{{ item.amount }}
+              <div class="cutPayment fr" v-if="item.costStatus != '2'">
+                <!-- 通过 驳回 审核中 -->
+                <div class="fr" v-if="item.auditStatus == 1">
+                  +{{ item.amount }}
+                </div>
+                <div class="fr active" v-else-if="item.auditStatus == 2">
+                  {{ item.amount }}
+                </div>
+                <div class="fr review" v-else>审核中</div>
               </div>
-              <div class="fr active" v-else-if="item.auditStatus == 2">
-                {{ item.amount }}
+              <!-- 扣款 -->
+              <div class="cutPayment1 fr" v-else>
+                <div class="fr">-{{ item.amount }}</div>
               </div>
-              <div class="fr review" v-else>审核中</div>
             </div>
           </van-list>
         </div>
@@ -220,6 +226,7 @@
         class="scroll-list"
         v-show="!applyStatus"
         v-if="rechargeList.length > 0"
+        :style="{ height: H - 340 + 'px' }"
       >
         <div class="itemList">
           <van-list
@@ -244,14 +251,20 @@
                 <span>编号：{{ item.numbering }}</span>
                 <span>{{ item.applicationDate }}</span>
               </div>
-              <!-- 通过 驳回 审核中 -->
-              <div class="fr" v-if="item.auditStatus == 1">
-                +{{ item.amount }}
+              <!-- 扣款判断 -->
+              <div class="cutPayment fr" v-if="item.costStatus != '2'">
+                <!-- 通过 驳回 审核中 -->
+                <div class="fr" v-if="item.auditStatus == 1">
+                  +{{ item.amount }}
+                </div>
+                <div class="fr active" v-else-if="item.auditStatus == 2">
+                  {{ item.amount }}
+                </div>
+                <div class="fr review" v-else>审核中</div>
               </div>
-              <div class="fr active" v-else-if="item.auditStatus == 2">
-                {{ item.amount }}
+              <div class="cutPayment1 fr" v-else>
+                <div>-{{ item.amount }}</div>
               </div>
-              <div class="fr review" v-else>审核中</div>
             </div>
           </van-list>
         </div>
@@ -458,6 +471,8 @@ export default {
           e.isActive = true;
         }
       });
+      // time
+      this.transiTime(this.transiTimeVal);
       if (item.text == "余额") {
         this.setTextStatus = true;
         this.refer();
@@ -479,6 +494,7 @@ export default {
       });
       item.isActive = true;
       this.data.userId = this.infoData.id;
+      this.data.amount = 30;
       //   检测为充值还是 提现 00000
       if (item.text == "扣款") {
         this.data.costStatus = Number(item.status);
@@ -593,6 +609,7 @@ export default {
       this.rechargeList = [];
       this.applyStatus = true;
       this.data.userId = this.infoData.id;
+       this.data.amount = 30;
       this.statusList.forEach((e) => {
         if (e.isActive) {
           if (e.text == "扣款") {

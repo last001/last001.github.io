@@ -1,21 +1,23 @@
 <template>
   <div class="recharge" :style="{ minHeight: H - 30 + 'px' }">
-    <van-nav-bar
-      title="充值"
-      left-text="返回"
-      left-arrow
-      fixed
-      @click-left="onClickLeft"
-    >
-      <template #right>
-        <span>上传图片</span>
-        <input @change="updata($event)" type="file" ref="uploadImg" />
-      </template>
-    </van-nav-bar>
+    <div class="title">
+      <van-nav-bar
+        title="充值"
+        left-text="返回"
+        left-arrow
+        fixed
+        @click-left="onClickLeft"
+      >
+        <template #right>
+          <span>上传图片</span>
+          <input @change="updata($event)" type="file" ref="uploadImg" />
+        </template>
+      </van-nav-bar>
+    </div>
     <div class="bgBox">
       <div class="pay">
-        <div class="qrCode" @click="largeImg()">
-          <img :src="qrCodeSrc" alt="" />
+        <div class="qrCode">
+          <img :src="qrCodeSrc" alt="" @click="largeImg()" />
         </div>
         <div class="text">充值金额(元)</div>
         <div class="int">
@@ -70,7 +72,7 @@ export default {
       // 屏幕高度
       H: "",
       infoData: {},
-      qrCodeSrc:require("../../../../assets/img/QRimg03.png"),
+      qrCodeSrc: "http://www.ec-sigaoyi.com/imagelink/1634893421649.png",
       //   充值金额
       payVal: 10,
       // 快捷的数字
@@ -198,6 +200,8 @@ export default {
           loading.clear();
           if (result.data.code == 200) {
             firstRouter = true;
+            // 消息推送
+            // plus.push.createMessage("xxx充值了xxx");
             this.$dialog({
               message: result.data.msg,
               confirmButtonColor: "#409eff",

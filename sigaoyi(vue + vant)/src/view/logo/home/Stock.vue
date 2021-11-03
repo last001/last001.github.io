@@ -40,7 +40,7 @@
               :error.sync="error"
               error-text="请求失败，点击重新加载"
               :finished="finished"
-              finished-text="没有更多了"
+              :finished-text="finishedText"
               @load="onLoad"
               :immediate-check="false"
             >
@@ -155,6 +155,7 @@ export default {
       isLoading: false,
       finished: false,
       error: false,
+      finishedText:"",
       // 库存数据
       stockList: [],
       pages: 1,
@@ -162,7 +163,7 @@ export default {
       total: 0,
       // 骨架屏状态
       skeletonState: false,
-      skeleton: 4,
+      skeleton: 8,
     };
   },
   beforeRouteEnter(to, from, next) {
@@ -185,12 +186,13 @@ export default {
         this.pages = 1;
         this.amount = 30;
         this.total = 0;
+        this.finishedText = "";
         this.skeletonState = false;
-        (this.refreshing = false),
-          (this.isLoading = false),
-          (this.finished = false),
-          (this.error = false),
-          (this.stockList = []);
+        this.refreshing = false;
+        this.isLoading = false;
+        this.finished = false;
+        this.error = false;
+        this.stockList = [];
         this.getStockList("start");
       }
     } else {
@@ -331,6 +333,7 @@ export default {
       if (this.stockList.length >= this.total) {
         this.finished = true;
         this.isLoading = true;
+        this.finishedText = "已经没有更多了"
         return;
       }
       this.amount += 30;
@@ -364,7 +367,10 @@ export default {
           console.log("result ==>", result);
           if (result.data.code == "200") {
             this.stockList.splice(index, 1);
-            this.$dialog({ message: result.data.msg ,confirmButtonColor:"#409eff"});
+            this.$dialog({
+              message: result.data.msg,
+              confirmButtonColor: "#409eff",
+            });
           } else {
             this.$dialog({ message: result.data.msg });
           }
