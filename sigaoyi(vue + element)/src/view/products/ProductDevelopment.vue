@@ -212,7 +212,7 @@ export default {
       chilrenVal: "",
       // 传给子元素的状态值
       flag: "",
-      H:"",
+      H: "",
       minHeight: "",
       // inputList
       inputList: [
@@ -224,6 +224,7 @@ export default {
         { name: "亚马逊日本站", value: "6", checked: false },
         { name: "乐天", value: "7", checked: false },
         { name: "雅虎商场", value: "8", checked: false },
+        { name: "趣天", value: "9", checked: false },
       ],
       //   xls
       tableData: [],

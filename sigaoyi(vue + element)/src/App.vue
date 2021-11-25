@@ -32,13 +32,21 @@ export default {
     this.setCompanData(
       JSON.parse(sessionStorage.getItem("state")).homeStore.companyData
     );
+    this.setShopData(
+      JSON.parse(sessionStorage.getItem("state")).homeStore.shopData
+    );
     sessionStorage.removeItem("state");
   },
   computed: {
     ...homeState(["InfoData", "companyData", "EscCode", "release"]),
   },
   methods: {
-    ...homeActions(["setInfoData", , "setCompanData", "setRelease"]),
+    ...homeActions([
+      "setInfoData",
+      "setCompanData",
+      "setRelease",
+      "setShopData",
+    ]),
     saveState() {
       sessionStorage.setItem("state", JSON.stringify(this.$store.state));
     },

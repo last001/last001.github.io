@@ -3,6 +3,7 @@ export const state = {
     InfoData:{},
     // 公司信息
     companyData:{},
+    shopData:[],
     // 展开状态
     WstateStatus:true,
     // sildeNavberNum

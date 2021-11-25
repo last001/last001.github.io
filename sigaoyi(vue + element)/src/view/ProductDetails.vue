@@ -890,7 +890,16 @@ export default {
   created() {
     let d = new Date();
     this.years = d.getFullYear();
-
+    // 店铺
+    this.qoo10shopsList = JSON.parse(this.$route.query.shopData);
+    this.qoo10shopsList.forEach((e) => {
+      e["selected"] = false;
+    });
+    let qoo10shopsObj = {
+      shopuser: "全部",
+      id: 0,
+    };
+    this.qoo10shopsList.unshift(qoo10shopsObj);
     this.getTable();
   },
   activated() {},
@@ -1847,7 +1856,7 @@ export default {
       })
         .then((result) => {
           loading.close();
-          console.log('result ==>',result);
+          console.log("result ==>", result);
           if (result.data.Code == 200) {
             document.title = result.data.product.title;
             //   个人信息
@@ -1922,16 +1931,12 @@ export default {
             this.item = result.data.product;
             this.quillDisabled = false;
             this.creatData();
-            // 店铺
-            let qoo10shopsObj = {
-              shopuser: "全部",
-              id: 0,
-            };
-            this.qoo10shopsList = result.data.qoo10shops;
-            this.qoo10shopsList.forEach((e) => {
-              e["selected"] = false;
+            this.$nextTick(() => {
+              let detailsVal = document.querySelector(".ql-editor").innerHTML;
+              result.data.product.details = detailsVal
+                .replace(/&lt;/g, "<")
+                .replace(/&lt;/g, ">");
             });
-            this.qoo10shopsList.unshift(qoo10shopsObj);
           } else {
             this.$notify({
               title: "请求失败",
@@ -1942,6 +1947,7 @@ export default {
           }
         })
         .catch((err) => {
+          console.log("err ==>", err);
           loading.close();
           this.$notify({
             title: "请求错误",
@@ -2069,7 +2075,7 @@ export default {
           },
         })
           .then((result) => {
-            console.log("result ==>",result);
+            console.log("result ==>", result);
             let freightObj = {
               ShippingName: "全部",
               ShippingNo: 0,
@@ -2508,32 +2514,32 @@ export default {
         return;
       }
       // 提示
-      if(this.qoo10shopsList[this.qoo10shopsIndex].id == 0){
-          this.$message({
-              message:"请先选择店铺",
-              center:true,
-              type:"warning",
-              duration:600
-          })
-          return;
-      }   
-      if(this.publishList.ShippingNo == 0){
-          this.$message({
-              message:"请先选择运费编号",
-              center:true,
-              type:"warning",
-              duration:600
-          })
-          return;
+      if (this.qoo10shopsList[this.qoo10shopsIndex].id == 0) {
+        this.$message({
+          message: "请先选择店铺",
+          center: true,
+          type: "warning",
+          duration: 600,
+        });
+        return;
       }
-      if(this.publishList.priceCount == ""){
-           this.$message({
-              message:"请先填写价格公示",
-              center:true,
-              type:"warning",
-              duration:600
-          })
-          return;
+      if (this.publishList.ShippingNo == 0) {
+        this.$message({
+          message: "请先选择运费编号",
+          center: true,
+          type: "warning",
+          duration: 600,
+        });
+        return;
+      }
+      if (this.publishList.priceCount == "") {
+        this.$message({
+          message: "请先填写价格公示",
+          center: true,
+          type: "warning",
+          duration: 600,
+        });
+        return;
       }
       let data = {
         pricefromula: this.publishList.priceCount,

@@ -43,8 +43,10 @@ Quill.register('modules/imageResize', ImageResize)
 // 放入全局变量中
 Vue.prototype.$axios = axios;
 
-// axios.defaults.baseURL = '/api';
-axios.defaults.baseURL = 'http://www.ec-sigaoyi.com';
+const root = process.env.API_HOST;
+
+axios.defaults.baseURL = root;
+// axios.defaults.baseURL = 'http://www.ec-sigaoyi.com';
 
 Vue.prototype.msg = function (msg) {
   return msg.replace("\n",

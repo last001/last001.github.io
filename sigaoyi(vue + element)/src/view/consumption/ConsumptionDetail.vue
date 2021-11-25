@@ -48,15 +48,11 @@
           </div>
         </div>
         <div class="inputList">
-          <div
-            ref="inp"
-            class="inp"
-            v-for="(item, index) in inputList"
-            :key="index"
-          >
+          <div class="inp" v-for="(item, index) in inputList" :key="index">
             <input
               type="text"
               :placeholder="item.placeText"
+              v-model="item.val"
               @keydown.enter="
                 sreachStatus && sreachIcon(currentPage, pageSize, true)
               "
@@ -316,10 +312,15 @@ export default {
       ],
       //   inputList
       inputList: [
-        { placeText: "申请人", text: "applicationName" },
-        { placeText: "编号/平台单号", text: "numbering" },
-        { placeText: "申请时间,格式:2020-01-01", text: "applicationDate" },
-        { placeText: "审核时间,格式:2020-01-01", text: "auditDate " },
+        { placeText: "申请人", text: "applicationName", val: "" },
+        { placeText: "编号/平台单号", text: "numbering", val: "" },
+        { placeText: "订单编号", text: "orderId", val: "" },
+        {
+          placeText: "申请时间,格式:2020-01-01",
+          text: "applicationDate",
+          val: "",
+        },
+        { placeText: "审核时间,格式:2020-01-01", text: "auditDate ", val: "" },
       ],
       //   xls
       tableData: [],
@@ -381,27 +382,11 @@ export default {
     },
     //  重置
     resetIniput() {
-      this.$nextTick(() => {
-        let inputList = document.querySelectorAll(".inp input");
-        for (let i = 0; i < inputList.length; i++) {
-          inputList[i].value = "";
-        }
-        // radioTypeList  radioStatusList
-        for (let i = 0; i < this.radioTypeList.length; i++) {
-          this.radioTypeList[i].checked = false;
-          if (this.radioTypeList[i].value == "99") {
-            this.radioTypeList[i].checked = true;
-          }
-        }
-        for (let i = 0; i < this.radioStatusList.length; i++) {
-          this.radioStatusList[i].checked = false;
-          if (this.radioStatusList[i].value == "99") {
-            this.radioStatusList[i].checked = true;
-          }
-        }
-        this.pageSize = 30;
-        this.currentPage = 1;
+      this.inputList.forEach((e) => {
+        e.val = "";
       });
+      this.pageSize = 30;
+      this.currentPage = 1;
     },
     //  搜索
     sreachIcon(pages, amount, flag) {
@@ -428,6 +413,7 @@ export default {
         numbering: "",
         applicationDate: "",
         auditDate: "",
+        orderId: "",
       };
       if (flag) {
         // 点击搜索按钮或者在input框的键盘事件
@@ -441,14 +427,14 @@ export default {
           data.pages = 1;
         }
       }
-      // inputList
-      let inputList = document.querySelectorAll(".inp input");
-      for (let i = 0; i < inputList.length; i++) {
-        data.applicationName = inputList[0].value;
-        data.numbering = inputList[1].value;
-        data.applicationDate = inputList[2].value;
-        data.auditDate = inputList[3].value;
-      }
+      // int
+      this.inputList.forEach((e) => {
+        for (const key in data) {
+          if (key == e.text) {
+            data[key] = e.val;
+          }
+        }
+      });
       //   审核状态
       for (let i = 0; i < this.radioStatusList.length; i++) {
         if (this.radioStatusList[i].checked) {
@@ -660,13 +646,14 @@ export default {
         auditDate: "",
         applicationDate: "",
       };
-      let inputList = document.querySelectorAll(".inp input");
-      for (let i = 0; i < inputList.length; i++) {
-        data.auditDate = inputList[3].value;
-        data.applicationDate = inputList[2].value;
-      }
+      this.inputList.forEach((e) => {
+        if (e.text == "applicationDate") {
+          data.applicationDate = e.val;
+        } else if (e.text == "auditDate") {
+          data.auditDate = e.val;
+        }
+      });
 
-      console.log("data ==>",data);
       // 请求
       let loading = this.$loading({
         lock: false,
@@ -681,10 +668,9 @@ export default {
       })
         .then((result) => {
           loading.close();
-
           if (result.data.code == 200) {
             this.ifarmSrc = "http://www.ec-sigaoyi.com/" + result.data.path;
-            // this.ifarmSrc = "http://192.168.1.179:8080/" + result.data.path;
+            console.log("this.ifarmSrc ==>", ifarmSrc);
             setTimeout(() => {
               this.ifarmSrc = null;
             }, 500);
@@ -728,14 +714,7 @@ export default {
       }
       this.infoData = JSON.parse(JSON.stringify(this.InfoData));
       this.infoData.balance = Number(this.infoData.balance).toFixed(2);
-
-      //   余额
-      let loading = this.$loading({
-        lock: false,
-        text: "加载中...",
-        spinner: "el-icon-loading",
-        background: "rgba(0, 0, 0, 0.7)",
-      });
+      this.tableLoading = true;
       this.$axios({
         url: "/sigaoyi/NEWconsumerdetails",
         method: "POST",
@@ -746,10 +725,7 @@ export default {
         },
       })
         .then((result) => {
-          setTimeout(() => {
-            loading.close();
-          }, 500);
-
+          this.tableLoading = false;
           if (result.data.Code == 200) {
             this.setInfoData(result.data.userinfo);
             this.infoData = result.data.userinfo;
@@ -827,10 +803,7 @@ export default {
           }
         })
         .catch((err) => {
-          setTimeout(() => {
-            loading.close();
-          }, 500);
-
+          this.tableLoading = false;
           this.$notify({
             title: "请求错误",
             message: "系统业务繁忙,请稍后再试!",

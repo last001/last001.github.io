@@ -401,8 +401,6 @@ export default {
     },
     // 点击登陆按钮
     submitFormLogin(formName) {
-      var CancelToken = this.$axios.CancelToken;
-      this.source = CancelToken.source();
       if (this.loginRuleForm.userName == "") {
         this.$message({
           message: "账号不能为空",
@@ -439,8 +437,6 @@ export default {
           city: cityname,
           ip: ip,
         },
-        timeout: 5 * 1000,
-        cancelToken: this.source.token,
       })
         .then((result) => {
           setTimeout(() => {
@@ -468,7 +464,14 @@ export default {
             } else {
               this.setCompanData({});
             }
-
+            // 店铺信息
+            if (result.data.qoo10shops != undefined) {
+              this.setShopData(result.data.qoo10shops);
+            } else {
+              this.setShopData([]);
+            }
+            // 账号名字
+            sessionStorage.setItem("userNumber", result.data.userinfo.userName);
             // 个人信息
             this.setInfoData(user);
 
@@ -497,19 +500,10 @@ export default {
           }
         })
         .catch((err) => {
+          console.log("err ==>", err);
           this.clickLogin = true;
           this.iconSrc = "";
           this.isLogin = false;
-
-          if (this.timer == null) {
-            this.$notify({
-              title: "请求错误",
-              message: err.message,
-              type: "error",
-              offset: 50,
-            });
-            return;
-          }
 
           this.$notify({
             title: "请求错误",
@@ -521,8 +515,6 @@ export default {
     },
     // inputCenter
     enterInput() {
-      var CancelToken = this.$axios.CancelToken;
-      this.source = CancelToken.source();
       if (this.loginRuleForm.userName == "") {
         this.$message({
           message: "账号不能为空!",
@@ -558,8 +550,6 @@ export default {
           city: cityname,
           ip: ip,
         },
-        timeout: 5 * 1000,
-        cancelToken: this.source.token,
       })
         .then((result) => {
           setTimeout(() => {
@@ -567,6 +557,7 @@ export default {
             this.iconSrc = "";
             this.isLogin = false;
           }, 300);
+          //   console.log("result ==>", result);
           if (result.data.Code == "200") {
             setTimeout(() => {
               this.$notify({
@@ -586,6 +577,14 @@ export default {
             } else {
               this.setCompanData({});
             }
+            // 店铺信息
+            if (result.data.qoo10shops != undefined) {
+              this.setShopData(result.data.qoo10shops);
+            } else {
+              this.setShopData([]);
+            }
+            // 账号名字
+            sessionStorage.setItem("userNumber", result.data.userinfo.userName);
             // 个人信息
             this.setInfoData(user);
             setTimeout(() => {
@@ -611,18 +610,10 @@ export default {
           }
         })
         .catch((err) => {
+          console.log("err ==>", err);
           this.enterLogin = true;
           this.iconSrc = "";
           this.isLogin = false;
-          if (this.timer == null) {
-            this.$notify({
-              title: "请求错误",
-              message: err.message,
-              type: "error",
-              offset: 50,
-            });
-            return;
-          }
           this.$notify({
             title: "请求错误",
             message: "系统服务繁忙,请稍后再试",
@@ -638,7 +629,7 @@ export default {
         this.screenHeight = document.documentElement.clientHeight;
       }, 400);
     },
-    ...homeActions(["setInfoData", "setCompanData"]),
+    ...homeActions(["setInfoData", "setCompanData", "setShopData"]),
   },
   watch: {
     screenHeight: "getclientH",

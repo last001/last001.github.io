@@ -661,7 +661,8 @@ export default {
         { name: "未选择", selected: true, value: "99" },
         { name: "佐川普货免抛", selected: false, value: "PK0009" },
         { name: "佐川特货", selected: false, value: "佐川" },
-        { name: "佐川普货", selected: false, value: "RB-DS3" },
+        // { name: "佐川普货", selected: false, value: "RB-DS3" },
+        { name: "佐川加急", selected: false, value: "RB-DS3" },
         { name: "佐川普货-LTW", selected: false, value: "LTW" },
         { name: "佐川普货-DPC", selected: false, value: "DPC" },
         { name: "青岛-免抛", selected: false, value: "QDMP" },
@@ -691,6 +692,7 @@ export default {
         { name: "未选择", selected: true, value: "99" },
         { name: "青岛-免抛", selected: false, value: "QDMP" },
         { name: "佐川", selected: false, value: "佐川" },
+        { name: "佐川加急", selected: false, value: "RB-DS3" },
         { name: "黑猫", selected: false, value: "黑猫" },
         { name: "带电渠道", selected: false, value: "JPSADD" },
         { name: "Qxpress", selected: false, value: "Qxpress" },
@@ -1267,6 +1269,7 @@ export default {
         "CNE",
         "LTW",
         "CNEGZ",
+        "RB-DS3",
       ];
       //   取消下单
       let cansrArr = [

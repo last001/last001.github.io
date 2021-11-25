@@ -86,9 +86,44 @@
               }
             }
 
+            .shop-time {
+              padding: 10px;
+              padding-left: 15px;
+              background-color: #fff;
+              width: 94%;
+              border-radius: 4px;
+              display: flex;
+              margin-top: 15px;
+
+              .shop,
+              .time {
+                line-height: 40px;
+
+                select {
+                  width: 230px;
+                  border: 1px solid #e4e4e4;
+                  outline: none;
+                  padding: 8px;
+                  border-radius: 5px;
+
+                  &:focus {
+                    border: 1px solid #2e71fe;
+                  }
+
+                  &:hover {
+                    border: 1px solid #2e71fe;
+                  }
+                }
+              }
+
+              .time {
+                margin-left: 100px;
+              }
+            }
+
             .fourBigBox {
               display: flex;
-              margin-top: 20px;
+              margin-top: 15px;
               width: 100%;
               flex-wrap: wrap;
 
@@ -102,10 +137,12 @@
                 padding-bottom: 0;
                 position: relative;
                 margin-top: 20px;
-                &:first-child{
-                  margin-top:0;
+
+                &:first-child {
+                  margin-top: 0;
                 }
-                &:nth-child(2){
+
+                &:nth-child(2) {
                   margin-top: 0;
                   margin-right: 0;
                 }
@@ -135,35 +172,33 @@
                   color: #333;
                   font-weight: 500;
                   font-size: 30px;
-                }
+                  -webkit-box-pack: center;
+                  -ms-flex-pack: center;
+                  justify-content: center;
+                  height: calc(100% - 100px);
+                  line-height: 100px;
 
-                .three {
-                  .triangle {
-                    width: 0;
-                    height: 0;
-                    margin-left: 6px;
+                  span {
+                    margin-left: 10px;
                   }
 
-                  .down {
-                    border: 6px solid transparent;
-                    border-top-color: rgb(82, 196, 26);
-                    margin-top: 6px;
-                  }
-
-                  .up {
-                    border: 6px solid transparent;
-                    border-bottom-color: rgb(245, 34, 45);
+                  &.active {
+                    color: #409eff;
                   }
                 }
 
-                .four {
-                  position: absolute;
-                  bottom: 0;
-                  left: 20px;
-                  width: 86%;
-                  border-top: 1px solid rgb(218, 218, 218);
-                  padding-top: 10px;
+                .Tolink {
+                  line-height: 50px;
+                  float: right;
+
+                  a {
+                    font-size: 18px;
+                    color: #409eff;
+                    font-weight: 500;
+                    letter-spacing: 2px;
+                  }
                 }
+
               }
             }
           }
@@ -201,8 +236,8 @@
               div {
                 flex: 2;
 
-                &.transtionType{
-                  flex:3;
+                &.transtionType {
+                  flex: 3;
                 }
 
                 span {
@@ -229,8 +264,8 @@
                   }
                 }
 
-                &.countType{
-                  span{
+                &.countType {
+                  span {
                     width: 127px;
                   }
                 }
@@ -249,10 +284,11 @@
                 width: 195px;
                 margin-left: 15px;
                 padding: 8px 12px;
-                padding-right:0;
+                padding-right: 0;
                 border-radius: 4px;
                 outline: none;
                 border: 1px solid #d4d4d4;
+
                 &:hover {
                   border: 1px solid #409eff;
                 }
@@ -279,17 +315,19 @@
                 display: inline-block;
               }
 
-              input{
+              input {
                 width: 195px;
                 padding: 8px 12px;
-                padding-right:0;
+                padding-right: 0;
                 border-radius: 4px;
                 outline: none;
                 border: 1px solid #d4d4d4;
                 margin-left: 42px;
-                &.first{
+
+                &.first {
                   margin-left: 15px;
                 }
+
                 &:hover {
                   border: 1px solid #409eff;
                 }
@@ -305,31 +343,36 @@
                   height: 35px;
                 }
               }
-              
+
             }
-            .product-type{
+
+            .product-type {
               display: flex;
               margin-top: 50px;
               border: 1px solid #d4d4d4;
               font-size: 13px;
-              padding:8px 4px;
+              padding: 8px 4px;
               border-radius: 4px;
-              div{
+
+              div {
                 display: flex;
                 flex: 1;
-                span{
+
+                span {
                   cursor: pointer;
                   user-select: none;
                 }
               }
             }
-            .remote{
+
+            .remote {
               margin-top: 50px;
               display: flex;
               border: 1px solid #d4d4d4;
               font-size: 13px;
-              padding:8px 4px;
+              padding: 8px 4px;
               border-radius: 4px;
+
               span {
                 width: 150px;
                 display: inline-block;
@@ -337,12 +380,14 @@
                 user-select: none;
               }
             }
-            .btn{
+
+            .btn {
               margin-top: 50px;
               width: 100%;
               text-align: center;
-              i{
-                &.el-icon-loading{
+
+              i {
+                &.el-icon-loading {
                   font-size: 16px !important;
                 }
               }
@@ -435,12 +480,15 @@
 
               .notice-content {
                 font-size: 15px;
-                .notice-table{
+
+                .notice-table {
                   margin: 10px 0;
-                  .el-table{
+
+                  .el-table {
                     font-size: 14px !important;
                   }
-                  .notice-title{
+
+                  .notice-title {
                     width: 100%;
                     border: 1px solid #EBEEF5;
                     border-bottom: none;
@@ -451,11 +499,13 @@
                     box-sizing: border-box;
                     border-right: 2px solid #EBEEF5;
                   }
-                  thead{
-                    th{
+
+                  thead {
+                    th {
                       text-align: center;
                     }
                   }
+
                   tbody {
                     tr {
                       td {
@@ -464,7 +514,8 @@
                     }
                   }
                 }
-                .zuci{
+
+                .zuci {
                   text-align: right;
                   margin-right: 15px;
                 }
@@ -480,8 +531,8 @@
               button {
                 padding: 8px 18px;
                 font-size: 14px;
-                margin-top: 15px;     
-                margin-right: 13px;   
+                margin-top: 15px;
+                margin-right: 13px;
               }
             }
           }
@@ -517,30 +568,31 @@
 }
 
 
-@media screen and (max-width:1800px){
-  .fourBigBox{
-    .fourBox{
-      &:first-child{
+@media screen and (max-width:1800px) {
+  .fourBigBox {
+    .fourBox {
+      &:first-child {
         margin-right: 10px !important;
       }
-      &:nth-child(3){
+
+      &:nth-child(3) {
         margin-right: 10px !important;
       }
     }
   }
 }
 
-@media screen and (max-width:1670px){
-  .fourBigBox{
-    .fourBox{
+@media screen and (max-width:1670px) {
+  .fourBigBox {
+    .fourBox {
       width: 42% !important;
     }
   }
 }
 
-@media screen and (max-width:1570px){
-  .fourBigBox{
-    .fourBox{
+@media screen and (max-width:1570px) {
+  .fourBigBox {
+    .fourBox {
       width: 40% !important;
     }
   }

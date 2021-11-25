@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "axios": "^0.21.0",
+    "clipboard": "^2.0.8",
     "echarts": "^5.0.0",
     "element-ui": "^2.14.1",
     "file-saver": "^2.0.5",
@@ -69,6 +70,7 @@
     "vue-template-compiler": "^2.5.2",
     "webpack": "^3.12.0",
     "webpack-bundle-analyzer": "^2.9.0",
+    "webpack-dev-server": "^2.9.7",
     "webpack-merge": "^4.1.0"
   },
   "engines": {

@@ -143,7 +143,7 @@
             >
             <span class="set">
               <select
-               disabled
+                disabled
                 v-model="statusIndex"
                 @change="changeSet(statusList, statusIndex)"
                 :class="statusIndex == 0 ? '' : 'active'"
@@ -836,12 +836,13 @@ export default {
     } else {
       this.headerW = "calc(100% - 110px)";
     }
+    console.log(this.shopData);
   },
   components: {
     // footerDiv,
   },
   computed: {
-    ...homeState(["WstateStatus", "InfoData"]),
+    ...homeState(["WstateStatus", "InfoData", "shopData"]),
     noMore() {
       return this.apiLoading;
     },
@@ -1642,12 +1643,15 @@ export default {
       //     },
       //   });
 
+      console.log(this.shopData);
+
       let routeData = this.$router.resolve({
         path: "/ProductDetails",
         query: {
           userID: this.InfoData.id,
           id: item.id,
           language: this.langugeList[this.langugeIndex].value,
+          shopData: JSON.stringify(this.shopData),
         },
       });
       window.open(routeData.href, "_blank");

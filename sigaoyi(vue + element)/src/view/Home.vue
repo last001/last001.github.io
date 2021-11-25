@@ -33,6 +33,31 @@
                         </div>
                       </el-collapse-item>
                       <el-collapse-item
+                        title="2021-11-01：Home展示店铺数据"
+                        name="2"
+                      >
+                        <div>
+                          <div>1.添加Home页面的店铺数据</div>
+                          <div>2.修改订单同步订单</div>
+                        </div>
+                      </el-collapse-item>
+                      <el-collapse-item
+                        title="2021-10-28：添加订单编号，消费页点单编号搜索框，佐川加急"
+                        name="4"
+                      >
+                        <div>1.添加订单编号,点击复制订单编号</div>
+                        <div>2.添加消费页面搜索点单编号的搜索框。</div>
+                        <div>3.添加佐川加急渠道。</div>
+                      </el-collapse-item>
+                      <el-collapse-item
+                        title="2021-10-27：修改公司管理"
+                        name="3"
+                      >
+                        <div>1.修改公司管理/公司管理</div>
+                        <div>2.修改公司管理/员工管理</div>
+                        <div>3.修复订单页面点击"转运订单"获取订单详情</div>
+                      </el-collapse-item>
+                      <el-collapse-item
                         title="2021-10-15：修改产品库获取产品方式"
                         name="1"
                       >
@@ -46,37 +71,42 @@
                         <div>1.订单页面添加查询物流(点击国内单号)</div>
                         <div>2.添加编辑订单页面佐川普货免抛(下单,打印)</div>
                       </el-collapse-item>
-                      <el-collapse-item
-                        title="2021-09-14：修改产品库导出价格"
-                        name="2"
-                      >
-                        <div>
-                          <div>
-                            1.修改订单详情客户(修改或添加)返回 重新获取数据
-                          </div>
-                          <div>
-                            2.修改订单页面 '待发货' 为 '库存件' 颜色为(浅绿色)
-                          </div>
-                        </div>
-                      </el-collapse-item>
-                      <el-collapse-item
-                        title="2021-09-08：添加青岛物流按钮 修改黑猫运费价格"
-                        name="4"
-                      >
-                        <div>
-                          1.我司内部人员添加 '导出发货-青岛'
-                          按钮(包括用户级别5)。
-                        </div>
-                        <div>2.修改黑猫3cm普货 首重:35 续重:11。</div>
-                        <div>3.修改黑猫3cm带电 首重:39 续重:12。</div>
-                      </el-collapse-item>
-                      <el-collapse-item title="2021-09-02：添加渠道" name="3">
-                        <div>1.添加佐川普货-LTW渠道</div>
-                        <div>2.添加订单页面管理员</div>
-                        <div>3.修复商品页面主图放大层的层级问题</div>
-                      </el-collapse-item>
                     </el-collapse>
                   </div>
+                </div>
+              </div>
+              <div class="shop-time">
+                <div class="shop">
+                  <span>选择店铺：</span>
+                  <select
+                    @change="changeST(shopList, shopListIndex)"
+                    v-model="shopListIndex"
+                  >
+                    <option
+                      v-for="(item, index) in shopList"
+                      :key="index"
+                      :value="index"
+                      :disabled="item.disabled"
+                    >
+                      {{ item.shopuser }}
+                    </option>
+                  </select>
+                </div>
+                <div class="time">
+                  <span>选择时间：</span>
+                  <select
+                    @change="changeST(timeList, timeListIndex)"
+                    v-model="timeListIndex"
+                  >
+                    <option
+                      v-for="(item, index) in timeList"
+                      :key="index"
+                      :value="index"
+                      :disabled="item.disabled"
+                    >
+                      {{ item.name }}
+                    </option>
+                  </select>
                 </div>
               </div>
               <div class="fourBigBox">
@@ -96,14 +126,15 @@
                       <i class="el-icon-warning-outline"></i>
                     </el-tooltip>
                   </div>
-                  <div class="two">{{ item.num }}</div>
-                  <div v-show="item.showState" class="three">
-                    {{ item.detail }}{{ item.numTwo }}
-                    <slot
-                      ><div :class="item.className" class="triangle"></div
-                    ></slot>
+                  <div class="two" :class="item.num > 0 ? 'active' : ''">
+                    {{ item.num
+                    }}<span v-show="item.titleVal == 'sales'">JPY</span>
                   </div>
-                  <div class="four">{{ item.time }}</div>
+                  <div class="Tolink" v-show="item.link && item.num > 0">
+                    <router-link :to="{ name: 'ProductOrderDefault' }"
+                      >订单</router-link
+                    >
+                  </div>
                 </div>
               </div>
             </div>
@@ -275,6 +306,8 @@
                     </el-table-column>
                     <el-table-column prop="Continuation" label="续重（0.5kg）">
                     </el-table-column>
+                    <el-table-column prop="serviceFreight" label="服务费">
+                    </el-table-column>
                     <el-table-column prop="norms" label="规格" width="220">
                     </el-table-column>
                     <el-table-column prop="volume" label="体积计算">
@@ -341,45 +374,45 @@ export default {
       // 4个盒子Data
       listData: [
         {
-          title: "今日总量",
+          title: "销售金额（包含邮费）",
+          titleVal: "sales",
           num: 0,
-          className: "down",
-          showState: true,
-          detail: "较昨日",
-          numTwo: 0,
-          time: "今日销售  0",
-          tooltip: "指标说明",
+          link: false,
+          tooltip: "总销售金额",
         },
         {
-          title: "待发货",
+          title: "订购数量",
+          titleVal: "OrderQuantity",
           num: 0,
-          className: "up",
-          showState: true,
-          detail: "取消要求/取消中",
-          numTwo: 0,
-          time: "运送延期  0",
+          link: false,
+          tooltip: "订购订单数量",
+        },
+        {
+          title: "新订购",
+          titleVal: "newOrder",
+          num: 0,
+          link: true,
+          tooltip: "新订购订单",
+        },
+        {
+          title: "等待发货",
+          titleVal: "waitOrder",
+          num: 0,
+          link: false,
           tooltip: "待发货订单",
         },
-        {
-          title: "本年销售额",
-          num: "¥   0",
-          showState: false,
-          className: "",
-          detail: "取消要求/取消中",
-          numTwo: 0,
-          time: "日均销售额  0",
-          tooltip: "本年总销售额",
-        },
-        {
-          title: "本年单量",
-          num: 0,
-          showState: false,
-          className: "",
-          detail: "取消要求/取消中",
-          numTwo: 0,
-          time: "日均单量  0",
-          tooltip: "本年总单量",
-        },
+      ],
+      //店铺
+      shopListIndex: 0,
+      shopList: [],
+      shopTime: "",
+      //   shijian
+      timeListIndex: 0,
+      timeList: [
+        { name: "当天", selected: true, value: 1 },
+        { name: "最近七天", selected: false, value: 7 },
+        { name: "最近半个月", selected: false, value: 15 },
+        { name: "最近一个月", selected: false, value: 30 },
       ],
       // 运输方式的index
       transtionIndex: 0,
@@ -479,25 +512,37 @@ export default {
       //  进来弹出层表格
       noticeTableData: [
         {
+          channel: "佐川加急",
+          first: "47",
+          Continuation: "14",
+          serviceFreight: "3",
+          norms: "限5kg以内,三边和不超过100cm",
+          volume: "长*宽*高/6000",
+          duration: "3-5天",
+        },
+        {
           channel: "佐川普货",
-          first: "45",
+          first: "42",
           Continuation: "13",
+          serviceFreight: "3",
           norms: "限5kg以内,三边和不超过100cm",
           volume: "长*宽*高/6000",
           duration: "3-5天",
         },
         {
           channel: "佐川带电",
-          first: "49",
+          first: "46",
           Continuation: "15",
+          serviceFreight: "3",
           norms: "限5kg以内,三边和不超过100cm",
           volume: "长*宽*高/6000",
           duration: "3-5天",
         },
         {
           channel: "佐川特货",
-          first: "57",
+          first: "54",
           Continuation: "16",
+          serviceFreight: "3",
           norms: "限5kg以内,三边和不超过100cm",
           volume: "长*宽*高/6000",
           duration: "3-5天",
@@ -512,16 +557,18 @@ export default {
         // },
         {
           channel: "黑猫3cm普货",
-          first: "35",
+          first: "32",
           Continuation: "11",
+          serviceFreight: "3",
           norms: "限5kg以内,三边和不超过60cm",
           volume: "不计抛",
           duration: "3-5天",
         },
         {
           channel: "黑猫3cm带电",
-          first: "37",
+          first: "34",
           Continuation: "12",
+          serviceFreight: "3",
           norms: "限5kg以内,三边和不超过60cm",
           volume: "不计抛",
           duration: "3-5天",
@@ -552,10 +599,21 @@ export default {
     let d = new Date();
     this.years = d.getFullYear();
     this.getTime();
+    // shopList
+    this.shopList = this.shopData;
+    if (this.shopList.length > 0) {
+      this.getFourDate();
+    } else {
+      let shopObj = {
+        id: 0,
+        shopuser: "全部",
+      };
+      this.shopList.push(shopObj);
+    }
     // this.setWstateStatus(false);
   },
   computed: {
-    ...homeState(["WstateStatus", "InfoData", "homeTitleStatus"]),
+    ...homeState(["WstateStatus", "InfoData", "homeTitleStatus", "shopData"]),
   },
   mounted() {},
   methods: {
@@ -572,6 +630,49 @@ export default {
     // 点击偏远地区
     clcikAddress() {
       this.addressFlag = !this.addressFlag;
+    },
+    // 获取店铺
+    getFourDate() {
+      if (this.shopList[this.shopListIndex].id == 0) {
+        return;
+      }
+      let data = {
+        shopid: this.shopList[this.shopListIndex].id,
+        Heaven: this.timeList[this.timeListIndex].value,
+      };
+      this.$axios({
+        url: "/sigaoyi/salesStatistics",
+        method: "POST",
+        params: data,
+      })
+        .then((result) => {
+          //   console.log("result ==>", result);
+          if (result.data.Code == 200) {
+            this.listData.forEach((e) => {
+              if (e.titleVal == "newOrder") {
+                e.num = result.data.NewOrder;
+              } else if (e.titleVal == "OrderQuantity") {
+                e.num = result.data.OrderQuantity;
+              } else if (e.titleVal == "sales") {
+                e.num = result.data.SalesAmount;
+              } else if (e.titleVal == "waitOrder") {
+                e.num = result.data.WaitForDelivery;
+              }
+            });
+          }
+        })
+        .catch((err) => {
+          //   console.log("err ==>", err);
+        });
+    },
+    // shop time
+    changeST(array, setIndex) {
+      array.forEach((e) => {
+        e.selected = false;
+      });
+      array[setIndex].selected = true;
+
+      this.getFourDate();
     },
     // set
     changeSet(array, index) {
@@ -773,7 +874,7 @@ export default {
     },
     // home开始弹出层 合并
     arraySpanMethod({ row, column, rowIndex, columnIndex }) {
-      if (rowIndex == 5) {
+      if (rowIndex == 6) {
         if (columnIndex == 1) {
           return [1, 3];
         } else if (columnIndex === 2 || columnIndex === 3) {
