@@ -1,0 +1,368 @@
+.staffInfo {
+  width: 100%;
+
+  .bigbox {
+    padding: 20px;
+    overflow: hidden;
+    padding-bottom: 51px;
+    padding-top: 0px;
+    .box {
+      // padding: 20px;
+      background-color: #fff;
+
+      .staffInfoContent {
+        padding-bottom: 50px;
+        .hint {
+          padding: 10px;
+          padding-left: 16px;
+        }
+
+        // 员工信息
+        .staffBasic {
+          padding: 20px;
+          padding-top: 0;
+          width: 100%;
+
+          .besicHeader {
+            padding: 10px 0;
+
+            hr {
+              width: 92%;
+              margin-left: 15px;
+              margin-top: 9.5px;
+            }
+          }
+
+          .besicContent {
+            display: flex;
+            margin-top: 20px;
+            justify-content: space-evenly;
+
+            div {
+              height: 40px;
+              line-height: 40px;
+
+              &:first-child {
+                span {
+                  &:first-child {
+                    letter-spacing: 26px;
+                  }
+                }
+              }
+
+              span {
+                display: inline-block;
+                width: 100px;
+                text-align: left;
+
+              }
+
+              select {
+                width: 372px;
+                padding: 10px 0;
+                padding-left: 8px;
+                border-radius: 4px;
+                border: 1px solid #c2c2c2;
+
+                &:hover {
+                  border: 1px solid #409eff;
+                }
+              }
+
+              input {
+                width: 370px;
+                text-indent: 10px;
+                padding: 10px 0;
+                border: 1px solid #c2c2c2;
+                border-radius: 4px;
+
+                &:hover {
+                  border: 1px solid #409eff;
+                }
+              }
+            }
+
+          }
+        }
+
+        // 工资薪金
+        .salaryMoney {
+          padding: 20px;
+          // margin-top: 10px;
+          width: 100%;
+
+          .besicHeader {
+            padding: 10px 0;
+
+            hr {
+              width: 92%;
+              margin-left: 15px;
+              margin-top: 9.5px;
+            }
+          }
+
+          .besicContent {
+            margin-top: 20px;
+            margin-left: 220px;
+
+            div {
+              width: 50%;
+              height: 40px;
+              line-height: 40px;
+
+              span {
+                display: inline-block;
+                width: 100px;
+                text-align: left;
+              }
+
+              input {
+                width: 370px;
+                text-indent: 10px;
+                border-radius: 4px;
+                border: 1px solid #c2c2c2;
+                padding: 10px 0;
+                border-radius: 4px;
+
+                &:hover {
+                  border: 1px solid #409eff;
+                }
+              }
+            }
+
+          }
+        }
+
+        // 管理费用
+        .administration {
+          padding: 20px;
+          // margin-top: 10px;
+          width: 100%;
+
+          .besicHeader {
+            padding: 10px 0;
+
+            hr {
+              width: 92%;
+              margin-left: 15px;
+              margin-top: 9.5px;
+            }
+          }
+
+          .besicContent {
+            display: flex;
+            margin-top: 20px;
+            justify-content: space-evenly;
+
+            .firstContent {
+
+              div {
+                height: 40px;
+                line-height: 40px;
+
+                span {
+                  display: inline-block;
+                  width: 100px;
+                  letter-spacing: 10px;
+                }
+
+                input {
+                  width: 370px;
+                  text-indent: 10px;
+                  padding: 10px 0;
+                  border: 1px solid #c2c2c2;
+                  border-radius: 4px;
+
+                  &:hover {
+                    border: 1px solid #409eff;
+                  }
+                }
+
+                &:nth-child(2) {
+                  margin-top: 40px;
+
+                  span {
+                    letter-spacing: 0px;
+                  }
+                }
+              }
+            }
+
+            .twoContent {
+              display: flex;
+              height: 40px;
+              line-height: 40px;
+
+              span {
+                width: 100px;
+                display: inline-block;
+              }
+
+              input {
+                width: 370px;
+                text-indent: 10px;
+                padding: 10px 0;
+                border: 1px solid #c2c2c2;
+                border-radius: 4px;
+
+                &:hover {
+                  border: 1px solid #409eff;
+                }
+
+              }
+            }
+          }
+        }
+
+        // 销售费用
+        .sell {
+          padding: 20px;
+          // margin-top: 10px;
+          width: 100%;
+
+          .besicHeader {
+            padding: 10px 0;
+
+            hr {
+              width: 92%;
+              margin-left: 15px;
+              margin-top: 9.5px;
+            }
+          }
+
+          .sellContent {
+            display: flex;
+            justify-content: space-evenly;
+
+            .firstContent {
+
+              div {
+                margin-top: 40px;
+                height: 40px;
+                line-height: 40px;
+
+                // span{
+                //   letter-spacing: 10px;
+                // }
+                &:nth-child(3) {
+                  span {
+                    letter-spacing: 15px;
+                  }
+                }
+              }
+            }
+
+            .twoContent {
+
+              div {
+                margin-top: 40px;
+                height: 40px;
+                line-height: 40px;
+
+                span {
+                  letter-spacing: 10px;
+                }
+              }
+            }
+
+            input {
+              width: 370px;
+              padding: 10px 0;
+              text-indent: 10px;
+              border: 1px solid #c2c2c2;
+              border-radius: 4px;
+
+              &:hover {
+                border: 1px solid #409eff;
+              }
+
+            }
+
+            span {
+              display: inline-block;
+              width: 100px;
+            }
+          }
+        }
+
+        // 办公费用
+        .work {
+          padding: 20px;
+          width: 100%;
+
+          .besicHeader {
+            padding: 10px 0;
+
+            hr {
+              width: 92%;
+              margin-left: 15px;
+              margin-top: 9.5px;
+            }
+          }
+
+          .workContent {
+            margin-left: 222px;
+            margin-top: 20px;
+
+            div {
+              display: flex;
+              height: 40px;
+              line-height: 40px;
+
+              span {
+                width: 100px;
+                display: inline-block;
+              }
+
+              input {
+                border: 1px solid #c2c2c2;
+                border-radius: 4px;
+                width: 370px;
+                padding: 10px 0;
+                text-indent: 10px;
+
+                &:hover {
+                  border: 1px solid #409eff;
+                }
+              }
+            }
+          }
+        }
+
+        input[type='number'] {
+          &::-webkit-inner-spin-button {
+            // width: 10px;
+            height: 37px;
+          }
+        }
+
+        // btn
+        .btn {
+          text-align: center;
+          width: 100%;
+          margin-top: 50px;
+          margin-bottom: 30px;
+
+          button {
+            padding: 12px 20px;
+            background: #333437;
+            color: #fff;
+            border: 1px solid #333437;
+
+            &:nth-child(2) {
+              margin-left: 100px;
+            }
+
+            &:hover {
+              background: #333437c7;
+            }
+          }
+        }
+
+        .mustIcon {
+          color: #e9360a;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,419 @@
+.company {
+  position: relative;
+  // transition: all .3s;
+  margin-top: 48px;
+  width: 100%;
+
+  .box {
+    overflow-x: hidden;
+    padding: 20px;
+    padding-bottom: 51px;
+    padding-top: 0;
+
+    .companyInfo {
+      position: relative;
+      margin-top: 20px;
+
+      .company-header {
+        background-color: #fff;
+        border-radius: 4px;
+        padding: 15px;
+        display: flex;
+
+        div {
+          flex: 1;
+          display: flex;
+
+          .text {
+            line-height: 34px;
+            width: 100px;
+            text-align: right;
+            display: inline-block;
+          }
+
+          input {
+            width: calc(100% - 120px);
+            padding: 8px;
+            outline: none;
+            border-radius: 3px;
+            border: 1px solid #dcdfe6;
+
+            &:hover {
+              border: 1px solid #bb2136;
+            }
+
+            &:focus {
+              border: 1px solid #bb2136;
+            }
+          }
+
+          .el-select {
+            width: calc(100% - 120px);
+
+            input {
+              width: 100%;
+              height: 34px;
+              line-height: 34px;
+              padding-left: 8px;
+            }
+
+            .el-input__suffix {
+              i {
+                line-height: 34px;
+              }
+            }
+          }
+
+          &.header-btn {
+            flex: 1;
+            width: 100%;
+            justify-content: flex-end;
+            button {
+              height: 34px;
+              padding: 9px 20px;
+              box-sizing: border-box;
+
+              &:first-child {
+                &:hover {
+                  color: #bb2136;
+                  border-color: #bb2136;
+                  background-color: #fff;
+                }
+
+                &:focus {
+                  background-color: #fff;
+                  color: #bb2136;
+                  border-color: #bb2136;
+                }
+              }
+
+              &:nth-child(2) {
+                margin-right: 5px;
+                background-color: #9e2536;
+                border: 1px solid #9e2536;
+
+                &:hover {
+                  background-color: #902636;
+                  border: 1px solid #902636;
+                }
+              }
+
+            }
+          }
+        }
+
+      }
+
+      .company-table {
+        background-color: #fff;
+        border-radius: 4px;
+        padding: 15px;
+        margin-top: 15px;
+
+        .btn {
+          justify-content: flex-end;
+          height: 34px;
+          line-height: 34px;
+          display: flex;
+
+          button {
+            background-color: #9e2536;
+            border: 1px solid #9e2536;
+            padding: 9px 20px;
+            margin-right: 15px;
+
+            &:hover {
+              background-color: #902636;
+              border: 1px solid #902636;
+            }
+          }
+
+          .el-select {
+            margin-top: -2px;
+            margin-right: 15px;
+            width: 105px;
+
+            input {
+              height: 34px;
+              line-height: 34px;
+            }
+
+            .el-input__suffix {
+              i {
+                line-height: 34px;
+              }
+            }
+          }
+
+          .relaod {
+            display: inline-block;
+            height: 40px;
+            line-height: 40px;
+
+            .el-icon-refresh-right {
+              font-size: 22px;
+              cursor: pointer;
+              color: #666;
+
+              &:hover {
+                color: #bb2136;
+              }
+            }
+          }
+        }
+
+        .xls {
+          margin-top: 10px;
+
+          .el-table {
+
+            td,
+            th {
+              text-align: center;
+            }
+
+            th {
+              background-color: #fafafa;
+            }
+
+            .edit {
+              button {
+                background-color: #9e2536;
+                border: 1px solid #9e2536;
+
+                &:hover {
+                  background-color: #902636;
+                  border: 1px solid #902636;
+                }
+              }
+            }
+
+            .el-loading-mask {
+              top: 49px;
+
+              .path {
+                stroke: #bb2136;
+              }
+            }
+          }
+        }
+
+        // 分页
+        .block {
+          margin-top: 10px;
+          display: flex;
+
+          .blockText {
+            font-weight: normal;
+          }
+
+          .el-pagination__sizes {
+            .el-input {
+              .el-input__inner:hover {
+                border-color: #bb2136;
+              }
+            }
+          }
+
+          .el-pagination {
+            //   width: 30%x;
+
+            &:nth-child(2) {
+              width: 100%;
+              margin-left: -13px;
+
+              .el-pager {
+                li {
+                  &.active {
+                    color: #bb2136;
+                  }
+
+                  &:hover {
+                    color: #bb2136;
+                  }
+                }
+              }
+
+              .el-pagination__jump {
+                input {
+                  &:focus {
+                    border-color: #902636;
+                  }
+                }
+              }
+
+              button {
+                &:hover {
+                  color: #bb2136;
+                }
+              }
+            }
+          }
+
+          .el-pagination__jump {
+            float: right;
+            margin-right: 16px;
+          }
+
+          .ensure-btn {
+            //   margin-right: -170px;
+            font-weight: normal;
+            border: 1px solid #dcdfe6;
+            text-align: center;
+            cursor: pointer;
+            padding: 0 10px;
+            border-radius: 4px;
+
+            &:hover {
+              border-color: #902636;
+              color: #902636;
+            }
+          }
+        }
+
+      }
+
+      .comopanyMangeDialog {
+        .el-dialog__header {
+          border: 1px solid #eee;
+          padding: 10px 20px;
+
+          .el-dialog__title {
+            font-size: 16px;
+          }
+
+          button {
+            top: 10px;
+            right: 10px;
+          }
+        }
+
+        .el-dialog__body {
+          padding: 20px 40px;
+
+          .content {
+
+            div {
+              display: flex;
+              margin-top: 20px;
+
+              span {
+                width: 100px;
+                text-align: right;
+                display: inline-block;
+                height: 34px;
+                line-height: 34px;
+              }
+
+              input {
+                width: 450px;
+                padding: 8px;
+                outline: none;
+                border-radius: 3px;
+                border: 1px solid #dcdfe6;
+
+                &:hover {
+                  border: 1px solid #bb2136;
+                }
+
+                &:focus {
+                  border: 1px solid #bb2136;
+                }
+              }
+
+              .el-select {
+                width: 470px;
+                margin-top: 0;
+
+                div {
+                  margin-top: 0;
+                }
+
+                input {
+                  width: 100%;
+                  height: 34px;
+                  line-height: 34px;
+                }
+
+                .el-input__suffix {
+                  i {
+                    line-height: 34px;
+                  }
+                }
+              }
+
+              &.imgNumber {
+                img {
+                  width: 340px;
+                }
+
+                .addImg {
+                  width: 340px;
+                  height: 200px;
+                  margin-top: 10px;
+                  border: 1px dashed #dcdfe6;
+                  position: relative;
+
+                  input {
+                    width: 100%;
+                    height: 100%;
+                    opacity: 0;
+                  }
+
+                  .el-icon-plus {
+                    color: #999;
+                    font-size: 40px;
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    margin-left: -20px;
+                    margin-top: -20px;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        .el-dialog__footer {
+          border: 1px solid #eee;
+          padding-bottom: 15px;
+          padding-top: 15px;
+          text-align: right !important;
+
+          button {
+            height: 34px;
+            padding: 8px 16px;
+
+            &:nth-child(2) {
+              &:hover {
+                color: #bb2136;
+                border-color: #bb2136;
+                background-color: #fff;
+              }
+
+              &:focus {
+                background-color: #fff;
+                color: #bb2136;
+                border-color: #bb2136;
+              }
+            }
+
+            &:first-child {
+              margin-right: 5px;
+              background-color: #9e2536;
+              border: 1px solid #9e2536;
+
+              &:hover {
+                background-color: #902636;
+                border: 1px solid #902636;
+              }
+            }
+
+
+          }
+        }
+      }
+    }
+  }
+}

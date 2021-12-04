@@ -1,0 +1,319 @@
+.purchaseList {
+  .v-purchaseList {
+    overflow-x: hidden;
+    padding: 20px;
+    padding-top: 0;
+    padding-bottom: 51px;
+    margin-top: 48px;
+
+    .purchaseListInfo {
+      position: relative;
+
+      .status-type {
+        background: #fff;
+        border-radius: 3px;
+        margin-top: 15px;
+        padding: 15px;
+
+        .search {
+          display: flex;
+          font-size: 15px;
+
+          div {
+            display: flex;
+            flex: 1;
+
+            .text {
+              display: inline-block;
+              height: 34px;
+              line-height: 34px;
+              width: 100px;
+              text-align: right;
+            }
+
+            input {
+              width: calc(100% - 120px);
+              outline: none;
+              border-radius: 3px;
+              padding: 0 8px;
+              height: 34px;
+              line-height: 34px;
+              border: 1px solid #dcdfe6;
+              box-sizing: border-box;
+
+              &:hover {
+                border: 1px solid #bb2136;
+              }
+
+              &:focus {
+                border: 1px solid #bb2136;
+              }
+            }
+
+            .el-select {
+              flex: 1;
+
+              input {
+                width: 100%;
+                height: 34px;
+                line-height: 34px;
+              }
+
+              .el-input__suffix {
+                i {
+                  line-height: 34px;
+                }
+              }
+            }
+
+            .el-date-editor {
+              width: calc(100% - 120px);
+
+              input {
+                height: 34px;
+                line-height: 34px;
+                width: 100%;
+                padding-left: 34px;
+              }
+
+              .el-input__prefix,
+              .el-input__suffix {
+                i {
+                  line-height: 34px;
+                }
+              }
+            }
+
+            &.btn {
+              margin-top: 0;
+              width: initial;
+
+              .open_close {
+                flex: initial;
+              }
+            }
+          }
+        }
+
+        .btn {
+          margin-top: 15px;
+          width: 100%;
+          display: flex;
+          justify-content: flex-end;
+
+          button {
+            height: 34px;
+            padding: 9px 20px;
+            box-sizing: border-box;
+
+            &:first-child {
+              &:hover {
+                color: #bb2136;
+                border-color: #bb2136;
+                background-color: #fff;
+              }
+
+              &:focus {
+                background-color: #fff;
+                color: #bb2136;
+                border-color: #bb2136;
+              }
+            }
+
+            &:nth-child(2) {
+              margin-right: 5px;
+              background-color: #9e2536;
+              border: 1px solid #9e2536;
+
+              &:hover {
+                background-color: #902636;
+                border: 1px solid #902636;
+              }
+            }
+          }
+
+          .open_close {
+            color: #bb2136;
+            text-indent: 0;
+            cursor: pointer;
+            margin-left: 10px;
+
+            span {
+              line-height: 35px;
+              width: 37px;
+              display: inline-block;
+            }
+          }
+        }
+      }
+
+      .pur-bottom {
+        background: #fff;
+        margin-top: 15px;
+        border-radius: 4px;
+        padding: 15px;
+
+        .btn {
+          width: 100%;
+          height: 32px;
+          text-align: right;
+          position: relative;
+
+          button {
+            background-color: #9e2536;
+            border: 1px solid #9e2536;
+            padding: 9px 20px;
+            margin-right: 38px;
+
+            &:hover {
+              background-color: #902636;
+              border: 1px solid #902636;
+            }
+          }
+
+          .el-icon-refresh-right {
+            font-size: 22px;
+            cursor: pointer;
+            color: #666;
+            position: absolute;
+            right: 5px;
+            top: 6px;
+          }
+        }
+
+        .xls {
+          margin-top: 10px;
+
+          .el-table--border {
+            border: none;
+          }
+
+          .el-table th {
+            background-color: #fafafa;
+          }
+
+          .el-table td,
+          .el-table th {
+            text-align: center;
+          }
+
+          .el-button--text:hover {
+            text-decoration: underline;
+          }
+
+          .updataImg {
+            position: relative;
+
+            button {
+              padding: 12px 14px;
+              color: #bb2136;
+            }
+
+            input {
+              position: absolute;
+              left: 14px;
+              top: 0px;
+              width: 58px;
+              height: 40px;
+              opacity: 0;
+            }
+          }
+
+
+          .edit {
+            button {
+              background-color: #9e2536;
+              border: 1px solid #9e2536;
+
+              &:hover {
+                background-color: #902636;
+                border: 1px solid #902636;
+              }
+            }
+          }
+
+          .el-loading-mask {
+            top: 92px;
+
+            .path {
+              stroke: #bb2136;
+            }
+          }
+        }
+
+        // 分页
+        .block {
+          margin-top: 10px;
+          display: flex;
+
+          .blockText {
+            font-weight: normal;
+          }
+
+          .el-pagination__sizes {
+            .el-input {
+              .el-input__inner:hover {
+                border-color: #bb2136;
+              }
+            }
+          }
+
+          .el-pagination {
+            //   width: 30%x;
+
+            &:nth-child(2) {
+              width: 100%;
+              margin-left: -13px;
+
+              .el-pager {
+                li {
+                  &.active {
+                    color: #bb2136;
+                  }
+
+                  &:hover {
+                    color: #bb2136;
+                  }
+                }
+              }
+
+              .el-pagination__jump {
+                input {
+                  &:focus {
+                    border-color: #902636;
+                  }
+                }
+              }
+
+              button {
+                &:hover {
+                  color: #bb2136;
+                }
+              }
+            }
+          }
+
+          .el-pagination__jump {
+            float: right;
+            margin-right: 16px;
+          }
+
+          .ensure-btn {
+            //   margin-right: -170px;
+            font-weight: normal;
+            border: 1px solid #dcdfe6;
+            text-align: center;
+            cursor: pointer;
+            padding: 0 10px;
+            border-radius: 4px;
+
+            &:hover {
+              border-color: #902636;
+              color: #902636;
+            }
+          }
+        }
+      }
+    }
+  }
+}

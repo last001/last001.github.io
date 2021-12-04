@@ -1,0 +1,37 @@
+.videoCourse {
+  position: relative;
+  width: 100%;
+  margin-top: 48px;
+
+  .box {
+    padding-bottom: 0;
+    position: relative;
+
+    .videoCouseInfo {
+      display: flex;
+      width: 100%;
+
+      .videoList {
+        width: 100%;
+        height: 800px;
+        position: relative;
+
+        video {
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+    }
+
+    .footer {
+      margin-top: 0;
+    }
+  }
+}

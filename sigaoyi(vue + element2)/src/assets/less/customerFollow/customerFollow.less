@@ -1,0 +1,194 @@
+.customerFollowDefault {
+  height: 100%;
+  width: 100%;
+  position: relative;
+
+  .hidden{
+    padding: 20px;
+  }
+  
+  .CustomerFollowInfo {
+    margin-top: 20px;
+    overflow-x: hidden;
+    padding: 20px;
+    padding-bottom: 51px;
+    padding-top: 0;
+
+    .customer-header {
+      background-color: #fff;
+      border-radius: 4px;
+      padding: 15px;
+
+      .title {
+        div {
+          display: flex;
+          margin-right: 20px;
+          cursor: pointer;
+
+          .text {
+            font-weight: 400;
+          }
+
+          input {
+            // margin-right: 15px;
+            margin-top: 5px;
+          }
+        }
+
+        .accountType {
+          margin-top: 15px;
+        }
+
+        .accountRootin {
+          margin-top: 15px;
+        }
+      }
+
+      .inputList {
+        display: flex;
+        margin-top: 20px;
+
+        div {
+          margin-right: 15px;
+
+          input {
+            padding: 8px 0;
+            width: 230px;
+            font-size: 14px;
+            border: 1px solid #c2c2c2;
+            border-radius: 4px;
+            outline: none;
+            text-indent: 8px;
+
+            &:focus{
+              outline-offset: 0px;
+              border: 1px solid #409eff;
+            }
+
+            &:hover{
+              border: 1px solid #409EFF;
+            }
+          }
+        }
+
+        .blockTime {
+          margin-right: 0px;
+
+          .el-date-editor {
+            width: 390px;
+            height: 35px;
+            border: 1px solid #c2c2c2;
+
+            &:hover{
+              border: 1px solid #409EFF;
+            }
+
+            input {
+              width: 143px;
+              padding:  0;
+              &::placeholder{
+                color: #777;
+              }
+            }
+
+            .el-range__close-icon {
+              margin-left: 4px;
+              line-height: 31px;
+            }
+          }
+
+        }
+
+        .iconList {
+          height: 34px;
+
+          button {
+            padding: 10px 15px;
+          }
+
+        }
+      }
+    }
+
+    .customer-table {
+      background-color: #fff;
+      border-radius: 4px;
+      padding: 15px;
+      margin-top: 15px;
+
+      .v-customer-table {
+        padding: 15px;
+        padding-top: 0px;
+
+        .btn {
+          button {
+            padding: 10px 15px;
+
+            &:nth-child(2) {
+              margin-right: 10px;
+            }
+          }
+        }
+
+        .xls {
+          margin-top: 10px;
+
+          .el-table--border{
+            border: none;
+          }
+
+          .el-table td,
+          .el-table th {
+            text-align: center;
+            border-right: none;
+          }
+
+          .el-button--text:hover {
+            text-decoration: underline;
+          }
+        }
+
+        .block {
+          margin-top: 10px;
+          display: flex;
+
+          .blockText {
+            font-weight: normal;
+          }
+
+          .el-pagination {
+            //   width: 30%x;
+
+            &:nth-child(2) {
+              width: 100%;
+              margin-left: -13px;
+            }
+          }
+
+          .el-pagination__jump {
+            float: right;
+            margin-right: 16px;
+          }
+
+          .ensure-btn {
+            //   margin-right: -170px;
+            font-weight: normal;
+            border: 1px solid #dcdfe6;
+            text-align: center;
+            cursor: pointer;
+            padding: 0 10px;
+            border-radius: 4px;
+
+            &:hover {
+              border-color: #40a0ffcc;
+              color: #409EFF;
+              background: #ecf5ff;
+            }
+          }
+        }
+      }
+
+
+    }
+  }
+}

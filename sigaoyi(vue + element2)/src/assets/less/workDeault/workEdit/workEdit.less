@@ -1,0 +1,223 @@
+.workEdit {
+  width: 100%;
+  padding-bottom: 31px;
+
+  .bigbox {
+    padding: 20px;
+    display: flex;
+    // padding: 20px;
+
+    .box {
+      padding: 20px;
+      width: 100%;
+      overflow: hidden;
+      // transition: all .3s;
+      padding-bottom: 0;
+      background-color: #fcfcfc;
+
+      .workEditInfo {
+        width: 100%;
+
+        .mustIcon {
+          color: red;
+        }
+
+        span {
+          display: inline-block;
+          width: 120px;
+          height: 40px;
+          line-height: 40px;
+          text-align: right;
+          font-weight: 500;
+        }
+
+        input {
+          width: 370px;
+          text-indent: 10px;
+          border-radius: 4px;
+          border: 1px solid #c2c2c2;
+          padding: 10px 0;
+          margin-left: 20px;
+
+          &:hover {
+            border: 1px solid #409eff;
+          }
+        }
+
+        select {
+          margin-left: 20px;
+          width: 355px;
+          height: 38px;
+          border-radius: 4px;
+          text-indent: 10px;
+          border: 1px solid #c2c2c2;
+          outline: none;
+
+          &:hover {
+            border: 1px solid #409eff;
+          }
+        }
+
+        .besicHeader {
+          padding: 10px 0;
+
+          span {
+            width: 70px;
+            margin-top: -10px;
+          }
+
+          hr {
+            width: 94%;
+            margin-left: 15px;
+            margin-top: 9.5px;
+          }
+        }
+
+        .besicContent {
+          margin-top: 20px;
+          margin-bottom: 25px;
+          display: flex;
+          justify-content: space-evenly;
+
+          div {
+            display: flex;
+          }
+
+          .el-date-editor {
+            width: 54%;
+          }
+        }
+
+        .content-pro {
+          .besicContent {
+            display: block;
+            margin-left: 182px;
+
+            div {
+              &:first-child {
+                width: 100%;
+
+                input {
+                  width: 1060px;
+                  padding-right: 4px;
+                }
+              }
+
+              &:nth-child(2) {
+                margin-top: 20px;
+                width: 100%;
+
+                textarea {
+                  margin-left: 20px;
+                  margin-top: 12px;
+                  width: 1060px;
+                  text-indent: 10px;
+                  border-radius: 4px;
+                  border: 1px solid #c2c2c2;
+
+                  &:hover {
+                    border: 1px solid #409eff;
+                  }
+
+                  &:focus {
+                    outline-offset: none;
+                    outline: none;
+                    border: 1px solid #409eff;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        .predicDate {
+          .besicContent {
+            div {
+              .el-date-editor{
+                width: 77%;
+              .el-input__inner {
+                padding-left: 20px;
+              }
+
+              .el-input__suffix-inner {
+                width: 100%;
+              }
+
+              .el-input__prefix,
+              .el-input__suffix {
+                position: absolute;
+                top: 0;
+                transition: all .3s;
+                height: 100%;
+                color: #C0C4CC;
+                text-align: center;
+                width: 70px;
+              }}
+            }
+          }
+        }
+
+        .finish{
+          .besicContent{
+            div{
+              margin-left: 8px;
+              select{
+                width: 371px;
+              }
+              &:nth-child(2){
+                margin-left: 15px;
+                .el-date-editor{
+                  width: 87%;
+                }
+                .el-input__prefix {
+                  left: -70px;
+                }
+                .el-input__suffix{
+                  right: 14px;
+                }
+                input{
+                  text-indent: 28px;
+                }
+              }
+            }
+          }
+        }
+
+        // btn
+        .btn {
+          width: 100%;
+          text-align: center;
+          margin-top: 80px;
+          margin-bottom: 50px;
+
+          button {
+            padding: 12px 20px;
+            background: #333437;
+            color: #fff;
+            border: 1px solid #333437;
+
+            span {
+              height: 14px;
+              width: 24px;
+              line-height: 14px;
+              font-weight: normal;
+            }
+
+            &:nth-child(2) {
+              margin-left: 100px;
+            }
+
+            &:hover {
+              background: #333437c7;
+            }
+          }
+        }
+
+      }
+    }
+
+    .footer {
+      background-color: #fcfcfc;
+    }
+  }
+}

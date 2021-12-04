@@ -1,0 +1,91 @@
+.references {
+  width: 100%;
+  background: url(../../img/bg02.jpg) no-repeat;
+  background-position: top;
+  background-size: 100% 100%;
+  // background-position: center center;
+  // height: 800px;
+  position: relative;
+  overflow: hidden;
+
+  .box {
+    // border: 1px solid #8291A2;
+    width: 420px;
+    position: absolute;
+    right: 50%;
+    margin-right: -210px;
+    top: 35%;
+    margin-top: 9px;
+    // margin-left: -60px;
+
+    .title {
+      border-bottom: 3px solid #8291A2;
+      color: #409eff;
+      // cursor: pointer;
+      background-color: rgba(255, 255, 255, 0.88);
+      border-top-left-radius: 6px;
+      border-top-right-radius: 6px;
+      text-align: center;
+      width: 100%;
+      //   font-weight: bold;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 50px;
+    }
+
+    .el-form-item {
+      margin-bottom: 18px;
+    }
+
+    .referencesInfo {
+      padding: 20px 30px 40px 20px;
+      padding-bottom: 1px;
+      // background: linear-gradient(to right,#adc8db,#adc8db);
+      border-bottom-left-radius: 6px;
+      border-bottom-right-radius: 6px;
+      background: rgba(255, 255, 255, 0.88);
+
+      .el-form{
+          padding-bottom: 10px;
+      }
+
+      .registeBox {
+          margin-top: 18px;
+        .el-form-item__content {
+          margin-left: 20px !important;
+
+          .el-button--primary {
+            width: 100%;
+
+            &.active {
+              opacity: .75;
+              box-shadow: 0 0 5px #409eff;
+            }
+
+            .el-icon-loading {
+              font-size: 14px !important;
+            }
+
+            span {
+              letter-spacing: 8px;
+            }
+          }
+
+
+        }
+
+      }
+    }
+  }
+}
+
+.gohome {
+    position: absolute;
+    left: 50%;
+    top: 3%;
+    width: 200px;
+    height: 192px;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    cursor: pointer;
+  }

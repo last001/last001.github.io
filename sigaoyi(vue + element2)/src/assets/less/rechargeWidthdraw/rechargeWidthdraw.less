@@ -1,0 +1,542 @@
+.rechargeWidthdraw {
+  position: relative;
+  width: 100%;
+  margin-top: 48px;
+
+  .box {
+    overflow-x: hidden;
+    padding: 20px;
+    padding-bottom: 51px;
+    padding-top: 0;
+
+    .rechargeInfo {
+      margin-top: 20px;
+      position: relative;
+      border-radius: 4px;
+      background-color: #FFF;
+      padding: 15px;
+
+      .balance {
+        padding: 10px 30px;
+        padding-top: 20px;
+        text-align: center;
+
+        span {
+          font-size: 30px;
+          color: #bb2136;
+
+          &:hover {
+            border-bottom: 2px solid #bb2136;
+            cursor: pointer;
+          }
+
+          &:first-child {
+            color: #444;
+
+            &:hover {
+              border-bottom: none;
+              cursor: initial;
+            }
+          }
+
+          .el-loading-mask {
+            .circular {
+              width: 38px;
+              height: 38px;
+
+              .path {
+                stroke: #bb2136;
+              }
+            }
+          }
+        }
+
+      }
+
+      .content {
+        padding: 0px 30px 50px 30px;
+        // display: flex;
+        // justify-content: center; 
+        text-align: center;
+
+        .titleText {
+          color: #444;
+          display: flex;
+          font-size: 24px;
+
+          span {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 5px;
+            width: 50%;
+            letter-spacing: 5px;
+
+            &.active {
+              color: #bb2136;
+              border-bottom: 1px solid #bb2136;
+            }
+
+            &:first-child {
+              margin-right: 10px;
+            }
+          }
+        }
+
+        .recharge {
+          .tips {
+            margin-top: 20px;
+
+            span {
+              color: #f29f01;
+              font-size: 18px;
+            }
+          }
+
+          .rechrgeMoney {
+            padding: 15px 0;
+            margin-top: 10px;
+
+            span {
+              font-weight: 600;
+              width: 100px;
+              text-align: right;
+              line-height: 34px;
+              display: inline-block;
+            }
+
+            input {
+              padding:9px 8px;
+              padding-right:0;
+              width: 308px;
+              border-radius: 4px;
+              outline: none;
+              border: 1px solid #dcdfe6;
+
+              &:hover {
+                border: 1px solid #bb2136;
+              }
+
+              &:focus {
+                outline-offset: 0px;
+                border: 1px solid #bb2136;
+              }
+            }
+
+            input[type='number'] {
+              &::-webkit-inner-spin-button {
+                width: 20px;
+                height: 29px;
+              }
+            }
+          }
+
+          .rechargeType {
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .Typetext {
+              margin-right: 5px;
+              width: 100px;
+              text-align: right;
+              font-weight: 600;
+              display: inline-block;
+              line-height: 34px;
+            }
+
+            .inputDiv {
+              .el-select {
+                width: 320px;
+
+                input {
+                  height: 34px;
+                  line-height: 34px;
+                  padding-left: 8px;
+                }
+
+                .el-input__suffix {
+                  i {
+                    line-height: 34px;
+                  }
+                }
+              }
+            }
+          }
+
+          .QRcode {
+            display: flex;
+            margin-top: 20px;
+
+            span {
+              font-weight: 600;
+              letter-spacing: 5.35px;
+            }
+          }
+
+          .additionImg {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+
+            // span {
+            //   font-weight: 600;
+            //   display: inline-block;
+            //   width: 100px;
+            //   text-align: right;
+            //   line-height: 34px;
+            //   margin-right: 5px;
+            // }
+
+            .int-img {
+              position: relative;
+              width: 350px;
+              height: 350px;
+              border: 1px solid #ddd;
+              box-sizing: border-box;
+
+              img {
+                width: 100%;
+                height: 100%;
+              }
+            }
+
+          }
+
+          .btnRecharge {
+            margin-top: 50px;
+            background-color: #9e2536;
+            border: 1px solid #9e2536;
+
+            &:hover {
+              background-color: #902636;
+              border: 1px solid #902636;
+            }
+          }
+        }
+
+        .widthdraw {
+          .widthdrawMoney {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            padding: 15px 0;
+
+            span {
+              display: inline-block;
+              width: 100px;
+              text-align: right;
+              font-weight: 600;
+              line-height: 34px;
+            }
+
+            input {
+              padding: 9px 8px;
+              padding-right:0;
+              width: 308px;
+              border: 1px solid #dcdfe6;
+              border-radius: 3px;
+              outline: none;
+
+              &:focus {
+                border: 1px solid #bb2136;
+              }
+
+              &:hover {
+                border: 1px solid #bb2136;
+              }
+            }
+
+            input[type='number'] {
+              &::-webkit-inner-spin-button {
+                width: 20px;
+                height: 29px;
+              }
+            }
+          }
+
+          .widthdrawType {
+            padding: 10px 0;
+            display: flex;
+            justify-content: center;
+
+            .Typetext {
+              line-height: 34px;
+              display: inline-block;
+              width: 100px;
+              text-align: right;
+              font-weight: 600;
+            }
+
+            .inputDiv {
+              display: flex;
+              cursor: pointer;
+
+              .el-select {
+                width: 320px;
+
+                input {
+                  height: 34px;
+                  line-height: 34px;
+                  padding-left: 8px;
+                }
+
+                .el-input__suffix {
+                  i {
+                    line-height: 34px;
+                  }
+                }
+              }
+            }
+          }
+
+          .typeName {
+            padding: 15px 0;
+
+            span {
+              font-weight: 600;
+              display: inline-block;
+              width: 100px;
+              line-height: 34px;
+              text-align: right;
+            }
+
+            input {
+              width: 300px;
+              padding: 9px 8px;
+              border-radius: 3px;
+              border: 1px solid #dcdfe6;
+              outline: none;
+
+              &:hover {
+                border: 1px solid #bb2136;
+              }
+
+              &:focus {
+                outline-offset: 0px;
+                border: 1px solid #bb2136;
+              }
+            }
+          }
+
+          .addQRcode {
+            margin-top: 20px;
+            position: relative;
+
+            span {
+              font-weight: 600;
+            }
+
+            .addFile {
+              position: absolute;
+              left: 0;
+              top: 0;
+              border: 1px solid red;
+              width: 310px;
+              opacity: 0;
+
+            }
+
+            .addtext {
+              padding: 5px 0;
+              text-indent: 4px;
+              width: 215px;
+            }
+          }
+
+          .QRcodeImg {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+
+            span {
+              font-weight: 600;
+              margin-left: 30px;
+            }
+
+            .int-img {
+              position: relative;
+              width: 315px;
+              height: 315px;
+              border: 1px dashed #dcdfe6;
+              margin-left: 6px;
+
+              img {
+                width: 100%;
+                height: 100%;
+                border-radius: 3px;
+              }
+
+              input {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                left: 0;
+                top: 0;
+                opacity: 0;
+                z-index: 9;
+              }
+
+              i{
+                color: #d6d6d6;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                font-size: 100px;
+                margin-left: -50px;
+                margin-top: -50px;
+              }
+
+              .el-loading-mask {
+                .path{
+                  stroke:#bb2136;
+                }
+              }
+            }
+          }
+
+          .btnWidthdraw {
+            margin-top: 50px;
+            background-color: #9e2536;
+            border: 1px solid #9e2536;
+
+            &:hover {
+              background-color: #902636;
+              border: 1px solid #902636;
+            }
+          }
+        }
+      }
+
+    }
+
+  }
+
+  .rechargeMask {
+    border-radius: 4px;
+    margin-top: 18vh !important;
+
+    .el-dialog__header {
+      border: 1px solid #eee;
+      padding: 10px 20px;
+
+      .el-dialog__title {
+        font-size: 16px;
+      }
+
+      button {
+        top: 10px;
+        right: 10px;
+      }
+    }
+
+    .el-dialog__body {
+      padding: 15px 40px;
+      
+      .content {
+        font-size: 16px;
+        div {
+          padding: 6px 0;
+          span {
+            &:first-child {
+              font-size: 15px;
+              display: inline-block;
+              width: 100px;
+              text-align: right;
+            }
+          }
+
+          &.weight{
+            font-weight: 600;
+          }
+
+          &:last-of-type {
+            span {
+              &:last-child {
+                position: relative;
+                display: inline-block;
+                width: 140px;
+                height: 140px;
+                vertical-align: top;
+                border: 1px dashed #dcdfe6;
+                margin-top: 4px;
+                border-radius: 3px;
+
+                img {
+                  width: 100%;
+                  height: 100%;
+                  border-radius: 3px;
+                }
+
+                input {
+                  width: 100%;
+                  height: 100%;
+                  position: absolute;
+                  left: 0;
+                  top: 0;
+                  opacity: 0;
+                  z-index: 9;
+                }
+
+                i{
+                  color: #d6d6d6;
+                  position: absolute;
+                  left: 50%;
+                  top: 50%;
+                  font-size: 24px;
+                  margin-left: -12px;
+                  margin-top: -12px;
+                }
+
+                .el-loading-mask {
+                  .path{
+                    stroke:#bb2136;
+                  }
+                }
+               
+              }
+            }
+          }
+
+        }
+      }
+    }
+
+    .el-dialog__footer {
+      border: 1px solid #eee;
+      padding-bottom: 15px;
+      padding-top: 15px;
+      text-align: right;
+
+      button {
+        height: 34px;
+        padding: 8px 16px;
+
+        &:first-child {
+          margin-right: 5px;
+          background-color: #9e2536;
+          border: 1px solid #9e2536;
+
+          &:hover {
+            background-color: #902636;
+            border: 1px solid #902636;
+          }
+        }
+
+        &:nth-child(2) {
+          &:hover {
+            color: #bb2136;
+            border-color: #bb2136;
+            background-color: #fff;
+          }
+
+          &:focus {
+            background-color: #fff;
+            color: #bb2136;
+            border-color: #bb2136;
+          }
+        }
+      }
+    }
+  }
+}

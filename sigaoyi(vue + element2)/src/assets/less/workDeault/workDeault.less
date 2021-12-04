@@ -1,0 +1,122 @@
+.workDeault {
+  width: 100%;
+  position: relative;
+
+  .hidden{
+    padding: 20px;
+  }
+  
+  .workSchedulingInfo {
+    margin-top: 20px;
+    position: relative;
+    overflow-x: hidden;
+    padding: 20px;
+    padding-bottom: 51px;
+    padding-top: 0;
+
+    .search {
+      background-color: #fff;
+      border-radius: 4px;
+      padding: 15px;
+      display: flex;
+
+      .int {
+
+        input {
+          width: 230px;
+          text-indent: 8px;
+          border: 1px solid #c2c2c2;
+          border-radius: 4px;
+          padding: 8px 0;
+
+          &:hover {
+            border: 1px solid #409EFF;
+          }
+        }
+      }
+
+      .el-button {
+        padding: 10px 15px;
+        margin-left: 30px;
+      }
+
+    }
+
+    .table {
+      background-color: #fff;
+      border-radius: 4px;
+      margin-top: 15px;
+
+      .v-table {
+        padding: 15px;
+
+        .btn {
+          button {
+            padding: 10px 15px;
+          }
+        }
+
+        .xls {
+          margin-top: 10px;
+
+          .el-table--border{
+            border: none;
+            &::after{
+              width: 0;
+            }
+          }
+          
+          .el-table td,
+          .el-table th {
+            border-right: none;
+            text-align: center;
+          }
+
+          .el-button--text:hover {
+            text-decoration: underline;
+          }
+        }
+
+        // 分页
+        .block {
+          margin-top: 10px;
+          display: flex;
+
+          .blockText {
+            font-weight: normal;
+          }
+
+          .el-pagination {
+            //   width: 30%x;
+
+            &:nth-child(2) {
+              width: 100%;
+              margin-left: -13px;
+            }
+          }
+
+          .el-pagination__jump {
+            float: right;
+            margin-right: 16px;
+          }
+
+          .ensure-btn {
+            //   margin-right: -170px;
+            font-weight: normal;
+            border: 1px solid #dcdfe6;
+            text-align: center;
+            cursor: pointer;
+            padding: 0 10px;
+            border-radius: 4px;
+
+            &:hover {
+              border-color: #40a0ffcc;
+              color: #409EFF;
+              background: #ecf5ff;
+            }
+          }
+        }
+      }
+    }
+  }
+}

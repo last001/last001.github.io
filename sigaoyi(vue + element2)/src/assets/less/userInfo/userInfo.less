@@ -1,0 +1,246 @@
+.userInfo {
+  margin-top: 48px;
+  width: 100%;
+
+  .v-userInfo {
+    overflow-y: hidden;
+    padding: 20px;
+    padding-top: 0;
+    padding-bottom: 51px;
+    margin-top: 20px;
+
+    .search {
+      display: flex;
+      padding: 15px;
+      background-color: #fff;
+      border-radius: 4px;
+        
+        div {
+          display: flex;
+          flex: 1;
+          .text {
+            line-height: 34px;
+            width: 100px;
+            text-align: right;
+            display: inline-block;
+          }
+
+          input {
+            width: calc(100% - 120px);
+            padding: 8px;
+            outline: none;
+            border-radius: 3px;
+            border: 1px solid #dcdfe6;
+
+            &:hover {
+              border: 1px solid #bb2136;
+            }
+
+            &:focus {
+              border: 1px solid #bb2136;
+            }
+          }
+
+          .el-select {
+            width: calc(100% - 120px);
+            input {
+              width: 100%;
+              height: 34px;
+              line-height: 34px;
+              padding-left: 8px;
+            }
+
+            .el-input__suffix {
+              i {
+                line-height: 34px;
+              }
+            }
+          }
+      }
+
+      .btn {
+        flex: 2;
+        width: 100%;
+        justify-content: flex-end;
+
+        button {
+          height: 34px;
+          padding: 9px 20px;
+          box-sizing: border-box;
+
+          &:first-child {
+            &:hover {
+              color: #bb2136;
+              border-color: #bb2136;
+              background-color: #fff;
+            }
+
+            &:focus {
+              background-color: #fff;
+              color: #bb2136;
+              border-color: #bb2136;
+            }
+          }
+
+          &:nth-child(2) {
+            margin-right: 5px;
+            background-color: #9e2536;
+            border: 1px solid #9e2536;
+
+            &:hover {
+              background-color: #902636;
+              border: 1px solid #902636;
+            }
+          }
+
+        }
+      }
+    }
+
+    .table {
+      margin-top: 20px;
+      background-color: #fff;
+      border-radius: 4px;
+      padding: 15px;
+
+      .btn {
+        width: 100%;
+        text-align: right;
+      }
+
+      .tableList {
+        margin-top: 15px;
+
+        .el-table {
+
+          td,
+          th {
+            text-align: center;
+          }
+
+          th {
+            background-color: #fafafa;
+          }
+
+          .cell{
+            button{
+              background-color: #9e2536;
+              border: 1px solid #9e2536;
+
+              &:hover {
+                background-color: #902636;
+                border: 1px solid #902636;
+              }
+            }
+          }
+
+          .el-loading-mask {
+            top: 49px;
+
+            .path {
+              stroke: #bb2136;
+            }
+          }
+        }
+      }
+
+      // 分页
+      .block {
+        margin-top: 10px;
+        display: flex;
+
+        .blockText {
+          font-weight: normal;
+        }
+
+        .el-pagination__sizes {
+          .el-input {
+            .el-input__inner:hover {
+              border-color: #bb2136;
+            }
+          }
+        }
+
+        .el-pagination {
+          //   width: 30%x;
+
+          &:nth-child(2) {
+            width: 100%;
+            margin-left: -13px;
+
+            .el-pager {
+              li {
+                &.active {
+                  color: #bb2136;
+                }
+
+                &:hover {
+                  color: #bb2136;
+                }
+              }
+            }
+
+            .el-pagination__jump {
+              input {
+                &:focus {
+                  border-color: #902636;
+                }
+              }
+            }
+
+            button{
+              &:hover{
+                color: #bb2136;
+              }
+            }
+          }
+        }
+
+        .el-pagination__jump {
+          float: right;
+          margin-right: 16px;
+        }
+
+        .ensure-btn {
+          //   margin-right: -170px;
+          font-weight: normal;
+          border: 1px solid #dcdfe6;
+          text-align: center;
+          cursor: pointer;
+          padding: 0 10px;
+          border-radius: 4px;
+
+          &:hover {
+            border-color: #902636;
+            color: #902636;
+          }
+        }
+      }
+    }
+  }
+}
+
+// 删除提示
+.delMessage {
+  .el-message-box--center .el-message-box__header {
+    padding-top: 40px;
+  }
+
+  .el-message-box__title {
+    span {
+      font-size: 18px;
+    }
+  }
+
+  .el-message-box__btns {
+    button {
+      width: 100px;
+      padding: 10px;
+      font-size: 14px;
+
+      &:nth-child(2) {
+        margin-left: 40px;
+      }
+    }
+  }
+}

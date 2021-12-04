@@ -1,0 +1,1486 @@
+.logisticsOrder {
+  position: relative;
+  margin-top: 68px;
+
+  .v-logisticsOrder {
+    padding: 20px;
+    padding-top: 0;
+    padding-bottom: 50px;
+
+    .proTop {
+
+      .order-search {
+        background-color: #fff;
+        border-radius: 4px;
+        padding: 20px 30px;
+
+        .search-one {
+          display: flex;
+          position: relative;
+
+          div {
+            display: flex;
+            flex: 1;
+
+            .text {
+              text-align: right;
+              line-height: 34px;
+              display: inline-block;
+              width: 120px;
+            }
+
+            input {
+              width: calc(100% - 140px);
+              padding: 8px;
+              outline: none;
+              border-radius: 3px;
+              border: 1px solid #dcdfe6;
+
+              &:hover {
+                border: 1px solid #bb2136;
+              }
+
+              &:focus {
+                border: 1px solid #bb2136;
+              }
+            }
+
+            .el-select {
+              width: calc(100% - 140px);
+
+              input {
+                width: 100%;
+                height: 34px;
+                line-height: 34px;
+                padding-left: 8px;
+              }
+
+              .el-input__suffix {
+                i {
+                  line-height: 34px;
+                }
+              }
+            }
+
+            &.btn {
+              display: flex;
+              justify-content: flex-end;
+
+              button {
+                height: 34px;
+                padding: 9px 20px;
+
+                &:first-child {
+                  &:hover {
+                    color: #bb2136;
+                    border-color: #bb2136;
+                    background-color: #fff;
+                  }
+
+                  &:focus {
+                    background-color: #fff;
+                    color: #bb2136;
+                    border-color: #bb2136;
+                  }
+                }
+
+                &:nth-child(2) {
+                  margin-right: 10px;
+                  background-color: #9e2536;
+                  border: 1px solid #9e2536;
+
+                  &:hover {
+                    background-color: #902636;
+                    border: 1px solid #902636;
+                  }
+                }
+
+              }
+
+              .open_close {
+                color: #bb2136;
+                text-indent: 0;
+                cursor: pointer;
+                flex: initial;
+
+                span {
+                  line-height: 35px;
+                  width: 37px;
+                  display: inline-block;
+                  user-select: none;
+
+                  &:nth-child(2) {
+                    width: 32px;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        .search-two {
+          display: flex;
+          margin-top: 20px;
+
+          div {
+            display: flex;
+            flex: 1;
+
+            .text {
+              text-align: right;
+              line-height: 34px;
+              display: inline-block;
+              width: 120px;
+            }
+
+            input {
+              width: calc(100% - 140px);
+              padding: 8px;
+              outline: none;
+              border-radius: 3px;
+              border: 1px solid #dcdfe6;
+
+              &:hover {
+                border: 1px solid #bb2136;
+              }
+
+              &:focus {
+                border: 1px solid #bb2136;
+              }
+            }
+
+            &.user {
+              .el-select {
+                width: calc(100% - 140px);
+
+                input {
+                  width: 100%;
+                  height: 34px;
+                  line-height: 34px;
+                  padding-left: 8px;
+                }
+
+                .el-input__suffix {
+                  i {
+                    line-height: 34px;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        .search-three {
+          display: flex;
+          margin-top: 20px;
+
+          .block {
+            display: flex;
+            flex: 1;
+
+            .text {
+              text-align: right;
+              line-height: 34px;
+              display: inline-block;
+              width: 120px;
+            }
+
+            .el-range-editor.is-active,
+            .el-range-editor.is-active:hover {
+              border-color: #bb2136;
+            }
+
+            .el-date-editor {
+              height: 34px;
+              width: calc(100% - 120px);
+
+              .el-range__close-icon {
+                line-height: 28px;
+              }
+
+              .el-range__icon {
+                line-height: 28px;
+              }
+
+              input {
+                height: 26px;
+                //   line-height: 30px;
+              }
+
+              .el-range-separator {
+                line-height: 26px;
+              }
+            }
+          }
+
+          .btn {
+            display: flex;
+            flex: 2;
+            justify-content: flex-end;
+
+            button {
+              height: 34px;
+              padding: 9px 20px;
+
+              &:first-child {
+                &:hover {
+                  color: #bb2136;
+                  border-color: #bb2136;
+                  background-color: #fff;
+                }
+
+                &:focus {
+                  background-color: #fff;
+                  color: #bb2136;
+                  border-color: #bb2136;
+                }
+              }
+
+              &:nth-child(2) {
+                margin-right: 10px;
+                background-color: #9e2536;
+                border: 1px solid #9e2536;
+
+                &:hover {
+                  background-color: #902636;
+                  border: 1px solid #902636;
+                }
+              }
+
+            }
+
+            .open_close {
+              color: #bb2136;
+              text-indent: 0;
+              cursor: pointer;
+
+              span {
+                line-height: 35px;
+                width: 37px;
+                display: inline-block;
+                user-select: none;
+
+                &:nth-child(2) {
+                  width: 32px;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .order-content {
+        background-color: #fff;
+        border-radius: 4px;
+        padding: 15px;
+        margin-top: 20px;
+        // margin-top: 130px;
+
+        .btn {
+          height: 34px;
+          line-height: 34px;
+          display: flex;
+          justify-content: flex-end;
+
+          .file {
+            margin-right: 10px;
+            position: relative;
+
+            input {
+              position: absolute;
+              left: 0;
+              top: 0;
+              width: 100%;
+              height: 100%;
+              opacity: 0;
+            }
+          }
+
+          .el-button--primary {
+            background-color: #9e2536;
+            border: 1px solid #9e2536;
+            padding: 9px 20px;
+
+            &:hover {
+              background-color: #902636;
+              border: 1px solid #902636;
+            }
+          }
+
+          .el-button--default {
+            &:hover {
+              color: #bb2136;
+              border-color: #bb2136;
+              background-color: #fff;
+            }
+
+            &:focus {
+              background-color: #fff;
+              color: #bb2136;
+              border-color: #bb2136;
+            }
+          }
+
+          .el-select {
+            margin-top: -1px;
+            margin-right: 15px;
+            margin-left: 10px;
+            height: 34px;
+            width: 105px;
+            user-select: none;
+
+            input {
+              height: 34px;
+              line-height: 34px;
+            }
+
+            .el-input__suffix {
+              i {
+                line-height: 34px;
+              }
+            }
+          }
+
+          .relaod {
+            display: inline-block;
+            height: 40px;
+            line-height: 40px;
+
+            .el-icon-refresh-right {
+              font-size: 22px;
+              cursor: pointer;
+              color: #666;
+
+              &:hover {
+                color: #bb2136;
+              }
+            }
+          }
+
+        }
+
+        .xls {
+          margin-top: 10px;
+
+          .el-table {
+            font-size: 15px;
+
+            td,
+            th {
+              text-align: center;
+            }
+
+            th {
+              background-color: #fafafa;
+            }
+          }
+
+          .el-table .hideDot {
+            div {
+              // overflow: hidden;
+              // white-space: nowrap;
+              // text-overflow: ellipsis;
+
+              word-break: break-all;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 2;
+              /* 这里是超出几行省略 */
+              overflow: hidden;
+            }
+          }
+
+          .el-table__row--striped {
+            .cell {
+              input {
+                background-color: #fafafa;
+              }
+            }
+          }
+
+          .el-table .stock {
+            background-color: #7cc17cd1;
+          }
+
+          .el-table .yellow {
+            background-color: #f7ef98;
+          }
+
+          .el-table tbody tr:hover>td {
+            background-color: initial;
+          }
+
+          .el-table__body tr.hover-row>td {
+            background-color: initial;
+          }
+
+          .el-table td {
+            &:last-child {
+              .Edit {
+                color: #bb2136;
+                cursor: pointer;
+                // margin-right: 5px;
+
+                &:hover {
+                  text-decoration: underline;
+                }
+              }
+
+              .active {
+                color: #444;
+              }
+            }
+          }
+
+          .cell {
+            .el-checkbox {
+              .is-indeterminate {
+                .el-checkbox__inner {
+                  background-color: #bb2136;
+                  border-color: #bb2136;
+                }
+              }
+            }
+
+            .v-followUp {
+              display: flex;
+              justify-content: center;
+
+              .followUp {
+                color: #bb2136;
+                cursor: pointer;
+                margin-right: 5px;
+
+                &:hover {
+                  text-decoration: underline;
+                }
+              }
+
+              .Edit {
+                margin-right: 5px;
+                // color: #5458b3;
+              }
+            }
+
+            input {
+              width: 100%;
+              padding: 6px 0;
+              text-align: center;
+              border: none;
+              background-color: #fff;
+            }
+
+            .el-popover__reference-wrapper {
+              cursor: pointer;
+            }
+
+            .orderId {
+              &.active {
+                color: #bb2136;
+                cursor: pointer;
+              }
+            }
+
+            .order_status {
+              &.active {
+                cursor: pointer;
+                color: #bb2136;
+              }
+            }
+
+          }
+
+          #id {
+            color: #bb2136;
+            cursor: pointer;
+          }
+
+          .el-table .red {
+            background-color: #ff7777;
+
+            .cell {
+              .orderId {
+                &.active {
+                  color: #ffcc6c;
+                  cursor: pointer;
+                }
+              }
+
+              .order_status {
+                &.active {
+                  cursor: pointer;
+                  color: #ffcc6c;
+                }
+              }
+
+              #id {
+                color: #ffcc6c;
+                cursor: pointer;
+              }
+
+              .v-followUp {
+
+                .followUp,
+                .Edit {
+                  color: #ffcc6c;
+                }
+              }
+            }
+          }
+
+          .el-loading-mask {
+            top: 49px;
+
+            .path {
+              stroke: #bb2136;
+            }
+          }
+        }
+
+        .paging {
+          margin-top: 10px;
+          display: flex;
+
+          .blockText {
+            font-weight: normal;
+          }
+
+          .el-pagination__sizes {
+            .el-input {
+              .el-input__inner:hover {
+                border-color: #bb2136;
+              }
+            }
+          }
+
+          .el-pagination {
+            //   width: 30%x;
+
+            &:nth-child(2) {
+              width: 79%;
+
+              .el-pager {
+                li {
+                  &.active {
+                    color: #bb2136;
+                  }
+
+                  &:hover {
+                    color: #bb2136;
+                  }
+                }
+              }
+
+              .el-pagination__jump {
+                input {
+                  &:focus {
+                    border-color: #902636;
+                  }
+                }
+              }
+
+              button {
+                &:hover {
+                  color: #bb2136;
+                }
+              }
+            }
+          }
+
+          .el-pagination__jump {
+            float: right;
+            margin-right: 16px;
+
+            input {
+              &:focus {
+                border-color: #bb2136;
+              }
+            }
+          }
+
+          .ensure-btn {
+            //   margin-right: -170px;
+            font-weight: normal;
+            border: 1px solid #dcdfe6;
+            text-align: center;
+            cursor: pointer;
+            padding: 0 10px;
+            border-radius: 4px;
+
+            &:hover {
+              border-color: #902636;
+              color: #902636;
+            }
+          }
+        }
+      }
+
+    }
+
+    // 同步订单
+    .sync-order {
+      .el-dialog__header {
+        border: 1px solid #eee;
+        padding: 10px 20px;
+
+        .el-dialog__title {
+          font-size: 16px;
+        }
+
+        button {
+          top: 10px;
+          right: 10px;
+        }
+      }
+
+      .el-dialog__body {
+        padding: 20px 40px;
+
+        .content {
+          div {
+            display: flex;
+            margin-top: 20px;
+
+            &:first-child {
+              margin-top: 0;
+            }
+
+            .text {
+              display: inline-block;
+              height: 34px;
+              width: 120px;
+              text-align: right;
+              line-height: 34px;
+            }
+
+            .el-select {
+              width: calc(100% - 140px);
+              margin-top: 0;
+
+              div {
+                margin-top: 0;
+              }
+
+              input {
+                width: 100%;
+                height: 34px;
+                line-height: 34px;
+              }
+
+              .el-input__suffix {
+                i {
+                  line-height: 34px;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .el-dialog__footer {
+        border: 1px solid #eee;
+        padding-bottom: 15px;
+        padding-top: 15px;
+
+        button {
+          height: 34px;
+          padding: 8px 16px;
+
+          &:first-child {
+            margin-right: 5px;
+            background-color: #9e2536;
+            border: 1px solid #9e2536;
+
+            &:hover {
+              background-color: #902636;
+              border: 1px solid #902636;
+            }
+          }
+
+          &:nth-child(2) {
+            &:hover {
+              color: #bb2136;
+              border-color: #bb2136;
+              background-color: #fff;
+            }
+
+            &:focus {
+              background-color: #fff;
+              color: #bb2136;
+              border-color: #bb2136;
+            }
+          }
+        }
+      }
+
+    }
+
+    // 入库
+    .godown {
+      .el-dialog__header {
+        border: 1px solid #eee;
+        padding: 10px 20px;
+
+        .el-dialog__title {
+          font-size: 16px;
+        }
+
+        button {
+          top: 10px;
+          right: 10px;
+        }
+      }
+
+      .el-dialog__body {
+        padding: 30px 40px;
+
+        div {
+          display: flex;
+          margin-top: 20px;
+          .text {
+            display: inline-block;
+            height: 34px;
+            width: 100px;
+            text-align: right;
+            line-height: 34px;
+          }
+
+          input {
+            width: calc(100% - 120px);
+            padding: 7px 8px;
+            outline: none;
+            border-radius: 3px;
+            border: 1px solid #dcdfe6;
+
+            &:hover {
+              border: 1px solid #bb2136;
+            }
+
+            &:focus {
+              border: 1px solid #bb2136;
+            }
+          }
+
+          .el-select {
+            width: calc(100% - 100px);
+            margin-top: 0;
+
+            div {
+              margin-top: 0;
+            }
+
+            input {
+              width: 100%;
+              height: 34px;
+              line-height: 34px;
+            }
+
+            .el-input__suffix {
+              i {
+                line-height: 34px;
+              }
+            }
+          }
+
+          &:first-child{
+            margin-top: 0;
+          }
+        }
+      }
+
+      .el-dialog__footer {
+        border: 1px solid #eee;
+        padding-bottom: 15px;
+        padding-top: 15px;
+
+        button {
+          height: 34px;
+          padding: 8px 16px;
+
+          &:first-child {
+            margin-right: 5px;
+            background-color: #9e2536;
+            border: 1px solid #9e2536;
+
+            &:hover {
+              background-color: #902636;
+              border: 1px solid #902636;
+            }
+          }
+
+          &:nth-child(2) {
+            &:hover {
+              color: #bb2136;
+              border-color: #bb2136;
+              background-color: #fff;
+            }
+
+            &:focus {
+              background-color: #fff;
+              color: #bb2136;
+              border-color: #bb2136;
+            }
+          }
+        }
+      }
+    }
+
+    //物流追踪
+    .causeMask1 {
+      .el-dialog__wrapper {
+        .el-dialog {
+          border-radius: 4px;
+
+          .el-dialog__header {
+            border: 1px solid #eee;
+            padding: 10px 20px;
+
+            .el-dialog__title {
+              font-size: 16px;
+            }
+
+            button {
+              top: 10px;
+              right: 10px;
+            }
+          }
+
+          .el-dialog__body {
+            .content {
+              width: 100%;
+
+              .query {
+                width: 100%;
+                display: flex;
+
+                .set,
+                .orderNum {
+                  flex: 3;
+                  display: flex;
+                  line-height: 38px;
+
+                  .text {
+                    display: inline-block;
+                    text-align: right;
+                  }
+
+                  .el-select {
+                    width: calc(100% - 80px);
+
+                    input {
+                      width: 100%;
+                      height: 34px;
+                      line-height: 40px;
+                    }
+
+                    .el-input__suffix {
+                      i {
+                        line-height: 40px;
+                      }
+                    }
+                  }
+
+                  input {
+                    padding: 7px 8px;
+                    outline: none;
+                    border-radius: 3px;
+                    border: 1px solid #dcdfe6;
+
+                    &:hover {
+                      border: 1px solid #bb2136;
+                    }
+
+                    &:focus {
+                      border: 1px solid #bb2136;
+                    }
+                  }
+                }
+
+                .btn {
+                  flex: 1;
+                  height: 36px;
+
+                  button {
+                    padding: 11.5px 15px;
+                    background-color: #9e2536;
+                    border: 1px solid #9e2536;
+
+                    &:hover {
+                      background-color: #902636;
+                      border: 1px solid #902636;
+                    }
+                  }
+                }
+              }
+
+              .note {
+                width: 100%;
+                height: 400px;
+                margin-top: 15px;
+
+                textarea {
+                  height: 100%;
+                  border: 1px solid #ddd;
+                  outline: none;
+                  border-radius: 4px;
+                  width: 100%;
+                  padding: 8px;
+                  box-sizing: border-box;
+                  resize: none;
+
+                  &:disabled {
+                    background-color: #fff;
+                  }
+                }
+
+                .loading {
+                  height: 100%;
+                  border: 1px solid #ddd;
+                  text-align: center;
+                  box-sizing: border-box;
+                  line-height: 430px;
+
+                  span {
+                    display: inline-block;
+
+                    i {
+                      display: block;
+                      line-height: initial;
+                      font-style: normal;
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          .el-dialog__footer {
+            border: 1px solid #eee;
+            padding-bottom: 15px;
+            padding-top: 15px;
+
+            button {
+              height: 34px;
+              padding: 8px 16px;
+              background-color: #9e2536;
+              border: 1px solid #9e2536;
+
+              &:hover {
+                background-color: #902636;
+                border: 1px solid #902636;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // 查看异常
+    .causeMask {
+      .el-dialog__wrapper {
+        .el-dialog {
+          border-radius: 4px;
+
+          .el-dialog__header {
+            border: 1px solid #eee;
+            padding: 10px 20px;
+
+            .el-dialog__title {
+              font-size: 16px;
+            }
+
+            button {
+              top: 10px;
+              right: 10px;
+            }
+          }
+
+          .el-dialog__body {
+            padding: 20px;
+
+            .content {
+              width: 100%;
+
+              div {
+                width: 100%;
+                height: 400px;
+
+                textarea {
+                  height: 100%;
+                  border: 1px solid #ddd;
+                  outline: none;
+                  border-radius: 4px;
+                  width: 100%;
+                  padding: 8px;
+                  box-sizing: border-box;
+
+                  &:disabled {
+                    background-color: #fff;
+                  }
+                }
+              }
+            }
+          }
+
+          .el-dialog__footer {
+            border: 1px solid #eee;
+            padding-bottom: 15px;
+            padding-top: 15px;
+
+            button {
+              height: 34px;
+              padding: 8px 16px;
+              background-color: #9e2536;
+              border: 1px solid #9e2536;
+
+              &:hover {
+                background-color: #902636;
+                border: 1px solid #902636;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // 标记异常
+    .abnormal {
+      .el-dialog__wrapper {
+        .el-dialog {
+          border-radius: 4px;
+
+          .el-dialog__header {
+            border: 1px solid #eee;
+            padding: 10px 20px;
+
+            .el-dialog__title {
+              font-size: 16px;
+            }
+
+            button {
+              top: 10px;
+              right: 10px;
+            }
+          }
+
+          .el-dialog__body {
+            .content {
+
+              // padding-right: 40px;
+              div {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                .text {
+                  display: inline-block;
+                  height: 34px;
+                  width: 100px;
+                  text-align: right;
+                  line-height: 34px;
+                }
+
+                .el-select {
+                  width: calc(100% - 120px);
+                  margin-top: 0;
+
+                  div {
+                    margin-top: 0;
+                  }
+
+                  input {
+                    width: 100%;
+                    height: 34px;
+                    line-height: 34px;
+                  }
+
+                  .el-input__suffix {
+                    i {
+                      line-height: 34px;
+                    }
+                  }
+                }
+
+                textarea {
+                  width: calc(100% - 140px);
+                  border: 1px solid #dcdfe6;
+                  outline: none;
+                  border-radius: 4px;
+                  padding: 10px;
+                  margin-top: 8px;
+
+                  &:hover {
+                    border: 1px solid #bb2136;
+                  }
+
+                  &:focus {
+                    outline-offset: 0px;
+                    border: 1px solid #bb2136;
+                  }
+                }
+
+                &.note {
+                  margin-top: 20px;
+                  align-items: flex-start;
+                }
+
+              }
+            }
+          }
+
+          .el-dialog__footer {
+            border: 1px solid #eee;
+            padding-bottom: 15px;
+            padding-top: 15px;
+
+            button {
+              height: 34px;
+              padding: 8px 16px;
+
+              &:first-child {
+                margin-right: 5px;
+                background-color: #9e2536;
+                border: 1px solid #9e2536;
+
+                &:hover {
+                  background-color: #902636;
+                  border: 1px solid #902636;
+                }
+              }
+
+              &:nth-child(2) {
+                &:hover {
+                  color: #bb2136;
+                  border-color: #bb2136;
+                  background-color: #fff;
+                }
+
+                &:focus {
+                  background-color: #fff;
+                  color: #bb2136;
+                  border-color: #bb2136;
+                }
+              }
+            }
+          }
+
+        }
+      }
+    }
+
+    // 处理按钮 + 跟进
+    .FollowUp,
+    .FollowUp1 {
+      .el-dialog__wrapper {
+        .el-dialog {
+          border-radius: 4px;
+
+          .el-dialog__header {
+            border: 1px solid #eee;
+            padding: 10px 20px;
+
+            .el-dialog__title {
+              font-size: 16px;
+            }
+
+            button {
+              top: 10px;
+              right: 10px;
+            }
+          }
+
+          .el-dialog__body {
+            padding: 20px 40px;
+            padding-left: 10px;
+
+            .content {
+              div {
+                margin-top: 20px;
+                display: flex;
+
+                .text {
+                  display: inline-block;
+                  height: 34px;
+                  width: 100px;
+                  text-align: right;
+                  line-height: 34px;
+                }
+
+                input {
+                  width: calc(100% - 120px);
+                  padding: 7px 8px;
+                  outline: none;
+                  border-radius: 3px;
+                  border: 1px solid #dcdfe6;
+
+                  &:hover {
+                    border: 1px solid #bb2136;
+                  }
+
+                  &:focus {
+                    border: 1px solid #bb2136;
+                  }
+                }
+
+                .el-select {
+                  width: calc(100% - 100px);
+                  margin-top: 0;
+
+                  div {
+                    margin-top: 0;
+                  }
+
+                  input {
+                    width: 100%;
+                    height: 34px;
+                    line-height: 34px;
+                  }
+
+                  .el-input__suffix {
+                    i {
+                      line-height: 34px;
+                    }
+                  }
+                }
+
+                textarea {
+                  width: calc(100% - 120px);
+                  border: 1px solid #dcdfe6;
+                  outline: none;
+                  border-radius: 4px;
+                  padding: 10px;
+                  margin-top: 8px;
+
+                  &:hover {
+                    border: 1px solid #bb2136;
+                  }
+
+                  &:focus {
+                    outline-offset: 0px;
+                    border: 1px solid #bb2136;
+                  }
+                }
+
+                &.active {
+                  align-items: flex-start;
+                }
+
+                &:first-child {
+                  margin-top: 0;
+                }
+              }
+            }
+          }
+
+          .el-dialog__footer {
+            border: 1px solid #eee;
+            padding-bottom: 15px;
+            padding-top: 15px;
+
+            button {
+              height: 34px;
+              padding: 8px 16px;
+
+              &:first-child {
+                margin-right: 5px;
+                background-color: #9e2536;
+                border: 1px solid #9e2536;
+
+                &:hover {
+                  background-color: #902636;
+                  border: 1px solid #902636;
+                }
+              }
+
+              &:nth-child(2) {
+                &:hover {
+                  color: #bb2136;
+                  border-color: #bb2136;
+                  background-color: #fff;
+                }
+
+                &:focus {
+                  background-color: #fff;
+                  color: #bb2136;
+                  border-color: #bb2136;
+                }
+              }
+            }
+          }
+
+        }
+      }
+    }
+
+    // 转运单号
+    .order1Mask {
+
+      .el-dialog__wrapper {
+        .el-dialog {
+          border-radius: 4px;
+
+          .el-dialog__header {
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+
+            .el-dialog__headerbtn {
+              right: 10px;
+              top: 10px;
+              font-size: 18px;
+            }
+          }
+
+          .content {
+            div {
+              height: 400px;
+              width: 100%;
+              border: 1px solid #ddd;
+
+              span {
+                width: 100%;
+                text-align: center;
+                margin-top: 181px;
+                display: inline-block;
+
+                i {
+                  display: block;
+                }
+              }
+            }
+
+            textarea {
+              width: 96%;
+              height: 400px;
+              outline: none;
+              border: 1px solid #ddd;
+              resize: none;
+              line-height: 22px;
+              padding: 10px;
+              padding-bottom: 0px;
+              border-radius: 2px;
+
+              &:disabled {
+                background-color: #fff;
+              }
+
+              &::-webkit-scrollbar {
+                width: 3.5px;
+              }
+
+              &::-webkit-scrollbar-thumb {
+                background: #67c23a;
+                border-radius: 5px;
+              }
+
+              &::-webkit-scrollbar-track {
+                background: transparent;
+              }
+            }
+          }
+
+          .el-dialog__footer {
+            border-top: 1px solid #ddd;
+            text-align: right;
+            padding-bottom: 10px;
+
+            button {
+              outline: none;
+              padding: 8px 17px;
+              font-size: 13px;
+              cursor: pointer;
+              border-radius: 4px;
+            }
+          }
+        }
+      }
+
+    }
+
+  }
+
+}
+
+.setOptions {
+  z-index: 998 !important;
+
+  .el-select-dropdown__item {
+    padding-right: 0;
+  }
+}
+
+.sycnMsg {
+  z-index: 2031 !important;
+}
+
+.order-popover {
+  background: #f0f0f0 !important;
+  width: 500px !important;
+
+  .popper__arrow {
+    opacity: 0;
+  }
+
+  .lagerImg {
+    width: 100%;
+
+    img {
+      width: 100%;
+    }
+  }
+}
+
+// 删除
+.delMessage {
+  .el-message-box--center .el-message-box__header {
+    padding-top: 40px;
+  }
+
+  .el-message-box__title {
+    span {
+      font-size: 17px;
+      font-weight: 500;
+    }
+  }
+
+  .el-message-box__btns {
+    margin-top: 10px;
+
+    button {
+      width: 100px;
+      padding: 10px;
+      font-size: 14px;
+
+      &:nth-child(2) {
+        margin-left: 40px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width:1900px) {
+  .paging {
+    .totalDom {
+      display: none !important;
+    }
+  }
+}
+
+@media screen and (max-width:1794px) {
+  .selectStatu {
+    div {
+      padding-right: 5px !important;
+
+      span {
+        flex: 7 !important;
+        height: 33px !important;
+      }
+
+      &:last-child {
+        span {
+          width: 175px !important;
+        }
+      }
+    }
+  }
+}

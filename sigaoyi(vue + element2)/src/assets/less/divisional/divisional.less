@@ -1,0 +1,312 @@
+.divisional {
+  position: relative;
+  width: 100%;
+  margin-top: 48px;
+  
+  .box {
+    overflow-x: hidden;
+    padding: 20px;
+    padding-bottom: 51px;
+    padding-top: 0;
+
+    .hidden{
+      margin-top: 20px;
+    }
+
+    .divisionalInfo {
+      margin-top: 20px;
+      position: relative;
+
+      .division-header {
+        background-color: #fff;
+        border-radius: 4px;
+        padding: 15px;
+        
+        .title {
+          display: flex;
+          margin-top: 10px;
+
+          .title-text {
+            letter-spacing: 31px;
+            // text-align: justify;
+          }
+
+          div {
+            display: flex;
+            margin-right: 20px;
+            cursor: pointer;
+
+            input {
+              margin-top: 5px;
+            }
+
+            span {
+              font-weight: normal;
+            }
+          }
+        }
+
+        .inputList {
+          padding-top:15px;
+          display: flex;
+
+          div {
+            padding-right: 30px;
+
+            input {
+              padding: 8px 0;
+              text-indent: 8px;
+              width: 230px;
+              border-radius: 4px;
+              font-size: 14px;
+              border: 1px solid #c2c2c2;
+              &:hover{
+                border: 1px solid #409EFF;
+              }
+            }
+
+
+            select {
+              text-indent: 4px;
+              height: 33px;
+              margin-top: 1px;
+              width: 230px;
+              outline: none;
+              border-radius: 4px;
+              border: 1px solid #c2c2c2;
+              color: #666;
+              &:hover{
+                border: 1px solid #409EFF;
+              }
+            }
+          }
+
+          .iconList {
+
+            button {
+              padding: 10px 15px;
+
+              &:nth-child(2) {
+                margin-left: 20px;
+              }
+            }
+          }
+        }
+
+      }
+
+      .division-table {
+        background-color: #fff;
+        border-radius: 4px;
+        padding: 15px;
+        margin-top: 15px;
+
+        .btn {
+          div {
+            button {
+              padding: 10px 15px;
+            }
+
+            select {
+              text-indent: 4px;
+              margin-right: 20px;
+              width: 230px;
+              padding: 8px 0;
+              outline: none;
+              border: 1px solid #c2c2c2;
+              border-radius: 4px;
+              color: #666;
+              &:hover{
+                border: 1px solid #409EFF;
+              }
+            }
+          }
+        }
+
+        .xls {
+          margin-top: 10px;
+
+          .el-table td,
+          .el-table th {
+            text-align: center;
+          }
+
+          .el-table th{
+            background-color: #e9edef;
+          }
+        }
+
+        .block {
+          margin-top: 10px;
+          display: flex;
+
+          .blockText {
+            font-weight: normal;
+          }
+
+          .el-pagination {
+            //   width: 30%x;
+
+            &:nth-child(2) {
+              width: 100%;
+              margin-left: -13px;
+            }
+          }
+
+          .el-pagination__jump {
+            float: right;
+            margin-right: 16px;
+          }
+
+          .ensure-btn {
+            //   margin-right: -170px;
+            font-weight: normal;
+            border: 1px solid #dcdfe6;
+            text-align: center;
+            cursor: pointer;
+            padding: 0 10px;
+            border-radius: 4px;
+
+            &:hover {
+              border-color: #40a0ffcc;
+              color: #409EFF;
+              background: #ecf5ff;
+            }
+          }
+        }
+
+      }
+    }
+
+    .departmentMask {
+       .el-dialog__wrapper {
+        .el-dialog {
+          margin-top: 20vh !important;
+          border-radius: 4px;
+
+          .el-dialog__header {
+            border-bottom: 1px solid #ddd;
+          }
+
+          .el-dialog__body {
+            padding-bottom: 20px;
+
+            .content {
+              padding-left: 24px;
+              div {
+                padding: 10px;
+                font-size: 22px;
+                display: flex;
+
+                &:last-child {
+                  span {
+
+                    &:last-child {
+                      display: block;
+                      width: 40px;
+                      height: 40px;
+                      margin-left: 20px;
+
+                      img {
+                        width: 100%;
+                        height: 100%;
+                      }
+                    }
+                  }
+                }
+
+                input {
+                  width: 230px;
+                  margin-left: 10px;
+                  border: none;
+                  border-bottom: 1px solid #c2c2c2;
+                  outline: none;
+                  font-size: 18px;
+                  text-indent: 6px;
+
+                  &:hover{
+                    border-bottom: 1px solid #409EFF;
+                  }
+
+                  &:focus {
+                    outline: none !important;
+                    border-bottom: 1px solid #409eff !important;
+                  }
+
+                  &::placeholder {
+                    font-size: 13px;
+                  }
+                }
+
+                span {
+                  width: 100px;
+                  text-align: right;
+                  font-size: 16px;
+
+                  &:last-child {
+                    border: 1px solid #ddd;
+                  }
+                }
+
+                select {
+                  text-indent: 4px;
+                  height: 30px;
+                  width: 235px;
+                  margin-left: 10px;
+                  border-radius: 4px;
+                  outline: none;
+                  border: 1px solid #c2c2c2;
+                  color: #666;
+                  &:hover{
+                    border: 1px solid #409EFF;
+                  }
+                  option{
+                    color: #333;
+                  }
+                }
+
+                textarea {
+                  margin-left: 10px;
+                  text-indent: 6px;
+                  width: 230px;
+                  border-radius: 4px;
+                  border: 1px solid #c2c2c2;
+
+                  &:hover{
+                    border: 1px solid #409EFF;
+                  }
+
+                  &:focus {
+                    outline: none;
+                    border: 1px solid #409eff;
+                  }
+                }
+
+              }
+            }
+          }
+
+          .dialog-footer {
+            width: 100%;
+            text-align: center;
+            display: block;
+
+            button {
+              outline: none;
+              padding: 8px 17px;
+              font-size: 13px;
+              cursor: pointer;
+              border-radius: 4px;
+
+              &:first-child {
+                margin-right: 20px;
+              }
+            }
+          }
+        }
+      }
+
+    }
+
+  }
+}

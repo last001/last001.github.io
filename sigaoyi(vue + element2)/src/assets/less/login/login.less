@@ -1,0 +1,227 @@
+.login {
+  width: 100%;
+  background: url(../../img/bg02.jpg) no-repeat;
+  background-position: top center;
+  background-size: 100% 100%;
+  // background-position: center center;
+  // height: 800px;
+  position: relative;
+  overflow: hidden;
+
+  .box {
+    // border: 1px solid #8291A2;
+    width: 360px;
+    position: absolute;
+    right: 50%;
+    margin-right: -180px;
+    top: 37%;
+
+    &.active {
+      width: 420px;
+      top: 15%;
+
+      .selector {
+        border-bottom: 1px solid #8291A2;
+      }
+
+      .showFace {
+        padding: 30px 50px;
+        padding-bottom: 20px;
+      }
+
+      .valcode {
+        margin-bottom: 0;
+      }
+
+      .toLogin {
+        color: #bb2136;
+        width: 100%;
+        text-align: right;
+        cursor: pointer;
+
+        i {
+          color: #444;
+          font-style: normal;
+          cursor: auto;
+        }
+      }
+
+      .registeBox {
+        margin-top: 24px;
+        margin-left: 16px;
+      }
+    }
+
+    .el-form-item {
+      margin-bottom: 20px;
+      margin-left: -60px;
+    }
+
+    .selector {
+      display: flex;
+      border-bottom: 3px solid #8291A2;
+      margin-top: -1px;
+      // cursor: pointer;
+      background-color: rgba(255, 255, 255, 0.92);
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+
+      div {
+        text-align: center;
+        width: 100%;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 40px;
+        letter-spacing: 3px;
+        
+        &.active {
+          font-weight: 600;
+          color: #bb2136;
+        }
+      }
+
+    }
+
+    .showFace {
+      padding: 30px 20px;
+      padding-bottom: 1px;
+      // background: linear-gradient(to right,#adc8db,#adc8db);
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      background: rgba(255, 255, 255, 0.92);
+
+      .el-form-item__content {
+        display: flex;
+
+        .el-input {
+          input:-webkit-autofill {
+            box-shadow: 0 0 0 1000px white inset !important;
+          }
+        }
+
+        .el-input {
+          input {
+            &:focus {
+              border-color: #c0c4cc !important;
+            }
+          }
+        }
+        .el-form-item__error {
+          color: #bb2136;
+        }
+
+      }
+
+      .el-form-item.is-error {
+        .el-input__inner {
+          border-color: #bb2136 !important;
+
+        }
+        .el-input__validateIcon{
+          color: #bb2136 !important;
+        }
+      }
+    }
+
+    .type {
+      display: flex;
+      margin-bottom: 14px;
+
+      .typeText {
+        width: 30%;
+        text-align: right;
+        padding-right: 40px;
+      }
+
+      .typeRadio {
+        width: 70%;
+        margin-left: 10px;
+      }
+    }
+
+    .valcode {
+      display: flex;
+      margin-bottom: 20px;
+
+      .el-input {
+        width: 90%;
+      }
+
+      button {
+        background-color: #909399;
+        border: none;
+
+        &:hover {
+          background-color: #a6a9ad;
+        }
+
+        span {
+          color: #fff;
+        }
+      }
+
+    }
+
+    .rightNow {
+      width: 100%;
+      text-align: right;
+      margin-top: -12px;
+      font-size: 15px;
+      color: #666;
+      
+      i {
+        cursor: pointer;
+        color: #bb2136;
+        font-style: normal;
+      }
+    }
+
+    .registeBox {
+      margin-top: 20px;
+      margin-left: 33px;
+
+      .el-form-item__content {
+        margin-left: 30px !important;
+
+        button{
+          background-color: #9e2536;
+          border-color: #9e2536;
+          &:hover{
+            background-color: #902636;
+            border-color: #902636;
+          }
+        }
+
+        .el-button--primary {
+          width: 100%;
+
+          &.active {
+            opacity: .75;
+            box-shadow: 0 0 5px #bb2136;
+          }
+
+          .el-icon-loading {
+            font-size: 14px !important;
+          }
+
+          span {
+            letter-spacing: 8px;
+          }
+        }
+      }
+
+    }
+  }
+
+}
+
+.gohome {
+  position: absolute;
+  left: 50%;
+  top: 3%;
+  width: 200px;
+  height: 192px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  // cursor: pointer;
+}
