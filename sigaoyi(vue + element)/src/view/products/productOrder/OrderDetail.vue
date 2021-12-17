@@ -684,6 +684,7 @@ export default {
         { name: "EMS", selected: false, value: "EMS" },
         { name: "CNE", selected: false, value: "CNE" },
         { name: "CNE广州", selected: false, value: "CNEGZ" },
+        { name: "日邮小包", value: "日邮小包" },
         { name: "国内退货", selected: false, value: "国内退货" },
       ],
       // 运输方式
@@ -698,6 +699,7 @@ export default {
         { name: "Qxpress", selected: false, value: "Qxpress" },
         { name: "ETK", selected: false, value: "ETK" },
         { name: "EMS", selected: false, value: "EMS" },
+        { name: "日邮小包", value: "日邮小包" },
         { name: "国内退货", selected: false, value: "国内退货" },
       ],
       // 计抛  product_id

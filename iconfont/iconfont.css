@@ -1,6 +1,6 @@
 @font-face {
   font-family: "iconfont"; /* Project id  */
-  src: url('iconfont.ttf?t=1631844737946') format('truetype');
+  src: url('iconfont.ttf?t=1638942058668') format('truetype');
 }
 
 .iconfont {
@@ -11,15 +11,67 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-home:before {
-  content: "\e605";
+.icon-weixin:before {
+  content: "\f0106";
 }
 
-.icon-xueyuanpeizhi:before {
-  content: "\e672";
+.icon-home2:before {
+  content: "\f0175";
+}
+
+.icon-dianhuahover:before {
+  content: "\e61f";
+}
+
+.icon-drgspingtairuanjianxitong212:before {
+  content: "\e609";
+}
+
+.icon-4_icon:before {
+  content: "\e656";
+}
+
+.icon-ziliaoku:before {
+  content: "\f0351";
+}
+
+.icon-icon-test:before {
+  content: "\e770";
+}
+
+.icon-icon-test1:before {
+  content: "\e771";
+}
+
+.icon-icon-test2:before {
+  content: "\e772";
+}
+
+.icon-QQ:before {
+  content: "\e882";
+}
+
+.icon-gengduo:before {
+  content: "\e652";
 }
 
 .icon-s-promotion:before {
-  content: "\e677";
+  content: "\e55a";
+}
+
+.icon-jichuguanli:before {
+  content: "\e61c";
+}
+
+.icon-buju:before {
+  content: "\e6b8";
+}
+
+.icon-xueli:before {
+  content: "\e612";
+}
+
+.icon-kuangjia:before {
+  content: "\e691";
 }
 

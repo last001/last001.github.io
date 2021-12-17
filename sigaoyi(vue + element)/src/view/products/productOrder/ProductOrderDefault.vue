@@ -1255,6 +1255,7 @@ export default {
           { name: "EMS", selected: false, value: "EMS" },
           { name: "免抛", selected: false, value: "PK0009" },
           { name: "CNE", selected: false, value: "CNE" },
+          { name: "日邮小包", value: "日邮小包" },
           { name: "国内退货", selected: false, value: "国内退货" },
         ];
         this.uploadOrderStatus = true;
@@ -1300,6 +1301,7 @@ export default {
           { name: "Qxpress", selected: false, value: "Qxpress" },
           { name: "ETK", selected: false, value: "ETK" },
           { name: "EMS", selected: false, value: "EMS" },
+          { name: "日邮小包", value: "日邮小包" },
         ];
         this.btnList.forEach((e) => {
           e.showStatus = true;

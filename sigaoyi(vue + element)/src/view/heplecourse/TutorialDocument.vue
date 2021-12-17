@@ -1,6 +1,7 @@
 <template>
   <div class="tutorialDocument">
     <div class="main" v-title data-title="教程文档"></div>
+    <iframe :src="downSrc" frameborder="0" style="display: none"></iframe>
     <div class="box">
       <div class="dandruff" ref="dandruff">
         <el-breadcrumb separator-class="el-icon-arrow-right">
@@ -103,6 +104,13 @@
                 </el-table-column>
                 <el-table-column align="center" label="操作">
                   <template slot-scope="scope">
+                    <el-button
+                      v-if="!brwoseStatus"
+                      @click="down(scope.$index, scope.row)"
+                      size="mini"
+                    >
+                      下载
+                    </el-button>
                     <el-button v-if="brwoseStatus" type="text">
                       未开放权限
                     </el-button>
@@ -193,6 +201,7 @@ export default {
       ],
       // 浏览按钮状态
       brwoseStatus: true,
+      downSrc: null,
     };
   },
   created() {
@@ -200,7 +209,10 @@ export default {
     if (
       this.InfoData.statu <= 2 ||
       this.InfoData.userName == "裴亚江" ||
-      this.InfoData.userName == "马腾"
+      this.InfoData.userName == "马腾" ||
+      this.InfoData.userName == "杨超" ||
+      this.InfoData.userName == "李巍" ||
+      this.InfoData.userName == "16958868"
     ) {
       this.brwoseStatus = false;
     } else {
@@ -440,6 +452,13 @@ export default {
             offset: 50,
           });
         });
+    },
+    // 下载
+    down(indesx, row) {
+      this.downSrc = "http://www.ec-sigaoyi.com/" + row.url;
+      setTimeout(() => {
+        this.downSrc = null;
+      }, 500);
     },
     // 浏览
     browse(index, row) {
