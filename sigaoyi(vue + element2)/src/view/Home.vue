@@ -270,7 +270,7 @@
             >
               <div class="tips">
                 <el-tag type="warning" v-show="purchaseList.warningTips">
-                  入库超过5天，请及时处理。入库超过30天，我司将销毁。
+                  入库超过5天，请及时处理。超过30天，我司将销毁。
                   <i
                     class="el-icon-close"
                     @click="purchaseList.warningTips = false"
@@ -301,11 +301,13 @@
                   </el-table-column>
                   <el-table-column prop="storageTime1" label="入库时间">
                   </el-table-column>
+                  <el-table-column prop="day" label="入库天数">
+                  </el-table-column>
                 </el-table>
               </div>
               <span slot="footer" class="dialog-footer">
                 <el-button type="primary" @click="TopurchaseList()"
-                  >查看</el-button
+                  >查看处理</el-button
                 >
                 <el-button @click="purchaseList.state = false">取消</el-button>
               </span>
@@ -314,7 +316,7 @@
           <!-- 弹窗通知 -->
           <div class="home-notice">
             <el-dialog
-              title="通知（因为香港航班价格调整，我司针对广州分部的香港带电特殊航线报价作出以下调整）"
+              title="通知"
               :visible.sync="noticeStatus"
               width="70%"
               center
@@ -323,13 +325,13 @@
               <div class="notice-content">
                 <div class="speech">
                   致 思高易全体用户：<br />
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2021年08月31日起，我司物流价格体系有所调整。<br />
-                  佐川普货：首重45,续重13<br />
-                  佐川带电：首重49,续重15<br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2021年12月15日起，我司物流价格体系有所调整。<br />
+                  佐川普货：首重42,续重13<br />
+                  佐川带电：首重45,续重14<br />
                   为提高工作效率及质量，发货默认由我司选择最优渠道，用户可自行在系统中查看发货渠道。<br />
                 </div>
                 <div class="notice-table">
-                  <div class="notice-title">执行日期2021年08月31日</div>
+                  <div class="notice-title">执行日期2021年12月15日</div>
                   <el-table
                     :data="noticeTableData"
                     :span-method="arraySpanMethod"
@@ -340,9 +342,9 @@
                     </el-table-column>
                     <el-table-column prop="first" label="首重（0.5kg）">
                     </el-table-column>
-                    <!-- <el-table-column prop="first" label="首重（0.5kg）">
-                    </el-table-column> -->
                     <el-table-column prop="Continuation" label="续重（0.5kg）">
+                    </el-table-column>
+                    <el-table-column prop="serviceCharge" label="服务费">
                     </el-table-column>
                     <el-table-column prop="norms" label="规格" width="220">
                     </el-table-column>
@@ -362,6 +364,7 @@
                   <br />
                   6.若遇到收件方客人拒收，佐川退回改派收取2000日币，退回销毁则不产生费用。黑猫退回改派收取29元人民币。<br />
                   7.黑猫渠道破损不赔偿<br />
+                  8.邮政小包如有超出需更换佐川派送，在原有运费基础上额外再加1000日币，并且时效会有延误。此渠道为邮箱投递，无签收单，冲绳北海道无偏远。
                 </div>
                 <div class="zuci">特此通知！<br />祝 商祺！</div>
               </div>
@@ -569,57 +572,55 @@ export default {
       noticeTableData: [
         {
           channel: "佐川加急",
-          first: "47",
-          Continuation: "14",
+          first: "42",
+          Continuation: "13",
+          serviceCharge: "3",
           norms: "限5kg以内,三边和不超过100cm",
           volume: "长*宽*高/6000",
           duration: "3-5天",
         },
         {
           channel: "佐川普货",
-          first: "45",
+          first: "42",
           Continuation: "13",
+          serviceCharge: "3",
           norms: "限5kg以内,三边和不超过100cm",
           volume: "长*宽*高/6000",
           duration: "3-5天",
         },
         {
           channel: "佐川带电",
-          first: "49",
-          Continuation: "15",
+          first: "45",
+          Continuation: "14",
+          serviceCharge: "3",
           norms: "限5kg以内,三边和不超过100cm",
           volume: "长*宽*高/6000",
           duration: "3-5天",
         },
         {
           channel: "佐川特货",
-          first: "57",
-          Continuation: "16",
+          first: "49",
+          Continuation: "15",
+          serviceCharge: "3",
           norms: "限5kg以内,三边和不超过100cm",
           volume: "长*宽*高/6000",
           duration: "3-5天",
         },
-        //  {
-        //   channel: "佐川免抛",
-        //   first: "57",
-        //   Continuation: "16",
-        //   norms: "限5kg以内,三边和不超过100cm",
-        //   volume: "长*宽*高/6000",
-        //   duration: "3-5天",
-        // },
         {
           channel: "黑猫3cm普货",
-          first: "35",
-          Continuation: "11",
-          norms: "限5kg以内,三边和不超过60cm",
+          first: "30",
+          Continuation: "9",
+          serviceCharge: "2",
+          norms: "最长边不超过3cm",
           volume: "不计抛",
           duration: "3-5天",
         },
         {
-          channel: "黑猫3cm带电",
-          first: "37",
-          Continuation: "12",
-          norms: "限5kg以内,三边和不超过60cm",
+          channel: "邮政小包",
+          first: "27.5（0.1kg）",
+          Continuation: "3.5（0.1kg）",
+          serviceCharge: "0",
+          norms: "限1kg以内，三边和不超过60cm，最长边不超过34CM，厚度不超3cm。",
           volume: "不计抛",
           duration: "3-5天",
         },
@@ -627,6 +628,7 @@ export default {
           channel: "Q仓",
           first: "3.5服务费/票",
           Continuation: "不计抛",
+          serviceCharge: "3",
           norms: "3-5天",
           volume: "不计抛",
           duration: "3-5天",
@@ -1033,7 +1035,7 @@ export default {
           console.log("err ==>", err);
         });
     },
-    // 获取库存 超时5天
+    // 获取库存 超时5天 提示
     getPurchareOverTime() {
       this.$axios({
         url: "/sigaoyi/InventoryWarning",
@@ -1048,8 +1050,12 @@ export default {
             if (result.data.invoicings.length > 0) {
               this.purchaseList.state = true;
               this.purchaseList.tableList = result.data.invoicings;
+              var d = new Date();
+              var timer = d.getTime();
               this.purchaseList.tableList.forEach((e) => {
                 e["storageTime1"] = dateFormats.dateFormat(e.storageTime);
+                e["day"] = timer - e.storageTime;
+                e.day = parseInt(e.day / 1000 / 24 / 60 / 60);
               });
             } else {
               this.purchaseList.state = false;

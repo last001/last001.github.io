@@ -60,6 +60,7 @@
 
           input {
             height: 40px;
+            padding: 0;
             text-align: center;
             outline: none;
             border: 1px solid #ddd;
@@ -75,14 +76,18 @@
           }
 
           .el-select {
-            width: 99%;
+            width: 98%;
             margin-top: 0;
 
             .el-input {
               input {
                 margin-top: 0;
+                padding: 1px 2px;
                 text-align: center;
                 box-sizing: border-box;
+              }
+              .el-input__suffix{
+                right: 15px;
               }
             }
           }

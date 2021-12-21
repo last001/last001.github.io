@@ -1,6 +1,7 @@
 <template>
   <div class="tutorialDocument">
     <div class="main" v-title data-title="教程文档"></div>
+    <iframe :src="downSrc" frameborder="0"></iframe>
     <div class="box">
       <div class="Documen">
         <div class="sreach">
@@ -57,7 +58,7 @@
                 stripe
                 v-loading="tableLoading"
                 style="width: 100%"
-                maxHeight="628px"
+                maxHeight="640px"
               >
                 <template slot="empty">
                   <span class="iconfont icon-zanwushuju"></span>
@@ -109,10 +110,18 @@
                       v-else
                       @click="browse(scope.$index, scope.row)"
                       size="mini"
-                      type="primary"
                       class="browse"
                     >
                       浏览
+                    </el-button>
+                    <el-button
+                      v-if="!brwoseStatus"
+                      @click="down(scope.$index, scope.row)"
+                      size="mini"
+                      type="primary"
+                      class="browse"
+                    >
+                      下载
                     </el-button>
                   </template>
                 </el-table-column>
@@ -183,6 +192,7 @@ export default {
       ],
       // 浏览按钮状态
       brwoseStatus: true,
+      downSrc: null,
     };
   },
   created() {
@@ -193,7 +203,10 @@ export default {
     if (
       this.InfoData.statu <= 2 ||
       this.InfoData.userName == "裴亚江" ||
-      this.InfoData.userName == "马腾"
+      this.InfoData.userName == "马腾" ||
+      this.InfoData.userName == "杨超" ||
+      this.InfoData.userName == "李巍" ||
+      this.InfoData.userName == "16958868"
     ) {
       this.brwoseStatus = false;
     } else {
@@ -410,6 +423,13 @@ export default {
       let url = encodeURIComponent("http://www.ec-sigaoyi.com/" + row.url);
       window.open("http://ow365.cn/?i=23884&furl=" + url);
       //   window.open("https://61office.com/?src=" + url);
+    },
+    // 下载
+    down(indesx, row) {
+      this.downSrc = "http://www.ec-sigaoyi.com/" + row.url;
+      setTimeout(() => {
+        this.downSrc = null;
+      }, 500);
     },
     // 删除
     deleteRow(index, row, rows) {

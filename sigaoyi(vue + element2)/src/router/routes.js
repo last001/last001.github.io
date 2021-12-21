@@ -1,11 +1,11 @@
 // import HelloWorld from '@/components/HelloWorld'
 export const routes = [
   // 介绍ERP
-  {
-    path: '/',
-    name: 'Introduce',
-    component: () => import('../view/Introduce.vue')
-  },
+  // {
+  //   path: '/',
+  //   name: 'Introduce',
+  //   component: () => import('../view/Introduce.vue')
+  // },
   // 登陆
   {
     path: '/login',

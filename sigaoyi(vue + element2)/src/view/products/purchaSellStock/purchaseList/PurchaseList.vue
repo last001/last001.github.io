@@ -54,34 +54,67 @@
               <span class="text">入库时间：</span>
               <el-date-picker
                 v-model="searchList.godownTime"
-                type="date"
-                placeholder="选择日期"
                 @change="search(1, 30)"
+                type="daterange"
+                range-separator="至"
+                start-placeholder="开始日期"
+                end-placeholder="结束日期"
               >
               </el-date-picker>
             </div>
           </div>
-          <div class="btn" v-show="!openCloseState">
-            <el-button size="small" @click="reset()">重置</el-button>
-            <el-button type="primary" size="small" @click="search(1, 30)"
-              >搜索</el-button
-            >
-            <!-- 收起 展开 -->
-            <div class="open_close" @click="openClose()">
-              <span>{{ openCloseText }}</span>
-              <span><i :class="openCloseCionSrc"></i></span>
+          <div class="btns" v-show="!openCloseState">
+            <div class="purchaseTime">
+              <span class="text">采购时间：</span>
+              <!-- <el-date-picker
+                v-model="searchList.purchaseTime"
+                type="date"
+                placeholder="选择日期"
+                @change="search(1, 30)"
+              >
+              </el-date-picker> -->
+              <el-date-picker
+                v-model="searchList.purchaseTime"
+                @change="search(1, 30)"
+                type="daterange"
+                range-separator="至"
+                start-placeholder="开始日期"
+                end-placeholder="结束日期"
+              >
+              </el-date-picker>
+            </div>
+            <div class="v-btn">
+              <el-button size="small" @click="reset()">重置</el-button>
+              <el-button type="primary" size="small" @click="search(1, 30)"
+                >搜索</el-button
+              >
+              <!-- 收起 展开 -->
+              <div class="open_close" @click="openClose()">
+                <span>{{ openCloseText }}</span>
+                <span><i :class="openCloseCionSrc"></i></span>
+              </div>
             </div>
           </div>
         </div>
         <div class="pur-bottom">
-          <!-- 按钮 -->
+          <!-- 按钮 + 销毁 -->
           <div class="btn" v-if="btnStatus">
             <el-button
               icon="el-icon-delete-location"
               type="danger"
               size="small"
-              @click="deleteList()"
+              @click="deleteList(false)"
               >删除</el-button
+            >
+            <i class="el-icon-refresh-right" @click="resetSearch()"></i>
+          </div>
+          <div class="btn" v-else>
+            <el-button
+              icon="el-icon-delete-location"
+              type="danger"
+              size="small"
+              @click="deleteList(true)"
+              >销毁</el-button
             >
             <i class="el-icon-refresh-right" @click="resetSearch()"></i>
           </div>
@@ -94,7 +127,7 @@
               style="width: 100%"
               @select="onTableSelect"
               @select-all="setAll"
-              maxHeight="600"
+              maxHeight="610"
               stripe
               v-loading="tableLoading"
             >
@@ -112,7 +145,11 @@
                 prop="orderNo"
                 label="订单编号"
               ></el-table-column>
-              <el-table-column prop="quantity" label="数量"></el-table-column>
+              <el-table-column
+                prop="quantity"
+                label="数量"
+                width="50"
+              ></el-table-column>
               <el-table-column label="图片">
                 <template slot-scope="scope">
                   <div v-if="scope.row.img == ''" class="updataImg">
@@ -134,34 +171,56 @@
               </el-table-column>
               <el-table-column prop="storehouse" label="仓库"></el-table-column>
               <el-table-column prop="shelf" label="货架"></el-table-column>
-              <el-table-column
-                prop="belonger"
-                width="150"
-                label="认领人"
-              ></el-table-column>
+              <el-table-column prop="belonger" label="认领人"></el-table-column>
               <el-table-column
                 prop="storageTime"
-                width="120"
+                width="100"
                 label="入库时间"
               ></el-table-column>
+              <el-table-column prop="day" label="入库天数"></el-table-column>
               <el-table-column
-                prop="updateTime"
-                label="认领时间"
+                prop="purchasePrice"
+                label="采购价格"
+              ></el-table-column>
+              <el-table-column
+                prop="deliveuTime1"
+                label="采购时间"
+                width="100"
               ></el-table-column>
               <el-table-column label="物件状态">
                 <el-table-column
                   prop="inventory"
                   label="待出库"
+                  width="80"
                 ></el-table-column>
-                <el-table-column prop="damaged" label="破损"></el-table-column>
-                <el-table-column prop="lost" label="丢失"></el-table-column>
-                <el-table-column prop="ship" label="已出库"></el-table-column>
+                <el-table-column
+                  prop="damaged"
+                  label="破损"
+                  width="50"
+                ></el-table-column>
+                <el-table-column
+                  prop="lost"
+                  label="丢失"
+                  width="50"
+                ></el-table-column>
+                <el-table-column
+                  prop="ship"
+                  label="已出库"
+                  width="80"
+                ></el-table-column>
               </el-table-column>
               <el-table-column prop="status" label="状态"></el-table-column>
               <el-table-column prop="remarks" label="备注"></el-table-column>
-              <el-table-column label="操作">
+              <el-table-column label="操作" width="150">
                 <template slot-scope="scope">
                   <div class="edit">
+                    <el-button
+                      size="mini"
+                      v-if="scope.row.status != '已退回'"
+                      @click="sendBack(scope.$index, scope.row)"
+                    >
+                      退回
+                    </el-button>
                     <el-button
                       type="success"
                       size="mini"
@@ -175,8 +234,9 @@
             </el-table>
           </div>
           <!-- 分页 -->
-          <div class="block">
+          <div class="block clearfix">
             <el-pagination
+              class="fl"
               @size-change="handleSizeChange"
               @current-change="handleCurrentChange"
               :current-page="currentPage"
@@ -186,19 +246,115 @@
               <span class="blockText">显示</span>
             </el-pagination>
             <el-pagination
+              class="fl"
               @size-change="handleSizeChange"
               @current-change="handleCurrentChange"
+              :pager-count="11"
               :current-page="currentPage"
               :page-sizes="[30, 50, 100]"
               :page-size="pageSize"
-              layout="sizes, prev, pager, next, slot,jumper"
+              layout="sizes, prev, pager, next"
               :total="total"
-              :pager-count="11"
+            >
+            </el-pagination>
+            <el-pagination layout="slot" class="fl totalDom">
+              <span>总采购金额：{{ totalPurchasePrice }}</span>
+            </el-pagination>
+            <el-pagination
+              class="fr"
+              @size-change="handleSizeChange"
+              @current-change="handleCurrentChange"
+              :current-page="currentPage"
+              layout="slot,jumper"
+              :total="total"
             >
               <span class="ensure-btn fr" @click="clickTrue()">确定</span>
             </el-pagination>
           </div>
         </div>
+        <!-- 退回弹出层 -->
+        <el-dialog
+          title="退回填单"
+          :visible.sync="backList.state"
+          width="30%"
+          custom-class="backMask"
+        >
+          <div class="content">
+            <div>
+              <span class="text">姓名：</span>
+              <input
+                type="text"
+                ref="shopName"
+                v-model="backList.userName"
+                placeholder="请输入"
+              />
+            </div>
+            <div>
+              <span class="text">电话：</span>
+              <input
+                type="text"
+                v-model="backList.phone"
+                placeholder="请输入"
+              />
+            </div>
+            <div>
+              <span class="text">邮编：</span>
+              <input
+                type="text"
+                v-model="backList.mailbox"
+                placeholder="请输入"
+              />
+            </div>
+            <div>
+              <span class="text">地址：</span>
+              <input
+                type="text"
+                v-model="backList.address"
+                placeholder="请输入"
+              />
+            </div>
+            <div>
+              <span class="text">品名：</span>
+              <input
+                type="text"
+                v-model="backList.productName"
+                placeholder="请输入"
+              />
+            </div>
+            <div>
+              <span class="text">方式：</span>
+              <el-select
+                v-model="backList.transitionIndex"
+                placeholder="默认选择国内退货"
+              >
+                <el-option
+                  v-for="item in backList.transitionList"
+                  :key="item.value"
+                  :label="item.name"
+                  :value="item.value"
+                >
+                </el-option>
+              </el-select>
+            </div>
+            <div class="note">
+              <span class="text">备注：</span>
+              <textarea
+                cols="20"
+                rows="5"
+                v-model="backList.remarks"
+                placeholder="请输入备注"
+              ></textarea>
+            </div>
+          </div>
+          <span slot="footer" class="dialog-footer">
+            <el-button size="small" type="primary" @click="confirmBack()"
+              >确 定</el-button
+            >
+            <el-button size="small" @click="backList.state = false"
+              >取 消</el-button
+            >
+          </span>
+        </el-dialog>
       </div>
     </div>
   </div>
@@ -206,6 +362,7 @@
 <script>
 import "../../../../assets/less/purchaseList/purchaseList.less";
 import dateFormats from "../../../../assets/js/dateFormat";
+import timestampToTimes from "../../../../assets/js/timestampToTime";
 import uploadPdfs from "../../../../assets/js/uploadPdf";
 import { createNamespacedHelpers, mapState, mapActions } from "vuex";
 const {
@@ -249,6 +406,7 @@ export default {
         order: "",
         godownTime: "",
         Claimant: "",
+        purchaseTime: "",
       },
       // 收起
       openCloseState: false,
@@ -257,6 +415,25 @@ export default {
       //   xls
       tableData: [],
       tableLoading: false,
+      //  退回弹出层
+      backList: {
+        state: false,
+        // 国内单号 + 数量 + 图片
+        id: 0,
+        orderNo: "",
+        quantity: 1,
+        img: "",
+        // 00
+        userName: "",
+        phone: "",
+        mailbox: "",
+        address: "",
+        productName: "",
+        remarks: "",
+        transitionIndex: "国内退货",
+        transitionList: [{ name: "国内退货", value: "国内退货" }],
+      },
+      rowList: {},
       //  分页 currentPage
       currentPage: 1,
       //   每一页多少条
@@ -264,6 +441,8 @@ export default {
       total: 0,
       //   删除按钮状态值
       btnStatus: false,
+      // 总采购金额
+      totalPurchasePrice: "",
     };
   },
   beforeRouteEnter(to, from, next) {
@@ -299,6 +478,7 @@ export default {
       this.searchList.order = "";
       this.searchList.godownTime = "";
       this.searchList.Claimant = "";
+      this.searchList.purchaseTime = "";
       if (
         this.InfoData.statu == "0" ||
         this.InfoData.userName == "王焕杰" ||
@@ -346,18 +526,54 @@ export default {
         return;
       }
       this.tableLoading = true;
+      let data = {
+        userId: this.InfoData.id,
+        pages: pages,
+        amount: amount,
+        status: this.radioIndex,
+        belonger: this.searchList.Claimant,
+        invoicingName: this.searchList.order,
+        storageTime: "",
+        storageTime1: "",
+        deliveuTime: "",
+        deliveuTime1: "",
+      };
+      if (
+        this.searchList.godownTime == "" ||
+        this.searchList.godownTime == null
+      ) {
+        data.storageTime = "";
+        data.storageTime1 = "";
+      } else {
+        data.storageTime = dateFormats.dateFormat(
+          this.searchList.godownTime[0]
+        );
+        data.storageTime1 = dateFormats.dateFormat(
+          this.searchList.godownTime[1]
+        );
+      }
+
+      if (
+        this.searchList.purchaseTime == "" ||
+        this.searchList.purchaseTime == null
+      ) {
+        data.deliveuTime = "";
+        data.deliveuTime1 = "";
+      } else {
+        data.deliveuTime = dateFormats.dateFormat(
+          this.searchList.purchaseTime[0]
+        );
+        data.deliveuTime1 = dateFormats.dateFormat(
+          this.searchList.purchaseTime[1]
+        );
+      }
+
+      console.log("data ==>", data);
+
       this.$axios({
         url: "/sigaoyi/NEWinStock",
         method: "POST",
-        params: {
-          userId: this.InfoData.id,
-          pages: pages,
-          amount: amount,
-          status: this.radioIndex,
-          belonger: this.searchList.Claimant,
-          invoicingName: this.searchList.order,
-          storageTime: this.searchList.godownTime,
-        },
+        params: data,
       })
         .then((result) => {
           console.log("result ==>", result);
@@ -369,12 +585,27 @@ export default {
               4: "已出库",
               5: "已退回",
             };
+            var d = new Date();
+            var timer = d.getTime();
+            // 表格处理
             result.data.invoicings.forEach((e) => {
+              e["storageTime1"] = e.storageTime;
               e.storageTime = dateFormats.dateFormat(e.storageTime);
+              if (e.deliveuTime == null) {
+                e["deliveuTime1"] = "";
+              } else {
+                e["deliveuTime1"] = dateFormats.dateFormat(e.deliveuTime);
+              }
+              e["day"] = timer - e.storageTime1;
+              e.day = parseInt(e.day / 1000 / 24 / 60 / 60);
             });
+            // 总数 + 分页 + 页数
             this.total = result.data.page.total;
             this.currentPage = result.data.page.pages;
             this.pageSize = result.data.page.amount;
+            // 总采购金额
+            this.totalPurchasePrice = result.data.sumPurchasePrice;
+            // 表格
             this.tableData = result.data.invoicings;
             this.tableData.forEach((e) => {
               for (const key in obj) {
@@ -382,7 +613,6 @@ export default {
                   e.status = obj[key];
                 }
               }
-              e["selected"] = false;
             });
           } else {
             this.$notify({
@@ -448,7 +678,7 @@ export default {
       }
     },
     // 删除
-    deleteList() {
+    deleteList(flag) {
       if (sessionStorage.getItem("token") == undefined) {
         alert("请先登录");
         this.$router.push({ name: "Login" });
@@ -470,22 +700,25 @@ export default {
           }
         }
       } else {
-        this.$message({
-          message: "请勾选要删除的列表",
-          center: true,
-          duration: 600,
-          type: "error",
-        });
+        if (flag) {
+          this.$message({
+            message: "请勾选要销毁的列表",
+            center: true,
+            duration: 600,
+            type: "error",
+          });
+        } else {
+          this.$message({
+            message: "请勾选要删除的列表",
+            center: true,
+            duration: 600,
+            type: "error",
+          });
+        }
         return;
       }
       ids = ids.substring(0, ids.length - 1);
-      //   发起请求
-      let loading = this.$loading({
-        lock: false,
-        text: "删除中...",
-        spinner: "el-icon-loading",
-        background: "rgba(0, 0, 0, 0.7)",
-      });
+      this.tableLoading = true;
       this.$axios({
         url: "/sigaoyi/delectInvoicing",
         method: "POST",
@@ -494,18 +727,27 @@ export default {
         },
       })
         .then((result) => {
-          loading.close();
+          this.tableLoading = false;
           if (result.data.code == "200") {
             // indexList
             for (let i = indexList.length - 1; i >= 0; i--) {
               this.tableData.splice(indexList[i], 1);
             }
-            this.$notify({
-              title: "请求成功",
-              message: result.data.msg,
-              type: "success",
-              offset: 50,
-            });
+            if (flag) {
+              this.$notify({
+                title: "请求成功",
+                message: "销毁成功",
+                type: "success",
+                offset: 50,
+              });
+            } else {
+              this.$notify({
+                title: "请求成功",
+                message: result.data.msg,
+                type: "success",
+                offset: 50,
+              });
+            }
           } else {
             this.$notify({
               title: "请求失败",
@@ -516,7 +758,170 @@ export default {
           }
         })
         .catch((err) => {
-          loading.close();
+          this.tableLoading = false;
+        });
+    },
+    // 退回
+    sendBack(index, row) {
+      this.backList.state = true;
+      this.backList.id = row.id;
+      this.backList.orderNo = row.name;
+      this.backList.quantity = row.quantity;
+      this.backList.img = row.img;
+      this.rowList = row;
+    },
+    // 确定退回
+    confirmBack() {
+      var time = timestampToTimes.timestampToTime(new Date());
+      var data = {
+        id: 0,
+        name: this.backList.userName,
+        postcode: this.backList.mailbox,
+        phone: this.backList.phone,
+        address: this.backList.address,
+        weight: "1",
+        englishName: "",
+        productName: this.backList.productName,
+        dedare: "18",
+        quantity: Number(this.backList.quantity),
+        image: this.backList.img,
+        note: "",
+        clientName: this.InfoData.userName,
+        enterDate: time,
+        orderId: this.backList.orderNo,
+        orderId1: "",
+        status: 0,
+        attributes: "",
+        price: "0",
+        purchaseMode: 0,
+        purchasePrice: 0,
+        collectionStatus: 0,
+        shipDate: "",
+        consignee_state: "",
+        consignee_city: "",
+        product_id: "",
+        trade_type: this.backList.transitionIndex,
+        country: "",
+        order_id: "",
+        freight: 0,
+        link: "",
+        platformorder: "",
+        trade_type1: "",
+        length: 0,
+        width: 0,
+        high: 0,
+        freightprofit: 0,
+        userId: this.InfoData.id,
+      };
+
+      // 备注
+      data.note =
+        "--" +
+        this.backList.remarks +
+        `--订单更新时间：${time}` +
+        "操作人：" +
+        this.InfoData.userName;
+
+      // 提示
+      if (data.phone == "") {
+        this.$message({
+          message: "请输入收件人手机号码",
+          center: true,
+          duration: 800,
+          type: "error",
+        });
+        return;
+      }
+      if (data.name == "") {
+        this.$message({
+          message: "请输入收件人名字",
+          center: true,
+          duration: 800,
+          type: "error",
+        });
+        return;
+      }
+      if (data.postcode == "") {
+        this.$message({
+          message: "请输入收件人邮箱",
+          center: true,
+          duration: 800,
+          type: "error",
+        });
+        return;
+      }
+      if (data.address == "") {
+        this.$message({
+          message: "请输入收件人地址",
+          center: true,
+          duration: 800,
+          type: "error",
+        });
+        return;
+      }
+      if (data.productName == "") {
+        this.$message({
+          message: "请输入品名",
+          center: true,
+          duration: 800,
+          type: "error",
+        });
+        return;
+      }
+
+      console.log("data ==>", data);
+      this.backList.state = false;
+      this.$axios({
+        url: "/sigaoyi/NEWaddlogistics",
+        method: "POST",
+        params: data,
+      })
+        .then((result) => {
+          console.log("result ==>", result);
+          if (result.data.Code == 200) {
+            this.changeStatus(this.backList.id);
+            this.$notify({
+              title: "请求成功",
+              message: result.data.msg,
+              type: "success",
+              offset: 50,
+            });
+          } else {
+            this.backList.state = true;
+            this.$notify({
+              title: "请求失败",
+              message: result.data.msg,
+              type: "warning",
+              offset: 50,
+            });
+          }
+        })
+        .catch((err) => {
+          console.log("err ==>", err);
+          this.backList.state = true;
+          this.$notify({
+            title: "请求错误",
+            message: "系统业务繁忙,请稍后再试!",
+            type: "error",
+            offset: 50,
+          });
+        });
+    },
+    // 修改状态
+    changeStatus(id) {
+      this.$axios({
+        url: "/sigaoyi/DomesticReturn",
+        method: "POST",
+        params: {
+          invoicingId: id,
+        },
+      })
+        .then((result) => {
+          console.log("result ==>", result);
+          this.rowList.status = "已退回";
+        })
+        .catch((err) => {
+          console.log("err ==>", err);
         });
     },
     // 编辑
@@ -575,6 +980,7 @@ export default {
         },
       })
         .then((result) => {
+          console.log(result);
           this.tableLoading = false;
           if (result.data.Code == 200) {
             let obj = {
@@ -582,10 +988,25 @@ export default {
               4: "已出库",
               5: "已退回",
             };
+            var d = new Date();
+            var timer = d.getTime();
+            // 表格处理
             result.data.invoicings.forEach((e) => {
+              e["storageTime1"] = e.storageTime;
               e.storageTime = dateFormats.dateFormat(e.storageTime);
+              if (e.deliveuTime == null) {
+                e["deliveuTime1"] = "";
+              } else {
+                e["deliveuTime1"] = dateFormats.dateFormat(e.deliveuTime);
+              }
+              e["day"] = timer - e.storageTime1;
+              e.day = parseInt(e.day / 1000 / 24 / 60 / 60);
             });
+            // 总数
             this.total = result.data.page.total;
+            // 总采购金额
+            this.totalPurchasePrice = result.data.sumPurchasePrice;
+            // 表格
             this.tableData = result.data.invoicings;
             this.tableData.forEach((e) => {
               for (const key in obj) {
@@ -593,7 +1014,6 @@ export default {
                   e.status = obj[key];
                 }
               }
-              e["selected"] = false;
             });
           } else {
             this.$notify({

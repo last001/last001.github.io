@@ -67,83 +67,170 @@
             }
 
             .el-date-editor {
-              width: calc(100% - 120px);
+              width: calc(100% - 100px);
+              height: 34px;
 
-              input {
-                height: 34px;
-                line-height: 34px;
-                width: 100%;
-                padding-left: 34px;
+              &.is-active {
+                border-color: #bb2136;
               }
 
-              .el-input__prefix,
-              .el-input__suffix {
-                i {
-                  line-height: 34px;
-                }
+              input {
+                width: 100%;
+                height: 26px;
+                line-height: 26px;
+                margin: 0 4px;
+                border: none;
+              }
+
+              .el-input__icon,
+              .el-range-separator {
+                line-height: 26px;
               }
             }
 
             &.btn {
-              margin-top: 0;
-              width: initial;
+              display: flex;
+              justify-content: flex-end;
 
+              button {
+                height: 34px;
+                padding: 9px 20px;
+                box-sizing: border-box;
+  
+                &:first-child {
+                  &:hover {
+                    color: #bb2136;
+                    border-color: #bb2136;
+                    background-color: #fff;
+                  }
+  
+                  &:focus {
+                    background-color: #fff;
+                    color: #bb2136;
+                    border-color: #bb2136;
+                  }
+                }
+  
+                &:nth-child(2) {
+                  margin-right: 5px;
+                  background-color: #9e2536;
+                  border: 1px solid #9e2536;
+  
+                  &:hover {
+                    background-color: #902636;
+                    border: 1px solid #902636;
+                  }
+                }
+              }
+  
               .open_close {
                 flex: initial;
+                display: block;
+                color: #bb2136;
+                text-indent: 0;
+                cursor: pointer;
+                margin-left: 10px;
+  
+                span {
+                  line-height: 35px;
+                  width: 37px;
+                  display: inline-block;
+                }
               }
             }
           }
         }
 
-        .btn {
+        .btns {
           margin-top: 15px;
           width: 100%;
           display: flex;
-          justify-content: flex-end;
 
-          button {
-            height: 34px;
-            padding: 9px 20px;
-            box-sizing: border-box;
+          .purchaseTime{
+            flex: 1;
+            display: flex;
 
-            &:first-child {
-              &:hover {
-                color: #bb2136;
-                border-color: #bb2136;
-                background-color: #fff;
-              }
-
-              &:focus {
-                background-color: #fff;
-                color: #bb2136;
-                border-color: #bb2136;
-              }
-            }
-
-            &:nth-child(2) {
-              margin-right: 5px;
-              background-color: #9e2536;
-              border: 1px solid #9e2536;
-
-              &:hover {
-                background-color: #902636;
-                border: 1px solid #902636;
-              }
-            }
-          }
-
-          .open_close {
-            color: #bb2136;
-            text-indent: 0;
-            cursor: pointer;
-            margin-left: 10px;
-
-            span {
-              line-height: 35px;
-              width: 37px;
+            .text {
               display: inline-block;
+              height: 34px;
+              line-height: 34px;
+              width: 100px;
+              text-align: right;
+            }
+
+            .el-date-editor {
+              width: calc(100% - 100px);
+              height: 34px;
+
+              &.is-active {
+                border-color: #bb2136;
+              }
+
+              input {
+                width: 100%;
+                height: 26px;
+                line-height: 26px;
+                margin: 0 4px;
+              }
+
+              .el-input__icon,
+              .el-range-separator {
+                line-height: 26px;
+              }
+            }
+
+          }
+
+          .v-btn {
+            display: flex;
+            flex: 3;
+            justify-content: flex-end;
+
+            button {
+              height: 34px;
+              padding: 9px 20px;
+              box-sizing: border-box;
+
+              &:first-child {
+                &:hover {
+                  color: #bb2136;
+                  border-color: #bb2136;
+                  background-color: #fff;
+                }
+
+                &:focus {
+                  background-color: #fff;
+                  color: #bb2136;
+                  border-color: #bb2136;
+                }
+              }
+
+              &:nth-child(2) {
+                margin-right: 5px;
+                background-color: #9e2536;
+                border: 1px solid #9e2536;
+
+                &:hover {
+                  background-color: #902636;
+                  border: 1px solid #902636;
+                }
+              }
+            }
+
+            .open_close {
+              color: #bb2136;
+              text-indent: 0;
+              cursor: pointer;
+              margin-left: 10px;
+
+              span {
+                line-height: 35px;
+                width: 37px;
+                display: inline-block;
+              }
             }
           }
+
         }
       }
 
@@ -182,6 +269,7 @@
         }
 
         .xls {
+          width: 100%;
           margin-top: 10px;
 
           .el-table--border {
@@ -221,7 +309,25 @@
 
 
           .edit {
-            button {
+            display: flex;
+            justify-content: center;
+
+            .el-button--default {
+              background-color: #fff;
+              border: 1px solid #dcdfe6;
+
+              &:hover {
+                border: 1px solid #bb2136;
+                color: #bb2136;
+              }
+
+              &:active {
+                border: 1px solid #bb2136;
+                color: #bb2136;
+              }
+            }
+
+            .el-button--success {
               background-color: #9e2536;
               border: 1px solid #9e2536;
 
@@ -244,7 +350,6 @@
         // 分页
         .block {
           margin-top: 10px;
-          display: flex;
 
           .blockText {
             font-weight: normal;
@@ -259,12 +364,15 @@
           }
 
           .el-pagination {
-            //   width: 30%x;
 
-            &:nth-child(2) {
-              width: 100%;
-              margin-left: -13px;
+            &.totalDom{
+              span{
+                font-size: 16px;
+                font-weight: 500;
+              }
+            }
 
+            &:nth-child(4) {
               .el-pager {
                 li {
                   &.active {
@@ -313,6 +421,145 @@
             }
           }
         }
+      }
+
+      // 退回
+      .backMask {
+        border-radius: 4px;
+
+        .el-dialog__header {
+          padding: 10px 20px;
+          text-align: left;
+          border-bottom: 1px solid #ddd;
+
+          button {
+            right: 10px;
+            top: 10px;
+          }
+        }
+
+        .el-dialog__body {
+          padding: 10px 50px 35px 10px;
+
+          .content {
+            font-size: 15px;
+
+            div {
+              width: 100%;
+              display: flex;
+              align-items: center;
+              margin-top: 20px;
+
+              .text {
+                line-height: 34px;
+                width: 100px;
+                text-align: right;
+                display: inline-block;
+              }
+
+              input {
+                width: calc(100% - 100px);
+                border-radius: 3px;
+                border: 1px solid #dcdfe6;
+                outline: none;
+                padding: 8px;
+
+                &:hover {
+                  border: 1px solid #bb2136;
+                }
+
+                &:focus {
+                  border: 1px solid #bb2136;
+                }
+              }
+
+              .el-select {
+                width: calc(100% - 80px);
+                margin-top: 0;
+
+                .el-input {
+                  margin-top: 0;
+
+                  input {
+                    width: 100%;
+                    height: 34px !important;
+                    line-height: 34px;
+                    padding-left: 8px;
+                  }
+
+                }
+
+                .el-input__suffix {
+                  i {
+                    line-height: 34px;
+                  }
+                }
+              }
+
+              &.note {
+                align-items: flex-start;
+
+                .text {
+                  line-height: 1;
+                }
+
+                textarea {
+                  width: calc(100% - 100px);
+                  border: 1px solid #dcdfe6;
+                  padding: 8px;
+                  outline: none;
+                  border-radius: 3px;
+
+                  &:hover {
+                    border: 1px solid #bb2136;
+                  }
+
+                  &:focus {
+                    border: 1px solid #bb2136;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        .el-dialog__footer {
+          border: 1px solid #eee;
+          padding-bottom: 15px;
+          padding-top: 15px;
+          text-align: right !important;
+
+          button {
+            height: 34px;
+            padding: 7px 18px;
+
+            &:first-child {
+              margin-right: 5px;
+              background-color: #9e2536;
+              border: 1px solid #9e2536;
+
+              &:hover {
+                background-color: #902636;
+                border: 1px solid #902636;
+              }
+            }
+
+            &:nth-child(2) {
+              &:hover {
+                color: #bb2136;
+                border-color: #bb2136;
+                background-color: #fff;
+              }
+
+              &:focus {
+                background-color: #fff;
+                color: #bb2136;
+                border-color: #bb2136;
+              }
+            }
+          }
+        }
+
       }
     }
   }

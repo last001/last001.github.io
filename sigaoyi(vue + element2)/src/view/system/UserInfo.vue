@@ -4,8 +4,13 @@
       <div class="main" v-title data-title="用户信息"></div>
       <div class="search">
         <div>
-          <span class="text">发货状态：</span>
-          <el-select v-model="radioIndex" clearable placeholder="请选择">
+          <span class="text">审核状态：</span>
+          <el-select
+            v-model="radioIndex"
+            @clear="radioIndex = 99"
+            clearable
+            placeholder="请选择"
+          >
             <el-option
               v-for="item in radioList"
               :key="item.value"
@@ -41,7 +46,7 @@
             tooltip-effect="dark"
             style="width: 100%"
             stripe
-            maxHeight="655"
+            maxHeight="670"
             @select-all="setAll"
             v-loading="tableLoading"
           >

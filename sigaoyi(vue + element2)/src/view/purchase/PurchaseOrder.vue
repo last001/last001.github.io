@@ -50,9 +50,10 @@
               <span class="text">添加时间：</span>
               <el-date-picker
                 v-model="purchaseTime"
-                clearable
-                type="date"
-                placeholder="选择日期"
+                type="daterange"
+                range-separator="至"
+                start-placeholder="开始日期"
+                end-placeholder="结束日期"
               >
               </el-date-picker>
             </div>
@@ -100,7 +101,10 @@
         </div>
         <div class="list">
           <div class="list_btn">
-            <el-button type="primary" size="medium">导出采购单</el-button>
+            <el-button type="primary" size="medium" @click="mergeGoodes()"
+              >合并发货</el-button
+            >
+            <el-button type="default" size="medium">导出采购单</el-button>
             <el-select
               v-model="batchVal"
               @change="changeBatch()"
@@ -134,10 +138,16 @@
                 <div>暂无数据</div>
               </template>
               <el-table-column type="selection"> </el-table-column>
-              <el-table-column
-                prop="shippingOrderNumber"
-                label="运输编号"
-              ></el-table-column>
+              <el-table-column label="运输编号">
+                <template slot-scope="scope">
+                  <div
+                    class="orderNumber"
+                    @click="openLogisticsTack(scope.$index, scope.row)"
+                  >
+                    {{ scope.row.shippingOrderNumber }}
+                  </div>
+                </template>
+              </el-table-column>
               <el-table-column prop="optionAttributes" label="选项属性">
                 <template slot-scope="scope">
                   <div class="optionAttributes">
@@ -172,7 +182,7 @@
                 prop="addTime"
                 label="添加时间"
               ></el-table-column>
-              <el-table-column prop="remark" label="备注"> </el-table-column>
+              <el-table-column prop="remark" label="备注"></el-table-column>
               <el-table-column label="操作" width="130">
                 <template slot-scope="scope">
                   <div class="table_btn">
@@ -189,12 +199,6 @@
                       v-show="scope.row.status != 2 && scope.row.status != 0"
                       @click="toShip(scope.row, scope.index)"
                       >去发货</el-button
-                    >
-                    <el-button
-                      size="small"
-                      type="text"
-                      v-if="scope.row.status == 2"
-                      >打印</el-button
                     >
                   </div>
                 </template>
@@ -476,17 +480,27 @@
           </div>
           <div class="img">
             <span>商品图片：</span>
-            <div class="bigImgList" v-show="apply.imgList.length > 0">
-              <div
-                class="imgList"
-                v-for="(item, index) in apply.imgList"
-                :key="index"
-              >
-                <img :src="item" alt="加载失败" />
-                <i class="el-icon-close"></i>
+            <div class="bigImgList">
+              <div v-show="apply.imgList.length > 0">
+                <div
+                  class="imgList"
+                  v-for="(item, index) in apply.imgList"
+                  :key="index"
+                >
+                  <img :src="item" alt="加载失败" />
+                  <i class="el-icon-close" @click="clearImg(index)"></i>
+                </div>
               </div>
-              <div class="addImg">
+              <div class="addImg imgList">
                 <i class="el-icon-plus"></i>
+                <input
+                  type="file"
+                  tilte="点击上传图片"
+                  accept="image/*"
+                  ref="uploadInt"
+                  multiple
+                  @change="updataImg($event)"
+                />
               </div>
             </div>
           </div>
@@ -500,12 +514,80 @@
           >
         </span>
       </el-dialog>
+      <!-- 物流追踪 -->
+      <div class="logisticsTack">
+        <el-dialog
+          title="物流追踪"
+          :visible.sync="logisTackList.state"
+          width="35%"
+        >
+          <div class="content">
+            <div class="query">
+              <div class="set">
+                <span class="text">物流公司：</span>
+                <el-select
+                  v-model="logisTackList.index"
+                  clearable
+                  placeholder="请选择"
+                >
+                  <el-option
+                    v-for="item in logisTackList.list"
+                    :key="item.value"
+                    :label="item.name"
+                    :value="item.value"
+                  >
+                  </el-option>
+                </el-select>
+              </div>
+              <div class="orderNum">
+                <span class="text">单号：</span>
+                <input
+                  type="text"
+                  placeholder="请输入单号"
+                  v-model="logisTackList.orderNum"
+                />
+              </div>
+              <div class="btn">
+                <el-button
+                  type="primary"
+                  icon="el-icon-search"
+                  size="mini"
+                  @click="queryLogistics()"
+                  >查询</el-button
+                >
+              </div>
+            </div>
+            <div class="note">
+              <div class="loading" v-if="logisTackList.loading">
+                <span>
+                  <i class="el-icon-loading"></i>
+                  <i>加载中</i>
+                </span>
+              </div>
+              <textarea
+                cols="30"
+                rows="28"
+                placeholder="物流追踪"
+                v-model="logisTackList.textVal"
+                v-else
+                disabled
+              ></textarea>
+            </div>
+          </div>
+          <span slot="footer" class="dialog-footer">
+            <el-button type="primary" @click="logisTackList.state = false"
+              >关 闭</el-button
+            >
+          </span>
+        </el-dialog>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import "@/assets/less/purchaseOrder/purchaseOrder.less";
+import dateFormats from "../../assets/js/dateFormat";
 import Clipboard from "clipboard";
 import { createNamespacedHelpers, mapState, mapActions } from "vuex";
 const {
@@ -548,6 +630,7 @@ export default {
       apply: {
         state: false,
         id: "",
+        ids: "",
         status: "",
         // 物流信息
         logisticsIndex: "",
@@ -572,14 +655,58 @@ export default {
         tradeName: "",
         englishName: "",
         option: "",
-        quantity: "",
+        quantity: 0,
         purchasePrice: "",
-        total: "",
+        total: 0,
         link: "",
         note: "",
         imgList: [],
       },
       applyRow: {},
+      logisTackList: {
+        state: false,
+        index: "",
+        list: [
+          { name: "自动匹配", selected: true, value: "" },
+          { name: "圆通速递", selected: false, value: "yuantong" },
+          { name: "韵达快递", selected: false, value: "yunda" },
+          { name: "中通快递", selected: false, value: "zhongtong" },
+          { name: "申通快递", selected: false, value: "shentong" },
+          { name: "百世快递", selected: false, value: "huitongkuaidi" },
+          { name: "邮政快递包裹", selected: false, value: "youzhengguonei" },
+          { name: "顺丰速运", selected: false, value: "shunfeng" },
+          { name: "极兔速递", selected: false, value: "jtexpress" },
+          { name: "EMS", selected: false, value: "ems" },
+          { name: "京东物流", selected: false, value: "jd" },
+          { name: "邮政标准快递", selected: false, value: "youzhengbk" },
+          { name: "德邦", selected: false, value: "debangwuliu" },
+          { name: "德邦快递", selected: false, value: "debangkuaidi" },
+          { name: "圆通快运", selected: false, value: "yuantongkuaiyun" },
+          { name: "百世快运", selected: false, value: "baishiwuliu" },
+          { name: "丰网速运", selected: false, value: "fengwang" },
+          { name: "宅急送", selected: false, value: "zhaijisong" },
+          { name: "中通国际", selected: false, value: "zhongtongguoji" },
+          { name: "中通快运", selected: false, value: "安能快运" },
+          { name: "韵达快运", selected: false, value: "yundakuaiyun" },
+          { name: "国际包裹", selected: false, value: "youzhengguoji" },
+          { name: "顺丰快运", selected: false, value: "shunfengkuaiyun" },
+          { name: "UPS", selected: false, value: "ups" },
+          { name: "安得物流", selected: false, value: "annto" },
+          { name: "优速快递", selected: false, value: "youshuwuliu" },
+          { name: "特急送", selected: false, value: "lntjs" },
+          { name: "DPD", selected: false, value: "dpd" },
+          { name: "D速快递", selected: false, value: "dsukuaidi" },
+          { name: "顺心捷达", selected: false, value: "sxjdfreight" },
+          { name: "跨越速运", selected: false, value: "kuayue" },
+          { name: "壹米滴答", selected: false, value: "yimidida" },
+          { name: "DHL-全球件", selected: false, value: "dhlen" },
+          { name: "DHL-中国件", selected: false, value: "dhl" },
+          { name: "京广速递", selected: false, value: "jinguangsudikuaijian" },
+        ],
+        orderNum: "",
+        loading: false,
+        textVal: "",
+      },
       // 展开/收起
       openCloseState: false,
       openCloseText: "收起",
@@ -591,12 +718,15 @@ export default {
       // 表格
       tableData: [],
       tableLoading: false,
+      mergeIndex: 0,
       // 当前页
       currentPage: 1,
       //   每一页多少条
       pageSize: 30,
       //   total
       total: 0,
+      // 发货 isMOre
+      isMOre: false,
     };
   },
   beforeRouteEnter(to, from, next) {
@@ -604,6 +734,8 @@ export default {
   },
   activated() {},
   created() {
+    document.title = "采购单";
+    this.reset();
     this.getTableList(true);
   },
   computed: {
@@ -656,6 +788,9 @@ export default {
       rows.forEach((e) => {
         e.selected = true;
       });
+
+      // 点击合并按钮 的 勾选的订单数量
+      this.mergeIndex = rows.length;
     },
     // 填单
     edit(index, row) {
@@ -775,6 +910,8 @@ export default {
     // 去发货
     toShip(row, index) {
       console.log(row);
+      this.isMOre = false;
+
       this.apply.state = true;
       this.apply.warningProduct = true;
       this.apply.imgList = [];
@@ -817,6 +954,87 @@ export default {
         })
         .catch((err) => {
           console.log("err ==>", err);
+        });
+    },
+    //  去发货 删除图片
+    clearImg(index) {
+      this.apply.imgList.splice(index, 1);
+    },
+    // 去发货 上传图片
+    updataImg(e) {
+      var formData = new FormData();
+      if (e.target.files.length > 1) {
+        for (let i = 0; i < e.target.files.length; i++) {
+          // 向 formData 对象中添加文件
+          formData.append("file", e.target.files[i]);
+        }
+      } else {
+        this.file = e.target.files[0];
+        // 向 formData 对象中添加文件
+        formData.append("file", this.file);
+      }
+
+      let loading = this.$loading({
+        lock: false,
+        text: "上传中...",
+        spinner: "el-icon-loading",
+        background: "rgba(0, 0, 0, 0.7)",
+      });
+      let url = "/sigaoyi/ImageOnlineURLUpload";
+      this.$axios({
+        url: "/sigaoyi/ImageOnlineURLUpload",
+        method: "POST",
+        data: formData,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+        .then((result) => {
+          console.log(result);
+          loading.close();
+          if (result.data.Code == "200") {
+            if (e.target.files.length > 1) {
+              let imgStrList;
+              imgStrList = result.data.imgsURL.split("\n");
+              for (let i = imgStrList.length; i > 0; i--) {
+                if (imgStrList[i] == "") {
+                  imgStrList.splice(i, 1);
+                }
+              }
+              for (let j = 0; j < imgStrList.length; j++) {
+                this.apply.imgList.push(imgStrList[j]);
+              }
+            } else {
+              this.apply.imgList.push(result.data.imgsURL);
+            }
+            this.$refs.uploadInt.value = "";
+            this.$notify({
+              title: "请求成功",
+              message: "上传图片成功！",
+              type: "success",
+              offset: 50,
+            });
+          } else {
+            this.$refs.uploadInt.value = "";
+            this.$notify({
+              title: "请求失败",
+              message: "上传图片失败！",
+              type: "warning",
+              offset: 50,
+            });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          this.$refs.uploadInt.value = "";
+          loading.close();
+
+          this.$notify({
+            title: "请求错误",
+            message: "系统服务繁忙,请稍后再试！",
+            type: "error",
+            offset: 50,
+          });
         });
     },
     // 去发货 弹出层   确定 按钮
@@ -877,7 +1095,11 @@ export default {
           console.log("result ==>", result);
           if (result.data.Code == 200) {
             this.apply.state = false;
-            this.changeState();
+            if (this.isMOre) {
+              this.changeStates();
+            } else {
+              this.changeState();
+            }
             this.$notify({
               title: "请求成功",
               message: result.data.msg,
@@ -905,7 +1127,7 @@ export default {
           console.log("err ==>", err);
         });
     },
-    //
+    // 修改状态
     changeState() {
       this.$axios({
         url: "/sigaoyi/updatePurchaseorderStatus",
@@ -922,6 +1144,67 @@ export default {
         })
         .catch((err) => {
           console.log("err ==>", err);
+        });
+    },
+    // 点击运输单号
+    openLogisticsTack(index, row) {
+      this.logisTackList.state = true;
+      // 重置
+      this.logisTackList.index = "";
+      this.logisTackList.textVal = "";
+      // 去除文字 + 空格
+      let orderIdVal;
+      orderIdVal = row.shippingOrderNumber.replace(/\s/g, "");
+      orderIdVal = orderIdVal.replace(/[\u4e00-\u9fa5]/g, "");
+      this.logisTackList.orderNum = orderIdVal;
+    },
+    // 物流弹出层 查询
+    queryLogistics() {
+      if (this.orderNum == "") {
+        this.$message({
+          message: "请输入物流单号",
+          type: "error",
+          center: true,
+          duration: 800,
+        });
+        return;
+      }
+      this.logisticsLoading = true;
+      this.$axios({
+        url: "/sigaoyi/GetLogisticsInformation",
+        method: "POST",
+        params: {
+          num: this.logisTackList.orderNum,
+          com: this.logisTackList.index,
+        },
+      })
+        .then((result) => {
+          this.logisticsLoading = false;
+          if (result.data.code == "200") {
+            this.logisTackList.textVal = result.data.text;
+            this.$notify({
+              title: "请求成功",
+              message: result.data.msg,
+              type: "success",
+              offset: 50,
+            });
+          } else {
+            this.$notify({
+              title: "请求失败",
+              message: result.data.msg,
+              type: "warning",
+              offset: 50,
+            });
+          }
+        })
+        .catch((err) => {
+          this.logisticsLoading = false;
+          this.$notify({
+            title: "请求错误",
+            message: "系统业务繁忙,请稍后再试",
+            type: "error",
+            offset: 50,
+          });
         });
     },
     // 分页事件 每页多少条
@@ -964,11 +1247,20 @@ export default {
         status: this.purchaseStateIndex,
         addPersonnel: this.addPeople,
         shippingOrderNumber: this.purchaseOrder,
-        addTime: this.purchaseTime,
+        addTime: "",
+        addTime1: "",
       };
       if (data.shopid == "") {
         data.shopid = 0;
       }
+      if (this.purchaseTime == "" || this.purchaseTime == null) {
+        data.addTime = "";
+        data.addTime1 = "";
+      } else {
+        data.addTime = dateFormats.dateFormat(this.purchaseTime[0]);
+        data.addTime1 = dateFormats.dateFormat(this.purchaseTime[1]);
+      }
+      console.log(data);
       this.tableLoading = true;
       this.$axios({
         url: "/sigaoyi/getAllPurchaseorderInfo",
@@ -1016,6 +1308,125 @@ export default {
             type: "error",
             offset: 50,
           });
+        });
+    },
+    // 合并发货
+    mergeGoodes() {
+      this.isMOre = true;
+
+      var qoo10orderIDs = "";
+      this.apply.total = 0;
+      this.apply.quantity = 0;
+      this.apply.purchasePrice = 0;
+      this.apply.imgList = [];
+      this.apply.option = "";
+      this.apply.note = "";
+      this.apply.addressee = "";
+      this.apply.phone = "";
+      this.apply.email = "";
+      this.apply.detailAdress = "";
+
+      if (this.tableData.findIndex((target) => target.selected === true) > -1) {
+        for (let i = 0; i < this.tableData.length; i++) {
+          if (this.tableData[i].selected) {
+            qoo10orderIDs += this.tableData[i].qoo10orderID + ",";
+            this.apply.ids += this.tableData[i].id + ",";
+            this.apply.option += this.tableData[i].optionAttributes + ",";
+            this.apply.note += this.tableData[i].remark + ",";
+            this.apply.purchasePrice += this.tableData[i].purchasePrice;
+            this.apply.imgList.push(this.tableData[i].img);
+          }
+        }
+      } else {
+        this.$message({
+          message: "您还未勾选要合并的订单",
+          center: true,
+          duration: 600,
+          type: "error",
+        });
+        return;
+      }
+
+      if (this.mergeIndex == 1) {
+        this.$message({
+          message: "只勾选了一个订单",
+          center: true,
+          duration: 600,
+          type: "error",
+        });
+        return;
+      }
+      qoo10orderIDs = qoo10orderIDs.substring(
+        0,
+        qoo10orderIDs.lastIndexOf(",")
+      );
+      this.apply.ids = this.apply.ids.substring(
+        0,
+        this.apply.ids.lastIndexOf(",")
+      );
+
+      this.$axios({
+        url: "/sigaoyi/getQoo10OrderFoIds",
+        method: "POST",
+        params: {
+          qoo10orderIDs,
+        },
+      })
+        .then((result) => {
+          console.log("result ==>", result);
+          if (result.data.Code == 200) {
+            this.apply.state = true;
+            result.data.qoo10Orders.forEach((e) => {
+              this.apply.addressee = e.receiver;
+              this.apply.phone = e.receiverTel;
+              this.apply.email = e.receiverMobile;
+              this.apply.detailAdress = e.shippingAddr;
+              this.apply.total += Number(e.orderPrice);
+              this.apply.quantity += Number(e.orderQty);
+            });
+          } else {
+            this.$notify({
+              title: "请求失败",
+              message: result.data.msg,
+              type: "warning",
+              offset: 60,
+            });
+          }
+        })
+        .catch((err) => {
+          console.log("err ==>", err);
+          this.$notify({
+            title: "请求错误",
+            message: "系统业务繁忙,请稍后再试",
+            type: "error",
+            offset: 60,
+          });
+        });
+    },
+    // 改状态
+    changeStates() {
+      this.$axios({
+        url: "/sigaoyi/updatePurchaseorderStatusatIds",
+        method: "POST",
+        params: {
+          ids: this.apply.ids,
+          status: 2,
+        },
+      })
+        .then((result) => {
+          console.log("result ==>", result);
+          var idsList = this.apply.ids.split(",");
+          this.tableData.forEach((e) => {
+            for (let i = 0; i < idsList.length; i++) {
+              if (e.id == idsList[i]) {
+                e.status = 2;
+                e.status1 = "已发货";
+              }
+            }
+          });
+        })
+        .catch((err) => {
+          console.log("err ==>", err);
         });
     },
   },

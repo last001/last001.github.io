@@ -126,26 +126,26 @@
     >
       <div class="content">
         <div>
-          <span class="text">店铺名称：</span>
+          <span class="text">趣天账号：</span>
           <input
             type="text"
             ref="shopName"
             v-model="handleEditList.shopuser"
-            placeholder="请输入店名"
+            placeholder="请输入趣天账号"
           />
         </div>
         <div>
-          <span class="text">店铺密码：</span>
+          <span class="text">趣天密码：</span>
           <input
             type="text"
             ref="shopPwd"
             v-model="handleEditList.shoppwd"
-            placeholder="请输入店铺密码"
+            placeholder="请输入趣天密码"
           />
         </div>
         <div>
           <span class="text">店铺状态：</span>
-          <el-select v-model="handleIndex" clearable placeholder="请选择">
+          <el-select v-model="handleIndex" placeholder="请选择">
             <el-option
               v-for="item in handleLit"
               :key="item.value"
@@ -362,9 +362,27 @@ export default {
     // 点击确定修改或者添加按钮
     addAuthor() {
       // 提示
-      if (this.handleIndex == 99) {
+      if (this.handleEditList.shopuser == "") {
         this.$message({
-          message: "请选择店铺状态",
+          message: "请输入趣天账号",
+          center: true,
+          duration: 600,
+          type: "error",
+        });
+        return;
+      }
+      if (this.handleEditList.shoppwd == "") {
+        this.$message({
+          message: "请输入趣天密码",
+          center: true,
+          duration: 600,
+          type: "error",
+        });
+        return;
+      }
+      if (this.handleEditList.aPIKey == "") {
+        this.$message({
+          message: "请输入APIkey",
           center: true,
           duration: 600,
           type: "error",
@@ -395,38 +413,17 @@ export default {
           remarks: this.handleEditList.remarks,
         };
       }
-
-      //   console.log("data ==>", data);
-
+      this.tableLoading = true;
       this.centerDialogVisible = false;
-      // 发起请求
-      let loading = this.$loading({
-        lock: false,
-        text: "加载中...",
-        spinner: "el-icon-loading",
-        background: "rgba(0, 0, 0, 0.7)",
-      });
+
       this.$axios({
         url: "/sigaoyi/addQoo10shop",
         method: "POST",
         params: data,
       })
         .then((result) => {
-          setTimeout(() => {
-            loading.close();
-          }, 500);
-          //   console.log("result ==>", result);
           if (result.data.code == "200") {
             if (this.addChangeStatus) {
-              // 添加成功
-              //   this.tableData.unshift();
-              //   this.tableData.forEach((e) => {
-              //     if (e.status == 0) {
-              //       e.status = "在售";
-              //     } else if (e.status == 1) {
-              //       e.status = "停售";
-              //     }
-              //   });
               this.searchInput(30, 1);
             } else {
               // 保存成功
@@ -447,6 +444,7 @@ export default {
               offset: 50,
             });
           } else {
+            this.tableLoading = false;
             this.centerDialogVisible = true;
             this.$notify({
               title: "请求失败",
@@ -457,7 +455,8 @@ export default {
           }
         })
         .catch((err) => {
-          loading.close();
+          //   loading.close();
+          this.tableLoading = false;
           this.centerDialogVisible = true;
           this.$notify({
             title: "请求错误",

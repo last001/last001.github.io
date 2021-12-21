@@ -485,7 +485,49 @@ export default {
         });
     },
     // 删除
-    deleteRow(index, row) {},
+    deleteRow(index, row) {
+      //   发起请求
+      this.tableLoading = true;
+      this.$axios({
+        url: "/sigaoyi/delectLogisticschannels",
+        method: "POST",
+        params: {
+          userId: this.InfoData.id,
+          ids: `${row.id}`,
+        },
+      })
+        .then((result) => {
+          console.log(result);
+          this.tableLoading = false;
+          if (result.data.Code == 200) {
+            // indexList
+            this.tableData.splice(index, 1);
+            this.total--;
+            this.$notify({
+              title: "请求成功",
+              message: result.data.msg,
+              type: "success",
+              offset: 50,
+            });
+          } else {
+            this.$notify({
+              title: "请求失败",
+              message: result.data.msg,
+              type: "warning",
+              offset: 50,
+            });
+          }
+        })
+        .catch((err) => {
+          this.tableLoading = false;
+          this.$notify({
+            title: "请求错误",
+            message: "系统业务繁忙,请稍后再试",
+            type: "error",
+            offset: 50,
+          });
+        });
+    },
   },
 };
 </script>

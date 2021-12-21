@@ -150,7 +150,11 @@
         </el-form>
       </div>
     </div>
-    <div class="gohome"></div>
+    <!-- <div class="gohome"></div> -->
+    <!-- 使用帮助 -->
+    <div class="toLinkVideo">
+      <el-button type="primary" @click="toLink()">使用帮助</el-button>
+    </div>
   </div>
 </template>
 <script>

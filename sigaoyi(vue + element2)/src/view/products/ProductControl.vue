@@ -1635,7 +1635,7 @@ export default {
         }
       } else {
         this.$message({
-          message: "请选择勾选要翻译的产品",
+          message: "请选择勾选要删除的产品",
           duration: 600,
           center: true,
           type: "error",
@@ -1648,7 +1648,7 @@ export default {
         userId: this.InfoData.id,
         ids: ids,
       };
-
+      console.log("data ==>", data);
       //   发起请求
       let loading = this.$loading({
         lock: false,

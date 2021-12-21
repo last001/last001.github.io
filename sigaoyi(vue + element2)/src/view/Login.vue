@@ -151,7 +151,10 @@
         </el-form>
       </div>
     </div>
-    <div class="gohome"></div>
+    <!-- 使用帮助 -->
+    <div class="toLinkVideo">
+      <el-button type="primary" @click="toLink()">使用帮助</el-button>
+    </div>
   </div>
 </template>
 <script>
@@ -635,6 +638,9 @@ export default {
       this.timer = setInterval(() => {
         this.screenHeight = document.documentElement.clientHeight;
       }, 400);
+    },
+    toLink() {
+      window.location.href = "http://www.ec-sigaoyi.com/";
     },
     ...homeActions([
       "setInfoData",

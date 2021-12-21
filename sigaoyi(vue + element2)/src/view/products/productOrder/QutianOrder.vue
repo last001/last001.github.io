@@ -43,9 +43,9 @@
             />
           </div>
           <div v-show="!isPutaway" class="one_btn">
-            <el-button size="medium" @click="resetSearchVal()">重 置</el-button>
+            <el-button size="medium" @click="resetSearchVal()">重置</el-button>
             <el-button size="medium" type="primary" @click="getTableList()"
-              >查 询</el-button
+              >搜索</el-button
             >
             <span class="text" @click="putaway()">
               收起
@@ -131,7 +131,7 @@
           <div class="three_btn">
             <el-button size="medium" @click="resetSearchVal()">重置</el-button>
             <el-button size="medium" type="primary" @click="getTableList()"
-              >查询</el-button
+              >搜索</el-button
             >
             <span class="text" @click="putaway()">
               收起
@@ -142,23 +142,23 @@
       </div>
       <!-- 进入总览 -->
       <div class="todayView">
-        <div class="view_text">今日总览</div>
+        <!-- <div class="view_text"></div> -->
         <div class="view_data">
           <div>
             <span>订单数</span>
-            <span>0单</span>
+            <span>{{ total }}单</span>
           </div>
           <div>
             <span>买家付款总额(JPY)</span>
-            <span>0</span>
+            <span>{{ payTotal }}</span>
           </div>
           <div>
             <span>销售总额(JPY)</span>
-            <span>0</span>
+            <span>{{ salePrice }}</span>
           </div>
           <div>
             <span>结算总额(JPY)</span>
-            <span>0</span>
+            <span>{{ resultPrice }}</span>
           </div>
         </div>
       </div>
@@ -188,6 +188,9 @@
               @click="synchrOrder.state = true"
               >同步订单</el-button
             >
+            <el-button type="default" size="medium" @click="mergeGoodes()"
+              >合并发货</el-button
+            >
             <el-button type="default" size="medium" @click="printSheet()"
               >打印面单</el-button
             >
@@ -216,6 +219,8 @@
             border
             style="width: 100%"
             maxHeight="1000px"
+            @select="onTableSelect"
+            @select-all="setAll"
             v-loading="tableLoading"
           >
             <template slot="empty">
@@ -311,7 +316,7 @@
                         <el-table
                           border
                           :span-method="arraySpanMethod"
-                          :data="addressList"
+                          :data="scope.row.addressList"
                         >
                           <el-table-column property="typeName" label="类型">
                           </el-table-column>
@@ -384,7 +389,7 @@
                     <span>{{ scope.row.settlePrice }}&nbsp;JPY</span>
                   </div>
                   <div>
-                    <span>运输费用：</span>
+                    <span>运输费：</span>
                     <span>{{ scope.row.shippingRate }}&nbsp;JPY</span>
                   </div>
                 </div>
@@ -394,7 +399,25 @@
               <template slot-scope="scope">
                 <div class="table_btn">
                   <div v-if="scope.row.shippingStatus1 == '新订购'">
-                    <el-button type="text">发货预定日</el-button>
+                    <div>
+                      <el-button
+                        type="text"
+                        @click="sendDate(scope.index, scope.row)"
+                        >发货预定日</el-button
+                      >
+                    </div>
+                    <div>
+                      <el-button type="text" @click="tostbao(scope.row)"
+                        >去采购</el-button
+                      >
+                    </div>
+                    <div>
+                      <el-button
+                        type="text"
+                        @click="toShip(scope.row, scope.index)"
+                        >去发货</el-button
+                      >
+                    </div>
                   </div>
                   <div v-if="scope.row.shippingStatus1 == '等待发货'">
                     <el-button
@@ -409,28 +432,21 @@
                       scope.row.shippingStatus1 == '等待发货'
                     "
                   >
-                    <el-button type="text">取消订单</el-button>
-                  </div>
-                  <div v-if="scope.row.shippingStatus1 == '新订购'">
-                    <el-button type="text" @click="tostbao(scope.row)"
-                      >去采购</el-button
-                    >
-                  </div>
-                  <!-- <div>
                     <el-button
                       type="text"
-                      @click="toShip(scope.row, scope.index)"
-                      >去发货</el-button
+                      @click="cacelOrder(scope.index, scope.row)"
+                      >取消订单</el-button
                     >
-                  </div> -->
+                  </div>
                 </div>
               </template>
             </el-table-column>
           </el-table>
         </div>
         <!-- 分页 -->
-        <div class="paging">
+        <div class="paging clearfix">
           <el-pagination
+            class="fl"
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
             :current-page="currentPage"
@@ -440,6 +456,7 @@
             <span class="blockText">显示</span>
           </el-pagination>
           <el-pagination
+            class="fl"
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
             :pager-count="11"
@@ -457,6 +474,7 @@
               <span>总利润：{{ profit.totalprofit }}</span>
             </el-pagination> -->
           <el-pagination
+            class="fr"
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
             :current-page="currentPage"
@@ -580,16 +598,24 @@
           >
         </span>
       </el-dialog>
-      <!-- 申请转运 -->
+      <!-- 添加运单 -->
       <el-dialog
         title="添加运单"
         :visible.sync="apply.state"
         custom-class="applyMsk"
         width="47%"
       >
+        <div class="AddomesticList">
+          <span>运输编号：</span>
+          <input
+            type="text"
+            placeholder="请填写转运单号"
+            v-model="apply.trackNumber"
+          />
+        </div>
         <div class="createInfo">
           <div>
-            <span>发货方式：</span>
+            <span class="text">发货方式：</span>
             <el-select
               v-model="apply.logisticsIndex"
               clearable
@@ -606,7 +632,7 @@
             </el-select>
           </div>
           <div>
-            <span>物流渠道：</span>
+            <span class="text">物流渠道：</span>
             <el-select v-model="apply.companyIndex" placeholder="请选择">
               <el-option
                 v-for="item in apply.companyList"
@@ -643,23 +669,23 @@
             ></i>
           </div>
         </div>
-        <el-divider content-position="left">海外收信息</el-divider>
+        <el-divider content-position="left">收件人信息</el-divider>
         <form action="">
           <div class="overseas">
             <div>
               <span>收件人：</span>
               <input
                 type="text"
-                placeholder="海外收件人"
+                placeholder="请输入收件人"
                 v-model="apply.addressee"
               />
             </div>
             <div>
-              <span>联系电话：</span>
+              <span class="text">联系电话：</span>
               <input
                 type="text"
                 id="address"
-                placeholder="海外联系电话"
+                placeholder="请输入联系电话"
                 v-model="apply.phone"
               />
             </div>
@@ -668,7 +694,7 @@
               <input
                 type="text"
                 id="address"
-                placeholder="海外邮编"
+                placeholder="请输入邮编"
                 v-model="apply.email"
               />
             </div>
@@ -678,69 +704,25 @@
             <input
               type="text"
               id="address"
-              placeholder="海外收件人详情地址信息"
+              placeholder="请输入收件人详情地址信息"
               v-model="apply.detailAdress"
             />
           </div>
         </form>
-        <el-divider content-position="left">转运信息</el-divider>
-        <div class="AddomesticList">
-          <div
-            class="lists"
-            v-for="(item, index) in apply.addomesticList"
-            :key="index"
-          >
-            <div>
-              <span>国内物流：</span>
-              <el-select
-                v-model="item.domesticIndex"
-                clearable
-                placeholder="请选择国内转运公司"
-              >
-                <el-option
-                  v-for="item in apply.domesticList"
-                  :key="item.value"
-                  :label="item.name"
-                  :value="item.value"
-                >
-                </el-option>
-              </el-select>
-            </div>
-            <div>
-              <span>转运单号：</span>
-              <input
-                type="text"
-                placeholder="请填写转运单号"
-                v-model="item.trackNumber"
-              />
-              <span class="deleteList" @click="removeList(index)">
-                <i class="el-icon-remove-outline"></i>
-              </span>
-            </div>
-          </div>
-        </div>
-        <div class="Addomestic" @click="addList()">
-          <i class="el-icon-plus"></i>
-          <span> 同一客户购买多个商品有多个国内快递，点这里添加转运单</span>
-        </div>
         <el-divider content-position="left">转运商品</el-divider>
         <el-tag type="warning" v-show="apply.warningProduct">
           请准确填写商品名称、规格。不准确的商品信息导致错发、延时等后果，由客户自行承担。
           <i class="el-icon-close" @click="apply.warningProduct = false"></i>
         </el-tag>
-        <div class="product" v-show="apply.productList.length > 0">
-          <div
-            class="productInfo"
-            v-for="(item, index) in apply.productList"
-            :key="index"
-          >
+        <div class="product">
+          <div class="product_content">
             <div class="name">
               <div>
                 <span>商品名称：</span>
                 <input
                   type="text"
                   placeholder="请输入商品中文名称"
-                  v-model="item.tradeName"
+                  v-model="apply.tradeName"
                 />
               </div>
               <div>
@@ -748,17 +730,17 @@
                 <input
                   type="text"
                   placeholder="请输入商品英文名称"
-                  v-model="item.englishName"
+                  v-model="apply.englishName"
                 />
               </div>
             </div>
             <div class="weight_count">
               <div>
-                <span>商品重量：</span>
+                <span>选项属性：</span>
                 <input
                   type="text"
                   placeholder="请输入商品重量"
-                  v-model="item.weight"
+                  v-model="apply.option"
                 />
               </div>
               <div>
@@ -766,43 +748,68 @@
                 <input
                   type="text"
                   placeholder="请输入商品数量"
-                  v-model="item.quantity"
+                  v-model="apply.quantity"
                 />
               </div>
             </div>
-            <div class="img">
-              <div class="v-img">
-                <span>商品图片：</span>
-                <div>
-                  <img
-                    v-show="item.imgSrc != ''"
-                    :src="item.imgSrc"
-                    alt="加载失败"
-                  />
-                  <i class="el-icon-plus"></i>
-                </div>
-              </div>
-              <div class="note">
-                <span>备注：</span>
-                <textarea
+            <div class="price">
+              <div>
+                <span class="text">采购价格：</span>
+                <input
+                  type="text"
                   placeholder="请输入"
-                  v-model="item.note"
-                  cols="30"
-                  rows="5"
-                ></textarea>
+                  v-model="apply.purchasePrice"
+                />
+              </div>
+              <div>
+                <span class="text">售价：</span>
+                <input type="text" placeholder="请输入" v-model="apply.total" />
               </div>
             </div>
-            <div class="deleteProcut" @click="removeProductList(index)">
-              <i class="el-icon-delete-solid"></i>
+            <div class="link">
+              <span class="text">采购链接：</span>
+              <input type="text" placeholder="请输入" v-model="apply.link" />
+            </div>
+          </div>
+          <!-- 备注 + 图片 -->
+          <div class="note">
+            <span>备注：</span>
+            <textarea
+              placeholder="请输入"
+              v-model="apply.note"
+              cols="30"
+              rows="5"
+            ></textarea>
+          </div>
+          <div class="img">
+            <span>商品图片：</span>
+            <div class="bigImgList">
+              <div v-show="apply.imgList.length > 0">
+                <div
+                  class="imgList"
+                  v-for="(item, index) in apply.imgList"
+                  :key="index"
+                >
+                  <img :src="item" alt="加载失败" />
+                  <i class="el-icon-close" @click="clearImg(index)"></i>
+                </div>
+              </div>
+              <div class="addImg imgList">
+                <i class="el-icon-plus"></i>
+                <input
+                  type="file"
+                  tilte="点击上传图片"
+                  accept="image/*"
+                  ref="uploadInt"
+                  multiple
+                  @change="updataImg($event)"
+                />
+              </div>
             </div>
           </div>
         </div>
-        <div class="AddProduct" @click="addProductList()">
-          <i class="el-icon-plus"></i>
-          <span> 同一个客户购买多个商品，点这里添加商品信息</span>
-        </div>
         <span slot="footer" class="dialog-footer">
-          <el-button size="medium" type="primary" @click="apply.state = false"
+          <el-button size="medium" type="primary" @click="confrimAddOrder()"
             >确 定</el-button
           >
           <el-button size="medium" @click="apply.state = false"
@@ -883,6 +890,68 @@
             >确 定</el-button
           >
           <el-button size="medium" @click="backOrder.state = false"
+            >取 消</el-button
+          >
+        </span>
+      </el-dialog>
+      <!-- 发货预定日 -->
+      <el-dialog
+        title="发货预定日"
+        :visible.sync="sendDateList.state"
+        custom-class="sendDateListMask"
+        width="30%"
+      >
+        <div>
+          <span class="text">日期：</span>
+          <el-date-picker
+            v-model="sendDateList.time"
+            type="date"
+            placeholder="选择日期"
+          >
+          </el-date-picker>
+        </div>
+        <span slot="footer" class="dialog-footer">
+          <el-button size="medium" type="primary" @click="comfirmcacel()"
+            >确 定</el-button
+          >
+          <el-button size="medium" @click="sendDateList.state = false"
+            >取 消</el-button
+          >
+        </span>
+      </el-dialog>
+      <!-- 取消订单 -->
+      <el-dialog
+        title="取消订单"
+        :visible.sync="cacelList.state"
+        custom-class="cacelMask"
+        width="30%"
+      >
+        <div>
+          <span class="text">原因：</span>
+          <el-select v-model="cacelList.reasonIndex" placeholder="请选择">
+            <el-option
+              v-for="item in cacelList.reasonlist"
+              :key="item.value"
+              :label="item.name"
+              :value="item.value"
+            >
+            </el-option>
+          </el-select>
+        </div>
+        <div>
+          <span class="text">说明：</span>
+          <textarea
+            v-model="cacelList.textVal"
+            placeholder="请输入"
+            cols="30"
+            rows="4"
+          ></textarea>
+        </div>
+        <span slot="footer" class="dialog-footer">
+          <el-button size="medium" type="primary" @click="comfirmcacel()"
+            >确 定</el-button
+          >
+          <el-button size="medium" @click="cacelList.state = false"
             >取 消</el-button
           >
         </span>
@@ -986,26 +1055,6 @@ export default {
         { label: "运输中", value: "4" },
         { label: "已完成订单", value: "5" },
       ],
-      addressList: [
-        {
-          typeName: "收件人",
-          two: "adhkasshdald",
-          three: "电话",
-          four: "99999",
-        },
-        {
-          typeName: "手机",
-          two: "shouji1",
-          three: "收件人国家",
-          four: "收件人国家111",
-          five: "邮编",
-          six: "邮编1111",
-        },
-        {
-          typeName: "地址",
-          two: "地址9999",
-        },
-      ],
       //   two
       WaybillNumber: "",
       placeIndex: 1,
@@ -1058,10 +1107,8 @@ export default {
       batchVal: "批量操作",
       batchList: [
         { label: "运送预定日", value: 0 },
-        { label: "申请转运", value: 1 },
-        { label: "批量发货", value: 2 },
-        { label: "更新送货", value: 3 },
-        { label: "取消订单", value: 4 },
+        { label: "批量发货", value: 1 },
+        { label: "取消订单", value: 2 },
       ],
       // 弹窗 状态
       //   同步订单
@@ -1081,9 +1128,11 @@ export default {
         ],
         noteVal: "",
       },
-      // 申请转运
+      // 去发货
       apply: {
         state: false,
+        id: "",
+        status: "",
         // 物流信息
         logisticsIndex: "",
         logisticsList: [
@@ -1098,49 +1147,23 @@ export default {
         email: "",
         // 转运信息
         addomesticList: [],
-        domesticList: [
-          { name: "圆通速递", selected: false, value: "yuantong" },
-          { name: "韵达快递", selected: false, value: "yunda" },
-          { name: "中通快递", selected: false, value: "zhongtong" },
-          { name: "申通快递", selected: false, value: "shentong" },
-          { name: "百世快递", selected: false, value: "huitongkuaidi" },
-          { name: "邮政快递包裹", selected: false, value: "youzhengguonei" },
-          { name: "顺丰速运", selected: false, value: "shunfeng" },
-          { name: "极兔速递", selected: false, value: "jtexpress" },
-          { name: "EMS", selected: false, value: "ems" },
-          { name: "京东物流", selected: false, value: "jd" },
-          { name: "邮政标准快递", selected: false, value: "youzhengbk" },
-          { name: "德邦", selected: false, value: "debangwuliu" },
-          { name: "德邦快递", selected: false, value: "debangkuaidi" },
-          { name: "圆通快运", selected: false, value: "yuantongkuaiyun" },
-          { name: "百世快运", selected: false, value: "baishiwuliu" },
-          { name: "丰网速运", selected: false, value: "fengwang" },
-          { name: "宅急送", selected: false, value: "zhaijisong" },
-          { name: "中通国际", selected: false, value: "zhongtongguoji" },
-          { name: "中通快运", selected: false, value: "安能快运" },
-          { name: "韵达快运", selected: false, value: "yundakuaiyun" },
-          { name: "国际包裹", selected: false, value: "youzhengguoji" },
-          { name: "顺丰快运", selected: false, value: "shunfengkuaiyun" },
-          { name: "UPS", selected: false, value: "ups" },
-          { name: "安得物流", selected: false, value: "annto" },
-          { name: "优速快递", selected: false, value: "youshuwuliu" },
-          { name: "特急送", selected: false, value: "lntjs" },
-          { name: "DPD", selected: false, value: "dpd" },
-          { name: "D速快递", selected: false, value: "dsukuaidi" },
-          { name: "顺心捷达", selected: false, value: "sxjdfreight" },
-          { name: "跨越速运", selected: false, value: "kuayue" },
-          { name: "壹米滴答", selected: false, value: "yimidida" },
-          { name: "DHL-全球件", selected: false, value: "dhlen" },
-          { name: "DHL-中国件", selected: false, value: "dhl" },
-          { name: "京广速递", selected: false, value: "jinguangsudikuaijian" },
-        ],
         trackNumber: "",
         detailAdress: "",
+        // 平台单号
+        orderNo: "",
         // warning
         warningProduct: true,
-        // 商品信息
-        productList: [],
+        tradeName: "",
+        englishName: "",
+        option: "",
+        quantity: "",
+        purchasePrice: "",
+        total: "",
+        link: "",
+        note: "",
+        imgList: [],
       },
+      applyRow: {},
       // 添加采购单
       purchaseOrder: {
         loading: false,
@@ -1183,6 +1206,18 @@ export default {
       },
       // 回填单号  row
       backOrderRow: {},
+      // 发货预定日
+      sendDateList: {
+        state: false,
+        time: "",
+      },
+      // 取消订单
+      cacelList: {
+        state: false,
+        reasonIndex: 0,
+        reasonlist: [{ name: "缺货", value: 0 }],
+        textVal: "",
+      },
       // 批量发货
       deliveryAll: {
         state: false,
@@ -1191,12 +1226,16 @@ export default {
       //   表格
       tableData: [],
       tableLoading: false,
+      mergeIndex: 0,
       // 当前页
       currentPage: 1,
       //   每一页多少条
       pageSize: 30,
       //   total
       total: 0,
+      payTotal: 0,
+      salePrice: 0,
+      resultPrice: 0,
     };
   },
   beforeRouteEnter(to, from, next) {
@@ -1225,6 +1264,11 @@ export default {
       this.getTableList();
     } else {
       this.$route.meta.isBack = false;
+      if (this.tableData.length == 0) {
+        this.resetData();
+        this.resetSearchVal();
+        this.getTableList();
+      }
     }
   },
   created() {
@@ -1285,17 +1329,68 @@ export default {
       if (this.batchIndex == 0) {
         this.scheduled.state = true;
       } else if (this.batchIndex == 1) {
-        this.apply.state = true;
-        this.apply.warningProduct = true;
-        this.apply.addomesticList = [];
-        this.apply.productList = [];
-        this.apply.logisticsIndex = "";
-      } else if (this.batchIndex == 2) {
         this.deliveryAll.state = true;
       }
     },
+    //   是否选中的状态值
+    onTableSelect(rows, row) {
+      row.selected = rows.length && rows.indexOf(row) !== -1;
+
+      this.tableData.forEach((e) => {
+        e["selected"] = false;
+      });
+      rows.forEach((e) => {
+        e["selected"] = true;
+      });
+
+      // 点击合并按钮 的 勾选的订单数量
+      this.mergeIndex = rows.length;
+    },
+    // 全选状态值
+    setAll(selection) {
+      if (selection.length > 0) {
+        for (let i = 0; i < this.tableData.length; i++) {
+          this.tableData[i].selected = true;
+        }
+      } else {
+        for (let i = 0; i < this.tableData.length; i++) {
+          this.tableData[i].selected = false;
+        }
+      }
+    },
     // 打印面单
-    printSheet() {},
+    printSheet() {
+      var ids = "";
+      if (this.tableData.findIndex((target) => target.selected === true) > -1) {
+        for (let i = 0; i < this.tableData.length; i++) {
+          if (this.tableData[i].selected) {
+            console.log(this.tableData[i]);
+            if (this.tableData[i].shippingStatus == "Awaiting shipping(1)") {
+              this.$message({
+                message: "勾选的选项含有订购处理中的订单",
+                center: true,
+                duration: 2000,
+                type: "error",
+              });
+              return;
+            } else {
+              ids += this.tableData[i].id + ",";
+            }
+          }
+        }
+      } else {
+        this.$message({
+          message: "请勾选要打印的订单",
+          center: true,
+          duration: 800,
+          type: "error",
+        });
+        return;
+      }
+      ids = ids.substring(0, ids.length - 1);
+      console.log("ids ==>", ids);
+      window.open(`http://192.168.1.180:8080/sigaoyi/printlabel2?ids=${ids}`);
+    },
     // 分页事件
     handleSizeChange(val) {
       this.pageSize = val;
@@ -1391,7 +1486,27 @@ export default {
               });
 
               // 收件人信息
-              this.addressList.forEach((el, index) => {
+              e["addressList"] = [
+                {
+                  typeName: "收件人",
+                  two: "adhkasshdald",
+                  three: "电话",
+                  four: "99999",
+                },
+                {
+                  typeName: "手机",
+                  two: "shouji1",
+                  three: "收件人国家",
+                  four: "收件人国家111",
+                  five: "邮编",
+                  six: "邮编1111",
+                },
+                {
+                  typeName: "地址",
+                  two: "地址9999",
+                },
+              ];
+              e.addressList.forEach((el, index) => {
                 if (index == 0) {
                   el.two = e.receiver;
                   el.four = e.receiverTel;
@@ -1408,6 +1523,10 @@ export default {
             this.pageSize = result.data.page.amount;
             this.currentPage = result.data.page.pages;
             this.total = result.data.page.total;
+
+            this.payTotal = result.data.total;
+            this.salePrice = result.data.SettlePrice;
+            this.resultPrice = result.data.orderPrice;
             // 筛选 全部
             this.screenList.forEach((e) => {
               if (e.name == "全部") {
@@ -1451,6 +1570,10 @@ export default {
         },
       });
       window.open(routeData.href, "_blank");
+    },
+    // 发货预定日
+    sendDate(index, row) {
+      this.sendDateList.state = true;
     },
     // 回填单号
     TobackOrder(index, row) {
@@ -1521,8 +1644,13 @@ export default {
           });
         });
     },
+    // 取消订单
+    cacelOrder(index, row) {
+      this.cacelList.state = true;
+    },
     // 去采购
     tostbao(row) {
+      console.log(row);
       this.purchaseRow = row;
       this.purchaseOrder.state = true;
       this.purchaseOrder.attribute = row.option;
@@ -1642,19 +1770,211 @@ export default {
     },
     // 去发货
     toShip(row, index) {
+      console.log(row);
       this.apply.state = true;
       this.apply.warningProduct = true;
+      this.apply.imgList = [];
+      this.applyRow = row;
+
+      //赋值
+      this.apply.total = row.orderPrice;
       this.apply.addressee = row.receiver;
       this.apply.phone = row.receiverTel;
       this.apply.email = row.receiverMobile;
       this.apply.detailAdress = row.shippingAddr;
-      if (this.apply.addomesticList.length < 1) {
-        this.addList();
+      this.apply.quantity = row.orderQty;
+      this.apply.option = row.option;
+
+      this.$axios({
+        url: "/sigaoyi/getdetail_url",
+        method: "POST",
+        params: {
+          id: row.sellerItemCode,
+          option: row.option,
+          itemCode: row.itemCode,
+        },
+      })
+        .then((result) => {
+          console.log("result ==>", result);
+          if (result.data.code == "200") {
+            this.apply.imgList.push(result.data.img);
+            this.apply.price = result.data.price;
+            if (result.data.link == undefined) {
+              this.apply.link = "";
+            } else {
+              this.apply.link = result.data.link;
+            }
+          }
+        })
+        .catch((err) => {
+          console.log("err ==>", err);
+        });
+    },
+    //  去发货 删除图片
+    clearImg(index) {
+      this.apply.imgList.splice(index, 1);
+    },
+    // 去发货 上传图片
+    updataImg(e) {
+      var formData = new FormData();
+      if (e.target.files.length > 1) {
+        for (let i = 0; i < e.target.files.length; i++) {
+          // 向 formData 对象中添加文件
+          formData.append("file", e.target.files[i]);
+        }
+      } else {
+        this.file = e.target.files[0];
+        // 向 formData 对象中添加文件
+        formData.append("file", this.file);
       }
-      if (this.apply.productList.length < 1) {
-        this.addProductList();
-        this.apply.productList[0].quantity = row.orderQty;
-      }
+
+      let loading = this.$loading({
+        lock: false,
+        text: "上传中...",
+        spinner: "el-icon-loading",
+        background: "rgba(0, 0, 0, 0.7)",
+      });
+      let url = "/sigaoyi/ImageOnlineURLUpload";
+      this.$axios({
+        url: "/sigaoyi/ImageOnlineURLUpload",
+        method: "POST",
+        data: formData,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+        .then((result) => {
+          console.log(result);
+          loading.close();
+          if (result.data.Code == "200") {
+            if (e.target.files.length > 1) {
+              let imgStrList;
+              imgStrList = result.data.imgsURL.split("\n");
+              for (let i = imgStrList.length; i > 0; i--) {
+                if (imgStrList[i] == "") {
+                  imgStrList.splice(i, 1);
+                }
+              }
+              for (let j = 0; j < imgStrList.length; j++) {
+                this.apply.imgList.push(imgStrList[j]);
+              }
+            } else {
+              this.apply.imgList.push(result.data.imgsURL);
+            }
+            this.$refs.uploadInt.value = "";
+            this.$notify({
+              title: "请求成功",
+              message: "上传图片成功！",
+              type: "success",
+              offset: 50,
+            });
+          } else {
+            this.$refs.uploadInt.value = "";
+            this.$notify({
+              title: "请求失败",
+              message: "上传图片失败！",
+              type: "warning",
+              offset: 50,
+            });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          this.$refs.uploadInt.value = "";
+          loading.close();
+
+          this.$notify({
+            title: "请求错误",
+            message: "系统服务繁忙,请稍后再试！",
+            type: "error",
+            offset: 50,
+          });
+        });
+    },
+    // 去发货 确定
+    confrimAddOrder() {
+      let data = {
+        id: 0,
+        userId: this.InfoData.id,
+        clientName: this.InfoData.userName,
+        name: this.apply.addressee,
+        postcode: this.apply.email,
+        phone: this.apply.phone,
+        address: this.apply.detailAdress,
+        englishName: this.apply.englishName,
+        productName: this.apply.tradeName,
+        dedare: "18",
+        quantity: Number(this.apply.quantity),
+        image: "",
+        note: this.apply.note,
+        enterDate: "",
+        country: "JP",
+        freight: 0,
+        length: 0,
+        width: 0,
+        high: 0,
+        weight: "0",
+        freightprofit: 0,
+        status: 9,
+        orderId: this.apply.trackNumber,
+        purchasePrice: Number(this.apply.purchasePrice),
+        shipDate: "未发货",
+        link: this.apply.link,
+        platformorder: this.apply.orderNo,
+        attributes: this.apply.option,
+        price: this.apply.total.toString(),
+        collectionStatus: 0,
+        consignee_state: "",
+        consignee_city: "",
+        product_id: "",
+        trade_type1: "",
+        trade_type: this.apply.companyIndex,
+        orderId1: "",
+        purchaseMode: 0,
+      };
+
+      // 图片路径
+      this.apply.imgList.forEach((e) => {
+        data.image += `${e},`;
+      });
+      data.image = data.image.slice(0, data.image.length - 1);
+
+      this.apply.state = false;
+      this.$axios({
+        url: "/sigaoyi/NEWaddlogistics",
+        method: "POST",
+        params: data,
+      })
+        .then((result) => {
+          console.log("result ==>", result);
+          if (result.data.Code == 200) {
+            this.apply.state = false;
+            this.$notify({
+              title: "请求成功",
+              message: result.data.msg,
+              type: "success",
+              offset: 50,
+            });
+          } else {
+            this.apply.state = true;
+            this.$notify({
+              title: "请求失败",
+              message: result.data.msg,
+              type: "warning",
+              offset: 50,
+            });
+          }
+        })
+        .catch((err) => {
+          this.apply.state = true;
+          this.$notify({
+            title: "请求错误",
+            message: "系统业务繁忙,请稍后再试",
+            type: "error",
+            offset: 50,
+          });
+          console.log("err ==>", err);
+        });
     },
     // 改变运输方式 获取 渠道
     getChannel(index) {
@@ -1744,6 +2064,124 @@ export default {
             offset: 60,
           });
         });
+    },
+    // 合并发货
+    mergeGoodes() {
+      var ids = "";
+      var nameList = [];
+      var shippingAddrList = [];
+      var receiverMobileList = [];
+      var receiverTelList = [];
+
+      // 订购数量
+      var orderQty = 0;
+      var option = "";
+      var orderPrice = 0;
+      if (this.tableData.findIndex((target) => target.selected === true) > -1) {
+        for (let i = 0; i < this.tableData.length; i++) {
+          if (this.tableData[i].selected) {
+            if (this.tableData[i].shippingStatus != "On request(2)") {
+              this.$message({
+                message: "合并发货 只能是新订购的订单",
+                center: true,
+                duration: 1000,
+                type: "error",
+              });
+              return;
+            }
+            ids += this.tableData[i].id + ",";
+            nameList.push(this.tableData[i].receiver);
+            shippingAddrList.push(this.tableData[i].shippingAddr);
+            receiverMobileList.push(this.tableData[i].receiverMobile);
+            receiverTelList.push(this.tableData[i].receiverTel);
+
+            orderQty += this.tableData[i].orderQty;
+            option += this.tableData[i].option + ",";
+            orderPrice += this.tableData[i].orderPrice;
+          }
+        }
+      } else {
+        this.$message({
+          message: "您还未勾选要合并的订单",
+          center: true,
+          duration: 600,
+          type: "error",
+        });
+        return;
+      }
+      if (this.mergeIndex == 1) {
+        this.$message({
+          message: "只勾选了一个订单",
+          center: true,
+          duration: 600,
+          type: "error",
+        });
+        return;
+      }
+      ids = ids.substring(0, ids.lastIndexOf(","));
+
+      // 名字
+      for (let i = 0; i < nameList.length; i++) {
+        if (nameList[0] != nameList[i]) {
+          this.$message({
+            message: "收件人名字不相同",
+            center: true,
+            duration: 600,
+            type: "error",
+          });
+          return;
+        }
+      }
+      // 邮箱
+      for (let i = 0; i < receiverMobileList.length; i++) {
+        if (receiverMobileList[0] != receiverMobileList[i]) {
+          this.$message({
+            message: "收件人邮箱不相同",
+            center: true,
+            duration: 600,
+            type: "error",
+          });
+          return;
+        }
+      }
+      // 地址
+      for (let i = 0; i < shippingAddrList.length; i++) {
+        if (shippingAddrList[0] != shippingAddrList[i]) {
+          this.$message({
+            message: "收件人地址不相同",
+            center: true,
+            duration: 600,
+            type: "error",
+          });
+          return;
+        }
+      }
+      // 电话
+      for (let i = 0; i < receiverTelList.length; i++) {
+        if (receiverTelList[0] != receiverTelList[i]) {
+          this.$message({
+            message: "收件人电话不相同",
+            center: true,
+            duration: 600,
+            type: "error",
+          });
+          return;
+        }
+      }
+      this.apply.state = true;
+
+      // 渲染
+      this.apply.addressee = nameList[0];
+      this.apply.phone = receiverTelList[0];
+      this.apply.email = receiverMobileList[0];
+      this.apply.detailAdress = shippingAddrList[0];
+
+      //   orderQty  option
+      this.apply.quantity = orderQty;
+      this.apply.option = option;
+      this.apply.total = orderPrice;
+
+      //   this.confrimAddOrder();
     },
   },
 };

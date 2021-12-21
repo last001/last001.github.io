@@ -177,13 +177,16 @@
       width="40%"
     >
       <div slot="title" class="online_title">
-        <div class="onlie_title_header">
-          <img
-            src="http://www.ec-sigaoyi.com/imagelink/1636623516940.jpg"
-            alt=""
-          />
+        <div class="online_title_box">
+          <div class="onlie_title_header">
+            <img
+              src="http://www.ec-sigaoyi.com/imagelink/1636623516940.jpg"
+              alt=""
+            />
+          </div>
+          <div class="onlie_title_user">{{ onlineTitle }}</div>
         </div>
-        <div class="onlie_title_user">{{ onlineTitle }}</div>
+        <div class="online_title_phone">客服电话：<span>18924279633</span></div>
       </div>
       <div class="content">
         <div class="content_userInfo">

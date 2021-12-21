@@ -408,7 +408,6 @@
             }
 
             .el-button--default {
-              margin-right: 10px;
 
               &:hover {
                 color: #bb2136;
@@ -420,6 +419,10 @@
                 background-color: #fff;
                 color: #bb2136;
                 border-color: #bb2136;
+              }
+
+              &:nth-child(3) {
+                margin-right: 10px;
               }
             }
 
@@ -465,6 +468,17 @@
 
         th {
           background-color: #fafafa;
+        }
+
+        .el-table__header-wrapper {
+          .el-checkbox {
+            .el-checkbox__input.is-indeterminate {
+              .el-checkbox__inner {
+                background-color: #bb2136;
+                border-color: #bb2136;
+              }
+            }
+          }
         }
 
         .orderDetails {
@@ -541,7 +555,6 @@
 
       .paging {
         margin-top: 10px;
-        display: flex;
 
         .blockText {
           font-weight: normal;
@@ -560,7 +573,6 @@
 
           &:nth-child(2) {
             width: 80%;
-            margin-left: 10px;
 
             .el-pager {
               li {
@@ -867,6 +879,7 @@
   }
 }
 
+// 去发货
 .applyMsk {
   margin-top: 12vh !important;
 
@@ -889,14 +902,56 @@
     height: 570px;
     overflow-y: auto;
 
+    .AddomesticList {
+      display: flex;
+
+      span {
+        display: inline-block;
+        width: 70px;
+        height: 34px;
+        line-height: 34px;
+      }
+
+      input {
+        width: calc(100% - 120px);
+        padding: 8px;
+        outline: none;
+        border-radius: 3px;
+        border: 1px solid #dcdfe6;
+        margin-left: 4px;
+
+        &:hover {
+          border: 1px solid #bb2136;
+        }
+
+        &:focus {
+          border: 1px solid #bb2136;
+        }
+      }
+    }
+
     .createInfo {
       display: flex;
+      margin-top: 20px;
 
       div {
         flex: 1;
+        display: flex;
+
+        .text {
+          display: inline-block;
+          text-align: right;
+          width: 70px;
+          line-height: 34px;
+        }
 
         .el-select {
+          flex: initial;
+          width: calc(100% - 150px);
+          margin-left: 5px;
+
           input {
+            width: 100%;
             height: 34px;
             line-height: 34px;
           }
@@ -935,14 +990,22 @@
 
       div {
         flex: 1;
+        display: flex;
 
         span {
+          width: 70px;
           display: inline-block;
           height: 34px;
           line-height: 34px;
+          text-align: right;
+
+          &.text {
+            width: 90px;
+          }
         }
 
         input {
+          width: calc(100% - 70px);
           padding: 8px;
           outline: none;
           border-radius: 3px;
@@ -954,6 +1017,12 @@
 
           &:focus {
             border: 1px solid #bb2136;
+          }
+        }
+
+        &:last-child {
+          input {
+            width: calc(100% - 90px);
           }
         }
       }
@@ -984,84 +1053,6 @@
 
         &:focus {
           border: 1px solid #bb2136;
-        }
-      }
-    }
-
-    .AddomesticList {
-      .lists {
-        display: flex;
-        margin-top: 15px;
-
-        div {
-          flex: 1;
-
-          span {
-            display: inline-block;
-            height: 34px;
-            line-height: 34px;
-          }
-
-          input {
-            width: 250px;
-            padding: 8px;
-            outline: none;
-            border-radius: 3px;
-            border: 1px solid #dcdfe6;
-
-            &:hover {
-              border: 1px solid #bb2136;
-            }
-
-            &:focus {
-              border: 1px solid #bb2136;
-            }
-          }
-
-          .el-select {
-            width: 300px;
-
-            input {
-              width: 100%;
-              height: 34px;
-              line-height: 34px;
-            }
-
-            .el-input__suffix {
-              i {
-                line-height: 34px;
-              }
-            }
-          }
-
-          .deleteList {
-            height: 34px;
-            line-height: 34px;
-            cursor: pointer;
-
-            .el-icon-remove-outline {
-              font-size: 26px;
-              color: #dcdfe6;
-            }
-          }
-        }
-
-        &:first-child {
-          div {
-            input {
-              width: 278px;
-            }
-
-            .el-select {
-              input {
-                width: 100%;
-              }
-            }
-
-            .deleteList {
-              display: none;
-            }
-          }
         }
       }
     }
@@ -1111,22 +1102,29 @@
     }
 
     .product {
-      margin-bottom: 10px;
+      padding-bottom: 20px;
+      border: 1px solid #e9e9e9;
 
-      .productInfo {
+      .product_content {
         position: relative;
-        border: 1px solid #e9e9e9;
         padding: 15px 20px;
-        margin-bottom: 20px;
 
         .name {
           display: flex;
 
+          span {
+            display: inline-block;
+            width: 80px;
+            text-align: right;
+            line-height: 34px;
+          }
+
           div {
             flex: 1;
+            display: flex;
 
             input {
-              width: 260px;
+              width: calc(100% - 100px);
               padding: 8px;
               outline: none;
               border-radius: 3px;
@@ -1147,11 +1145,19 @@
           display: flex;
           margin-top: 20px;
 
+          span {
+            display: inline-block;
+            width: 80px;
+            text-align: right;
+            line-height: 34px;
+          }
+
           div {
             flex: 1;
+            display: flex;
 
             input {
-              width: 260px;
+              width: calc(100% - 100px);
               padding: 8px;
               outline: none;
               border-radius: 3px;
@@ -1168,56 +1174,27 @@
           }
         }
 
-        .img {
-          margin-top: 20px;
+        .price {
           display: flex;
+          margin-top: 20px;
 
-          .v-img {
-            flex: 1;
-            display: flex;
-
-            div {
-              position: relative;
-              width: 100px;
-              height: 100px;
-              background-color: #fafafa;
-              border: 1px solid #e9e9e9;
-              margin-left: 4px;
-
-              img {
-                width: 100%;
-                height: 100%;
-              }
-
-              i {
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                font-size: 20px;
-                color: #000;
-                font-weight: 600;
-                margin-left: -10px;
-                margin-top: -10px;
-              }
-            }
+          span {
+            display: inline-block;
+            width: 80px;
+            text-align: right;
+            line-height: 34px;
           }
 
-          .note {
+          div {
             flex: 1;
             display: flex;
 
-            span {
-              width: 70px;
-              text-align: right;
-            }
-
-            textarea {
-              width: calc(100% - 114px);
+            input {
+              width: calc(100% - 100px);
               padding: 8px;
-              margin-left: 4px;
+              outline: none;
               border-radius: 3px;
               border: 1px solid #dcdfe6;
-              outline: none;
 
               &:hover {
                 border: 1px solid #bb2136;
@@ -1230,48 +1207,146 @@
           }
         }
 
-        .deleteProcut {
-          border: 1px dashed #bb2136;
-          border-radius: 50%;
-          cursor: pointer;
-          position: absolute;
-          right: -13px;
-          top: -13px;
-          padding: 4px;
-          background-color: #fff;
+        .link {
+          display: flex;
+          margin-top: 20px;
 
-          i {
-            font-size: 18px;
-            color: #bb2136;
+          span {
+            display: inline-block;
+            width: 80px;
+            text-align: right;
+            line-height: 34px;
+          }
+
+          input {
+            width: calc(100% - 100px);
+            padding: 8px;
+            outline: none;
+            border-radius: 3px;
+            border: 1px solid #dcdfe6;
+
+            &:hover {
+              border: 1px solid #bb2136;
+            }
+
+            &:focus {
+              border: 1px solid #bb2136;
+            }
           }
         }
-      }
-    }
 
-    .AddProduct {
-      width: 100%;
-      height: 34px;
-      line-height: 34px;
-      border: 1px dashed #ddd;
-      text-align: center;
-      border-radius: 3px;
-      user-select: none;
-
-      i {
-        font-size: 14px;
-        font-weight: 600;
-        color: #000;
       }
 
-      &:hover {
-        border: 1px dashed #bb2136;
-        cursor: pointer;
-        color: #bb2136;
+      .note {
+        margin-top: 10px;
+        flex: 1;
+        display: flex;
 
-        i {
-          color: #bb2136;
+        span {
+          width: 96px;
+          text-align: right;
         }
+
+        textarea {
+          width: calc(100% - 180px);
+          padding: 8px;
+          margin-left: 4px;
+          border-radius: 3px;
+          border: 1px solid #dcdfe6;
+          box-sizing: border-box;
+          outline: none;
+
+          &:hover {
+            border: 1px solid #bb2136;
+          }
+
+          &:focus {
+            border: 1px solid #bb2136;
+          }
+        }
+
       }
+
+      .img {
+        margin-top: 10px;
+        display: flex;
+        min-height: 112px;
+
+        span {
+          width: 96px;
+          margin-top: 10px;
+          text-align: right;
+        }
+
+        .bigImgList {
+          display: flex;
+          flex-wrap: wrap;
+
+          .imgList {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            border: 1px solid #e9e9e9;
+            margin-left: 10px;
+            margin-top: 10px;
+           
+
+            &:nth-child(7n) {
+              margin-left: 5px;
+            }
+
+            img {
+              width: 100%;
+              height: 100%;
+            }
+
+            i {
+              position: absolute;
+              right: 0px;
+              top: 0px;
+              color: red;
+              font-size: 20px;
+              cursor: pointer;
+            }
+
+            &:first-child {
+              margin-left: 5px;
+            }
+          }
+
+          .addImg {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            border: 1px solid #e9e9e9;
+            margin-left: 10px;
+
+            i {
+              position: absolute;
+              left: 50%;
+              top: 50%;
+              font-size: 20px;
+              color: #979797;
+              margin-left: -10px;
+              margin-top: -10px;
+              font-weight: 600;
+              z-index: 9;
+            }
+
+            input {
+              position: absolute;
+              left: 0;
+              top: 0;
+              width: 100%;
+              height: 100%;
+              opacity: 0;
+              z-index: 99;
+            }
+          }
+        }
+
+      }
+
     }
   }
 
@@ -1357,6 +1432,194 @@
 
       &:nth-child(2) {
         margin-top: 15px;
+      }
+    }
+  }
+
+  .el-dialog__footer {
+    border: 1px solid #eee;
+    padding-bottom: 15px;
+    padding-top: 15px;
+
+    button {
+      height: 34px;
+      padding: 8px 16px;
+
+      &:first-child {
+        margin-right: 5px;
+        background-color: #9e2536;
+        border: 1px solid #9e2536;
+
+        &:hover {
+          background-color: #902636;
+          border: 1px solid #902636;
+        }
+      }
+
+      &:nth-child(2) {
+        &:hover {
+          color: #bb2136;
+          border-color: #bb2136;
+          background-color: #fff;
+        }
+
+        &:focus {
+          background-color: #fff;
+          color: #bb2136;
+          border-color: #bb2136;
+        }
+      }
+    }
+  }
+}
+
+// 发货预定日
+.sendDateListMask {
+  .el-dialog__header {
+    border: 1px solid #eee;
+    padding: 10px 20px;
+
+    .el-dialog__title {
+      font-size: 16px;
+    }
+
+    button {
+      top: 10px;
+      right: 10px;
+    }
+  }
+
+  .el-dialog__body {
+    padding: 20px 40px;
+
+    div {
+      display: flex;
+
+      .text {
+        display: inline-block;
+        height: 34px;
+        line-height: 34px;
+        width: 60px;
+        text-align: right;
+      }
+
+      .el-date-editor {
+        width: calc(100% - 160px);
+
+        input {
+          height: 34px;
+          line-height: 34px;
+        }
+
+        .el-input__icon {
+          line-height: 34px;
+        }
+      }
+    }
+  }
+
+  .el-dialog__footer {
+    border: 1px solid #eee;
+    padding-bottom: 15px;
+    padding-top: 15px;
+
+    button {
+      height: 34px;
+      padding: 8px 16px;
+
+      &:first-child {
+        margin-right: 5px;
+        background-color: #9e2536;
+        border: 1px solid #9e2536;
+
+        &:hover {
+          background-color: #902636;
+          border: 1px solid #902636;
+        }
+      }
+
+      &:nth-child(2) {
+        &:hover {
+          color: #bb2136;
+          border-color: #bb2136;
+          background-color: #fff;
+        }
+
+        &:focus {
+          background-color: #fff;
+          color: #bb2136;
+          border-color: #bb2136;
+        }
+      }
+    }
+  }
+}
+
+// 取消订单
+.cacelMask {
+  .el-dialog__header {
+    border: 1px solid #eee;
+    padding: 10px 20px;
+
+    .el-dialog__title {
+      font-size: 16px;
+    }
+
+    button {
+      top: 10px;
+      right: 10px;
+    }
+  }
+
+  .el-dialog__body {
+    padding: 0 40px 20px;
+
+    div {
+      display: flex;
+      margin-top: 20px;
+
+      .text {
+        display: block;
+        width: 60px;
+        line-height: 34px;
+        text-align: right;
+      }
+
+      .el-select {
+        width: calc(100% - 120px);
+        margin-top: 0;
+
+        div {
+          margin-top: 0;
+        }
+
+        input {
+          width: 100%;
+          height: 34px;
+          line-height: 34px;
+        }
+
+        .el-input__suffix {
+          i {
+            line-height: 34px;
+          }
+        }
+      }
+
+      textarea {
+        outline: none;
+        border: 1px solid #dcdfe6;
+        padding: 8px;
+        border-radius: 3px;
+        width: calc(100% - 138px);
+
+        &:hover {
+          border: 1px solid #bb2136;
+        }
+
+        &:focus {
+          border: 1px solid #bb2136;
+        }
       }
     }
   }
@@ -1624,6 +1887,7 @@
 
       .el-loading-mask {
         margin-top: 0;
+
         .el-loading-spinner {
           display: block;
 

@@ -10,7 +10,7 @@
           <div class="search-one">
             <div>
               <span class="text">发货状态：</span>
-              <el-select v-model="shipIndex" clearable placeholder="请选择">
+              <el-select v-model="shipIndex" placeholder="请选择">
                 <el-option
                   v-for="item in shippingStatusData"
                   :key="item.value"
@@ -22,7 +22,7 @@
             </div>
             <div v-show="!openCloseState">
               <span class="text">采购方式：</span>
-              <el-select v-model="pruchaseIndex" clearable placeholder="请选择">
+              <el-select v-model="pruchaseIndex" placeholder="请选择">
                 <el-option
                   v-for="item in purchaseMethodsData"
                   :key="item.value"
@@ -34,11 +34,7 @@
             </div>
             <div v-show="!openCloseState">
               <span class="text">运输方式：</span>
-              <el-select
-                v-model="modeMethodsIndex"
-                clearable
-                placeholder="请选择"
-              >
+              <el-select v-model="modeMethodsIndex" placeholder="请选择">
                 <el-option
                   v-for="item in modeMethodsData"
                   :key="item.value"
@@ -50,7 +46,7 @@
             </div>
             <div v-show="!openCloseState">
               <span class="text">异常状态：</span>
-              <el-select v-model="abnormalIndex" clearable placeholder="请选择">
+              <el-select v-model="abnormalIndex" placeholder="请选择">
                 <el-option
                   v-for="item in abnormalData"
                   :key="item.value"
@@ -96,7 +92,7 @@
                 size="medium"
                 type="primary"
                 @click="clickSearch(30, 1, true)"
-                >查询</el-button
+                >搜索</el-button
               >
               <!-- 收起 展开 -->
               <div class="open_close" @click="openClose()">
@@ -135,21 +131,21 @@
               />
             </div>
             <div>
-              <span class="text">平台单号：</span>
-              <input
-                type="text"
-                @keydown.enter="clickSearch(30, 1, true)"
-                placeholder="请输入"
-                v-model="platformorder"
-              />
-            </div>
-            <div>
               <span class="text">订单单号：</span>
               <input
                 type="text"
                 @keydown.enter="clickSearch(30, 1, true)"
                 placeholder="请输入"
                 v-model="orderVal"
+              />
+            </div>
+            <div>
+              <span class="text">平台单号：</span>
+              <input
+                type="text"
+                @keydown.enter="clickSearch(30, 1, true)"
+                placeholder="请输入"
+                v-model="platformorder"
               />
             </div>
           </div>
@@ -188,7 +184,7 @@
                 size="medium"
                 type="primary"
                 @click="clickSearch(30, 1, true)"
-                >查询</el-button
+                >搜索</el-button
               >
               <!-- 收起 展开 -->
               <div class="open_close" @click="openClose()">
@@ -198,7 +194,7 @@
             </div>
           </div>
         </div>
-        <!-- btn table -->
+        <!-- btn table pading-->
         <div class="order-content">
           <div class="btn">
             <div class="file">
@@ -310,10 +306,16 @@
                   </div>
                 </template>
               </el-table-column>
-              <el-table-column
-                prop="order_id"
-                label="国际单号"
-              ></el-table-column>
+              <el-table-column label="国际单号">
+                <template slot-scope="scope">
+                  <div
+                    class="order_id"
+                    @click="clickorderId(scope.$index, scope.row)"
+                  >
+                    {{ scope.row.order_id }}
+                  </div>
+                </template>
+              </el-table-column>
               <!-- <el-table-column label="转运单号">
                 @click="clickOrder1(scope.$index, scope.row)"
                 <template slot-scope="scope">
@@ -403,7 +405,7 @@
                       abnormalState && changeAbnormal(scope.$index, scope.row)
                     "
                   >
-                    {{ scope.row.status }}
+                    {{ scope.row.status1 }}
                   </div>
                 </template>
               </el-table-column>
@@ -606,7 +608,7 @@
           </span>
         </el-dialog>
       </div>
-      <!-- 跟进按钮 -->
+      <!--入库按钮 -->
       <div class="godown">
         <el-dialog title="入库" :visible.sync="godownState" width="30%">
           <div>
@@ -1269,7 +1271,12 @@ export default {
       this.getOrder(30, 1);
     } else {
       this.$route.meta.isBack = false;
-
+      if (this.tableData.length == 0) {
+        this.abnormalState = false;
+        this.resetIniput();
+        this.getInitial();
+        this.getOrder(30, 1);
+      }
       if (this.$route.query.first) {
         this.clickSearch(30, 1, true);
         this.getInitial();
@@ -1283,7 +1290,7 @@ export default {
     this.userNameList = [];
     this.storeList = [];
     this.tableData = [];
-    this.tableLoading = true;
+    this.tableLoading = false;
     this.getInitial();
   },
   mounted() {
@@ -1336,6 +1343,7 @@ export default {
           { name: "EMS", value: "EMS" },
           { name: "免抛", value: "PK0009" },
           { name: "CNE", value: "CNE" },
+          { name: "日邮小包", value: "日邮小包" },
           { name: "国内退货", value: "国内退货" },
         ];
         // 导入订单
@@ -1369,6 +1377,7 @@ export default {
           { name: "Qxpress", value: "Qxpress" },
           { name: "ETK", value: "ETK" },
           { name: "EMS", value: "EMS" },
+          { name: "日邮小包", value: "日邮小包" },
         ];
         // 标记异常
         this.abnormalState = false;
@@ -1397,6 +1406,7 @@ export default {
             { name: "EMS", value: "EMS" },
             { name: "免抛", value: "PK0009" },
             { name: "CNE", value: "CNE" },
+            { name: "日邮小包", value: "日邮小包" },
             { name: "国内退货", value: "国内退货" },
           ];
           // 入库
@@ -1479,6 +1489,15 @@ export default {
         clipboard.destroy();
       });
     },
+    // 国际单号
+    clickorderId(index, row) {
+      console.log(row);
+      //   if(row.trade_type1 == "")
+      window.open(
+        "http://k2k.sagawa-exp.co.jp/p/web/okurijosearch.do?okurijoNo=" +
+          row.order_id
+      );
+    },
     // 点击转运单号
     clickOrder1(index, row) {
       this.order1Status = true;
@@ -1552,6 +1571,7 @@ export default {
         params: data,
       })
         .then((result) => {
+          console.log(result);
           //   loading.close();
           if (result.data.Code == 200) {
             this.godownState = false;
@@ -1766,13 +1786,14 @@ export default {
               if (e.order_id == "null") {
                 e.order_id = "";
               }
-              // 国内单号
-              if (e.orderId == "null") {
-                e.orderId = "";
+              for (const key in e) {
+                if (e[key] == "null") {
+                  e[key] = "";
+                }
               }
               for (const key in obj) {
                 if (e.status == key) {
-                  e.status = obj[key];
+                  e["status1"] = obj[key];
                 }
               }
               // 运费
@@ -1891,7 +1912,7 @@ export default {
       if (!row.collecChecked) {
         return "red";
       }
-      if (row.status == "库存件") {
+      if (row.status == 0) {
         return "stock";
       }
       if (row.trade_type == "Qxpress") {
@@ -3063,17 +3084,15 @@ export default {
               } else {
                 e.purchaseMode = "待采购";
               }
-              // 国际单号
-              if (e.order_id == "null") {
-                e.order_id = "";
-              }
-              // 国内单号
-              if (e.orderId == "null") {
-                e.orderId = "";
+              // null
+              for (const key in e) {
+                if (e[key] == "null") {
+                  e[key] = "";
+                }
               }
               for (const key in obj) {
                 if (e.status == key) {
-                  e.status = obj[key];
+                  e["status1"] = obj[key];
                 }
               }
               // 运费

@@ -60,6 +60,7 @@ export default {
     };
   },
   created() {
+    document.title = "发布公告";
     this.infoData = this.InfoData;
     this.$nextTick(() => {
       this.$parent.$refs.sideNavbar1.testRouter();

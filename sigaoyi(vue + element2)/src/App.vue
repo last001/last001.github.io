@@ -134,22 +134,22 @@ input {
 .el-checkbox {
   .el-checkbox__input {
     .el-checkbox__inner:hover {
-      border-color: #9e2536;
+      border-color: #9e2536 !important;
     }
   }
   .is-focus {
     .el-checkbox__inner {
-      border-color: #9e2536;
+      border-color: #9e2536 !important;
     }
   }
   .is-checked {
     .el-checkbox__inner {
-      border-color: #9e2536;
-      background-color: #9e2536;
+      border-color: #9e2536 !important;
+      background-color: #9e2536 !important;
     }
   }
   .el-checkbox__input.is-checked + .el-checkbox__label {
-    color: #9e2536;
+    color: #9e2536 !important;
   }
 }
 
@@ -274,6 +274,17 @@ input {
   padding: 4px 8px;
   cursor: pointer;
   -webkit-user-select: none;
+}
+
+.el-table__header-wrapper {
+  .el-checkbox {
+    .el-checkbox__input.is-indeterminate {
+      .el-checkbox__inner {
+        background-color: #bb2136 !important;
+        border-color: #bb2136 !important;
+      }
+    }
+  }
 }
 
 .el-table__empty-text {

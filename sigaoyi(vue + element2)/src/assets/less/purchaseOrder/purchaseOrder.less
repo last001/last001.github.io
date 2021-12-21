@@ -67,19 +67,23 @@
 
             .el-date-editor {
               width: calc(100% - 120px);
+              height: 34px;
+
+              &.is-active {
+                border-color: #bb2136;
+              }
 
               input {
                 width: 100%;
-                height: 34px;
-                line-height: 34px;
-                padding: 0 30px;
+                height: 28px;
+                line-height: 28px;
+                margin: 0 4px;
+                border: none;
               }
 
-              .el-input__prefix,
-              .el-input__suffix {
-                i {
-                  line-height: 34px;
-                }
+              .el-input__icon,
+              .el-range-separator {
+                line-height: 26px;
               }
             }
 
@@ -236,11 +240,10 @@
           display: flex;
           justify-content: flex-end;
 
-          button {
+          .el-button--primary {
             background-color: #9e2536;
             border: 1px solid #9e2536;
             padding: 9px 20px;
-            margin-right: 15px;
 
             &:hover {
               background-color: #902636;
@@ -248,8 +251,22 @@
             }
           }
 
+          .el-button--default {
+            margin-right: 10px;
+            &:hover {
+              color: #bb2136;
+              border-color: #bb2136;
+              background-color: #fff;
+            }
+
+            &:focus {
+              background-color: #fff;
+              color: #bb2136;
+              border-color: #bb2136;
+            }
+          }
+
           .el-select {
-            margin-top: -2px;
             margin-right: 15px;
             width: 105px;
 
@@ -320,6 +337,11 @@
                 -webkit-line-clamp: 2;
                 /* 这里是超出几行省略 */
                 overflow: hidden;
+              }
+
+              .orderNumber{
+                cursor: pointer;
+                color: #bb2136;
               }
             }
 
@@ -929,12 +951,13 @@
           }
 
           .img {
-            margin-top: 20px;
+            margin-top: 10px;
             display: flex;
 
             span {
               width: 96px;
               text-align: right;
+              margin-top: 10px;
             }
 
             .bigImgList {
@@ -947,6 +970,11 @@
                 height: 100px;
                 border: 1px solid #e9e9e9;
                 margin-left: 10px;
+                margin-top: 10px;
+
+                &:nth-child(7n){
+                  margin-left: 5px;
+                }
 
                 img {
                   width: 100%;
@@ -979,10 +1007,20 @@
                   left: 50%;
                   top: 50%;
                   font-size: 20px;
-                  color: #747474;
+                  color: #979797;
                   margin-left: -10px;
                   margin-top: -10px;
                   font-weight: 600;
+                }
+
+                input{
+                  position: absolute;
+                  left: 0;
+                  top: 0;
+                  width: 100%;
+                  height: 100%;
+                  opacity: 0;
+                  z-index: 99;
                 }
               }
             }
@@ -1023,6 +1061,156 @@
               background-color: #fff;
               color: #bb2136;
               border-color: #bb2136;
+            }
+          }
+        }
+      }
+    }
+
+    //物流追踪
+    .logisticsTack {
+      .el-dialog__wrapper {
+        .el-dialog {
+          border-radius: 4px;
+
+          .el-dialog__header {
+            border: 1px solid #eee;
+            padding: 10px 20px;
+
+            .el-dialog__title {
+              font-size: 16px;
+            }
+
+            button {
+              top: 10px;
+              right: 10px;
+            }
+          }
+
+          .el-dialog__body {
+            .content {
+              width: 100%;
+
+              .query {
+                width: 100%;
+                display: flex;
+
+                .set,
+                .orderNum {
+                  flex: 3;
+                  display: flex;
+                  line-height: 38px;
+
+                  .text {
+                    display: inline-block;
+                    text-align: right;
+                  }
+
+                  .el-select {
+                    width: calc(100% - 80px);
+
+                    input {
+                      width: 100%;
+                      height: 34px;
+                      line-height: 40px;
+                    }
+
+                    .el-input__suffix {
+                      i {
+                        line-height: 40px;
+                      }
+                    }
+                  }
+
+                  input {
+                    padding: 7px 8px;
+                    outline: none;
+                    border-radius: 3px;
+                    border: 1px solid #dcdfe6;
+
+                    &:hover {
+                      border: 1px solid #bb2136;
+                    }
+
+                    &:focus {
+                      border: 1px solid #bb2136;
+                    }
+                  }
+                }
+
+                .btn {
+                  flex: 1;
+                  height: 36px;
+
+                  button {
+                    padding: 11.5px 15px;
+                    background-color: #9e2536;
+                    border: 1px solid #9e2536;
+
+                    &:hover {
+                      background-color: #902636;
+                      border: 1px solid #902636;
+                    }
+                  }
+                }
+              }
+
+              .note {
+                width: 100%;
+                height: 400px;
+                margin-top: 15px;
+
+                textarea {
+                  height: 100%;
+                  border: 1px solid #ddd;
+                  outline: none;
+                  border-radius: 4px;
+                  width: 100%;
+                  padding: 8px;
+                  box-sizing: border-box;
+                  resize: none;
+
+                  &:disabled {
+                    background-color: #fff;
+                  }
+                }
+
+                .loading {
+                  height: 100%;
+                  border: 1px solid #ddd;
+                  text-align: center;
+                  box-sizing: border-box;
+                  line-height: 430px;
+
+                  span {
+                    display: inline-block;
+
+                    i {
+                      display: block;
+                      line-height: initial;
+                      font-style: normal;
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          .el-dialog__footer {
+            border: 1px solid #eee;
+            padding-bottom: 15px;
+            padding-top: 15px;
+
+            button {
+              height: 34px;
+              padding: 8px 16px;
+              background-color: #9e2536;
+              border: 1px solid #9e2536;
+
+              &:hover {
+                background-color: #902636;
+                border: 1px solid #902636;
+              }
             }
           }
         }

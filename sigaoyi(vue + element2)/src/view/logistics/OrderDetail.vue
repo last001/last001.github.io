@@ -13,7 +13,11 @@
           <div class="orderLeft">
             <div class="orderStatus">
               <span>订单状态<i class="mustIcon">*</i></span>
-              <el-select v-model="optionIndex" placeholder="请选择">
+              <el-select
+                v-model="optionIndex"
+                :disabled="orderDisabled"
+                placeholder="请选择"
+              >
                 <el-option
                   v-for="item in optionsList"
                   :key="item.value"
@@ -646,6 +650,7 @@ export default {
         { name: "EMS", selected: false, value: "EMS" },
         { name: "CNE", selected: false, value: "CNE" },
         { name: "CNE广州", selected: false, value: "CNEGZ" },
+        { name: "日邮小包", value: "日邮小包" },
         { name: "国内退货", selected: false, value: "国内退货" },
       ],
       // 运输方式
@@ -660,6 +665,7 @@ export default {
         { name: "Qxpress", value: "Qxpress" },
         { name: "ETK", value: "ETK" },
         { name: "EMS", value: "EMS" },
+        { name: "日邮小包", value: "日邮小包" },
         { name: "国内退货", value: "国内退货" },
       ],
       // 计抛  product_id
@@ -1371,6 +1377,12 @@ export default {
         });
         data.image = data.image.slice(0, data.image.length - 1);
 
+        for (const key in data) {
+          if (data[key] == "null") {
+            data[key] = "";
+          }
+        }
+
         // 提示
         if (data.shipDate == "NaN-NaN-NaN" || data.shipDate == "1970-01-01") {
           this.$message({
@@ -1489,7 +1501,7 @@ export default {
           });
           return;
         }
-
+        console.log("data ==>", data);
         // 发起请求
         let loading = this.$loading({
           lock: false,

@@ -835,6 +835,9 @@ export default {
     creatData() {
       this.$refs.titlePage.getInfoData();
       // 小图片 imgSrc
+      if (this.item.item_imgs == "") {
+        return (this.samllImg = []);
+      }
       this.samllImg = this.item.item_imgs.split(",");
     },
     //   table 删除 按钮
@@ -1205,9 +1208,15 @@ export default {
         imglist: "",
         language: this.$route.query.language,
       };
+      // 分类
+      if (data.sortid == "") {
+        data.sortid = 0;
+      }
       // 处理price 单位
       data.price = data.price.replace(/[^\d.]/g, "");
       // 主图图片
+
+      this.samllImg.unshift(this.item.pic_url);
       this.samllImg.forEach((e) => {
         data.imglist += e + ",";
       });
@@ -1234,7 +1243,6 @@ export default {
       console.log("data ==>", data);
       // 初始值问题
       let data1 = qs.stringify(data);
-
       //   laoding
       let loading = this.$loading({
         lock: false,
@@ -2136,6 +2144,7 @@ export default {
       let url = "/sigaoyi/NEWbase64ImageSave";
       this.$axios(uploadPdfs.uploadPdf(url, formData))
         .then((result) => {
+          console.log("result ==>", result);
           loading.close();
           if (result.data.Code == 200) {
             result.data.list.forEach((e) => {

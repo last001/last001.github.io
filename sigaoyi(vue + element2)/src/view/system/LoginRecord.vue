@@ -42,7 +42,7 @@
                 :data="tableData"
                 stripe
                 style="width: 100%"
-                maxHeight="650"
+                maxHeight="675"
                 v-loading="tableLoading"
               >
                 <template slot="empty">

@@ -37,7 +37,7 @@
             <div class="status">
               <div class="v-status">
                 <div>
-                  <span>待出库<i class="mustIcon">*</i></span>
+                  <span class="text">待出库<i class="mustIcon">*</i></span>
                   <input
                     type="number"
                     v-model="row.inventory"
@@ -55,7 +55,7 @@
                   />
                 </div>
                 <div class="set" v-show="infoData.admitor">
-                  <span>状态<i class="mustIcon">*</i></span>
+                  <span class="text">状态<i class="mustIcon">*</i></span>
                   <el-select v-model="statusIndex" placeholder="请选择">
                     <el-option
                       v-for="item in statusList"
@@ -140,10 +140,11 @@
             <div class="system">
               <div class="godown">
                 <div>
-                  <span>入库时间<i class="mustIcon">*</i></span>
+                  <span>入库时间</span>
                   <el-date-picker
                     v-model="row.storageTime"
                     type="date"
+                    :disabled="!infoData.admitor"
                     placeholder="选择日期"
                   >
                   </el-date-picker>
@@ -285,6 +286,7 @@ export default {
         },
       })
         .then((result) => {
+          console.log("result ==>", result);
           if (result.data.Code == "200") {
             this.statusIndex = result.data.invoicing.status;
             this.row = result.data.invoicing;
@@ -420,6 +422,8 @@ export default {
         imgUrl: this.row.img,
         status: this.statusIndex,
       };
+
+      console.log(data);
 
       //   请求
       let loading = this.$loading({

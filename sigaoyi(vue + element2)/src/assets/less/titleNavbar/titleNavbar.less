@@ -164,7 +164,8 @@
       cursor: pointer;
       color: #bb2136;
       padding: 0 5px;
-      .el-badge__content.is-fixed{
+
+      .el-badge__content.is-fixed {
         top: 10px;
       }
     }
@@ -178,13 +179,13 @@
 
       .el-dialog__header {
         border-bottom: 1px solid #ddd;
-        padding:5px 10px;
+        padding: 5px 10px;
 
         .el-dialog__title {
           font-size: 20px;
         }
 
-        .tips{
+        .tips {
           font-style: normal;
           color: #bb2136;
         }
@@ -201,7 +202,7 @@
       }
 
       .el-dialog__body {
-        padding:20px 40px  60px 0;
+        padding: 20px 40px 60px 0;
 
         .release-content {
           div {
@@ -283,22 +284,35 @@
 
       .online_title {
         display: flex;
+        
+        .online_title_box {
+          display: flex;
+          flex: 5;
+          .onlie_title_header {
+            width: 40px;
+            height: 40px;
 
-        .onlie_title_header {
-          width: 40px;
-          height: 40px;
+            img {
+              width: 100%;
+              height: 100%;
+              border-radius: 50%;
+            }
+          }
 
-          img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
+          .onlie_title_user {
+            height: 40px;
+            line-height: 40px;
+            margin-left: 10px;
           }
         }
 
-        .onlie_title_user {
-          height: 40px;
-          line-height: 40px;
-          margin-left: 10px;
+        .online_title_phone{
+          flex: 2;
+          text-align: right;
+          padding-right: 30px;
+          span{
+            font-weight: 600;
+          }
         }
       }
 
@@ -520,6 +534,7 @@
               padding: 8px;
               font-size: 13px;
             }
+
             .emoji-vue-wraper {
               height: 100%;
 
@@ -527,7 +542,7 @@
                 width: 100% !important;
                 height: 100%;
 
-                .emoji-vue-textarea{
+                .emoji-vue-textarea {
                   width: 100%;
                   height: 100%;
                   padding: 0;
