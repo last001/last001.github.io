@@ -1,3 +1,5 @@
+https://www.php.cn/code/36216.html
+
 dist本地打开:
 https://blog.csdn.net/weixin_39897287/article/details/89643591
 
@@ -96,3 +98,13 @@ https://www.liangzl.com/get-article-detail-224919.html
 http://view.xdocin.com/xdoc?_xdoc=
 http://view.officeapps.live.com/op/view.aspx?src=
 http://ow365.cn/?i=23884&furl=
+
+webpack-dev-server版本错误
+npm i webpack-dev-server@2.9.7 -D
+
+
+noide搭建api接口
+https://www.cnblogs.com/r-mp/p/13598828.html
+
+git操作流程
+https://www.cnblogs.com/coderwhytop/p/14723223.html
