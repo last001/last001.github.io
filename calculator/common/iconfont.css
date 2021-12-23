@@ -1,0 +1,18 @@
+@font-face {
+  font-family: "iconfont"; /* Project id  */
+  src: url("~@/static/iconfont.ttf");
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 32rpx;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-youjiantou1:before {
+  content: "\e628";
+}
+
+

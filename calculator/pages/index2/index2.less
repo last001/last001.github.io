@@ -1,0 +1,446 @@
+.calculator {
+	background-color: #f8f8f8;
+	color: #444;
+	padding-bottom: 30rpx;
+	.total {
+		// border: 1rpx solid #ddd;
+		padding: 20rpx;
+		background-color: #fff;
+		display: flex;
+		.prescri {
+			margin-top: 40rpx;
+			flex: 1;
+		}
+		.re_dis {
+			flex: 2;
+			margin-top: 20rpx;
+			.number {
+				color: #bb2136;
+				font-size: 50rpx;
+			}
+		}
+	}
+
+	.shipping {
+		display: flex;
+		padding: 20rpx 15rpx;
+		margin-top: 30rpx;
+		// border-bottom: 1rpx solid #ddd;
+		background-color: #fff;
+		width: calc(100% - 30rpx);
+		.text {
+			display: block;
+			min-width: 170rpx;
+			text-align: right;
+		}
+		.shipping_set {
+			// max-width: calc(100% - 210rpx);
+			width: calc(100% - 240rpx);
+			picker {
+				.selector_name {
+					color: #999;
+					text-align: right;
+				}
+			}
+		}
+		.iconfont {
+			display: block;
+			width: 50rpx;
+			color: #999;
+			line-height: 44rpx;
+			text-align: right;
+		}
+	}
+
+	.fright {
+		padding: 0 20rpx;
+		margin-top: 30rpx;
+		background-color: #fff;
+		.box_weight {
+			display: flex;
+			padding: 20rpx 0;
+			padding-right: 0rpx;
+			border-bottom: 1rpx solid #ddd;
+			.box {
+				flex: 1;
+				display: flex;
+				.text {
+					min-width: 160rpx;
+					text-align: right;
+					line-height: 50rpx;
+				}
+				.box_number {
+					display: flex;
+					// width: calc(100% - 190rpx);
+					.reduce,
+					.add {
+						width: 50rpx;
+						height: 50rpx;
+						display: block;
+						background-color: #bb2136;
+						color: #fff;
+						border-radius: 50%;
+						line-height: 50rpx;
+						text-align: center;
+						font-size: 26rpx;
+						&.active {
+							background-color: #bb213699;
+						}
+					}
+					.number {
+						display: flex;
+						min-width: 60rpx;
+						color: #000;
+						justify-content: center;
+						.unit {
+							color: #999;
+						}
+					}
+				}
+			}
+			.weight {
+				flex: 1;
+				display: flex;
+				.text {
+					display: block;
+					min-width: 160rpx;
+					text-align: right;
+					line-height: 54rpx;
+				}
+				.int_unit {
+					width: calc(100% - 160rpx);
+					display: flex;
+					input {
+						padding: 5rpx 0;
+						width: calc(100% - 40rpx);
+						text-align: center;
+						border: 1rpx solid #ddd;
+					}
+					.unit {
+						display: block;
+						width: 50rpx;
+						text-align: right;
+						color: #999;
+					}
+				}
+			}
+		}
+		.volume {
+			padding: 20rpx 0;
+			padding-right: 0;
+			border-bottom: 1rpx solid #ddd;
+			display: flex;
+			.text {
+				display: block;
+				width: 160rpx;
+				text-align: right;
+				line-height: 54rpx;
+			}
+			.list {
+				width: calc(100% - 160rpx);
+				.int {
+					display: flex;
+					margin-top: 20rpx;
+					input {
+						border: 1rpx solid #ddd;
+						text-align: center;
+						flex: 1;
+						margin-right: 10rpx;
+						padding: 5rpx 0;
+						&:last-child {
+							margin-right: 0;
+						}
+					}
+					.unit {
+						width: 40rpx;
+						text-align: center;
+						color: #999;
+						line-height: 54rpx;
+					}
+					&:first-child {
+						margin-top: 0;
+					}
+				}
+			}
+		}
+		.allBubbleWeight_price {
+			padding: 20rpx 0;
+			border-bottom: 1rpx solid #ddd;
+			display: flex;
+			.allBubbleWeight {
+				flex: 1;
+				display: flex;
+				.text {
+					min-width: 160rpx;
+					text-align: right;
+					line-height: 54rpx;
+				}
+				text {
+					line-height: 54rpx;
+				}
+			}
+			.price {
+				flex: 1;
+				display: flex;
+				.text {
+					min-width: 160rpx;
+					text-align: right;
+					line-height: 54rpx;
+				}
+				.int_unit {
+					display: flex;
+					justify-content: space-between;
+					width: calc(100% - 180rpx);
+					input {
+						width: calc(100% - 35rpx);
+						border: 1rpx solid #ddd;
+						text-align: center;
+						padding: 5rpx 0;
+					}
+					.unit {
+						display: block;
+						width: 20rpx;
+						text-align: center;
+						color: #999;
+						line-height: 54rpx;
+					}
+				}
+			}
+		}
+		.Allfright {
+			padding: 20rpx 0;
+			// border-bottom: 1rpx solid #ddd;
+			display: flex;
+			align-items: baseline;
+			.text {
+				min-width: 160rpx;
+			}
+			.result {
+				width: calc(100% - 200rpx);
+				color: #bb2136;
+				font-size: 50rpx;
+			}
+		}
+	}
+	.tariff {
+		margin-top: 40rpx;
+		background-color: #fff;
+		padding: 0 15rpx;
+		.type_declaration {
+			display: flex;
+			padding: 20rpx 15rpx;
+			border-bottom: 1rpx solid #ddd;
+			.type {
+				flex: 1;
+				display: flex;
+				.text {
+					min-width: 160rpx;
+					text-align: right;
+					line-height: 50rpx;
+				}
+				.type_number {
+					display: flex;
+					// width: calc(100% - 160rpx);
+					.reduce,
+					.add {
+						width: 50rpx;
+						height: 50rpx;
+						display: block;
+						background-color: #9e2536;
+						color: #fff;
+						border-radius: 50%;
+						line-height: 50rpx;
+						text-align: center;
+						font-size: 26rpx;
+						&.active {
+							background-color: #bb213699;
+						}
+					}
+					.number {
+						min-width: 60rpx;
+						color: #000;
+						text-align: center;
+					}
+				}
+			}
+			.declaration {
+				display: flex;
+				flex: 1;
+				.text {
+					display: block;
+					width: 160rpx;
+					text-align: right;
+					line-height: 54rpx;
+				}
+				.int_unit {
+					width: calc(100% - 160rpx);
+					display: flex;
+					justify-content: space-between;
+					input {
+						width: calc(100% - 35rpx);
+						border: 1rpx solid #ddd;
+						text-align: center;
+						padding: 5rpx 0;
+					}
+					.unit {
+						display: block;
+						width: 20rpx;
+						text-align: center;
+						color: #999;
+						line-height: 54rpx;
+					}
+				}
+			}
+		}
+
+		.list {
+			.category {
+				display: flex;
+				padding: 20rpx 0;
+				padding-right: 0rpx;
+				border-bottom: 1rpx solid #ddd;
+				.text {
+					min-width: 170rpx;
+					text-align: right;
+					.cateId {
+						margin-right: 30rpx;
+						color: #bb2136;
+					}
+				}
+				picker {
+					width: calc(100% - 240rpx);
+					.selector_name {
+						color: #999;
+						text-align: right;
+					}
+				}
+				.iconfont {
+					display: block;
+					width: 50rpx;
+					color: #999;
+					line-height: 44rpx;
+					text-align: right;
+				}
+			}
+			.taxRate {
+				display: flex;
+				padding: 20rpx 0;
+				padding-right: 0rpx;
+				border-bottom: 1rpx solid #ddd;
+				.text {
+					display: block;
+					width: 170rpx;
+					text-align: right;
+				}
+				input {
+					width: calc(100% - 240rpx);
+					text-align: right;
+				}
+				.place-holder {
+					color: #999999;
+				}
+				.unit {
+					display: block;
+					width: 50rpx;
+					color: #999;
+					text-align: right;
+				}
+			}
+			.salePrice_number {
+				display: flex;
+				padding: 20rpx 10rpx;
+				border-bottom: 1rpx solid #ddd;
+				.salePrice {
+					flex: 1;
+					display: flex;
+					.text {
+						min-width: 160rpx;
+						line-height: 54rpx;
+						text-align: right;
+					}
+					input {
+						width: calc(100% - 200rpx);
+						border: 1rpx solid #ddd;
+						text-align: center;
+						padding: 5rpx 0;
+					}
+					.unit {
+						display: block;
+						width: 40rpx;
+						color: #999;
+						text-align: right;
+						line-height: 54rpx;
+					}
+				}
+				.number {
+					flex: 1;
+					display: flex;
+					margin-left: 10rpx;
+					.text {
+						display: block;
+						width: 160rpx;
+						text-align: right;
+						line-height: 54rpx;
+					}
+					input {
+						width: calc(100% - 200rpx);
+						border: 1rpx solid #ddd;
+						text-align: center;
+						padding: 5rpx 0;
+					}
+					.unit {
+						display: block;
+						width: 40rpx;
+						color: #999;
+						text-align: right;
+						margin-left: 10rpx;
+						line-height: 54rpx;
+					}
+				}
+			}
+		}
+	}
+	.Alltariff {
+		background-color: #fff;
+		padding:20rpx ;
+		// border-bottom: 1rpx solid #ddd;
+		display: flex;
+		align-items: baseline;
+		.text {
+			width: 160rpx;
+			text-align: right;
+		}
+		.result1 {
+			color: #bb2136;
+			font-size: 50rpx;
+		}
+	}
+	.btn {
+		margin-top: 50rpx;
+		padding: 0 30rpx;
+		button[type='warn'] {
+			background-color: #bb2136;
+		}
+		.button-hover[type='warn'] {
+			background-color: #aa1e33;
+		}
+	}
+	.tips {
+		margin-top: 20rpx;
+		padding-left: 15rpx;
+		.text {
+			width: 140rpx;
+		}
+		.contentTip {
+			padding:1rem 1.7rem;
+			color: #ff7158;
+			.list {
+				display: flex;
+				font-size: 28rpx;
+				.text1{
+					min-width: 90rpx;
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,24 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index2/index2",
+			"style": {
+				"navigationBarTitleText": "三海跨境物流计算器",
+				"navigationBarBackgroundColor":"#bb2136"
+			}
+		},
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "三海跨境物流计算器",
+				"navigationBarBackgroundColor":"#bb2136"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "white",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	}
+}
