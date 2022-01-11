@@ -36,4 +36,6 @@ export const state = {
         count:'',
         list:[]
     },
+    // 验证码
+    CAPTCHA:"",
 }

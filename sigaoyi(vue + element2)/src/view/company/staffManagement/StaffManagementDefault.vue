@@ -43,7 +43,7 @@
               tooltip-effect="dark"
               style="width: 100%"
               stripe
-              maxHeight="625"
+              maxHeight="650"
               v-loading="loading"
             >
               <template slot="empty">
@@ -241,8 +241,6 @@ export default {
         }
       }
 
-      console.log("data ==>", data);
-
       this.$axios({
         method: "POST",
         url: "/sigaoyi/userinfos",
@@ -250,7 +248,6 @@ export default {
       })
         .then((result) => {
           this.loading = false;
-          console.log("result ==>", result);
           if (result.data.Code == 200) {
             this.tableData = result.data.users;
             this.pageSize = result.data.page.amount;

@@ -61,43 +61,6 @@
 			padding: 20rpx 0;
 			padding-right: 0rpx;
 			border-bottom: 1rpx solid #ddd;
-			.box {
-				flex: 1;
-				display: flex;
-				.text {
-					min-width: 160rpx;
-					text-align: right;
-					line-height: 50rpx;
-				}
-				.box_number {
-					display: flex;
-					// width: calc(100% - 190rpx);
-					.reduce,
-					.add {
-						width: 50rpx;
-						height: 50rpx;
-						display: block;
-						background-color: #bb2136;
-						color: #fff;
-						border-radius: 50%;
-						line-height: 50rpx;
-						text-align: center;
-						font-size: 26rpx;
-						&.active {
-							background-color: #bb213699;
-						}
-					}
-					.number {
-						display: flex;
-						min-width: 60rpx;
-						color: #000;
-						justify-content: center;
-						.unit {
-							color: #999;
-						}
-					}
-				}
-			}
 			.weight {
 				flex: 1;
 				display: flex;
@@ -108,7 +71,7 @@
 					line-height: 54rpx;
 				}
 				.int_unit {
-					width: calc(100% - 160rpx);
+					width: calc(100% - 180rpx);
 					display: flex;
 					input {
 						padding: 5rpx 0;
@@ -121,6 +84,34 @@
 						width: 50rpx;
 						text-align: right;
 						color: #999;
+						line-height: 54rpx;
+					}
+				}
+			}
+			.price {
+				flex: 1;
+				display: flex;
+				.text {
+					min-width: 160rpx;
+					text-align: right;
+					line-height: 54rpx;
+				}
+				.int_unit {
+					display: flex;
+					justify-content: space-between;
+					width: calc(100% - 180rpx);
+					input {
+						width: calc(100% - 35rpx);
+						border: 1rpx solid #ddd;
+						text-align: center;
+						padding: 5rpx 0;
+					}
+					.unit {
+						display: block;
+						width: 20rpx;
+						text-align: center;
+						color: #999;
+						line-height: 54rpx;
 					}
 				}
 			}
@@ -167,6 +158,60 @@
 			padding: 20rpx 0;
 			border-bottom: 1rpx solid #ddd;
 			display: flex;
+			.box {
+				flex: 1;
+				display: flex;
+				.text {
+					min-width: 160rpx;
+					text-align: right;
+					line-height: 50rpx;
+				}
+				.int_unit {
+					width: calc(100% - 160rpx);
+					display: flex;
+					input {
+						padding: 5rpx 0;
+						width: calc(100% - 40rpx);
+						text-align: center;
+						border: 1rpx solid #ddd;
+					}
+					.unit {
+						display: block;
+						width: 50rpx;
+						text-align: right;
+						color: #999;
+						line-height: 54rpx;
+					}
+				}
+				.box_number {
+					display: flex;
+					// width: calc(100% - 190rpx);
+					.reduce,
+					.add {
+						width: 50rpx;
+						height: 50rpx;
+						display: block;
+						background-color: #bb2136;
+						color: #fff;
+						border-radius: 50%;
+						line-height: 50rpx;
+						text-align: center;
+						font-size: 26rpx;
+						&.active {
+							background-color: #bb213699;
+						}
+					}
+					.number {
+						display: flex;
+						min-width: 60rpx;
+						color: #000;
+						justify-content: center;
+						.unit {
+							color: #999;
+						}
+					}
+				}
+			}
 			.allBubbleWeight {
 				flex: 1;
 				display: flex;
@@ -177,33 +222,6 @@
 				}
 				text {
 					line-height: 54rpx;
-				}
-			}
-			.price {
-				flex: 1;
-				display: flex;
-				.text {
-					min-width: 160rpx;
-					text-align: right;
-					line-height: 54rpx;
-				}
-				.int_unit {
-					display: flex;
-					justify-content: space-between;
-					width: calc(100% - 180rpx);
-					input {
-						width: calc(100% - 35rpx);
-						border: 1rpx solid #ddd;
-						text-align: center;
-						padding: 5rpx 0;
-					}
-					.unit {
-						display: block;
-						width: 20rpx;
-						text-align: center;
-						color: #999;
-						line-height: 54rpx;
-					}
 				}
 			}
 		}

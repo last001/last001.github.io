@@ -56,7 +56,11 @@
                 </div>
                 <div class="set" v-show="infoData.admitor">
                   <span class="text">状态<i class="mustIcon">*</i></span>
-                  <el-select v-model="statusIndex" placeholder="请选择">
+                  <el-select
+                    v-model="statusIndex"
+                    disabled
+                    placeholder="请选择"
+                  >
                     <el-option
                       v-for="item in statusList"
                       :key="item.value"
@@ -233,7 +237,7 @@ export default {
     if (
       this.infoData.statu == "0" ||
       this.infoData.userName == "王焕杰" ||
-      this.infoData.userName == "任治琴" ||
+      this.infoData.userName == "汪春梅" ||
       this.infoData.userName == "李健明" ||
       this.infoData.userName == "王杰" ||
       this.infoData.userName == "hzsugoi"
@@ -286,7 +290,6 @@ export default {
         },
       })
         .then((result) => {
-          console.log("result ==>", result);
           if (result.data.Code == "200") {
             this.statusIndex = result.data.invoicing.status;
             this.row = result.data.invoicing;
@@ -422,8 +425,6 @@ export default {
         imgUrl: this.row.img,
         status: this.statusIndex,
       };
-
-      console.log(data);
 
       //   请求
       let loading = this.$loading({

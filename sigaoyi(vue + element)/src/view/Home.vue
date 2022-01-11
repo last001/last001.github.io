@@ -514,8 +514,8 @@ export default {
       noticeTableData: [
         {
           channel: "佐川加急",
-          first: "45",
-          Continuation: "14",
+          first: "42",
+          Continuation: "13",
           serviceCharge: "3",
           norms: "限5kg以内,三边和不超过100cm",
           volume: "长*宽*高/6000",

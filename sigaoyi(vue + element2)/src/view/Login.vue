@@ -426,7 +426,6 @@ export default {
       // 获取IP地址
       let ip = localStorage.getItem("Ip");
       let cityname = localStorage.getItem("cityname");
-      //   http://www.ec-sigaoyi.com/sugoiERP/UserLogin
 
       this.$axios({
         method: "POST",
@@ -444,8 +443,6 @@ export default {
             this.iconSrc = "";
             this.isLogin = false;
           }, 300);
-
-          console.log(result);
 
           if (result.data.Code == "200") {
             //   清除头部 得 list
@@ -561,7 +558,6 @@ export default {
             this.iconSrc = "";
             this.isLogin = false;
           }, 300);
-          console.log("result ==>", result);
           if (result.data.Code == "200") {
             //   清除 title 的头部list
             this.detAllPagingList();

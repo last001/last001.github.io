@@ -306,6 +306,9 @@
                 </el-table>
               </div>
               <span slot="footer" class="dialog-footer">
+                <el-button type="primary" @click="todayTipsNo()"
+                  >今日不再提示</el-button
+                >
                 <el-button type="primary" @click="TopurchaseList()"
                   >查看处理</el-button
                 >
@@ -320,18 +323,16 @@
               :visible.sync="noticeStatus"
               width="70%"
               center
-              @close="getPurchareOverTime"
+              @close="purcharState && getPurchareOverTime()"
             >
               <div class="notice-content">
                 <div class="speech">
                   致 思高易全体用户：<br />
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2021年12月15日起，我司物流价格体系有所调整。<br />
-                  佐川普货：首重42,续重13<br />
-                  佐川带电：首重45,续重14<br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2022年1月10日起，我司物流价格体系有所调整。详情如下：<br />
                   为提高工作效率及质量，发货默认由我司选择最优渠道，用户可自行在系统中查看发货渠道。<br />
                 </div>
                 <div class="notice-table">
-                  <div class="notice-title">执行日期2021年12月15日</div>
+                  <div class="notice-title">执行日期2022年1月10日</div>
                   <el-table
                     :data="noticeTableData"
                     :span-method="arraySpanMethod"
@@ -344,9 +345,9 @@
                     </el-table-column>
                     <el-table-column prop="Continuation" label="续重（0.5kg）">
                     </el-table-column>
-                    <el-table-column prop="serviceCharge" label="服务费">
-                    </el-table-column>
-                    <el-table-column prop="norms" label="规格" width="220">
+                    <!-- <el-table-column prop="serviceCharge" label="服务费">
+                    </el-table-column> -->
+                    <el-table-column prop="norms" label="规格" width="300">
                     </el-table-column>
                     <el-table-column prop="volume" label="体积计算">
                     </el-table-column>
@@ -357,13 +358,13 @@
                 <div class="speech-footer">
                   注意事项： <br />
                   1.所有包裹或货件都必须提供货物清单：清单信息要求单货相符，内容一致，品名要特别注明清楚。<br />
-                  2.冲绳、离岛、北海道部分地区另收偏远费150元/票！ <br />
+                  2.冲绳、离岛、北海道部分地区另收偏远费150元/票！<br />
                   3.特货渠道：包含化妆品（单票24个以内）、防疫物资、情趣用品、动漫产品可出，另粉末液体单询。<br />
                   4.佐川带电：带磁带电（单票6个以内） <br />
                   5.自出口报关后，需改地址的，需在原日本地址派送不成功后更改，派送成功则无法更改，地址更改费为99RMB/票。
                   <br />
                   6.若遇到收件方客人拒收，佐川退回改派收取2000日币，退回销毁则不产生费用。黑猫退回改派收取29元人民币。<br />
-                  7.黑猫渠道破损不赔偿<br />
+                  7.黑猫渠道破损不赔偿，Qxpress丢件不赔偿。<br />
                   8.邮政小包如有超出需更换佐川派送，在原有运费基础上额外再加1000日币，并且时效会有延误。此渠道为邮箱投递，无签收单，冲绳北海道无偏远。
                 </div>
                 <div class="zuci">特此通知！<br />祝 商祺！</div>
@@ -571,20 +572,10 @@ export default {
       //  进来弹出层表格
       noticeTableData: [
         {
-          channel: "佐川加急",
-          first: "42",
-          Continuation: "13",
-          serviceCharge: "3",
-          norms: "限5kg以内,三边和不超过100cm",
-          volume: "长*宽*高/6000",
-          duration: "3-5天",
-        },
-        {
           channel: "佐川普货",
-          first: "42",
-          Continuation: "13",
-          serviceCharge: "3",
-          norms: "限5kg以内,三边和不超过100cm",
+          first: "43",
+          Continuation: "12",
+          norms: "限5kg以内,三边和不超过160cm",
           volume: "长*宽*高/6000",
           duration: "3-5天",
         },
@@ -592,8 +583,7 @@ export default {
           channel: "佐川带电",
           first: "45",
           Continuation: "14",
-          serviceCharge: "3",
-          norms: "限5kg以内,三边和不超过100cm",
+          norms: "限5kg以内,三边和不超过160cm",
           volume: "长*宽*高/6000",
           duration: "3-5天",
         },
@@ -601,16 +591,22 @@ export default {
           channel: "佐川特货",
           first: "49",
           Continuation: "15",
-          serviceCharge: "3",
-          norms: "限5kg以内,三边和不超过100cm",
+          norms: "限5kg以内,三边和不超过160cm",
           volume: "长*宽*高/6000",
           duration: "3-5天",
         },
         {
           channel: "黑猫3cm普货",
-          first: "30",
+          first: "31",
           Continuation: "9",
-          serviceCharge: "2",
+          norms: "最长边不超过3cm",
+          volume: "不计抛",
+          duration: "3-5天",
+        },
+        {
+          channel: "黑猫3cm化妆品",
+          first: "33",
+          Continuation: "11",
           norms: "最长边不超过3cm",
           volume: "不计抛",
           duration: "3-5天",
@@ -619,7 +615,6 @@ export default {
           channel: "邮政小包",
           first: "27.5（0.1kg）",
           Continuation: "3.5（0.1kg）",
-          serviceCharge: "0",
           norms: "限1kg以内，三边和不超过60cm，最长边不超过34CM，厚度不超3cm。",
           volume: "不计抛",
           duration: "3-5天",
@@ -628,12 +623,13 @@ export default {
           channel: "Q仓",
           first: "3.5服务费/票",
           Continuation: "不计抛",
-          serviceCharge: "3",
-          norms: "3-5天",
+          norms: "",
           volume: "不计抛",
           duration: "3-5天",
         },
       ],
+      //   库存提示 拦截值
+      purcharState: false,
       // 库存提示列表
       purchaseList: {
         state: false,
@@ -662,6 +658,8 @@ export default {
     let d = new Date();
     this.years = d.getFullYear();
     this.getTime();
+    // 检测localStorage 值
+    this.getItem();
     // 初始公告 bage
     this.getNoticeBage();
     // 获取信息
@@ -694,6 +692,48 @@ export default {
         this.setWstateStatus(false);
       }
     },
+    // 设置localStorage 值
+    setItem(key, flag, expirse) {
+      let data = {
+        purcharTips: flag,
+        id: this.InfoData.id,
+        expirse: new Date(expirse).getTime(),
+      };
+      localStorage.setItem(key, JSON.stringify(data));
+    },
+    // 获取localStorage 值
+    getItem() {
+      this.purcharState = false;
+      var data = JSON.parse(localStorage.getItem("purcharTips"));
+      if (data == null) {
+        this.purcharState = true;
+        this.setItem(
+          "purcharTips",
+          true,
+          new Date().getTime() + 1000 * 60 * 60 * 24
+        );
+      } else {
+        if (data.id != this.InfoData.id) {
+          this.purcharState = true;
+          this.setItem(
+            "purcharTips",
+            true,
+            new Date().getTime() + 1000 * 60 * 60 * 24
+          );
+        }
+        if (data.expirse != null && data.expirse < new Date().getTime()) {
+          this.purcharState = true;
+          this.setItem(
+            "purcharTips",
+            true,
+            new Date().getTime() + 1000 * 60 * 60 * 24
+          );
+        }
+        if (data.purcharTips) {
+          this.purcharState = true;
+        }
+      }
+    },
     // 初始获取公告
     getNoticeBage() {
       this.$axios({
@@ -702,8 +742,12 @@ export default {
         params: {},
       })
         .then((result) => {
-          console.log("result ==>", result);
           this.collapseList = result.data.announcements;
+          if (this.collapseList.length > 6) {
+            this.collapseList = this.collapseList.splice(
+              this.collapseList.length - 6
+            );
+          }
           this.collapseList.forEach((e) => {
             e["bage"] = true;
             e["content1"] = e.content.split("\n");
@@ -728,9 +772,7 @@ export default {
           id: id,
         },
       })
-        .then((result) => {
-          console.log("result ==>", result);
-        })
+        .then((result) => {})
         .catch((err) => {
           console.log("err ==>", err);
         });
@@ -765,7 +807,6 @@ export default {
         url = "/sigaoyi/salesStatistics";
       }
 
-      console.log("data ==>", data);
       this.$axios({
         url,
         method: "POST",
@@ -796,8 +837,6 @@ export default {
               });
               this.shopIndex = 0;
             }
-            console.log("this.shopList==>", this.shopList);
-            console.log("this.shopData==>", this.shopData);
           }
         })
         .catch((err) => {
@@ -951,6 +990,7 @@ export default {
               day - weekDay + 7 - endweekEnd
             }`;
           }
+
           this.value1 = [startweek, endweek];
         }
         // 本月
@@ -991,8 +1031,12 @@ export default {
     arraySpanMethod({ row, column, rowIndex, columnIndex }) {
       if (rowIndex == 6) {
         if (columnIndex == 1) {
-          return [1, 3];
-        } else if (columnIndex === 2 || columnIndex === 3) {
+          return [1, 4];
+        } else if (
+          columnIndex === 2 ||
+          columnIndex === 3 ||
+          columnIndex === 4
+        ) {
           return [0, 0];
         }
       }
@@ -1021,7 +1065,6 @@ export default {
         },
       })
         .then((result) => {
-          console.log("result ==>", result);
           if (result.data.Code == 200) {
             let list = {
               isUnread: true,
@@ -1045,7 +1088,6 @@ export default {
         },
       })
         .then((result) => {
-          console.log("result ==>", result);
           if (result.data.Code == 200) {
             if (result.data.invoicings.length > 0) {
               this.purchaseList.state = true;
@@ -1065,6 +1107,16 @@ export default {
         .catch((err) => {
           console.log("err ==>", err);
         });
+    },
+    // 今日 不再提示
+    todayTipsNo() {
+      this.setItem(
+        "purcharTips",
+        false,
+        new Date().getTime() + 1000 * 60 * 60 * 24
+      );
+      this.purcharState = false;
+      this.purchaseList.state = false;
     },
     // 添加单号
     TopurchaseList() {

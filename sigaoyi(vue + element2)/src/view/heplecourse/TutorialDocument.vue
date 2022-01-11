@@ -250,7 +250,6 @@ export default {
         params: data,
       })
         .then((result) => {
-          console.log("result ==>", result);
           this.tableLoading = false;
           if (result.data.Code == 200) {
             result.data.files.forEach((e) => {

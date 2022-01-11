@@ -408,7 +408,6 @@ export default {
       })
         .then((result) => {
           this.tableLoading = false;
-          console.log("result ==>", result);
           if (result.data.Code == 200) {
             this.tableData = result.data.qoo10Orders;
           }
@@ -452,7 +451,6 @@ export default {
       })
         .then((result) => {
           this.tableLoading = false;
-          console.log("result ==>", result);
           if (result.data.Code == 200) {
             this.channelList.state = false;
             this.getTable();
@@ -497,7 +495,6 @@ export default {
         },
       })
         .then((result) => {
-          console.log(result);
           this.tableLoading = false;
           if (result.data.Code == 200) {
             // indexList

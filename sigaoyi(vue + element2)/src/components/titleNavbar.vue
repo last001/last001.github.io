@@ -70,6 +70,7 @@
         <div class="head-info" v-else>
           <div class="number">编号：{{ number }}</div>
           <div class="number">姓名：{{ Vname }}</div>
+          <div class="number">{{ levelText }}</div>
         </div>
       </div>
       <div class="InformationDiv" v-show="listStatus">
@@ -86,13 +87,20 @@
     </div>
     <!-- 帮助 + 客服 -->
     <div class="help_sevice fr">
-      <!-- <div class="help" @click="openOnlinePage()">客服</div> -->
-      <div class="sevice" @click="openOnlinePage()">
+      <div class="help">
+        <span class="text">客服</span>
+        <div class="wxCode">
+          <img src="../assets/img/kefu.jpg" alt="" />
+          <i class="el-icon-caret-top active"></i>
+          <i class="el-icon-caret-top"></i>
+        </div>
+      </div>
+      <div class="sevice" @click="openOnlinePage1()">
         <el-badge :value="UnreadCount" :hidden="UnreadCount <= 0">
           <el-tooltip
             class="item"
             effect="dark"
-            content="人工客服"
+            content="在线客服"
             placement="bottom"
           >
             <i class="el-icon-phone"></i>
@@ -175,6 +183,7 @@
       custom-class="onlie"
       :visible.sync="onlineServiceState"
       width="40%"
+      @close="websocketclose()"
     >
       <div slot="title" class="online_title">
         <div class="online_title_box">
@@ -602,6 +611,7 @@ export default {
       listStatus: false,
       number: "",
       Vname: "",
+      levelText: "",
       logoImg: "",
       company: "",
       isLogin: false,
@@ -642,6 +652,14 @@ export default {
       sendType: false,
       infoList: [],
       contentInfoList: [],
+
+      // 0000000000000000000000000000
+      websock: null, //建立的连接
+      lockReconnect: false, //是否真正建立连接
+      timeout: 30 * 1000, //30秒一次心跳
+      timeoutObj: null, //心跳心跳倒计时
+      serverTimeoutObj: null, //心跳倒计时
+      timeoutnum: null, //断开 重连倒计时
     };
   },
   created() {
@@ -779,6 +797,17 @@ export default {
       //   this.userName = this.InfoData.mail;
       this.number = 10850 + this.InfoData.id;
       this.Vname = this.InfoData.userName;
+      // 级别
+      let levelList = {
+        0: "管理员",
+        1: "内部员工",
+        2: "普通用户",
+      };
+      for (const key in levelList) {
+        if (key == this.InfoData.level) {
+          this.levelText = levelList[key];
+        }
+      }
 
       //  gongsi
       if (this.companyData.id) {
@@ -830,7 +859,7 @@ export default {
               if (
                 this.InfoData.statu == "0" ||
                 this.InfoData.userName == "王焕杰" ||
-                this.InfoData.userName == "任治琴" ||
+                this.InfoData.userName == "汪春梅" ||
                 this.InfoData.userName == "李健明" ||
                 this.InfoData.userName == "王杰" ||
                 this.InfoData.userName == "hzsugoi"
@@ -993,7 +1022,6 @@ export default {
     },
     // 删除头部列表
     clearData(item, index) {
-      console.log("item ==>", item);
       if (this.pagingData.length == 1) {
         this.detPagingList(item);
         this.$router.push({ name: "Home" });
@@ -1049,6 +1077,7 @@ export default {
         e.isActive = false;
       });
       item.isActive = true;
+      this.$parent.$refs.sideNavbar1.testRouter();
     },
     // 初始检测
     GetRouterName() {
@@ -1075,16 +1104,13 @@ export default {
           this.infoList.splice(index, 1);
           this.infoList[index - 1].isActive = true;
           return;
-          console.log("删除最后一个");
         } else if (index == 0) {
           this.infoList.splice(index, 1);
           this.infoList[index].isActive = true;
           return;
-          console.log("删除第一个");
         } else {
           this.infoList.splice(index, 1);
           this.infoList[index].isActive = true;
-          console.log("其他");
         }
       } else {
         this.infoList.splice(index, 1);
@@ -1167,8 +1193,19 @@ export default {
         });
       }
 
-      this.onlineServiceState = true;
+      //   this.onlineServiceState = true;
       this.UnreadCount = 0;
+    },
+    openOnlinePage1() {
+      if (this.InfoData.id == 6 || this.InfoData.id == 2) {
+        let routeData = this.$router.resolve({
+          path: "/WebStock",
+          query: {
+            InfoData: JSON.stringify(this.InfoData),
+          },
+        });
+        window.open(routeData.href, "_blank");
+      }
     },
     // 选择用户状态
     selectUser(item, index) {
@@ -1185,7 +1222,6 @@ export default {
         },
       })
         .then((result) => {
-          console.log("result ==>", result);
           if (result.data.Code == 200) {
             this.contentInfoList = [];
             this.contentInfoList = result.data.informations;
@@ -1222,7 +1258,6 @@ export default {
     },
     // 监听 键盘按下事件
     keydownVal(e) {
-      console.log("键盘按下事件");
       if (this.sendType) {
         //用户点击了ctrl+enter 发送消息
         if (e.ctrlKey && e.keyCode == 13) {
@@ -1273,8 +1308,6 @@ export default {
           data.recipient = e.sender;
         }
       });
-      console.log("data ==>", data);
-      console.log("this.contentInfoList ==>", this.contentInfoList);
       this.contentInfoList.push(data);
       this.clearTextarea();
       setTimeout(() => {
@@ -1286,17 +1319,16 @@ export default {
         method: "POST",
         params: data,
       })
-        .then((result) => {
-          console.log("result ==>", result);
-        })
+        .then((result) => {})
         .catch((err) => {
           console.log("err ==>", err);
         });
+
+      this.websocketsend(data);
     },
     // 表情选择
     onInput(event) {
       //事件。数据包含文本区域的值
-      console.log(event);
       this.textVal += document.querySelector(".emoji-wysiwyg-editor").innerHTML;
       //   let phoneReg = /\n/;
       //   if (phoneReg.test(event.data)) {
@@ -1312,6 +1344,109 @@ export default {
     getOnlineList() {
       this.UnreadCount = this.onlineList.count;
     },
+
+    initWebSocket() {
+      //建立连接
+      //初始化weosocket
+      const wsuri = "ws://192.168.1.179:8080/sigaoyi/websocket/001";
+      //建立连接
+      this.websock = new WebSocket(wsuri);
+      //连接成功
+      this.websock.onopen = this.websocketonopen;
+      //连接错误
+      this.websock.onerror = this.websocketonerror;
+      //接收信息
+      this.websock.onmessage = this.websocketonmessage;
+      //连接关闭
+      this.websock.onclose = this.websocketclose;
+    },
+    reconnect() {
+      //重新连接
+      var that = this;
+      if (that.lockReconnect) {
+        return;
+      }
+      that.lockReconnect = true;
+      //没连接上会一直重连，设置延迟避免请求过多
+      that.timeoutnum && clearTimeout(that.timeoutnum);
+      that.timeoutnum = setTimeout(function () {
+        //新连接
+        that.initWebSocket();
+        that.lockReconnect = false;
+      }, 5000);
+    },
+    reset() {
+      //重置心跳
+      var that = this;
+      //清除时间
+      clearTimeout(that.timeoutObj);
+      clearTimeout(that.serverTimeoutObj);
+      //重启心跳
+      that.start();
+    },
+    start() {
+      console.log("开启心跳");
+      //开启心跳
+      var self = this;
+      self.timeoutObj && clearTimeout(self.timeoutObj);
+      self.serverTimeoutObj && clearTimeout(self.serverTimeoutObj);
+      self.timeoutObj = setTimeout(function () {
+        //这里发送一个心跳，后端收到后，返回一个心跳消息，
+        if (self.websock.readyState == 1) {
+          //如果连接正常
+          //   self.websock.send("ping");
+        } else {
+          //否则重连
+          self.reconnect();
+        }
+        self.serverTimeoutObj = setTimeout(function () {
+          //超时关闭
+          self.websock.close();
+        }, self.timeout);
+      }, self.timeout);
+    },
+    websocketonopen() {
+      //连接成功事件
+      //提示成功
+      console.log("连接成功", 3);
+      //开启心跳
+      this.start();
+    },
+    websocketonerror(e) {
+      //连接失败事件
+      //错误
+      console.log("WebSocket连接发生错误");
+      //重连
+      this.reconnect();
+    },
+    websocketclose(e) {
+      //连接关闭事件
+      console.log("关闭连接");
+      //关闭
+      console.log("e ==>", e);
+      //重连
+      this.reconnect();
+    },
+    websocketonmessage(event) {
+      //接收服务器推送的信息
+      //打印收到服务器的内容
+      console.log("返回消息==>", JSON.parse(event.data));
+
+      let msgList = JSON.parse(event.data);
+      if (msgList.recipientId == this.InfoData.id) {
+        this.contentInfoList.push(msgList);
+        // this.openOnlinePage();
+        this.scrollBottm();
+      }
+      //收到服务器信息，心跳重置
+      this.reset();
+    },
+    websocketsend(data) {
+      //向服务器发送信息
+      //数据发送
+      this.websock.send(JSON.stringify(data));
+    },
+
     ...homeActions([
       "setHomeTitleStatus",
       "detPagingList",

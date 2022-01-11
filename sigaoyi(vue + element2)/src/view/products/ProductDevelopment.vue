@@ -51,7 +51,7 @@
                 </el-select>
                 <el-select
                   v-model="smallIndex"
-                  @change="changeSet(smallIndex, 'middleList')"
+                  @change="changeSet(smallIndex, 'smallList')"
                   clearable
                   placeholder="请选择"
                 >
@@ -276,6 +276,7 @@ export default {
     next();
   },
   created() {
+    document.title = "产品采集";
     this.H = document.documentElement.clientHeight;
     this.getclassfly();
   },
@@ -351,7 +352,6 @@ export default {
     // changeSet
     changeSet(index, string) {
       if (string == "largeList") {
-        console.log(this.largeIndex);
         if (this.largeIndex == "") {
           this.largeIndex = 99;
         }
@@ -386,7 +386,6 @@ export default {
           },
         })
           .then((result) => {
-            console.log("result ==>", result);
             let classObj = {
               catalogId: 99,
               catalogLevel: 0,

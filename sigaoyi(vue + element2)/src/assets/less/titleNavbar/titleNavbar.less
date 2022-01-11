@@ -64,7 +64,7 @@
       font-size: 15px;
       line-height: 25px;
       margin-top: 8px;
-      border-radius: 12px;
+      border-radius: 15px;
       cursor: pointer;
       display: flex;
       overflow: hidden;
@@ -156,8 +156,51 @@
 
     .help {
       margin-right: 10px;
-      color: #bb2136;
+      position: relative;
       cursor: pointer;
+      
+      .text {
+        color: #bb2136;
+      }
+
+      .wxCode {
+        position: absolute;
+        left: 50%;
+        top: 50px;
+        margin-left: -100px;
+        width: 160px;
+        height: 160px;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 10px #dddddd;
+        border-radius: 5px;
+        display: none;
+        img{
+          display: block;
+          width: 100%;
+          height: 100%;
+        }
+        i{
+          position: absolute;
+          top: -28px;
+          left: 50%;
+          font-size: 40px;
+          margin-left: -20px;
+          color: #fff;
+          &.active{
+            color: #ddd9;
+            top: -32px;
+            font-size: 46px;
+            margin-left: -23px;
+          }
+        }
+      }
+
+      &:hover{
+        .wxCode{
+          display: block;
+        }
+      }
     }
 
     .sevice {
@@ -273,365 +316,6 @@
     }
   }
 
-  .onlie {
-    margin-top: 15vh !important;
-    height: 70vh !important;
-
-    .el-dialog__header {
-      padding: 10px;
-      background-color: #9e2536;
-      color: #fff;
-
-      .online_title {
-        display: flex;
-        
-        .online_title_box {
-          display: flex;
-          flex: 5;
-          .onlie_title_header {
-            width: 40px;
-            height: 40px;
-
-            img {
-              width: 100%;
-              height: 100%;
-              border-radius: 50%;
-            }
-          }
-
-          .onlie_title_user {
-            height: 40px;
-            line-height: 40px;
-            margin-left: 10px;
-          }
-        }
-
-        .online_title_phone{
-          flex: 2;
-          text-align: right;
-          padding-right: 30px;
-          span{
-            font-weight: 600;
-          }
-        }
-      }
-
-      .el-dialog__headerbtn {
-        top: 10px;
-        right: 10px;
-
-        i {
-          color: #Fff;
-        }
-      }
-    }
-
-    .el-dialog__body {
-      padding: 0;
-      height: calc(100% - 210px);
-
-      .content {
-        height: 100%;
-        display: flex;
-
-        .content_userInfo {
-          overflow-y: auto;
-          flex: 3;
-
-          .content_userInfo_list {
-            display: flex;
-            padding: 5px 10px;
-            padding-left: 15px;
-            background-color: #fff;
-            position: relative;
-
-            .content_header {
-              width: 40px;
-              height: 40px;
-              margin-top: 5px;
-
-              img {
-                width: 100%;
-                height: 100%;
-                display: block;
-                border-radius: 50%;
-              }
-            }
-
-            .content_userName_info {
-              width: 130px;
-              padding-left: 15px;
-              height: 50px;
-
-              .content_userName {
-                width: 100%;
-                height: 25px;
-                line-height: 30px;
-                color: #000;
-                font-size: 15px;
-                cursor: default;
-              }
-
-              .content_infotioin {
-                width: 100%;
-                height: 25px;
-                line-height: 20px;
-                color: #a7a5a5;
-                font-size: 12px;
-                display: inline-block;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                cursor: default;
-              }
-            }
-
-            .el-icon-close {
-              position: absolute;
-              right: 5px;
-              top: 5px;
-              font-size: 15px;
-              color: #a2a2a2;
-            }
-
-            &.active {
-              background-color: #e6e6e6;
-
-              .content_userName_info {
-                background-color: #e6e6e6;
-
-                .content_info {
-                  background-color: #e6e6e6;
-                }
-              }
-            }
-
-          }
-
-          &::-webkit-scrollbar {
-            width: 5px;
-          }
-
-          &::-webkit-scrollbar-track {
-            border-radius: 5px;
-          }
-
-          &::-webkit-scrollbar-thumb {
-            border-radius: 5px;
-            background-color: #dddddd;
-          }
-        }
-
-        .content_info {
-          flex: 8;
-          background-color: #f9f9f9;
-          overflow-y: auto;
-
-          .content_info_text {
-            padding: 10px;
-
-            .content_info_text_time {
-              padding: 5px;
-              width: 100%;
-              line-height: 20px;
-              text-align: center;
-            }
-
-            .content_info_text_box {
-              display: flex;
-
-              .content_info_text_header {
-                width: 40px;
-                height: 40px;
-
-                img {
-                  width: 100%;
-                  height: 100%;
-                  border-radius: 50%;
-                }
-              }
-
-              .content_info_text_list {
-                max-width: calc(100% - 71px);
-                background-color: #dcdcdc;
-                position: relative;
-                border-radius: 8px;
-                margin-left: 15px;
-                margin-top: 5px;
-                margin-bottom: 5px;
-                padding: 5px 8px;
-                line-height: 25px;
-
-                i {
-                  color: #dcdcdc;
-                  position: absolute;
-                  left: -15px;
-                  top: 2px;
-                  font-size: 24px;
-                }
-
-                span {
-                  color: #000;
-                  line-height: 20px;
-                }
-              }
-            }
-          }
-
-          &::-webkit-scrollbar {
-            width: 5px;
-          }
-
-          &::-webkit-scrollbar-track {
-            border-radius: 5px;
-          }
-
-          &::-webkit-scrollbar-thumb {
-            border-radius: 5px;
-            background-color: #b5b5b5;
-          }
-        }
-      }
-    }
-
-    .el-dialog__footer {
-      padding: 0;
-
-      .online-footer {
-        height: 150px;
-
-        .footer_file {
-          padding: 0 10px;
-          height: 40px;
-          line-height: 40px;
-          box-sizing: border-box;
-          border-bottom: 1px solid #e8e8e8;
-          border-top: 1px solid #e8e8e8;
-          text-align: left;
-
-          i {
-            margin-top: 6px;
-            margin-left: 36px;
-            font-size: 26px;
-            color: #a5a5a5;
-          }
-        }
-
-        .footer_info {
-          height: 110px;
-          position: relative;
-
-          .textVal {
-            width: 100%;
-            height: 100%;
-
-            textarea {
-              width: calc(100% - 16px);
-              height: calc(100% - 16px);
-              border: none;
-              resize: none;
-              outline: none;
-              padding: 8px;
-              font-size: 13px;
-            }
-
-            .emoji-vue-wraper {
-              height: 100%;
-
-              .emoji-picker-container {
-                width: 100% !important;
-                height: 100%;
-
-                .emoji-vue-textarea {
-                  width: 100%;
-                  height: 100%;
-                  padding: 0;
-                }
-
-                .emoji-wysiwyg-editor {
-                  width: calc(100% - 16px) !important;
-                  height: calc(100% - 16px) !important;
-                  padding: 8px;
-                  text-align: left;
-                  border: none;
-                  outline: none;
-                }
-
-                .emoji-picker-icon {
-                  left: 12px;
-                  top: -32px;
-                  color: #a5a5a5;
-                }
-              }
-            }
-          }
-
-          .btn {
-            background-color: #c7c7c7;
-            position: absolute;
-            right: 15px;
-            bottom: 10px;
-            height: 36px;
-            line-height: 37px;
-            font-size: 15px;
-            color: #fff;
-            padding: 0 10px;
-            border-radius: 3px;
-            cursor: pointer;
-            user-select: none;
-
-            .btn_su {
-              padding: 0 5px;
-            }
-
-            .sendTypeMask {
-              position: absolute;
-              top: -155%;
-              right: 0;
-              height: 55px;
-              width: 250px;
-              display: flex;
-              box-shadow: 0 0 10px rgba(0, 0, 0, .4);
-
-              .sendTypeMask_set {
-                background-color: #dadada;
-                flex: 2;
-                position: relative;
-
-                i {
-                  position: absolute;
-                  left: 14px;
-                  top: 2px;
-                  font-size: 25px;
-
-                  &.active {
-                    top: 30px;
-                  }
-                }
-              }
-
-              .sendTypeMask_text {
-                flex: 8;
-                background-color: #fff;
-                color: #666;
-                padding: 5px 0;
-
-                div {
-                  height: 25px;
-                  width: 100%;
-                  text-align: left;
-                  font-size: 12px;
-                  text-indent: 8px;
-                  line-height: 25px;
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-
   .number {
     // height: 50%;
     // border: 1px solid red;
@@ -702,6 +386,8 @@
     .InformationDiv {
       z-index: 99;
       width: 100%;
+      max-width: 250px;
+      min-width: 200px;
       background: #fff;
       overflow: hidden;
       border-radius: 5px;

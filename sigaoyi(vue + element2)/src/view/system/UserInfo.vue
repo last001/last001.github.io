@@ -46,7 +46,7 @@
             tooltip-effect="dark"
             style="width: 100%"
             stripe
-            maxHeight="670"
+            maxHeight="675"
             @select-all="setAll"
             v-loading="tableLoading"
           >
@@ -334,7 +334,6 @@ export default {
         params: data,
       })
         .then((result) => {
-          console.log("result ==>", result);
           this.tableLoading = false;
           if (result.data.Code == 200) {
             for (let i = 0; i < result.data.users.length; i++) {

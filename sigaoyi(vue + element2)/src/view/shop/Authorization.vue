@@ -334,7 +334,6 @@ export default {
     },
     //   点击表格编辑 按钮
     handleEdit(index, row) {
-      console.log(row);
       this.centerDialogVisible = true;
       this.EditFaceTitle = "修改店铺";
       this.handleEditList = row;

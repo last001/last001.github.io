@@ -22,9 +22,8 @@
               <span class="text">消费类型：</span>
               <el-select
                 v-model="radioTypeIndex"
-                clearable
                 placeholder="请选择"
-                @clear="radioTypeIndex = 99"
+                @change="sreachIcon(currentPage, pageSize, true)"
               >
                 <el-option
                   v-for="item in radioTypeList"
@@ -39,9 +38,8 @@
               <span class="text">审核状态：</span>
               <el-select
                 v-model="radioStatusIndex"
-                clearable
                 placeholder="请选择"
-                @clear="radioStatusIndex = '99'"
+                @change="sreachIcon(currentPage, pageSize, true)"
               >
                 <el-option
                   v-for="item in radioStatusList"
@@ -59,6 +57,7 @@
                 clearable
                 type="date"
                 placeholder="选择日期"
+                @change="sreachIcon(currentPage, pageSize, true)"
               >
               </el-date-picker>
             </div>
@@ -69,6 +68,7 @@
                 clearable
                 type="date"
                 placeholder="选择日期"
+                @change="sreachIcon(currentPage, pageSize, true)"
               >
               </el-date-picker>
             </div>
@@ -228,15 +228,15 @@
                   <div class="btnList" v-if="infoData.statu == '0'">
                     <el-button
                       size="mini"
-                      type="default"
-                      @click="reject(scope.$index, scope.row)"
-                      >驳回</el-button
-                    >
-                    <el-button
-                      size="mini"
                       type="success"
                       @click="pass(scope.$index, scope.row)"
                       >通过</el-button
+                    >
+                    <el-button
+                      size="mini"
+                      type="default"
+                      @click="reject(scope.$index, scope.row)"
+                      >驳回</el-button
                     >
                   </div>
                   <div v-else class="text">审核中</div>
@@ -299,6 +299,7 @@
 // import footerDiv from "@/components/footer.vue";
 import "../../assets/less/consumptionDetail/consumptionDetail.css";
 import timestampToTimes from "../../assets/js/timestampToTime";
+import dateFormats from "../../assets/js/dateFormat";
 import { createNamespacedHelpers, mapState, mapActions } from "vuex";
 const {
   mapState: homeState,
@@ -334,6 +335,14 @@ export default {
       ],
       // 企业个人状态码
       accountType: "true",
+      // redioType
+      radioTypeIndex: "99",
+      radioTypeList: [
+        { name: "全部", value: "99" },
+        { name: "充值", value: 0 },
+        { name: "提现", value: 1 },
+        { name: "扣款", value: 2 },
+      ],
       //   radioStatus
       radioStatusIndex: "99",
       radioStatusList: [
@@ -341,14 +350,6 @@ export default {
         { name: "审核中", value: "0" },
         { name: "审核通过", value: "1" },
         { name: "驳回", value: "2" },
-      ],
-      // redioType
-      radioTypeIndex: 99,
-      radioTypeList: [
-        { name: "全部", value: 99 },
-        { name: "充值", value: 0 },
-        { name: "提现", value: 1 },
-        { name: "扣款", value: 2 },
       ],
       //   inputList
       inputList: {
@@ -406,15 +407,15 @@ export default {
     GotoRDraw(number) {
       this.$router.push({ name: "RechargeWidthdraw", query: { id: number } });
       //   调用sideNavbar的路由检测
-      this.$parent.$refs.sideNavbar.testRouter();
+      //   this.$parent.$refs.sideNavbar.testRouter();
     },
     //  重置
     resetIniput() {
       for (const key in this.inputList) {
         this.inputList[key] = "";
       }
+      this.radioTypeIndex = "99";
       this.radioStatusIndex = "99";
-      this.radioTypeIndex = 99;
     },
     // 收起 展开
     openClose() {
@@ -443,17 +444,36 @@ export default {
         return;
       }
       let data = {
-        pages: "",
+        pages: pages,
         amount: amount,
         costStatus: this.radioTypeIndex,
         auditStatus: this.radioStatusIndex,
         userId: this.InfoData.id,
         applicationName: this.inputList.applicationName,
         numbering: this.inputList.numbering,
-        applicationDate: this.inputList.applicationDate,
-        auditDate: this.inputList.auditDate,
+        applicationDate: "",
+        auditDate: "",
         orderId: this.inputList.orderId,
       };
+
+      //   审核时间 + 申请时间
+      if (this.inputList.auditDate == "" || this.inputList.auditDate == null) {
+        data.auditDate = "";
+      } else {
+        data.auditDate = dateFormats.dateFormat(this.inputList.auditDate);
+      }
+
+      if (
+        this.inputList.applicationDate == "" ||
+        this.inputList.applicationDate == null
+      ) {
+        data.applicationDate = "";
+      } else {
+        data.applicationDate = dateFormats.dateFormat(
+          this.inputList.applicationDate
+        );
+      }
+
       if (flag) {
         // 点击搜索按钮或者在input框的键盘事件
         data.pages = 1;
@@ -567,9 +587,27 @@ export default {
     exportDetail() {
       let data = {
         userName: this.InfoData.userName,
-        auditDate: this.inputList.auditDate,
-        applicationDate: this.inputList.applicationDate,
+        auditDate: "",
+        applicationDate: "",
       };
+
+      //   审核时间 + 申请时间
+      if (this.inputList.auditDate == "" || this.inputList.auditDate == null) {
+        data.auditDate = "";
+      } else {
+        data.auditDate = dateFormats.dateFormat(this.inputList.auditDate);
+      }
+
+      if (
+        this.inputList.applicationDate == "" ||
+        this.inputList.applicationDate == null
+      ) {
+        data.applicationDate = "";
+      } else {
+        data.applicationDate = dateFormats.dateFormat(
+          this.inputList.applicationDate
+        );
+      }
 
       // 请求
       let loading = this.$loading({
@@ -587,7 +625,6 @@ export default {
           loading.close();
           if (result.data.code == 200) {
             this.ifarmSrc = "http://www.ec-sigaoyi.com/" + result.data.path;
-            console.log("this.ifarmSrc ==>", ifarmSrc);
             setTimeout(() => {
               this.ifarmSrc = null;
             }, 500);
@@ -630,6 +667,8 @@ export default {
         return;
       }
       this.resetIniput();
+      this.pageSize = 30;
+      this.currentPage = 1;
 
       this.infoData = JSON.parse(JSON.stringify(this.InfoData));
       this.infoData.balance = Number(this.infoData.balance).toFixed(2);
@@ -638,8 +677,8 @@ export default {
         url: "/sigaoyi/NEWconsumerdetails",
         method: "POST",
         params: {
-          amount: 30,
-          pages: 1,
+          amount: this.pageSize,
+          pages: this.currentPage,
           userId: this.InfoData.id,
         },
       })

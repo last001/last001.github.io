@@ -38,19 +38,29 @@ export default {
     this.copyPagingList(
       JSON.parse(sessionStorage.getItem("state")).homeStore.pagingList
     );
+    this.setCAPTCHA(
+      JSON.parse(sessionStorage.getItem("state")).homeStore.CAPTCHA
+    );
     sessionStorage.removeItem("state");
   },
   computed: {
-    ...homeState(["InfoData", "companyData", "shopData", "EscCode", "release"]),
+    ...homeState([
+      "InfoData",
+      "companyData",
+      "shopData",
+      "EscCode",
+      "release",
+      "CAPTCHA",
+    ]),
   },
   methods: {
     ...homeActions([
       "setInfoData",
-      ,
       "setCompanData",
       "setShopData",
       "setRelease",
       "copyPagingList",
+      "setCAPTCHA",
     ]),
     saveState() {
       sessionStorage.setItem("state", JSON.stringify(this.$store.state));

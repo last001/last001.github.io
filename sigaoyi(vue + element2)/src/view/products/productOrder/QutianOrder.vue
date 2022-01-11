@@ -414,9 +414,11 @@
                     <div>
                       <el-button
                         type="text"
+                        v-if="scope.row.logisticsId == 0"
                         @click="toShip(scope.row, scope.index)"
                         >去发货</el-button
                       >
+                      <el-button type="text" v-else>已发货</el-button>
                     </div>
                   </div>
                   <div v-if="scope.row.shippingStatus1 == '等待发货'">
@@ -1252,7 +1254,6 @@ export default {
   },
   activated() {
     document.title = "趣天店铺订单";
-    console.log("this.$route.meta.isBack ==>", this.$route.meta.isBack);
     this.shopList = this.shopData;
     if (!this.$route.meta.isBack) {
       // 重置 筛选 数据 + 分页
@@ -1364,7 +1365,6 @@ export default {
       if (this.tableData.findIndex((target) => target.selected === true) > -1) {
         for (let i = 0; i < this.tableData.length; i++) {
           if (this.tableData[i].selected) {
-            console.log(this.tableData[i]);
             if (this.tableData[i].shippingStatus == "Awaiting shipping(1)") {
               this.$message({
                 message: "勾选的选项含有订购处理中的订单",
@@ -1388,8 +1388,7 @@ export default {
         return;
       }
       ids = ids.substring(0, ids.length - 1);
-      console.log("ids ==>", ids);
-      window.open(`http://192.168.1.180:8080/sigaoyi/printlabel2?ids=${ids}`);
+      window.open(`http://www.ec-sigaoyi.com/sigaoyi/printlabel2?ids=${ids}`);
     },
     // 分页事件
     handleSizeChange(val) {
@@ -1468,7 +1467,6 @@ export default {
         params: data,
       })
         .then((result) => {
-          console.log("result ==>", result);
           this.tableLoading = false;
           if (result.data.Code == 200) {
             this.tableData = result.data.qoo10Orders;
@@ -1578,9 +1576,34 @@ export default {
     // 回填单号
     TobackOrder(index, row) {
       this.backOrder.state = true;
+      this.backOrder.orderNo = "";
+      this.backOrder.listIndex = "";
       this.backOrderRow = row;
+
+      this.$axios({
+        url: "/sigaoyi/GetOrderNumber",
+        method: "POST",
+        params: {
+          id: row.logisticsId,
+        },
+      })
+        .then((result) => {
+          if (result.data.Code == "200") {
+            this.backOrder.orderNo = result.data.orderNum;
+          } else {
+            this.$notify({
+              title: "请求失败",
+              message: result.data.msg,
+              type: "warning",
+              offset: 50,
+            });
+          }
+        })
+        .catch((err) => {
+          console.log("err ==>", err);
+        });
     },
-    // 回填单号   确定
+    // 回填单号  确定按钮
     comfirmBackOrder() {
       if (this.backOrder.listIndex == "") {
         this.$message({
@@ -1615,7 +1638,6 @@ export default {
         params: data,
       })
         .then((result) => {
-          console.log("result ==>", result);
           if (result.data.Code == 200) {
             this.$notify({
               title: "请求成功",
@@ -1650,7 +1672,6 @@ export default {
     },
     // 去采购
     tostbao(row) {
-      console.log(row);
       this.purchaseRow = row;
       this.purchaseOrder.state = true;
       this.purchaseOrder.attribute = row.option;
@@ -1665,7 +1686,6 @@ export default {
         },
       })
         .then((result) => {
-          console.log("result ==>", result);
           this.purchaseOrder.loading = false;
           if (result.data.code == "200") {
             if (result.data.link == undefined) {
@@ -1705,8 +1725,6 @@ export default {
         remark: this.purchaseOrder.remark,
       };
 
-      console.log(data);
-
       this.purchaseOrder.state = false;
       this.$axios({
         url: "/sigaoyi/editPurchaseorderInfo",
@@ -1714,7 +1732,6 @@ export default {
         params: data,
       })
         .then((result) => {
-          console.log("result ==>", result);
           if (result.data.Code == 200) {
             this.purchaseOrder.state = false;
 
@@ -1770,7 +1787,6 @@ export default {
     },
     // 去发货
     toShip(row, index) {
-      console.log(row);
       this.apply.state = true;
       this.apply.warningProduct = true;
       this.apply.imgList = [];
@@ -1795,7 +1811,6 @@ export default {
         },
       })
         .then((result) => {
-          console.log("result ==>", result);
           if (result.data.code == "200") {
             this.apply.imgList.push(result.data.img);
             this.apply.price = result.data.price;
@@ -1844,7 +1859,6 @@ export default {
         },
       })
         .then((result) => {
-          console.log(result);
           loading.close();
           if (result.data.Code == "200") {
             if (e.target.files.length > 1) {
@@ -1931,6 +1945,7 @@ export default {
         trade_type: this.apply.companyIndex,
         orderId1: "",
         purchaseMode: 0,
+        qoo10shopId: this.applyRow.shopId,
       };
 
       // 图片路径
@@ -1946,9 +1961,9 @@ export default {
         params: data,
       })
         .then((result) => {
-          console.log("result ==>", result);
           if (result.data.Code == 200) {
             this.apply.state = false;
+            this.changelogisticsId(result.data.logisticsId);
             this.$notify({
               title: "请求成功",
               message: result.data.msg,
@@ -1976,6 +1991,25 @@ export default {
           console.log("err ==>", err);
         });
     },
+    // 去发货修改logisticsId
+    changelogisticsId(id) {
+      this.$axios({
+        url: "/sigaoyi/updateQoo10OrderInfo",
+        method: "POST",
+        params: {
+          shopid: this.applyRow.id,
+          logisticsId: id,
+        },
+      })
+        .then((result) => {
+          if (result.data.Code == 200) {
+            this.applyRow.logisticsId = id;
+          }
+        })
+        .catch((err) => {
+          console.log("err ==>", err);
+        });
+    },
     // 改变运输方式 获取 渠道
     getChannel(index) {
       this.$axios({
@@ -1987,7 +2021,6 @@ export default {
         },
       })
         .then((result) => {
-          console.log("result ==>", result);
           if (result.data.Code == 200) {
             this.apply.companyList = result.data.qoo10Orders;
             if (result.data.qoo10Orders.length > 0) {
@@ -2023,7 +2056,6 @@ export default {
         data.status = "0";
       }
 
-      console.log("data ==>", data);
       this.tableLoading = true;
       this.synchrOrder.state = false;
       this.$axios({
@@ -2032,7 +2064,6 @@ export default {
         params: data,
       })
         .then((result) => {
-          console.log("result ==>", result);
           this.tableLoading = false;
           if (result.data.Code == 200) {
             this.synchrOrder.state = false;
@@ -2189,3 +2220,5 @@ export default {
 
 <style>
 </style>
+
+

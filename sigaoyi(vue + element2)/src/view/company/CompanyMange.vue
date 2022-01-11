@@ -326,8 +326,6 @@ export default {
 
       this.loading = true;
 
-      console.log("data ==>", data);
-
       this.$axios({
         method: "POST",
         url: "/sigaoyi/getAllConpanyInfo",
@@ -392,7 +390,6 @@ export default {
     handleEdit(index, row) {
       this.companyDialog = true;
       this.DialogText = row;
-      console.log(row);
     },
     // 分页事件 每页多少条
     handleSizeChange(val) {

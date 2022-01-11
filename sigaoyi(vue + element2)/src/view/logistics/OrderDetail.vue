@@ -629,20 +629,38 @@ export default {
         { name: "自采购", value: 0 },
         { name: "待采购", value: 1 },
       ],
+      // 运输方式
+      tradeIndex: "99",
+      tradeTypeList: [
+        { name: "未选择", value: "99" },
+        { name: "青岛-免抛", value: "QDMP" },
+        { name: "佐川", value: "佐川" },
+        // { name: "佐川加急", value: "RB-DS3" },
+        // { name: "佐川普货(义达)", selected: false, value: "JP-DS" },
+        { name: "黑猫", value: "黑猫" },
+        { name: "黑猫3cm化妆品", value: "黑猫3cm化妆品" },
+        { name: "带电渠道", value: "JPSADD" },
+        { name: "Qxpress", value: "Qxpress" },
+        { name: "ETK", value: "ETK" },
+        { name: "EMS", value: "EMS" },
+        { name: "日邮小包", value: "日邮小包" },
+        { name: "国内退货", value: "国内退货" },
+      ],
       // 发货渠道
       channelIndex: "99",
       channelList: [
         { name: "未选择", selected: true, value: "99" },
         { name: "佐川普货免抛", selected: false, value: "PK0009" },
         { name: "佐川特货", selected: false, value: "佐川" },
-        // { name: "佐川普货", selected: false, value: "RB-DS3" },
-        { name: "佐川加急", selected: false, value: "RB-DS3" },
+        { name: "佐川普货(义达)", selected: false, value: "JP-DS" },
+        // { name: "佐川加急", selected: false, value: "RB-DS3" },
         { name: "佐川普货-LTW", selected: false, value: "LTW" },
         { name: "佐川普货-DPC", selected: false, value: "DPC" },
         { name: "青岛-免抛", selected: false, value: "QDMP" },
         { name: "佐川带电", selected: false, value: "JPSADD" },
         { name: "黑猫3cm", selected: false, value: "黑猫" },
         { name: "黑猫3cm带电", selected: false, value: "黑猫带电" },
+        { name: "黑猫3cm化妆品", value: "黑猫3cm化妆品" },
         { name: "黑猫普货5cm", selected: false, value: "黑猫普货5cm" },
         { name: "黑猫带电5cm", selected: false, value: "黑猫带电5cm" },
         { name: "Qxpress", selected: false, value: "Qxpress" },
@@ -652,21 +670,6 @@ export default {
         { name: "CNE广州", selected: false, value: "CNEGZ" },
         { name: "日邮小包", value: "日邮小包" },
         { name: "国内退货", selected: false, value: "国内退货" },
-      ],
-      // 运输方式
-      tradeIndex: "99",
-      tradeTypeList: [
-        { name: "未选择", value: "99" },
-        { name: "青岛-免抛", value: "QDMP" },
-        { name: "佐川", value: "佐川" },
-        { name: "佐川加急", value: "RB-DS3" },
-        { name: "黑猫", value: "黑猫" },
-        { name: "带电渠道", value: "JPSADD" },
-        { name: "Qxpress", value: "Qxpress" },
-        { name: "ETK", value: "ETK" },
-        { name: "EMS", value: "EMS" },
-        { name: "日邮小包", value: "日邮小包" },
-        { name: "国内退货", value: "国内退货" },
       ],
       // 计抛  product_id
       product_id: "",
@@ -715,7 +718,7 @@ export default {
     if (
       this.InfoData.statu == "0" ||
       this.InfoData.userName == "王焕杰" ||
-      this.InfoData.userName == "任治琴" ||
+      this.InfoData.userName == "汪春梅" ||
       this.InfoData.userName == "李健明" ||
       this.InfoData.userName == "王杰" ||
       this.InfoData.userName == "hzsugoi" ||
@@ -730,7 +733,7 @@ export default {
     if (
       this.InfoData.statu == "0" ||
       this.InfoData.userName == "王焕杰" ||
-      this.InfoData.userName == "任治琴" ||
+      this.InfoData.userName == "汪春梅" ||
       this.InfoData.userName == "李健明" ||
       this.InfoData.userName == "王杰"
     ) {
@@ -803,7 +806,7 @@ export default {
       // 判断创库人员
       if (
         this.InfoData.userName == "王焕杰" ||
-        this.InfoData.userName == "任治琴" ||
+        this.InfoData.userName == "汪春梅" ||
         this.InfoData.userName == "李健明" ||
         this.InfoData.userName == "王杰" ||
         this.InfoData.userName == "hzsugoi" ||
@@ -1040,7 +1043,6 @@ export default {
       if (sessionStorage.getItem("token") == undefined) {
         alert("请先登录");
         this.$router.push({ name: "Login" });
-
         return;
       }
       if (this.InfoData.id == undefined) {
@@ -1119,7 +1121,7 @@ export default {
       // 判断创库人员
       if (
         this.InfoData.userName == "王焕杰" ||
-        this.InfoData.userName == "任治琴" ||
+        this.InfoData.userName == "汪春梅" ||
         this.InfoData.userName == "李健明" ||
         this.InfoData.userName == "王杰" ||
         this.InfoData.userName == "hzsugoi" ||
@@ -1154,10 +1156,12 @@ export default {
         "LTW",
         "CNEGZ",
         "RB-DS3",
+        "JP-DS",
       ];
       //   取消下单
       let cansrArr = [
         "RB-DS3",
+        "JP-DS",
         "DPC",
         "JPSADD",
         "佐川",
@@ -1181,6 +1185,7 @@ export default {
         "佐川",
         "CNE",
         "RB-DS3",
+        "JP-DS",
         "CNEGZ",
         "PK0009",
         "PK00091",
@@ -1193,7 +1198,15 @@ export default {
         if (this.infoData.statu == "5") {
           this.orderDisabled = true;
         }
+        // q仓
+        if (this.row.trade_type1 == "Qxpress" && this.row.status == 2) {
+          this.printStatus = true;
+          this.cancelPrint = false;
+          this.payOrderStatus = false;
+          return;
+        }
         if (this.row.status != 6 && this.row.status != 7) {
+          // 未下单
           this.cancelPrint = false;
           this.printStatus = false;
           //
@@ -1279,8 +1292,8 @@ export default {
         .then((result) => {
           if (result.data.Code == 200) {
             this.row.freight = result.data.freight;
-            this.row.freightprofit = result.data.freightprofit.toFixed(3);
-            this.row.weight = result.data.weight1.toFixed(3);
+            this.row.freightprofit = result.data.freightprofit.toFixed(2);
+            this.row.weight = result.data.weight1.toFixed(2);
             this.product_id = result.data.product_id;
           } else {
             this.$notify({
@@ -1501,7 +1514,6 @@ export default {
           });
           return;
         }
-        console.log("data ==>", data);
         // 发起请求
         let loading = this.$loading({
           lock: false,
@@ -1531,7 +1543,7 @@ export default {
               this.getPurchaseType();
               if (
                 this.InfoData.userName == "王焕杰" ||
-                this.InfoData.userName == "任治琴" ||
+                this.InfoData.userName == "汪春梅" ||
                 this.InfoData.userName == "李健明" ||
                 this.InfoData.userName == "王杰" ||
                 this.InfoData.userName == "hzsugoi" ||
@@ -1812,7 +1824,7 @@ export default {
         // 发货渠道
         tradeTypeVal = this.row.trade_type1;
 
-        if (tradeTypeVal == "RB-DS3") {
+        if (tradeTypeVal == "RB-DS3" || tradeTypeVal == "JP-DS") {
           url = "/sigaoyi/RecordYDH";
         } else if (
           //   专享特惠东南亚专线 专享邮政 专享快速日本专线(5)
@@ -1876,6 +1888,7 @@ export default {
           },
         })
           .then((result) => {
+            console.log(result);
             setTimeout(() => {
               loading.close();
             }, 500);
@@ -1927,7 +1940,7 @@ export default {
       }
 
       var url = "";
-      if (this.row.trade_type1 == "RB-DS3") {
+      if (this.row.trade_type1 == "RB-DS3" || this.row.trade_type1 == "JP-DS") {
         url = "/sigaoyi/cancelOrderYDH";
       } else if (
         this.row.trade_type1 == "DPC" ||
@@ -2076,7 +2089,10 @@ export default {
             loading.close();
           });
         return;
-      } else if (this.row.trade_type1 == "RB-DS3") {
+      } else if (
+        this.row.trade_type1 == "RB-DS3" ||
+        this.row.trade_type1 == "JP-DS"
+      ) {
         let loading = this.$loading({
           lock: false,
           text: "加载中...",
@@ -2210,6 +2226,8 @@ export default {
             });
             loading.close();
           });
+      } else if (this.row.trade_type1 == "Qxpress") {
+        window.open(this.row.link);
       } else {
         this.$message({
           message: "不能打印",
@@ -2223,7 +2241,6 @@ export default {
   },
   watch: {
     "$route.query.id": function () {
-      console.log("this.$route.query.id ==>", this.$route.query.id);
       if (this.$route.query.id == undefined) {
         this.browserTitle = "添加订单";
         this.infoData = this.InfoData;
@@ -2269,7 +2286,7 @@ export default {
         // 判断创库人员
         if (
           this.InfoData.userName == "王焕杰" ||
-          this.InfoData.userName == "任治琴" ||
+          this.InfoData.userName == "汪春梅" ||
           this.InfoData.userName == "李健明" ||
           this.InfoData.userName == "王杰" ||
           this.InfoData.userName == "hzsugoi" ||

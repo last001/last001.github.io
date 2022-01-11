@@ -1597,7 +1597,6 @@ export default {
         },
       })
         .then((result) => {
-          console.log("result ==>", result);
           if (result.data.code == "200") {
             window.open(result.data.detail_url, "_blank");
           }
@@ -1648,7 +1647,6 @@ export default {
         userId: this.InfoData.id,
         ids: ids,
       };
-      console.log("data ==>", data);
       //   发起请求
       let loading = this.$loading({
         lock: false,
@@ -2076,7 +2074,6 @@ export default {
         params: data,
       })
         .then((result) => {
-          console.log("result ==>", result);
           if (result.data.Code == 200) {
             // laoding
             this.loading = false;
@@ -2246,7 +2243,6 @@ export default {
         },
       })
         .then((result) => {
-          console.log("result ==>", result);
           this.loadingProcontent1 = false;
           if (result.data.Code == 200) {
             if (result.data.products.length == 0) {

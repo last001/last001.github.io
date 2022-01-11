@@ -34,26 +34,82 @@
       }
 
       .toLogin {
-        color: #bb2136;
         width: 100%;
         text-align: right;
-        cursor: pointer;
+        color: #444;
+        display: flex;
+
+        .el-checkbox {
+          margin-left: 15px;
+          font-size: 18px;
+
+        }
+
+        font {
+          margin-left: 10px;
+          cursor: pointer;
+        }
 
         i {
-          color: #444;
+          color: #bb2136;
+          cursor: pointer;
           font-style: normal;
-          cursor: auto;
+        }
+
+        &.active {
+          animation: myfirst 1s infinite;
         }
       }
 
+      .toLogin1 {
+        margin-top: 5px;
+        width: 100%;
+        color: #444;
+        display: flex;
+        justify-content: flex-start;
+
+        .el-checkbox {
+          margin-left: 15px;
+          font-size: 18px;
+        }
+
+        font {
+          margin-left: 10px;
+          cursor: pointer;
+        }
+        &.active {
+          animation: myfirst 1s infinite;
+        }
+      }
+      
+      @keyframes myfirst {
+        0%   {background: #fff;}
+        25%  {background: #d6d6d6;}
+        50%  {background: #fff;}
+        75%  {background: #d6d6d6;}
+        100% {background: #fff;}
+    }
+
       .registeBox {
-        margin-top: 24px;
+        margin-top: 15px;
         margin-left: 16px;
+
+        .already {
+          display: block;
+          width: 100%;
+          text-align: center;
+
+          i {
+            color: #bb2136;
+            font-style: normal;
+            cursor: pointer;
+          }
+        }
       }
     }
 
     .el-form-item {
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       margin-left: -60px;
     }
 
@@ -220,7 +276,8 @@
     position: absolute;
     right: 4%;
     top: 3%;
-    button{
+
+    button {
       margin-right: 5px;
       background-color: #9e2536;
       border: 1px solid #9e2536;

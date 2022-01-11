@@ -73,7 +73,7 @@
             </div>
             <div class="authority">
               <span>权限：</span>
-              <div class="val">{{ infoData.levelName }}</div>
+              <div class="val">{{ infoData.levelText }}</div>
             </div>
           </div>
         </div>
@@ -292,6 +292,7 @@ export default {
     };
   },
   created() {
+    document.title = "个人信息";
     this.$nextTick(() => {
       this.getInfoData();
       this.$parent.$refs.sideNavbar1.testRouter();
@@ -320,16 +321,19 @@ export default {
         return;
       }
       this.personInfoLoading = true;
-      if (this.InfoData.statu == "0") {
-        this.InfoData["levelName"] = "超级管理员";
-      } else if (this.InfoData.statu == "1") {
-        this.InfoData["levelName"] = "管理员";
-      } else {
-        this.InfoData["levelName"] = "普通账号";
-      }
       if (this.InfoData.img == undefined || this.infoData.img == "") {
         this.infoData.img =
           "http://www.ec-sigaoyi.com/imagelink/1634893766009.jpg";
+      }
+      let levelList = {
+        0: "管理员",
+        1: "内部员工",
+        2: "普通用户",
+      };
+      for (const key in levelList) {
+        if (key == this.infoData.level) {
+          this.infoData["levelText"] = levelList[key];
+        }
       }
       setTimeout(() => {
         this.personInfoLoading = false;
@@ -641,7 +645,6 @@ export default {
         params: data,
       })
         .then((result) => {
-          console.log("result ==>", result);
           if (string == "saveName") {
             this.saveNameLoading = false;
             this.saveText = "保存";

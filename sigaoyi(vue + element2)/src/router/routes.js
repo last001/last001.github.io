@@ -6,6 +6,11 @@ export const routes = [
   //   name: 'Introduce',
   //   component: () => import('../view/Introduce.vue')
   // },
+  {
+    path: '/webStock',
+    name: 'WebStock',
+    component: () => import('../view/WebStock.vue')
+  },
   // 登陆
   {
     path: '/login',
@@ -15,7 +20,13 @@ export const routes = [
   {
     path: '/register',
     name: 'Register',
-    component: () => import('../view/register.vue')
+    component: () => import('../view/Register.vue')
+  },
+  // 协议
+  {
+    path: '/agreement',
+    name: 'Agreement',
+    component: () => import('../view/Agreement.vue')
   },
   {
     path: '/company1',
@@ -186,6 +197,11 @@ export const routes = [
         path: 'godown',
         name: 'Godown',
         component: () => import('../view/products/purchaSellStock/godown/Godown.vue'),
+      },
+      {
+        path: 'outbound',
+        name: 'Outbound',
+        component: () => import('../view/products/purchaSellStock/outbound/Outbound.vue'),
       },
       {
         path: 'purchaseCompileDefault',

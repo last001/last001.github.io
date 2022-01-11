@@ -61,7 +61,7 @@
             <div class="additionImg">
               <span>扫码图片：</span>
               <div class="int-img">
-                <img src="../../assets/img/QRimg03.png" alt="" />
+                <img src="../../assets/img/QRimg03.jpg" alt="" />
               </div>
             </div>
             <el-button class="btnRecharge" type="primary" @click="rechargeBtn()"

@@ -118,9 +118,15 @@
           <div class="tips">图片详情</div>
           <div class="pic_url">
             <span class="text">产品图片：</span>
-            <div>
-              <img :src="item.pic_url" alt="" v-if="item.pic_url != ''" />
-              <i class="el-icon-plus" v-else></i>
+            <div v-show="item.pic_url != ''">
+              <el-image
+                :src="item.pic_url"
+                :preview-src-list="picUrlList"
+              ></el-image>
+              <i class="el-icon-close" @click.stop="deleteZhutu()"></i>
+            </div>
+            <div class="add">
+              <i class="el-icon-plus"></i>
               <input
                 type="file"
                 accept="image/*"
@@ -717,6 +723,8 @@ export default {
       },
       quillDisabled: true,
       quillLoading: false,
+      // 首张图片lager
+      picUrlList: [],
       // 小图片 index*50
       samllImg: [],
       //   年份
@@ -788,6 +796,7 @@ export default {
   created() {
     let d = new Date();
     this.years = d.getFullYear();
+
     // 店铺
     this.qoo10shopsList = JSON.parse(this.$route.query.shopData);
     let qoo10shopsObj = {
@@ -834,11 +843,20 @@ export default {
     //   初始化数据
     creatData() {
       this.$refs.titlePage.getInfoData();
+
+      if (this.item.pic_url == "") {
+        return (this.picUrlList = []);
+      }
+      this.picUrlList.push(this.item.pic_url);
       // 小图片 imgSrc
       if (this.item.item_imgs == "") {
         return (this.samllImg = []);
       }
       this.samllImg = this.item.item_imgs.split(",");
+
+      this.$nextTick(() => {
+        this.$refs.sideNavbar1.getCompanyName();
+      });
     },
     //   table 删除 按钮
     handleDelete(index, row) {
@@ -885,7 +903,6 @@ export default {
     },
     //   table 保存 按钮
     handleSave(index, row) {
-      console.log("row.imgurl ==>", row.imgurl);
       this.tableLoading = true;
       let data = {
         product_id: this.item.id,
@@ -1095,7 +1112,6 @@ export default {
       let url = "/sigaoyi/variantsImgupload";
       this.$axios(uploadPdfs.uploadPdf(url, formData))
         .then((result) => {
-          console.log(result);
           loading.close();
           this.$refs.uploadSrc.value = null;
           if (result.data.Code == "200") {
@@ -1214,9 +1230,11 @@ export default {
       }
       // 处理price 单位
       data.price = data.price.replace(/[^\d.]/g, "");
-      // 主图图片
 
-      this.samllImg.unshift(this.item.pic_url);
+      // 主图图片
+      if (this.item.pic_url != "") {
+        this.samllImg.unshift(this.item.pic_url);
+      }
       this.samllImg.forEach((e) => {
         data.imglist += e + ",";
       });
@@ -1240,7 +1258,6 @@ export default {
         });
         return;
       }
-      console.log("data ==>", data);
       // 初始值问题
       let data1 = qs.stringify(data);
       //   laoding
@@ -1260,8 +1277,6 @@ export default {
         data: data1,
       })
         .then((result) => {
-          console.log("result ==>", result);
-
           setTimeout(() => {
             loading.close();
           }, 500);
@@ -1300,6 +1315,10 @@ export default {
     Exit() {
       window.close();
     },
+    // 删除首展示图片
+    deleteZhutu() {
+      this.item.pic_url = "";
+    },
     //头部 上传图片
     upImg(e, string) {
       let files = e.target.files[0];
@@ -1318,7 +1337,6 @@ export default {
       this.$axios(uploadPdfs.uploadPdf(url, formData))
         .then((result) => {
           loading.close();
-          console.log("result ==>", result);
           this.$refs.uploadVal.value = null;
           if (result.data.Code == "200") {
             if (string == "more") {
@@ -1326,30 +1344,29 @@ export default {
             } else {
               this.item.pic_url = result.data.imglist;
             }
-            this.$message({
+            this.$notify({
+              title: "请求成功",
               message: "上传图片成功!",
-              center: true,
-              type: "success",
-              duration: 800,
+              type: "succes",
+              offset: 50,
             });
           } else {
-            this.$message({
+            this.$notify({
+              title: "请求失败",
               message: "上传图片失败!",
-              center: true,
               type: "warning",
-              duration: 800,
+              offset: 50,
             });
           }
         })
         .catch((err) => {
           this.$refs.uploadVal.value = null;
           loading.close();
-
-          this.$message({
+          this.$notify({
+            title: "请求错误",
             message: "系统繁忙,请稍后再试!",
-            center: true,
-            type: "warning",
-            duration: 800,
+            type: "error",
+            offset: 50,
           });
         });
     },
@@ -1467,7 +1484,6 @@ export default {
       for (let item of arrImages) {
         const promise = _this.getImgArrayBuffer(item.fileUrl).then((data) => {
           // 下载文件, 并存成ArrayBuffer对象(blob)
-
           zip.file(item.renameFileName, data, { binary: true }); // 逐个添加文件
           cache[item.renameFileName] = data;
         });
@@ -1621,7 +1637,6 @@ export default {
       })
         .then((result) => {
           loading.close();
-          console.log("result ==>", result);
           if (result.data.Code == 200) {
             document.title = result.data.product.title;
             //   个人信息
@@ -1694,6 +1709,7 @@ export default {
               result.data.product.details = detailsVal
                 .replace(/&lt;/g, "<")
                 .replace(/&lt;/g, ">");
+              // 获取管理员
             });
           } else {
             this.$notify({
@@ -1719,7 +1735,6 @@ export default {
     changeSet(index, string) {
       // 请求
       if (string == "large") {
-        console.log("indexindexindexindex  ===>", index);
         if (index == 99) {
           this.mediumIndex = 99;
           this.smallIndex = 99;
@@ -1783,7 +1798,6 @@ export default {
           },
         })
           .then((result) => {
-            console.log(result);
             let classObj = {
               catalogId: 99,
               catalogLevel: 0,
@@ -1807,16 +1821,31 @@ export default {
           },
         })
           .then((result) => {
-            console.log("result ==>", result);
-            let freightObj = {
-              ShippingName: "全部",
-              ShippingNo: 0,
-            };
-            this.freightList = result.data.ShippingList;
-            this.freightList.unshift(freightObj);
-            this.publishList.CertificationKey = result.data.CertificationKey;
+            if (result.data.code == "200") {
+              let freightObj = {
+                ShippingName: "全部",
+                ShippingNo: 0,
+              };
+              this.freightList = result.data.ShippingList;
+              this.freightList.unshift(freightObj);
+              this.publishList.CertificationKey = result.data.CertificationKey;
+            } else {
+              this.$notify({
+                title: "请求失败",
+                message: result.data.CertificationKey,
+                type: "warning",
+                offset: 50,
+              });
+            }
           })
-          .catch((err) => {});
+          .catch((err) => {
+            this.$notify({
+              title: "请求错误",
+              message: "系统业务繁忙,请稍后再试",
+              type: "error",
+              offset: 50,
+            });
+          });
       } else if (string == "freight") {
         this.publishList.ShippingNo = this.freightIndex;
       }
@@ -2031,7 +2060,6 @@ export default {
       })
         .then((result) => {
           loading.close();
-          console.log("result ==>", result);
           if (result.data.code == "200") {
             this.$notify({
               title: "请求成功",
@@ -2144,7 +2172,6 @@ export default {
       let url = "/sigaoyi/NEWbase64ImageSave";
       this.$axios(uploadPdfs.uploadPdf(url, formData))
         .then((result) => {
-          console.log("result ==>", result);
           loading.close();
           if (result.data.Code == 200) {
             result.data.list.forEach((e) => {
@@ -2239,7 +2266,6 @@ export default {
         this.$router.push({ name: "Login" });
         return;
       }
-      console.log("this.shopData ==>", this.shopData);
       // 提示
       if (this.qoo10shopsIndex == 0) {
         this.$message({

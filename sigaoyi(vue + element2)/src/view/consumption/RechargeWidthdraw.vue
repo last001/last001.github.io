@@ -4,10 +4,24 @@
     <div class="box">
       <div class="rechargeInfo">
         <div class="balance">
-          <span>当前账户余额:</span>
-          <span @click="GotoConsumption()" v-loading="loading"
-            >{{ balanceText }}元</span
-          >
+          <div>
+            <span>账号总余额:</span>
+            <span @click="GotoConsumption()" v-loading="loading"
+              >{{ (Number(credit) + Number(balanceText)).toFixed(2) }}元</span
+            >
+          </div>
+          <div>
+            <span>充值余额:</span>
+            <span @click="GotoConsumption()" v-loading="loading"
+              >{{ balanceText }}元</span
+            >
+          </div>
+          <div>
+            <span>赠送余额:</span>
+            <span @click="GotoConsumption()" v-loading="loading"
+              >{{ credit }}元</span
+            >
+          </div>
         </div>
         <div class="content">
           <!-- 充值 提现  切换 -->
@@ -54,7 +68,7 @@
             <div class="additionImg">
               <!-- <span>扫码图片：</span> -->
               <div class="int-img">
-                <img src="../../assets/img/QRimg03.png" alt="" />
+                <img src="../../assets/img/QRimg03.jpg" alt="" />
               </div>
             </div>
             <el-button class="btnRecharge" type="primary" @click="rechargeBtn()"
@@ -191,6 +205,8 @@ export default {
       H: "",
       //   账户余额
       balanceText: 0.0,
+      //   赠送余额
+      credit: 0.0,
       // 充值上传的截图
       imgSrc: "",
       updataLoading: false,
@@ -279,6 +295,7 @@ export default {
     // 获取 余额
     getInfoData() {
       this.balanceText = this.balanceText.toFixed(2);
+      this.credit = this.credit.toFixed(2);
       if (sessionStorage.getItem("token") == undefined) {
         alert("请先登录");
         this.$router.push({ name: "Login" });
@@ -305,6 +322,9 @@ export default {
             this.setInfoData(result.data.userInfo);
             this.balanceText = result.data.userInfo.balance;
             this.balanceText = this.balanceText.toFixed(2);
+
+            this.credit = result.data.userInfo.credit;
+            this.credit = this.credit.toFixed(2);
           } else {
             this.$notify({
               title: "请求失败",

@@ -794,7 +794,6 @@ export default {
     },
     // 填单
     edit(index, row) {
-      console.log(row);
       for (const key in this.purchaseMask) {
         for (const key1 in row) {
           if (key == key1) {
@@ -827,8 +826,6 @@ export default {
         params: data,
       })
         .then((result) => {
-          console.log("result ==>", result);
-
           if (result.data.Code == 200) {
             this.purchaseMask.state = false;
             this.$notify({
@@ -895,7 +892,6 @@ export default {
         },
       })
         .then((result) => {
-          console.log("result ==>", result);
           if (result.data.Code == 200) {
             this.apply.companyList = result.data.qoo10Orders;
             if (result.data.qoo10Orders.length > 0) {
@@ -909,7 +905,6 @@ export default {
     },
     // 去发货
     toShip(row, index) {
-      console.log(row);
       this.isMOre = false;
 
       this.apply.state = true;
@@ -925,7 +920,6 @@ export default {
         },
       })
         .then((result) => {
-          console.log("result ==>", result);
           if (result.data.Code == 200) {
             this.apply.id = row.id;
             this.apply.status = row.status;
@@ -990,7 +984,6 @@ export default {
         },
       })
         .then((result) => {
-          console.log(result);
           loading.close();
           if (result.data.Code == "200") {
             if (e.target.files.length > 1) {
@@ -1092,7 +1085,6 @@ export default {
         params: data,
       })
         .then((result) => {
-          console.log("result ==>", result);
           if (result.data.Code == 200) {
             this.apply.state = false;
             if (this.isMOre) {
@@ -1138,7 +1130,6 @@ export default {
         },
       })
         .then((result) => {
-          console.log("result ==>", result);
           this.applyRow.status = 2;
           this.applyRow.status1 = "已发货";
         })
@@ -1268,7 +1259,6 @@ export default {
         params: data,
       })
         .then((result) => {
-          console.log("result ==>", result);
           this.tableLoading = false;
           if (result.data.Code == 200) {
             this.tableData = result.data.purchaseorders;
@@ -1373,7 +1363,6 @@ export default {
         },
       })
         .then((result) => {
-          console.log("result ==>", result);
           if (result.data.Code == 200) {
             this.apply.state = true;
             result.data.qoo10Orders.forEach((e) => {
@@ -1414,7 +1403,6 @@ export default {
         },
       })
         .then((result) => {
-          console.log("result ==>", result);
           var idsList = this.apply.ids.split(",");
           this.tableData.forEach((e) => {
             for (let i = 0; i < idsList.length; i++) {

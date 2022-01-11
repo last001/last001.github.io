@@ -1,176 +1,101 @@
 <template>
   <div class="record">
-    <div class="v-record" v-if="blockState">
-      <div class="main" v-title data-title="进出库记录"></div>
-      <div class="dandruff">
-        <el-breadcrumb separator-class="el-icon-arrow-right">
-          <el-breadcrumb-item :to="{ path: '/Home' }">首页</el-breadcrumb-item>
-          <el-breadcrumb-item>库存管理</el-breadcrumb-item>
-          <el-breadcrumb-item>进出库记录</el-breadcrumb-item>
-        </el-breadcrumb>
-      </div>
+    <div class="v-record">
+      <div class="main" v-title data-title="出库"></div>
       <div class="recordInfo">
-        <div class="status-type">
-          <div class="statusDiv">
-            <span class="text">状态：</span>
-            <div
-              v-for="(item, index) in radioList"
-              :key="index"
-              @click="clickRadio(item, index)"
-            >
-              <input type="radio" :checked="item.checked" />
-              <span>{{ item.name }}</span>
-            </div>
-          </div>
-          <div class="search">
-            <div class="odd">
-              <span>单号：</span>
-              <input type="text" value="" placeholder="请输入" />
-            </div>
-            <div class="godownTime">
-              <span>认领人：</span>
-              <input type="text" value="" placeholder="请输入" />
-            </div>
-            <div class="updateTime">
-              <span>入库时间：</span>
-              <input type="text" value="" placeholder="示例2021-01-01" />
-            </div>
-            <div class="btn">
-              <!-- <div>
-            <i class="el-icon-refresh-right"></i>
-          </div>
-          <div><i class="el-icon-search"></i></div> -->
-              <el-button type="success" icon="el-icon-refresh-right"
-                >重置</el-button
-              >
-              <el-button type="primary" icon="el-icon-search">搜索</el-button>
-            </div>
-          </div>
+        <div class="search">
+          <input
+            type="text"
+            v-model="order"
+            placeholder="请输入单号"
+            @keydown.enter="search()"
+          />
+          <el-button type="primary" size="medium" @click="search()"
+            >查询</el-button
+          >
         </div>
         <div class="record-table">
-          <!-- 表格 -->
-          <div class="xls">
+          <div class="table-left">
+            <div class="table-title">账号余额不足</div>
             <el-table
-              ref="multipleTable"
+              v-loading="tableDataLoading"
               :data="tableData"
-              tooltip-effect="dark"
-              style="width: 100%"
-              stripe
               border
+              style="width: 100%"
             >
               <template slot="empty">
                 <span class="iconfont icon-zanwushuju"></span>
                 <div>暂无数据</div>
               </template>
-              <el-table-column type="selection" width="50"></el-table-column>
-              <el-table-column prop="odd" label="名称/单号"></el-table-column>
-              <el-table-column
-                prop="orderID"
-                label="订单编号"
-              ></el-table-column>
-              <el-table-column prop="claimant" label="认领人"></el-table-column>
-              <el-table-column prop="number" label="数量"></el-table-column>
-              <el-table-column label="图片">
-                <template slot-scope="scope">
-                  <img :src="scope.row.imgSrc" alt="" style="height: 50px" />
-                </template>
+              <el-table-column prop="ClientName" label="名字">
               </el-table-column>
-              <el-table-column
-                prop="godownTime"
-                label="入库时间"
-              ></el-table-column>
-              <el-table-column label="物件状态">
-                <el-table-column
-                  prop="stockPending"
-                  label="待出库"
-                ></el-table-column>
-                <el-table-column prop="broken" label="破损"></el-table-column>
-                <el-table-column prop="lossOf" label="丢失"></el-table-column>
-                <el-table-column
-                  prop="haveOutbound"
-                  label="已出库"
-                ></el-table-column>
-              </el-table-column>
-              <el-table-column
-                prop="claimTime"
-                label="认领时间"
-              ></el-table-column>
-              <el-table-column label="状态" prop="status"></el-table-column>
-              <el-table-column label="备注" prop="remask"></el-table-column>
-              <el-table-column label="操作">
+              <el-table-column prop="orderNum" label="单号"></el-table-column>
+              <el-table-column prop="" label="提示">
                 <template slot-scope="scope">
-                  <el-button
-                    type="text"
-                    class="Edit"
-                    @click="handleEdit(scope.$index, scope.row)"
-                  >
-                    编辑
-                  </el-button>
+                  <span :class="scope.row.color">{{ scope.row.msg }}</span>
                 </template>
               </el-table-column>
             </el-table>
+            <div class="table-btn">
+              <el-button type="primary" size="medium" @click="sendTip()"
+                >发送提示</el-button
+              >
+            </div>
           </div>
-          <!-- 分页 -->
-          <div class="block">
-            <el-pagination
-              @size-change="handleSizeChange"
-              @current-change="handleCurrentChange"
-              :current-page="currentPage"
-              layout="total,slot"
-              :total="copyTableData.length"
+          <div class="table-right">
+            <el-table
+              v-loading="tableData1Loading"
+              :data="tableData1"
+              border
+              style="width: 100%"
             >
-              <span class="blockText">显示</span>
-            </el-pagination>
-            <el-pagination
-              @size-change="handleSizeChange"
-              @current-change="handleCurrentChange"
-              :current-page="currentPage"
-              :page-sizes="[2, 3, 4, 5]"
-              :page-size="5"
-              layout="sizes, prev, pager, next, slot,jumper"
-              :total="copyTableData.length"
-            >
-              <span class="ensure-btn fr" @click="clickTrue()">确定</span>
-            </el-pagination>
+              <template slot="empty">
+                <span class="iconfont icon-zanwushuju"></span>
+                <div>暂无数据</div>
+              </template>
+              <el-table-column prop="orderNum" label="单号"> </el-table-column>
+              <el-table-column prop="trade_type1" label="渠道">
+              </el-table-column>
+              <el-table-column prop="operator" label="操作人">
+              </el-table-column>
+              <el-table-column prop="deliveryTime" label="出库时间">
+              </el-table-column>
+              <el-table-column prop="" label="出库提示">
+                <template slot-scope="scope">
+                  <span :class="scope.row.color">{{ scope.row.tips }}</span>
+                </template>
+              </el-table-column>
+            </el-table>
+            <div class="table-btn">
+              <el-button type="primary" size="medium" @click="confirmOut()"
+                >确认出库</el-button
+              >
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="none" v-else>功能开发中，敬请期待。。。</div>
   </div>
 </template>
 
 <script>
+import "@/assets/less/record/record.less";
+import { createNamespacedHelpers, mapState, mapActions } from "vuex";
+const {
+  mapState: homeState,
+  mapActions: homeActions,
+} = createNamespacedHelpers("homeStore");
 export default {
   data() {
     return {
-      blockState: false,
-      //   radio数组
-      radioList: [
-        {
-          name: "全部",
-          checked: true,
-        },
-        {
-          name: "待出库",
-          checked: false,
-        },
-        {
-          name: "已出库",
-          checked: false,
-        },
-        {
-          name: "已退回",
-          checked: false,
-        },
-      ],
-      //   xls
+      //  查询单号
+      order: "",
+      //   欠费
       tableData: [],
-      copyTableData: [],
-      //  分页 currentPage
-      currentPage: 1,
-      //   每一页多少条
-      pageSize: "",
+      tableDataLoading: false,
+      //  可以出库
+      tableData1: [],
+      tableData1Loading: false,
     };
   },
   beforeRouteEnter(to, from, next) {
@@ -178,225 +103,193 @@ export default {
     next();
   },
   created() {
-    this.$nextTick(() => {
-      this.$parent.$refs.sideNavbar1.testRouter();
-    });
-    // 分页复制对象
-    this.tableData = JSON.parse(JSON.stringify(this.copyTableData));
+    document.title = "出库";
+  },
+  computed: {
+    ...homeState(["InfoData"]),
   },
   methods: {
-    // 点击radio
-    clickRadio(item, index) {
-      if (item.checked) {
+    //  查询
+    search() {
+      if (this.order == "") {
+        this.$message({
+          message: "请输入要查询的单号",
+          duration: 600,
+          type: "warning",
+          center: true,
+        });
         return;
       }
-      this.radioList.forEach((e) => {
-        e.checked = false;
-      });
-      item.checked = true;
-    },
-    // 表格
-    // 编辑
-    handleEdit(index, row) {
-      let loading = this.$loading({
-        lock: false,
-        text: "加载中...",
-        spinner: "el-icon-loading",
-        background: "rgba(0, 0, 0, 0.7)",
-      });
-      setTimeout(() => {
-        loading.close();
-      }, 300);
-      setTimeout(() => {
-        this.$router.push({
-          name: "PurchaseCompileDefault",
-          query: { row: JSON.stringify(row), rowStatus: true, title: "record" },
-        });
-      }, 400);
-    },
-    // 分页事件 每页多少条
-    handleSizeChange(val) {
-      this.pageSize = val;
-      this.currentPage = 1;
-      this.tableData = JSON.parse(JSON.stringify(this.copyTableData));
-      this.tableData.splice(val);
-    },
-    // 去第几页
-    handleCurrentChange(val) {
-      this.currentPage = val;
-      let abc = this.pageSize * (val - 1);
-      this.tableData = JSON.parse(JSON.stringify(this.copyTableData));
-      this.tableData.splice(0, abc);
-      this.tableData.splice(this.pageSize);
 
-      //   this.tableData = a.splice(this.pageSize)
+      this.$axios({
+        url: "/sigaoyi/ShippingInquiry",
+        method: "POST",
+        params: {
+          order: this.order,
+          userName: this.InfoData.userName,
+        },
+      })
+        .then((result) => {
+          if (result.data.Code == 200) {
+            // 可以出库
+            //   检测单号
+            if (this.tableData1.length > 0) {
+              if (
+                this.tableData1.findIndex(
+                  (target) => target.orderNum == this.order
+                ) > -1
+              ) {
+                this.$notify({
+                  title: "单号重复",
+                  message: "该单号已经存在",
+                  type: "warning",
+                  offset: 50,
+                });
+                return;
+              } else {
+                result.data.shipInfo["color"] = "wck";
+                result.data.shipInfo["tips"] = "未出库";
+                this.tableData1.push(result.data.shipInfo);
+                return (this.order = "");
+              }
+            }
+            // else
+            result.data.shipInfo["color"] = "wck";
+            result.data.shipInfo["tips"] = "未出库";
+            this.tableData1.push(result.data.shipInfo);
+            this.order = "";
+          } else if (result.data.Code == 201) {
+            // 欠费
+            result.data.arrearsDetails["color"] = "";
+            //   检测单号
+            if (this.tableData.length > 0) {
+              if (
+                this.tableData.findIndex(
+                  (target) => target.orderNum == this.order
+                ) > -1
+              ) {
+                this.$notify({
+                  title: "单号重复",
+                  message: "该单号已经存在",
+                  type: "warning",
+                  offset: 50,
+                });
+                return;
+              } else {
+                this.tableData.push(result.data.arrearsDetails);
+                return (this.order = "");
+              }
+            }
+            // else
+            this.tableData.push(result.data.arrearsDetails);
+            this.order = "";
+            this.$notify({
+              title: "余额不足",
+              message: "该账号余额不足",
+              type: "warning",
+              offset: 50,
+              duration: 2000,
+            });
+          } else {
+            // 错误
+            this.$notify({
+              title: "请求失败",
+              message: result.data.msg,
+              type: "warning",
+              offset: 50,
+            });
+          }
+        })
+        .catch((err) => {
+          console.log("err ==>", err);
+          this.$notify({
+            title: "请求错误",
+            message: "系统业务繁忙,请稍后再试",
+            type: "error",
+            offset: 50,
+          });
+        });
     },
-    // 点击确定去哪一页
-    clickTrue() {
-      this.handleCurrentChange(this.currentPage);
+    // 确认出库
+    confirmOut() {
+      this.tableData1Loading = true;
+      this.tableData1.forEach((e) => {
+        if (e.color == "cg") {
+          return;
+        }
+        this.$axios({
+          url: "/sigaoyi/addshipInfo",
+          method: "POST",
+          params: {
+            order: e.orderNum,
+            operator: e.operator,
+            trade_type: e.trade_type1,
+            deliveryTime: e.deliveryTime,
+          },
+        })
+          .then((result) => {
+            this.tableData1Loading = false;
+            if (result.data.Code == 200) {
+              // if (this.tableData.findIndex((target) => target.orderNum != this.order) > -1){}
+              e.tips = result.data.msg;
+              e.color = "cg";
+            } else {
+              e.tips = result.data.msg;
+              e.color = "sbai";
+            }
+          })
+          .catch((err) => {
+            console.log("err ==>", err);
+            this.tableData1Loading = false;
+          });
+      });
+    },
+    // 发送提示
+    sendTip() {
+      var data = {
+        code: "",
+        userName: "",
+      };
+      this.tableData.forEach((e) => {
+        data.code += e.arrears + ",";
+        data.userName += e.ClientName + ",";
+      });
+      data.code = data.code.substring(0, data.code.length - 1);
+      data.userName = data.userName.substring(0, data.userName.length - 1);
+      //   console.log("data ==>", data);
+      //   loading
+      this.tableDataLoading = true;
+      this.$axios({
+        url: "/sigaoyi/SMSReminder",
+        method: "POST",
+        params: data,
+      })
+        .then((result) => {
+          this.tableDataLoading = false;
+          if (result.data.Code == 200) {
+            this.tableData.forEach((e) => {
+              e.msg = result.data.message;
+              e.color = "cg";
+            });
+          } else {
+            this.tableData.forEach((e) => {
+              e.msg = result.data.message;
+              e.color = "sbai";
+            });
+          }
+        })
+        .catch((err) => {
+          this.tableDataLoading = false;
+          console.log("err ==>", err);
+          this.tableData.forEach((e) => {
+            e.msg = "系统业务繁忙,请稍后再试";
+            e.color = "sbai";
+          });
+        });
     },
   },
 };
 </script>
 
-<style lang="less" scoped>
-.record {
-  .v-record,
-  .none {
-    position: relative;
-    overflow-x: hidden;
-    padding: 20px;
-    padding-top: 0;
-    padding-bottom: 51px;
-    margin-top: 48px;
-    .recordInfo {
-      .status-type {
-        background: #fff;
-        border-radius: 4px;
-        padding: 15px;
-
-        .statusDiv {
-          display: flex;
-          margin-right: 20px;
-          cursor: pointer;
-          font-size: 15px;
-
-          div {
-            display: flex;
-            margin-right: 15px;
-          }
-        }
-
-        .search {
-          margin-top: 10px;
-          display: flex;
-          line-height: 53px;
-          font-size: 15px;
-
-          div {
-            margin-right: 15px;
-
-            input {
-              padding: 8px 0;
-              width: 230px;
-              text-indent: 8px;
-              border-radius: 4px;
-              border: 1px solid #c2c2c2;
-              outline: none;
-              &:hover {
-                border: 1px solid #409eff;
-              }
-              &:focus {
-                outline-offset: 0px;
-                border: 1px solid #409eff;
-              }
-            }
-
-            select {
-              width: 230px;
-              padding: 8px 0px;
-              text-indent: 8px;
-              border-radius: 4px;
-              border: 1px solid #c2c2c2;
-              color: #666;
-              outline: none;
-              &:hover {
-                border: 1px solid #409eff;
-              }
-              &:focus {
-                outline-offset: 0px;
-                border: 1px solid #409eff;
-              }
-            }
-
-            button {
-              padding: 9px 14px;
-              &:first-child {
-                margin-right: 5px;
-              }
-            }
-          }
-
-          .btn {
-            display: flex;
-            padding: 10px 0;
-
-            div {
-              border: 1px solid #777;
-              height: 31px;
-              line-height: 34px;
-              padding: 0 10px;
-
-              i {
-                font-size: 16px;
-                color: #3b3b3b;
-              }
-            }
-          }
-        }
-      }
-
-      .record-table {
-        background: #fff;
-        border-radius: 4px;
-        padding: 15px;
-        margin-top: 15px;
-        .xls {
-          margin-top: 10px;
-
-          .el-table td,
-          .el-table th {
-            text-align: center;
-          }
-
-          .el-button--text:hover {
-            text-decoration: underline;
-          }
-        }
-
-        .block {
-          margin-top: 10px;
-          display: flex;
-
-          .blockText {
-            font-weight: normal;
-          }
-
-          .el-pagination {
-            //   width: 30%x;
-
-            &:nth-child(2) {
-              width: 100%;
-              margin-left: -13px;
-            }
-          }
-
-          .el-pagination__jump {
-            float: right;
-            margin-right: 16px;
-          }
-
-          .ensure-btn {
-            //   margin-right: -170px;
-            font-weight: normal;
-            border: 1px solid #dcdfe6;
-            text-align: center;
-            cursor: pointer;
-            padding: 0 10px;
-            border-radius: 4px;
-
-            &:hover {
-              border-color: #40a0ffcc;
-              color: #409EFF;
-              background: #ecf5ff;
-            }
-          }
-        }
-      }
-    }
-  }
-  .none {
-    padding-top: 20px;
-  }
-}
+<style lang="less">
 </style>

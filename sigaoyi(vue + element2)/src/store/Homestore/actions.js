@@ -121,6 +121,9 @@ export const actions = {
   // Home 获取未读消息值
   setOnlineList({state},list){
     state.onlineList = list;
+  },
+  // 验证码
+  setCAPTCHA({state},code){
+    state.CAPTCHA = code;
   }
-  
 }

@@ -218,19 +218,28 @@ export default {
               isActive: false,
               showState: true,
             },
-            // {
-            //   titleB: "进出库记录",
-            //   isChildB: false,
-            //   routerSrc: "Record",
-            //   routerPath: "purchaSellStock",
-            //   isRoute: false,
-            //   isActive: false,
-            //   showState: true,
-            // },
             {
               titleB: "入库",
               isChildB: false,
               routerSrc: "Godown",
+              routerPath: "purchaSellStock",
+              isRoute: false,
+              isActive: false,
+              showState: true,
+            },
+            {
+              titleB: "出库",
+              isChildB: false,
+              routerSrc: "Record",
+              routerPath: "purchaSellStock",
+              isRoute: false,
+              isActive: false,
+              showState: true,
+            },
+            {
+              titleB: "出库记录",
+              isChildB: false,
+              routerSrc: "Outbound",
               routerPath: "purchaSellStock",
               isRoute: false,
               isActive: false,
@@ -613,7 +622,6 @@ export default {
         this.testRouter();
       }
       this.$emit("Wstate", this.WstateStatus);
-      console.log("this.iconSrc ==>", this.iconSrc);
     },
     clickTitleA(item) {
       if (!this.WstateStatus) {
@@ -636,7 +644,14 @@ export default {
       if (ele.isChildB) {
         return;
       }
+      this.sideNavbarList.forEach((e) => {
+        e.titleAList.forEach((el) => {
+          el.isActive = false;
+          el.isRoute = false;
+        });
+      });
       ele.isActive = true;
+      ele.isRoute = true;
       this.setPagingList(ele);
       this.$router.push({ name: ele.routerSrc });
       //   this.$parent.$refs.titlePage.GetRouterName();
@@ -651,7 +666,6 @@ export default {
     handleClose(key, keyPath) {},
     // 获取公司名字 + 管理员
     getCompanyName() {
-      //   console.log("this.companyData ==>", this.companyData);
       if (this.companyData.id) {
         if (
           this.companyData.companyName == "" ||
@@ -687,7 +701,7 @@ export default {
           }
           // 订单管理员
           if (
-            this.InfoData.userName == "任治琴" ||
+            this.InfoData.userName == "汪春梅" ||
             this.InfoData.userName == "李健明" ||
             this.InfoData.userName == "王杰" ||
             this.InfoData.userName == "hzsugoi"
@@ -698,7 +712,7 @@ export default {
           } else {
             e.titleAList.forEach((el) => {
               el.showState = true;
-              if (el.titleB == "入库") {
+              if (el.titleB == "入库" || el.titleB == "出库") {
                 el.showState = false;
               }
             });
@@ -738,7 +752,6 @@ export default {
                 ele.isRoute = true;
                 this.openedsList.push(`${i + 1}`);
                 this.openedsList.push(`${i + 1}-${k + 1}`);
-                console.log(this.openedsList);
                 // 初始添加入 pagingList
                 // this.setPagingList(ele);
               }

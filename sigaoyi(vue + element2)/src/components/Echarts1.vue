@@ -45,7 +45,8 @@ export default {
       },
       xAxis: {
         type: "category",
-        data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"],
+        // data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"],
+        data: [],
         axisTick: {
           alignWithLabel: true,
         },
@@ -53,6 +54,10 @@ export default {
       yAxis: [
         {
           type: "value",
+          min: 0,
+          max: 60,
+          splitNumber: 10,
+
           axisLabel: {
             formatter: "{value}",
           },
@@ -63,7 +68,8 @@ export default {
           name: "销量",
           type: "bar",
           barWidth: 50,
-          data: [50, 97, 136, 190, 83, 28],
+          //   data: [50, 97, 136, 190, 83, 28],
+          data: [],
           itemStyle: {
             color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
               { offset: 1, color: "#1787f5" },
@@ -104,12 +110,12 @@ export default {
           radius: "60%",
           top: "10%",
           data: [
-            { value: 50, name: "衬衫" },
-            { value: 97, name: "羊毛衫" },
-            { value: 136, name: "雪纺衫" },
-            { value: 190, name: "裤子" },
-            { value: 83, name: "高跟鞋" },
-            { value: 30, name: "袜子" },
+            // { value: 50, name: "衬衫" },
+            // { value: 97, name: "羊毛衫" },
+            // { value: 136, name: "雪纺衫" },
+            // { value: 190, name: "裤子" },
+            // { value: 83, name: "高跟鞋" },
+            // { value: 30, name: "袜子" },
           ],
           label: {
             show: true,

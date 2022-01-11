@@ -611,11 +611,8 @@ export default {
         return;
       }
 
-      console.log("this.optionIndex ==>", this.optionIndex);
-
       if (this.optionIndex == 1 || this.optionIndex == 2) {
         // 提示
-        console.log(this.weightVal);
         if (this.weightVal == "") {
           this.$message({
             type: "warning",

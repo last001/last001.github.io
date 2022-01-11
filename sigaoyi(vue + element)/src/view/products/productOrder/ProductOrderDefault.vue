@@ -1630,31 +1630,31 @@ export default {
                     e.showStatus = false;
                   }
                 });
-                //  >2 公司名字 + 级别5
-                if (
-                  this.InfoData.company == "和美国际旅行社有限公司" ||
-                  this.InfoData.company == "杭州思高易" ||
-                  this.InfoData.statu == "5"
-                ) {
-                  this.uploadOrderStatus = true;
-                  this.btnList.forEach((e) => {
-                    if (e.name == "同步订单" || e.name == "添加订单") {
-                      e.showStatus = true;
-                    }
-                  });
-                }
-                // 沈永鑫
-                if (
-                  this.InfoData.userName == "沈永鑫" &&
-                  result.data.billingPeriodFreight <= 0
-                ) {
-                  this.uploadOrderStatus = true;
-                  this.btnList.forEach((e) => {
-                    if (e.name == "同步订单" || e.name == "添加订单") {
-                      e.showStatus = true;
-                    }
-                  });
-                }
+                // //  >2 公司名字 + 级别5
+                // if (
+                //   this.InfoData.company == "和美国际旅行社有限公司" ||
+                //   this.InfoData.company == "杭州思高易" ||
+                //   this.InfoData.statu == "5"
+                // ) {
+                //   this.uploadOrderStatus = true;
+                //   this.btnList.forEach((e) => {
+                //     if (e.name == "同步订单" || e.name == "添加订单") {
+                //       e.showStatus = true;
+                //     }
+                //   });
+                // }
+                // // 沈永鑫
+                // if (
+                //   this.InfoData.userName == "沈永鑫" &&
+                //   result.data.billingPeriodFreight <= 0
+                // ) {
+                //   this.uploadOrderStatus = true;
+                //   this.btnList.forEach((e) => {
+                //     if (e.name == "同步订单" || e.name == "添加订单") {
+                //       e.showStatus = true;
+                //     }
+                //   });
+                // }
                 //  朴学峰
                 if (
                   this.InfoData.userName == "朴学峰" &&
@@ -3208,31 +3208,31 @@ export default {
                     e.showStatus = false;
                   }
                 });
-                //  >2 公司名字 + 级别5
-                if (
-                  this.InfoData.company == "和美国际旅行社有限公司" ||
-                  this.InfoData.company == "杭州思高易" ||
-                  this.InfoData.statu == "5"
-                ) {
-                  this.uploadOrderStatus = true;
-                  this.btnList.forEach((e) => {
-                    if (e.name == "同步订单" || e.name == "添加订单") {
-                      e.showStatus = true;
-                    }
-                  });
-                }
-                // 沈永鑫
-                if (
-                  this.InfoData.userName == "沈永鑫" &&
-                  result.data.billingPeriodFreight <= 0
-                ) {
-                  this.uploadOrderStatus = true;
-                  this.btnList.forEach((e) => {
-                    if (e.name == "同步订单" || e.name == "添加订单") {
-                      e.showStatus = true;
-                    }
-                  });
-                }
+                // //  >2 公司名字 + 级别5
+                // if (
+                //   this.InfoData.company == "和美国际旅行社有限公司" ||
+                //   this.InfoData.company == "杭州思高易" ||
+                //   this.InfoData.statu == "5"
+                // ) {
+                //   this.uploadOrderStatus = true;
+                //   this.btnList.forEach((e) => {
+                //     if (e.name == "同步订单" || e.name == "添加订单") {
+                //       e.showStatus = true;
+                //     }
+                //   });
+                // }
+                // // 沈永鑫
+                // if (
+                //   this.InfoData.userName == "沈永鑫" &&
+                //   result.data.billingPeriodFreight <= 0
+                // ) {
+                //   this.uploadOrderStatus = true;
+                //   this.btnList.forEach((e) => {
+                //     if (e.name == "同步订单" || e.name == "添加订单") {
+                //       e.showStatus = true;
+                //     }
+                //   });
+                // }
                 //  朴学峰
                 if (
                   this.InfoData.userName == "朴学峰" &&

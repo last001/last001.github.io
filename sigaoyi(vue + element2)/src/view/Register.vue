@@ -70,6 +70,7 @@
               v-model.number="ruleForm.userName"
               placeholder="请输入用户名"
               clearable
+              @blur="getRepeatName()"
             ></el-input>
           </el-form-item>
           <el-form-item label="密码" prop="pass">
@@ -131,21 +132,40 @@
               }}</el-button>
             </el-row>
           </div>
-          <el-form-item label="推荐人" prop="recommend">
+          <el-form-item label="公司名" prop="recommend">
             <el-input
               type="text"
               v-model.number="ruleForm.recommend"
-              placeholder="请输入推荐人"
+              placeholder="选填项"
               clearable
             ></el-input>
           </el-form-item>
-          <div class="toLogin" @click="toLogin"><i>已有账号？</i>去登陆</div>
+          <div class="toLogin" :class="agreementIsActive ? 'active' : ''">
+            <el-checkbox v-model="agreementChecked"></el-checkbox>
+            <font @click="agreementChecked = !agreementChecked"
+              >我已阅读并同意</font
+            >
+            <i @click="toAgreement">《ERP用户服务协议》</i>
+          </div>
+          <div class="toLogin1" :class="agreementIsActive1 ? 'active' : ''">
+            <el-checkbox v-model="agreementChecked1"></el-checkbox>
+            <font @click="agreementChecked1 = !agreementChecked1"
+              >我愿意通过邮件、短信等方式接受最新的资讯</font
+            >
+          </div>
           <div class="registeBox">
             <el-form-item>
-              <el-button type="primary" @click="submitForm('ruleForm')"
+              <el-button
+                type="primary"
+                :class="clickRegister ? '' : 'active'"
+                :icon="iconSrc"
+                @click="clickRegister && submitForm('ruleForm')"
                 >注册</el-button
               >
             </el-form-item>
+            <span class="already"
+              >已有账号？<i @click="toLogin">去登陆</i></span
+            >
           </div>
         </el-form>
       </div>
@@ -195,6 +215,8 @@ export default {
       clickLogin: true,
       // enterLogin拦截状态值
       enterLogin: true,
+      // 点击注册按钮事件拦截状态值
+      clickRegister: true,
       //   点击登录按钮
       isLogin: false,
       //  个人 公司 radio
@@ -224,10 +246,23 @@ export default {
       },
       sendCodeText: "获取验证码",
       sendCodeStatus: true,
-      //  定时器
+      //   ONE
+      agreementChecked: false,
+      agreementIsActive: false,
+      // TWO
+      agreementChecked1: false,
+      agreementIsActive1: false,
+      // 屏幕高度
       timer: null,
       //  弹出层状态值
       tpisStatus: false,
+
+      // 验证用户名 是否重复
+      isRest: false,
+      // 验证用户名 错误提示
+      isRestmessage: "",
+      // 验证 验证码
+      valCodeTips: false,
     };
   },
   beforeRouteEnter(to, from, next) {
@@ -247,7 +282,7 @@ export default {
     });
   },
   computed: {
-    ...homeState(["InfoData", "companyData", "shopData"]),
+    ...homeState(["InfoData", "companyData", "shopData", "CAPTCHA"]),
   },
   mounted() {},
   destroyed() {
@@ -290,6 +325,8 @@ export default {
       this.rules.userName[0].validator = (rule, value, callback) => {
         if (value === "") {
           callback(new Error("请输入用户名"));
+        } else if (this.isRest) {
+          callback(new Error(this.isRestmessage));
         } else {
           callback();
         }
@@ -353,17 +390,20 @@ export default {
           callback(new Error("请输入验证码"));
         } else if (!valCodeReg.test(value)) {
           callback(new Error("验证码格式不正确"));
-        }
-        callback();
-      };
-      // 推荐人
-      this.rules.recommend[0].validator = (rule, value, callback) => {
-        if (value === "") {
-          callback(new Error("请输入推荐人"));
+        } else if (this.valCodeTips) {
+          callback(new Error("验证码不正确"));
         } else {
           callback();
         }
       };
+      //   // 推荐人
+      //   this.rules.recommend[0].validator = (rule, value, callback) => {
+      //     if (value === "") {
+      //       callback(new Error("请输入推荐码"));
+      //     } else {
+      //       callback();
+      //     }
+      //   };
     },
     // 登陆表单验证
     codeLogin() {
@@ -389,50 +429,94 @@ export default {
       // 手机号码是否有填写
       let phoneReg = new RegExp("^1[3456789][0-9]{9}$");
       if (this.ruleForm.phone == "" || !phoneReg.test(this.ruleForm.phone)) {
-        this.$message({
-          message: "请输入正确的手机号码!",
-          center: true,
-          duration: 1000,
-          type: "error",
-        });
+        this.$refs.ruleForm.validateField("phone");
       } else {
         // 获取验证码
         this.sendCodeStatus = false;
-        let Num = 60;
-        this.$message({
-          center: true,
-          message: `我们已经向${this.ruleForm.phone}发送验证码,请注意查收!`,
-          type: "success",
-          duration: 1200,
-        });
         this.getApi();
-        let timer = null;
-        timer = setInterval(() => {
-          Num--;
-          this.sendCodeText = Num + "s重新发送";
-          if (Num <= 0) {
-            clearInterval(timer);
-            timer = null;
-            //   "发送验证码";
-            this.sendCodeText = "获取验证码";
-            this.sendCodeStatus = true;
-          }
-        }, 1000);
       }
     },
     // 获取验证码 api=""
     getApi() {
-      //   this.$axios({
-      //     url: "/sigaoyi/",
-      //     method: "POST",
-      //     params: data,
-      //   })
-      //     .then((result) => {
-      //       console.log("result ==>", result);
-      //     })
-      //     .catch((err) => {
-      //       console.log("err ==>", err);
-      //     });
+      this.$axios({
+        url: "/sigaoyi/Messages",
+        method: "POST",
+        params: {
+          pholo: this.ruleForm.phone,
+        },
+      })
+        .then((result) => {
+          if (result.data.code == "200") {
+            this.$notify({
+              title: "请求成功",
+              message: `我们已经向${this.ruleForm.phone}发送验证码,请注意查收!`,
+              type: "success",
+              offset: 50,
+              duration: 8000,
+            });
+            this.setCAPTCHA(result.data.CAPTCHA);
+
+            // 获取验证码
+            this.sendCodeStatus = false;
+            let Num = 60;
+            let timer = null;
+            timer = setInterval(() => {
+              Num--;
+              this.sendCodeText = Num + "s重新发送";
+              if (Num <= 0) {
+                clearInterval(timer);
+                timer = null;
+                //   "发送验证码";
+                this.sendCodeText = "获取验证码";
+                this.sendCodeStatus = true;
+              }
+            }, 1000);
+          } else {
+            this.$notify({
+              title: "请求失败",
+              message: result.data.msg,
+              type: "warning",
+              offset: 50,
+            });
+            this.sendCodeStatus = true;
+          }
+        })
+        .catch((err) => {
+          console.log("err ==>", err);
+          this.$notify({
+            title: "请求错误",
+            message: "系统繁忙,请稍后再试",
+            type: "error",
+            offset: 50,
+          });
+          this.sendCodeStatus = true;
+        });
+    },
+    // 查询用户名 重复
+    getRepeatName() {
+      if (this.ruleForm.userName == "") {
+        return;
+      }
+      this.$axios({
+        url: "/sigaoyi/RepeatName",
+        method: "POST",
+        params: {
+          userName: this.ruleForm.userName,
+        },
+      })
+        .then((result) => {
+          if (result.data.Code == "200") {
+            this.isRest = false;
+            this.isRestmessage = result.data.message;
+          } else {
+            this.isRest = true;
+            this.isRestmessage = result.data.message;
+          }
+          this.$refs.ruleForm.validateField("userName");
+        })
+        .catch((err) => {
+          console.log("err ==>", err);
+        });
     },
     // 点击注册按钮
     submitForm(formName) {
@@ -440,9 +524,83 @@ export default {
         if (valid) {
           alert("submit!");
         } else {
-          return false;
+          // 同意协议
+          if (!this.agreementChecked) {
+            this.agreementIsActive = true;
+            setTimeout(() => {
+              this.agreementIsActive = false;
+            }, 1000);
+            return;
+          }
+          if (!this.agreementChecked1) {
+            this.agreementIsActive1 = true;
+            setTimeout(() => {
+              this.agreementIsActive1 = false;
+            }, 1000);
+            return;
+          }
+
+          this.addUser();
         }
       });
+    },
+    // 注册
+    addUser() {
+      if (this.ruleForm.valCode == this.CAPTCHA) {
+        //  注册按钮 拦截
+        this.clickRegister = false;
+        this.iconSrc = "el-icon-loading";
+        // 验证码 提示
+        this.valCodeTips = false;
+        let data = {
+          password: this.ruleForm.pass,
+          userName: this.ruleForm.userName,
+          phone: this.ruleForm.phone,
+          mail: this.ruleForm.email,
+          company: this.ruleForm.recommend,
+        };
+        this.$axios({
+          url: "/sigaoyi/addUser",
+          method: "POST",
+          params: data,
+        })
+          .then((result) => {
+            this.clickRegister = true;
+            this.iconSrc = "";
+            if (result.data.Code == "200") {
+              this.$notify({
+                title: "请求成功",
+                message: result.data.msg,
+                type: "success",
+                offset: 50,
+              });
+              setTimeout(() => {
+                this.$router.push({ name: "Login" });
+              }, 300);
+            } else {
+              this.$notify({
+                title: "请求失败",
+                message: result.data.msg,
+                type: "warning",
+                offset: 50,
+              });
+            }
+          })
+          .catch((err) => {
+            this.clickRegister = true;
+            this.iconSrc = "";
+            console.log("err ==>", err);
+            this.$notify({
+              title: "请求失败",
+              message: "系统业务繁忙,请稍后再试",
+              type: "error",
+              offset: 50,
+            });
+          });
+      } else {
+        this.valCodeTips = true;
+        this.$refs.ruleForm.validateField("valCode");
+      }
     },
     // 点击登陆按钮
     submitFormLogin(formName) {
@@ -602,7 +760,6 @@ export default {
             this.iconSrc = "";
             this.isLogin = false;
           }, 300);
-          //   console.log("result ==>", result);
           if (result.data.Code == "200") {
             setTimeout(() => {
               this.$notify({
@@ -675,6 +832,18 @@ export default {
     toLogin() {
       this.$router.push({ name: "Login" });
     },
+    // 去 协议
+    toAgreement() {
+      let routeData = this.$router.resolve({
+        path: "/agreement",
+        query: {},
+      });
+      window.open(routeData.href, "_blank");
+    },
+    // 使用帮助
+    toLink() {
+      window.location.href = "http://www.ec-sigaoyi.com/";
+    },
     // 屏幕高度
     getclientH() {
       this.timer = null;
@@ -682,7 +851,12 @@ export default {
         this.screenHeight = document.documentElement.clientHeight;
       }, 400);
     },
-    ...homeActions(["setInfoData", "setCompanData", "setShopData"]),
+    ...homeActions([
+      "setInfoData",
+      "setCompanData",
+      "setShopData",
+      "setCAPTCHA",
+    ]),
   },
   watch: {
     screenHeight: "getclientH",

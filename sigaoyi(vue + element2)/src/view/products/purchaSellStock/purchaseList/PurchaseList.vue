@@ -447,7 +447,12 @@ export default {
   },
   beforeRouteEnter(to, from, next) {
     document.body.scrollTop = document.documentElement.scrollTop = 0;
-    if (from.path == "/purchaSellStock/purchaseCompileDefault") {
+    if (
+      from.path == "/purchaSellStock/purchaseCompileDefault" ||
+      from.path == "/purchaSellStock/record" ||
+      from.path == "/purchaSellStock/godown" ||
+      from.path == "/purchaSellStock/outbound"
+    ) {
       to.meta.isBack = true;
     } else {
       to.meta.isBack = false;
@@ -466,6 +471,9 @@ export default {
       if (this.$route.query.flag) {
         this.search(1, 30);
       }
+      if (this.tableData.length == 0) {
+        this.resetSearch();
+      }
     }
   },
   created() {},
@@ -479,13 +487,14 @@ export default {
       this.searchList.godownTime = "";
       this.searchList.Claimant = "";
       this.searchList.purchaseTime = "";
+      this.radioIndex = 99;
       if (
         this.InfoData.statu == "0" ||
         this.InfoData.userName == "王焕杰" ||
         this.InfoData.userName == "李健明" ||
         this.InfoData.userName == "王杰" ||
         this.InfoData.userName == "hzsugoi" ||
-        this.InfoData.userName == "任治琴"
+        this.InfoData.userName == "汪春梅"
       ) {
         this.btnStatus = true;
       } else {
@@ -568,15 +577,12 @@ export default {
         );
       }
 
-      console.log("data ==>", data);
-
       this.$axios({
         url: "/sigaoyi/NEWinStock",
         method: "POST",
         params: data,
       })
         .then((result) => {
-          console.log("result ==>", result);
           this.tableLoading = false;
 
           if (result.data.Code == 200) {
@@ -869,7 +875,6 @@ export default {
         return;
       }
 
-      console.log("data ==>", data);
       this.backList.state = false;
       this.$axios({
         url: "/sigaoyi/NEWaddlogistics",
@@ -877,7 +882,6 @@ export default {
         params: data,
       })
         .then((result) => {
-          console.log("result ==>", result);
           if (result.data.Code == 200) {
             this.changeStatus(this.backList.id);
             this.$notify({
@@ -917,7 +921,6 @@ export default {
         },
       })
         .then((result) => {
-          console.log("result ==>", result);
           this.rowList.status = "已退回";
         })
         .catch((err) => {
@@ -980,7 +983,6 @@ export default {
         },
       })
         .then((result) => {
-          console.log(result);
           this.tableLoading = false;
           if (result.data.Code == 200) {
             let obj = {

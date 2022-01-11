@@ -546,18 +546,16 @@ export default {
     };
   },
   beforeRouteEnter(to, from, next) {
-    
     next();
   },
   activated() {
-    
     // this.Width = document.documentElement.clientWidth - 50;
     // 状态值
     // 入库 statu
     if (
       this.InfoData.statu == 0 ||
       this.InfoData.userName == "王焕杰" ||
-      this.InfoData.userName == "任治琴" ||
+      this.InfoData.userName == "汪春梅" ||
       this.InfoData.userName == "李健明" ||
       this.InfoData.userName == "王杰" ||
       this.InfoData.userName == "hzsugoi"
@@ -578,14 +576,14 @@ export default {
         this.catalogueList = e.arrName;
       }
     });
-    
+
     if (this.$parent.$refs.titlePage != undefined) {
       // 掉用titleNavbar 的 方法
       this.$parent.$refs.titlePage.getInfoData();
     }
     // 检测路由
     this.detection();
-    
+
     // 解决不缓存跳到缓存的leftNavbar 不展开问题
     if (this.WstateStatus && this.$route.meta.keepAlive) {
       this.setWstateStatus(false);
@@ -597,12 +595,11 @@ export default {
     }
   },
   created() {
-    
     // 入库 statu
     if (
       this.InfoData.statu == 0 ||
       this.InfoData.userName == "王焕杰" ||
-      this.InfoData.userName == "任治琴" ||
+      this.InfoData.userName == "汪春梅" ||
       this.InfoData.userName == "李健明" ||
       this.InfoData.userName == "王杰" ||
       this.InfoData.userName == "hzsugoi"
@@ -629,8 +626,7 @@ export default {
     }
     // 检测路由
     this.detection();
-    
-    
+
     // 解决缓存跳到不缓存的leftNavbar 展开问题
     if (!this.WstateStatus && !this.$route.meta.keepAlive) {
       this.setWstateStatus(true);
@@ -670,7 +666,6 @@ export default {
         },
       })
         .then((result) => {
-          
           if (result.data.code == "200") {
             if (result.data.announcementsize > 0) {
               // 通知层状态值
@@ -700,9 +695,7 @@ export default {
             }
           }
         })
-        .catch((err) => {
-          
-        });
+        .catch((err) => {});
     },
     // 已阅读
     read() {
@@ -718,9 +711,7 @@ export default {
           this.releaseStatus = false;
           this.$emit("childByValue", true);
         })
-        .catch((err) => {
-          
-        });
+        .catch((err) => {});
     },
     // clickMe宽度
     clickW() {
@@ -751,7 +742,6 @@ export default {
         ) {
           this.catalogueList[this.catalogueList.length - 1].isChildren = true;
           this.catalogueList[this.catalogueList.length - 1].arrow = true;
-          
         }
         if (this.$route.path.indexOf("product") > -1) {
           this.catalogueList[this.catalogueList.length - 1].rightStatus = true;
@@ -788,7 +778,6 @@ export default {
         this.borderR = "3px solid #409eff";
       }
       this.$emit("Wstate", this.WstateStatus);
-      
     },
     // 检测路由
     detection() {
@@ -800,7 +789,7 @@ export default {
             e.children[i].isActive = false;
           }
         }
-         // this.catalogueList[this.catalogueList.length - 1].isChildren = true;
+        // this.catalogueList[this.catalogueList.length - 1].isChildren = true;
         if (e.name == "库存管理") {
           e.isChildren = this.sideStatus.isChildren;
           e.arrow = this.sideStatus.arrow;
@@ -822,17 +811,24 @@ export default {
           this.catalogueList[this.catalogueList.length - 1].isChildren = true;
           this.catalogueList[this.catalogueList.length - 1].rightStatus = true;
           this.catalogueList[this.catalogueList.length - 1].arrow = true;
-          this.catalogueList[this.catalogueList.length - 1].isChildrenColor = true;
+          this.catalogueList[
+            this.catalogueList.length - 1
+          ].isChildrenColor = true;
           //  上颜色
           if (e.isChildren) {
-            
             if (e.name == "趣天教学视频" || e.name == "系统操作教学视频") {
               //   父颜色
-              this.catalogueList[this.catalogueList.length - 2].isChildrenColor = true;
-              this.catalogueList[this.catalogueList.length - 2].isChildren = true;
+              this.catalogueList[
+                this.catalogueList.length - 2
+              ].isChildrenColor = true;
+              this.catalogueList[
+                this.catalogueList.length - 2
+              ].isChildren = true;
               this.catalogueList[this.catalogueList.length - 2].arrow = true;
               // 最后一个
-              this.catalogueList[this.catalogueList.length - 1].isChildren = false;
+              this.catalogueList[
+                this.catalogueList.length - 1
+              ].isChildren = false;
               this.catalogueList[this.catalogueList.length - 1].arrow = false;
               // this.catalogueList[this.catalogueList.length - 1].rightStatus = false;
               this.catalogueList[
@@ -868,7 +864,9 @@ export default {
         if (this.$route.name == "PurchaseCompileDefault") {
           // 展开 icon颜色
           this.catalogueList[this.catalogueList.length - 1].rightStatus = true;
-          this.catalogueList[this.catalogueList.length - 1].isChildrenColor = true;
+          this.catalogueList[
+            this.catalogueList.length - 1
+          ].isChildrenColor = true;
           if (e.isChildren) {
             for (let i = 0; i < e.children.length; i++) {
               if (this.$route.query.title == "record") {
@@ -890,7 +888,6 @@ export default {
           e.isChildrenColor = true;
         }
       });
-      
     },
     // 侧边栏跳转路由
     gotoRouter(item, index) {
@@ -926,8 +923,7 @@ export default {
           e.arrow = this.sideStatus.arrow;
         }
       });
-      
-      
+
       item.isActive = true;
       item.isChildrenColor = true;
       //   检测是否有通知
@@ -936,9 +932,7 @@ export default {
     },
     // 点击展开 跳转子路由
     gotoChildren(item, ele, i) {
-      
       if (item.name == "趣天教学视频" || item.name == "系统操作教学视频") {
-        
         // 去所有子颜色
         this.pathName.forEach((e) => {
           if (e.name == "help") {
@@ -959,7 +953,7 @@ export default {
               if (k == 0) {
                 el.isActive = false;
                 el.isChildrenColor = false;
-                
+
                 return;
               }
               el.isChildrenColor = false;
@@ -970,7 +964,7 @@ export default {
         item.isChildrenColor = true;
         this.$router.push({ name: "VideoCourse" });
         // 给链接
-        
+
         this.setVideoSrc(ele.videoSrc);
         return;
       }
@@ -996,8 +990,6 @@ export default {
     // 鼠标移上已经关闭的Navbar
     overNavbar(item, index) {
       this.titleIndex = index;
-      
-      
     },
     // 显示的时候触发
     getPopoverList() {
@@ -1022,7 +1014,6 @@ export default {
         this.timer = true;
         let that = this;
         setTimeout(function () {
-          
           that.timer = false;
         }, 400);
       }

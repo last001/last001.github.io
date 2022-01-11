@@ -1,7 +1,7 @@
 <template>
   <div class="logisticsOrder">
     <div class="v-logisticsOrder">
-      <div class="main" v-title data-title="产品订单"></div>
+      <div class="main" v-title data-title="物流订单"></div>
       <!-- 内容 -->
       <div class="proTop">
         <iframe :src="ifarmSrc" frameborder="0" style="display: none"></iframe>
@@ -10,7 +10,11 @@
           <div class="search-one">
             <div>
               <span class="text">发货状态：</span>
-              <el-select v-model="shipIndex" placeholder="请选择">
+              <el-select
+                @change="clickSearch(30, 1, true)"
+                v-model="shipIndex"
+                placeholder="请选择"
+              >
                 <el-option
                   v-for="item in shippingStatusData"
                   :key="item.value"
@@ -22,7 +26,11 @@
             </div>
             <div v-show="!openCloseState">
               <span class="text">采购方式：</span>
-              <el-select v-model="pruchaseIndex" placeholder="请选择">
+              <el-select
+                @change="clickSearch(30, 1, true)"
+                v-model="pruchaseIndex"
+                placeholder="请选择"
+              >
                 <el-option
                   v-for="item in purchaseMethodsData"
                   :key="item.value"
@@ -34,7 +42,11 @@
             </div>
             <div v-show="!openCloseState">
               <span class="text">运输方式：</span>
-              <el-select v-model="modeMethodsIndex" placeholder="请选择">
+              <el-select
+                @change="clickSearch(30, 1, true)"
+                v-model="modeMethodsIndex"
+                placeholder="请选择"
+              >
                 <el-option
                   v-for="item in modeMethodsData"
                   :key="item.value"
@@ -46,7 +58,11 @@
             </div>
             <div v-show="!openCloseState">
               <span class="text">异常状态：</span>
-              <el-select v-model="abnormalIndex" placeholder="请选择">
+              <el-select
+                @change="clickSearch(30, 1, true)"
+                v-model="abnormalIndex"
+                placeholder="请选择"
+              >
                 <el-option
                   v-for="item in abnormalData"
                   :key="item.value"
@@ -75,11 +91,11 @@
                 </el-option>
               </el-select>
             </div>
-            <div v-show="openCloseState">
+            <div class="order" v-show="openCloseState">
               <span class="text">订单单号：</span>
               <input
                 type="text"
-                placeholder="请输入"
+                placeholder="查询多个单号以英文逗号隔开"
                 @keydown.enter="clickSearch(30, 1, true)"
                 v-model="orderVal"
               />
@@ -130,23 +146,21 @@
                 v-model="address"
               />
             </div>
-            <div>
+            <div class="order">
               <span class="text">订单单号：</span>
               <input
                 type="text"
                 @keydown.enter="clickSearch(30, 1, true)"
-                placeholder="请输入"
+                placeholder="查询多个单号以英文逗号隔开"
                 v-model="orderVal"
               />
-            </div>
-            <div>
-              <span class="text">平台单号：</span>
-              <input
-                type="text"
-                @keydown.enter="clickSearch(30, 1, true)"
-                placeholder="请输入"
-                v-model="platformorder"
-              />
+              <!-- <textarea
+                cols="30"
+                rows="10"
+                placeholder="多个单号换行隔开"
+                v-model="orderVal"
+                @keydown.enter.stop="clickSearch(30, 1, true)"
+              ></textarea> -->
             </div>
           </div>
           <div class="search-three" v-show="!openCloseState">
@@ -176,6 +190,15 @@
               >
               </el-date-picker>
             </div>
+            <div class="block">
+              <span class="text">平台单号：</span>
+              <input
+                type="text"
+                @keydown.enter="clickSearch(30, 1, true)"
+                placeholder="查询多个单号以英文逗号隔开"
+                v-model="platformorder"
+              />
+            </div>
             <div class="btn">
               <el-button size="medium" type="default" @click="resetIniput()"
                 >重置</el-button
@@ -197,7 +220,7 @@
         <!-- btn table pading-->
         <div class="order-content">
           <div class="btn">
-            <div class="file">
+            <div class="file" @click="lisenMoney()">
               <el-button type="primary" size="medium" v-if="uploadOrderStatus"
                 >导入订单</el-button
               >
@@ -232,7 +255,7 @@
               size="medium"
               type="default"
               v-show="godownStatus"
-              @click="godownState = true"
+              @click="godownBtn()"
               >入库</el-button
             >
             <el-select
@@ -308,11 +331,17 @@
               </el-table-column>
               <el-table-column label="国际单号">
                 <template slot-scope="scope">
-                  <div
-                    class="order_id"
-                    @click="clickorderId(scope.$index, scope.row)"
-                  >
-                    {{ scope.row.order_id }}
+                  <div class="order_id">
+                    <i @click="clickorderId(scope.$index, scope.row)">{{
+                      scope.row.order_id
+                    }}</i
+                    >&nbsp;<i
+                      v-if="scope.row.order_id"
+                      class="el-icon-document-copy"
+                      id="order_id"
+                      :data-clipboard-text="scope.row.order_id"
+                      @click="copyOrderid(scope.row.order_id)"
+                    ></i>
                   </div>
                 </template>
               </el-table-column>
@@ -412,7 +441,7 @@
               <el-table-column
                 label="操作"
                 :fixed="screenWidth < 1700 ? 'right' : false"
-                width="150"
+                width="200"
               >
                 <template slot-scope="scope">
                   <!-- 管理员 -->
@@ -433,12 +462,20 @@
                       <div
                         class="followUp"
                         v-show="
-                          scope.row.status == '待付运费' &&
+                          scope.row.status1 == '待付运费' &&
                           InfoDataObj.orderStatu != 0
                         "
                         @click="clickPay(scope.$index, scope.row)"
                       >
                         付款
+                      </div>
+                      <!-- 店铺单号 -->
+                      <div
+                        class="backfillOrder"
+                        v-show="scope.row.qoo10shopId != 0"
+                        @click="TobackOrder(scope.index, scope.row)"
+                      >
+                        回填单号
                       </div>
                       <div
                         class="Edit"
@@ -453,12 +490,20 @@
                       <div
                         class="followUp"
                         v-show="
-                          scope.row.status == '待付运费' &&
+                          scope.row.status1 == '待付运费' &&
                           InfoDataObj.orderStatu != 0
                         "
                         @click="clickPay(scope.$index, scope.row)"
                       >
                         付款
+                      </div>
+                      <!-- 店铺单号 -->
+                      <div
+                        class="backfillOrder"
+                        v-show="scope.row.qoo10shopId != 0"
+                        @click="TobackOrder(scope.index, scope.row)"
+                      >
+                        回填单号
                       </div>
                       <div
                         class="Edit"
@@ -481,10 +526,18 @@
                       <!-- 订单状态 == 7 -->
                       <div
                         class="followUp"
-                        v-show="scope.row.status == '待付运费'"
+                        v-show="scope.row.status1 == '待付运费'"
                         @click="clickPay(scope.$index, scope.row)"
                       >
                         付款
+                      </div>
+                      <!-- 店铺单号 -->
+                      <div
+                        class="backfillOrder"
+                        v-show="scope.row.qoo10shopId != 0"
+                        @click="TobackOrder(scope.index, scope.row)"
+                      >
+                        回填单号
                       </div>
                       <div
                         class="Edit"
@@ -504,10 +557,18 @@
                       <!-- 订单状态 != 7 -->
                       <div
                         class="followUp"
-                        v-show="scope.row.status == '待付运费'"
+                        v-show="scope.row.status1 == '待付运费'"
                         @click="clickPay(scope.$index, scope.row)"
                       >
                         付款
+                      </div>
+                      <!-- 店铺单号 -->
+                      <div
+                        class="backfillOrder"
+                        v-show="scope.row.qoo10shopId != 0"
+                        @click="TobackOrder(scope.index, scope.row)"
+                      >
+                        回填单号
                       </div>
                       <div
                         class="Edit"
@@ -931,6 +992,68 @@
           </span>
         </el-dialog>
       </div>
+      <!-- 余额提示 -->
+      <div class="moneyLittle">
+        <el-dialog
+          title="余额不足100元提示"
+          :visible.sync="moneyTipListState"
+          @close="closeTips()"
+          width="30%"
+        >
+          <div class="tips">
+            <el-alert :title="moneyTipTitle" type="warning" :closable="false">
+            </el-alert>
+          </div>
+          <span slot="footer" class="dialog-footer">
+            <el-button type="primary" @click="todayTipsNot()"
+              >今日不再提示</el-button
+            >
+            <el-button @click="moneyTipListState = false">取消</el-button>
+          </span>
+        </el-dialog>
+      </div>
+      <!-- 回填单号 -->
+      <el-dialog
+        title="回填单号"
+        :visible.sync="backOrder.state"
+        custom-class="backOrderMask"
+        width="30%"
+      >
+        <div class="content" v-loading="backOrder.loading">
+          <div>
+            <span class="text">中国发货：</span>
+            <el-select
+              v-model="backOrder.listIndex"
+              clearable
+              placeholder="请选择"
+            >
+              <el-option
+                v-for="item in backOrder.list"
+                :key="item.value"
+                :label="item.name"
+                :value="item.value"
+              >
+              </el-option>
+            </el-select>
+          </div>
+          <div>
+            <span class="text">国际单号：</span>
+            <input
+              type="text"
+              placeholder="请输入"
+              v-model="backOrder.orderNo"
+            />
+          </div>
+        </div>
+        <span slot="footer" class="dialog-footer">
+          <el-button size="medium" type="primary" @click="comfirmBackOrder()"
+            >确 定</el-button
+          >
+          <el-button size="medium" @click="backOrder.state = false"
+            >取 消</el-button
+          >
+        </span>
+      </el-dialog>
     </div>
   </div>
 </template>
@@ -1243,6 +1366,38 @@ export default {
       ifarmSrc: null,
       // 入库按钮状态值
       godownStatus: false,
+      // 余额提示
+      moneyTipListState: false,
+      moneyTipTitle: "",
+      // 上传 + 添加 + 同步 index
+      orderIndex: "",
+      // 回填单号
+      backOrder: {
+        state: false,
+        loading: false,
+        orderNo: "",
+        listIndex: "",
+        list: [
+          { name: "佐川急便(海外)", value: "佐川急便(海外)" },
+          { name: "ネコポス(海外)", value: "ネコポス(海外)" },
+          {
+            name: "Chinapost registered airmail",
+            value: "Chinapost registered airmail",
+          },
+          { name: "BANRI Express", value: "BANRI Express" },
+          { name: "YDH Express", value: "YDH Express" },
+          { name: "ゆうパケット(海外)", value: "ゆうパケット(海外)" },
+          { name: "ヤマト宅急便 (海外)", value: "ヤマト宅急便 (海外)" },
+          { name: "SDM Express", value: "SDM Express" },
+          { name: "佐川グローバル", value: "佐川グローバル" },
+          { name: "EMS", value: "EMS" },
+          { name: "OCS", value: "OCS" },
+          { name: "Fedex", value: "Fedex" },
+          { name: "UPS", value: "UPS" },
+          { name: "DHL", value: "DHL" },
+        ],
+      },
+      backOrderRow: {},
     };
   },
   beforeRouteEnter(to, from, next) {
@@ -1259,7 +1414,7 @@ export default {
     next();
   },
   activated() {
-    document.title = "物流管理";
+    document.title = "物流订单";
     if (!this.$route.meta.isBack) {
       this.resetIniput();
       this.abnormalState = false;
@@ -1320,7 +1475,7 @@ export default {
       if (
         this.InfoDataObj.statu == "0" ||
         this.InfoDataObj.userName == "王焕杰" ||
-        this.InfoDataObj.userName == "任治琴" ||
+        this.InfoDataObj.userName == "汪春梅" ||
         this.InfoDataObj.userName == "李健明" ||
         this.InfoDataObj.userName == "王杰"
       ) {
@@ -1330,13 +1485,15 @@ export default {
           { name: "E特快", value: "ETK" },
           { name: "佐川特货", value: "佐川" },
           //   { name: "佐川普货", value: "RB-DS3" },
-          { name: "佐川加急", value: "RB-DS3" },
+          { name: "佐川普货(义达)", value: "JP-DS" },
+          //   { name: "佐川加急", value: "RB-DS3" },
           { name: "佐川普货-LTW", value: "LTW" },
           { name: "佐川普货-DPC", value: "DPC" },
           { name: "青岛-免抛", value: "QDMP" },
           { name: "佐川带电", value: "JPSADD" },
           { name: "黑猫3cm", value: "黑猫" },
           { name: "黑猫3cm带电", value: "黑猫带电" },
+          { name: "黑猫3cm化妆品", value: "黑猫3cm化妆品" },
           { name: "黑猫普货5cm", value: "黑猫普货5cm" },
           { name: "黑猫带电5cm", value: "黑猫带电5cm" },
           { name: "Qxpress", value: "Qxpress" },
@@ -1357,6 +1514,7 @@ export default {
           { label: "合并订单", value: 0 },
           { label: "导出订单", value: 1 },
           { label: "删除订单", value: 2 },
+          { label: "回填单号", value: 6 },
           { label: "导入模板下载", value: 3 },
           { label: "导出发货表格", value: 4 },
           { label: "导出表格-青岛", value: 5 },
@@ -1370,8 +1528,10 @@ export default {
         this.modeMethodsData = [
           { name: "全部", value: "99" },
           { name: "佐川", value: "佐川" },
-          { name: "佐川加急", value: "RB-DS3" },
+          //   { name: "佐川普货(义达)", value: "JP-DS" },
+          //   { name: "佐川加急", value: "RB-DS3" },
           { name: "黑猫", value: "黑猫" },
+          { name: "黑猫3cm化妆品", value: "黑猫3cm化妆品" },
           { name: "青岛-免抛", value: "QDMP" },
           { name: "带电渠道", value: "JPSADD" },
           { name: "Qxpress", value: "Qxpress" },
@@ -1393,13 +1553,15 @@ export default {
             { name: "E特快", value: "ETK" },
             { name: "佐川特货", value: "佐川" },
             //   { name: "佐川普货", value: "RB-DS3" },
-            { name: "佐川加急", value: "RB-DS3" },
+            // { name: "佐川加急", value: "RB-DS3" },
+            { name: "佐川普货(义达)", value: "JP-DS" },
             { name: "佐川普货-LTW", value: "LTW" },
             { name: "佐川普货-DPC", value: "DPC" },
             { name: "青岛-免抛", value: "QDMP" },
             { name: "佐川带电", value: "JPSADD" },
             { name: "黑猫3cm", value: "黑猫" },
             { name: "黑猫3cm带电", value: "黑猫带电" },
+            { name: "黑猫3cm化妆品", value: "黑猫3cm化妆品" },
             { name: "黑猫普货5cm", value: "黑猫普货5cm" },
             { name: "黑猫带电5cm", value: "黑猫带电5cm" },
             { name: "Qxpress", value: "Qxpress" },
@@ -1466,6 +1628,76 @@ export default {
 
       this.setPagingList(obj);
     },
+    // 回填单号
+    TobackOrder(index, row) {
+      this.backOrder.state = true;
+      this.backOrder.orderNo = row.order_id;
+      this.backOrder.listIndex = "";
+      this.backOrderRow = row;
+    },
+    // 回填单号  确定按钮
+    comfirmBackOrder() {
+      if (this.backOrder.listIndex == "") {
+        this.$message({
+          message: "请选择发货渠道",
+          center: true,
+          duration: 600,
+          type: "error",
+        });
+        return;
+      }
+      if (this.backOrder.orderNo == "") {
+        this.$message({
+          message: "请输入国际单号",
+          center: true,
+          duration: 600,
+          type: "error",
+        });
+        return;
+      }
+      let data = {
+        shopid: this.backOrderRow.qoo10shopId,
+        orderNo: this.backOrderRow.platformorder,
+        shippingCorp: this.backOrder.listIndex,
+        trackingNo: this.backOrder.orderNo,
+      };
+
+      this.backOrder.state = false;
+
+      this.$axios({
+        url: "/sigaoyi/BackfillOrderNumber",
+        method: "POST",
+        params: data,
+      })
+        .then((result) => {
+          if (result.data.Code == 200) {
+            this.$notify({
+              title: "请求成功",
+              message: result.data.msg,
+              type: "success",
+              offset: 50,
+            });
+          } else {
+            this.backOrder.state = true;
+            this.$notify({
+              title: "请求失败",
+              message: result.data.msg,
+              type: "warning",
+              offset: 50,
+            });
+          }
+        })
+        .catch((err) => {
+          console.log("err ==>", err);
+          this.backOrder.state = true;
+          this.$notify({
+            title: "请求错误",
+            message: "系统业务繁忙,请稍后再试",
+            type: "err",
+            offset: 50,
+          });
+        });
+    },
     // 复制id
     copyId(id) {
       var clipboard = new Clipboard("#id");
@@ -1489,14 +1721,43 @@ export default {
         clipboard.destroy();
       });
     },
+    //  复制国际单号
+    copyOrderid(id) {
+      var clipboard = new Clipboard("#order_id");
+      clipboard.on("success", (e) => {
+        this.$message({
+          message: `复制国际单号${id}成功`,
+          center: true,
+          duration: 800,
+          type: "success",
+        });
+        clipboard.destroy();
+      });
+      clipboard.on("error", (e) => {
+        // 不支持复制
+        this.$message({
+          message: "该浏览器不支持复制",
+          center: true,
+          duration: 800,
+          type: "error",
+        });
+        clipboard.destroy();
+      });
+    },
     // 国际单号
     clickorderId(index, row) {
-      console.log(row);
-      //   if(row.trade_type1 == "")
-      window.open(
-        "http://k2k.sagawa-exp.co.jp/p/web/okurijosearch.do?okurijoNo=" +
-          row.order_id
-      );
+      if (row.trade_type1 == "日邮小包") {
+        window.open(
+          "https://trackings.post.japanpost.jp/services/srv/search/?requestNo1=" +
+            row.order_id +
+            "&requestNo2=&requestNo3=&requestNo4=&requestNo5=&requestNo6=&requestNo7=&requestNo8=&requestNo9=&requestNo10=&search.x=94&search.y=21&startingUrlPatten=&locale=ja"
+        );
+      } else {
+        window.open(
+          "http://k2k.sagawa-exp.co.jp/p/web/okurijosearch.do?okurijoNo=" +
+            row.order_id
+        );
+      }
     },
     // 点击转运单号
     clickOrder1(index, row) {
@@ -1532,7 +1793,12 @@ export default {
     openImgLink(index, row) {
       window.open(row.link);
     },
-    // 入库
+    // 入库按钮 填写单号
+    godownBtn() {
+      this.godownState = true;
+      this.godownList.order = this.orderVal;
+    },
+    // 弹出层 确认 入库
     godown() {
       // 提示
       if (this.godownList.order == "") {
@@ -1571,7 +1837,6 @@ export default {
         params: data,
       })
         .then((result) => {
-          console.log(result);
           //   loading.close();
           if (result.data.Code == 200) {
             this.godownState = false;
@@ -1680,8 +1945,6 @@ export default {
         data["trade_type"] = this.modeMethodsIndex;
       }
 
-      console.log("data ===>", data);
-
       if (flag) {
         this.tableLoading = true;
       } else {
@@ -1699,7 +1962,6 @@ export default {
         params: data,
       })
         .then((result) => {
-          console.log("result ==>", result);
           if (flag) {
             this.tableLoading = false;
           } else {
@@ -1719,33 +1981,39 @@ export default {
               this.AllFreightStatus = true;
               if (this.InfoData.statu > 2) {
                 this.uploadOrderStatus = false;
-                //  >2 公司名字 + 级别5
-                if (
-                  this.InfoData.company == "和美国际旅行社有限公司" ||
-                  this.InfoData.company == "杭州思高易" ||
-                  this.InfoData.statu == "5"
-                ) {
-                  this.uploadOrderStatus = true;
-                }
-                // 沈永鑫
-                if (
-                  this.InfoData.userName == "沈永鑫" &&
-                  result.data.billingPeriodFreight <= 0
-                ) {
-                  this.uploadOrderStatus = true;
-                }
-                //  朴学峰
-                if (
-                  this.InfoData.userName == "朴学峰" &&
-                  Number(this.freightVal) < 5000
-                ) {
-                  this.uploadOrderStatus = true;
-                }
+                // //  >2 公司名字 + 级别5
+                // if (
+                //   this.InfoData.company == "和美国际旅行社有限公司" ||
+                //   this.InfoData.company == "杭州思高易" ||
+                //   this.InfoData.statu == "5"
+                // ) {
+                //   this.uploadOrderStatus = true;
+                // }
+                // // 沈永鑫
+                // if (
+                //   this.InfoData.userName == "沈永鑫" &&
+                //   result.data.billingPeriodFreight <= 0
+                // ) {
+                //   this.uploadOrderStatus = true;
+                // }
+                // //  朴学峰
+                // if (
+                //   this.InfoData.userName == "朴学峰" &&
+                //   Number(this.freightVal) < 5000
+                // ) {
+                //   this.uploadOrderStatus = true;
+                // }
                 //  韩睿
-                if (
-                  this.InfoData.userName == "韩睿" &&
-                  Number(this.freightVal) < 5000
-                ) {
+                // if (
+                //   this.InfoData.userName == "韩睿" &&
+                //   Number(this.freightVal) < 5000
+                // ) {
+                //   this.uploadOrderStatus = true;
+                // }
+
+                if (Number(this.freightVal) > result.data.userinfo.quota) {
+                  this.uploadOrderStatus = false;
+                } else {
                   this.uploadOrderStatus = true;
                 }
               } else {
@@ -1781,10 +2049,6 @@ export default {
                 e.purchaseMode = "自采购";
               } else {
                 e.purchaseMode = "待采购";
-              }
-              // 国际单号
-              if (e.order_id == "null") {
-                e.order_id = "";
               }
               for (const key in e) {
                 if (e[key] == "null") {
@@ -1912,11 +2176,11 @@ export default {
       if (!row.collecChecked) {
         return "red";
       }
-      if (row.status == 0) {
-        return "stock";
-      }
       if (row.trade_type == "Qxpress") {
         return "yellow";
+      }
+      if (row.status == 0) {
+        return "stock";
       }
     },
     // 属性选项 两行显示
@@ -1941,18 +2205,229 @@ export default {
     },
     // 添加订单
     addOrder() {
-      this.$router.push({ name: "OrderDetail", rowStatus: false });
       //   let obj = {
       //     titleB: `添加订单`,
       //     isChildB: false,
       //     routerSrc: "OrderDetail",
       //     isRoute: false,
       //   };
-
       //   this.setPagingList(obj);
+
+      this.orderIndex = "add";
+      var data = JSON.parse(localStorage.getItem("moneyTips"));
+      this.removeItem(data);
+      if (this.moneyTipListState) {
+        return;
+      }
+      this.$router.push({ name: "OrderDetail", rowStatus: false });
+    },
+    // 不再提示
+    todayTipsNot() {
+      this.setItem(
+        "moneyTips",
+        false,
+        new Date().getTime() + 1000 * 60 * 60 * 24
+      );
+      this.moneyTipListState = false;
+    },
+    // 关闭提示
+    closeTips() {
+      if (this.orderIndex == "add") {
+        this.$router.push({ name: "OrderDetail", rowStatus: false });
+      } else if (this.orderIndex == "sync") {
+        if (this.shopData.length == 0) {
+          this.$message({
+            message: "该用户还没绑定店铺",
+            center: true,
+            duration: 800,
+            type: "error",
+          });
+          return;
+        }
+        this.storeList = this.shopData;
+        this.syncOrderStatus = true;
+      }
+    },
+    // 设置localStorage
+    setItem(key, flag, expirse) {
+      let data = {
+        moneyTips: flag,
+        id: this.InfoData.id,
+        expirse: new Date(expirse).getTime(),
+      };
+      localStorage.setItem(key, JSON.stringify(data));
+    },
+    // 检测money < 100 || 管理员 + 特殊人员等等
+    removeItem(data) {
+      if (this.InfoData.statu <= 2) {
+        return (this.moneyTipListState = false);
+      }
+
+      if (Number(this.InfoData.balance) < 100) {
+        // var data = JSON.parse(localStorage.getItem("moneyTips"));
+        this.moneyTipTitle = `您目前的账户余额是${this.InfoData.balance}元，为了避免账户余额不足导致不能正常发货，请及时充值。`;
+        if (data == null) {
+          this.moneyTipListState = true;
+          this.setItem(
+            "moneyTips",
+            true,
+            new Date().getTime() + 1000 * 60 * 60 * 24
+          );
+        } else {
+          if (data.id != this.InfoData.id) {
+            localStorage.removeItem("moneyTips");
+            this.moneyTipListState = true;
+            this.setItem(
+              "moneyTips",
+              true,
+              new Date().getTime() + 1000 * 60 * 60 * 24
+            );
+          }
+          if (data.expirse != null && data.expirse < new Date().getTime()) {
+            localStorage.removeItem("moneyTips");
+            this.moneyTipListState = true;
+            this.setItem(
+              "moneyTips",
+              true,
+              new Date().getTime() + 1000 * 60 * 60 * 24
+            );
+          }
+          if (data.moneyTips) {
+            this.moneyTipListState = true;
+          }
+        }
+      }
+    },
+    // 导入订单  检测money < 100  || 管理员 + 特殊人员等等
+    lisenMoney() {
+      this.orderIndex = "export";
+      if (Number(this.InfoData.balance) < 100) {
+        var data = JSON.parse(localStorage.getItem("moneyTips"));
+        if (data == null) {
+          if (this.InfoData.statu <= 2) {
+            return;
+          }
+          alert(
+            "您目前的账户余额是" +
+              this.InfoData.balance +
+              "元，为了避免账户余额不足导致不能正常发货，请及时充值。"
+          );
+          this.setItem(
+            "moneyTips",
+            true,
+            new Date().getTime() + 1000 * 60 * 60 * 24
+          );
+        } else {
+          if (this.InfoData.statu <= 2) {
+            return;
+          }
+          if (data.id != this.InfoData.id) {
+            localStorage.removeItem("moneyTips");
+            alert(
+              "您目前的账户余额是" +
+                this.InfoData.balance +
+                "元，为了避免账户余额不足导致不能正常发货，请及时充值。"
+            );
+            this.setItem(
+              "moneyTips",
+              true,
+              new Date().getTime() + 1000 * 60 * 60 * 24
+            );
+          }
+          if (data.expirse != null && data.expirse < new Date().getTime()) {
+            localStorage.removeItem("moneyTips");
+            alert(
+              "您目前的账户余额是" +
+                this.InfoData.balance +
+                "元，为了避免账户余额不足导致不能正常发货，请及时充值。"
+            );
+            this.setItem(
+              "moneyTips",
+              true,
+              new Date().getTime() + 1000 * 60 * 60 * 24
+            );
+          }
+          if (data.moneyTips) {
+            alert(
+              "您目前的账户余额是" +
+                this.InfoData.balance +
+                "元，为了避免账户余额不足导致不能正常发货，请及时充值。"
+            );
+          }
+        }
+      }
+    },
+    // 导入订单 录入时间没有时:分:秒
+    updateFile(e) {
+      if (sessionStorage.getItem("token") == undefined) {
+        alert("请先登录");
+        this.$router.push({ name: "Login" });
+        return;
+      }
+      if (this.InfoData.id == undefined) {
+        alert("登陆时间过期,请重新登陆!");
+        sessionStorage.removeItem("token");
+        this.$router.push({ name: "Login" });
+        return;
+      }
+      if (this.InfoData.statu == "5") {
+        alert("没有权限");
+        return;
+      }
+
+      let files = e.target.files[0];
+      let formData = new FormData();
+      // 向 formData 对象中添加文件
+      formData.append("file", files);
+      formData.append("userName", this.InfoData.userName);
+      this.tableLoading = true;
+      this.$axios({
+        url: "/sigaoyi/NEWImportxls",
+        method: "POST",
+        data: formData,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+        .then((result) => {
+          this.$refs.uploadOrder.value = null;
+
+          if (result.data.Code == 200) {
+            this.$notify({
+              title: "请求成功",
+              message: result.data.msg,
+              type: "success",
+              offset: 50,
+            });
+            this.getOrder(30, 1);
+          } else {
+            this.$notify({
+              title: "请求失败",
+              message: result.data.msg,
+              type: "warning",
+              offset: 50,
+            });
+          }
+        })
+        .catch((err) => {
+          this.$refs.uploadOrder.value = null;
+          this.$notify({
+            title: "请求错误",
+            message: "系统服务繁忙,请稍后再试",
+            type: "error",
+            offset: 50,
+          });
+        });
     },
     // 同步订单
     syncOrder() {
+      this.orderIndex = "sync";
+
+      var data = JSON.parse(localStorage.getItem("moneyTips"));
+      this.removeItem(data);
+      if (this.moneyTipListState) {
+        return;
+      }
       if (this.shopData.length == 0) {
         this.$message({
           message: "该用户还没绑定店铺",
@@ -1978,7 +2453,7 @@ export default {
         this.$message({
           message: "您还未勾选要合并的订单",
           center: true,
-          duration: 600,
+          duration: 800,
           type: "error",
         });
         return;
@@ -1987,7 +2462,7 @@ export default {
         this.$message({
           message: "只勾选了一个订单",
           center: true,
-          duration: 600,
+          duration: 800,
           type: "error",
         });
         return;
@@ -1996,7 +2471,7 @@ export default {
         this.$message({
           message: "最多只能勾选两个订单",
           center: true,
-          duration: 600,
+          duration: 800,
           type: "error",
         });
         return;
@@ -2115,7 +2590,6 @@ export default {
         params: data,
       })
         .then((result) => {
-          console.log("result ==>", result);
           loading.close();
           if (result.data.code == "200") {
             this.ifarmSrc = null;
@@ -2338,6 +2812,33 @@ export default {
       } else if (this.batchIndex == 5) {
         // 导出表格-青岛
         this.exportQDorder();
+      } else if (this.batchIndex == 6) {
+        //   回填单号
+        var shopIDs = "";
+        var platformorders = "";
+        if (
+          this.tableData.findIndex((target) => target.selected === true) > -1
+        ) {
+          for (let i = 0; i < this.tableData.length; i++) {
+            if (this.tableData[i].selected) {
+              shopIDs += this.tableData[i].shopid + ",";
+              platformorders += this.tableData[i].platformorder + ",";
+            }
+          }
+        } else {
+          this.$message({
+            message: "您还未勾选要回填的单号",
+            center: true,
+            duration: 800,
+            type: "error",
+          });
+          return;
+        }
+        shopIDs = shopIDs.substring(0, shopIDs.lastIndexOf(","));
+        platformorders = platformorders.substring(
+          0,
+          platformorders.lastIndexOf(",")
+        );
       }
     },
     // 同步订单弹出层 确定按钮
@@ -2392,7 +2893,6 @@ export default {
         params: data,
       })
         .then((result) => {
-          console.log("result ==>", result);
           if (result.data.Code == 200) {
             this.syncOrderStatus = false;
             this.$notify({
@@ -2508,30 +3008,26 @@ export default {
         }
         return;
       }
-      let obj = {
-        0: "库存件",
-        1: "已订货",
-        2: "已发货",
-        3: "已完成",
-        4: "待填采购价",
-        5: "待付采购价",
-        6: "待填运费",
-        7: "待付运费",
-        8: "处理跟进中",
-        9: "未入库",
-      };
+      //   let obj = {
+      //     0: "库存件",
+      //     1: "已订货",
+      //     2: "已发货",
+      //     3: "已完成",
+      //     4: "待填采购价",
+      //     5: "待付采购价",
+      //     6: "待填运费",
+      //     7: "待付运费",
+      //     8: "处理跟进中",
+      //     9: "未入库",
+      //   };
       let data = {
         userId: this.InfoData.id,
         userName: this.InfoData.userName,
         id: row.id,
-        status: 99,
+        status: row.status,
         price: row.freight,
       };
-      for (const key in obj) {
-        if (row.status == obj[key]) {
-          data.status = key;
-        }
-      }
+
       this.tableLoading = true;
 
       this.$axios({
@@ -2540,11 +3036,13 @@ export default {
         params: data,
       })
         .then((result) => {
+          //   console.log(result);
           setTimeout(() => {
             this.tableLoading = false;
           }, 500);
           if (result.data.code == "200") {
-            row.status = "已完成";
+            row.status1 = "已完成";
+            row.status = 3;
             result.data.userinfo.balance = result.data.userinfo.balance.toFixed(
               2
             );
@@ -2583,68 +3081,6 @@ export default {
           this.$notify({
             title: "请求错误",
             message: "系统业务繁忙,请稍后再试!",
-            type: "error",
-            offset: 50,
-          });
-        });
-    },
-    // 导入订单 录入时间没有时:分:秒
-    updateFile(e) {
-      if (sessionStorage.getItem("token") == undefined) {
-        alert("请先登录");
-        this.$router.push({ name: "Login" });
-        return;
-      }
-      if (this.InfoData.id == undefined) {
-        alert("登陆时间过期,请重新登陆!");
-        sessionStorage.removeItem("token");
-        this.$router.push({ name: "Login" });
-        return;
-      }
-      if (this.InfoData.statu == "5") {
-        alert("没有权限");
-        return;
-      }
-
-      let files = e.target.files[0];
-      let formData = new FormData();
-      // 向 formData 对象中添加文件
-      formData.append("file", files);
-      formData.append("userName", this.InfoData.userName);
-      this.tableLoading = true;
-      this.$axios({
-        url: "/sigaoyi/NEWImportxls",
-        method: "POST",
-        data: formData,
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
-        .then((result) => {
-          this.$refs.uploadOrder.value = null;
-
-          if (result.data.Code == 200) {
-            this.$notify({
-              title: "请求成功",
-              message: result.data.msg,
-              type: "success",
-              offset: 50,
-            });
-            this.getOrder(30, 1);
-          } else {
-            this.$notify({
-              title: "请求失败",
-              message: result.data.msg,
-              type: "warning",
-              offset: 50,
-            });
-          }
-        })
-        .catch((err) => {
-          this.$refs.uploadOrder.value = null;
-          this.$notify({
-            title: "请求错误",
-            message: "系统服务繁忙,请稍后再试",
             type: "error",
             offset: 50,
           });
@@ -2787,7 +3223,7 @@ export default {
     },
     // 点击表格处理 按钮
     clickFollowUp(index, row) {
-      // 王焕杰 任治琴 李健明 王杰 hzsugoi
+      // 王焕杰 汪春梅 李健明 王杰 hzsugoi
       if (this.InfoDataObj.orderStatu == 0 || this.InfoData.statu == "5") {
         this.FollowUpRow = row;
         this.FollowUpIndex = index;
@@ -2987,8 +3423,6 @@ export default {
       })
         .then((result) => {
           this.tableLoading = false;
-          console.log("result ==>", result);
-
           if (result.data.Code == 200) {
             document.body.scrollTop = document.documentElement.scrollTop = 0;
             //   用户名
@@ -3007,33 +3441,38 @@ export default {
                 // 导入 + 添加 + 同步
                 this.uploadOrderStatus = false;
 
-                //  >2 公司名字 + 级别5
-                if (
-                  this.InfoData.company == "和美国际旅行社有限公司" ||
-                  this.InfoData.company == "杭州思高易" ||
-                  this.InfoData.statu == "5"
-                ) {
-                  this.uploadOrderStatus = true;
-                }
-                // 沈永鑫
-                if (
-                  this.InfoData.userName == "沈永鑫" &&
-                  result.data.billingPeriodFreight <= 0
-                ) {
-                  this.uploadOrderStatus = true;
-                }
-                //  朴学峰
-                if (
-                  this.InfoData.userName == "朴学峰" &&
-                  Number(this.freightVal) < 5000
-                ) {
-                  this.uploadOrderStatus = true;
-                }
+                // //  >2 公司名字 + 级别5
+                // if (
+                //   this.InfoData.company == "和美国际旅行社有限公司" ||
+                //   this.InfoData.company == "杭州思高易" ||
+                //   this.InfoData.statu == "5"
+                // ) {
+                //   this.uploadOrderStatus = true;
+                // }
+                // // 沈永鑫
+                // if (
+                //   this.InfoData.userName == "沈永鑫" &&
+                //   result.data.billingPeriodFreight <= 0
+                // ) {
+                //   this.uploadOrderStatus = true;
+                // }
+                // //  朴学峰
+                // if (
+                //   this.InfoData.userName == "朴学峰" &&
+                //   Number(this.freightVal) < 5000
+                // ) {
+                //   this.uploadOrderStatus = true;
+                // }
                 //  韩睿
-                if (
-                  this.InfoData.userName == "韩睿" &&
-                  Number(this.freightVal) < 5000
-                ) {
+                // if (
+                //   this.InfoData.userName == "韩睿" &&
+                //   Number(this.freightVal) < 5000
+                // ) {
+                //   this.uploadOrderStatus = true;
+                // }
+                if (Number(this.freightVal) > result.data.userinfo.quota) {
+                  this.uploadOrderStatus = false;
+                } else {
                   this.uploadOrderStatus = true;
                 }
               } else {

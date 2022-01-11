@@ -48,6 +48,9 @@ const root = process.env.API_HOST;
 axios.defaults.baseURL = root;
 // axios.defaults.baseURL = "http://192.168.1.179:8080/";
 
+// import * as socket from '@/assets/js/socket.js'
+// Vue.prototype.$SOCKET = socket;
+
 Vue.prototype.msg = function (msg) {
   return msg.replace("\n",
     "<br>")
