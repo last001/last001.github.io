@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "限量抢购",
+  "navigationBarBackgroundColor": "#F3CF4B",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "u-line-progress": "/uni_modules/uview-ui/components/u-line-progress/u-line-progress",
+    "u-button": "/uni_modules/uview-ui/components/u-button/u-button"
+  }
+}

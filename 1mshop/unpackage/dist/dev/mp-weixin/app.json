@@ -1,0 +1,98 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/order/order",
+    "pages/my/my",
+    "pages/afterTea/afterTea",
+    "pages/timeSpike/timeSpike",
+    "pages/publishEvaluate/publishEvaluate",
+    "pages/evaluateSuccess/evaluateSuccess",
+    "pages/followUpEvaluate/followUpEvaluate",
+    "pages/refund/refund",
+    "pages/map/map"
+  ],
+  "subPackages": [
+    {
+      "root": "pages_my",
+      "pages": [
+        "coupon/coupon",
+        "historyLocation/historyLocation",
+        "address/address",
+        "newAddress/newAddress",
+        "collection/collection",
+        "shoppingCart/shoppingCart",
+        "myCoupon/myCoupon",
+        "couponDetails/couponDetails",
+        "myTeam/myTeam",
+        "team/team",
+        "myEvaluate/myEvaluate"
+      ]
+    },
+    {
+      "root": "pages_search",
+      "pages": [
+        "search/search",
+        "classifySearch/classifySearch"
+      ]
+    },
+    {
+      "root": "pages_product",
+      "pages": [
+        "shop/shop",
+        "submitOrder/submitOrder",
+        "wxPay/wxPay",
+        "PayOnBehalf/PayOnBehalf",
+        "pay/pay"
+      ]
+    },
+    {
+      "root": "pages_specially",
+      "pages": [
+        "collage/collage",
+        "discount/discount",
+        "rush/rush"
+      ]
+    }
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "backgroundColor": "#fff",
+    "borderStyle": "black",
+    "selectedColor": "#F8CF39",
+    "color": "#7F8389",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "static/mipmap-mdpi1/shouye1.png",
+        "selectedIconPath": "static/mipmap-mdpi1/shouye.png"
+      },
+      {
+        "pagePath": "pages/order/order",
+        "text": "订单",
+        "iconPath": "static/mipmap-mdpi1/order.png",
+        "selectedIconPath": "static/mipmap-mdpi1/order1.png"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "我的",
+        "iconPath": "static/mipmap-mdpi1/my.png",
+        "selectedIconPath": "static/mipmap-mdpi1/my1.png"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  },
+  "requiredPrivateInfos": [
+    "getLocation"
+  ],
+  "usingComponents": {}
+}

@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "发布评价",
+  "navigationBarBackgroundColor": "#fbd553",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "u-button": "/uni_modules/uview-ui/components/u-button/u-button",
+    "u-rate": "/uni_modules/uview-ui/components/u-rate/u-rate",
+    "u-textarea": "/uni_modules/uview-ui/components/u-textarea/u-textarea",
+    "u-icon": "/uni_modules/uview-ui/components/u-icon/u-icon"
+  }
+}

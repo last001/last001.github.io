@@ -1,0 +1,136 @@
+.team.data-v-b94ca556 {
+  height: 100vh;
+  background-image: linear-gradient(#FF6465, #FFD95E);
+}
+.titlea.data-v-b94ca556 {
+  color: white;
+  font-size: 36rpx;
+  text-align: center;
+  padding: 15px 0;
+}
+.content-box.data-v-b94ca556 {
+  padding: 20px 0;
+  width: 90%;
+  margin-left: 5%;
+  background-color: white;
+  border-radius: 15px;
+}
+.titleb.data-v-b94ca556 {
+  color: #F24849;
+  font-size: 28rpx;
+  text-align: center;
+}
+.friend-box.data-v-b94ca556 {
+  display: flex;
+  text-align: center;
+  flex-wrap: wrap;
+}
+.friend-boxs.data-v-b94ca556 {
+  width: 25%;
+  padding-bottom: 10px;
+}
+.head-portrait.data-v-b94ca556 {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 100rpx;
+}
+.name.data-v-b94ca556 {
+  font-size: 28rpx;
+  color: #666;
+}
+.position.data-v-b94ca556 {
+  font-size: 22rpx;
+  color: #F8CF39;
+}
+.circle.data-v-b94ca556 {
+  width: 100rpx;
+  height: 100rpx;
+  border: dashed 1px #ccc;
+  border-radius: 100rpx;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.add.data-v-b94ca556 {
+  width: 20px;
+}
+.team-box.data-v-b94ca556 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 44%;
+  margin-left: 28%;
+  border-radius: 30px;
+  padding: 10rpx 5rpx;
+  margin-top: 20px;
+  background-color: #FF5D20;
+}
+.teaming.data-v-b94ca556 {
+  color: white;
+  font-size: 36rpx;
+}
+.count-down.data-v-b94ca556 {
+  color: #f99e33;
+  font-size: 22rpx;
+  font-weight: bold;
+}
+.team-state.data-v-b94ca556 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 40%;
+  margin-left: 30%;
+  border-radius: 30px;
+  padding: 26rpx 0;
+  color: white;
+  margin-top: 20px;
+  background-color: #F24849;
+}
+.next.data-v-b94ca556 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 40%;
+  margin-left: 30%;
+  border-radius: 30px;
+  padding: 26rpx 0;
+  color: white;
+  margin-top: 20px;
+  background-color: #F8CF39;
+}
+.accumulated.data-v-b94ca556 {
+  width: 90%;
+  margin-left: 5%;
+  background-color: white;
+  border-radius: 12px;
+  margin-top: 20px;
+}
+.accumulated-box.data-v-b94ca556 {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  padding: 20px 0;
+  font-size: 28rpx;
+}
+.discount-coupon.data-v-b94ca556 {
+  color: #333333;
+}
+.number.data-v-b94ca556 {
+  color: #FF5314;
+  margin-top: 20px;
+}
+.rule.data-v-b94ca556 {
+  margin-left: 5%;
+  margin-top: 20px;
+  color: white;
+}
+.text.data-v-b94ca556 {
+  margin-top: 10px;
+  font-size: 28rpx;
+}
+

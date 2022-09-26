@@ -1,0 +1,228 @@
+.myEvaluate{
+	background-color: #f2f2f2;
+	padding-top: 94rpx;
+	/* #ifdef H5 */
+	min-height: calc(100vh - 182rpx);
+	/* #endif */
+	/* #ifdef MP-WEIXIN */
+	min-height: calc(100vh - 94rpx);
+	/* #endif */
+	.tabsLists{
+		width: 100%;
+		padding: 5rpx 0;
+		background-color: #fff;
+		position: fixed;
+		left: 0;
+		z-index: 999;
+		// top: 88rpx;
+		/* #ifdef MP-WEIXIN */
+		top: 0;
+		/* #endif */
+		/deep/ .u-tabs__wrapper__nav__item{
+			padding-top: 8rpx;
+			padding-bottom: 16rpx;
+		}
+		/deep/ .u-tabs__wrapper__nav__line{
+			left: 20rpx;
+		}
+		// /deep/.u-tabs__wrapper__nav__item{
+		// 	justify-content: flex-start;
+		// }
+		// /deep/.u-tabs__wrapper__nav{
+		// 	justify-content: space-between;
+		// }
+		// /deep/.u-tabs__wrapper__nav__item-0{
+		// 	justify-content: flex-start;
+		// }
+		// /deep/.u-tabs__wrapper__nav__item-1{
+		// 	justify-content: center;
+		// }
+		// /deep/.u-tabs__wrapper__nav__item-2{
+		// 	justify-content: flex-end;
+		// }
+	}
+	.all,.wait-evaluate{
+		.v-all{
+			background-color: #fff;
+			padding: 20rpx 20rpx 0;
+			margin-bottom: 20rpx;
+			
+			.title{
+				width: 100%;
+				display: flex;
+				align-items: center;
+				justify-content: flex-start;
+				border-bottom: 1rpx solid #EAEAEA;
+				padding-bottom:20rpx;
+				.title-image{
+					width: 50rpx;
+					height: 50rpx;
+					image{
+						width: 100%;
+						height: 100%;
+						display: block;
+					}
+				}
+				.name{
+					margin-left:15rpx;
+					font-size: 28rpx;
+					color: #333;
+					font-weight: bold;
+				}
+				.u-icon{
+					margin-left:20rpx;
+					margin-top:4rpx;
+				}
+			}
+			.main-image{
+				display: flex;
+				align-items: center;
+				justify-content: flex-start;
+				margin-top:20rpx;
+				.image{
+					width: 160rpx;
+					height: 135rpx;
+					image{
+						width: 100%;
+						height: 100%;
+						display: block;
+					}
+				}
+				.text{
+					margin-left: 20rpx;
+					width: calc(100% - 202rpx);
+					font-size: 26rpx;
+					color: #333;
+				}
+				.count{
+					font-size: 22rpx;
+					width: 22rpx;
+					text-align: center;
+				}
+			}
+			.time-pay{
+				margin-top: 20rpx;
+				font-size: 22rpx;
+				color: #666;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				.pay{
+					text{
+						font-weight: bold;
+					}
+				}
+			}
+			.btn{
+				float: right;
+				padding: 20rpx 0;
+				width: 150rpx;
+				
+			}
+			&::after{
+				clear:both;
+				content:'';
+				display:block;
+			}
+		}
+	}
+	.already-evaluate{
+		.v-already-evaluate{
+		background-color: #fff;
+		padding: 20rpx 0;
+		margin-bottom: 20rpx;
+			.show-time{
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				font-size: 26rpx;
+				color: #999;
+				padding: 0rpx 20rpx 20rpx;
+				border-bottom: 1rpx solid #EAEAEA;
+				.isShow{
+					display: flex;
+					align-items: center;
+					.text{
+						margin: 0 10rpx;
+					}
+				}
+			}
+			.default{
+				color: #333;
+				font-size: 22rpx;
+				padding: 20rpx;
+			}
+			.image-list{
+				.evaluate-text{
+					padding: 10rpx 20rpx;
+					font-size: 26rpx;
+					text{
+						color: #F8CF39;
+					}
+				}
+				.list{
+					display: flex;
+					padding: 20rpx;
+					image{
+						display: block;
+						width: 168rpx;
+						height: 168rpx;
+						margin-right: 20rpx;
+						&:last-child{
+							margin-right:0;
+						}
+					}
+				}
+			}
+			.image-title{
+				padding: 20rpx;
+				display: flex;
+				.image{
+					width: 120rpx;
+					height: 120rpx;
+					image{
+						width: 100%;
+						height: 100%;
+						display:block;
+					}
+				}
+				.title{
+					padding-left: 20rpx;
+					width: calc(100% - 140rpx);
+					background-color: #f2f2f2;
+					display: flex;
+					flex-direction: column;
+					justify-content: space-evenly;
+					.v-title{
+						font-size: 28rpx;
+						font-weight: bold;
+						color: #333;
+					}
+					.rate{
+						display: flex;
+						align-items: center;
+						font-size: 24rpx;
+						.name{
+							margin-right: 10rpx;
+						}
+					}
+				}
+			}
+			.btn{
+				width: 100%;
+				.u-button{
+					float: right;
+					width: 150rpx;
+					margin-right: 20rpx;
+				}
+				&::after{
+					display: block;
+					content:"";
+					clear:both;
+					height: 0;
+				}
+			}
+		}
+		
+	}
+}

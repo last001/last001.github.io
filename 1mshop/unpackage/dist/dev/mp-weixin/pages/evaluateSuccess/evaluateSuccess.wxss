@@ -1,0 +1,101 @@
+.evaluateSuccess {
+  background-color: #f2f2f2;
+}
+.evaluateSuccess .successTip {
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20rpx 0;
+}
+.evaluateSuccess .successTip .image-tip {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.evaluateSuccess .successTip .image-tip image {
+  width: 36rpx;
+  height: 36rpx;
+  display: block;
+}
+.evaluateSuccess .successTip .image-tip text {
+  color: #333;
+  font-size: 36rpx;
+  font-weight: bold;
+  margin-left: 20rpx;
+}
+.evaluateSuccess .successTip .text {
+  font-size: 22rpx;
+  color: #999;
+  margin: 20rpx 0;
+}
+.evaluateSuccess .successTip .btn .u-button {
+  width: 220rpx;
+}
+.evaluateSuccess .lists .list {
+  background-color: #fff;
+  margin-top: 20rpx;
+}
+.evaluateSuccess .lists .list .time {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx;
+}
+.evaluateSuccess .lists .list .time .timeText {
+  font-size: 26rpx;
+  color: #999;
+}
+.evaluateSuccess .lists .list .time .isShow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 22rpx;
+  color: #666;
+}
+.evaluateSuccess .lists .list .time .isShow .text {
+  margin: 0 10rpx;
+}
+.evaluateSuccess .lists .list .tip {
+  border-top: 1rpx solid #EAEAEA;
+  color: #333;
+  font-size: 22rpx;
+  padding: 20rpx;
+}
+.evaluateSuccess .lists .list .image-title {
+  display: flex;
+  padding: 10rpx 20rpx;
+}
+.evaluateSuccess .lists .list .image-title .image {
+  width: 120rpx;
+  height: 120rpx;
+}
+.evaluateSuccess .lists .list .image-title .image image {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.evaluateSuccess .lists .list .image-title .title {
+  padding-left: 20rpx;
+  width: calc(100% - 140rpx);
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  background-color: #f2f2f2;
+}
+.evaluateSuccess .lists .list .btn {
+  float: right;
+  padding: 20rpx;
+  padding-bottom: 30rpx;
+}
+.evaluateSuccess .lists .list .btn .u-button {
+  width: 150rpx;
+}
+.evaluateSuccess .lists .list::after {
+  display: block;
+  content: "";
+  height: 0rpx;
+  clear: both;
+}
+

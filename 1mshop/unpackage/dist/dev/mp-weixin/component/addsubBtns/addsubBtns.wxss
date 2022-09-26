@@ -1,0 +1,29 @@
+.addsubBtns.data-v-5e46a47f {
+  display: flex;
+  align-items: flex-end;
+}
+.addsubBtns .odd.data-v-5e46a47f,
+.addsubBtns .add.data-v-5e46a47f {
+  border: 2rpx solid #9a979b;
+  border-radius: 50%;
+  width: 40rpx;
+  height: 40rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.addsubBtns .odd.data-v-5e46a47f {
+  background-color: #fff;
+}
+.addsubBtns .add.data-v-5e46a47f {
+  background-color: #999;
+  border: 2rpx solid #999;
+}
+.addsubBtns .num.data-v-5e46a47f {
+  width: 100rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 34rpx;
+}
+

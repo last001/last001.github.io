@@ -1,0 +1,83 @@
+.PayOnBehalf {
+  background-color: #f2f2f2;
+  position: relative;
+
+
+
+
+  min-height: 100vh;
+}
+.PayOnBehalf .payMoney {
+  background-color: #fff;
+  padding: 50rpx 20rpx;
+  color: #333;
+  box-shadow: 0px 3rpx 6rpx 1rpx rgba(0, 0, 0, 0.09);
+}
+.PayOnBehalf .payMoney .text {
+  width: 100%;
+  text-align: center;
+  font-size: 32rpx;
+}
+.PayOnBehalf .payMoney .money {
+  width: 100%;
+  text-align: center;
+  font-size: 66rpx;
+  padding: 20rpx 0;
+}
+.PayOnBehalf .payMoney .time {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  font-size: 32rpx;
+  color: #F24849;
+}
+.PayOnBehalf .payMoney .time .u-count-down {
+  margin-left: 20rpx;
+}
+.PayOnBehalf .payMoney .time .u-count-down .u-count-down__text {
+  color: #F24849;
+  font-size: 32rpx;
+}
+.PayOnBehalf .wechatPay {
+  padding: 20rpx;
+}
+.PayOnBehalf .wechatPay .v-wechatPay {
+  padding: 30rpx 20rpx;
+  background-color: #fff;
+  border-radius: 18rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20rpx;
+}
+.PayOnBehalf .wechatPay .v-wechatPay .image-text {
+  display: flex;
+  align-items: center;
+}
+.PayOnBehalf .wechatPay .v-wechatPay .image-text .image {
+  width: 46rpx;
+  height: 46rpx;
+}
+.PayOnBehalf .wechatPay .v-wechatPay .image-text .image image {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.PayOnBehalf .wechatPay .v-wechatPay .image-text .text {
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-left: 20rpx;
+}
+.PayOnBehalf .btn {
+  position: absolute;
+  bottom: 20rpx;
+  left: 5%;
+  width: 90%;
+}
+.PayOnBehalf .btn .u-button {
+  width: 100%;
+}
+.PayOnBehalf .btn .u-button:nth-child(2) {
+  margin-top: 20rpx;
+}
+

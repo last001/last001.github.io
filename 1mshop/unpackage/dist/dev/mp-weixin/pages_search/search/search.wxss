@@ -1,0 +1,51 @@
+.search .searchInt {
+  padding: 20rpx;
+}
+.search .lately {
+  padding: 20rpx;
+}
+.search .lately .lately-text {
+  display: flex;
+  justify-content: space-between;
+}
+.search .lately .lately-text .text {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: bold;
+}
+.search .lately .lately-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+.search .lately .lately-list .lists {
+  margin-right: 30rpx;
+  margin-top: 20rpx;
+  background-color: #FEF6D7;
+  color: #FFA025;
+  border-radius: 99px;
+  font-size: 26rpx;
+  padding: 15rpx;
+}
+.search .hot {
+  padding: 20rpx;
+  margin-top: 20rpx;
+}
+.search .hot .hot-text {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: bold;
+}
+.search .hot .hot-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+.search .hot .hot-list .hot-lists {
+  margin-right: 30rpx;
+  margin-top: 20rpx;
+  background-color: #FEF6D7;
+  color: #FFA025;
+  border-radius: 99px;
+  font-size: 26rpx;
+  padding: 15rpx;
+}
+

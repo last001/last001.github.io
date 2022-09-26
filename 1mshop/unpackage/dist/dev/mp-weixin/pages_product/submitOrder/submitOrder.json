@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText": "提交订单",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "u-icon": "/uni_modules/uview-ui/components/u-icon/u-icon",
+    "u-checkbox-group": "/uni_modules/uview-ui/components/u-checkbox-group/u-checkbox-group",
+    "u-checkbox": "/uni_modules/uview-ui/components/u-checkbox/u-checkbox",
+    "u-popup": "/uni_modules/uview-ui/components/u-popup/u-popup",
+    "u-button": "/uni_modules/uview-ui/components/u-button/u-button"
+  }
+}

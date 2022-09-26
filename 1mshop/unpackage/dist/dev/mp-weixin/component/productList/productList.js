@@ -1,0 +1,11 @@
+(global["webpackJsonp"]=global["webpackJsonp"]||[]).push([["component/productList/productList"],{457:function(n,t,e){"use strict";e.r(t);var r=e(458),o=e(460);for(var u in o)"default"!==u&&function(n){e.d(t,n,(function(){return o[n]}))}(u);e(462);var c,i=e(13),s=Object(i["default"])(o["default"],r["render"],r["staticRenderFns"],!1,null,"33807a1b",null,!1,r["components"],c);s.options.__file="component/productList/productList.vue",t["default"]=s.exports},458:function(n,t,e){"use strict";e.r(t);var r=e(459);e.d(t,"render",(function(){return r["render"]})),e.d(t,"staticRenderFns",(function(){return r["staticRenderFns"]})),e.d(t,"recyclableRender",(function(){return r["recyclableRender"]})),e.d(t,"components",(function(){return r["components"]}))},459:function(n,t,e){"use strict";var r;e.r(t),e.d(t,"render",(function(){return o})),e.d(t,"staticRenderFns",(function(){return c})),e.d(t,"recyclableRender",(function(){return u})),e.d(t,"components",(function(){return r}));var o=function(){var n=this,t=n.$createElement;n._self._c},u=!1,c=[];o._withStripped=!0},460:function(n,t,e){"use strict";e.r(t);var r=e(461),o=e.n(r);for(var u in r)"default"!==u&&function(n){e.d(t,n,(function(){return r[n]}))}(u);t["default"]=o.a},461:function(n,t,e){"use strict";(function(n){Object.defineProperty(t,"__esModule",{value:!0}),t.default=void 0;var e={name:"product-list",props:{list:{}},methods:{toShop:function(){console.log(131313),n.navigateTo({url:"/pages_product/shop/shop"})}}};t.default=e}).call(this,e(1)["default"])},462:function(n,t,e){"use strict";e.r(t);var r=e(463),o=e.n(r);for(var u in r)"default"!==u&&function(n){e.d(t,n,(function(){return r[n]}))}(u);t["default"]=o.a},463:function(n,t,e){}}]);
+//# sourceMappingURL=../../../.sourcemap/mp-weixin/component/productList/productList.js.map
+;(global["webpackJsonp"] = global["webpackJsonp"] || []).push([
+    'component/productList/productList-create-component',
+    {
+        'component/productList/productList-create-component':(function(module, exports, __webpack_require__){
+            __webpack_require__('1')['createComponent'](__webpack_require__(457))
+        })
+    },
+    [['component/productList/productList-create-component']]
+]);

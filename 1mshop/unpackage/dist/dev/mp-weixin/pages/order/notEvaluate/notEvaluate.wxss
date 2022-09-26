@@ -1,0 +1,121 @@
+.notEvaluate-lists {
+  margin-bottom: 20rpx;
+  padding: 0 20rpx;
+  margin-top: 70rpx;
+
+  margin-top: 62rpx;
+  padding-top: 0;
+}
+.notEvaluate-lists .list {
+  background-color: #fff;
+  width: 100%;
+  border-radius: 18rpx;
+  margin-bottom: 20rpx;
+}
+.notEvaluate-lists .list .list-name {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx;
+  width: calc(100% - 40rpx);
+}
+.notEvaluate-lists .list .list-name .storeInfo {
+  display: flex;
+  align-items: center;
+}
+.notEvaluate-lists .list .list-name .storeInfo .image {
+  width: 60rpx;
+  height: 60rpx;
+}
+.notEvaluate-lists .list .list-name .storeInfo .image image {
+  width: 100%;
+  height: 100%;
+}
+.notEvaluate-lists .list .list-name .storeInfo .storeName {
+  color: #333;
+  font-weight: bold;
+  font-size: 28rpx;
+  margin-left: 15rpx;
+}
+.notEvaluate-lists .list .list-name .storeInfo .stroeIcon {
+  margin-left: 20rpx;
+}
+.notEvaluate-lists .list .list-name .state {
+  font-size: 26rpx;
+}
+.notEvaluate-lists .list .setMeal {
+  padding: 20rpx;
+}
+.notEvaluate-lists .list .setMeal .setMeal-image {
+  position: relative;
+}
+.notEvaluate-lists .list .setMeal .setMeal-image .setMeal-info .setMeal-info-item {
+  margin-right: 12rpx;
+}
+.notEvaluate-lists .list .setMeal .setMeal-image .setMeal-info .setMeal-info-item:last-child {
+  margin-right: 0;
+}
+.notEvaluate-lists .list .setMeal .setMeal-image .setMeal-info .setMeal-info-item .setMeal-info-image {
+  width: 160rpx;
+  height: 136rpx;
+}
+.notEvaluate-lists .list .setMeal .setMeal-image .setMeal-info .setMeal-info-item .setMeal-info-title {
+  width: 100%;
+  font-size: 22rpx;
+  color: #333;
+}
+.notEvaluate-lists .list .setMeal .setMeal-image .count {
+  width: 26rpx;
+  height: 100%;
+  padding: 10rpx;
+  position: absolute;
+  right: -2rpx;
+  top: -2rpx;
+  background: #fff;
+  font-size: 26rpx;
+  color: #333;
+  text-align: center;
+  border-radius: 0rpx  4rpx  4rpx  0rpx ;
+  vertical-align: middle;
+}
+.notEvaluate-lists .list .setMeal .setMeal-image .count.active {
+  opacity: 0.89;
+}
+.notEvaluate-lists .list .payInfo {
+  display: flex;
+  justify-content: space-between;
+  font-size: 22rpx;
+  padding: 20rpx;
+  padding-top: 0;
+}
+.notEvaluate-lists .list .payInfo .payTime {
+  color: #666;
+}
+.notEvaluate-lists .list .payInfo .payMoney {
+  color: #333;
+}
+.notEvaluate-lists .list .payInfo .payMoney .money {
+  font-weight: bold;
+  font-size: 28rpx;
+}
+.notEvaluate-lists .list .btns {
+  width: 100%;
+  padding-bottom: 20rpx;
+}
+.notEvaluate-lists .list .btns .btnsItem .u-button {
+  float: right;
+  width: 150rpx;
+  height: 50rpx;
+  margin-right: 20rpx;
+}
+.notEvaluate-lists .list .btns .u-button--info {
+  border-color: #333;
+}
+.notEvaluate-lists .list .btns::after {
+  display: block;
+  clear: both;
+  content: "";
+  visibility: hidden;
+  height: 0;
+}
+

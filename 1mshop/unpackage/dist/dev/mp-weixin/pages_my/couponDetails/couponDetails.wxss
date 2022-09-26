@@ -1,0 +1,236 @@
+.couponDetails {
+  background-color: #f2f2f2;
+  padding-top: 88rpx;
+  min-height: calc(100vh - 88rpx);
+}
+.couponDetails .friendGive {
+  background: linear-gradient(to right, #F6CE42, #FFE78F);
+  padding: 100rpx 0;
+}
+.couponDetails .friendGive .title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.couponDetails .friendGive .title ._h3 {
+  font-size: 32rpx;
+  position: relative;
+}
+.couponDetails .friendGive .title ._h3:before {
+  content: "";
+  display: block;
+  width: 21rpx;
+  height: 5rpx;
+  background-color: #F24849;
+  position: absolute;
+  left: -44rpx;
+  top: 50%;
+}
+.couponDetails .friendGive .title ._h3::after {
+  content: "";
+  display: block;
+  width: 21rpx;
+  height: 5rpx;
+  background-color: #F24849;
+  position: absolute;
+  right: -44rpx;
+  top: 50%;
+}
+.couponDetails .friendGive .text {
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  font-size: 22rpx;
+  padding: 20rpx 0;
+}
+.couponDetails .couponList {
+  padding: 20rpx;
+}
+.couponDetails .couponList .v-couponList {
+  background-color: #fff;
+  border-radius: 18rpx;
+  overflow: hidden;
+  margin-top: 20rpx;
+}
+.couponDetails .couponList .v-couponList:first-child {
+  margin-top: 0rpx;
+}
+.couponDetails .couponList .v-couponList .price-border {
+  position: relative;
+}
+.couponDetails .couponList .v-couponList .price-border .left-round {
+  width: 50rpx;
+  height: 60rpx;
+  background-color: #f2f2f2;
+  border-radius: 50%;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin-left: -40rpx;
+  margin-top: -30rpx;
+}
+.couponDetails .couponList .v-couponList .price-border .right-round {
+  width: 50rpx;
+  height: 60rpx;
+  background-color: #f2f2f2;
+  border-radius: 50%;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  margin-right: -40rpx;
+  margin-top: -30rpx;
+}
+.couponDetails .couponList .v-couponList .price-border .price {
+  padding: 0 20rpx;
+  border-bottom: 2rpx solid #EAEAEA;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  position: relative;
+}
+.couponDetails .couponList .v-couponList .price-border .price .v-price {
+  padding: 20rpx 50rpx 20rpx 30rpx;
+  color: #FF5B5B;
+  border-right: 2rpx dashed #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.couponDetails .couponList .v-couponList .price-border .price .v-price .num {
+  font-size: 24rpx;
+}
+.couponDetails .couponList .v-couponList .price-border .price .v-price .num text {
+  font-weight: bold;
+  font-size: 56rpx;
+  color: #FF5B5B;
+}
+.couponDetails .couponList .v-couponList .price-border .price .v-price .full {
+  font-size: 24rpx;
+  color: #333;
+}
+.couponDetails .couponList .v-couponList .price-border .price .coupon {
+  padding: 20rpx 20rpx 10rpx;
+  display: flex;
+  width: calc(100% - 246rpx);
+  justify-content: center;
+}
+.couponDetails .couponList .v-couponList .price-border .price .coupon .text ._h4 {
+  padding: 10rpx 0;
+  display: flex;
+  align-items: center;
+}
+.couponDetails .couponList .v-couponList .price-border .price .coupon .text ._h4 .giveCoupon {
+  margin-left: 20rpx;
+  font-size: 18rpx;
+
+
+
+  color: #F24849;
+  border: 1rpx solid #F24849;
+  border-radius: 52rpx;
+  padding: 5rpx 10rpx;
+}
+.couponDetails .couponList .v-couponList .price-border .price .coupon .text .date {
+  padding: 10rpx 0;
+  font-size: 24rpx;
+  color: #666;
+}
+.couponDetails .couponList .v-couponList .price-border .price .coupon .text .details {
+  padding: 10rpx 0;
+  color: #999;
+  font-size: 24rpx;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+.couponDetails .couponList .v-couponList .price-border .price .coupon .text .details .u-icon {
+  margin-left: 10rpx;
+}
+.couponDetails .couponList .v-couponList .price-border .price .coupon .btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.couponDetails .couponList .v-couponList .price-border .price .tag {
+  position: absolute;
+  right: -50rpx;
+  top: 8rpx;
+  font-size: 16rpx;
+
+
+
+  color: #fff;
+  padding: 5rpx 50rpx;
+  -webkit-transform: rotate(30deg);
+          transform: rotate(30deg);
+}
+.couponDetails .couponList .v-couponList .introduce {
+  padding: 30rpx 20rpx;
+  background-color: #fff;
+}
+.couponDetails .couponList .v-couponList .introduce view {
+  padding: 10rpx 0;
+  color: #666;
+  font-size: 26rpx;
+}
+.couponDetails .explain {
+  margin-top: 20rpx;
+  padding: 20rpx;
+  font-size: 32rpx;
+}
+.couponDetails .explain view {
+  padding: 10rpx 0;
+  font-size: 28rpx;
+  color: #666;
+}
+.couponDetails .btn {
+  position: fixed;
+  bottom: 20rpx;
+  left: 5%;
+  width: 90%;
+}
+.couponDetails .btn .u-button {
+  border-width: 0px !important;
+}
+.couponDetails .btn .u-button:last-child {
+  margin-top: 30rpx;
+}
+.couponDetails .btnShow .content {
+  width: 582rpx;
+  padding: 40rpx 0 0rpx;
+  overflow: hidden;
+  border-bottom-left-radius: 30rpx;
+  border-bottom-right-radius: 30rpx;
+}
+.couponDetails .btnShow .content ._h3 {
+  text-align: center;
+  font-size: 36rpx;
+}
+.couponDetails .btnShow .content .text {
+  text-align: center;
+  color: #666;
+  font-size: 28rpx;
+  margin-top: 20rpx;
+}
+.couponDetails .btnShow .content .btns {
+  margin-top: 40rpx;
+  display: flex;
+}
+.couponDetails .btnShow .content .btns .u-button {
+  flex: 1;
+  border-width: 0px !important;
+}
+.couponDetails .btnShow .content .btns .u-button:first-child {
+  position: relative;
+}
+.couponDetails .btnShow .content .btns .u-button:first-child::after {
+  content: "|";
+  position: absolute;
+  left: 50%;
+  top: 20%;
+  font-size: 50rpx;
+  display: block;
+  color: #ccc;
+}
+

@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "u-button": "/uni_modules/uview-ui/components/u-button/u-button",
+    "u-icon": "/uni_modules/uview-ui/components/u-icon/u-icon",
+    "u-rate": "/uni_modules/uview-ui/components/u-rate/u-rate"
+  }
+}

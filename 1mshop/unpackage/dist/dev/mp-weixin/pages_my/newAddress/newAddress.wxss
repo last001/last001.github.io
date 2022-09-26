@@ -1,0 +1,72 @@
+.newAddress {
+  padding: 20rpx 0 0;
+  background-color: #F2F2F2;
+  position: relative;
+
+
+
+
+  min-height: calc(100vh - 20rpx);
+}
+.newAddress .u-form {
+  background-color: #fff;
+}
+.newAddress .u-form .u-form-item {
+  padding: 10rpx 20rpx;
+}
+.newAddress .u-form .u-form-item .u-form-item__body {
+  padding-bottom: 30rpx;
+}
+.newAddress .u-form .u-form-item .u-form-item__body__left {
+  width: 150rpx !important;
+}
+.newAddress .u-form .u-form-item .u-form-item__body__left__content__label {
+  font-weight: bold;
+}
+.newAddress .u-form .u-form-item .u-form-item__body__right__content__slot {
+  flex-direction: row;
+}
+.newAddress .u-form .u-form-item .phone-text {
+  color: #F8CF39;
+}
+.newAddress .u-form .u-form-item .text {
+  color: #c0c4cc;
+}
+.newAddress .u-form .u-form-item .phone {
+  display: flex;
+}
+.newAddress .u-form .u-form-item .map {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.newAddress .u-form .u-form-item .map image {
+  width: 24rpx;
+  height: 31rpx;
+  display: block;
+}
+.newAddress .default {
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  padding: 20rpx;
+  margin-top: 20rpx;
+}
+.newAddress .default .text {
+  font-weight: bold;
+}
+.newAddress .btn {
+  position: absolute;
+  width: 80%;
+  bottom: 20rpx;
+  left: 10%;
+}
+.newAddress .btn .deleteBtn {
+  margin-bottom: 40rpx;
+}
+.newAddress .btn .u-button {
+}
+.newAddress .btn .u-button:last-child {
+  margin-top: 40rpx;
+}
+

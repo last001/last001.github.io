@@ -1,0 +1,84 @@
+.PayOnBehalf{
+	background-color: #f2f2f2;
+	position: relative;
+	/* #ifdef H5 */
+	min-height: calc(100vh - 88rpx);
+	/* #endif */
+	/* #ifdef MP-WEIXIN */
+	min-height: 100vh;
+	/* #endif */
+	.payMoney{
+		background-color: #fff;
+		padding:50rpx 20rpx;
+		// padding-bottom: 50rpx;
+		color: #333;
+		box-shadow: 0px 3rpx 6rpx 1rpx rgba(0,0,0,0.0900);
+		.text{
+			width: 100%;
+			text-align: center;
+			font-size: 32rpx;
+		}
+		.money{
+			width: 100%;
+			text-align: center;
+			font-size: 66rpx;
+			padding: 20rpx 0;
+		}
+		.time{
+			width: 100%;
+			display: flex;
+			justify-content: center;
+			font-size: 32rpx;
+			color: #F24849;
+			.u-count-down{
+				margin-left: 20rpx;
+				/deep/.u-count-down__text{
+					color:#F24849;
+					font-size: 32rpx;
+				}
+			}
+		}
+	}
+	.wechatPay{
+		padding: 20rpx;
+		.v-wechatPay{
+			padding:30rpx 20rpx;
+			background-color: #fff;
+			border-radius: 18rpx;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-top: 20rpx;
+			.image-text{
+				display: flex;
+				align-items: center;
+				.image{
+					width: 46rpx;
+					height: 46rpx;
+					image{
+						display: block;
+						width: 100%;
+						height: 100%;
+					}
+				}
+				.text{
+					font-size: 32rpx;
+					font-weight: bold;
+					margin-left: 20rpx;
+				}
+			}
+		}
+	}
+	.btn{
+		position: absolute;
+		bottom: 20rpx;
+		left: 5%;
+		width: 90%;
+		.u-button{
+			width: 100%;
+			&:nth-child(2){
+				margin-top: 20rpx;
+			}
+		}
+	}
+}

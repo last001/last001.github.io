@@ -1,0 +1,75 @@
+.newAddress{
+	padding: 20rpx 0 0;
+	background-color: #F2F2F2;
+	position: relative;
+	/* #ifdef H5 || APP */
+	min-height: calc(100vh - 20rpx - 88rpx);
+	/* #endif */
+	/* #ifdef MP-WEIXIN */
+	min-height: calc(100vh - 20rpx);
+	/* #endif */
+	.u-form{
+		background-color: #fff;
+		.u-form-item{
+			padding:10rpx 20rpx;
+			/deep/.u-form-item__body{
+				padding-bottom: 30rpx;
+			}
+				/deep/.u-form-item__body__left{
+					width: 150rpx !important;
+				}
+				/deep/ .u-form-item__body__left__content__label{
+					font-weight: bold;
+				}
+				/deep/.u-form-item__body__right__content__slot{
+					flex-direction: row;
+				}
+				.phone-text{
+					color:#F8CF39;
+				}
+				.text{
+					color:#c0c4cc;
+				}
+				.phone{
+					display: flex;
+				}
+				.map{
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					image{
+						width: 24rpx;
+						height: 31rpx;
+						display: block;
+					}
+				}
+		}
+	}
+	.default{
+		display: flex;
+		justify-content: space-between;
+		background-color: #fff;
+		padding: 20rpx;
+		margin-top: 20rpx;
+		.text{
+			font-weight: bold;
+		}
+	}
+	.btn{
+		position: absolute;
+		width: 80%;
+		bottom: 20rpx;
+		left: 10%;
+		// height: 80rpx;
+		.deleteBtn{
+			margin-bottom: 40rpx;
+		}
+		.u-button{
+			/* #ifdef MP-WEIXIN */
+			&:last-child{
+				margin-top: 40rpx;
+			}
+			/* #endif */
+		}
+	}	
+}

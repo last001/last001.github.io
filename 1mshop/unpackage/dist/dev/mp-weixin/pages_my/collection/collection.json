@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText": "我的收藏",
+  "navigationBarBackgroundColor": "#FFE27A",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "u-sticky": "/uni_modules/uview-ui/components/u-sticky/u-sticky",
+    "u-tabs": "/uni_modules/uview-ui/components/u-tabs/u-tabs",
+    "u-swipe-action": "/uni_modules/uview-ui/components/u-swipe-action/u-swipe-action",
+    "u-swipe-action-item": "/uni_modules/uview-ui/components/u-swipe-action-item/u-swipe-action-item",
+    "product-list": "/component/productList/productList"
+  }
+}

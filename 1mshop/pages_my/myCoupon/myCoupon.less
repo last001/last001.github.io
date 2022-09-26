@@ -1,0 +1,202 @@
+.myCoupon{
+	background-color: #F2F2F2;
+	padding: 0 20rpx;
+	/* #ifdef H5 */
+	min-height:calc(100vh - 88rpx);
+	/* #endif */
+	/* #ifdef MP-WEIXIN */
+	padding-top: 52rpx;
+	min-height:calc(100vh - 52rpx);
+	/* #endif */
+	.tabsLists{
+		width: 100%;
+		padding: 10rpx 0;
+		background-color: #fff;
+		position: fixed;
+		left: 0;
+		z-index: 999;
+		// top: 88rpx;
+		/* #ifdef MP-WEIXIN */
+		top: 0;
+		/* #endif */
+		/deep/ .u-tabs__wrapper__nav__item{
+			padding-top: 8rpx;
+			padding-bottom: 16rpx;
+		}
+		/deep/ .u-tabs__wrapper__nav__line{
+			left: 13rpx;
+		}
+	}
+	.couponList,.couponList1,.couponList2{
+		padding-top: 104rpx;
+		padding-bottom: 20rpx;
+		/* #ifdef MP-WEIXIN */
+		padding-top: 60rpx;
+		/* #endif */
+		.v-couponList,.v-couponList1,.v-couponList2{
+			// padding: 20rpx;
+			background-color: #fff;
+			border-radius: 18rpx;
+			overflow: hidden;
+			margin-top: 20rpx;
+			&:first-child{
+				margin-top: 0rpx;
+			}
+			.price-border{
+				position: relative;
+				.left-round{
+					width: 50rpx;
+					height: 60rpx;
+					background-color: #f2f2f2;
+					border-radius: 50%;
+					position: absolute;
+					left: 0;
+					top: 50%;
+					margin-left: -40rpx;
+					margin-top: -30rpx;
+				}
+				
+				.right-round{
+					width: 50rpx;
+					height: 60rpx;
+					background-color: #f2f2f2;
+					border-radius: 50%;
+					position: absolute;
+					right: 0;
+					top: 50%;
+					margin-right: -40rpx;
+					margin-top: -30rpx;
+				}
+				.price{
+					padding:0 20rpx;
+					border-bottom: 2rpx solid #EAEAEA;
+					box-sizing: border-box;
+					width: 100%;
+					display: flex;
+					position: relative;
+					.v-price{
+						padding: 20rpx 30rpx 20rpx 10rpx;
+						color: #FF5B5B;
+						border-right:2rpx dashed #ccc ;
+						display: flex;
+						align-items: center;
+						justify-content: space-between;
+						flex-direction: column;
+						.num{
+							font-size: 24rpx;
+							text{
+								font-weight: bold;
+								font-size: 56rpx;
+								color: #FF5B5B;
+							}
+						}
+						.full{
+							font-size: 24rpx;
+							color: #333;
+						}
+					}
+					.coupon{
+						padding: 20rpx 20rpx 10rpx;
+						display: flex;
+						width: calc(100% - 206rpx);
+						justify-content: space-between;
+						.text{
+							h4{
+								padding: 10rpx 0;
+								display: flex;
+								align-items: center;
+								.giveCoupon{
+									margin-left: 20rpx;
+									font-size: 18rpx;
+									/* #ifdef H5 */	
+									zoom: 0.75;
+									/* #endif */
+									color: #F24849;
+									border: 1rpx solid  #F24849;
+									border-radius: 52rpx;
+									padding:5rpx 10rpx;
+								}
+							}
+							.date{
+								padding: 10rpx 0;
+								font-size: 24rpx;
+								color: #666;
+							}
+							.details{
+								padding: 10rpx 0;
+								color: #999;
+								font-size: 24rpx;
+								display: flex;
+								justify-content: flex-start;
+								align-items: flex-end;
+								.u-icon{
+									margin-left: 10rpx;
+								}
+							}
+						}
+						.btn{
+							display: flex;
+							align-items: center;
+							justify-content: flex-end;
+							// margin-left: 140rpx;
+						}
+					}
+					.tag{
+						position: absolute;
+						right: -50rpx;
+						top: 8rpx;
+						font-size: 16rpx;
+						/* #ifdef H5 */
+						zoom:0.77;
+						/* #endif */
+						color: #fff;
+						// background-color: #F24849;
+						padding: 5rpx 50rpx;
+						transform: rotate(30deg);
+					}
+				}
+			}
+			.introduce{
+				// height: 500rpx;
+				padding: 30rpx 20rpx;
+				background-color: #fff;
+				view{
+					padding: 10rpx 0;
+					color: #666;
+					font-size: 26rpx;
+				}
+			}
+		}
+	}
+	.couponList1,.couponList2{
+		.v-couponList1,.v-couponList2{
+			.price-border{
+				.price{
+					.v-price{
+						.num{
+							color: #999;
+							text{
+								color: #999;
+							}
+						}
+					}
+				}
+			}
+			h4{
+				color: #999;
+				font-weight: normal;
+			}
+		}
+	}
+	.couponList2{
+		.v-couponList2{
+			.price-border{
+				.price{
+					.tag{
+						background-color: #ccc;
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,444 @@
+.pay {
+  background-color: #f2f2f2;
+  padding-bottom: 100rpx;
+  position: relative;
+}
+.pay .tips {
+  width: 100%;
+  height: 520rpx;
+  background: linear-gradient(to top, #FFE27A, #fbd553);
+  border-bottom-left-radius: 100rpx;
+  border-bottom-right-radius: 100rpx;
+}
+.pay .tips .icon-refresh {
+  padding: 20rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.pay .tips .icon-refresh .v-icon-refresh {
+  display: flex;
+  align-items: center;
+}
+.pay .tips .icon-refresh .v-icon-refresh .image {
+  width: 36rpx;
+  height: 36rpx;
+}
+.pay .tips .icon-refresh .v-icon-refresh .image image {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.pay .tips .icon-refresh .v-icon-refresh .text {
+  color: #fff;
+  font-size: 36rpx;
+  font-weight: bold;
+  margin-left: 15rpx;
+}
+.pay .tips .icon-refresh .refresh {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.pay .tips .icon-refresh .refresh text {
+  font-size: 28rpx;
+  color: #666;
+  margin-right: 15rpx;
+}
+.pay .tips .icon-refresh .refresh image {
+  display: block;
+  width: 22rpx;
+  height: 22rpx;
+}
+.pay .tips .tipText {
+  padding: 0 20rpx;
+  font-size: 26rpx;
+}
+.pay .orderContent {
+  padding: 20rpx;
+  margin-top: -380rpx;
+}
+.pay .orderContent .v-orderContent {
+  background-color: #fff;
+  border-radius: 18rpx;
+  color: #333;
+  padding: 20rpx;
+  box-shadow: 0px 3px 6px 1px rgba(0, 0, 0, 0.09);
+}
+.pay .orderContent .v-orderContent .orderTitle {
+  padding: 0rpx 0 20rpx;
+  border-bottom: 2rpx solid #EAEAEA;
+  display: flex;
+  justify-content: space-between;
+}
+.pay .orderContent .v-orderContent .orderTitle .v-orderTitle {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}
+.pay .orderContent .v-orderContent .orderTitle .v-orderTitle .title {
+  font-size: 32rpx;
+  display: block;
+}
+.pay .orderContent .v-orderContent .orderTitle .v-orderTitle .u-icon {
+  display: block;
+  margin-left: 20rpx;
+}
+.pay .orderContent .v-orderContent .orderTitle .phoneImage {
+  width: 42rpx;
+  height: 42rpx;
+}
+.pay .orderContent .v-orderContent .orderTitle .phoneImage image {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.pay .orderContent .v-orderContent .orderList {
+  padding: 20rpx 0;
+}
+.pay .orderContent .v-orderContent .orderList .v-orderList {
+  display: flex;
+  margin-bottom: 20rpx;
+}
+.pay .orderContent .v-orderContent .orderList .v-orderList .image {
+  width: 160rpx;
+  height: 136rpx;
+}
+.pay .orderContent .v-orderContent .orderList .v-orderList .image image {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.pay .orderContent .v-orderContent .orderList .v-orderList .price-count {
+  width: calc(100% - 180rpx);
+  margin-left: 20rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.pay .orderContent .v-orderContent .orderList .v-orderList .price-count .price {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  font-size: 32rpx;
+  font-weight: bold;
+}
+.pay .orderContent .v-orderContent .orderList .v-orderList .price-count .price .v-price {
+  font-size: 26rpx;
+}
+.pay .orderContent .v-orderContent .cost {
+  display: flex;
+  justify-content: space-between;
+  padding: 10rpx 0;
+}
+.pay .orderContent .v-orderContent .coupon {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10rpx 0;
+}
+.pay .orderContent .v-orderContent .coupon .image-text {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.pay .orderContent .v-orderContent .coupon .image-text .image {
+  width: 24rpx;
+  height: 26rpx;
+  margin-right: 20rpx;
+}
+.pay .orderContent .v-orderContent .coupon .image-text .image image {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.pay .orderContent .v-orderContent .coupon .image-text .image .text {
+  font-size: 28rpx;
+  color: #333;
+}
+.pay .orderContent .v-orderContent .coupon .pop-icon {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.pay .orderContent .v-orderContent .coupon .pop-icon .pop {
+  font-size: 26rpx;
+  color: #999;
+}
+.pay .orderContent .v-orderContent .coupon .pop-icon .u-icon {
+  margin-left: 20rpx;
+}
+.pay .orderContent .v-orderContent .total {
+  padding: 20rpx 0 10rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 2rpx solid #EAEAEA;
+}
+.pay .orderContent .v-orderContent .total .prefer {
+  font-size: 28rpx;
+}
+.pay .orderContent .v-orderContent .total .prefer text:last-child {
+  color: #FF5B5B;
+  font-size: 26rpx;
+}
+.pay .orderContent .v-orderContent .total .v-total {
+  font-size: 28rpx;
+}
+.pay .orderContent .v-orderContent .total .v-total text {
+  color: #666;
+}
+.pay .orderContent .v-orderContent .total .v-total text:last-child {
+  font-weight: bold;
+  font-size: 32rpx;
+  color: #333;
+}
+.pay .deliveryInfo {
+  padding: 10rpx 20rpx 20rpx;
+}
+.pay .deliveryInfo .v-deliveryInfo {
+  background-color: #fff;
+  border-radius: 18rpx;
+  box-shadow: 0px 3px 6px 1px rgba(0, 0, 0, 0.09);
+}
+.pay .deliveryInfo .v-deliveryInfo ._h3 {
+  font-size: 32rpx;
+  padding: 20rpx;
+  border-bottom: 2rpx solid #EAEAEA;
+}
+.pay .deliveryInfo .v-deliveryInfo .addresss {
+  padding: 20rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.pay .deliveryInfo .v-deliveryInfo .addresss .text-image {
+  display: flex;
+  align-items: center;
+  color: #666;
+}
+.pay .deliveryInfo .v-deliveryInfo .addresss .text-image .image {
+  width: 22rpx;
+  height: 28rpx;
+  margin-right: 15rpx;
+}
+.pay .deliveryInfo .v-deliveryInfo .addresss .text-image .image image {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.pay .deliveryInfo .v-deliveryInfo .addresss .text-icon {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.pay .deliveryInfo .v-deliveryInfo .addresss .text-icon .text {
+  font-size: 28rpx;
+  color: #999;
+  margin-right: 20rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.pay .deliveryInfo .v-deliveryInfo .addresss .text-icon .changText {
+  font-size: 26rpx;
+  color: #F8CF39;
+}
+.pay .deliveryInfo .v-deliveryInfo .remask {
+  padding: 10rpx 20rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.pay .deliveryInfo .v-deliveryInfo .remask .text-image {
+  display: flex;
+  align-items: center;
+  color: #666;
+}
+.pay .deliveryInfo .v-deliveryInfo .remask .text-image .image {
+  margin-right: 15rpx;
+  width: 22rpx;
+  height: 28rpx;
+}
+.pay .deliveryInfo .v-deliveryInfo .remask .text-image .image image {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.pay .deliveryInfo .v-deliveryInfo .remask .inp-icon {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.pay .deliveryInfo .v-deliveryInfo .remask .inp-icon input {
+  text-align: right;
+  padding-right: 20rpx;
+  font-size: 28rpx;
+}
+.pay .deliveryInfo .v-deliveryInfo .remask .inp-icon .uni-input-placeholder {
+  color: #999;
+}
+.pay .deliveryInfo .v-deliveryInfo .serviceTime,
+.pay .deliveryInfo .v-deliveryInfo .delivery-people {
+  padding: 20rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.pay .deliveryInfo .v-deliveryInfo .serviceTime .text-image,
+.pay .deliveryInfo .v-deliveryInfo .delivery-people .text-image {
+  color: #666;
+  display: flex;
+  align-items: center;
+}
+.pay .deliveryInfo .v-deliveryInfo .serviceTime .text-image .image,
+.pay .deliveryInfo .v-deliveryInfo .delivery-people .text-image .image {
+  margin-right: 15rpx;
+  width: 22rpx;
+  height: 28rpx;
+}
+.pay .deliveryInfo .v-deliveryInfo .serviceTime .text-image .image image,
+.pay .deliveryInfo .v-deliveryInfo .delivery-people .text-image .image image {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.pay .deliveryInfo .v-deliveryInfo .serviceTime .text-icon,
+.pay .deliveryInfo .v-deliveryInfo .delivery-people .text-icon {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.pay .deliveryInfo .v-deliveryInfo .serviceTime .text-icon .image,
+.pay .deliveryInfo .v-deliveryInfo .delivery-people .text-icon .image {
+  width: 22rpx;
+  height: 28rpx;
+}
+.pay .deliveryInfo .v-deliveryInfo .serviceTime .text-icon .image image,
+.pay .deliveryInfo .v-deliveryInfo .delivery-people .text-icon .image image {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.pay .deliveryInfo .v-deliveryInfo .serviceTime .text-icon .text,
+.pay .deliveryInfo .v-deliveryInfo .delivery-people .text-icon .text {
+  font-size: 28rpx;
+  color: #999;
+  margin-right: 20rpx;
+}
+.pay .orderInfo {
+  padding: 20rpx;
+}
+.pay .orderInfo .v-orderInfo {
+  background-color: #fff;
+  border-radius: 18rpx;
+  box-shadow: 0px 3px 6px 1px rgba(0, 0, 0, 0.09);
+}
+.pay .orderInfo .v-orderInfo ._h3 {
+  font-size: 32rpx;
+  padding: 20rpx;
+  border-bottom: 2rpx solid #EAEAEA;
+}
+.pay .orderInfo .v-orderInfo .orderNumber,
+.pay .orderInfo .v-orderInfo .creatTime {
+  display: flex;
+  justify-content: space-between;
+  font-size: 26rpx;
+  padding: 20rpx;
+}
+.pay .orderInfo .v-orderInfo .orderNumber .copy,
+.pay .orderInfo .v-orderInfo .creatTime .copy {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.pay .orderInfo .v-orderInfo .orderNumber .copy .u-button,
+.pay .orderInfo .v-orderInfo .creatTime .copy .u-button {
+  margin-left: 15rpx;
+}
+.pay .orderInfo .v-orderInfo .orderNumber .time text:nth-child(2),
+.pay .orderInfo .v-orderInfo .creatTime .time text:nth-child(2) {
+  margin-left: 15rpx;
+}
+.pay .orderInfo .v-orderInfo .creatTime {
+  padding-top: 0;
+}
+.pay .btns {
+  width: 100%;
+  background-color: #fff;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding: 20rpx ;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.pay .btns .u-button {
+  width: 178rpx;
+  margin: 0;
+  margin-right: 20rpx;
+}
+.pay .btns .u-button:last-child {
+  margin-right: 40rpx;
+}
+.pay .changeAddShow .content,
+.pay .cancelEvalutate .content {
+  width: 520rpx;
+  padding: 50rpx;
+}
+.pay .changeAddShow .content ._h3,
+.pay .cancelEvalutate .content ._h3 {
+  width: 100%;
+  text-align: center;
+  font-size: 36rpx;
+}
+.pay .changeAddShow .content .tip,
+.pay .cancelEvalutate .content .tip {
+  text-align: center;
+  font-size: 28rpx;
+  color: #999;
+  padding: 20rpx 0;
+}
+.pay .changeAddShow .content .add-btns,
+.pay .cancelEvalutate .content .add-btns {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.pay .changeAddShow .content .add-btns .u-button:first-child,
+.pay .cancelEvalutate .content .add-btns .u-button:first-child {
+  margin-right: 20rpx;
+}
+.pay .paySuccess .u-popup__content {
+  background-color: transparent;
+}
+.pay .paySuccess .u-popup__content .content {
+  position: relative;
+}
+.pay .paySuccess .u-popup__content .content image {
+  display: block;
+  width: 551rpx;
+  height: 765rpx;
+}
+.pay .paySuccess .u-popup__content .content .close {
+  position: absolute;
+  right: 2rpx;
+  top: 2rpx;
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+}
+.pay .paySuccess .u-popup__content .content .ShareFriends {
+  position: absolute;
+  right: 50%;
+  margin-right: -50rpx;
+  bottom: 9%;
+  width: 120rpx;
+  height: 30rpx;
+}
+.pay .paySuccess .u-popup__content .content .ShareFriends button {
+  height: 30rpx;
+  background-color: transparent;
+}
+

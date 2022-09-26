@@ -1,0 +1,105 @@
+.evaluateSuccess{
+	background-color: #f2f2f2;
+	.successTip{
+		background-color: #fff;
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		justify-content: center;
+		padding: 20rpx 0;
+		.image-tip{
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			image{
+				width: 36rpx;
+				height: 36rpx;
+				display: block;
+			}
+			text{
+				color: #333;
+				font-size: 36rpx;
+				font-weight: bold;
+				margin-left: 20rpx;
+			}
+		}
+		.text{
+			font-size: 22rpx;
+			color: #999;
+			margin: 20rpx 0;
+		}
+		.btn{
+			.u-button{
+				width: 220rpx;
+			}
+		}
+	}
+	.lists{
+		.list{
+			background-color: #fff;
+			margin-top: 20rpx;
+			.time{
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				padding: 20rpx;
+				.timeText{
+					font-size: 26rpx;
+					color: #999;
+				}
+				.isShow{
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+					font-size: 22rpx;
+					color: #666;
+					.text{
+						margin: 0 10rpx;
+					}
+				}
+			}
+			.tip{
+				border-top: 1rpx solid #EAEAEA;
+				color: #333;
+				font-size: 22rpx;
+				padding: 20rpx;
+			}
+			.image-title{
+				display: flex;
+				padding:10rpx 20rpx;
+				.image{
+					width: 120rpx;
+					height: 120rpx;
+					image{
+						display: block;
+						width: 100%;
+						height: 100%;
+					}
+				}
+				.title{
+					padding-left: 20rpx;
+					width: calc(100% - 140rpx);
+					display: flex;
+					// align-items: center;
+					justify-content: space-around;
+					flex-direction: column;
+					background-color: #f2f2f2;
+				}
+			}
+			.btn{
+				float: right;
+				padding: 20rpx;
+				padding-bottom: 30rpx;
+				.u-button{
+					width: 150rpx;
+				}
+			}
+			&::after{
+				display: block;
+				content:"";
+				height: 0rpx;
+				clear: both;
+			}
+		}
+	}
+}

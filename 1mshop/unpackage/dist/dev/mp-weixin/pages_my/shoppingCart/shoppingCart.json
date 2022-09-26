@@ -1,0 +1,14 @@
+{
+  "navigationBarTitleText": "购物车",
+  "navigationBarBackgroundColor": "#FFE27A",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "u-swipe-action": "/uni_modules/uview-ui/components/u-swipe-action/u-swipe-action",
+    "u-swipe-action-item": "/uni_modules/uview-ui/components/u-swipe-action-item/u-swipe-action-item",
+    "u-checkbox-group": "/uni_modules/uview-ui/components/u-checkbox-group/u-checkbox-group",
+    "u-checkbox": "/uni_modules/uview-ui/components/u-checkbox/u-checkbox",
+    "u-icon": "/uni_modules/uview-ui/components/u-icon/u-icon",
+    "u-popup": "/uni_modules/uview-ui/components/u-popup/u-popup",
+    "u-button": "/uni_modules/uview-ui/components/u-button/u-button"
+  }
+}

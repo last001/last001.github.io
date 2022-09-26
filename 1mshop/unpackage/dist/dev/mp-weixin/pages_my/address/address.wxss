@@ -1,0 +1,66 @@
+.address {
+  background-color: #f2f2f2;
+  padding-top: 20rpx;
+
+
+
+
+  min-height: calc(100vh - 20rpx);
+
+  position: relative;
+}
+.address .address-list {
+  background-color: #fff;
+  margin-top: 20rpx;
+  padding: 20rpx;
+}
+.address .address-list:first-child {
+  margin-top: 0;
+}
+.address .address-list .name-phone {
+  display: flex;
+  justify-content: space-between;
+  font-size: 32rpx;
+  color: #333;
+  padding: 20rpx 0;
+  font-weight: bold;
+}
+.address .address-list .v-address {
+  font-size: 26rpx;
+  font-weight: bold;
+  color: #999;
+}
+.address .address-list .handle {
+  margin-top: 40rpx;
+  padding-top: 20rpx;
+  border-top: 2rpx solid #eaeaea;
+  display: flex;
+  justify-content: space-between;
+}
+.address .address-list .handle .edit-delete {
+  display: flex;
+  align-items: flex-end;
+}
+.address .address-list .handle .edit-delete image {
+  width: 28rpx;
+  height: 28rpx;
+  margin-right: 10rpx;
+}
+.address .address-list .handle .edit-delete .edit {
+  margin-right: 20rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.address .address-list .handle .edit-delete .delete {
+  justify-content: center;
+  align-items: center;
+}
+.address .btn {
+  position: absolute;
+  width: 80%;
+  bottom: 20rpx;
+  left: 10%;
+  height: 80rpx;
+}
+

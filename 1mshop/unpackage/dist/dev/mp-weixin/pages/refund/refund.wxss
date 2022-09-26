@@ -1,0 +1,239 @@
+.refund {
+  background-color: #f2f2f2;
+  padding: 20rpx ;
+  position: relative;
+
+
+
+
+  min-height: 100vh;
+}
+.refund .product {
+  padding: 20rpx;
+  background-color: #fff;
+  border-radius: 18rpx;
+}
+.refund .product ._h3 {
+  font-size: 32rpx;
+}
+.refund .product .image-content {
+  margin-top: 20rpx;
+  display: flex;
+}
+.refund .product .image-content .image {
+  width: 180rpx;
+  height: 160rpx;
+}
+.refund .product .image-content .image image {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.refund .product .image-content .content {
+  margin-left: 20rpx;
+  width: calc(100% - 180rpx);
+}
+.refund .product .image-content .content .title {
+  color: #333;
+  font-weight: bold;
+  font-size: 28rpx;
+  padding: 10rpx 0;
+}
+.refund .product .image-content .content .setText {
+  color: #666;
+  font-size: 22rpx;
+}
+.refund .product .image-content .content .money-count {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 20rpx 0 0;
+}
+.refund .product .image-content .content .money-count .money {
+  font-size: 22rpx;
+  color: #333;
+}
+.refund .product .image-content .content .money-count .count {
+  border: 2rpx solid #ccc;
+  border-radius: 50rpx;
+  box-sizing: border-box;
+  height: 44rpx;
+  line-height: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.refund .product .image-content .content .money-count .count text {
+  display: block;
+  width: 50rpx;
+  text-align: center;
+  color: #ccc;
+  box-sizing: border-box;
+  height: 100%;
+  line-height: 34rpx;
+  font-weight: bold;
+}
+.refund .product .image-content .content .money-count .count text.num {
+  font-weight: normal;
+  background-color: #ccc;
+  color: #333;
+  font-size: 24rpx;
+  width: 50rpx;
+  height: 100%;
+  text-align: center;
+  line-height: 40rpx;
+}
+.refund .refundInfo {
+  margin-top: 20rpx;
+  padding: 20rpx;
+  border-radius: 18rpx;
+  background-color: #fff;
+}
+.refund .refundInfo ._h3 {
+  font-size: 32rpx;
+  margin-bottom: 10rpx;
+}
+.refund .refundInfo .refundList {
+  padding: 10rpx 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.refund .refundInfo .refundList .title {
+  font-size: 26rpx;
+  color: #333;
+}
+.refund .refundInfo .refundList .text-icon {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.refund .refundInfo .refundList .text-icon .text {
+  font-size: 26rpx;
+  color: #999;
+  margin-right: 15rpx;
+}
+.refund .refundInfoPop .u-popup__content {
+  overflow: hidden;
+}
+.refund .refundInfoPop .u-popup__content .content {
+  width: 500rpx;
+}
+.refund .refundInfoPop .u-popup__content .content .u-radio-group .u-radio {
+  padding: 40rpx;
+
+  padding-bottom: 40rpx !important;
+}
+.refund .refundInfoPop .u-popup__content .content .u-radio-group .u-radio /deep/ .u-radio__text {
+  font-weight: bold;
+  color: #333;
+}
+.refund .refundInfoPop .u-popup__content .content .custom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 40rpx;
+}
+.refund .refundInfoPop .u-popup__content .content .custom .text {
+  font-weight: bold;
+  font-size: 30rpx;
+  color: #606266;
+}
+.refund .refundInfoPop .u-popup__content .content .custom .inp {
+  width: 150rpx;
+}
+.refund .refundInfoPop .u-popup__content .content .custom .inp .u-input {
+  padding: 3rpx 8rpx !important;
+}
+.refund .refundInfoPop .u-popup__content .content .custom .inp .u-input /deep/ .u-input__content__subfix-icon text {
+  font-size: 22rpx;
+  color: #999;
+}
+.refund .refundExplain {
+  margin-top: 20rpx;
+  padding: 20rpx;
+  border-radius: 18rpx;
+  background-color: #fff;
+}
+.refund .refundExplain ._h3 {
+  font-size: 32rpx;
+  margin-bottom: 10rpx;
+}
+.refund .refundExplain .u-textarea {
+  width: calc(100% - 20rpx);
+  margin-top: 20rpx;
+  background-color: #f2f2f2;
+  padding: 10rpx;
+  border: none;
+}
+.refund .refundExplain .u-textarea .u-textarea__field {
+  font-size: 22rpx;
+}
+.refund .refundExplain .voucher {
+  display: flex;
+  flex-wrap: wrap;
+}
+.refund .refundExplain .voucher .imageList {
+  margin-top: 20rpx;
+  width: calc((100% - 60rpx) / 4);
+  height: 162rpx;
+  border: 1rpx solid red;
+  margin-left: 15rpx;
+}
+.refund .refundExplain .voucher .imageList:first-child {
+  margin-left: 0;
+}
+.refund .refundExplain .voucher .imageList:nth-of-type(n + 5) {
+  margin-left: 0;
+}
+.refund .refundExplain .voucher .imageList image {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.refund .refundExplain .voucher .addBtn {
+  margin-left: 20rpx;
+  margin-top: 20rpx;
+  width: calc((100% - 60rpx) / 4);
+  height: 162rpx;
+  border: 1rpx dashed #EAEAEA;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.refund .refundExplain .voucher .addBtn image {
+  width: 35rpx;
+  height: 35rpx;
+  display: block;
+}
+.refund .refundExplain .voucher .addBtn text {
+  font-size: 22rpx;
+  color: #999;
+  margin-top: 20rpx;
+}
+.refund .btn {
+  width: 90%;
+  position: fixed;
+  bottom: 20rpx;
+  left: 5%;
+}
+.refund .explainPop .content {
+  padding: 50rpx;
+  width: 520rpx;
+}
+.refund .explainPop .content ._h3 {
+  font-size: 36rpx;
+  width: 100%;
+  text-align: center;
+}
+.refund .explainPop .content .btns {
+  margin-top: 40rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.refund .explainPop .content .btns .u-button:last-child {
+  margin-left: 20rpx;
+}
+

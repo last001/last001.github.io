@@ -1,0 +1,215 @@
+.myEvaluate {
+  background-color: #f2f2f2;
+  padding-top: 94rpx;
+
+
+
+
+  min-height: calc(100vh - 94rpx);
+}
+.myEvaluate .tabsLists {
+  width: 100%;
+  padding: 5rpx 0;
+  background-color: #fff;
+  position: fixed;
+  left: 0;
+  z-index: 999;
+
+  top: 0;
+}
+.myEvaluate .tabsLists .u-tabs__wrapper__nav__item {
+  padding-top: 8rpx;
+  padding-bottom: 16rpx;
+}
+.myEvaluate .tabsLists .u-tabs__wrapper__nav__line {
+  left: 20rpx;
+}
+.myEvaluate .all .v-all,
+.myEvaluate .wait-evaluate .v-all {
+  background-color: #fff;
+  padding: 20rpx 20rpx 0;
+  margin-bottom: 20rpx;
+}
+.myEvaluate .all .v-all .title,
+.myEvaluate .wait-evaluate .v-all .title {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border-bottom: 1rpx solid #EAEAEA;
+  padding-bottom: 20rpx;
+}
+.myEvaluate .all .v-all .title .title-image,
+.myEvaluate .wait-evaluate .v-all .title .title-image {
+  width: 50rpx;
+  height: 50rpx;
+}
+.myEvaluate .all .v-all .title .title-image image,
+.myEvaluate .wait-evaluate .v-all .title .title-image image {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.myEvaluate .all .v-all .title .name,
+.myEvaluate .wait-evaluate .v-all .title .name {
+  margin-left: 15rpx;
+  font-size: 28rpx;
+  color: #333;
+  font-weight: bold;
+}
+.myEvaluate .all .v-all .title .u-icon,
+.myEvaluate .wait-evaluate .v-all .title .u-icon {
+  margin-left: 20rpx;
+  margin-top: 4rpx;
+}
+.myEvaluate .all .v-all .main-image,
+.myEvaluate .wait-evaluate .v-all .main-image {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 20rpx;
+}
+.myEvaluate .all .v-all .main-image .image,
+.myEvaluate .wait-evaluate .v-all .main-image .image {
+  width: 160rpx;
+  height: 135rpx;
+}
+.myEvaluate .all .v-all .main-image .image image,
+.myEvaluate .wait-evaluate .v-all .main-image .image image {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.myEvaluate .all .v-all .main-image .text,
+.myEvaluate .wait-evaluate .v-all .main-image .text {
+  margin-left: 20rpx;
+  width: calc(100% - 202rpx);
+  font-size: 26rpx;
+  color: #333;
+}
+.myEvaluate .all .v-all .main-image .count,
+.myEvaluate .wait-evaluate .v-all .main-image .count {
+  font-size: 22rpx;
+  width: 22rpx;
+  text-align: center;
+}
+.myEvaluate .all .v-all .time-pay,
+.myEvaluate .wait-evaluate .v-all .time-pay {
+  margin-top: 20rpx;
+  font-size: 22rpx;
+  color: #666;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.myEvaluate .all .v-all .time-pay .pay text,
+.myEvaluate .wait-evaluate .v-all .time-pay .pay text {
+  font-weight: bold;
+}
+.myEvaluate .all .v-all .btn,
+.myEvaluate .wait-evaluate .v-all .btn {
+  float: right;
+  padding: 20rpx 0;
+  width: 150rpx;
+}
+.myEvaluate .all .v-all::after,
+.myEvaluate .wait-evaluate .v-all::after {
+  clear: both;
+  content: '';
+  display: block;
+}
+.myEvaluate .already-evaluate .v-already-evaluate {
+  background-color: #fff;
+  padding: 20rpx 0;
+  margin-bottom: 20rpx;
+}
+.myEvaluate .already-evaluate .v-already-evaluate .show-time {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 26rpx;
+  color: #999;
+  padding: 0rpx 20rpx 20rpx;
+  border-bottom: 1rpx solid #EAEAEA;
+}
+.myEvaluate .already-evaluate .v-already-evaluate .show-time .isShow {
+  display: flex;
+  align-items: center;
+}
+.myEvaluate .already-evaluate .v-already-evaluate .show-time .isShow .text {
+  margin: 0 10rpx;
+}
+.myEvaluate .already-evaluate .v-already-evaluate .default {
+  color: #333;
+  font-size: 22rpx;
+  padding: 20rpx;
+}
+.myEvaluate .already-evaluate .v-already-evaluate .image-list .evaluate-text {
+  padding: 10rpx 20rpx;
+  font-size: 26rpx;
+}
+.myEvaluate .already-evaluate .v-already-evaluate .image-list .evaluate-text text {
+  color: #F8CF39;
+}
+.myEvaluate .already-evaluate .v-already-evaluate .image-list .list {
+  display: flex;
+  padding: 20rpx;
+}
+.myEvaluate .already-evaluate .v-already-evaluate .image-list .list image {
+  display: block;
+  width: 168rpx;
+  height: 168rpx;
+  margin-right: 20rpx;
+}
+.myEvaluate .already-evaluate .v-already-evaluate .image-list .list image:last-child {
+  margin-right: 0;
+}
+.myEvaluate .already-evaluate .v-already-evaluate .image-title {
+  padding: 20rpx;
+  display: flex;
+}
+.myEvaluate .already-evaluate .v-already-evaluate .image-title .image {
+  width: 120rpx;
+  height: 120rpx;
+}
+.myEvaluate .already-evaluate .v-already-evaluate .image-title .image image {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.myEvaluate .already-evaluate .v-already-evaluate .image-title .title {
+  padding-left: 20rpx;
+  width: calc(100% - 140rpx);
+  background-color: #f2f2f2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.myEvaluate .already-evaluate .v-already-evaluate .image-title .title .v-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+}
+.myEvaluate .already-evaluate .v-already-evaluate .image-title .title .rate {
+  display: flex;
+  align-items: center;
+  font-size: 24rpx;
+}
+.myEvaluate .already-evaluate .v-already-evaluate .image-title .title .rate .name {
+  margin-right: 10rpx;
+}
+.myEvaluate .already-evaluate .v-already-evaluate .btn {
+  width: 100%;
+}
+.myEvaluate .already-evaluate .v-already-evaluate .btn .u-button {
+  float: right;
+  width: 150rpx;
+  margin-right: 20rpx;
+}
+.myEvaluate .already-evaluate .v-already-evaluate .btn::after {
+  display: block;
+  content: "";
+  clear: both;
+  height: 0;
+}
+

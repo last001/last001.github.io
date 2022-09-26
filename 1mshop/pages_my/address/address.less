@@ -1,0 +1,65 @@
+.address{
+	background-color: #f2f2f2;
+	padding-top: 20rpx;
+	/* #ifdef H5 || APP */
+	min-height: calc(100vh - 20rpx - 88rpx);
+	/* #endif */
+	/* #ifdef MP-WEIXIN */
+	min-height: calc(100vh - 20rpx);
+	/* #endif */
+	position: relative;
+	.address-list{
+		background-color: #fff;
+		margin-top: 20rpx;
+		padding: 20rpx;
+		&:first-child{
+			margin-top: 0;
+		}
+		.name-phone{
+			display: flex;
+			justify-content: space-between;
+			font-size: 32rpx;
+			color: #333;
+			padding: 20rpx 0;
+			font-weight: bold;
+		}
+		.v-address{
+			font-size: 26rpx;
+			font-weight: bold;
+			color: #999;
+		}
+		.handle{
+			margin-top: 40rpx;
+			padding-top: 20rpx;
+			border-top: 2rpx solid #eaeaea;
+			display: flex;
+			justify-content: space-between;
+			.edit-delete{
+				display: flex;
+				align-items: flex-end;
+				image{
+					width: 28rpx;
+					height: 28rpx;
+					margin-right: 10rpx;
+				}
+				.edit{
+					margin-right: 20rpx;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+				}
+				.delete{
+					justify-content: center;
+					align-items: center;
+				}
+			}
+		}
+	}
+	.btn{
+		position: absolute;
+		width: 80%;
+		bottom: 20rpx;
+		left: 10%;
+		height: 80rpx;
+	}
+}

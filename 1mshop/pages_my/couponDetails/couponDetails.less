@@ -1,0 +1,249 @@
+.couponDetails{
+		background-color: #f2f2f2;
+		padding-top: 88rpx;
+		min-height:calc(100vh - 88rpx);
+		.friendGive{
+			background: linear-gradient(to right , #F6CE42 ,#FFE78F);
+			padding: 100rpx 0;
+			.title{
+					display: flex;
+					align-items: center;
+					justify-content: center;
+				h3{
+					font-size: 32rpx;
+					position: relative;
+					&:before{
+						content:"";
+						display: block;
+						width: 21rpx;
+						height: 5rpx;
+						background-color: #F24849;
+						position: absolute;
+						left: -44rpx;
+						top: 50%;
+					}
+					&::after{
+						content:"";
+						display: block;
+						width: 21rpx;
+						height: 5rpx;
+						background-color: #F24849;
+						position: absolute;
+						right: -44rpx;
+						top: 50%;
+					}
+				}
+			}
+			.text{
+				width: 100%;
+				text-align: center;
+				color: #fff;
+				font-size: 22rpx;
+				padding: 20rpx 0;
+			}
+		}
+		.couponList{
+			padding:20rpx;
+			.v-couponList{
+				background-color: #fff;
+				border-radius: 18rpx;
+				overflow: hidden;
+				margin-top: 20rpx;
+				&:first-child{
+					margin-top: 0rpx;
+				}
+				.price-border{
+					position: relative;
+					.left-round{
+						width: 50rpx;
+						height: 60rpx;
+						background-color: #f2f2f2;
+						border-radius: 50%;
+						position: absolute;
+						left: 0;
+						top: 50%;
+						margin-left: -40rpx;
+						margin-top: -30rpx;
+					}
+					
+					.right-round{
+						width: 50rpx;
+						height: 60rpx;
+						background-color: #f2f2f2;
+						border-radius: 50%;
+						position: absolute;
+						right: 0;
+						top: 50%;
+						margin-right: -40rpx;
+						margin-top: -30rpx;
+					}
+					.price{
+						padding:0 20rpx;
+						border-bottom: 2rpx solid #EAEAEA;
+						box-sizing: border-box;
+						width: 100%;
+						display: flex;
+						position: relative;
+						.v-price{
+							padding: 20rpx 50rpx 20rpx 30rpx;
+							color: #FF5B5B;
+							border-right:2rpx dashed #ccc ;
+							display: flex;
+							align-items: center;
+							justify-content: space-between;
+							flex-direction: column;
+							.num{
+								font-size: 24rpx;
+								text{
+									font-weight: bold;
+									font-size: 56rpx;
+									color: #FF5B5B;
+								}
+							}
+							.full{
+								font-size: 24rpx;
+								color: #333;
+							}
+						}
+						.coupon{
+							padding: 20rpx 20rpx 10rpx;
+							display: flex;
+							width: calc(100% - 246rpx);
+							justify-content: center;
+							.text{
+								h4{
+									padding: 10rpx 0;
+									display: flex;
+									align-items: center;
+									.giveCoupon{
+										margin-left: 20rpx;
+										font-size: 18rpx;
+										/* #ifdef H5 */	
+										zoom: 0.75;
+										/* #endif */
+										color: #F24849;
+										border: 1rpx solid  #F24849;
+										border-radius: 52rpx;
+										padding:5rpx 10rpx;
+									}
+								}
+								.date{
+									padding: 10rpx 0;
+									font-size: 24rpx;
+									color: #666;
+								}
+								.details{
+									padding: 10rpx 0;
+									color: #999;
+									font-size: 24rpx;
+									display: flex;
+									justify-content: flex-start;
+									align-items: flex-end;
+									.u-icon{
+										margin-left: 10rpx;
+									}
+								}
+							}
+							.btn{
+								display: flex;
+								align-items: center;
+								justify-content: flex-end;
+								// margin-left: 140rpx;
+							}
+						}
+						.tag{
+							position: absolute;
+							right: -50rpx;
+							top: 8rpx;
+							font-size: 16rpx;
+							/* #ifdef H5 */
+							zoom:0.77;
+							/* #endif */
+							color: #fff;
+							// background-color: #F24849;
+							padding: 5rpx 50rpx;
+							transform: rotate(30deg);
+						}
+					}
+				}
+				.introduce{
+					// height: 500rpx;
+					padding: 30rpx 20rpx;
+					background-color: #fff;
+					view{
+						padding: 10rpx 0;
+						color: #666;
+						font-size: 26rpx;
+					}
+				}
+			}
+		}
+		.explain{
+			margin-top: 20rpx;
+			padding: 20rpx;
+			font-size: 32rpx;
+			view{
+				padding: 10rpx 0;
+				font-size: 28rpx;
+				color: #666;
+			}
+		}
+		.btn{
+			position: fixed;
+			bottom: 20rpx;
+			left: 5%;
+			width: 90%;
+			.u-button{
+				border-width: 0px !important;
+				&:last-child{
+					margin-top: 30rpx;
+				}
+			}
+		}
+		.btnShow{
+			.content{
+				width: 582rpx;
+				padding: 40rpx 0 0rpx;
+				overflow: hidden;
+				border-bottom-left-radius: 30rpx;
+				border-bottom-right-radius: 30rpx;
+				h3{
+					text-align: center;
+					font-size: 36rpx;
+				}
+				.text{
+					text-align: center;
+					color: #666;
+					font-size: 28rpx;
+					margin-top: 20rpx;
+				}
+				.btns{
+					margin-top: 40rpx;
+					display: flex;
+					// .btn1{
+					// 	flex: 1;
+					// 	border-right: 1rpx solid #ccc;
+					// }
+					// .btn2{
+					// 	flex: 1;
+					// }
+					.u-button{
+						flex: 1;
+						border-width: 0px !important;
+						&:first-child{
+							position: relative;
+							&::after{
+								content: "|";
+								position: absolute;
+								left: 50%;
+								top: 20%;
+								font-size: 50rpx;
+								display: block;
+								color:#ccc;
+							}
+						}
+					}
+				}
+			}
+		}
+	}

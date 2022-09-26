@@ -1,0 +1,32 @@
+.historyLocation {
+  background-color: #f2f2f2;
+  padding: 40rpx;
+
+
+
+
+  min-height: calc(100vh - 80rpx);
+}
+.historyLocation .item {
+  background-color: #F8CF39;
+  padding: 20rpx;
+  border-radius: 50rpx;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 30rpx;
+}
+.historyLocation .item:first-child {
+  margin-top: 0;
+}
+.historyLocation .item image {
+  width: 28rpx;
+  height: 34rpx;
+  display: block;
+  margin-left: 10rpx;
+}
+.historyLocation .item text {
+  color: #fff;
+  margin-left: 20rpx;
+}
+

@@ -1,0 +1,206 @@
+.order {
+  background-color: #F2F2F2;
+}
+.order .tabsLists {
+  width: 100%;
+  padding: 10rpx 0;
+  background-color: #fff;
+  position: fixed;
+  left: 0;
+  z-index: 999;
+
+  top: 0;
+}
+.order .tabsLists .u-tabs__wrapper__nav__item {
+  padding-top: 8rpx;
+  padding-bottom: 16rpx;
+}
+.order .tabsLists .u-tabs__wrapper__nav__line {
+  left: 20rpx;
+}
+.order .notLogin {
+  background-color: #fff;
+  padding: 0 20rpx;
+  margin-top: 20rpx;
+  padding-top: 88rpx;
+  margin-bottom: 0;
+
+  margin-top: 0rpx;
+}
+.order .notLogin .u-empty .u-empty__wrap {
+  margin-top: 40rpx;
+}
+.order .notLogin .u-empty .u-empty__wrap .u-button {
+  width: 203rpx;
+}
+.order .allOrderList {
+  padding-top: 84rpx;
+  background-color: #F2F2F2;
+}
+.order .allOrderList .order-lists {
+  padding: 0 20rpx;
+}
+.order .allOrderList .order-lists .scroll-Y {
+  height: calc(100vh - 84rpx);
+}
+.order .allOrderList .order-lists .scroll-Y .list {
+  background-color: #fff;
+  width: 100%;
+  border-radius: 18rpx;
+  margin-bottom: 20rpx;
+}
+.order .allOrderList .order-lists .scroll-Y .list:first-of-type {
+  margin-top: 20rpx;
+}
+.order .allOrderList .order-lists .scroll-Y .list .list-name {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx;
+  width: calc(100% - 40rpx);
+}
+.order .allOrderList .order-lists .scroll-Y .list .list-name .storeInfo {
+  display: flex;
+  align-items: center;
+}
+.order .allOrderList .order-lists .scroll-Y .list .list-name .storeInfo .image {
+  width: 60rpx;
+  height: 60rpx;
+}
+.order .allOrderList .order-lists .scroll-Y .list .list-name .storeInfo .image image {
+  width: 100%;
+  height: 100%;
+}
+.order .allOrderList .order-lists .scroll-Y .list .list-name .storeInfo .storeName {
+  color: #333;
+  font-weight: bold;
+  font-size: 28rpx;
+  margin-left: 15rpx;
+}
+.order .allOrderList .order-lists .scroll-Y .list .list-name .storeInfo .stroeIcon {
+  margin-left: 20rpx;
+}
+.order .allOrderList .order-lists .scroll-Y .list .list-name .state {
+  font-size: 26rpx;
+}
+.order .allOrderList .order-lists .scroll-Y .list .setMeal {
+  padding: 20rpx;
+}
+.order .allOrderList .order-lists .scroll-Y .list .setMeal .setMeal-image {
+  position: relative;
+}
+.order .allOrderList .order-lists .scroll-Y .list .setMeal .setMeal-image .setMeal-info .setMeal-info-item {
+  margin-right: 12rpx;
+}
+.order .allOrderList .order-lists .scroll-Y .list .setMeal .setMeal-image .setMeal-info .setMeal-info-item:last-child {
+  margin-right: 0;
+}
+.order .allOrderList .order-lists .scroll-Y .list .setMeal .setMeal-image .setMeal-info .setMeal-info-item .setMeal-info-image {
+  width: 160rpx;
+  height: 136rpx;
+}
+.order .allOrderList .order-lists .scroll-Y .list .setMeal .setMeal-image .setMeal-info .setMeal-info-item .setMeal-info-title {
+  width: 100%;
+  font-size: 22rpx;
+  color: #333;
+}
+.order .allOrderList .order-lists .scroll-Y .list .setMeal .setMeal-image .count {
+  width: 26rpx;
+  height: 100%;
+  padding: 10rpx;
+  position: absolute;
+  right: -2rpx;
+  top: -2rpx;
+  background: #fff;
+  font-size: 26rpx;
+  color: #333;
+  text-align: center;
+  border-radius: 0rpx  4rpx  4rpx  0rpx ;
+  vertical-align: middle;
+}
+.order .allOrderList .order-lists .scroll-Y .list .setMeal .setMeal-image .count.active {
+  opacity: 0.89;
+}
+.order .allOrderList .order-lists .scroll-Y .list .payInfo {
+  display: flex;
+  justify-content: space-between;
+  font-size: 22rpx;
+  padding: 20rpx;
+  padding-top: 0;
+}
+.order .allOrderList .order-lists .scroll-Y .list .payInfo .payTime {
+  color: #666;
+}
+.order .allOrderList .order-lists .scroll-Y .list .payInfo .payMoney {
+  color: #333;
+}
+.order .allOrderList .order-lists .scroll-Y .list .payInfo .payMoney .money {
+  font-weight: bold;
+  font-size: 28rpx;
+}
+.order .allOrderList .order-lists .scroll-Y .list .btns {
+  width: 100%;
+  padding-bottom: 20rpx;
+}
+.order .allOrderList .order-lists .scroll-Y .list .btns .btnsItem .u-button {
+  float: right;
+  width: 150rpx;
+  height: 50rpx;
+  margin-right: 20rpx;
+}
+.order .allOrderList .order-lists .scroll-Y .list .btns .u-button--info {
+  border-color: #333;
+}
+.order .allOrderList .order-lists .scroll-Y .list .btns::after {
+  display: block;
+  clear: both;
+  content: "";
+  visibility: hidden;
+  height: 0;
+}
+.order .allOrderList .order-lists .scroll-Y .u-loadmore {
+  padding-bottom: 20rpx;
+}
+.order .notEvaluate {
+  margin-top: 20rpx;
+  padding-top: 20rpx;
+
+  margin-top: 0;
+  padding-top: 0;
+}
+.order .notEvaluate .btns {
+  width: 100%;
+  padding-bottom: 20rpx;
+}
+.order .notEvaluate .btns .btnsItem .u-button {
+  float: right;
+  width: 150rpx;
+  height: 50rpx;
+  margin-right: 20rpx;
+}
+.order .notEvaluate .btns .u-button--info {
+  border-color: #333;
+}
+.order .notEvaluate .btns::after {
+  display: block;
+  clear: both;
+  content: "";
+  visibility: hidden;
+  height: 0;
+}
+.order .raminderBox {
+  padding: 40rpx 60rpx;
+}
+.order .raminderBox ._h3 {
+  text-align: center;
+}
+.order .raminderBox .text {
+  text-align: center;
+  color: #ccc;
+  font-size: 24rpx;
+  margin-top: 20rpx;
+}
+.order .raminderBox .u-button {
+  margin-top: 40rpx;
+}
+

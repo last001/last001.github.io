@@ -1,0 +1,128 @@
+.notEvaluate-lists{
+	margin-bottom: 20rpx;
+	padding: 0 20rpx;
+	margin-top: 70rpx;
+	
+	/* #ifdef MP-WEIXIN */
+	margin-top: 62rpx;
+	padding-top: 0;
+	/* #endif */
+	
+	.list{
+		background-color: #fff;
+		width: 100%;
+		// height: 200rpx;
+		border-radius: 18rpx;
+		margin-bottom: 20rpx;
+		.list-name{
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: 20rpx;
+			width: calc(100% - 40rpx);
+			.storeInfo{
+				display: flex;
+				align-items: center;
+				.image{
+					width: 60rpx;
+					height: 60rpx;
+					image{
+						width: 100%;
+						height: 100%;
+					}
+				}
+				.storeName{
+					color: #333;
+					font-weight: bold;
+					font-size: 28rpx;
+					margin-left: 15rpx;
+				}
+				.stroeIcon{
+					margin-left: 20rpx;
+				}
+			}
+			.state{
+				font-size: 26rpx;
+			}
+		}
+		.setMeal{
+			padding: 20rpx;
+				.setMeal-image{
+					position: relative;
+					.setMeal-info{
+						.setMeal-info-item{
+							margin-right: 12rpx;
+							&:last-child{
+								margin-right: 0;
+							}
+							/deep/.setMeal-info-image{
+								width: 160rpx;
+								height: 136rpx;
+							}
+							.setMeal-info-title{
+								width: 100%;
+								font-size: 22rpx;
+								color: #333;
+							}
+						}
+					}
+					.count{
+						width: 26rpx;
+						height: 100%;
+						padding: 10rpx;
+						position: absolute;
+						right: -2rpx;
+						top: -2rpx;
+						background: #fff;
+						font-size: 26rpx;
+						color: #333;
+						text-align: center;
+						border-radius: 0rpx  4rpx  4rpx  0rpx ;
+						vertical-align: middle;
+						&.active{
+							opacity: 0.89;
+						}
+					}
+				}
+		}
+		.payInfo{
+			display: flex;
+			justify-content: space-between;
+			font-size: 22rpx;
+			padding: 20rpx;
+			padding-top: 0;
+			.payTime{
+				color: #666;
+			}
+			.payMoney{
+				color: #333;
+				.money{
+					font-weight: bold;
+					font-size: 28rpx;
+				}
+			}
+		}
+		.btns{
+			width: 100%;
+			padding-bottom: 20rpx;
+			.btnsItem{
+				.u-button{
+					float: right;
+					width: 150rpx;
+					height: 50rpx;
+					margin-right: 20rpx;
+				}
+			}
+			/deep/.u-button--info{
+				border-color: #333;
+			}
+			&::after{
+				display: block;
+				clear: both;
+				content: "";
+				visibility: hidden;
+				height: 0;
+			}
+		}
+	}
+}

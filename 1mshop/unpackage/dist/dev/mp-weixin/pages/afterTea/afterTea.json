@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "下午茶",
+  "navigationBarBackgroundColor": "#ffffff",
+  "usingComponents": {
+    "product-list": "/component/productList/productList"
+  }
+}

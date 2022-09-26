@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "拼团作战",
+  "navigationBarBackgroundColor": "#05C0AB",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "u-button": "/uni_modules/uview-ui/components/u-button/u-button"
+  }
+}

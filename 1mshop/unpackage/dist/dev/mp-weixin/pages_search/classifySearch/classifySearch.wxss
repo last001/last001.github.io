@@ -1,0 +1,213 @@
+.classifySearch {
+  background-color: #f2f2f2;
+  position: relative;
+  padding-top: 172rpx;
+  min-height: calc(100vh - 172rpx);
+}
+.classifySearch .searchInt {
+  z-index: 99;
+  padding: 20rpx;
+  width: calc(100% - 40rpx);
+  background-color: #fff;
+  position: fixed;
+  left: 0;
+
+
+
+
+  top: 0;
+}
+.classifySearch .searchType {
+  z-index: 99;
+  background-color: #fff;
+  display: flex;
+  padding: 20rpx;
+  padding-top: 10rpx;
+  width: calc(100% - 40rpx);
+  position: fixed;
+  left: 0;
+
+
+
+
+  top: 100rpx;
+}
+.classifySearch .searchType .searchTypeList {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+.classifySearch .searchType .searchTypeList.searchTypeList1 .u-icon {
+  zoom: 0.83;
+}
+.classifySearch .searchType .searchTypeList.searchTypeList2,
+.classifySearch .searchType .searchTypeList.searchTypeList3 {
+  justify-content: center;
+}
+.classifySearch .searchType .searchTypeList.searchTypeList4 {
+  justify-content: flex-end;
+}
+.classifySearch .searchType .searchTypeList .text {
+  font-size: 28rpx;
+  color: #333;
+  margin-right: 10rpx;
+}
+.classifySearch .searchType .searchTypeList .up-down .u-icon {
+  zoom: 0.7;
+}
+.classifySearch .searchType .searchTypeList image {
+  width: 20rpx;
+  height: 20rpx;
+}
+.classifySearch .searchList {
+  z-index: 9;
+  padding: 20rpx;
+}
+.classifySearch .searchList .searchLists {
+  display: flex;
+  padding: 20rpx;
+  border-radius: 18rpx;
+  background-color: #fff;
+  margin-top: 20rpx;
+}
+.classifySearch .searchList .searchLists:first-child {
+  margin-top: 0;
+}
+.classifySearch .searchList .searchLists .headrImage {
+  width: 84rpx;
+  height: 90rpx;
+  position: relative;
+}
+.classifySearch .searchList .searchLists .headrImage image {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.classifySearch .searchList .searchLists .headrImage .identification {
+  position: absolute;
+  left: -4rpx;
+  top: 5rpx;
+  width: 50rpx;
+  height: 30rpx;
+}
+.classifySearch .searchList .searchLists .headrImage .identification image {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.classifySearch .searchList .searchLists .info {
+  margin-left: 20rpx;
+  width: calc(100% - 104rpx);
+}
+.classifySearch .searchList .searchLists .info .info-name {
+  position: relative;
+}
+.classifySearch .searchList .searchLists .info .info-name .title {
+  color: #000;
+  font-size: 30rpx;
+  font-weight: bold;
+}
+.classifySearch .searchList .searchLists .info .info-name .delivery {
+  position: absolute;
+  right: -20rpx;
+  top: 0;
+  background-color: #05C0AB;
+  border-top-left-radius: 99rpx;
+  border-bottom-left-radius: 99rpx;
+  color: #fff;
+  font-size: 20rpx;
+  padding: 5rpx 10rpx;
+}
+.classifySearch .searchList .searchLists .info .score-distance {
+  display: flex;
+  padding: 10rpx 0;
+  font-size: 22rpx;
+  position: relative;
+}
+.classifySearch .searchList .searchLists .info .score-distance .score {
+  color: #05C0AB;
+  margin-right: 10rpx;
+  font-weight: bold;
+}
+.classifySearch .searchList .searchLists .info .score-distance .type {
+  font-size: 18rpx;
+}
+.classifySearch .searchList .searchLists .info .score-distance .distance {
+  color: #999;
+  position: absolute;
+  right: 0;
+  top: 15rpx;
+}
+.classifySearch .searchList .searchLists .info .target {
+  display: flex;
+}
+.classifySearch .searchList .searchLists .info .target view {
+  background-color: rgba(248, 207, 57, 0.2);
+  color: #FFA024;
+  margin-right: 10rpx;
+  font-size: 20rpx;
+  padding: 10rpx;
+  border-radius: 8rpx;
+}
+.classifySearch .searchList .searchLists .info .payMoney {
+  padding: 10rpx 0;
+  display: flex;
+  color: #333;
+  font-size: 22rpx;
+}
+.classifySearch .searchList .searchLists .info .payMoney view:nth-child(2) {
+  color: #05C0AB;
+  margin-left: 10rpx;
+}
+.classifySearch .searchList .searchLists .info .discount {
+  display: flex;
+}
+.classifySearch .searchList .searchLists .info .discount view {
+  border-radius: 8rpx;
+  margin-right: 10rpx;
+  border: 1px solid #F24849;
+  color: #F24849;
+  font-size: 20rpx;
+  padding: 5rpx;
+}
+.classifySearch .searchList .searchLists .info .lists-image {
+  margin-top: 10rpx;
+  display: flex;
+}
+.classifySearch .searchList .searchLists .info .lists-image .v-lists-image {
+  flex: 1;
+  margin-left: 20rpx;
+}
+.classifySearch .searchList .searchLists .info .lists-image .v-lists-image:first-child {
+  margin-left: 0rpx;
+}
+.classifySearch .searchList .searchLists .info .lists-image .v-lists-image .image {
+  width: 176rpx;
+  height: 190rpx;
+  border: 1rpx solid red;
+}
+.classifySearch .searchList .searchLists .info .lists-image .v-lists-image .image image {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.classifySearch .searchList .searchLists .info .lists-image .v-lists-image .title {
+  color: #333;
+  font-size: 22rpx;
+  padding: 10rpx 0;
+}
+.classifySearch .searchList .searchLists .info .lists-image .v-lists-image .price {
+  font-size: 22rpx;
+}
+.classifySearch .searchList .searchLists .info .lists-image .v-lists-image .price .new {
+  color: #FF5E5E;
+}
+.classifySearch .searchList .searchLists .info .lists-image .v-lists-image .price .old {
+  color: #999;
+
+
+
+  text-decoration: line-through;
+  margin-left: 10rpx;
+}
+

@@ -1,0 +1,133 @@
+.followUpEvaluate {
+  background-color: #f2f2f2;
+}
+.followUpEvaluate .rate {
+  display: flex;
+  background-color: #fff;
+  padding: 0 20rpx;
+}
+.followUpEvaluate .rate .image {
+  margin-top: 20rpx;
+  width: 168rpx;
+  height: 168rpx;
+}
+.followUpEvaluate .rate .image image {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.followUpEvaluate .rate .content {
+  margin-top: 20rpx;
+  margin-left: 20rpx;
+  width: calc(100% - 188rpx);
+  padding-bottom: 20rpx;
+}
+.followUpEvaluate .rate .content .title {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: bold;
+}
+.followUpEvaluate .rate .content .productRate,
+.followUpEvaluate .rate .content .delivery {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.followUpEvaluate .rate .content .productRate .text,
+.followUpEvaluate .rate .content .delivery .text {
+  font-size: 26rpx;
+  font-weight: bold;
+}
+.followUpEvaluate .rate .content .productRate .rate,
+.followUpEvaluate .rate .content .delivery .rate {
+  margin: 0 20rpx;
+}
+.followUpEvaluate .rate .content .productRate .tip,
+.followUpEvaluate .rate .content .delivery .tip {
+  font-size: 26rpx;
+  color: #F89621;
+}
+.followUpEvaluate .rate .content .productRate {
+  margin: 20rpx 0;
+}
+.followUpEvaluate .text-btn {
+  margin-top: 20rpx;
+  background-color: #fff;
+  padding: 20rpx;
+}
+.followUpEvaluate .text-btn .textarea {
+  margin-top: 20rpx;
+}
+.followUpEvaluate .text-btn .textarea .u-textarea {
+  background-color: #F2F2F2;
+  min-height: 260rpx;
+  border: none;
+}
+.followUpEvaluate .text-btn .isShow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20rpx;
+}
+.followUpEvaluate .text-btn .isShow .v-isShow {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 22rpx;
+  color: #666;
+}
+.followUpEvaluate .text-btn .isShow .v-isShow .text {
+  margin: 0 10rpx;
+}
+.followUpEvaluate .text-btn .isShow .tip {
+  font-size: 22rpx;
+  color: #CCCCCC;
+}
+.followUpEvaluate .text-btn .addImage {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20rpx;
+}
+.followUpEvaluate .text-btn .addImage .image {
+  width: calc((100% - 60rpx) / 4);
+  height: 162rpx;
+  margin-right: 20rpx ;
+  margin-bottom: 20rpx ;
+}
+.followUpEvaluate .text-btn .addImage .image image {
+  border-radius: 9rpx;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.followUpEvaluate .text-btn .addImage .image:nth-of-type(4n) {
+  margin-right: 0rpx ;
+}
+.followUpEvaluate .text-btn .addImage .addBtn {
+  width: calc((100% - 60rpx) / 4);
+  height: 162rpx;
+  border: 1rpx solid #00000017;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.followUpEvaluate .text-btn .addImage .addBtn image {
+  width: 35rpx;
+  height: 35rpx;
+  display: block;
+}
+.followUpEvaluate .text-btn .addImage .addBtn text {
+  font-size: 22rpx;
+  color: #999;
+  margin-top: 20rpx;
+}
+.followUpEvaluate .text-btn .followUpBtn {
+  width: 100%;
+  text-align: center;
+  margin-top: 100rpx;
+}
+.followUpEvaluate .text-btn .followUpBtn .u-button {
+  width: 246rpx;
+}
+

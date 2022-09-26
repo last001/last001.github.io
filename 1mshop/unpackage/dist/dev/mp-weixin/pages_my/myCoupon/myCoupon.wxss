@@ -1,0 +1,346 @@
+.myCoupon {
+  background-color: #F2F2F2;
+  padding: 0 20rpx;
+
+
+
+
+  padding-top: 52rpx;
+  min-height: calc(100vh - 52rpx);
+}
+.myCoupon .tabsLists {
+  width: 100%;
+  padding: 10rpx 0;
+  background-color: #fff;
+  position: fixed;
+  left: 0;
+  z-index: 999;
+
+  top: 0;
+}
+.myCoupon .tabsLists .u-tabs__wrapper__nav__item {
+  padding-top: 8rpx;
+  padding-bottom: 16rpx;
+}
+.myCoupon .tabsLists .u-tabs__wrapper__nav__line {
+  left: 13rpx;
+}
+.myCoupon .couponList,
+.myCoupon .couponList1,
+.myCoupon .couponList2 {
+  padding-top: 104rpx;
+  padding-bottom: 20rpx;
+
+  padding-top: 60rpx;
+}
+.myCoupon .couponList .v-couponList,
+.myCoupon .couponList1 .v-couponList,
+.myCoupon .couponList2 .v-couponList,
+.myCoupon .couponList .v-couponList1,
+.myCoupon .couponList1 .v-couponList1,
+.myCoupon .couponList2 .v-couponList1,
+.myCoupon .couponList .v-couponList2,
+.myCoupon .couponList1 .v-couponList2,
+.myCoupon .couponList2 .v-couponList2 {
+  background-color: #fff;
+  border-radius: 18rpx;
+  overflow: hidden;
+  margin-top: 20rpx;
+}
+.myCoupon .couponList .v-couponList:first-child,
+.myCoupon .couponList1 .v-couponList:first-child,
+.myCoupon .couponList2 .v-couponList:first-child,
+.myCoupon .couponList .v-couponList1:first-child,
+.myCoupon .couponList1 .v-couponList1:first-child,
+.myCoupon .couponList2 .v-couponList1:first-child,
+.myCoupon .couponList .v-couponList2:first-child,
+.myCoupon .couponList1 .v-couponList2:first-child,
+.myCoupon .couponList2 .v-couponList2:first-child {
+  margin-top: 0rpx;
+}
+.myCoupon .couponList .v-couponList .price-border,
+.myCoupon .couponList1 .v-couponList .price-border,
+.myCoupon .couponList2 .v-couponList .price-border,
+.myCoupon .couponList .v-couponList1 .price-border,
+.myCoupon .couponList1 .v-couponList1 .price-border,
+.myCoupon .couponList2 .v-couponList1 .price-border,
+.myCoupon .couponList .v-couponList2 .price-border,
+.myCoupon .couponList1 .v-couponList2 .price-border,
+.myCoupon .couponList2 .v-couponList2 .price-border {
+  position: relative;
+}
+.myCoupon .couponList .v-couponList .price-border .left-round,
+.myCoupon .couponList1 .v-couponList .price-border .left-round,
+.myCoupon .couponList2 .v-couponList .price-border .left-round,
+.myCoupon .couponList .v-couponList1 .price-border .left-round,
+.myCoupon .couponList1 .v-couponList1 .price-border .left-round,
+.myCoupon .couponList2 .v-couponList1 .price-border .left-round,
+.myCoupon .couponList .v-couponList2 .price-border .left-round,
+.myCoupon .couponList1 .v-couponList2 .price-border .left-round,
+.myCoupon .couponList2 .v-couponList2 .price-border .left-round {
+  width: 50rpx;
+  height: 60rpx;
+  background-color: #f2f2f2;
+  border-radius: 50%;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin-left: -40rpx;
+  margin-top: -30rpx;
+}
+.myCoupon .couponList .v-couponList .price-border .right-round,
+.myCoupon .couponList1 .v-couponList .price-border .right-round,
+.myCoupon .couponList2 .v-couponList .price-border .right-round,
+.myCoupon .couponList .v-couponList1 .price-border .right-round,
+.myCoupon .couponList1 .v-couponList1 .price-border .right-round,
+.myCoupon .couponList2 .v-couponList1 .price-border .right-round,
+.myCoupon .couponList .v-couponList2 .price-border .right-round,
+.myCoupon .couponList1 .v-couponList2 .price-border .right-round,
+.myCoupon .couponList2 .v-couponList2 .price-border .right-round {
+  width: 50rpx;
+  height: 60rpx;
+  background-color: #f2f2f2;
+  border-radius: 50%;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  margin-right: -40rpx;
+  margin-top: -30rpx;
+}
+.myCoupon .couponList .v-couponList .price-border .price,
+.myCoupon .couponList1 .v-couponList .price-border .price,
+.myCoupon .couponList2 .v-couponList .price-border .price,
+.myCoupon .couponList .v-couponList1 .price-border .price,
+.myCoupon .couponList1 .v-couponList1 .price-border .price,
+.myCoupon .couponList2 .v-couponList1 .price-border .price,
+.myCoupon .couponList .v-couponList2 .price-border .price,
+.myCoupon .couponList1 .v-couponList2 .price-border .price,
+.myCoupon .couponList2 .v-couponList2 .price-border .price {
+  padding: 0 20rpx;
+  border-bottom: 2rpx solid #EAEAEA;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  position: relative;
+}
+.myCoupon .couponList .v-couponList .price-border .price .v-price,
+.myCoupon .couponList1 .v-couponList .price-border .price .v-price,
+.myCoupon .couponList2 .v-couponList .price-border .price .v-price,
+.myCoupon .couponList .v-couponList1 .price-border .price .v-price,
+.myCoupon .couponList1 .v-couponList1 .price-border .price .v-price,
+.myCoupon .couponList2 .v-couponList1 .price-border .price .v-price,
+.myCoupon .couponList .v-couponList2 .price-border .price .v-price,
+.myCoupon .couponList1 .v-couponList2 .price-border .price .v-price,
+.myCoupon .couponList2 .v-couponList2 .price-border .price .v-price {
+  padding: 20rpx 30rpx 20rpx 10rpx;
+  color: #FF5B5B;
+  border-right: 2rpx dashed #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.myCoupon .couponList .v-couponList .price-border .price .v-price .num,
+.myCoupon .couponList1 .v-couponList .price-border .price .v-price .num,
+.myCoupon .couponList2 .v-couponList .price-border .price .v-price .num,
+.myCoupon .couponList .v-couponList1 .price-border .price .v-price .num,
+.myCoupon .couponList1 .v-couponList1 .price-border .price .v-price .num,
+.myCoupon .couponList2 .v-couponList1 .price-border .price .v-price .num,
+.myCoupon .couponList .v-couponList2 .price-border .price .v-price .num,
+.myCoupon .couponList1 .v-couponList2 .price-border .price .v-price .num,
+.myCoupon .couponList2 .v-couponList2 .price-border .price .v-price .num {
+  font-size: 24rpx;
+}
+.myCoupon .couponList .v-couponList .price-border .price .v-price .num text,
+.myCoupon .couponList1 .v-couponList .price-border .price .v-price .num text,
+.myCoupon .couponList2 .v-couponList .price-border .price .v-price .num text,
+.myCoupon .couponList .v-couponList1 .price-border .price .v-price .num text,
+.myCoupon .couponList1 .v-couponList1 .price-border .price .v-price .num text,
+.myCoupon .couponList2 .v-couponList1 .price-border .price .v-price .num text,
+.myCoupon .couponList .v-couponList2 .price-border .price .v-price .num text,
+.myCoupon .couponList1 .v-couponList2 .price-border .price .v-price .num text,
+.myCoupon .couponList2 .v-couponList2 .price-border .price .v-price .num text {
+  font-weight: bold;
+  font-size: 56rpx;
+  color: #FF5B5B;
+}
+.myCoupon .couponList .v-couponList .price-border .price .v-price .full,
+.myCoupon .couponList1 .v-couponList .price-border .price .v-price .full,
+.myCoupon .couponList2 .v-couponList .price-border .price .v-price .full,
+.myCoupon .couponList .v-couponList1 .price-border .price .v-price .full,
+.myCoupon .couponList1 .v-couponList1 .price-border .price .v-price .full,
+.myCoupon .couponList2 .v-couponList1 .price-border .price .v-price .full,
+.myCoupon .couponList .v-couponList2 .price-border .price .v-price .full,
+.myCoupon .couponList1 .v-couponList2 .price-border .price .v-price .full,
+.myCoupon .couponList2 .v-couponList2 .price-border .price .v-price .full {
+  font-size: 24rpx;
+  color: #333;
+}
+.myCoupon .couponList .v-couponList .price-border .price .coupon,
+.myCoupon .couponList1 .v-couponList .price-border .price .coupon,
+.myCoupon .couponList2 .v-couponList .price-border .price .coupon,
+.myCoupon .couponList .v-couponList1 .price-border .price .coupon,
+.myCoupon .couponList1 .v-couponList1 .price-border .price .coupon,
+.myCoupon .couponList2 .v-couponList1 .price-border .price .coupon,
+.myCoupon .couponList .v-couponList2 .price-border .price .coupon,
+.myCoupon .couponList1 .v-couponList2 .price-border .price .coupon,
+.myCoupon .couponList2 .v-couponList2 .price-border .price .coupon {
+  padding: 20rpx 20rpx 10rpx;
+  display: flex;
+  width: calc(100% - 206rpx);
+  justify-content: space-between;
+}
+.myCoupon .couponList .v-couponList .price-border .price .coupon .text ._h4,
+.myCoupon .couponList1 .v-couponList .price-border .price .coupon .text ._h4,
+.myCoupon .couponList2 .v-couponList .price-border .price .coupon .text ._h4,
+.myCoupon .couponList .v-couponList1 .price-border .price .coupon .text ._h4,
+.myCoupon .couponList1 .v-couponList1 .price-border .price .coupon .text ._h4,
+.myCoupon .couponList2 .v-couponList1 .price-border .price .coupon .text ._h4,
+.myCoupon .couponList .v-couponList2 .price-border .price .coupon .text ._h4,
+.myCoupon .couponList1 .v-couponList2 .price-border .price .coupon .text ._h4,
+.myCoupon .couponList2 .v-couponList2 .price-border .price .coupon .text ._h4 {
+  padding: 10rpx 0;
+  display: flex;
+  align-items: center;
+}
+.myCoupon .couponList .v-couponList .price-border .price .coupon .text ._h4 .giveCoupon,
+.myCoupon .couponList1 .v-couponList .price-border .price .coupon .text ._h4 .giveCoupon,
+.myCoupon .couponList2 .v-couponList .price-border .price .coupon .text ._h4 .giveCoupon,
+.myCoupon .couponList .v-couponList1 .price-border .price .coupon .text ._h4 .giveCoupon,
+.myCoupon .couponList1 .v-couponList1 .price-border .price .coupon .text ._h4 .giveCoupon,
+.myCoupon .couponList2 .v-couponList1 .price-border .price .coupon .text ._h4 .giveCoupon,
+.myCoupon .couponList .v-couponList2 .price-border .price .coupon .text ._h4 .giveCoupon,
+.myCoupon .couponList1 .v-couponList2 .price-border .price .coupon .text ._h4 .giveCoupon,
+.myCoupon .couponList2 .v-couponList2 .price-border .price .coupon .text ._h4 .giveCoupon {
+  margin-left: 20rpx;
+  font-size: 18rpx;
+
+
+
+  color: #F24849;
+  border: 1rpx solid #F24849;
+  border-radius: 52rpx;
+  padding: 5rpx 10rpx;
+}
+.myCoupon .couponList .v-couponList .price-border .price .coupon .text .date,
+.myCoupon .couponList1 .v-couponList .price-border .price .coupon .text .date,
+.myCoupon .couponList2 .v-couponList .price-border .price .coupon .text .date,
+.myCoupon .couponList .v-couponList1 .price-border .price .coupon .text .date,
+.myCoupon .couponList1 .v-couponList1 .price-border .price .coupon .text .date,
+.myCoupon .couponList2 .v-couponList1 .price-border .price .coupon .text .date,
+.myCoupon .couponList .v-couponList2 .price-border .price .coupon .text .date,
+.myCoupon .couponList1 .v-couponList2 .price-border .price .coupon .text .date,
+.myCoupon .couponList2 .v-couponList2 .price-border .price .coupon .text .date {
+  padding: 10rpx 0;
+  font-size: 24rpx;
+  color: #666;
+}
+.myCoupon .couponList .v-couponList .price-border .price .coupon .text .details,
+.myCoupon .couponList1 .v-couponList .price-border .price .coupon .text .details,
+.myCoupon .couponList2 .v-couponList .price-border .price .coupon .text .details,
+.myCoupon .couponList .v-couponList1 .price-border .price .coupon .text .details,
+.myCoupon .couponList1 .v-couponList1 .price-border .price .coupon .text .details,
+.myCoupon .couponList2 .v-couponList1 .price-border .price .coupon .text .details,
+.myCoupon .couponList .v-couponList2 .price-border .price .coupon .text .details,
+.myCoupon .couponList1 .v-couponList2 .price-border .price .coupon .text .details,
+.myCoupon .couponList2 .v-couponList2 .price-border .price .coupon .text .details {
+  padding: 10rpx 0;
+  color: #999;
+  font-size: 24rpx;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+.myCoupon .couponList .v-couponList .price-border .price .coupon .text .details .u-icon,
+.myCoupon .couponList1 .v-couponList .price-border .price .coupon .text .details .u-icon,
+.myCoupon .couponList2 .v-couponList .price-border .price .coupon .text .details .u-icon,
+.myCoupon .couponList .v-couponList1 .price-border .price .coupon .text .details .u-icon,
+.myCoupon .couponList1 .v-couponList1 .price-border .price .coupon .text .details .u-icon,
+.myCoupon .couponList2 .v-couponList1 .price-border .price .coupon .text .details .u-icon,
+.myCoupon .couponList .v-couponList2 .price-border .price .coupon .text .details .u-icon,
+.myCoupon .couponList1 .v-couponList2 .price-border .price .coupon .text .details .u-icon,
+.myCoupon .couponList2 .v-couponList2 .price-border .price .coupon .text .details .u-icon {
+  margin-left: 10rpx;
+}
+.myCoupon .couponList .v-couponList .price-border .price .coupon .btn,
+.myCoupon .couponList1 .v-couponList .price-border .price .coupon .btn,
+.myCoupon .couponList2 .v-couponList .price-border .price .coupon .btn,
+.myCoupon .couponList .v-couponList1 .price-border .price .coupon .btn,
+.myCoupon .couponList1 .v-couponList1 .price-border .price .coupon .btn,
+.myCoupon .couponList2 .v-couponList1 .price-border .price .coupon .btn,
+.myCoupon .couponList .v-couponList2 .price-border .price .coupon .btn,
+.myCoupon .couponList1 .v-couponList2 .price-border .price .coupon .btn,
+.myCoupon .couponList2 .v-couponList2 .price-border .price .coupon .btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.myCoupon .couponList .v-couponList .price-border .price .tag,
+.myCoupon .couponList1 .v-couponList .price-border .price .tag,
+.myCoupon .couponList2 .v-couponList .price-border .price .tag,
+.myCoupon .couponList .v-couponList1 .price-border .price .tag,
+.myCoupon .couponList1 .v-couponList1 .price-border .price .tag,
+.myCoupon .couponList2 .v-couponList1 .price-border .price .tag,
+.myCoupon .couponList .v-couponList2 .price-border .price .tag,
+.myCoupon .couponList1 .v-couponList2 .price-border .price .tag,
+.myCoupon .couponList2 .v-couponList2 .price-border .price .tag {
+  position: absolute;
+  right: -50rpx;
+  top: 8rpx;
+  font-size: 16rpx;
+
+
+
+  color: #fff;
+  padding: 5rpx 50rpx;
+  -webkit-transform: rotate(30deg);
+          transform: rotate(30deg);
+}
+.myCoupon .couponList .v-couponList .introduce,
+.myCoupon .couponList1 .v-couponList .introduce,
+.myCoupon .couponList2 .v-couponList .introduce,
+.myCoupon .couponList .v-couponList1 .introduce,
+.myCoupon .couponList1 .v-couponList1 .introduce,
+.myCoupon .couponList2 .v-couponList1 .introduce,
+.myCoupon .couponList .v-couponList2 .introduce,
+.myCoupon .couponList1 .v-couponList2 .introduce,
+.myCoupon .couponList2 .v-couponList2 .introduce {
+  padding: 30rpx 20rpx;
+  background-color: #fff;
+}
+.myCoupon .couponList .v-couponList .introduce view,
+.myCoupon .couponList1 .v-couponList .introduce view,
+.myCoupon .couponList2 .v-couponList .introduce view,
+.myCoupon .couponList .v-couponList1 .introduce view,
+.myCoupon .couponList1 .v-couponList1 .introduce view,
+.myCoupon .couponList2 .v-couponList1 .introduce view,
+.myCoupon .couponList .v-couponList2 .introduce view,
+.myCoupon .couponList1 .v-couponList2 .introduce view,
+.myCoupon .couponList2 .v-couponList2 .introduce view {
+  padding: 10rpx 0;
+  color: #666;
+  font-size: 26rpx;
+}
+.myCoupon .couponList1 .v-couponList1 .price-border .price .v-price .num,
+.myCoupon .couponList2 .v-couponList1 .price-border .price .v-price .num,
+.myCoupon .couponList1 .v-couponList2 .price-border .price .v-price .num,
+.myCoupon .couponList2 .v-couponList2 .price-border .price .v-price .num {
+  color: #999;
+}
+.myCoupon .couponList1 .v-couponList1 .price-border .price .v-price .num text,
+.myCoupon .couponList2 .v-couponList1 .price-border .price .v-price .num text,
+.myCoupon .couponList1 .v-couponList2 .price-border .price .v-price .num text,
+.myCoupon .couponList2 .v-couponList2 .price-border .price .v-price .num text {
+  color: #999;
+}
+.myCoupon .couponList1 .v-couponList1 ._h4,
+.myCoupon .couponList2 .v-couponList1 ._h4,
+.myCoupon .couponList1 .v-couponList2 ._h4,
+.myCoupon .couponList2 .v-couponList2 ._h4 {
+  color: #999;
+  font-weight: normal;
+}
+.myCoupon .couponList2 .v-couponList2 .price-border .price .tag {
+  background-color: #ccc;
+}
+

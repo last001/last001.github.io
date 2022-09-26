@@ -1,0 +1,16 @@
+{
+  "navigationBarTitleText": "订单",
+  "navigationBarBackgroundColor": "#F8CF39",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "u-sticky": "/uni_modules/uview-ui/components/u-sticky/u-sticky",
+    "u-tabs": "/uni_modules/uview-ui/components/u-tabs/u-tabs",
+    "u-empty": "/uni_modules/uview-ui/components/u-empty/u-empty",
+    "u-button": "/uni_modules/uview-ui/components/u-button/u-button",
+    "u-icon": "/uni_modules/uview-ui/components/u-icon/u-icon",
+    "u-scroll-list": "/uni_modules/uview-ui/components/u-scroll-list/u-scroll-list",
+    "u-loadmore": "/uni_modules/uview-ui/components/u-loadmore/u-loadmore",
+    "u-popup": "/uni_modules/uview-ui/components/u-popup/u-popup",
+    "not-evaluate": "/pages/order/notEvaluate/notEvaluate"
+  }
+}

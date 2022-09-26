@@ -1,0 +1,785 @@
+.submitOrder {
+  background-color: #f2f2f2;
+  padding: 20rpx;
+  padding-bottom: 137rpx;
+}
+.submitOrder .modeTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.submitOrder .modeTitle .takeOut {
+  width: calc(50% - 38rpx);
+  background-color: #F8CF39;
+  position: relative;
+  height: 76rpx;
+  line-height: 76rpx;
+  text-align: center;
+  color: #fff;
+}
+.submitOrder .modeTitle .takeOut .triangle {
+  position: absolute;
+  right: -76rpx;
+  top: -38rpx;
+  height: 0;
+  width: 0px;
+  border-bottom: 76rpx solid #F8CF39;
+  border-left: 0rpx solid transparent;
+  border-right: 76rpx solid transparent;
+  border-top: 38rpx solid transparent;
+}
+.submitOrder .modeTitle .takeYouerself {
+  width: calc(100% - calc(50% - 38rpx) - 20rpx);
+  background-color: #FEF6D7;
+  height: 76rpx;
+  line-height: 76rpx;
+  text-align: center;
+  -webkit-transform: scale(0.85);
+          transform: scale(0.85);
+  position: relative;
+  left: 32rpx;
+  bottom: -8rpx;
+}
+.submitOrder .modeTitle .takeYouerself .triangle {
+  position: absolute;
+  left: -76rpx;
+  top: 0rpx;
+  height: 0;
+  width: 0px;
+  border-bottom: 76rpx solid #FEF6D7;
+  border-left: 0rpx solid transparent;
+  border-right: 76rpx solid transparent;
+  border-top: 38rpx solid transparent;
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+.submitOrder .modeTitle1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-left: 20rpx;
+}
+.submitOrder .modeTitle1 .takeOut {
+  width: calc(100% - calc(50% - 38rpx));
+  background-color: #FEF6D7;
+  height: 76rpx;
+  line-height: 76rpx;
+  text-align: center;
+  -webkit-transform: scale(0.85);
+          transform: scale(0.85);
+  position: relative;
+  right: 40rpx;
+  bottom: -8rpx;
+}
+.submitOrder .modeTitle1 .takeOut .triangle {
+  position: absolute;
+  right: -94rpx;
+  top: -20rpx;
+  height: 0;
+  width: 0px;
+  border-bottom: 76rpx solid #FEF6D7;
+  border-left: 0rpx solid transparent;
+  border-right: 76rpx solid transparent;
+  border-top: 38rpx solid transparent;
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+.submitOrder .modeTitle1 .takeYouerself {
+  width: calc(50% - 38rpx);
+  background-color: #F8CF39;
+  position: relative;
+  height: 76rpx;
+  line-height: 76rpx;
+  text-align: center;
+  color: #fff;
+}
+.submitOrder .modeTitle1 .takeYouerself .triangle {
+  position: absolute;
+  left: -93.5rpx;
+  top: -20rpx;
+  height: 0;
+  width: 0px;
+  border-bottom: 76rpx solid #F8CF39;
+  border-left: 0rpx solid transparent;
+  border-right: 76rpx solid transparent;
+  border-top: 38rpx solid transparent;
+  -webkit-transform: rotate(270deg);
+          transform: rotate(270deg);
+}
+.submitOrder .takeOut .address-phone {
+  padding: 30rpx 20rpx;
+  background-color: #fff;
+}
+.submitOrder .takeOut .address-phone .address {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  position: relative;
+}
+.submitOrder .takeOut .address-phone .address .u-icon {
+  position: absolute;
+  right: 0;
+  top: 8rpx;
+}
+.submitOrder .takeOut .address-phone .phone {
+  margin-top: 20rpx;
+  color: #666;
+  font-size: 28rpx;
+}
+.submitOrder .takeOut .address-phone .phone text:last-child {
+  margin-left: 20rpx;
+}
+.submitOrder .takeOut .time {
+  padding: 0 20rpx;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.submitOrder .takeOut .time .v-time {
+  flex: 1;
+  border-top: 2rpx solid #EAEAEA;
+  padding: 20rpx 0;
+}
+.submitOrder .takeOut .time .delivery {
+  border-top: 2rpx solid #EAEAEA;
+  padding: 20rpx 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: 32rpx;
+}
+.submitOrder .takeOut .time .delivery .text {
+  color: #F8CF39;
+}
+.submitOrder .takeOut .time .delivery .u-icon {
+  margin-left: 20rpx;
+}
+.submitOrder .takeIt .address-gap {
+  padding: 30rpx 20rpx;
+  background-color: #fff;
+}
+.submitOrder .takeIt .address-gap .address {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  position: relative;
+}
+.submitOrder .takeIt .address-gap .address .u-icon {
+  position: absolute;
+  right: 0;
+  top: 8rpx;
+}
+.submitOrder .takeIt .address-gap .gap {
+  margin-top: 20rpx;
+}
+.submitOrder .takeIt .address-gap .gap text {
+  font-size: 28rpx;
+  color: #666;
+}
+.submitOrder .takeIt .address-gap .gap text:nth-child(2) {
+  color: #F8CF39;
+  position: relative;
+  padding: 0 10rpx;
+  margin-left: 10rpx;
+}
+.submitOrder .takeIt .address-gap .gap text:nth-child(2):before {
+  content: "|";
+  display: block;
+  position: absolute;
+  left: -4rpx;
+  top: 0;
+  color: #EAEAEA;
+}
+.submitOrder .takeIt .time-info {
+  background-color: #fff;
+  padding: 0rpx 20rpx;
+  display: flex;
+}
+.submitOrder .takeIt .time-info .time {
+  flex: 1;
+  border-top: 2rpx solid #EAEAEA;
+  padding: 20rpx 0;
+}
+.submitOrder .takeIt .time-info .time .v-time {
+  color: #999;
+  font-size: 32rpx;
+}
+.submitOrder .takeIt .time-info .time .v-icon {
+  padding: 20rpx 0;
+  display: flex;
+}
+.submitOrder .takeIt .time-info .time .v-icon .u-icon {
+  margin-left: 20rpx;
+}
+.submitOrder .takeIt .time-info .info {
+  flex: 1;
+  padding: 20rpx 0;
+  border-top: 2rpx solid #EAEAEA;
+}
+.submitOrder .takeIt .time-info .info .v-info {
+  color: #999;
+  font-size: 32rpx;
+}
+.submitOrder .takeIt .time-info .info .v-icon {
+  padding: 20rpx 0;
+  display: flex;
+  justify-content: space-between;
+  font-size: 28rpx;
+}
+.submitOrder .orderContent {
+  padding: 20rpx;
+  background-color: #fff;
+  border-radius: 18rpx;
+  color: #333;
+  margin-top: 20rpx;
+}
+.submitOrder .orderContent .orderTitle {
+  padding: 0rpx 0 20rpx;
+  border-bottom: 2rpx solid #EAEAEA;
+  font-size: 32rpx;
+}
+.submitOrder .orderContent .orderList {
+  padding: 20rpx 0;
+}
+.submitOrder .orderContent .orderList .v-orderList {
+  display: flex;
+  margin-bottom: 20rpx;
+}
+.submitOrder .orderContent .orderList .v-orderList .image {
+  width: 160rpx;
+  height: 136rpx;
+}
+.submitOrder .orderContent .orderList .v-orderList .image image {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.submitOrder .orderContent .orderList .v-orderList .price-count {
+  width: calc(100% - 180rpx);
+  margin-left: 20rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.submitOrder .orderContent .orderList .v-orderList .price-count .price {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  font-size: 32rpx;
+  font-weight: bold;
+}
+.submitOrder .orderContent .orderList .v-orderList .price-count .price .v-price {
+  font-size: 26rpx;
+}
+.submitOrder .orderContent .cost {
+  display: flex;
+  justify-content: space-between;
+  padding: 10rpx 0;
+}
+.submitOrder .orderContent .coupon {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10rpx 0;
+}
+.submitOrder .orderContent .coupon .image-text {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.submitOrder .orderContent .coupon .image-text .image {
+  width: 24rpx;
+  height: 26rpx;
+  margin-right: 20rpx;
+  border: 1rpx solid red;
+}
+.submitOrder .orderContent .coupon .image-text .image image {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.submitOrder .orderContent .coupon .image-text .image .text {
+  font-size: 28rpx;
+  color: #333;
+}
+.submitOrder .orderContent .coupon .pop-icon {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.submitOrder .orderContent .coupon .pop-icon .pop {
+  font-size: 26rpx;
+  color: #999;
+}
+.submitOrder .orderContent .coupon .pop-icon .u-icon {
+  margin-left: 20rpx;
+}
+.submitOrder .orderContent .total {
+  padding: 20rpx 0 10rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 2rpx solid #EAEAEA;
+}
+.submitOrder .orderContent .total .prefer {
+  font-size: 28rpx;
+}
+.submitOrder .orderContent .total .prefer text:last-child {
+  color: #FF5B5B;
+  font-size: 26rpx;
+}
+.submitOrder .orderContent .total .v-total {
+  font-size: 28rpx;
+}
+.submitOrder .orderContent .total .v-total text {
+  color: #666;
+}
+.submitOrder .orderContent .total .v-total text:last-child {
+  font-weight: bold;
+  font-size: 32rpx;
+  color: #333;
+}
+.submitOrder .memberFace {
+  padding: 20rpx 0 ;
+}
+.submitOrder .memberFace .v-memberFace {
+  padding: 20rpx;
+  background-color: #fff;
+  border-radius: 18rpx;
+}
+.submitOrder .memberFace .v-memberFace .setMember {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10rpx 0;
+}
+.submitOrder .memberFace .v-memberFace .setMember .text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FF5B5B;
+  font-weight: bold;
+}
+.submitOrder .memberFace .v-memberFace .setMember .text text {
+  margin-right: 10rpx;
+  font-size: 32rpx;
+}
+.submitOrder .memberFace .v-memberFace .text {
+  font-size: 28rpx;
+}
+.submitOrder .memberFace .v-memberFace .text text {
+  color: #FF5B5B;
+  font-size: 32rpx;
+  font-weight: bold;
+}
+.submitOrder .memberFace .v-memberFace .imageList {
+  padding: 10rpx 0;
+  display: flex;
+  position: relative;
+}
+.submitOrder .memberFace .v-memberFace .imageList .image {
+  width: 127rpx;
+  height: 108rpx;
+  border: 1rpx solid red;
+  margin-left: 20rpx;
+}
+.submitOrder .memberFace .v-memberFace .imageList .image:first-child {
+  margin-left: 0;
+}
+.submitOrder .memberFace .v-memberFace .imageList .image image {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.submitOrder .memberFace .v-memberFace .imageList .total {
+  width: 26rpx;
+  height: calc(100% - 20rpx);
+  padding: 10rpx;
+  position: absolute;
+  right: 0rpx;
+  top: 0rpx;
+  background: #fff;
+  font-size: 24rpx;
+  color: #333;
+  text-align: center;
+  vertical-align: middle;
+}
+.submitOrder .memberFace .v-memberFace .imageList .total text {
+  color: #F24849;
+}
+.submitOrder .memberFace .v-memberFace .tips {
+  color: #999;
+  font-size: 26rpx;
+}
+.submitOrder .payMode {
+  padding: 20rpx;
+  border-radius: 18rpx;
+  background-color: #fff;
+}
+.submitOrder .payMode .wx {
+  padding: 10rpx 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.submitOrder .payMode .wx .text-icon {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.submitOrder .payMode .wx .text-icon .text {
+  font-size: 28rpx;
+  color: #999;
+  margin-right: 20rpx;
+}
+.submitOrder .payMode .remask {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.submitOrder .payMode .remask .inp-icon {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.submitOrder .payMode .remask .inp-icon input {
+  text-align: right;
+  padding-right: 20rpx;
+  font-size: 28rpx;
+}
+.submitOrder .payMode .remask .inp-icon .uni-input-placeholder {
+  color: #999;
+}
+.submitOrder .payBtn {
+  position: fixed;
+  bottom: 20rpx;
+  left: 20rpx;
+  color: #fff;
+  display: flex;
+  width: calc(100% - 40rpx);
+}
+.submitOrder .payBtn .price-discount {
+  background-color: #333;
+  flex: 2;
+  border-top-left-radius: 50rpx;
+  border-bottom-left-radius: 50rpx;
+  padding: 10rpx 15rpx 15rpx 30rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.submitOrder .payBtn .price-discount .price {
+  font-size: 30rpx;
+}
+.submitOrder .payBtn .price-discount .discount {
+  color: #ccc;
+  font-size: 20rpx;
+}
+.submitOrder .payBtn .otherPay {
+  flex: 1;
+  background-color: #666;
+  text-align: center;
+  line-height: 97rpx;
+}
+.submitOrder .payBtn .pay {
+  flex: 1;
+  background-color: #F8CF39;
+  border-top-right-radius: 50rpx;
+  border-bottom-right-radius: 50rpx;
+  text-align: center;
+  line-height: 97rpx;
+}
+.submitOrder .discountFace .content,
+.submitOrder .couponFace .content {
+  background-color: #f2f2f2;
+  padding-bottom: 20rpx;
+  margin-top: 30rpx;
+}
+.submitOrder .discountFace .content ._h3,
+.submitOrder .couponFace .content ._h3 {
+  width: 100%;
+  text-align: center;
+  background-color: #fff;
+  padding-bottom: 30rpx ;
+}
+.submitOrder .discountFace .content .discount,
+.submitOrder .couponFace .content .discount {
+  padding: 20rpx;
+  padding-bottom: 10rpx;
+}
+.submitOrder .discountFace .content .discount .v-discount,
+.submitOrder .couponFace .content .discount .v-discount {
+  background-color: #fff;
+  border-radius: 18rpx;
+}
+.submitOrder .discountFace .content .discount .v-discount .price-border,
+.submitOrder .couponFace .content .discount .v-discount .price-border {
+  position: relative;
+}
+.submitOrder .discountFace .content .discount .v-discount .price-border .left-round,
+.submitOrder .couponFace .content .discount .v-discount .price-border .left-round {
+  width: 50rpx;
+  height: 60rpx;
+  background-color: #f2f2f2;
+  border-radius: 50%;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin-left: -40rpx;
+  margin-top: -30rpx;
+}
+.submitOrder .discountFace .content .discount .v-discount .price-border .right-round,
+.submitOrder .couponFace .content .discount .v-discount .price-border .right-round {
+  width: 50rpx;
+  height: 60rpx;
+  background-color: #f2f2f2;
+  border-radius: 50%;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  margin-right: -40rpx;
+  margin-top: -30rpx;
+}
+.submitOrder .discountFace .content .discount .v-discount .price-border .price,
+.submitOrder .couponFace .content .discount .v-discount .price-border .price {
+  padding: 0 20rpx;
+  border-bottom: 2rpx solid #EAEAEA;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+}
+.submitOrder .discountFace .content .discount .v-discount .price-border .price .v-price,
+.submitOrder .couponFace .content .discount .v-discount .price-border .price .v-price {
+  padding: 20rpx 30rpx 20rpx 10rpx;
+  color: #FF5B5B;
+  border-right: 2rpx dashed #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.submitOrder .discountFace .content .discount .v-discount .price-border .price .v-price .num,
+.submitOrder .couponFace .content .discount .v-discount .price-border .price .v-price .num {
+  font-size: 24rpx;
+}
+.submitOrder .discountFace .content .discount .v-discount .price-border .price .v-price .num text,
+.submitOrder .couponFace .content .discount .v-discount .price-border .price .v-price .num text {
+  font-weight: bold;
+  font-size: 56rpx;
+  color: #FF5B5B;
+}
+.submitOrder .discountFace .content .discount .v-discount .price-border .price .v-price .full,
+.submitOrder .couponFace .content .discount .v-discount .price-border .price .v-price .full {
+  font-size: 24rpx;
+  color: #333;
+}
+.submitOrder .discountFace .content .discount .v-discount .price-border .price .coupon,
+.submitOrder .couponFace .content .discount .v-discount .price-border .price .coupon {
+  padding: 20rpx 20rpx 10rpx;
+  display: flex;
+  width: calc(100% - 206rpx);
+  justify-content: space-between;
+}
+.submitOrder .discountFace .content .discount .v-discount .price-border .price .coupon .text .date,
+.submitOrder .couponFace .content .discount .v-discount .price-border .price .coupon .text .date {
+  padding: 10rpx 0;
+  font-size: 24rpx;
+  color: #666;
+}
+.submitOrder .discountFace .content .discount .v-discount .price-border .price .coupon .text .details,
+.submitOrder .couponFace .content .discount .v-discount .price-border .price .coupon .text .details {
+  padding: 10rpx 0;
+  color: #999;
+  font-size: 24rpx;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+.submitOrder .discountFace .content .discount .v-discount .price-border .price .coupon .text .details .u-icon,
+.submitOrder .couponFace .content .discount .v-discount .price-border .price .coupon .text .details .u-icon {
+  margin-left: 10rpx;
+}
+.submitOrder .discountFace .content .discount .v-discount .price-border .price .coupon .btn,
+.submitOrder .couponFace .content .discount .v-discount .price-border .price .coupon .btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.submitOrder .discountFace .content .discount .v-discount .introduce,
+.submitOrder .couponFace .content .discount .v-discount .introduce {
+  padding: 30rpx 20rpx;
+  background-color: #fff;
+}
+.submitOrder .discountFace .content .discount .v-discount .introduce view,
+.submitOrder .couponFace .content .discount .v-discount .introduce view {
+  padding: 10rpx 0;
+  color: #666;
+  font-size: 26rpx;
+}
+.submitOrder .discountFace .content .member,
+.submitOrder .couponFace .content .member,
+.submitOrder .discountFace .content .Platform,
+.submitOrder .couponFace .content .Platform {
+  border-radius: 18rpx;
+  padding: 10rpx 20rpx;
+}
+.submitOrder .discountFace .content .member .price-border,
+.submitOrder .couponFace .content .member .price-border,
+.submitOrder .discountFace .content .Platform .price-border,
+.submitOrder .couponFace .content .Platform .price-border {
+  background-color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+.submitOrder .discountFace .content .member .price-border .left-round,
+.submitOrder .couponFace .content .member .price-border .left-round,
+.submitOrder .discountFace .content .Platform .price-border .left-round,
+.submitOrder .couponFace .content .Platform .price-border .left-round {
+  width: 50rpx;
+  height: 60rpx;
+  background-color: #f2f2f2;
+  border-radius: 50%;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin-left: -40rpx;
+  margin-top: -30rpx;
+}
+.submitOrder .discountFace .content .member .price-border .right-round,
+.submitOrder .couponFace .content .member .price-border .right-round,
+.submitOrder .discountFace .content .Platform .price-border .right-round,
+.submitOrder .couponFace .content .Platform .price-border .right-round {
+  width: 50rpx;
+  height: 60rpx;
+  background-color: #f2f2f2;
+  border-radius: 50%;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  margin-right: -40rpx;
+  margin-top: -30rpx;
+}
+.submitOrder .discountFace .content .member .price-border .price,
+.submitOrder .couponFace .content .member .price-border .price,
+.submitOrder .discountFace .content .Platform .price-border .price,
+.submitOrder .couponFace .content .Platform .price-border .price {
+  padding: 0 20rpx;
+  width: 100%;
+  display: flex;
+  position: relative;
+}
+.submitOrder .discountFace .content .member .price-border .price .v-price,
+.submitOrder .couponFace .content .member .price-border .price .v-price,
+.submitOrder .discountFace .content .Platform .price-border .price .v-price,
+.submitOrder .couponFace .content .Platform .price-border .price .v-price {
+  padding: 20rpx 30rpx 20rpx 10rpx;
+  color: #FF5B5B;
+  border-right: 2rpx dashed #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  min-width: 126rpx;
+}
+.submitOrder .discountFace .content .member .price-border .price .v-price .num,
+.submitOrder .couponFace .content .member .price-border .price .v-price .num,
+.submitOrder .discountFace .content .Platform .price-border .price .v-price .num,
+.submitOrder .couponFace .content .Platform .price-border .price .v-price .num {
+  font-size: 24rpx;
+}
+.submitOrder .discountFace .content .member .price-border .price .v-price .num text,
+.submitOrder .couponFace .content .member .price-border .price .v-price .num text,
+.submitOrder .discountFace .content .Platform .price-border .price .v-price .num text,
+.submitOrder .couponFace .content .Platform .price-border .price .v-price .num text {
+  font-weight: bold;
+  font-size: 56rpx;
+  color: #FF5B5B;
+}
+.submitOrder .discountFace .content .member .price-border .price .v-price .full,
+.submitOrder .couponFace .content .member .price-border .price .v-price .full,
+.submitOrder .discountFace .content .Platform .price-border .price .v-price .full,
+.submitOrder .couponFace .content .Platform .price-border .price .v-price .full {
+  font-size: 24rpx;
+  color: #333;
+}
+.submitOrder .discountFace .content .member .price-border .price .coupon,
+.submitOrder .couponFace .content .member .price-border .price .coupon,
+.submitOrder .discountFace .content .Platform .price-border .price .coupon,
+.submitOrder .couponFace .content .Platform .price-border .price .coupon {
+  padding: 20rpx 20rpx 10rpx;
+  display: flex;
+  width: calc(100% - 246rpx);
+  justify-content: space-between;
+}
+.submitOrder .discountFace .content .member .price-border .price .coupon .text .date,
+.submitOrder .couponFace .content .member .price-border .price .coupon .text .date,
+.submitOrder .discountFace .content .Platform .price-border .price .coupon .text .date,
+.submitOrder .couponFace .content .Platform .price-border .price .coupon .text .date {
+  padding: 10rpx 0;
+  font-size: 24rpx;
+  color: #666;
+}
+.submitOrder .discountFace .content .member .price-border .price .coupon .text .details,
+.submitOrder .couponFace .content .member .price-border .price .coupon .text .details,
+.submitOrder .discountFace .content .Platform .price-border .price .coupon .text .details,
+.submitOrder .couponFace .content .Platform .price-border .price .coupon .text .details {
+  padding: 10rpx 0;
+  color: #999;
+  font-size: 24rpx;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+.submitOrder .discountFace .content .member .price-border .price .coupon .text .details .u-icon,
+.submitOrder .couponFace .content .member .price-border .price .coupon .text .details .u-icon,
+.submitOrder .discountFace .content .Platform .price-border .price .coupon .text .details .u-icon,
+.submitOrder .couponFace .content .Platform .price-border .price .coupon .text .details .u-icon {
+  margin-left: 10rpx;
+}
+.submitOrder .discountFace .content .member .price-border .price .coupon .btn,
+.submitOrder .couponFace .content .member .price-border .price .coupon .btn,
+.submitOrder .discountFace .content .Platform .price-border .price .coupon .btn,
+.submitOrder .couponFace .content .Platform .price-border .price .coupon .btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.submitOrder .discountFace .content .member .price-border .price .tag,
+.submitOrder .couponFace .content .member .price-border .price .tag,
+.submitOrder .discountFace .content .Platform .price-border .price .tag,
+.submitOrder .couponFace .content .Platform .price-border .price .tag {
+  position: absolute;
+  right: 10rpx;
+  top: 8rpx;
+  font-size: 16rpx;
+
+
+
+  color: #fff;
+  background-color: #ccc;
+  padding: 5rpx 50rpx;
+  -webkit-transform: rotate(30deg);
+          transform: rotate(30deg);
+}
+.submitOrder .discountFace .content .Platform,
+.submitOrder .couponFace .content .Platform {
+  padding-bottom: 0;
+}
+.submitOrder .discountFace .content .cannot,
+.submitOrder .couponFace .content .cannot {
+  padding: 0 20rpx;
+}
+.submitOrder .discountFace .content .cannot text,
+.submitOrder .couponFace .content .cannot text {
+  background-color: #fdf9e6;
+  display: block;
+  padding: 20rpx;
+  font-size: 24rpx;
+}
+.submitOrder .discountFace .content .btn,
+.submitOrder .couponFace .content .btn {
+  margin-top: 20rpx;
+  padding: 0 20rpx;
+}
+

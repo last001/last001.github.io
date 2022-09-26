@@ -1,0 +1,444 @@
+.pay{
+	background-color: #f2f2f2;
+	padding-bottom: 100rpx;
+	position: relative;
+	.tips{
+		width: 100%;
+		height: 520rpx;
+		background:linear-gradient(to top , #FFE27A , #fbd553);
+		border-bottom-left-radius: 100rpx;
+		border-bottom-right-radius: 100rpx;
+		.icon-refresh{
+			padding: 20rpx;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			.v-icon-refresh{
+				display: flex;
+				align-items: center;
+				.image{
+					width: 36rpx;
+					height: 36rpx;
+					image{
+						display: block;
+						width: 100%;
+						height: 100%;
+					}
+				}
+				.text{
+					color: #fff;
+					font-size: 36rpx;
+					font-weight: bold;
+					margin-left: 15rpx;
+				}
+			}
+			.refresh{
+				display: flex;
+				align-items: center;
+				justify-content: flex-end;
+				text{
+					font-size: 28rpx;
+					color: #666;
+					margin-right: 15rpx;
+				}
+				image{
+					display: block;
+					width: 22rpx;
+					height: 22rpx;
+				}
+			}
+		}
+		.tipText{
+			padding:0 20rpx;
+			font-size: 26rpx;
+		}
+	}
+	.orderContent{
+		padding: 20rpx;
+		margin-top: -380rpx;
+		.v-orderContent{
+			background-color: #fff;
+			border-radius: 18rpx;
+			color: #333;
+			padding: 20rpx;
+			box-shadow: 0px 3px 6px 1px rgba(0,0,0,0.0900);
+			.orderTitle{
+				padding: 0rpx 0 20rpx;
+				border-bottom: 2rpx solid #EAEAEA;
+				display: flex;
+				justify-content: space-between;
+				.v-orderTitle{
+					display: flex;
+					align-items: baseline;
+					justify-content: center;
+					.title{
+						font-size: 32rpx;
+						display: block;
+					}
+					.u-icon{
+						display: block;
+						margin-left: 20rpx;
+						// margin-top:8rpx;
+					}
+				}
+				.phoneImage{
+					width: 42rpx;
+					height: 42rpx;
+					image{
+						display: block;
+						width: 100%;
+						height: 100%;
+					}
+				}
+			}
+			.orderList{
+				padding: 20rpx 0;
+				.v-orderList{
+					display: flex;
+					margin-bottom: 20rpx;
+					.image{
+						width: 160rpx;
+						height: 136rpx;
+						image{
+							width: 100%;
+							height: 100%;
+							display: block;
+						}
+					}
+					.price-count{
+						width: calc(100% - 180rpx);
+						margin-left: 20rpx;
+						display: flex;
+						flex-direction: column;
+						justify-content: space-between;
+							.price{
+								display: flex;
+								justify-content: space-between;
+								align-items: flex-end;
+								font-size: 32rpx;
+								font-weight: bold;
+								.v-price{
+									font-size: 26rpx;
+								}
+							}
+					}
+				}
+			}
+			.cost{
+				display: flex;
+				justify-content: space-between;
+				padding: 10rpx 0;
+			}
+			.coupon{
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding: 10rpx 0;
+				.image-text{
+					display: flex;
+					align-items: center;
+					justify-content: flex-start;
+					.image{
+						width: 24rpx;
+						height: 26rpx;
+						margin-right: 20rpx;
+						image{
+							display: block;
+							width: 100%;
+							height: 100%;
+						}
+						.text{
+							font-size: 28rpx;
+							color: #333;
+						}
+					}
+				}
+				.pop-icon{
+					display: flex;
+					align-items: center;
+					justify-content: flex-end;
+					.pop{
+						font-size: 26rpx;
+						color: #999;
+					}
+					.u-icon{
+						margin-left: 20rpx;
+					}
+				}
+			}
+			.total{
+				padding: 20rpx 0 10rpx;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				border-top: 2rpx solid #EAEAEA;
+				.prefer{
+					font-size: 28rpx;
+					text{
+						&:last-child{
+							color: #FF5B5B;
+							font-size: 26rpx;
+						}
+					}
+				}
+				.v-total{
+					font-size: 28rpx;
+					text{
+						color: #666;
+						&:last-child{
+							font-weight: bold;
+							font-size: 32rpx;
+							color: #333;
+						}
+					}
+				}
+			}
+		}
+	}
+	.deliveryInfo{
+		padding:10rpx 20rpx 20rpx;
+		.v-deliveryInfo{
+			background-color: #fff;
+			border-radius: 18rpx;
+			// padding: 20rpx;
+			box-shadow: 0px 3px 6px 1px rgba(0,0,0,0.0900);
+			h3{
+				font-size: 32rpx;
+				padding: 20rpx;
+				border-bottom: 2rpx solid #EAEAEA;
+			}
+			.addresss{
+				padding: 20rpx;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				.text-image{
+					display: flex;
+					align-items: center;
+					color: #666;
+					.image{
+						width: 22rpx;
+						height: 28rpx;
+						margin-right: 15rpx;
+						image{
+							display: block;
+							width: 100%;
+							height: 100%;
+						}
+					}
+				}
+				.text-icon{
+					display: flex;
+					align-items: center;
+					justify-content: flex-end;
+					.text{
+						font-size: 28rpx;
+						color: #999;
+						margin-right: 20rpx;
+						display: flex;
+						flex-direction: column;
+						align-items: flex-end;
+					}
+					.changText{
+						font-size: 26rpx;
+						color: #F8CF39;
+					}
+				}
+			}
+			.remask{
+				padding:10rpx 20rpx;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				.text-image{
+					display: flex;
+					align-items: center;
+					color: #666;
+					.image{
+						margin-right: 15rpx;
+						width: 22rpx;
+						height: 28rpx;
+						image{
+							display: block;
+							width: 100%;
+							height: 100%;
+						}
+					}
+				}
+				.inp-icon{
+					display: flex;
+					align-items: center;
+					justify-content: flex-end;
+					input{
+						text-align: right;
+						padding-right: 20rpx;
+						font-size: 28rpx;
+					}
+					.uni-input-placeholder{
+						color: #999;
+					}
+				}
+			}
+			.serviceTime,.delivery-people{
+				padding: 20rpx;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				.text-image{
+					color: #666;
+					display: flex;
+					align-items: center;
+					.image{
+						margin-right: 15rpx;
+						width: 22rpx;
+						height: 28rpx;
+						image{
+							display: block;
+							width: 100%;
+							height: 100%;
+						}
+					}
+				}
+				.text-icon{
+					display: flex;
+					align-items: center;
+					justify-content: flex-end;
+					.image{
+						width: 22rpx;
+						height: 28rpx;
+						image{
+							display: block;
+							width: 100%;
+							height: 100%;
+						}
+					}
+					.text{
+						font-size: 28rpx;
+						color: #999;
+						margin-right: 20rpx;	
+					}
+				}
+			}
+		}
+	}
+	.orderInfo{
+		padding: 20rpx;
+		.v-orderInfo{
+			background-color: #fff;
+			border-radius: 18rpx;
+			// padding: 20rpx;
+			box-shadow: 0px 3px 6px 1px rgba(0,0,0,0.0900);
+			h3{
+				font-size: 32rpx;
+				padding: 20rpx;
+				border-bottom: 2rpx solid #EAEAEA;
+			}
+			.orderNumber,.creatTime{
+				display: flex;
+				justify-content: space-between;
+				font-size: 26rpx;
+				padding: 20rpx;
+				.copy{
+					display: flex;
+					justify-content: flex-end;
+					align-items: center;
+					.u-button{
+						margin-left: 15rpx;
+					}
+				}
+				.time{
+					text{
+						&:nth-child(2){
+							margin-left: 15rpx;
+						}
+					}
+				}
+			}
+			.creatTime{
+				padding-top: 0;
+			}
+		}
+	}
+	.btns{
+		width: 100%;
+		background-color: #fff;
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		padding: 20rpx ;
+		// text-align: right;
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		.u-button{
+			width: 178rpx;
+			margin: 0;
+			margin-right: 20rpx;
+			&:last-child{
+				margin-right: 40rpx;
+			}
+		}
+	}
+	.changeAddShow,.cancelEvalutate{
+		.content{
+			width: 520rpx;
+			padding: 50rpx;
+			h3{
+				width: 100%;
+				text-align: center;
+				font-size: 36rpx;
+			}
+			.tip{
+				text-align: center;
+				font-size: 28rpx;
+				color: #999;
+				padding: 20rpx 0;
+			}
+			.add-btns{
+				display: flex;
+				justify-content: space-around;
+				align-items: center;
+				.u-button{
+					&:first-child{
+						margin-right:20rpx;
+					}
+				}
+			}
+		}
+	}
+	.paySuccess{
+		/deep/.u-popup__content{
+			background-color: transparent;
+			.content{
+				position: relative;
+				image{
+					display: block;
+					width: 551rpx;
+					height: 765rpx;
+				}
+				.close{
+					position: absolute;
+					right: 2rpx;
+					top: 2rpx;
+					width: 60rpx;
+					height: 60rpx;
+					// border: 1px solid red;
+					border-radius: 50%;
+				}
+				.ShareFriends{
+					position: absolute;
+					right: 50%;
+					margin-right: -50rpx;
+					bottom: 9%;
+					width: 120rpx;
+					height: 30rpx;
+					// border: 1px solid green;
+					button{
+						height: 30rpx;
+						background-color: transparent;
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,1 @@
+<view class="afterTea"><view class="banner"><image src="/static/mipmap-mdpi1/teaBanner.png" mode></image></view><product-list vue-id="6488b680-1" list="{{productList}}" bind:__l="__l"></product-list></view>

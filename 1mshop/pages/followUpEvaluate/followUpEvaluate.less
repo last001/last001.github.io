@@ -1,0 +1,131 @@
+.followUpEvaluate{
+	background-color: #f2f2f2;
+	.rate{
+		display: flex;
+		background-color: #fff;
+		padding: 0 20rpx;
+		.image{
+			margin-top: 20rpx;
+			width: 168rpx;
+			height: 168rpx;
+			image{
+				width: 100%;
+				height: 100%;
+				display: block;
+			}
+		}
+		.content{
+			margin-top: 20rpx;
+			margin-left: 20rpx;
+			width: calc(100% - 188rpx);
+			padding-bottom:  20rpx;
+			.title{
+				font-size: 28rpx;
+				color: #333;
+				font-weight: bold;
+			}
+			.productRate,.delivery{
+				display: flex;
+				align-items: center;
+				justify-content: flex-start;
+				.text{
+					font-size: 26rpx;
+					font-weight: bold;
+				}
+				.rate{
+					margin: 0 20rpx;
+				}
+				.tip{
+					font-size: 26rpx;
+					color: #F89621;
+				}
+			}
+			.productRate{
+				margin: 20rpx 0;
+			}
+		}
+	}
+	.text-btn{
+		margin-top: 20rpx;
+		background-color: #fff;
+		padding: 20rpx;
+		.textarea{
+			margin-top: 20rpx;
+			.u-textarea{
+				background-color: #F2F2F2;
+				min-height: 260rpx;
+				border: none;
+			}
+		}
+		.isShow{
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			margin-top: 20rpx;
+			.v-isShow{
+				display: flex;
+				align-items: center;
+				justify-content: flex-start;
+				font-size: 22rpx;
+				color: #666;
+				.text{
+					margin: 0 10rpx;
+				}
+			}
+			.tip{
+				font-size: 22rpx;
+				color: #CCCCCC;
+			}
+		}
+		.addImage{
+			display: flex;
+			flex-wrap: wrap;
+			margin-top: 20rpx;
+			.image{
+				// width: 162rpx;
+				width: calc((100% - 60rpx) / 4);
+				height: 162rpx;
+				margin-right:20rpx ;
+				margin-bottom:20rpx ;
+				image{
+					border-radius: 9rpx;
+					display: block;
+					width: 100%;
+					height: 100%;
+				}
+				&:nth-of-type(4n){
+					margin-right:0rpx ;
+				}
+			}
+			.addBtn{
+				width: calc((100% - 60rpx) / 4);
+				height: 162rpx;
+				border: 1rpx solid #00000017;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				image{
+					width: 35rpx;
+					height: 35rpx;
+					display: block;
+					// border: 1rpx dashed ;
+				}
+				text{
+					font-size: 22rpx;
+					color: #999;
+					margin-top: 20rpx;
+				}
+			}
+		}
+		.followUpBtn{
+			width: 100%;
+			text-align: center;
+			margin-top: 100rpx;
+			.u-button{
+				width: 246rpx;
+			}
+		}
+	}
+	
+}

@@ -1,0 +1,32 @@
+.historyLocation{
+	background-color: #f2f2f2;
+	padding: 40rpx;
+	/* #ifdef H5 || APP */
+	min-height: calc(100vh - 80rpx - 88rpx);
+	/* #endif */
+	/* #ifdef MP-WEIXIN */
+	min-height: calc(100vh - 80rpx);
+	/* #endif */
+	.item{
+		background-color: #F8CF39;
+		padding: 20rpx;
+		border-radius: 50rpx;
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		margin-top: 30rpx;
+		&:first-child{
+			margin-top: 0;
+		}
+		image{
+			width: 28rpx;
+			height: 34rpx;
+			display: block;
+			margin-left: 10rpx;
+		}
+		text{
+			color: #fff;
+			margin-left: 20rpx;
+		}
+	}
+}

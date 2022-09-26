@@ -1,0 +1,172 @@
+.my{
+	.personInfo{
+		display: flex;
+		justify-content: space-between;
+		padding:20rpx;
+		.info{
+			.name{
+				display: flex;
+				align-items: center;
+				// padding: 10rpx 0;
+				.login{
+					background-color: #fff;
+					border: none;
+					font-size: 40rpx;
+					font-weight: bold;
+					color: #333;
+					padding: 0;
+					margin: 0;
+					&::after{
+						content:"";
+						width: 0;
+						height: 0;
+					}
+				}
+				.gender{
+					width:28rpx;
+					height: 28rpx;
+					margin-left: 20rpx;
+					border:1rpx solid red;
+					box-sizing: border-box;
+					image{
+						display: block;
+						width: 100%;
+						height: 100%;
+					}
+				}
+			}
+			.phone{
+				color: #ccc;
+				font-size: 26rpx;
+			}
+		}
+		.header{
+			border: 1rpx solid red;
+			box-sizing: border-box;
+			width: 137rpx;
+			height: 137rpx;
+			image{
+				display: block;
+				width: 100%;
+				height: 100%;
+			}
+		}
+	}
+	.welfare{
+		display: flex;
+		padding: 20rpx;
+		padding-top: 0;
+		justify-content: space-between;
+		.member{
+			background: linear-gradient(to bottom , #FFF3C8 ,#FFFFFF);
+			border-radius: 18rpx;
+			padding: 20rpx;
+			flex: 1;
+			box-shadow: 0px 0px 9px 1px rgba(51,42,12,0.05);
+			.v-member{
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				.member-name{
+					.text{
+						color: #333;
+						font-size: 28rpx;
+					}
+					.text-icon{
+						color: #F8CF39;
+						font-weight: bold;
+						font-size: 22rpx;
+						display: flex;
+						padding: 20rpx 0;
+						.u-icon--right{
+							margin-left: 10rpx;
+						}
+					}
+				}
+				.menber-image{
+					width: 40rpx;
+					height: 40rpx;
+					padding: 10rpx;
+					background-color: #fff;
+					border-radius: 50%;
+					image{
+						width: 100%;
+						height: 100%;
+					}
+				}
+			}
+			.explain{
+				width: 100%;
+				color: #F8CF39;
+				padding: 10rpx 0;
+				border-radius: 18rpx;
+				font-size: 19rpx;
+			}
+		}
+		.coupons{
+			background: linear-gradient(to bottom , #FFE5E5 ,#FFFFFF);
+			border-radius: 18rpx;
+			padding: 20rpx;
+			flex: 1;
+			margin-left: 20rpx;
+			box-shadow: 0px 0px 9px 1px rgba(51,42,12,0.05);
+			.v-coupons{
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				.coupons-name{
+					.text{
+						color: #333;
+						font-size: 28rpx;
+					}
+					.text-icon{
+						color: #FF4D4E;
+						font-weight: bold;
+						font-size: 22rpx;
+						display: flex;
+						padding: 20rpx 0;
+						.u-icon--right{
+							margin-left: 10rpx;
+						}
+					}
+				}
+				.coupons-image{
+					width: 40rpx;
+					height: 40rpx;
+					padding: 10rpx;
+					background-color: #fff;
+					border-radius: 50%;
+					image{
+						width: 100%;
+						height: 100%;
+					}
+				}
+			}
+			.explain{
+				width: 100%;
+				color: #FFB4B4;
+				padding: 10rpx 0;
+				border-radius: 18rpx;
+				font-size: 19rpx;
+			}
+		}
+	}
+	.list{
+		.lists{
+			.u-list{
+				height: initial !important;
+				/deep/ .u-cell__body__content{
+					position: relative;
+					.u-icon--right{
+						position: absolute;
+						right: 0;
+						top: 8rpx;
+					}
+				}
+				/deep/.u-line{
+					width: 0% !important;
+				}	
+			}
+		}
+	}
+}

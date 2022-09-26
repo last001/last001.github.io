@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "支付",
+  "navigationBarBackgroundColor": "#fbd553",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "u-count-down": "/uni_modules/uview-ui/components/u-count-down/u-count-down",
+    "u-checkbox-group": "/uni_modules/uview-ui/components/u-checkbox-group/u-checkbox-group",
+    "u-checkbox": "/uni_modules/uview-ui/components/u-checkbox/u-checkbox",
+    "u-button": "/uni_modules/uview-ui/components/u-button/u-button"
+  }
+}

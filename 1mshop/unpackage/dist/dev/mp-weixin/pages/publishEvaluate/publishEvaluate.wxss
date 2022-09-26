@@ -1,0 +1,186 @@
+.publishEvaluate {
+  padding: 20rpx;
+}
+.publishEvaluate .rate {
+  display: flex;
+}
+.publishEvaluate .rate .image {
+  width: 168rpx;
+  height: 168rpx;
+}
+.publishEvaluate .rate .image image {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.publishEvaluate .rate .content {
+  margin-left: 20rpx;
+  width: calc(100% - 188rpx);
+}
+.publishEvaluate .rate .content .title-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.publishEvaluate .rate .content .title-btn .title {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: bold;
+}
+.publishEvaluate .rate .content .productRate,
+.publishEvaluate .rate .content .delivery {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.publishEvaluate .rate .content .productRate .text,
+.publishEvaluate .rate .content .delivery .text {
+  font-size: 26rpx;
+  font-weight: bold;
+}
+.publishEvaluate .rate .content .productRate .rate,
+.publishEvaluate .rate .content .delivery .rate {
+  margin: 0 20rpx;
+}
+.publishEvaluate .rate .content .productRate .tip,
+.publishEvaluate .rate .content .delivery .tip {
+  font-size: 26rpx;
+  color: #F89621;
+}
+.publishEvaluate .rate .content .productRate {
+  margin: 20rpx 0rpx;
+}
+.publishEvaluate .textVal {
+  margin-top: 20rpx;
+  min-height: 260rpx;
+  border-radius: 9rpx;
+  background-color: #F2F2F2;
+  padding: 20rpx;
+}
+.publishEvaluate .textVal .first {
+  background-color: transparent;
+  border: none;
+  height: 100%;
+  padding: 0;
+}
+.publishEvaluate .textVal .v-textVal {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 4rpx 0;
+}
+.publishEvaluate .textVal .v-textVal:first-of-type .text {
+  top: 0;
+}
+.publishEvaluate .textVal .v-textVal .text {
+  position: absolute;
+  left: 0;
+  top: 5rpx;
+  min-width: 140rpx;
+  text-align: left;
+  color: #FFA025;
+  font-size: 28rpx;
+  z-index: 99;
+}
+.publishEvaluate .textVal .v-textVal .u-textarea {
+  z-index: 9;
+  border: none;
+  font-size: 28rpx;
+  text-indent: 140rpx;
+  text-align: left;
+  padding: 0;
+  background-color: transparent;
+}
+.publishEvaluate .isShow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20rpx;
+}
+.publishEvaluate .isShow .v-isShow {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 22rpx;
+  color: #666;
+}
+.publishEvaluate .isShow .v-isShow .text {
+  margin: 0 10rpx;
+}
+.publishEvaluate .isShow .tip {
+  font-size: 22rpx;
+  color: #CCCCCC;
+}
+.publishEvaluate .addImage {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20rpx;
+}
+.publishEvaluate .addImage .image {
+  width: calc((100% - 60rpx) / 4);
+  height: 162rpx;
+  margin-right: 20rpx ;
+  margin-bottom: 20rpx ;
+}
+.publishEvaluate .addImage .image image {
+  border-radius: 9rpx;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.publishEvaluate .addImage .image:nth-of-type(4n) {
+  margin-right: 0rpx ;
+}
+.publishEvaluate .addImage .addBtn {
+  width: calc((100% - 60rpx) / 4);
+  height: 162rpx;
+  border: 1rpx solid #00000017;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+.publishEvaluate .addImage .addBtn image {
+  width: 35rpx;
+  height: 35rpx;
+  display: block;
+}
+.publishEvaluate .addImage .addBtn text {
+  font-size: 22rpx;
+  color: #999;
+  margin-top: 20rpx;
+}
+.publishEvaluate .addLabel {
+  margin-top: 50rpx;
+  padding-bottom: 50rpx;
+}
+.publishEvaluate .addLabel .title {
+  font-size: 32rpx;
+  color: #666;
+  font-weight: bold;
+  padding: 20rpx 0;
+}
+.publishEvaluate .addLabel .labeiList {
+  display: flex;
+  flex-wrap: wrap;
+}
+.publishEvaluate .addLabel .labeiList .list {
+  background-color: #FEF6D7;
+  color: #FFA025;
+  font-size: 22rpx;
+  border-radius: 99rpx;
+  padding: 10rpx 0;
+  margin-right: 20rpx;
+  margin-top: 20rpx;
+  width: calc(20% - 20rpx + 4rpx);
+  text-align: center;
+}
+.publishEvaluate .addLabel .labeiList .list:nth-of-type(5n) {
+  margin-right: 0;
+}
+.publishEvaluate .addLabel .labeiList .list.active {
+  color: #999;
+  background-color: #EEE;
+}
+

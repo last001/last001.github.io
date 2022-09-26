@@ -1,0 +1,371 @@
+.myTeam {
+  padding-top: 88rpx;
+  min-height: calc(100vh - 88rpx);
+}
+.myTeam .captain {
+  background: linear-gradient(to left, #FFD95E 0%, #FF6465 100%);
+  position: relative;
+  display: flex;
+  padding: 80rpx 20rpx;
+
+  padding: 100rpx 20rpx 80rpx;
+}
+.myTeam .captain .v-captain,
+.myTeam .captain .teamMember {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.myTeam .captain .v-captain image,
+.myTeam .captain .teamMember image {
+  display: block;
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+}
+.myTeam .captain .v-captain text,
+.myTeam .captain .teamMember text {
+  margin-top: 10rpx;
+  color: #fff;
+  font-size: 28rpx;
+}
+.myTeam .captain .arrow-right-image {
+  width: 77rpx;
+  height: 30rpx;
+  padding: 0 30rpx;
+  margin-top: 30rpx;
+}
+.myTeam .captain .arrow-right-image image {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.myTeam .captain .couponBox {
+  width: 256rpx;
+  height: 114rpx;
+}
+.myTeam .captain .couponBox image {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.myTeam .captain .rule {
+  position: absolute;
+  right: 40rpx;
+  bottom: 40rpx;
+  color: #333;
+  font-size: 22rpx;
+  display: flex;
+}
+.myTeam .captain .rule text {
+  margin-left: 10rpx;
+}
+.myTeam .teamList {
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0px 3px 6px 1px rgba(0, 0, 0, 0.09);
+  display: flex;
+}
+.myTeam .teamList .v-teamList {
+  padding: 30rpx 40rpx;
+  flex: 1;
+  align-items: center;
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+.myTeam .teamList .v-teamList.active {
+  color: #fff;
+  background-color: #F8CF39;
+}
+.myTeam .teamList .v-teamList:nth-child(2) {
+  flex: 2;
+}
+.myTeam .teamList .v-teamList:last-child {
+  flex: 2;
+}
+.myTeam .toTeam .invite {
+  color: #FF5314;
+  font-weight: bold;
+  font-size: 36rpx;
+  width: 100%;
+  text-align: center;
+  padding: 30rpx 0;
+}
+.myTeam .toTeam .queue {
+  padding: 20rpx;
+  padding-top: 0rpx;
+}
+.myTeam .toTeam .queue .v-queue {
+  box-shadow: 0px 0px 6px 1px rgba(0, 0, 0, 0.09);
+  padding: 20rpx;
+  padding-top: 40rpx;
+  background-color: #fff;
+  border-radius: 20rpx;
+}
+.myTeam .toTeam .queue .v-queue .list {
+  display: flex;
+}
+.myTeam .toTeam .queue .v-queue .list .lists {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.myTeam .toTeam .queue .v-queue .list .lists .headerImg {
+  width: 100rpx;
+  height: 100rpx;
+}
+.myTeam .toTeam .queue .v-queue .list .lists .headerImg image {
+  border-radius: 50%;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.myTeam .toTeam .queue .v-queue .list .lists .headerImg .noHeader {
+  width: 100%;
+  height: 100%;
+  color: #ccc;
+  font-size: 66rpx;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 100rpx;
+  border: 2rpx dashed #ccc;
+}
+.myTeam .toTeam .queue .v-queue .list .lists .name {
+  font-size: 28rpx;
+  color: #666;
+  padding: 15rpx 0;
+}
+.myTeam .toTeam .queue .v-queue .list .lists .nick {
+  color: #F8CF39;
+  font-size: 22rpx;
+}
+.myTeam .toTeam .queue .v-queue .list .lists .couponWall {
+  margin-top: 20rpx;
+  width: 131rpx;
+  height: 138rpx;
+  border-radius: 18rpx;
+  overflow: hidden;
+  position: relative;
+}
+.myTeam .toTeam .queue .v-queue .list .lists .couponWall image {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.myTeam .toTeam .queue .v-queue .list .lists .couponWall .posiText {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+.myTeam .toTeam .queue .v-queue .list .lists .couponWall .posiText .questionMark {
+  width: 100%;
+  text-align: center;
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+  margin-top: 15rpx;
+}
+.myTeam .toTeam .queue .v-queue .list .lists .couponWall .posiText .couponText {
+  margin-top: -6rpx;
+  margin-bottom: 8rpx;
+  width: 100%;
+  text-align: center;
+  color: #FF8751;
+  font-size: 18rpx;
+}
+.myTeam .toTeam .queue .v-queue .list .lists .couponWall .posiText .wait {
+  width: 100%;
+  text-align: center;
+  font-size: 16rpx;
+  color: #fff;
+}
+.myTeam .toTeam .queue .v-queue .couponTip {
+  font-size: 26rpx;
+  color: #F24849;
+  width: 100%;
+  text-align: center;
+  padding: 20rpx 0 60rpx;
+}
+.myTeam .toTeam .queue .v-queue .btn {
+  padding: 20rpx;
+}
+.myTeam .toTeam .queue .v-queue .btn .u-button {
+  width: 252rpx;
+}
+.myTeam .toTeam .total {
+  margin-top: 20rpx;
+  padding: 20rpx;
+  padding-top: 0rpx;
+}
+.myTeam .toTeam .total .v-total {
+  display: flex;
+  background-color: #fff;
+  box-shadow: 0px 3px 6px 1px rgba(0, 0, 0, 0.09);
+  padding: 20rpx;
+  border-radius: 18rpx;
+}
+.myTeam .toTeam .total .v-total .total-coupon,
+.myTeam .toTeam .total .v-total .total-count {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.myTeam .toTeam .total .v-total .total-coupon .text,
+.myTeam .toTeam .total .v-total .total-count .text {
+  padding: 10rpx 0 20rpx;
+}
+.myTeam .toTeam .total .v-total .total-coupon .num,
+.myTeam .toTeam .total .v-total .total-count .num {
+  color: #FF5314;
+  font-weight: bold;
+}
+.myTeam .toTeam .total .v-total .total-coupon {
+  border-right: 1rpx solid #EAEAEA;
+}
+.myTeam .myTeams,
+.myTeam .handTeam {
+  background-color: #fff;
+  padding: 30rpx 20rpx ;
+  margin-top: 2rpx;
+}
+.myTeam .myTeams .v-myTeams,
+.myTeam .handTeam .v-myTeams,
+.myTeam .myTeams .v-handTeam,
+.myTeam .handTeam .v-handTeam {
+  display: flex;
+  flex-wrap: wrap;
+  box-shadow: 0px 3px 6px 1px rgba(0, 0, 0, 0.09);
+  border: 2rpx solid #ccc;
+  border-radius: 26rpx;
+  padding: 40rpx 20rpx 70rpx;
+  position: relative;
+}
+.myTeam .myTeams .v-myTeams.success,
+.myTeam .handTeam .v-myTeams.success,
+.myTeam .myTeams .v-handTeam.success,
+.myTeam .handTeam .v-handTeam.success {
+  box-shadow: 0px 3px 6px 1px rgba(248, 207, 57, 0.25), inset 0px 0px 99px 1px rgba(248, 207, 57, 0.25);
+  border: 3rpx solid #FFB23E;
+}
+.myTeam .myTeams .v-myTeams .myTeamList,
+.myTeam .handTeam .v-myTeams .myTeamList,
+.myTeam .myTeams .v-handTeam .myTeamList,
+.myTeam .handTeam .v-handTeam .myTeamList,
+.myTeam .myTeams .v-myTeams .handTeamList,
+.myTeam .handTeam .v-myTeams .handTeamList,
+.myTeam .myTeams .v-handTeam .handTeamList,
+.myTeam .handTeam .v-handTeam .handTeamList {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 32rpx;
+}
+.myTeam .myTeams .v-myTeams .myTeamList:nth-of-type(n + 5),
+.myTeam .handTeam .v-myTeams .myTeamList:nth-of-type(n + 5),
+.myTeam .myTeams .v-handTeam .myTeamList:nth-of-type(n + 5),
+.myTeam .handTeam .v-handTeam .myTeamList:nth-of-type(n + 5),
+.myTeam .myTeams .v-myTeams .handTeamList:nth-of-type(n + 5),
+.myTeam .handTeam .v-myTeams .handTeamList:nth-of-type(n + 5),
+.myTeam .myTeams .v-handTeam .handTeamList:nth-of-type(n + 5),
+.myTeam .handTeam .v-handTeam .handTeamList:nth-of-type(n + 5) {
+  margin-top: 20rpx;
+}
+.myTeam .myTeams .v-myTeams .myTeamList .headerImg,
+.myTeam .handTeam .v-myTeams .myTeamList .headerImg,
+.myTeam .myTeams .v-handTeam .myTeamList .headerImg,
+.myTeam .handTeam .v-handTeam .myTeamList .headerImg,
+.myTeam .myTeams .v-myTeams .handTeamList .headerImg,
+.myTeam .handTeam .v-myTeams .handTeamList .headerImg,
+.myTeam .myTeams .v-handTeam .handTeamList .headerImg,
+.myTeam .handTeam .v-handTeam .handTeamList .headerImg {
+  width: 100rpx;
+  height: 100rpx;
+}
+.myTeam .myTeams .v-myTeams .myTeamList .headerImg image,
+.myTeam .handTeam .v-myTeams .myTeamList .headerImg image,
+.myTeam .myTeams .v-handTeam .myTeamList .headerImg image,
+.myTeam .handTeam .v-handTeam .myTeamList .headerImg image,
+.myTeam .myTeams .v-myTeams .handTeamList .headerImg image,
+.myTeam .handTeam .v-myTeams .handTeamList .headerImg image,
+.myTeam .myTeams .v-handTeam .handTeamList .headerImg image,
+.myTeam .handTeam .v-handTeam .handTeamList .headerImg image {
+  border-radius: 50%;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.myTeam .myTeams .v-myTeams .myTeamList .headerImg.active,
+.myTeam .handTeam .v-myTeams .myTeamList .headerImg.active,
+.myTeam .myTeams .v-handTeam .myTeamList .headerImg.active,
+.myTeam .handTeam .v-handTeam .myTeamList .headerImg.active,
+.myTeam .myTeams .v-myTeams .handTeamList .headerImg.active,
+.myTeam .handTeam .v-myTeams .handTeamList .headerImg.active,
+.myTeam .myTeams .v-handTeam .handTeamList .headerImg.active,
+.myTeam .handTeam .v-handTeam .handTeamList .headerImg.active {
+  border-radius: 50%;
+  border: 1rpx dashed #ccc;
+}
+.myTeam .myTeams .v-myTeams .myTeamList .name,
+.myTeam .handTeam .v-myTeams .myTeamList .name,
+.myTeam .myTeams .v-handTeam .myTeamList .name,
+.myTeam .handTeam .v-handTeam .myTeamList .name,
+.myTeam .myTeams .v-myTeams .handTeamList .name,
+.myTeam .handTeam .v-myTeams .handTeamList .name,
+.myTeam .myTeams .v-handTeam .handTeamList .name,
+.myTeam .handTeam .v-handTeam .handTeamList .name {
+  font-size: 28rpx;
+  color: #666;
+  padding: 15rpx 0;
+}
+.myTeam .myTeams .v-myTeams .myTeamList .nick,
+.myTeam .handTeam .v-myTeams .myTeamList .nick,
+.myTeam .myTeams .v-handTeam .myTeamList .nick,
+.myTeam .handTeam .v-handTeam .myTeamList .nick,
+.myTeam .myTeams .v-myTeams .handTeamList .nick,
+.myTeam .handTeam .v-myTeams .handTeamList .nick,
+.myTeam .myTeams .v-handTeam .handTeamList .nick,
+.myTeam .handTeam .v-handTeam .handTeamList .nick {
+  color: #F8CF39;
+  font-size: 22rpx;
+}
+.myTeam .myTeams .v-myTeams .myTeam-btn,
+.myTeam .handTeam .v-myTeams .myTeam-btn,
+.myTeam .myTeams .v-handTeam .myTeam-btn,
+.myTeam .handTeam .v-handTeam .myTeam-btn {
+  position: absolute;
+  left: 50%;
+  bottom: -30rpx;
+  margin-left: -140rpx;
+}
+.myTeam .myTeams .v-myTeams .myTeam-btn .u-button,
+.myTeam .handTeam .v-myTeams .myTeam-btn .u-button,
+.myTeam .myTeams .v-handTeam .myTeam-btn .u-button,
+.myTeam .handTeam .v-handTeam .myTeam-btn .u-button {
+  flex-direction: column;
+  width: 280rpx;
+}
+.myTeam .myTeams .v-myTeams .myTeam-btn .u-button .btn-text,
+.myTeam .handTeam .v-myTeams .myTeam-btn .u-button .btn-text,
+.myTeam .myTeams .v-handTeam .myTeam-btn .u-button .btn-text,
+.myTeam .handTeam .v-handTeam .myTeam-btn .u-button .btn-text {
+  color: #fff;
+  font-size: 28rpx;
+  font-weight: bold;
+}
+.myTeam .myTeams .v-myTeams .myTeam-btn .u-button .btn-num,
+.myTeam .handTeam .v-myTeams .myTeam-btn .u-button .btn-num,
+.myTeam .myTeams .v-handTeam .myTeam-btn .u-button .btn-num,
+.myTeam .handTeam .v-handTeam .myTeam-btn .u-button .btn-num {
+  color: #F8CF39;
+  font-size: 22rpx;
+}
+

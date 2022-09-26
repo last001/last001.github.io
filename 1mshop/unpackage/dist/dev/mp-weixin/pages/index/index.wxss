@@ -1,0 +1,915 @@
+.index {
+  padding-bottom: 20rpx;
+  background: #f2f2f2;
+}
+.index .banner {
+  width: 100%;
+  overflow-x: hidden;
+  height: 560rpx;
+  background-color: #fff;
+  position: relative;
+}
+.index .banner .bg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 150%;
+  margin-left: -25%;
+  height: 500rpx;
+  border-bottom-left-radius: 450rpx;
+  border-bottom-right-radius: 450rpx;
+  background: linear-gradient(to right, #f9d44a, #fee68e);
+}
+.index .banner .adress {
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 20rpx;
+  z-index: 999;
+}
+.index .banner .adress .tadress-text {
+  padding: 0 20rpx;
+  font-weight: 600;
+  font-size: 32rpx;
+  display: flex;
+  align-items: center;
+}
+.index .banner .adress .tadress-text .adress-icon {
+  width: 22rpx;
+  height: 26rpx;
+  margin-top: -12rpx;
+}
+.index .banner .adress .tadress-text .adress-icon image {
+  width: 100%;
+  height: 100%;
+}
+.index .banner .adress .tadress-text .addText {
+  padding: 0 20rpx;
+}
+.index .banner .adress .tadress-text .switch {
+  font-size: 22rpx;
+  font-weight: normal;
+  margin-top: 4rpx;
+}
+.index .banner .adress .tadress-text .u-icon {
+  margin-top: 10rpx;
+  margin-left: 5rpx;
+}
+.index .banner .adress .adress-search {
+  position: absolute;
+  right: 20rpx;
+  top: 18rpx;
+}
+.index .banner .u-block {
+  padding: 80rpx 20rpx 0;
+  height: 460rpx;
+}
+.index .banner .u-block .u-swiper {
+
+  background-color: transparent !important;
+  padding-top: 100rpx;
+  height: calc(100% - 100rpx) !important;
+}
+.index .banner .banner-img {
+  width: 100%;
+  height: 560rpx;
+}
+.index .list {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #fff;
+}
+.index .list .lists {
+  padding: 25rpx;
+  width: calc(20% - 50rpx);
+}
+.index .list .lists .list-img {
+  width: 100%;
+  height: 100rpx;
+}
+.index .list .lists .list-img image {
+  height: 100%;
+  width: 100%;
+  display: block;
+}
+.index .list .lists .list-text {
+  width: 100%;
+  font-size: 24rpx;
+  text-align: center;
+  color: #666;
+  padding: 10rpx 0;
+  font-weight: bold;
+}
+.index .list .lists:nth-of-type(n+6) {
+  padding-top: 0;
+}
+.index .powder {
+  padding: 20rpx;
+  border-radius: 18rpx;
+  overflow: hidden;
+  background: linear-gradient(to bottom, #FFFFFFFF, #FFFFFF00);
+}
+.index .powder .shopShow {
+  width: 100%;
+  height: 150rpx;
+  display: block;
+}
+.index .powder .v-powder {
+  width: 100%;
+  border-bottom-left-radius: 18rpx;
+  border-bottom-right-radius: 18rpx;
+  background: linear-gradient(to bottom, #ffd0c7, #FFFFFF);
+  position: relative;
+}
+.index .powder .v-powder .title-shopHeader {
+  position: absolute;
+  left: 20rpx;
+  top: -40rpx;
+  display: flex;
+  align-items: center;
+}
+.index .powder .v-powder .title-shopHeader .shopHeader {
+  width: 100rpx;
+  height: 100rpx;
+}
+.index .powder .v-powder .title-shopHeader .shopHeader image {
+  border-radius: 18rpx;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.index .powder .v-powder .title-shopHeader .title {
+  margin-left: 20rpx;
+  font-size: 32rpx;
+  font-weight: 400;
+  color: #FFFFFF;
+}
+.index .powder .v-powder ._h3 {
+  font-weight: bold;
+  font-size: 32rpx;
+  color: #333333FF;
+  padding: 0 20rpx ;
+  padding-top: 75rpx;
+}
+.index .powder .v-powder .powderList {
+  padding: 20rpx;
+}
+.index .powder .v-powder .powderList .timeLimit-lists-image {
+  padding-right: 20rpx;
+  width: 220rpx;
+  height: 220rpx;
+}
+.index .powder .v-powder .powderList .timeLimit-lists-title {
+  width: 220rpx;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 24rpx;
+  color: #333;
+}
+.index .powder .v-powder .powderList .timeLimit-lists-price .timeLimit-lists-price-text {
+  color: red;
+  font-size: 24rpx;
+}
+.index .powder .v-powder .powderList .timeLimit-lists-price .timeLimit-lists-price-text text {
+  font-size: 28rpx;
+  font-weight: bold;
+}
+.index .powder .v-powder .powderList .timeLimit-lists-price .timeLimit-lists-price-nowPrice {
+  margin-left: 10rpx;
+  font-size: 26rpx;
+  color: #999;
+  text-decoration: line-through;
+}
+.index .timeLimit {
+  padding: 0 20rpx 20rpx;
+}
+.index .timeLimit .v-timeLimit {
+  padding: 20rpx;
+  border-radius: 18rpx;
+  background: linear-gradient(to bottom, #FCE89F 0%, #fff 100%);
+}
+.index .timeLimit .v-timeLimit .time-text {
+  display: flex;
+  align-items: center;
+}
+.index .timeLimit .v-timeLimit .time-text .text {
+  flex: 1;
+  font-weight: bold;
+  color: #333;
+  font-size: 36rpx;
+}
+.index .timeLimit .v-timeLimit .time-text .times {
+  flex: 2;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.index .timeLimit .v-timeLimit .time-text .times .times-text {
+  color: #333;
+  font-size: 22rpx;
+  line-height: 52rpx;
+}
+.index .timeLimit .v-timeLimit .time-text .times .u-count-down {
+  margin-left: 20rpx;
+}
+.index .timeLimit .v-timeLimit .timeLimit-lists {
+  margin-top: 20rpx;
+}
+.index .timeLimit .v-timeLimit .timeLimit-lists .timeLimit-lists-image {
+  padding-right: 20rpx;
+  width: 220rpx;
+  height: 220rpx;
+}
+.index .timeLimit .v-timeLimit .timeLimit-lists .timeLimit-lists-title {
+  width: 220rpx;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 24rpx;
+  color: #333;
+}
+.index .timeLimit .v-timeLimit .timeLimit-lists .timeLimit-lists-price .timeLimit-lists-price-text {
+  color: red;
+  font-size: 24rpx;
+}
+.index .timeLimit .v-timeLimit .timeLimit-lists .timeLimit-lists-price .timeLimit-lists-price-text text {
+  font-size: 28rpx;
+  font-weight: bold;
+}
+.index .timeLimit .v-timeLimit .timeLimit-lists .timeLimit-lists-price .timeLimit-lists-price-nowPrice {
+  margin-left: 10rpx;
+  font-size: 26rpx;
+  color: #999;
+  text-decoration: line-through;
+}
+.index .discount-collage {
+  padding: 0 20rpx 20rpx;
+}
+.index .discount-collage .v-discount-collage {
+  display: flex;
+  justify-content: space-between;
+}
+.index .discount-collage .v-discount-collage .discount {
+  border-radius: 18rpx;
+  flex: 1;
+  background: linear-gradient(to bottom right, #FFE4E4 0%, #fff 100%);
+  padding: 20rpx;
+}
+.index .discount-collage .v-discount-collage .discount .discount-title {
+  display: flex;
+  align-items: center;
+}
+.index .discount-collage .v-discount-collage .discount .discount-title .title {
+  flex: 1;
+  color: #333;
+  font-weight: bold;
+  font-size: 32rpx;
+}
+.index .discount-collage .v-discount-collage .discount .discount-title .more {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  font-size: 22rpx;
+  color: #000;
+  opacity: 0.5;
+}
+.index .discount-collage .v-discount-collage .discount .discount-image {
+  display: flex;
+  margin-top: 30rpx;
+}
+.index .discount-collage .v-discount-collage .discount .discount-image .discount-image-lists {
+  flex: 1;
+}
+.index .discount-collage .v-discount-collage .discount .discount-image .discount-image-lists:nth-child(2) {
+  margin-left: 10rpx;
+}
+.index .discount-collage .v-discount-collage .discount .discount-image .discount-image-lists image {
+  width: calc(100% - 10rpx);
+  height: 160rpx;
+}
+.index .discount-collage .v-discount-collage .discount .discount-image .discount-image-lists .discount-lists-title {
+  width: 144rpx;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 24rpx;
+  color: #333;
+}
+.index .discount-collage .v-discount-collage .discount .discount-image .discount-image-lists .discount-lists-price .price {
+  color: #F24A49;
+  font-size: 26rpx;
+}
+.index .discount-collage .v-discount-collage .discount .discount-image .discount-image-lists .discount-lists-price .price text {
+  font-size: 28rpx;
+}
+.index .discount-collage .v-discount-collage .discount .discount-image .discount-image-lists .discount-lists-price .nowprice {
+  font-size: 25rpx;
+  color: #999;
+  text-decoration: line-through;
+  margin-left: 20rpx;
+}
+.index .discount-collage .v-discount-collage .collage {
+  flex: 1;
+  margin-left: 20rpx;
+  border-radius: 18rpx;
+  background: linear-gradient(to bottom left, #EEF6FF 0%, #fff 100%);
+  padding: 20rpx;
+}
+.index .discount-collage .v-discount-collage .collage .collage-title {
+  display: flex;
+  align-items: center;
+}
+.index .discount-collage .v-discount-collage .collage .collage-title .title {
+  flex: 1;
+  color: #333;
+  font-weight: bold;
+  font-size: 32rpx;
+}
+.index .discount-collage .v-discount-collage .collage .collage-title .more {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  font-size: 22rpx;
+  color: #000;
+  opacity: 0.5;
+}
+.index .discount-collage .v-discount-collage .collage .collage-image {
+  margin-top: 30rpx;
+}
+.index .discount-collage .v-discount-collage .collage .collage-image .collage-image-lists {
+  display: flex;
+}
+.index .discount-collage .v-discount-collage .collage .collage-image .collage-image-lists:nth-child(2) {
+  margin-top: 20rpx;
+}
+.index .discount-collage .v-discount-collage .collage .collage-image .collage-image-lists image {
+  width: 142rpx;
+  height: 100rpx;
+}
+.index .discount-collage .v-discount-collage .collage .collage-image .collage-image-lists .collage-lists-price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-left: 10rpx;
+}
+.index .discount-collage .v-discount-collage .collage .collage-image .collage-image-lists .collage-lists-price .collage-lists-title {
+  width: 144rpx;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 24rpx;
+  color: #333;
+}
+.index .discount-collage .v-discount-collage .collage .collage-image .collage-image-lists .collage-lists-price .price {
+  width: calc(100% - 20rpx);
+}
+.index .discount-collage .v-discount-collage .collage .collage-image .collage-image-lists .collage-lists-price .price .v-price {
+  color: #F24A49;
+  font-size: 26rpx;
+}
+.index .discount-collage .v-discount-collage .collage .collage-image .collage-image-lists .collage-lists-price .price .v-price text {
+  font-size: 28rpx;
+}
+.index .discount-collage .v-discount-collage .collage .collage-image .collage-image-lists .collage-lists-price .price .nowprice {
+  font-size: 25rpx;
+  color: #999;
+  text-decoration: line-through;
+  margin-left: 20rpx;
+}
+.index .preference-rush {
+  padding: 0 20rpx 20rpx;
+}
+.index .preference-rush .v-preference-rush {
+  display: flex;
+  justify-content: space-between;
+}
+.index .preference-rush .v-preference-rush .preference {
+  flex: 1;
+  border-radius: 18rpx;
+  background: linear-gradient(to top right, #EEF6FF 0%, #fff 100%);
+  padding: 20rpx;
+}
+.index .preference-rush .v-preference-rush .preference .preference-title {
+  display: flex;
+  align-items: center;
+}
+.index .preference-rush .v-preference-rush .preference .preference-title .title {
+  flex: 1;
+  color: #333;
+  font-weight: bold;
+  font-size: 32rpx;
+}
+.index .preference-rush .v-preference-rush .preference .preference-title .more {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  font-size: 22rpx;
+  color: #000;
+  opacity: 0.5;
+}
+.index .preference-rush .v-preference-rush .preference .preference-image {
+  margin-top: 30rpx;
+}
+.index .preference-rush .v-preference-rush .preference .preference-image .preference-image-lists {
+  display: flex;
+}
+.index .preference-rush .v-preference-rush .preference .preference-image .preference-image-lists:nth-child(2) {
+  margin-top: 20rpx;
+}
+.index .preference-rush .v-preference-rush .preference .preference-image .preference-image-lists image {
+  width: 142rpx;
+  height: 100rpx;
+}
+.index .preference-rush .v-preference-rush .preference .preference-image .preference-image-lists .preference-lists-price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-left: 10rpx;
+}
+.index .preference-rush .v-preference-rush .preference .preference-image .preference-image-lists .preference-lists-price .preference-lists-title {
+  width: 144rpx;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 24rpx;
+  color: #333;
+}
+.index .preference-rush .v-preference-rush .preference .preference-image .preference-image-lists .preference-lists-price .price {
+  width: calc(100% - 20rpx);
+}
+.index .preference-rush .v-preference-rush .preference .preference-image .preference-image-lists .preference-lists-price .price .v-price {
+  color: #F24A49;
+  font-size: 26rpx;
+}
+.index .preference-rush .v-preference-rush .preference .preference-image .preference-image-lists .preference-lists-price .price .v-price text {
+  font-size: 28rpx;
+}
+.index .preference-rush .v-preference-rush .preference .preference-image .preference-image-lists .preference-lists-price .price .nowprice {
+  font-size: 25rpx;
+  color: #999;
+  text-decoration: line-through;
+  margin-left: 20rpx;
+}
+.index .preference-rush .v-preference-rush .rush {
+  border-radius: 18rpx;
+  flex: 1;
+  background: linear-gradient(to top left, #FFFAE9FF 0%, #FFFFFFFF 100%);
+  padding: 20rpx;
+  margin-left: 20rpx;
+}
+.index .preference-rush .v-preference-rush .rush .rush-title {
+  display: flex;
+  align-items: center;
+}
+.index .preference-rush .v-preference-rush .rush .rush-title .title {
+  flex: 1;
+  color: #333;
+  font-weight: bold;
+  font-size: 32rpx;
+}
+.index .preference-rush .v-preference-rush .rush .rush-title .more {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  font-size: 22rpx;
+  color: #000;
+  opacity: 0.5;
+}
+.index .preference-rush .v-preference-rush .rush .rush-image {
+  display: flex;
+  margin-top: 30rpx;
+}
+.index .preference-rush .v-preference-rush .rush .rush-image .rush-image-lists {
+  flex: 1;
+}
+.index .preference-rush .v-preference-rush .rush .rush-image .rush-image-lists:nth-child(2) {
+  margin-left: 10rpx;
+}
+.index .preference-rush .v-preference-rush .rush .rush-image .rush-image-lists image {
+  width: calc(100% - 10rpx);
+  height: 160rpx;
+}
+.index .preference-rush .v-preference-rush .rush .rush-image .rush-image-lists .rush-lists-title {
+  width: 144rpx;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 24rpx;
+  color: #333;
+}
+.index .preference-rush .v-preference-rush .rush .rush-image .rush-image-lists .rush-lists-price .price {
+  color: #F24A49;
+  font-size: 26rpx;
+}
+.index .preference-rush .v-preference-rush .rush .rush-image .rush-image-lists .rush-lists-price .price text {
+  font-size: 28rpx;
+}
+.index .preference-rush .v-preference-rush .rush .rush-image .rush-image-lists .rush-lists-price .nowprice {
+  font-size: 25rpx;
+  color: #999;
+  text-decoration: line-through;
+  margin-left: 20rpx;
+}
+.index .business {
+  width: 144rpx;
+  position: relative;
+  margin-left: 20rpx;
+}
+.index .business .bg {
+  width: 144rpx;
+  height: 18rpx;
+  background-color: #F8CF39;
+  opacity: 0.75;
+  border-radius: 2rpx;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 9;
+}
+.index .business .tit {
+  width: 144rpx;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333333;
+  z-index: 99;
+}
+.index .setList {
+  display: flex;
+  color: #333;
+  font-size: 28rpx;
+  padding: 20rpx;
+}
+.index .setList view {
+  flex: 1;
+}
+.index .setList .setSort {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}
+.index .setList .setSort .uicon-arrow-down-fill {
+  display: block;
+}
+.index .lists {
+  padding: 0 20rpx;
+}
+.index .lists .v-lists {
+  border-radius: 18rpx;
+  background-color: #fff;
+  padding: 20rpx;
+}
+.index .lists .v-lists .image-info {
+  display: flex;
+  width: 100%;
+  position: relative;
+}
+.index .lists .v-lists .image-info .classify {
+  position: absolute;
+  left: -4rpx;
+  top: 10rpx;
+  z-index: 99;
+  width: 54rpx;
+  height: 26rpx;
+}
+.index .lists .v-lists .image-info .classify image {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.index .lists .v-lists .image-info .lists-image {
+  width: 176rpx;
+  height: 190rpx;
+}
+.index .lists .v-lists .image-info .lists-image image {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.index .lists .v-lists .image-info .lists-info {
+  position: relative;
+  margin-left: 20rpx;
+  width: calc(100% - 196rpx);
+}
+.index .lists .v-lists .image-info .lists-info .delivery {
+  position: absolute;
+  right: -20rpx;
+  top: 0rpx;
+  background-color: #05C0AB;
+  padding: 4rpx 6rpx;
+  color: #fff;
+  border-top-left-radius: 22rpx;
+  border-bottom-left-radius: 22rpx;
+  font-size: 18rpx;
+}
+.index .lists .v-lists .image-info .lists-info .info-title .title {
+  font-weight: bold;
+  font-size: 28rpx;
+  color: #333;
+  width: 220rpx;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.index .lists .v-lists .image-info .lists-info .score {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.index .lists .v-lists .image-info .lists-info .score .v-score {
+  display: flex;
+  align-items: center;
+}
+.index .lists .v-lists .image-info .lists-info .score .v-score .score-num {
+  color: #05C0AB;
+  font-weight: bold;
+  font-size: 22rpx;
+}
+.index .lists .v-lists .image-info .lists-info .score .v-score .score-text {
+  margin-left: 20rpx;
+  color: #333;
+  font-size: 18rpx;
+}
+.index .lists .v-lists .image-info .lists-info .score .distance {
+  color: #999;
+  font-size: 22rpx;
+}
+.index .lists .v-lists .image-info .lists-info .plun {
+  display: flex;
+  margin-top: 10rpx;
+}
+.index .lists .v-lists .image-info .lists-info .plun view {
+  font-size: 20rpx;
+
+
+
+  background-color: rgba(248, 207, 57, 0.2);
+  color: #F8B239;
+  padding: 4rpx 10rpx;
+  border-radius: 8rpx;
+  margin-right: 15rpx;
+}
+.index .lists .v-lists .image-info .lists-info .pay {
+  padding: 10rpx 0;
+}
+.index .lists .v-lists .image-info .lists-info .pay text {
+  font-size: 22rpx;
+  color: #333;
+}
+.index .lists .v-lists .image-info .lists-info .pay text:nth-child(2) {
+  margin-left: 20rpx;
+}
+.index .lists .v-lists .image-info .lists-info .prefer {
+  display: flex;
+  align-items: center;
+}
+.index .lists .v-lists .image-info .lists-info .prefer view {
+  border: 2rpx solid #F24849;
+  color: #F24849;
+  font-size: 18rpx;
+
+
+
+  border-radius: 8rpx;
+  margin-right: 15rpx;
+  padding: 5rpx;
+}
+.index .receive .u-popup__content {
+  background-color: transparent;
+}
+.index .receive .u-popup__content .receive-content {
+  background-color: transparent;
+  position: relative;
+}
+.index .receive .u-popup__content .receive-content .image {
+  width: 750rpx;
+  height: 1624rpx;
+}
+.index .receive .u-popup__content .receive-content .image image {
+  width: 100%;
+  height: 100%;
+}
+.index .receive .u-popup__content .receive-content .close {
+  position: absolute;
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 50%;
+  left: 50%;
+  bottom: 25%;
+  margin-left: -36rpx;
+}
+.index .receive .u-popup__content .receive-content .getCouponList {
+  position: absolute;
+  left: 50%;
+  top: 37%;
+  width: 480rpx;
+  margin-left: -260rpx;
+  height: 248rpx;
+  padding: 30rpx;
+}
+.index .receive .u-popup__content .receive-content .getCouponList .v-getCouponList {
+  margin-bottom: 30rpx;
+  display: flex;
+  background-color: #fff;
+  border-radius: 12rpx;
+  position: relative;
+  overflow: hidden;
+}
+.index .receive .u-popup__content .receive-content .getCouponList .v-getCouponList:last-child {
+  margin-bottom: 0rpx;
+}
+.index .receive .u-popup__content .receive-content .getCouponList .v-getCouponList .leftBox {
+  background: linear-gradient(to right, #ffeeae, #fdf6d4);
+  border-right: 1rpx solid #F8CF39;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-top-left-radius: 12rpx;
+  border-bottom-left-radius: 12rpx;
+  position: relative;
+  width: 176rpx;
+  padding-bottom: 10rpx;
+}
+.index .receive .u-popup__content .receive-content .getCouponList .v-getCouponList .leftBox .money {
+  width: 100%;
+  text-align: center;
+  font-size: 45rpx;
+  color: #F24849;
+}
+.index .receive .u-popup__content .receive-content .getCouponList .v-getCouponList .leftBox .money text {
+  font-size: 24rpx;
+}
+.index .receive .u-popup__content .receive-content .getCouponList .v-getCouponList .leftBox .full {
+  margin-left: 16rpx;
+  text-align: center;
+  font-size: 20rpx;
+  color: #FFA025;
+}
+.index .receive .u-popup__content .receive-content .getCouponList .v-getCouponList .leftBox .full text {
+  padding: 5rpx;
+  border: 1rpx solid #FFA025;
+  border-radius: 6rpx;
+}
+.index .receive .u-popup__content .receive-content .getCouponList .v-getCouponList .leftBox .topRround {
+  width: 16rpx;
+  height: 16rpx;
+  background-color: #f03333;
+  border-radius: 50%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin-right: -8rpx;
+  margin-top: -8rpx;
+}
+.index .receive .u-popup__content .receive-content .getCouponList .v-getCouponList .leftBox .btmRround {
+  width: 16rpx;
+  height: 16rpx;
+  background-color: #f03333;
+  border-radius: 50%;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin-right: -8rpx;
+  margin-bottom: -8rpx;
+}
+.index .receive .u-popup__content .receive-content .getCouponList .v-getCouponList .rightBox {
+  color: #fbc26a;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 0 20rpx 30rpx;
+}
+.index .receive .u-popup__content .receive-content .getCouponList .v-getCouponList .rightBox .textBox {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-evenly;
+}
+.index .receive .u-popup__content .receive-content .getCouponList .v-getCouponList .rightBox .textBox .title {
+  font-size: 28rpx;
+  font-weight: bold;
+}
+.index .receive .u-popup__content .receive-content .getCouponList .v-getCouponList .rightBox .textBox .duration {
+  font-size: 20rpx;
+}
+.index .receive .u-popup__content .receive-content .getCouponList .v-getCouponList .rightBox .set {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+.index .receive .u-popup__content .receive-content .getCouponList .v-getCouponList .tag {
+  position: absolute;
+  right: -56rpx;
+  top: 10rpx;
+  font-size: 16rpx;
+
+
+
+  color: #fff;
+  background-color: #ffbc5a;
+  padding: 5rpx 50rpx;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+.index .receive .u-popup__content .receive-content .btn {
+  position: absolute;
+  left: 50%;
+  top: 58%;
+  width: 220rpx;
+  height: 60rpx;
+  margin-left: -114rpx;
+  margin-top: 10rpx;
+  border-radius: 50rpx;
+}
+.index .emappShow .emappShow-content {
+  background-color: transparent;
+  position: relative;
+}
+.index .emappShow .emappShow-content .image {
+  width: 640rpx;
+  height: 1008rpx;
+}
+.index .emappShow .emappShow-content .image image {
+  width: 100%;
+  height: 100%;
+}
+.index .emappShow .emappShow-content .close {
+  position: absolute;
+  width: 66rpx;
+  height: 66rpx;
+  border-radius: 50%;
+  left: 50%;
+  bottom: -15%;
+  margin-left: -33rpx;
+  border: 1px solid #fff;
+  font-size: 24rpx;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@charset "UTF-8";
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 引入uview主题样式 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.time {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.time__custom {
+  width: 22px;
+  height: 22px;
+  background-color: #fff;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.time__custom__item {
+  color: #333;
+  font-size: 12px;
+  text-align: center;
+  font-weight: 600;
+}
+.time__doc {
+  color: #3c9cff;
+  padding: 0px 4px;
+}
+.time__item {
+  color: #606266;
+  font-size: 15px;
+  margin-right: 4px;
+}
+
