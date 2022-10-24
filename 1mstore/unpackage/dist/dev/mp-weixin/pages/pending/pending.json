@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "待处理",
+  "usingComponents": {
+    "u-badge": "/node-modules/uview-ui/components/u-badge/u-badge",
+    "list": "/component/list/list"
+  }
+}

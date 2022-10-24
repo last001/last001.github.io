@@ -1,0 +1,268 @@
+.saleList{
+	height: calc(100vh);
+	/* #ifdef H5 */
+	height: calc(100vh - var(--window-top));
+	/* #endif */
+	.u-wrap {
+		height: calc(100vh); 
+		/* #ifdef H5 */
+		height: calc(100vh - var(--window-top));
+		/* #endif */
+		display: flex;
+		flex-direction: column;
+	}
+	
+	.u-search-box {
+		padding: 18rpx 30rpx;
+	}
+	
+	.u-menu-wrap {
+		/* #ifdef H5 */
+		height: calc(100vh - 88rpx);
+		/* #endif */
+		/* #ifdef MP-WEIXIN */
+		height: calc(100vh);
+		/* #endif */
+		flex: 1;
+		display: flex;
+		overflow: hidden;
+	}
+	
+	.u-search-inner {
+		background-color: rgb(234, 234, 234);
+		border-radius: 100rpx;
+		display: flex;
+		align-items: center;
+		padding: 10rpx 16rpx;
+	}
+	
+	.u-search-text {
+		font-size: 26rpx;
+		color: #333;
+		margin-left: 10rpx;
+	}
+	
+	.u-tab-view {
+		width: 220rpx;
+		height: 100%;
+	}
+	
+	.u-tab-item {
+		width: 100%;
+		height: 100rpx;
+		background: #f6f6f6;
+		box-sizing: border-box;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 32rpx;
+		color: #333;
+		font-weight: 400;
+		line-height: 1;
+	}
+	
+	.u-tab-item-active {
+		position: relative;
+		color: #f8cf39;
+		font-size: 32rpx;
+		font-weight: 600;
+		background: #fff;
+	}
+	
+	.u-tab-view {
+		height: 100%;
+	}
+	
+	.right-box {
+		background-color: #fff;
+	}
+	
+	// .page-view {
+	// 	padding: 16rpx;
+	// }
+	
+	.class-item {
+		// margin-bottom: 30rpx;
+		background-color: #fff;
+		border-radius: 8rpx;
+		padding: 28rpx 26rpx;
+		position: relative;
+	}
+	
+	.item-title-box{
+		padding: 0 26rpx;
+		box-sizing: border-box;
+		// height: 72rpx;
+		font-size: 32rpx;
+		color: #333;
+		font-weight: bold;
+		position: fixed;
+		right: 0;
+		top: 0;
+		/* #ifdef H5 */
+		top: 88rpx;
+		/* #endif */
+		width: calc(100% - 168rpx);
+		background-color: #fff;
+		z-index: 99;
+	}
+	
+	.item-title {
+		border-bottom: 1rpx solid #EEEEEE;
+		padding: 28rpx 0;
+	}
+	
+	.item-v-title{
+		.title{
+			font-size: 32rpx;
+			font-weight: bold
+		}
+		.checked{
+			/* #ifdef H5 */
+			display: flex;
+			/* #endif */
+			margin-left: 26rpx;
+			/deep/.u-checkbox__label{
+				color: #f8cf39;
+				/* #ifdef H5 */
+				zoom: 0.9;
+				/* #endif */
+			}
+		}
+	}
+	
+	.search{
+		width: 140rpx;
+		/* #ifdef H5 */
+		width: 126rpx;
+		/* #endif */
+		height: 42rpx;
+		border: 1rpx solid #f8cf39;
+		border-radius: 99rpx;
+	}
+	
+	
+	.search /deep/.u-field{
+		padding: 0 10rpx;
+		height: 42rpx;
+	}
+	
+	
+	.search /deep/.u-field-inner{
+		height: 42rpx;
+	}
+	
+	.search /deep/.u-icon__icon{
+		font-size: 20rpx;
+		/* #ifdef H5 */
+		zoom: 0.9;
+		/* #endif */
+	}
+	
+	.search /deep/.u-label{
+		width: 40rpx;
+	}
+	
+	.search	 /deep/.uni-input-placeholder{
+		color: #f8cf39;
+		font-size: 20rpx;
+		/* #ifdef H5 */
+		zoom: 0.9;
+		/* #endif */
+	}
+	
+	.item-menu-name {
+		font-weight: normal;
+		font-size: 24rpx;
+		color: #333;
+	}
+	
+	.item-container {
+		display: block;
+		z-index: 9;
+		padding-top: 100rpx;
+		padding-bottom: 122rpx;
+		// flex-wrap: wrap;
+	}
+	
+	.thumb-box {
+		width: 100%;
+		margin-top: 20rpx;
+		padding-bottom: 20rpx;
+		border-bottom: 1rpx solid #EEEEEE;
+		&:first-child{
+			margin-top: 0;
+		}
+		&:last-child{
+			padding-bottom: 0;
+			border-bottom: none;
+		}
+	}
+	
+	.item-menu-image {
+		width: 126rpx;
+		height: 126rpx;
+		display: block;
+	}
+	
+	.image-name{
+		display: flex;
+		.item-menu-name-price{
+			margin-left: 16rpx;
+			display: flex;
+			justify-content: space-around;
+			flex-direction: column;
+			.item-menu-name{
+				font-size: 28rpx;
+				font-weight: bold;
+			}
+			.item-menu-price{
+				font-size: 28rpx;
+				font-weight: bold;
+				color: #FB2626;
+			}
+		}
+	}
+	
+	.handle{
+		justify-content: space-between;
+		.text{
+			font-size: 22rpx;
+			/* #ifdef H5 */
+			zoom: 0.9;
+			/* #endif */
+			font-weight: 400;
+			color: #999999;
+			&.active{
+				color: #f8cf39;
+			}
+		}
+		.btn{
+			margin-top: 8rpx;
+			button{
+				width: 72rpx;
+				height: 38rpx;
+				background-color: #FF9102;
+				color: #fff;
+				border: none;
+			}
+		}
+	}
+	
+	.slot-content {
+		padding: 10rpx 40rpx;
+
+		/deep/.u-field {
+			border: 1rpx solid #ccc;
+			padding: 10rpx 20rpx;
+			border-radius: 12rpx;
+			margin-bottom: 20rpx;
+			margin-top: 20rpx;
+
+			.u-label-text {
+				color: #f8cf39;
+			}
+		}
+		
+	}
+}

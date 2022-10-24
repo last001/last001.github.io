@@ -1,0 +1,111 @@
+.printer {
+  min-height: 100vh;
+  background-color: #fff;
+}
+.printer .title {
+  width: 100%;
+  display: flex;
+  box-shadow: 0rpx 3rpx 6rpx 1rpx rgba(0, 0, 0, 0.06);
+}
+.printer .title .v-title {
+  padding: 20rpx 15rpx;
+  flex: 1;
+  font-size: 32rpx;
+  font-weight: 400;
+  color: #999999;
+}
+.printer .title .v-title.active {
+  color: #F8CF39;
+  background-color: #FFFAE6;
+}
+.printer .printerList .printerText {
+  padding: 36rpx 25rpx 0;
+}
+.printer .printerList .printerText .v-printerText {
+  padding-bottom: 36rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  border-bottom: 1px solid #EAEAEA;
+}
+.printer .printerList .list {
+  padding: 25rpx 25rpx 0;
+}
+.printer .printerList .list .radio-online {
+  display: flex;
+  align-items: center;
+}
+.printer .printerList .list .radio-online .radio .u-radio__label {
+  font-weight: bold;
+}
+.printer .printerList .list .online {
+  font-size: 28rpx;
+  color: #FB2626;
+}
+.printer .printerList .list .online.active {
+  color: #f8cf39;
+}
+.printer .printerList .list .btns {
+  display: flex;
+  align-items: center;
+}
+.printer .printerList .list .btns .edit .text,
+.printer .printerList .list .btns .delete .text {
+  margin-left: 10rpx;
+}
+.printer .printerList .list .btns .edit {
+  margin-right: 50rpx;
+}
+.printer .bluetooth {
+  width: 100%;
+}
+.printer .bluetooth .switch {
+  padding: 36rpx 25rpx 0;
+}
+.printer .bluetooth .switch .v-switch {
+  padding-bottom: 36rpx;
+  border-bottom: 1px solid #EAEAEA;
+}
+.printer .bluetooth .switch .v-switch .text {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+.printer .bluetooth .switch .v-switch .openClose text {
+  margin-right: 10rpx;
+  font-size: 26rpx;
+  font-weight: 400;
+  color: #999999;
+}
+.printer .bluetooth .device {
+  padding: 25rpx;
+}
+.printer .bluetooth .device .text {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #F8CF39;
+}
+.printer .bluetooth .device .deviceList {
+  margin-top: 25rpx;
+}
+.printer .bluetooth .device .deviceList .v-deviceList {
+  margin-top: 25rpx;
+  display: flex;
+}
+.printer .bluetooth .device .deviceList .v-deviceList .image {
+  border: 1rpx solid red;
+  width: 50rpx;
+  height: 35rpx;
+}
+.printer .bluetooth .device .deviceList .v-deviceList .image image {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.printer .bluetooth .device .deviceList .v-deviceList .name {
+  margin-left: 30rpx;
+  font-size: 26rpx;
+  font-weight: 400;
+}
+.printer .bluetooth .device .deviceList .v-deviceList .state {
+  margin-left: 100rpx;
+}
+

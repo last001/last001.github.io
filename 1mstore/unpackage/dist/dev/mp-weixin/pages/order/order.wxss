@@ -1,0 +1,30 @@
+.order {
+  height: 100vh;
+}
+.order .tabs {
+  width: 100%;
+  height: 84rpx;
+  display: flex;
+  align-items: center;
+  box-shadow: 0rpx 3rpx 6rpx 2rpx rgba(0, 0, 0, 0.09);
+}
+.order .tabs .vue-ref {
+  width: calc(100% - 104rpx);
+}
+.order .tabs .icon {
+  height: 80rpx;
+  background-color: #fff;
+  padding: 0 22rpx;
+
+  width: 104rpx;
+}
+.order .orderList {
+  height: calc(100vh - 84rpx);
+}
+.order .orderList .swi {
+  height: 100%;
+}
+.order .orderList .H {
+  height: 100%;
+}
+

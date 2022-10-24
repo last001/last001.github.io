@@ -1,0 +1,72 @@
+.staffEdit.data-v-4878a674 {
+  position: relative;
+  padding: 25rpx 0;
+}
+.staffEdit .job .text.data-v-4878a674 {
+  padding: 25rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  background-color: #fff;
+  box-shadow: 0rpx 3rpx 6rpx 1rpx rgba(0, 0, 0, 0.06);
+}
+.staffEdit .job .jobList.data-v-4878a674 {
+  margin-top: 2rpx;
+  padding: 25rpx;
+  padding-bottom: 0rpx;
+  background-color: #fff;
+  box-shadow: 0px 3rpx 6rpx 1rpx rgba(0, 0, 0, 0.09);
+  display: flex;
+  flex-wrap: wrap;
+}
+.staffEdit .job .jobList .list.data-v-4878a674 {
+  margin-right: 112rpx;
+  margin-bottom: 20rpx;
+}
+.staffEdit .job .jobList .list.active.data-v-4878a674 {
+  color: #f8cf39;
+}
+.staffEdit .accountName.data-v-4878a674,
+.staffEdit .userName.data-v-4878a674,
+.staffEdit .phone.data-v-4878a674 {
+  margin-top: 25rpx;
+  background-color: #fff;
+  box-shadow: 0rpx 3rpx 6rpx 1rpx rgba(0, 0, 0, 0.06);
+}
+.staffEdit .userName input.data-v-4878a674 {
+  color: #ccc;
+}
+.staffEdit .accountName.data-v-4878a674 input,
+.staffEdit .phone.data-v-4878a674 input {
+  color: #f8cf39;
+}
+.staffEdit .tips.data-v-4878a674 {
+  padding: 0 20rpx;
+  margin-top: 66rpx;
+  font-size: 32rpx;
+  font-weight: 400;
+}
+.staffEdit .tips .left.data-v-4878a674 {
+  color: #FB2626;
+}
+.staffEdit .tips .right.data-v-4878a674 {
+  color: #FC8C53;
+}
+.staffEdit .btns.data-v-4878a674 {
+  position: fixed;
+  bottom: 20rpx;
+  left: 5%;
+  width: 90%;
+}
+.staffEdit .btns.data-v-4878a674 .u-btn {
+  background-color: #F24849;
+  color: #fff;
+  border: none;
+  margin-top: 25rpx;
+}
+.staffEdit .btns.data-v-4878a674 .u-btn:nth-child(2) {
+  background-color: #f8cf39;
+}
+.staffEdit .btns u-button.data-v-4878a674:nth-child(2) .u-btn {
+  background-color: #f8cf39;
+}
+

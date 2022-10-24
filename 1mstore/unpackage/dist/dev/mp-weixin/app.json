@@ -1,0 +1,65 @@
+{
+  "pages": [
+    "pages/pending/pending",
+    "pages/order/order",
+    "pages/myShop/myShop",
+    "pages/search/search",
+    "pages/printer/printer",
+    "pages/ppp/ppp"
+  ],
+  "subPackages": [
+    {
+      "root": "pages_func",
+      "pages": [
+        "staff/staff",
+        "staff/staffEdit/staffEdit",
+        "sale/sale",
+        "platform/platform"
+      ]
+    },
+    {
+      "root": "pages_sale",
+      "pages": [
+        "discount/discount"
+      ]
+    }
+  ],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "生活服务",
+    "navigationBarBackgroundColor": "#F8CF39",
+    "backgroundColor": "#F9F9F9"
+  },
+  "tabBar": {
+    "backgroundColor": "#fff",
+    "borderStyle": "black",
+    "selectedColor": "#F8CF39",
+    "color": "#7F8389",
+    "list": [
+      {
+        "pagePath": "pages/pending/pending",
+        "text": "待处理",
+        "iconPath": "static/image/pending.png",
+        "selectedIconPath": "static/image/pending_h.png"
+      },
+      {
+        "pagePath": "pages/order/order",
+        "text": "订单管理",
+        "iconPath": "static/image/order.png",
+        "selectedIconPath": "static/image/order_h.png"
+      },
+      {
+        "pagePath": "pages/myShop/myShop",
+        "text": "我的店铺",
+        "iconPath": "static/image/my_shop.png",
+        "selectedIconPath": "static/image/my_shop_h.png"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "测试调用示例"
+    }
+  },
+  "usingComponents": {}
+}

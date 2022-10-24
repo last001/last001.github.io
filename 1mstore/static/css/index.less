@@ -1,0 +1,54 @@
+page{
+	background-color: #f2f2f2;
+	width: 100%;
+	min-height: calc(100% - 88rpx);
+	color: #333;
+	/* #ifdef MP-WEIXIN */
+	min-height: 100%;
+	width: 100vw;
+	/* #endif */
+}
+.fl{
+	float: left;
+}
+.fr{
+	float: right;
+}
+.clearFixed:after{
+	content: "";
+	display: block;
+	clear: both;
+}
+// 弹性盒子 垂直水平居中
+.flex-center-cs-r{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+.flex-center-cs-c{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+// 弹性盒子 垂直居中 水平左右排列
+.flex-l-r{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+// :root{
+// 	--color:"#F8CF39";
+// 	--background-color: "#F8CF39";
+// }
+// @color:red;
+
+
+.safe-padding {
+  padding-bottom: constant(safe-area-inset-bottom) !important;
+  padding-bottom: env(safe-area-inset-bottom) !important;
+  box-sizing: content-box !important;
+}

@@ -1,0 +1,77 @@
+.platform .title {
+  display: flex;
+  background: #FFFFFF;
+  box-shadow: 0rpx 3rpx 6rpx 1rpx rgba(0, 0, 0, 0.09);
+}
+.platform .title .v-title {
+  padding: 30rpx 0;
+  flex: 1;
+  font-size: 32rpx;
+  font-weight: 400;
+  color: #333;
+}
+.platform .title .v-title.active {
+  background: #FFFAE6;
+  color: #f8cf39;
+  font-weight: bold;
+}
+.platform .activity {
+  margin-top: 2rpx;
+  width: 100%;
+  background: #FFFFFF;
+  box-shadow: 0rpx 3rpx 6rpx 1rpx rgba(0, 0, 0, 0.09);
+}
+.platform .activity .padding {
+  padding: 13rpx 20rpx;
+}
+.platform .activity .signUp {
+  padding-top: 26rpx;
+}
+.platform .activity .signUp .icon-text .icon {
+  width: 24rpx;
+  height: 28rpx;
+  background-color: #FB2626;
+  color: #fff;
+  font-size: 20rpx;
+  border-radius: 6rpx;
+}
+.platform .activity .signUp .icon-text .text {
+  font-size: 28rpx;
+  font-weight: bold;
+  margin-left: 18rpx;
+}
+.platform .activity .signUp .btn button {
+  border: none;
+}
+.platform .activity .signUp.full .btn button {
+  background-color: #f8cf39;
+  color: #fff;
+}
+.platform .activity .signUp.full .btn .u-default-hover {
+  color: #FFFFFF !important;
+  background-color: #f8cf39cf !important;
+}
+.platform .activity .type,
+.platform .activity .rule,
+.platform .activity .condition {
+  display: flex;
+  font-size: 28rpx;
+}
+.platform .activity .type .text,
+.platform .activity .rule .text,
+.platform .activity .condition .text {
+  color: #f8cf39;
+}
+.platform .activity .rule .rule-list text {
+  padding: 2rpx 5rpx;
+  border-radius: 6rpx;
+  font-size: 18rpx;
+  font-weight: 400;
+  color: #FF5E5E;
+  border: 1rpx solid #FF5E5E;
+  margin-right: 20rpx;
+}
+.platform .activity .condition .text {
+  color: #999;
+}
+

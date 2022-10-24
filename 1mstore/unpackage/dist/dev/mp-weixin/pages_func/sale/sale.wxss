@@ -1,0 +1,29 @@
+.sale .list {
+  background-color: #fff;
+  padding: 30rpx;
+  margin-top: 26rpx;
+}
+.sale .list:first-child {
+  margin-top: 0rpx;
+}
+.sale .list .icon-title .icon {
+  width: 30rpx;
+  height: 35rpx;
+}
+.sale .list .icon-title .icon image {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.sale .list .icon-title .title {
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-left: 15rpx;
+}
+.sale .list .icon-tips .tips {
+  font-size: 28rpx;
+  font-weight: 400;
+  color: #F8CF39;
+  margin-right: 15rpx;
+}
+

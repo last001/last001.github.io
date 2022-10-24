@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "搜索",
+  "usingComponents": {
+    "u-field": "/node-modules/uview-ui/components/u-field/u-field",
+    "u-icon": "/node-modules/uview-ui/components/u-icon/u-icon"
+  }
+}

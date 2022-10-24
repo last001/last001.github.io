@@ -1,0 +1,120 @@
+.printer{
+	min-height: 100vh;
+	background-color: #fff;
+	/* #ifdef H5 */
+	min-height: calc(100vh - 88rpx);
+	/* #endif */
+	.title{
+		width: 100%;
+		display: flex;
+		box-shadow: 0rpx 3rpx 6rpx 1rpx rgba(0,0,0,0.06);
+		.v-title{
+			padding:20rpx 15rpx;
+			flex: 1;
+			font-size: 32rpx;
+			font-weight: 400;
+			color: #999999;
+			&.active{
+				color:#F8CF39;
+				background-color: #FFFAE6;
+			}
+		}
+	}
+	.printerList{
+		.printerText{
+			padding: 36rpx 25rpx 0;
+			.v-printerText{
+				padding-bottom:36rpx;
+				font-size: 32rpx;
+				font-weight: bold;
+				border-bottom: 1px solid #EAEAEA;
+			}
+		}
+		.list{
+			padding: 25rpx 25rpx 0;
+			.radio-online{
+				display: flex;
+				align-items: center;
+				.radio{
+					/deep/.u-radio__label{
+						font-weight: bold;
+					}
+				}
+			}
+			.online{
+				font-size: 28rpx;
+				color: #FB2626;
+				&.active{
+					color: #f8cf39;
+				}
+			}
+			.btns{
+				display: flex;
+				align-items: center;
+				.edit,.delete{
+					.text{
+						margin-left: 10rpx;
+					}
+				}
+				.edit{
+					margin-right: 50rpx;
+				}
+			}
+		}
+	}
+	.bluetooth{
+		width: 100%;
+		.switch{
+			padding: 36rpx 25rpx 0;
+			.v-switch{
+				padding-bottom:36rpx;
+				border-bottom: 1px solid #EAEAEA;
+				.text{
+					font-size: 32rpx;
+					font-weight: bold;
+				}
+				.openClose{
+					text{
+						margin-right: 10rpx;
+						font-size: 26rpx;
+						font-weight: 400;
+						color: #999999;
+					}
+				}
+			}
+		}
+		.device{
+			padding: 25rpx;
+			.text{
+				font-size: 28rpx;
+				font-weight: bold;
+				color: #F8CF39;
+			}
+			.deviceList{
+				margin-top: 25rpx;
+				.v-deviceList{
+					margin-top: 25rpx;
+					display: flex;
+					.image{
+						border: 1rpx solid red;
+						width: 50rpx;
+						height: 35rpx;
+						image{
+							width: 100%;
+							height: 100%;
+							display: block;
+						}
+					}
+					.name{
+						margin-left: 30rpx;
+						font-size: 26rpx;
+						font-weight: 400;
+					}
+					.state{
+						margin-left: 100rpx;
+					}
+				}
+			}
+		}
+	}
+}

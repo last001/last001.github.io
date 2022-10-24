@@ -1,0 +1,14 @@
+.singleShow .slot-content.data-v-2afd511f {
+  padding: 10rpx 40rpx;
+}
+.singleShow .slot-content.data-v-2afd511f .u-field {
+  border: 1rpx solid #ccc;
+  padding: 10rpx 20rpx;
+  border-radius: 12rpx;
+  margin-bottom: 20rpx;
+  margin-top: 20rpx;
+}
+.singleShow .slot-content.data-v-2afd511f .u-field /deep/ .u-label-text {
+  color: #f8cf39;
+}
+

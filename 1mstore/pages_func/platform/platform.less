@@ -1,0 +1,97 @@
+@color:#f8cf39;
+.platform{
+	.title{
+		display: flex;
+		background: #FFFFFF;
+		box-shadow: 0rpx 3rpx 6rpx 1rpx rgba(0,0,0,0.09);
+		.v-title{
+			padding: 30rpx 0;
+			flex: 1;
+			font-size: 32rpx;
+			font-weight: 400;
+			color: #333;
+			&.active{
+				background: #FFFAE6;
+				color: @color;
+				font-weight: bold;
+			}
+		}
+	}
+	.activity{
+		margin-top: 2rpx;
+		width: 100%;
+		background: #FFFFFF;
+		box-shadow: 0rpx 3rpx 6rpx 1rpx rgba(0,0,0,0.09);
+		.padding{ 
+			padding: 13rpx 20rpx;
+		}
+		.signUp{
+			padding-top: 26rpx;
+			.icon-text{
+				.icon{
+					width: 24rpx;
+					height: 28rpx;
+					background-color: #FB2626;
+					color: #fff;
+					font-size: 20rpx;
+					border-radius: 6rpx;
+					/* #ifdef H5 */
+					zoom: 0.83;
+					/* #endif */
+				}
+				.text{
+					font-size: 28rpx;
+					font-weight: bold;
+					margin-left: 18rpx;
+				}
+			}
+			.btn{
+				button{
+					// height: 40rpx;
+					// line-height: 40rpx;
+					border: none;
+				}
+				
+			}
+			&.full{
+				.btn{
+					button{
+						// height: 40rpx;
+						// line-height: 40rpx;
+						background-color: @color;
+						color: #fff;
+					}
+					.u-default-hover{
+						color: #FFFFFF !important;
+						background-color: #f8cf39cf !important;
+					}
+				}
+			}
+		}
+		.type,.rule,.condition{
+			display: flex;
+			font-size: 28rpx;
+			.text{
+				color: @color;
+			}
+		}
+		.rule{
+			.rule-list{
+				text{
+					padding: 2rpx 5rpx;
+					border-radius: 6rpx;
+					font-size: 18rpx;
+					font-weight: 400;
+					color: #FF5E5E;
+					border: 1rpx solid #FF5E5E;
+					margin-right: 20rpx;
+				}
+			}
+		}
+		.condition{
+			.text{
+				color: #999;
+			}
+		}
+	}
+}

@@ -1,0 +1,113 @@
+{
+	"easycom": {
+		"^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
+	},
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/pending/pending",
+			"style": {
+				"navigationBarTitleText": "待处理"
+			}
+		},
+		{
+			"path": "pages/order/order",
+			"style": {
+				"navigationBarTitleText": "订单管理"
+			}
+		},
+		{
+			"path": "pages/myShop/myShop",
+			"style": {
+				"navigationBarTitleText": "我的店铺"
+			}
+		},
+		{
+			"path": "pages/search/search",
+			"style": {
+				"navigationBarTitleText": "搜索"
+			}
+		},
+		{
+			"path": "pages/printer/printer",
+			"style": {
+				"navigationBarTitleText": "打印机设置"
+			}
+		},
+		{
+			"path": "pages/ppp/ppp",
+			"style": {
+				"navigationBarTitleText": "打印机设置"
+			}
+		}
+	],
+	"subPackages": [
+		{
+			"root": "pages_func",
+			"pages": [
+				{
+					"path": "staff/staff",
+					"style": {
+						"navigationBarTitleText": "店员管理"
+					}
+				},
+				{
+					"path": "staff/staffEdit/staffEdit",
+					"style": {
+						"navigationBarTitleText": "店员管理"
+					}
+				},
+				{
+					"path": "sale/sale",
+					"style": {
+						"navigationBarTitleText": "促销管理"
+					}
+				},
+				{
+					"path": "platform/platform",
+					"style": {
+						"navigationBarTitleText": "平台活动"
+					}
+				}
+			]
+		},
+		{
+			"root": "pages_sale",
+			"pages": [
+				{					"path": "discount/discount",					"style": {						"navigationBarTitleText": "折扣管理"					}				}
+			]
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "white",
+		"navigationBarTitleText": "生活服务",
+		"navigationBarBackgroundColor": "#F8CF39",
+		"backgroundColor": "#F9F9F9"
+	},
+	"tabBar": {
+		"backgroundColor": "#fff",
+		"borderStyle": "black",
+		"selectedColor": "#F8CF39",
+		"color": "#7F8389",
+		"list": [
+			{
+				"pagePath": "pages/pending/pending",
+				"text": "待处理",
+				"iconPath": "static/image/pending.png",
+				"selectedIconPath": "static/image/pending_h.png"
+			},
+			{
+				"pagePath": "pages/order/order",
+				"text": "订单管理",
+				"iconPath": "static/image/order.png",
+				"selectedIconPath": "static/image/order_h.png"
+			},
+			{
+				"pagePath": "pages/myShop/myShop",
+				"text": "我的店铺",
+				"iconPath": "static/image/my_shop.png",
+				"selectedIconPath": "static/image/my_shop_h.png"
+			}
+		]
+	},
+	"uniIdRouter": {}
+}

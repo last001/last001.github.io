@@ -1,0 +1,266 @@
+.list{	
+	background-color: #f2f2f2;
+	padding: 20rpx 0;
+		.v-list{
+			padding: 20rpx;
+			background: #FFFFFF;
+			box-shadow: 0px 3px 6px 1px rgba(0,0,0,0.09);
+			
+			&:nth-of-type(n + 2){
+				margin-top: 20rpx;
+			}
+			.number{
+				position: relative;
+				left: -20rpx;
+				width: calc(100% + 20rpx);
+				.count-text{
+					display: flex;
+					align-items: center;
+					.count{
+						width: 126rpx;
+						height: 66rpx;
+						text-align: center;
+						line-height: 66rpx;
+						font-size: 34rpx;
+						color: #fff;
+						background-color: #02B6BF;
+						border-top-right-radius: 52rpx;
+						border-bottom-right-radius: 52rpx;
+					}
+					.text{
+						font-weight: 400;
+						font-size: 28rpx;
+						color: #999999;
+						margin-left: 20rpx;
+					}
+				}
+				.state{
+					display: flex;
+					align-items: center;
+					justify-content: flex-end;
+					.text{
+						margin-right: 15rpx;
+						font-weight: bold;
+						color: #003333;
+						font-size: 28rpx;
+					}
+					.u-checkbox-group{
+						/deep/.u-checkbox{
+							display: block;
+						}
+					}
+				}
+			}
+			.info{
+				width: 100%;
+				margin: 20rpx 0;
+				.name-phone{
+					display: flex;
+					.name{
+						display: flex;
+						align-items:center;
+						.v-name{
+							font-size: 32rpx;
+							font-weight: bold;
+							color: #333333;
+						}
+						.payNum{
+								font-size: 22rpx;
+								/* #ifdef H5 */
+								zoom: 0.9;
+								/* #endif */
+							text{
+								font-weight: 400;
+								color: #FB2626;
+							}
+						}
+					}
+					.phone{
+						margin-left: 20rpx;
+						font-size: 32rpx;
+						font-weight: bold;
+						color: #02B6BF;
+					}
+				}
+				.notice{
+					display: flex;
+					.text{
+						font-size: 28rpx;
+						font-weight: 400;
+						color: #FC9A26;
+					}
+				}
+			}
+			.address{
+				font-size: 28rpx;
+				font-weight: 400;
+			}
+			.productList{
+				width: 100%;
+				margin-top: 20rpx;
+				padding: 20rpx 0;
+				border-top: 2rpx dashed #EAEAEA;
+				.text-time{
+					display: flex;
+					align-items: center;
+					.text{
+						display: flex;
+						align-items: center;
+						font-size: 32rpx;
+						font-weight: bold;
+						/* #ifdef MP-WEIXIN */
+						.name{
+							font-size: 32rpx;
+							font-weight: bold;
+							color: #333333;
+						}
+						/deep/u-icon{
+							display: block;
+							margin-left: 20rpx;
+						}
+						/* #endif */
+						/deep/.u-icon{
+							margin-left: 20rpx;
+						}
+					}
+					.time{
+						font-size: 26rpx;
+						font-weight: 400;
+						color: #FC8C53;
+						margin-left: 15rpx;
+					}
+				}
+				.open-close{
+					font-size: 26rpx;
+					font-weight: 400;
+					color: #F8CF39;
+					text{
+						margin-right: 15rpx;
+					}
+				}
+			}
+			.isShow{
+				.setMeal{
+					&:nth-child(2){
+						margin: 20rpx 0;
+					}
+					.title{
+						font-size: 32rpx;
+						font-weight: bold;
+						color: #333333;
+						text{
+							margin-left: 20rpx;
+						}
+					}
+					.price{
+						display: flex;
+						align-items: center;
+						.old{
+							font-size: 26rpx;
+							font-weight: 400;
+							color: #999999;
+							margin-right: 15rpx;
+							text-decoration: line-through;
+						}
+						.new{
+							font-size: 32rpx;
+							font-weight: bold;
+						}
+					}
+				}
+				.showList{
+					&:nth-of-type(n + 2){
+						margin: 20rpx 0;
+					}
+					&:last-child{
+						margin: 20rpx 0;
+					}
+					.text{
+						font-size: 28rpx;
+						font-weight: 400;
+						color: #999999;
+					}
+					.price{
+						font-size: 28rpx;
+						font-weight: 400;
+						color: #333333;
+						text{
+							font-size: 22rpx;
+						}
+					}
+				}
+				.total{
+					padding: 20rpx 0;
+					border-bottom: 2rpx dashed #EAEAEA;
+					.text{
+						font-size: 26rpx;
+						font-weight: bold;
+					}
+					.beCareful{
+						margin-top: 20rpx;
+						font-size: 26rpx;
+						font-weight: bold;
+						color: #999;
+						text{
+							color: #333;
+							margin-left: 10rpx;
+						}
+					}
+				}
+				.income{
+					margin: 20rpx 0;
+					.text{
+						font-size: 32rpx;
+						font-weight: bold;
+					}
+					.price{
+						font-size: 36rpx;
+						font-weight: bold;
+						color: #FB2626;
+					}
+				}
+				.remarks{
+					margin: 20rpx 0;
+					font-size: 26rpx;
+					font-weight: 400;
+					color: #FC6E26;
+				}
+			}
+			.s-refund{
+				position: relative;
+				left: -20rpx;
+				width: calc(100% + 40rpx);
+				padding: 20rpx;
+				background: #FFFAE6;
+				font-size: 28rpx;
+				.reason{
+					text{
+						color: #FC6E26;
+					}
+				}
+				.money{
+					margin-top: 20rpx;
+					text{
+						font-weight: 400;
+						color: #FC6E26;
+					}
+				}
+			}
+			.btns{
+				margin-top: 20rpx ;
+				.u-btn{
+					width: 150rpx;
+					&:nth-of-type(n + 2){
+						margin-right: 20rpx;
+					}
+				}
+				/* #ifdef MP-WEIXIN */
+				u-button{
+					&:nth-of-type(n + 2){
+						margin-right: 20rpx;
+					}
+				}
+				/* #endif */
+			}
+		}
+	}

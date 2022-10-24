@@ -1,0 +1,65 @@
+.search {
+  min-height: 100vh;
+  background-color: #fff;
+  padding: 25rpx;
+}
+.search .inp {
+  box-shadow: inset 0rpx 0rpx 6rpx 1rpx rgba(0, 0, 0, 0.06);
+  border-radius: 36rpx 36rpx 36rpx 36rpx;
+  border: 1rpx solid #F2F2F2;
+}
+.search .inp .u-field {
+  color: #f8cf39;
+  padding: 12rpx 28rpx;
+}
+.search .inp .u-field .u-icon__icon {
+  font-size: 36rpx !important;
+  color: #f8cf39 !important;
+}
+.search .lately,
+.search .hotSearch {
+  margin-top: 30rpx;
+  position: relative;
+}
+.search .lately .title,
+.search .hotSearch .title {
+  font-size: 28rpx;
+  font-weight: bold;
+}
+.search .lately .lists,
+.search .hotSearch .lists {
+  margin-top: 30rpx;
+  display: flex;
+}
+.search .lately .lists .list,
+.search .hotSearch .lists .list {
+  margin-right: 40rpx;
+  background: #FEF6D7;
+  border-radius: 99rpx;
+  padding: 10rpx 20rpx;
+  font-size: 20rpx;
+  font-weight: 500;
+  color: #FFA025;
+}
+.search .lately .icon,
+.search .hotSearch .icon {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.search .hotSearch {
+  margin-top: 40rpx;
+}
+.search .hotSearch .lists {
+  flex-wrap: wrap;
+}
+.search .hotSearch .lists .list {
+  margin-bottom: 30rpx;
+  background: #EEEEEE;
+  color: #999;
+}
+.search .hotSearch .lists .list.active {
+  color: #FFA025;
+  background: #FEF6D7;
+}
+
