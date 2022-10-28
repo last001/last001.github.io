@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "mqtt",
+  "navigationBarTextStyle": "white",
+  "enablePullDownRefresh": false,
+  "usingComponents": {}
+}

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "待处理",
+  "navigationBarTextStyle": "white",
+  "enablePullDownRefresh": false,
+  "usingComponents": {}
+}

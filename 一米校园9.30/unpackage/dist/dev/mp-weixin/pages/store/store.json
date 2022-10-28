@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "店铺运营",
+  "navigationBarTextStyle": "white",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "uni-search-bar": "/uni_modules/uni-search-bar/components/uni-search-bar/uni-search-bar",
+    "uni-badge": "/uni_modules/uni-badge/components/uni-badge/uni-badge",
+    "uni-notice-bar": "/uni_modules/uni-notice-bar/components/uni-notice-bar/uni-notice-bar"
+  }
+}

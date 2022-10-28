@@ -1,0 +1,190 @@
+//三角形
+.trangle {
+	width: 0rpx;
+	height: 0rpx;
+	border: 50rpx solid #666;
+	border-top-color: red;
+	border-bottom-color: transparent;
+	border-left-color: transparent;
+	border-right-color: transparent;
+	transform: rotate(135deg);
+	position: absolute;
+	left: -25px;
+	bottom: 45px;
+}
+
+.xin {
+	width: 30rpx;
+	height: 30rpx;
+	position: absolute;
+	left: 6rpx;
+	top: 2px;
+	z-index: 99;
+	font-size: 24rpx;
+	color: #fff;
+}
+
+
+.top {
+	padding: 5px 0px;
+}
+
+.location {
+	display: flex;
+	justify-content: space-between;
+	width: 94%;
+	margin-left: 3%;
+	background-color: #56bdaa;
+	border-radius: 20px;
+	height: 30px;
+	line-height: 30px;
+}
+
+.locations {
+	display: flex;
+	font-size: 30rpx;
+}
+
+.text {
+	width: 80px;
+	color: white;
+	margin-left: 15px;
+}
+
+.texts {
+	width: 200px;
+	color: white;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 1;
+}
+
+.icon {
+	width: 30px;
+	margin-top: 1px;
+}
+
+.heart-box {
+	background-color: #fff;
+}
+
+.heart {
+	padding: 10px 0px;
+	display: flex;
+	width: 94%;
+	margin-left: 3%;
+}
+
+.search {
+	display: flex;
+	width: 72%;
+}
+
+.search-box {
+	margin-left: 20rpx;
+}
+
+.equipment-box {
+	align-items: center;
+	text-align: center;
+}
+
+.picture {
+	width: 56px;
+	height: 56px;
+	border: 1px solid #c3c3c3;
+}
+
+.pictures {
+	width: 56px;
+	/* border-radius: 50%; */
+}
+
+.equipment {
+	width: 28%;
+	font-size: 28rpx;
+	display: flex;
+	justify-content: space-around;
+}
+
+.connected {
+	color: #56bdaa;
+}
+
+.chut-up-shop {
+	color: brown;
+}
+
+.statistics-box {
+	display: flex;
+}
+
+.turnover {
+	padding: 8px 0px;
+	width: 33.3%;
+	background-color: white;
+	flex: 1;
+	text-align: center;
+	border: #c3c3c3 solid 1px;
+	position: relative;
+}
+
+.today {
+	font-size: 30rpx;
+}
+
+.number {
+	color: #56bdaa;
+	padding: 5px 0px;
+}
+
+.yesterday {
+	font-size: 20rpx;
+	color: #56bdaa;
+}
+
+.search-result {
+	padding-top: 10px;
+	padding-bottom: 20px;
+	text-align: center;
+}
+
+.search-result-text {
+	text-align: center;
+	font-size: 14px;
+	color: #666;
+}
+
+.example-body {
+	/* #ifndef APP-NVUE */
+	display: block;
+	/* #endif */
+	padding: 0px;
+}
+
+.uni-mt-10 {
+	margin-top: 10px;
+}
+
+/deep/ .element.style {
+	border-radius: 100px;
+	background-color: rgb(248, 248, 248);
+	border: 1px solid #545151;
+}
+
+.image {
+	width: 25px;
+	height: 25px;
+}
+
+.cc {
+	font-size: 20rpx;
+	color: #05c0ab;
+}
+
+.nocc {
+	font-size: 20rpx;
+	color: red;
+}

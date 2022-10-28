@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "音频播放",
+  "navigationBarTextStyle": "white",
+  "enablePullDownRefresh": false,
+  "usingComponents": {}
+}

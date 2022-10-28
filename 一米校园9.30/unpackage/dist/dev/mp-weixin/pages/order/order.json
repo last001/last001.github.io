@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "订单管理",
+  "navigationBarTextStyle": "white",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "uni-segmented-control": "/uni_modules/uni-segmented-control/components/uni-segmented-control/uni-segmented-control"
+  }
+}

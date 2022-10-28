@@ -1,0 +1,59 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/my/my",
+    "pages/store/store",
+    "pages/pending/pending",
+    "pages/order/order",
+    "pages/order/order-detail",
+    "pages/print/print",
+    "pages/prints/prints",
+    "pages/lj/lj",
+    "pages/mqtt/mqtt",
+    "pages/about-us/about-us",
+    "pages/feedback/feedback",
+    "pages/audio/audio"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "一米校园商户版",
+    "navigationBarBackgroundColor": "#56bdaa",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#56bdaa",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "iconWidth": "22px",
+    "list": [
+      {
+        "pagePath": "pages/pending/pending",
+        "iconPath": "static/tabBar/dcl.png",
+        "selectedIconPath": "static/tabBar/dcls.png",
+        "text": "待处理"
+      },
+      {
+        "pagePath": "pages/order/order",
+        "iconPath": "static/tabBar/ddgl.png",
+        "selectedIconPath": "static/tabBar/ddgls.png",
+        "text": "订单管理"
+      },
+      {
+        "pagePath": "pages/store/store",
+        "iconPath": "static/tabBar/yy.png",
+        "selectedIconPath": "static/tabBar/yys.png",
+        "text": "店铺运营"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "iconPath": "static/tabBar/wd.png",
+        "selectedIconPath": "./static/tabBar/wds.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json"
+}

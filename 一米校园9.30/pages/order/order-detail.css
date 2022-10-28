@@ -1,0 +1,89 @@
+.contents {
+		background-color: #e6e6e6;
+		padding-bottom: 70px;
+	}
+
+	.line {
+		background-color: white;
+		margin-top: 1px;
+		padding: 8px 0px;
+	}
+
+	.lines {
+		margin-left: 3%;
+		color: darkgray;
+	}
+
+	.linea {
+		width: 94%;
+		margin-left: 3%;
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.quantity {
+		color: darkgray;
+		margin-left: 30px;
+	}
+
+	.unit-price {
+		font-size: 30rpx;
+	}
+
+	.delivery-cost {
+		color: red;
+		font-size: 30rpx;
+	}
+
+	.discounts {
+		color: red;
+		margin-left: 30px;
+		font-size: 30rpx;
+	}
+
+	.ddxx {
+		margin-left: 3%;
+		padding: 8px 0px;
+	}
+
+	.order-number {
+		font-size: 30rpx;
+	}
+
+	.order-numbers {
+		color: red;
+	}
+
+	.btn {
+		height: 60px;
+		background-color: #d6d6d6;
+		position: fixed;
+		bottom: 0;
+		width: 100%;
+	}
+
+	.btns {
+		display: flex;
+		padding-top: 15px;
+		justify-content: space-around;
+	}
+
+	.bottoma {
+		text-align: center;
+		line-height: 35px;
+		color: #ffffff;
+		border-radius: 10px;
+		width: 49%;
+		height: 35px;
+		background-color: #c8121f;
+	}
+
+	.bottomb {
+		text-align: center;
+		line-height: 35px;
+		color: #ffffff;
+		border-radius: 10px;
+		width: 49%;
+		height: 35px;
+		background-color: #05c0ab;
+	}

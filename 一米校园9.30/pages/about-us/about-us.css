@@ -1,0 +1,32 @@
+.conter{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		padding-top: 50px;
+	}
+	.version-number{
+		color: #949494;
+		margin-top: 15px;
+		font-size: 20rpx;
+	}
+	.copyright{
+		font-size: 30rpx;
+		color: #949494;
+		margin: 20px 0;
+	}
+	.phone{
+		font-size: 30rpx;
+		display: flex;
+	}
+	.introduce{
+		margin-top: 10px;
+		border-top: 1px solid #f2f2f2;
+		padding: 10px 30rpx;
+		border-bottom: 1px solid #f2f2f2;
+	}
+	.text{
+		font-size: 20rpx;
+		color: #949494;
+		padding: 10rpx 30rpx;
+	}

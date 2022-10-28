@@ -1,0 +1,25 @@
+
+.content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.logo {
+	height: 200rpx;
+	width: 200rpx;
+	margin-top: 200rpx;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 50rpx;
+}
+.btn{
+	margin-top: 30px;
+	background-color: #56bdaa;
+	border-radius: 20px;
+}
+.qd{
+	padding: 11px 117px;
+	color: white;
+}
+

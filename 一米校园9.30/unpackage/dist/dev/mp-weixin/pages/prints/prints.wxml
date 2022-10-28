@@ -1,0 +1,1 @@
+<view><view class="btn"><view data-event-opts="{{[['tap',[['bfa',['$event']]]]]}}" class="qd" bindtap="__e">播放</view></view></view>
