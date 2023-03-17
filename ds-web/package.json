@@ -1,0 +1,47 @@
+{
+  "name": "dscloud",
+  "version": "1.5.0",
+  "description": "dscloud",
+  "module": "./es/src/index.js",
+  "main": "./lib/src/index.js",
+  "git-checks": false,
+  "scripts": {
+    "build:prod": "vite build --mode prod"
+  },
+  "files": [
+    "es",
+    "lib"
+  ],
+  "keywords": [],
+  "author": "tanwj <tanweijie112>",
+  "license": "ISC",
+  "repository": "http://172.17.36.200/dscloud-web/dscloud-framework.git",
+  "dependencies": {
+    "@element-plus/icons-vue": "^2.0.6",
+    "axios": "^0.27.2",
+    "element-plus": "^2.2.9",
+    "jsencrypt": "^3.2.1",
+    "nprogress": "^0.2.0",
+    "qs": "^6.11.0",
+    "vue": "^3.2.36",
+    "vue-router": "^4.1.2",
+    "vue-wechat-title": "^2.0.7",
+    "vuedraggable": "^4.1.0",
+    "vuex": "^4.0.2"
+  },
+  "devDependencies": {
+    "@dscloud/api": "workspace:^1.0.0",
+    "@dscloud/components": "workspace:^1.0.0",
+    "@dscloud/config": "workspace:^1.0.0",
+    "@dscloud/router": "workspace:^1.0.0",
+    "@dscloud/store": "workspace:^1.0.0",
+    "@dscloud/utils": "workspace:^1.0.0",
+    "@dscloud/views": "workspace:^1.0.0",
+    "@vitejs/plugin-vue": "^3.0.1",
+    "sass": "^1.53.0",
+    "typescript": "^4.7.4",
+    "vite": "^3.0.2",
+    "vite-plugin-dts": "^1.4.0",
+    "vue-tsc": "^0.38.9"
+  }
+}

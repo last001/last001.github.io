@@ -1,0 +1,81 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\Administrator\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add @element-plus/icons-vue
+
+PATH: 
+  C:\Program Files\Common Files\Oracle\Java\javapath;E:\PhpStorm 2021.2.1\bin\phpstorm64.exe；C:\Program Files\Java\jdk1.7.0\bin；C:\Program Files\Java\jdk1.7.0\jre\bin;C;\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\system32\wbem;E:\xampp-\php;E:\Mysql\mysql-5.7.10-winx64\bin;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;E:\Git\cmd;E:\Git\usr\bin;C:\Program Files\OpenSSH\bin;C:\Program Files (x86)\NetSarang\Xshell 7\;E:\微信web开发者工具\dll;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\nodejs\;C:\\Users\\Administrator\\AppData\\Roaming\\npm;C:\\Users\\Administrator\\AppData\\Roaming\\npm;E:\PhpStorm 2021.2.1\bin\phpstorm64.exe;E:\Microsoft VS Code\bin;E:\xampp-\php;E:\Mysql\mysql-5.7.10-winx64\bin;C:\Users\Administrator\AppData\Roaming\npm;C:\\Users\\Administrator\\AppData\\Roaming\\npm;
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  16.16.0
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: https://registry.npmjs.org/@dscloud%2fapi: Not found
+      at Request.params.callback [as _callback] (C:\Users\Administrator\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:66145:18)
+      at Request.self.callback (C:\Users\Administrator\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:140890:22)
+      at Request.emit (node:events:527:28)
+      at Request.<anonymous> (C:\Users\Administrator\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141862:10)
+      at Request.emit (node:events:527:28)
+      at IncomingMessage.<anonymous> (C:\Users\Administrator\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141784:12)
+      at Object.onceWrapper (node:events:641:28)
+      at IncomingMessage.emit (node:events:539:35)
+      at endReadableNT (node:internal/streams/readable:1345:12)
+      at processTicksAndRejections (node:internal/process/task_queues:83:21)
+
+npm manifest: 
+  {
+    "name": "dscloud",
+    "version": "1.2.3",
+    "description": "dscloud",
+    "module": "./es/src/index.js",
+    "main": "./lib/src/index.js",
+    "git-checks": false,
+    "scripts": {
+      "build": "vite build",
+      "build:prod": "vite build --mode prod"
+    },
+    "files": [
+      "es",
+      "lib"
+    ],
+    "keywords": [],
+    "author": "tanwj <tanweijie112>",
+    "license": "ISC",
+    "repository": "http://172.17.36.200/dscloud-web/dscloud-framework.git",
+    "dependencies": {
+      "@element-plus/icons-vue": "^2.0.6",
+      "axios": "^0.27.2",
+      "element-plus": "^2.2.9",
+      "jsencrypt": "^3.2.1",
+      "nprogress": "^0.2.0",
+      "qs": "^6.11.0",
+      "vue": "^3.2.36",
+      "vue-router": "^4.1.2",
+      "vuedraggable": "^4.1.0",
+      "vuex": "^4.0.2"
+    },
+    "devDependencies": {
+      "@dscloud/api": "workspace:^1.0.0",
+      "@dscloud/components": "workspace:^1.0.0",
+      "@dscloud/config": "workspace:^1.0.0",
+      "@dscloud/router": "workspace:^1.0.0",
+      "@dscloud/store": "workspace:^1.0.0",
+      "@dscloud/utils": "workspace:^1.0.0",
+      "@vitejs/plugin-vue": "^3.0.1",
+      "sass": "^1.53.0",
+      "typescript": "^4.7.4",
+      "vite": "^3.0.2",
+      "vite-plugin-dts": "^1.4.0",
+      "vue-tsc": "^0.38.9"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

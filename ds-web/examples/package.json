@@ -1,0 +1,25 @@
+{
+  "name": "examples",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite --mode dev  ",
+    "test": "vite --mode test --open",
+    "build": "vue-tsc --noEmit && vite build",
+    "build:prod": "vue-tsc --noEmit && vite build --mode prod",
+    "preview": "vite preview"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@element-plus/icons": "^0.0.11",
+    "dscloud": "^1.2.0",
+    "element-plus": "^2.2.9",
+    "vue": "^3.2.36",
+    "vue-router": "^4.1.2",
+    "vue-wechat-title": "^2.0.7",
+    "vuedraggable": "^4.1.0"
+  }
+}
