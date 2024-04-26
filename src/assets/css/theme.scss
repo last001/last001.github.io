@@ -1,0 +1,35 @@
+@forward 'element-plus/theme-chalk/src/common/var.scss' with (
+  $colors: (
+    'primary': (
+      'base': green,
+    ),
+  ),
+);
+@use "element-plus/theme-chalk/src/index.scss" as *;
+
+.el-header{
+  position: sticky;
+  left: 0;
+  top: 0;
+  z-index: 999;
+  box-shadow: 0px 3px 6px 1px rgb(0, 0, 0,0.09);
+}
+
+.Aside{
+  &.collapse{
+    width: calc(var(--el-menu-icon-width) + var(--el-menu-base-level-padding) * 2);
+  }
+  &.expand{
+    width: 220px;
+  }
+}
+
+.el-container{
+  transition: all .36s;
+  &.collapse{
+    margin-left: calc(var(--el-menu-icon-width) + var(--el-menu-base-level-padding) * 2);
+  }
+  &.expand{
+    margin-left: 220px;
+  }
+}
