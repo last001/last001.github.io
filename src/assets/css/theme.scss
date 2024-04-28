@@ -18,9 +18,19 @@
 .Aside{
   &.collapse{
     width: calc(var(--el-menu-icon-width) + var(--el-menu-base-level-padding) * 2);
+    .logoBox{
+      transition: all .3;
+      border-right: solid 1px var(--el-menu-border-color);
+      width: calc(var(--el-menu-icon-width) + var(--el-menu-base-level-padding) * 2);
+    }
   }
   &.expand{
     width: 220px;
+    .logoBox{
+      transition: all .42;
+      border-right: solid 1px var(--el-menu-border-color);
+      width: 220px;
+    }
   }
 }
 

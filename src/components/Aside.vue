@@ -1,6 +1,12 @@
 <template>
     <div class="Aside ps-f" :class="isCollapse ? 'collapse' : 'expand'" style="left:0;top:0;z-index: 999;">
-        <div class="w-full text-center">logo</div>
+        <div class="logoBox box-sizing ds-fx ai-c jc-c pv-10 transition-3">
+            <el-icon class="br-2 p-5 transition-3" color="#FFF" size="26" :style="{backgroundColor: primaryColor}"><Ship /></el-icon>
+            <div class="fx-d-cloumn ai-c jc-c ml-10 transition-3" :style="{display:isShow ? 'none' : 'block'}">
+                <div class="bold">客户服务管理</div>
+                <div class="fs-12">Customer Service</div>
+            </div>
+        </div>
         <el-menu default-active="1"  class="w-220 h-vh" :collapse="isCollapse" @open="handleOpen"
             @close="handleClose">
             <el-sub-menu :index="item.id" v-for="(item, index) in moduleList" :key="index">
@@ -22,7 +28,8 @@
 <script lang="ts" setup>
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
-import { reactive, defineProps, toRefs, computed, watch } from 'vue';
+import { reactive, defineProps, toRefs, computed, watch ,ref, onMounted} from 'vue';
+import utils from "@/utils/utils";
 
 const store = useStore();
 const router = useRouter();
@@ -30,6 +37,12 @@ const router = useRouter();
 const isCollapse = computed(() => {
     return store.state.isCollapse
 })
+
+const primaryColor = computed(() => {
+    return utils.getThemes(store);
+})
+
+const isShow = ref(false);
 
 const moduleList = reactive([
     {
@@ -71,6 +84,21 @@ const toMenu = (item: item) => {
     console.log(item.url);
     item.url ? router.push(item.url) : router.push("/notFound")
 }
+
+onMounted(() =>{
+    isShow.value = isCollapse.value;
+})
+
+watch(isCollapse,(newVal) =>{
+    console.log(newVal);
+    if(newVal){
+        isShow.value = newVal;
+    }else{
+        setTimeout(() => {
+            isShow.value = newVal;
+        }, 250);
+    }
+})
 
 </script>
 

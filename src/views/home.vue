@@ -387,6 +387,11 @@ const options = reactive({
     }
 })
 
+/**
+ * @function handler 事件处理
+ * @param command 
+ * @param data 
+ */
 const handler = (command: string, data?: any) => {
     switch (command) {
         case "switchTitle":

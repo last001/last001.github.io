@@ -11,6 +11,14 @@ const routes: Array<RouteRecordRaw> = [
     },
   },
   {
+    path: '/login',
+    name: 'login',
+    meta: {
+      title: '登录'
+    },
+    component: () => import('@/views/login.vue'),
+  },
+  {
     path: '/search',
     name: 'search',
     meta: {

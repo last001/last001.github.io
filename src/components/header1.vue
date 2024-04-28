@@ -15,11 +15,53 @@
                 <el-switch v-model="isDark" />
                 <p class="c-primary ml-5 pointer" @click.stop="toggleDark()">暗黑</p>
             </div>
-            <el-icon :size="18">
-                <Search />
-            </el-icon>
-            <el-text type="primary" class="ml-5 pointer" @click="handler('search')">搜索</el-text>
-            <el-text type="primary" class="ml-50 pointer" @click="handler('toHelp')">帮助</el-text>
+            <div class="ds-fx ai-c">
+                <img class="wh-10 br-circle mr-10" src="@/assets/img/header.png" alt="">
+                <el-popover ref="popover" placement="bottom" :width="140" trigger="hover">
+                    <template #reference>
+                        <div class="ds-fx ai-c pointer">
+                            <div class="">王老师</div>
+                            <el-icon>
+                                <component :is="options.isheaderIconShow" @click="handler('switchAsideW')"></component>
+                            </el-icon>
+                        </div>
+                    </template>
+                    <template #default>
+                        <div class="bg-white fs-14">
+                            <div class="ds-fx ai-c pt-5 pb-10">
+                                <el-icon size="16">
+                                    <Bell />
+                                </el-icon>
+                                <div class="ml-15 pointer list">消息中心</div>
+                            </div>
+                            <div class="ds-fx ai-c pv-10 b-t-info">
+                                <el-icon size="16">
+                                    <User />
+                                </el-icon>
+                                <div class="ml-15 pointer list">个人设置</div>
+                            </div>
+                            <div class="ds-fx ai-c pv-10 b-t-info">
+                                <el-icon size="16">
+                                    <EditPen />
+                                </el-icon>
+                                <div class="ml-15 pointer list">修改密码</div>
+                            </div>
+                            <div class="ds-fx ai-c pv-10 b-t-info">
+                                <el-icon size="16">
+                                    <QuestionFilled />
+                                </el-icon>
+                                <div class="ml-15 pointer list">帮助中心</div>
+                            </div>
+                            <div class="ds-fx ai-c pt-10 b-t-info" @click="handler('logout')">
+                                <el-icon size="16">
+                                    <SwitchButton />
+                                </el-icon>
+                                <div class="ml-15 pointer list">退出登录</div>
+                            </div>
+                        </div>
+                    </template>
+                </el-popover>
+            </div>
         </div>
     </div>
 </template>
@@ -62,6 +104,7 @@ export default defineComponent({
         })
         const options = reactive({
             isCollapse: "Expand", // Fold Expand 
+            isheaderIconShow: "CaretBottom",
         })
         const handler = (command: string, data?: any, event?: any) => {
             switch (command) {
@@ -85,6 +128,9 @@ export default defineComponent({
                     }
                     store.commit("setIsCollapse", isCollapse)
                     break;
+                case "logout":
+                    router.push("/login")
+                    break;
             }
         }
 
@@ -93,7 +139,7 @@ export default defineComponent({
             utils.setThemes(color, store);
         }
 
-        onMounted(() =>{
+        onMounted(() => {
             options.isCollapse = isCollapse.value ? "Expand" : "Fold";
         })
 
@@ -113,5 +159,16 @@ export default defineComponent({
 <style lang="scss" scoped>
 .Header1 {
     background-color: var(--el-bg-color-overlay);
+}
+
+.wh-10 {
+    width: 30px;
+    height: 30px;
+}
+
+.list{
+    &:hover{
+        color: var(--el-color-primary);
+    }
 }
 </style>
