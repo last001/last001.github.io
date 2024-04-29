@@ -12,6 +12,13 @@ export default defineConfig({
   },
   server: {
     host: "0.0.0.0",
-    port: 3002
+    port: 3002,
+    proxy:{
+      '/api':{
+        target:"https://yeedev.1miedu.com/api",
+        changeOrigin:true,
+        rewrite:(path) => path.replace(/^\/api/,'')
+      }
+    }
   }
 })

@@ -18,7 +18,7 @@
                                 v-for="(item, index) in options.list" :key="index">
                                 <div class="pv-5 c-666 ds-fx jc-sb ai-s">
                                     <div>{{ item.name }}</div>
-                                    <el-tooltip class="box-item" effect="dark" content="Bottom prompts info"
+                                    <el-tooltip class="box-item" effect="dark" :content="item.remake"
                                         placement="bottom">
                                         <el-icon class="pointer">
                                             <QuestionFilled />
@@ -135,6 +135,7 @@ import utils from "@/utils/utils";
 import { useStore } from "vuex";
 import * as echarts from "echarts";
 import WOswitch from "@/components/WOswitch.vue";
+import woApi from "@/api/woApi";
 
 const isCollapse = computed(() => {
     return store.state.isCollapse;
@@ -150,12 +151,7 @@ const options = reactive({
     date1: utils.getAroundDate(),
     date2: utils.getAroundDate(),
     list: [
-        { name: "数据总量", num: "716", direction: "up", floatNum: "61" },
-        { name: "进行中数量", num: "289", direction: "down", floatNum: "23" },
-        { name: "已完成数量", num: "347", direction: "up", floatNum: "3" },
-        { name: "已取消数量", num: "25", direction: "up", floatNum: "7" },
-        { name: "逃单记录", num: "49", direction: "down", floatNum: "25" },
-        { name: "改约记录", num: "8", direction: "up", floatNum: "46" },
+        { name: "数据总量", num: "716", direction: "up", floatNum: "61",remake:"cs" }
     ],
     setionTitleData: [
         { name: "安装完成", isActive: true },
@@ -216,9 +212,9 @@ const options = reactive({
                `;
             },
         },
-        series: [
+        series: [ 
             {
-                data: [100, 150, 201, 196, 350, 400, 350, 300, 420, 450, 500, 600, 580, 760, 800, 750, 700, 650, 500, 600, 750, 800, 850, 900, 950, 850, 800, 750, 769],
+                data: [],
                 type: 'line',
                 showSymbol: false,
                 itemStyle: {
@@ -432,7 +428,7 @@ const getDuration = (date: string): number => {
  */
 const getObtainData = () => {
     const lastDay = getDuration(utils.getAroundDate());
-    for (let i = 1; i < lastDay; i++) {
+    for (let i = 1; i <= lastDay; i++) {
         options.echartsLineData.xAxis.data.push(`${utils.getAroundDate().slice(5, 7)}-${i < 10 ? '0' + i : i}`)
     }
 }
@@ -476,6 +472,37 @@ const setOptionEcharts = () => {
         echarts.init(EcharRef_line.value).setOption(options.echartsLineData);
         echarts.init(EcharRef_bar.value).setOption(options.echartsBarData);
         echarts.init(EcharRef_pie.value).setOption(options.echartsPieData);
+    })  
+}
+
+/**
+ * @function getHomeCountTotal 获取首页数据统计
+ */
+const getHomeCountTotal = () =>{
+    const params = {
+        userId:"123456",
+        date:""
+    }
+    woApi.getHomeCountTotal(params).then((res: any) => {
+        if(res){
+            options.list = res;
+        }
+    })
+}
+/**
+ * @function getLineMonthsList 获取Line数据统计
+ */
+const getLineMonthsList = () =>{
+    const params = {
+        userId:"123456",
+    }
+    woApi.getLineMonthsList(params).then((res: any) => {
+        if(res){
+            options.echartsLineData.series[0].data = res;
+            getObtainData();
+            getTimeData();
+            setOptionEcharts();
+        }
     })
 }
 
@@ -489,9 +516,10 @@ watch(isCollapse,(newVal) =>{
 
 
 const init = () => {
-    getObtainData();
-    getTimeData();
-    setOptionEcharts();
+    // 获取首页数据统计
+    getHomeCountTotal();
+    // 获取Line数据统计
+    getLineMonthsList();
 }
 
 init();

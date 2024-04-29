@@ -73,6 +73,7 @@ import { useRouter } from "vue-router";
 import { useStore } from 'vuex';
 import { ref } from "vue";
 import utils from "@/utils/utils";
+import woApi from "@/api/woApi";
 export default defineComponent({
     name: "Header1",
     props: {
@@ -166,8 +167,8 @@ export default defineComponent({
     height: 30px;
 }
 
-.list{
-    &:hover{
+.list {
+    &:hover {
         color: var(--el-color-primary);
     }
 }
