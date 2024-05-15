@@ -1,5 +1,5 @@
 <template>
-    <div class="Aside ps-f" :class="isCollapse ? 'collapse' : 'expand'" style="left:0;top:0;z-index: 999;">
+    <div class="WOaside ps-f" :class="isCollapse ? 'collapse' : 'expand'" style="left:0;top:0;z-index: 999;">
         <div class="logoBox box-sizing ds-fx ai-c jc-c pv-10 transition-3">
             <el-icon class="br-2 p-5 transition-3" color="#FFF" size="26" :style="{backgroundColor: primaryColor}"><Ship /></el-icon>
             <div class="fx-d-cloumn ai-c jc-c ml-10 transition-3" :style="{display:isShow ? 'none' : 'block'}">

@@ -1,10 +1,10 @@
 <template>
     <div class="home">
         <el-container>
-            <Aside></Aside>
+            <WOaside></WOaside>
             <el-container :class="isCollapse ? 'collapse' : 'expand'">
                 <el-header>
-                    <Header1 :setOptionEcharts="setOptionEcharts"></Header1>
+                    <WOheader :setOptionEcharts="setOptionEcharts"></WOheader>
                 </el-header>
                 <el-main style="background-color: var(--el-bg-color-page);">
                     <div class="bg-white br-2 ph-15">

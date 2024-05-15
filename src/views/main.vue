@@ -1,10 +1,10 @@
 <template>
     <div class="main">
         <el-container>
-            <Aside></Aside>
+            <WOaside></WOaside>
             <el-container  :class="isCollapse ? 'collapse' : 'expand'">
                 <el-header>
-                    <Header1></Header1>
+                    <WOheader></WOheader>
                 </el-header>
                 <el-main style="background-color: var(--el-bg-color-page);">
                     <router-view></router-view>

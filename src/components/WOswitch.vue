@@ -16,7 +16,7 @@ export default defineComponent({
     props: {
         modelValue: String,
         modelData: {
-            type: Array,
+            type: Array as any,
             default: [],
         },
         initialIndex: {

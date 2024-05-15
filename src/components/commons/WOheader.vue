@@ -1,5 +1,5 @@
 <template>
-    <div class="Header1 ds-fx ai-c jc-sb ph-25 ps-s" style="top: 0;left: 0;">
+    <div class="WOheader ds-fx ai-c jc-sb ph-25 ps-s" style="top: 0;left: 0;">
         <div class="ds-fx ai-c pointer">
             <el-icon size="22">
                 <component :is="options.isCollapse" @click="handler('switchAsideW')"></component>
@@ -75,7 +75,7 @@ import { ref } from "vue";
 import utils from "@/utils/utils";
 import woApi from "@/api/woApi";
 export default defineComponent({
-    name: "Header1",
+    name: "WOheader",
     props: {
         setOptionEcharts: {
             type: Function,
@@ -136,7 +136,9 @@ export default defineComponent({
         }
 
         const switchThemes = (color: any) => {
-            props.setOptionEcharts();
+            if(props.setOptionEcharts){
+                props.setOptionEcharts();
+            }
             utils.setThemes(color, store);
         }
 
@@ -158,7 +160,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.Header1 {
+.WOheader {
     background-color: var(--el-bg-color-overlay);
 }
 

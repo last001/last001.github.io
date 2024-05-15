@@ -11,17 +11,17 @@ import router from "@/router/index";
 import store from '@/store/index'
 
 // 全局注册组件
-import Header1 from "@/components/header1.vue";
-import Aside from "@/components/Aside.vue";
-import Footer from "@/components/footer.vue";
+import WOheader from "@/components/commons/WOheader.vue";
+import WOaside from "@/components/commons/WOaside.vue";
+import Footer from "@/components/commons/footer.vue";
 
 import App from './App.vue';
 const app = createApp(App)
 
 app.use(router).use(store)
     .use(ElementPlus, { locale: zhCn, })
-    .component('Header1', Header1)
-    .component('Aside', Aside)
+    .component('WOheader', WOheader)
+    .component('WOaside', WOaside)
     .component('Footer', Footer)
     .mount('#app')
 
