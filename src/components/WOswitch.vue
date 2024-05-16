@@ -28,7 +28,7 @@ export default defineComponent({
             default:"default"
         }
     },
-    emits: ["update:modelValue"],
+    emits: ["update:modelValue","change"],
     setup(props: any, context) {
         const options = reactive({
             modelValue: props.modelValue,
@@ -45,11 +45,10 @@ export default defineComponent({
                         v.isActive = false;
                     })
                     data.isActive = true;
-                    console.log(event);
                     options.initialIndex = event;
                     options.sliderLeft = options.initialIndex == 0 ? '5px' : `calc(calc(100%/${props.modelData.length}) * ${options.initialIndex })`
-                    console.log(options.sliderLeft);
                     context.emit('update:modelValue', data.value);
+                    context.emit('change', data.value);
                     break;
 
                 default:
@@ -66,6 +65,7 @@ export default defineComponent({
             if (newValue !== value) {
                 options.modelValue = newValue;
                 context.emit('update:modelValue', newValue);
+                context.emit('change', newValue);
                 return true;
             }
             return false;

@@ -32,20 +32,26 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       title: 'main'
     },
-    redirect:{name:"one"},
+    redirect:{name:"twoOne"},
     component: () => import('@/views/main.vue'),
     children: [ // menu
       {
         path: 'one',
         name: 'one',
-        meta: { title: '第一'},
+        meta: { title: '第一',code:"one"},
         component: () => import('@/views/menu/one.vue'),
       },
       {
         path: 'two',
         name: 'two',
-        meta: {title: '第二'},
+        meta: {title: '第二',code:"two"},
         component: () => import('@/views/menu/two.vue'),
+      },
+      {
+        path: 'twoOne',
+        name: 'twoOne',
+        meta: {title: '第三',code:"twoOne"},
+        component: () => import('@/views/two/one.vue'),
       },
     ]
   },

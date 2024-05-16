@@ -63,11 +63,11 @@
                                 </div>
                                 <div class="h-full EcharRef_line" ref="EcharRef_line"></div>
                             </div>
-                            <div class="w-500">
+                            <div class="w-500" style="min-height: 415px;">
                                 <div class="bold fs-15">排行榜</div>
                                 <div class="w-200 mt-5">
                                     <WOswitch :modelData="options.rangkingTitleData" :initialIndex="0"
-                                        v-model="options.rangkingValue"></WOswitch>
+                                        v-model="options.rangkingValue" @change="getRangkingData"></WOswitch>
                                 </div>
                                 <div class="mt-15">
                                     <div class="ds-fx ai-c jc-sb mt-8" v-for="(item, index) in options.rangkingData"
@@ -76,9 +76,10 @@
                                             <div class="mr-35 wh-25 text-center br-circle"
                                                 :class="index < 3 ? 'c-primary bg-primary-8' : 'bg-fill'">{{ index + 1
                                                 }}</div>
-                                            <div class="rankingName pointer">{{ item.name }}</div>
+                                            <div class="rankingName pointer" v-show="options.rangkingValue == 'team'">{{ item.name }} - {{item.teamName}}团队</div>
+                                            <div class="rankingName pointer"  v-show="options.rangkingValue == 'person'">{{ item.name }}</div>
                                         </div>
-                                        <div>{{ item.value }}单</div>
+                                        <div>{{ item.orderCount }}单</div>
                                     </div>
                                 </div>
                             </div>
@@ -146,7 +147,7 @@ const EcharRef_line = ref(null);
 const EcharRef_bar = ref(null);
 const EcharRef_pie = ref(null);
 
-const options = reactive({
+const options:any = reactive({
     date: utils.getAroundDate(),
     date1: utils.getAroundDate(),
     date2: utils.getAroundDate(),
@@ -168,14 +169,8 @@ const options = reactive({
         { name: '团队', value: "team", isActive: true },
         { name: '个人', value: "person", isActive: false },
     ],
-    rangkingData: [
-        { name: '浙江省杭州市-周宏杰团队', value: "547", isActive: true },
-        { name: '上海市-刘房军团队', value: "534", isActive: false },
-        { name: '陕西省一张建华团队', value: "468", isActive: false },
-        { name: '浙江省宁波市-王家兴团队', value: "429", isActive: false },
-        { name: '江苏省南京市天城区-孙国伟团认', value: "312", isActive: false },
-        { name: '江苏省南通市-张华团队', value: "307", isActive: false },
-    ],
+    rangkingData: [],
+    rangkingTime:0,
     reschedulingTitleData: [
         { name: "今日改约数", value: 428, isDown: false },
         { name: "昨日改约数", value: 441, isDown: false },
@@ -506,6 +501,17 @@ const getLineMonthsList = () =>{
     })
 }
 
+const getRangkingData = () =>{
+    const params = {
+        userId:"123456",
+    }
+    woApi.getRangkingData(params).then((res: any) => {
+        if(res){
+            options.rangkingData = res.sort((a:any,b:any) => b.orderCount - a.orderCount);
+        }
+    })
+}
+
 watch(isCollapse,(newVal) =>{
     setTimeout(() => {
         echarts.init(EcharRef_line.value).resize();
@@ -520,6 +526,8 @@ const init = () => {
     getHomeCountTotal();
     // 获取Line数据统计
     getLineMonthsList();
+    // 获取排行榜数据
+    getRangkingData();
 }
 
 init();

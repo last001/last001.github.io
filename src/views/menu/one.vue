@@ -10,7 +10,6 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 // 引入扩展库GLTFLoader.js
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
-console.log("THREE ==>", THREE);
 const webgl = ref();
 
 const scene = new THREE.Scene();

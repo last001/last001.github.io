@@ -7,8 +7,7 @@
                 <div class="fs-12">Customer Service</div>
             </div>
         </div>
-        <el-menu default-active="1"  class="w-220 h-vh" :collapse="isCollapse" @open="handleOpen"
-            @close="handleClose">
+        <el-menu :default-openeds="defaultOpeneds" :default-active="defaultActive" class="w-220 h-vh" unique-opened :collapse="isCollapse">
             <el-sub-menu :index="item.id" v-for="(item, index) in moduleList" :key="index">
                 <template #title>
                     <el-icon>
@@ -16,7 +15,7 @@
                     </el-icon>
                     <span>{{ item.name }}</span>
                 </template>
-                <el-menu-item :index="`${index}-${list.id}`" v-for="(list, idx) in item.children" :key="idx"
+                <el-menu-item :index="list.code" v-for="(list, idx) in item.children" :key="idx"
                     @click="toMenu(list)">
                     {{ list.name }}
                 </el-menu-item>
@@ -26,16 +25,16 @@
 </template>
 
 <script lang="ts" setup>
-import { useRouter } from "vue-router";
+import { onBeforeRouteUpdate, useRouter } from "vue-router";
 import { useStore } from "vuex";
-import { reactive, defineProps, toRefs, computed, watch ,ref, onMounted} from 'vue';
+import { reactive, defineProps, toRefs, computed, watch ,ref, onMounted, onBeforeMount} from 'vue';
 import utils from "@/utils/utils";
 
 const store = useStore();
 const router = useRouter();
 
 const isCollapse = computed(() => {
-    return store.state.isCollapse
+    return store.state.isCollapse;
 })
 
 const primaryColor = computed(() => {
@@ -44,13 +43,16 @@ const primaryColor = computed(() => {
 
 const isShow = ref(false);
 
+const defaultActive = ref();
+const defaultOpeneds = ref();
+
 const moduleList = reactive([
     {
         name: "工单管理",
         id: "1",
         children: [
-            { name: "工单一", id: "1", url: "/menu/one" },
-            { name: "工单二", id: "2", url: "/menu/two" },
+            { name: "工单一", id: "1", code:"one", url: "/menu/one" },
+            { name: "工单二", id: "2", code:"two",url: "/menu/two" },
             { name: "工单三测试时段1111111", id: "3" },
             { name: "工单四", id: "4" },
         ]
@@ -58,18 +60,12 @@ const moduleList = reactive([
     {
         name: "库哥展示管理",
         id: "2",
-        children: []
+        children: [
+            { name: "工单er---一", id: "1",code:"twoOne", url: "/menu/twoOne" },
+            { name: "工单er---二", id: "2", url: "" },
+        ]
     }
 ])
-
-// const { isCollapse } = toRefs(props)
-
-const handleOpen = (key: string, keyPath: string[]) => {
-    console.log(key, keyPath)
-}
-const handleClose = (key: string, keyPath: string[]) => {
-    console.log(key, keyPath)
-}
 
 /**
  * toMenu事件参数类型
@@ -80,10 +76,31 @@ interface item {
     url?: string;
 }
 
+/**
+ * @function toMenu 跳转路由
+ * @param item 参数
+ */
 const toMenu = (item: item) => {
-    console.log(item.url);
     item.url ? router.push(item.url) : router.push("/notFound")
 }
+onBeforeMount(() =>{
+    const path = router.currentRoute.value?.path || null;
+    const code = router.currentRoute.value?.meta.code || null;
+    if(!path || path == "/"){
+        defaultOpeneds.value = [];
+    }else{
+        let idx = moduleList.findIndex((v:any,i:number) =>{
+            if(v.children.some((el:any) => el.url && el.code == code)){
+                return i;
+            }
+        });
+        console.log(idx);
+        defaultOpeneds.value = [];
+        defaultOpeneds.value.push(`${idx}`);
+    }
+    console.log(defaultOpeneds.value);
+    defaultActive.value = code;
+})
 
 onMounted(() =>{
     isShow.value = isCollapse.value;

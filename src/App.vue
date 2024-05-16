@@ -22,11 +22,13 @@ utils.setThemes(utils.getThemes());
 
 <style lang="scss">
 #nprogress .bar {
+  z-index: 5000 !important;
   /** 进度条颜色 */
   background: var(--el-color-primary) !important;
 }
 
 #nprogress .spinner .spinner-icon {
+  z-index: 5000 !important;
   /** 右上角转圈颜色 */
   border-top-color: var(--el-color-primary) !important;
   border-left-color: var(--el-color-primary) !important;

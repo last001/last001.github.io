@@ -36,9 +36,8 @@
             </div>
             <p>对不起，您的页面丢失了。</p>
             <div class="ds-fx ai-c mt-50">
-                <div class="ds-fx ai-c mr-60 pointer bg-white  ph-5" style="color: var(--el-bg-color-page);"
-                    @click="handler('back')">
-                    <el-icon color="var(--el-bg-color-page)">
+                <div class="ds-fx ai-c mr-60 pointer bg-white ph-5" style="border: 1px solid #fff;" @click="handler('back')">
+                    <el-icon >
                         <Back />
                     </el-icon>
                     <span class="ml-5">返回首页</span>

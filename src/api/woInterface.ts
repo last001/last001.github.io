@@ -3,10 +3,7 @@ export interface CountTotal {
     date: string
 }
 
-/**
- * @interface LineMonths 获取Line
- */
-export interface LineMonths {
+export interface UserId {
     /**
      * 用户的唯一标识符
      */
